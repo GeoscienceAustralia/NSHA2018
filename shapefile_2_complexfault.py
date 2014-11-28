@@ -13,8 +13,6 @@ Gareth Davies, Geoscience Australia, 2014
 
 import os
 import ogr
-import gdal
-
 
 def parse_line_shapefile(shapefile, shapefile_depth_attribute):
     """Read the line shapefile with contours on the fault plain
@@ -70,7 +68,7 @@ def append_xml_header(output_xml,
                       ' xmlns="http://openquake.org/xmlns/nrml/0.4">')
 
     # Source model information
-    output_xml.append('  <sourceModel name=' + str(source_model_name) + '>')
+    output_xml.append('  <sourceModel name="' + str(source_model_name) + '">')
     output_xml.append('  <complexFaultSource id="' + str(complex_fault_id) +
                       '"' + ' name="' + str(complex_fault_name) + '"' +
                       ' tectonicRegion="' +
