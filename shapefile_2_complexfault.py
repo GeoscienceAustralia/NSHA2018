@@ -1,3 +1,16 @@
+"""
+
+Command line tool to convert line shapefile + various input parameters to an
+openquake complex fault in nrml format
+
+Run with 
+> python shapefile_2_complexfault.py -h
+to get help
+
+Gareth Davies, Geoscience Australia, 2014
+
+"""
+
 import os
 import ogr
 import gdal
