@@ -59,8 +59,9 @@ def append_xml_header(output_xml,
 
     """
 
+    # I think this breaks openquake
     # First line = blank
-    output_xml.append('')
+#    output_xml.append('')
 
     # Various header info which the user does not control
     output_xml.append("<?xml version='1.0' encoding='utf-8'?>")
@@ -88,7 +89,7 @@ def append_gml_Linestring(output_xml, fc):
         @return nothing, but the gml linestring is appended to the output_xml
 
     """
-    output_xml.append('          <gml:Linestring>')
+    output_xml.append('          <gml:LineString>')
     output_xml.append('            <gml:posList>')
 
     # Add the geometry
@@ -98,8 +99,8 @@ def append_gml_Linestring(output_xml, fc):
             str(fc[i][2]))
 
     # Footer
-    output_xml.append('            <gml:posList>')
-    output_xml.append('          <gml:Linestring>')
+    output_xml.append('            </gml:posList>')
+    output_xml.append('          </gml:LineString>')
 
     return
 
@@ -115,7 +116,7 @@ def append_rupture_geometry(output_xml, fault_contours):
     output_xml.append('      <complexFaultGeometry>')
     output_xml.append('        <faultTopEdge>')
     append_gml_Linestring(output_xml, fault_contours[0])
-    output_xml.append('        <faultTopEdge>')
+    output_xml.append('        </faultTopEdge>')
     output_xml.append('')
 
     # Intermediate edges
@@ -123,14 +124,14 @@ def append_rupture_geometry(output_xml, fault_contours):
         for i in range(1, len(fault_contours) - 1):
             output_xml.append('        <intermediateEdge>')
             append_gml_Linestring(output_xml, fault_contours[i])
-            output_xml.append('        <intermediateEdge>')
+            output_xml.append('        </intermediateEdge>')
             output_xml.append('')
 
     # Bottom edge
     output_xml.append('        <faultBottomEdge>')
     append_gml_Linestring(output_xml, fault_contours[-1])
-    output_xml.append('        <faultBottomEdge>')
-    output_xml.append('      <complexFaultGeometry>')
+    output_xml.append('        </faultBottomEdge>')
+    output_xml.append('      </complexFaultGeometry>')
     output_xml.append('')
 
     return
@@ -142,21 +143,21 @@ def append_earthquake_information(output_xml, magnitude_scaling_relation,
     """
 
     """
-    output_xml.append('      <magScaleRel><' +
-                      str(magnitude_scaling_relation) + '>')
+    output_xml.append('      <magScaleRel>' +
+                      str(magnitude_scaling_relation) + '</magScaleRel>')
     output_xml.append('')
 
     output_xml.append(
-        '      <ruptAspectRatio><' + str(rupture_aspect_ratio) + '>')
+        '      <ruptAspectRatio>' + str(rupture_aspect_ratio) + '</ruptAspectRatio>')
     output_xml.append('')
 
-    output_xml.append('      <truncGutenbergRichterMFD aValue=' +
-                      str(a_value) + ' bValue=' + str(b_value) +
-                      ' minMag=' + str(min_mag) +
-                      ' maxMag=' + str(max_mag) + '/>')
+    output_xml.append('      <truncGutenbergRichterMFD aValue="' +
+                      str(a_value) + '" bValue="' + str(b_value) +
+                      '" minMag="' + str(min_mag) +
+                      '" maxMag="' + str(max_mag) + '" />')
     output_xml.append('')
 
-    output_xml.append('      <rake><' + str(rake) + '>')
+    output_xml.append('      <rake>' + str(rake) + '</rake>')
     output_xml.append('    </complexFaultSource>')
     output_xml.append('  </sourceModel>')
 
