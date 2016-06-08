@@ -17,14 +17,17 @@ Jonathan Griffin, Geoscience Australia, June 2016
 
 import os
 import ogr
+from geopy import distance
 from TsuTools.recurrence import fault_slip_rate_GR_conversion
+from openquake.hazardlib.scalerel.wc1994 import WC1994
 
 def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
                          shapefile_dip_attribute, 
                          shapefile_sliprate_attribute):
-    """Read the line shapefile with of fault surface traces
-
-        Return a list of lists of [x,y,z] points defining each line
+    """Read the line shapefile with of fault surface traces and
+    extrace data from attibute table
+        Return a list of lists of [x,y] points defining each line
+    and calculates the length of the fault
     """
 
     driver = ogr.GetDriverByName("ESRI Shapefile")
@@ -36,6 +39,9 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
     faultnames = []
     dips = []
     sliprates = []
+    fault_lengths = []
+    distance.VincentyDistance.ELLIPSOID = 'WGS_84'
+    d = distance.distance
     for feature in layer:
         line = feature.GetGeometryRef().GetPoints()
         try:
@@ -56,13 +62,20 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
             sliprate = '""'
         sliprates.append(sliprate)
         line = [list(pts) for pts in line]
-       # print line
+        fault_length = 0
+        for i in range(len(line)):
+            if i == len(line) -1:
+                break
+            else:
+                pt_distance = d(line[i],line[i+1]).meters/1000
+                fault_length+=pt_distance
+        fault_lengths.append(fault_length)
         fault_traces.append(line)
 
     msg = 'Line shapefile must contain at least 1 fault'
     assert len(fault_traces) > 0, msg
-    print fault_traces
-    print len(fault_traces)
+#    print fault_traces
+#    print len(fault_traces)
 
     # Make sure the ordering of depth is from smallest to largest
 #    new_fault_contours = []
@@ -76,7 +89,7 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
 #                break
 
 
-    return fault_traces, faultnames, dips, sliprates
+    return fault_traces, faultnames, dips, sliprates, fault_lengths
 
 
 def append_xml_header(output_xml,
@@ -198,10 +211,11 @@ def nrml_from_shapefile(shapefile,
      
     """
     # Get geometry
-    fault_traces, faultnames, dips, sliprate = parse_line_shapefile(shapefile,
-                                                                    shapefile_faultname_attribute,
-                                                                    shapefile_dip_attribute, 
-                                                                    shapefile_sliprate_attribute)
+    fault_traces, faultnames, dips, \
+    sliprate, fault_lengths = parse_line_shapefile(shapefile,
+                                                  shapefile_faultname_attribute,
+                                                  shapefile_dip_attribute, 
+                                                  shapefile_sliprate_attribute)
 
      # Output is written line-by-line to this list
     output_xml = []
@@ -212,11 +226,11 @@ def nrml_from_shapefile(shapefile,
     # Loop through each fault and add source specific info
     for i in range(len(fault_traces)):
         simple_fault_id = i
-        # Calculate length first
-        length = 100
-        print 'need to fix length'
-        A = length*(float(lower_depth)-float(upper_depth))
-        print A
+        A = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
+        # Calculate M_max from scaling relations
+        scalrel = WC1994()
+        max_mag = scalrel.get_median_mag(A, float(rake))
+#        print A
         # Calculate GR a values from slip rate
         if sliprate[i] != '""':
             print sliprate[i]
