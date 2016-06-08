@@ -17,6 +17,7 @@ Jonathan Griffin, Geoscience Australia, June 2016
 
 import os
 import ogr
+from TsuTools.recurrence import fault_slip_rate_GR_conversion
 
 def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
                          shapefile_dip_attribute, 
@@ -37,11 +38,22 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
     sliprates = []
     for feature in layer:
         line = feature.GetGeometryRef().GetPoints()
-        faultname = str(feature.GetField(shapefile_faultname_attribute))
+        try:
+            faultname = str(feature.GetField(shapefile_faultname_attribute))
+        except ValueError:
+            faultname = '""'
         faultnames.append(faultname)
-        dip = float(feature.GetField(shapefile_dip_attribute))
+        try:
+            dip = float(feature.GetField(shapefile_dip_attribute))
+        except ValueError:
+            dip = '""'
         dips.append(dip)
-        sliprate = float(feature.GetField(shapefile_sliprate_attribute))
+        try:
+            sliprate = float(feature.GetField(shapefile_sliprate_attribute))
+            # Convert from m/ma to mm/a
+            sliprate = sliprate/1000
+        except ValueError:
+            sliprate = '""'
         sliprates.append(sliprate)
         line = [list(pts) for pts in line]
        # print line
@@ -191,7 +203,7 @@ def nrml_from_shapefile(shapefile,
                                                                     shapefile_dip_attribute, 
                                                                     shapefile_sliprate_attribute)
 
-    # Output is written line-by-line to this list
+     # Output is written line-by-line to this list
     output_xml = []
 
     append_xml_header(output_xml, source_model_name)
@@ -200,6 +212,18 @@ def nrml_from_shapefile(shapefile,
     # Loop through each fault and add source specific info
     for i in range(len(fault_traces)):
         simple_fault_id = i
+        # Calculate length first
+        length = 100
+        print 'need to fix length'
+        A = length*(float(lower_depth)-float(upper_depth))
+        print A
+        # Calculate GR a values from slip rate
+        if sliprate[i] != '""':
+            print sliprate[i]
+            a_value, moment_rate = fault_slip_rate_GR_conversion.slip2GR(sliprate[i], A,
+                                                                         float(b_value), 
+                                                                         float(max_mag),
+                                                                         M_min=0.0)
         append_rupture_geometry(output_xml, fault_traces[i],
                                 dips[i], simple_fault_id,
                                 faultnames[i], upper_depth,
