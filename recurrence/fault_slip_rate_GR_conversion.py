@@ -40,7 +40,7 @@ def slip2GR(slip_rate, A, b, M_max, M_min=0, mu=3e11):
     # Calculate a
     a = np.log10(N) + b*M_min
     # Momement rate from slip rate
-    moment_rate = mu*A*slip_rate
+    moment_rate = mu*A*slip_fault
 
     return a, moment_rate
 
