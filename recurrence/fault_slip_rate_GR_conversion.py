@@ -29,7 +29,7 @@ def slip2GR(slip_rate, A, b, M_max, M_min=0, mu=3e11):
         Float: Gutenberg-Richter a value"""
 
     c = 1.5 # Hanks and Kanamori coefficient
-    beta = 2.303*b
+    beta = np.log(10)*b
     slip_fault = slip_rate/10  # convert to cm/a
     A = A*np.power(10,10) # convert to cm^2
     # Convert moment magnitude to moment for M_max
@@ -68,7 +68,7 @@ def GR2sliprate(a, b, A, M_max, M_min=0, mu=3e11):
         Float: Seismic moment rate across fault"""
 
     c = 1.5 # Hanks and Kanamori coefficient
-    beta = 2.303*b
+    beta = np.log(10)*b
     A = A*np.power(10,10) # convert to cm^2
     # Convert moment magnitude to moment for M_max
     moment_max = np.power(10,(c*M_max + 16.05)) # dyn/cm = N/km

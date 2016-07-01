@@ -18,7 +18,7 @@ Jonathan Griffin, Geoscience Australia, June 2016
 import os
 import ogr
 from geopy import distance
-from TsuTools.recurrence import fault_slip_rate_GR_conversion
+from eq_hazard_tools.recurrence import fault_slip_rate_GR_conversion
 from openquake.hazardlib.scalerel.wc1994 import WC1994
 
 def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
