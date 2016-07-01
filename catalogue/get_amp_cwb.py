@@ -133,7 +133,13 @@ with open("eq.txt",'r') as cat:
                    paz=parser.getPAZ(seedid,start_time)
                    ''' calib is already applied therefore we set sensitivity to 1 '''
                    paz['sensitivity']=1.
-                   wa_amp=inv.estimateWoodAndersonAmplitude(paz,amplitude,period)
+                   # Define Wood Anderson paz based on Uhrhammer 1990 sensitivity of 2080
+                   # rather than theoretical 2800 as used by obpy
+                   # wa_amp=inv.estimateWoodAndersonAmplitude(paz,amplitude,period)
+                   paz_wa = {'sensitivity': 2080, 'zeros': [0j], 'gain': 1,
+                             'poles': [-6.2832 - 4.7124j, -6.2832 + 4.7124j]}
+                   # Now convert to WA spectra
+                   wa_tr = tr.simulate(paz_remove=paz, paz_simulate=paz_wa)
                    ''' now we print every station-component measurement '''
                    print tr.stats['station'],tr.stats['channel'],tr.stats['calib'],wa_amp,period
                 else:
