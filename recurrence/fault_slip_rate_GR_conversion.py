@@ -40,8 +40,8 @@ def slip2GR(slip_rate, A, b, M_max, M_min=0, mu=3e11):
     # Calculate a
     a = np.log10(N) + b*M_min
     # Momement rate from slip rate
-    moment_rate = mu*A*slip_fault #dyn/cm
-    moment_rate = moment_rate/1000 #N/m
+    moment_rate = mu*A*slip_fault #dyncm
+    moment_rate = moment_rate/1e7 #Nm
 
     return a, moment_rate
 
@@ -80,7 +80,7 @@ def GR2sliprate(a, b, A, M_max, M_min=0, mu=3e11):
     slip_rate = (b*N*moment_max*np.exp(-1*beta*(M_max-M_min)))/(mu*A*(c-b)*(1-np.exp(-1*beta*(M_max-M_min))))
     slip_rate = slip_rate*10 # Convert to mm/a
     moment_rate = (b*N*moment_max*np.exp(-1*beta*(M_max-M_min)))/((c-b)*(1-np.exp(-1*beta*(M_max-M_min))))
-    moment_rate = moment_rate/1000. #N/m
+    moment_rate = moment_rate/1e7 #Nm
     return slip_rate, moment_rate
 
 if __name__ == "__main__":
