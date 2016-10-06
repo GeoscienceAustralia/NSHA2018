@@ -235,6 +235,7 @@ def nrml_from_shapefile(shapefile,
         scalrel = WC1994()
         bin_width = 0.1
         max_mag = scalrel.get_median_mag(A, float(rake))
+        char_mag = max_mag - 0.25 #characteristic magnitude for OQ def
 #        print A
         # Calculate characteristic incremental occurrence rates from slip rate
         if sliprate[i] != '""':
@@ -262,7 +263,7 @@ def nrml_from_shapefile(shapefile,
 
         append_earthquake_information(output_xml,
                                       magnitude_scaling_relation,
-                                      rupture_aspect_ratio, max_mag, b_value,
+                                      rupture_aspect_ratio, char_mag, b_value,
                                       min_mag, max_mag, rake, moment_rate, bin_width)
 
     # Close xml
