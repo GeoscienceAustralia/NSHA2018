@@ -181,7 +181,7 @@ def append_earthquake_information(output_xml, magnitude_scaling_relation,
         '      <ruptAspectRatio>' + str(rupture_aspect_ratio) + '</ruptAspectRatio>')
  #   output_xml.append('')
 
-    output_xml.append('      <YoungsCoppersmithMFD minmag="' +
+    output_xml.append('      <YoungsCoppersmith1985MFD minMag="' +
                       str(min_mag) + '" bValue="' + str(b_value) +
                       '" binWidth="' + str(bin_width) +
                       '" characteristicMag="' + str(characteristic_mag) +
