@@ -31,8 +31,9 @@ def generate_mfd(source_model_file):
         # Now calculate actual discretised moment rate
         moment_rate = 0
         for pair in occurrence_rates:
-            moment = numpy.power(10, (1.5*pair[0]+16.05))
-            moment = moment/1e7 # N/m
+            print pair
+            moment = numpy.power(10, (1.5*(pair[0])+16.05))
+            moment = moment/1e7 # Nm
             inc_moment_rate = moment*pair[1]
             moment_rate += inc_moment_rate
         print moment_rate_pure, moment_rate
