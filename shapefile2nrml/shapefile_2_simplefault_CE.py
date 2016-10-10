@@ -18,9 +18,11 @@ Jonathan Griffin, Geoscience Australia, June 2016
 
 import os
 import ogr
+import numpy as np
 from geopy import distance
 from eq_hazard_tools.recurrence import fault_slip_rate_GR_conversion
 from openquake.hazardlib.scalerel.wc1994 import WC1994
+from openquake.hazardlib.mfd import YoungsCoppersmith1985MFD
 
 def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
                          shapefile_dip_attribute, 
@@ -167,7 +169,76 @@ def append_rupture_geometry(output_xml, trace, dip,
     return
 
 
-def append_earthquake_information(output_xml, magnitude_scaling_relation,
+def append_earthquake_information_inc(output_xml, magnitude_scaling_relation,
+                                  rupture_aspect_ratio, characteristic_mag, b_value,
+                                  min_mag, max_mag, rake, moment_rate, bin_width):
+    """
+    Generate Youngs and Coppersmith MFD using OpenQuake, then convert
+    to incrementalMFD type. This allows us to balance the seismic moment to 
+    be exactly equal to the total moment rate. We do this assuming the GR
+    part of the YC distribution starts at magnitude 0.05.
+    """
+
+    mfd = YoungsCoppersmith1985MFD.from_total_moment_rate(min_mag=0.05,
+                                                          b_val=float(b_value),
+                                                          char_mag=characteristic_mag, 
+                                                          total_moment_rate=moment_rate,
+                                                          bin_width=float(bin_width))
+    mags,rates=zip(*mfd.get_annual_occurrence_rates())
+    #print mags, rates
+    # calcualate total moment rate and rescale rates if
+    # necessary to meet total input rate
+    total_moment_rate = 0
+    for i in range(len(mags)):
+        moment = np.power(10, (1.5*mags[i]+16.05))
+        moment = moment/1e7 #Nm
+        inc_moment_rate = moment*rates[i]
+        total_moment_rate += inc_moment_rate
+    moment_error = (total_moment_rate - moment_rate)/moment_rate
+    print 'Relative moment rate error', moment_error
+
+    # Rescale rates
+#    print rates
+    rates = rates/(1+moment_error)
+#    print rates
+    # check rates sum as expected
+    total_moment_rate = 0
+    for i in range(len(mags)):
+        moment = np.power(10, (1.5*mags[i]+16.05))
+        moment = moment/1e7 #Nm
+        inc_moment_rate = moment*rates[i]
+        total_moment_rate += inc_moment_rate
+    moment_error = (total_moment_rate - moment_rate)/moment_rate
+    print 'Final moment rate error',  moment_error
+
+#    if float(min_mag) != mags[0]:
+#        print 'Modelled min magnitude %.2f not equal to '\
+#            'input minimum magnitude %s' % (mags[0], min_mag)
+   # print mags, rates
+
+    output_xml.append('      <magScaleRel>' +
+                      str(magnitude_scaling_relation) + '</magScaleRel>')
+  #  output_xml.append('')
+
+    output_xml.append(
+        '      <ruptAspectRatio>' + str(rupture_aspect_ratio) + '</ruptAspectRatio>')
+ #   output_xml.append('')
+
+    output_xml.append('      <incrementalMFD minMag="' +
+                      str(min_mag) + '" binWidth="' + str(bin_width) + '">')
+    output_xml.append('          <occurRates>' + ' '.join(str(rt) for rt in rates ) +
+                      '</occurRates>')
+    output_xml.append('      </incrementalMFD>')
+                     
+                      
+#    output_xml.append('')
+
+    output_xml.append('      <rake>' + str(rake) + '</rake>')
+    output_xml.append('    </simpleFaultSource>')
+
+    return
+
+def append_earthquake_information_YC(output_xml, magnitude_scaling_relation,
                                   rupture_aspect_ratio, characteristic_mag, b_value,
                                   min_mag, max_mag, rake, moment_rate, bin_width):
     """
@@ -193,7 +264,6 @@ def append_earthquake_information(output_xml, magnitude_scaling_relation,
 
     return
 
-
 def nrml_from_shapefile(shapefile,
                         shapefile_faultname_attribute,
                         shapefile_dip_attribute,
@@ -210,6 +280,7 @@ def nrml_from_shapefile(shapefile,
                         max_mag,
                         rake,
                         output_dir,
+                        incremental_mfd,
                         quiet):
     """Driver routine to convert nrml to shapefile
      
@@ -261,10 +332,16 @@ def nrml_from_shapefile(shapefile,
                                 faultnames[i], upper_depth,
                                 lower_depth, simple_fault_tectonic_region)
 
-        append_earthquake_information(output_xml,
-                                      magnitude_scaling_relation,
-                                      rupture_aspect_ratio, char_mag, b_value,
-                                      min_mag, max_mag, rake, moment_rate, bin_width)
+        if incremental_mfd:
+            append_earthquake_information_inc(output_xml,
+                                          magnitude_scaling_relation,
+                                          rupture_aspect_ratio, char_mag, b_value,
+                                          min_mag, max_mag, rake, moment_rate, bin_width)
+        else:
+            append_earthquake_information_YC(output_xml,
+                                          magnitude_scaling_relation,
+                                          rupture_aspect_ratio, char_mag, b_value,
+                                          min_mag, max_mag, rake, moment_rate, bin_width)
 
     # Close xml
     output_xml.append('  </sourceModel>')
@@ -378,6 +455,12 @@ if __name__ == '__main__':
         default='nrml',
         help='Location for output files. Created if necessary.')
 
+    parser.add_argument(
+        '-incremental_mfd',
+        type=bool,
+        default=False,
+        help='If True create incremental MFD for nrml file')
+
     parser.add_argument('-quiet', action='store_true', default=False,
                         help="Don't print anything")
 
@@ -410,6 +493,7 @@ if __name__ == '__main__':
                                           args.max_mag,
                                           args.rake,
                                           args.output_dir,
+                                          args.incremental_mfd,
                                           args.quiet)
 
     # Write to file
