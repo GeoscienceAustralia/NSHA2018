@@ -179,7 +179,7 @@ def append_earthquake_information_inc(output_xml, magnitude_scaling_relation,
     part of the YC distribution starts at magnitude 0.05.
     """
 
-    mfd = YoungsCoppersmith1985MFD.from_total_moment_rate(min_mag=0.05,
+    mfd = YoungsCoppersmith1985MFD.from_total_moment_rate(min_mag=0.01,
                                                           b_val=float(b_value),
                                                           char_mag=characteristic_mag, 
                                                           total_moment_rate=moment_rate,
@@ -211,6 +211,12 @@ def append_earthquake_information_inc(output_xml, magnitude_scaling_relation,
     moment_error = (total_moment_rate - moment_rate)/moment_rate
     print 'Final moment rate error',  moment_error
 
+    # Now trim the distribution to just above min_mag
+    print mags, rates
+    mags = np.array(mags)
+    rates = rates[np.where(mags >= float(min_mag))]
+    mags = mags[np.where(mags >= float(min_mag))]
+    print mags, rates
 #    if float(min_mag) != mags[0]:
 #        print 'Modelled min magnitude %.2f not equal to '\
 #            'input minimum magnitude %s' % (mags[0], min_mag)
