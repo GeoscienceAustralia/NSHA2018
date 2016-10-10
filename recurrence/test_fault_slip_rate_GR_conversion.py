@@ -18,7 +18,7 @@ class slip2GRTestCase(unittest.TestCase):
         self.test_mus = [3e11, 3e11, 3e11, 3e11, 3e11, 3e11]
 
         self.expected_avalue = [2.17712, 3.17712, 4.65424, 4.652867, 4.12918, 4.885939]
-        self.expected_moment_rate = [6e21, 6e22, 1.8e24, 1.8e24, 1.8e24, 1.8e24]
+        self.expected_moment_rate = [6e14, 6e15, 1.8e17, 1.8e17, 1.8e17, 1.8e17]
 
     def test_avalues(self):
         for i in range(len(self.test_sliprates)):
@@ -53,7 +53,7 @@ class GR2sliprateTestCase(unittest.TestCase):
                              4.1291806326, 4.8859398061]
 
         self.expected_sliprates = [0.1, 0.1, 3., 3., 3., 3.]
-        self.expected_moment_rate = [6e21, 6e22, 1.8e24, 1.8e24, 1.8e24, 1.8e24]
+        self.expected_moment_rate = [6e14, 6e15, 1.8e17, 1.8e17, 1.8e17, 1.8e17]
 
     def test_sliprates(self):
         for i in range(len(self.test_avalues)):
