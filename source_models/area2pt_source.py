@@ -9,6 +9,7 @@ October 2016
 import os, sys
 import numpy
 import hmtk
+from subprocess import call
 
 from openquake.hazardlib.source import area, point
 #from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser
@@ -45,15 +46,17 @@ def area2pt_source(area_source_file):
     nodes = []
     for source in sources:
         pt_sources = area_to_point_sources(source)
-        nodes += (map(obj_to_node, pt_sources))
-#    print nodes
+        new_pt_sources = []
+        for pt in pt_sources:
+            pt.source_id = pt.source_id.replace(':',"")
+            new_pt_sources.append(pt)
+           # print [method for method in dir(pt) if callable(getattr(pt, method))]
+        print new_pt_sources
+        nodes += (map(obj_to_node, new_pt_sources))
     source_model = Node("sourceModel", {"name": name}, nodes=nodes)
     nrml_pt_file = area_source_file[:-4] + '_pts.xml'
     with open(nrml_pt_file, 'wb') as f:
         nrml.write([source_model], f, '%s')
-#        for pt in pt_sources:
-#nodes
-
 
 if __name__ == "__main__":
     path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/PSHA_modelling/oq_inputs/NSHM'
