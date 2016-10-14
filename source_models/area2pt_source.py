@@ -30,7 +30,14 @@ def area2pt_source(area_source_file):
                                 area_source_discretization=200.)
     parser = SourceModelParser(converter)
 #    print [method for method in dir(parser) if callable(getattr(parser, method))]
-    sources = parser.parse_sources(area_source_file) # will update at 2.1 to parse_group
+    try:
+        sources = parser.parse_sources(area_source_file)
+    except AttributeError: # Handle version 2.1 and above
+        sources = []
+        groups = parser.parse_src_groups(area_source_file)
+        for group in groups:
+            for source in group:
+                sources.append(source)
     print sources
 
     name = 'test_point_model'
@@ -50,5 +57,6 @@ def area2pt_source(area_source_file):
 
 if __name__ == "__main__":
     path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/PSHA_modelling/oq_inputs/NSHM'
+    path = '/media/sf_openquake_shared_files/Australia/eq_hazard_tools/catalogue/'
     area_source_file = os.path.join(path, 'source_model_leonard_2008.xml')
     area2pt_source(area_source_file)
