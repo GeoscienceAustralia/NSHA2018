@@ -86,11 +86,10 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
     max_fault_lon = np.max(fault_lons)
     min_fault_lat = np.min(fault_lats)
     max_fault_lat = np.max(fault_lats)
-#    print fault_lons, type(fault_lons)
+
     # Generate ruptures for point sources
- 
     minimum_distance_list = []
-    buffer_distance = 4 # Degrees, initial filter to only process pts
+    buffer_distance = 5. # Degrees, initial filter to only process pts
     # within the region where we have faults
     for pt in pt_sources:
         # For speeding things up
@@ -111,25 +110,37 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
             rupture_lats.append(rupture.surface.corner_lats)
             rupture_depths.append(rupture.surface.corner_depths)
         rupture_mags = np.array(rupture_mags).flatten()
+        # make the same length as the corners
+        rupture_mags = np.repeat(rupture_mags, 4)
         rupture_lons = np.array(rupture_lons).flatten()
         rupture_lats = np.array(rupture_lats).flatten()
         rupture_depths = np.array(rupture_depths).flatten()
-        #Tile to get grid of distances
-#        print np.shape(rupture_lons)
-#        print np.shape(fault_lons)
         lons1,lons2 = np.meshgrid(fault_lons, rupture_lons)
         lats1,lats2 = np.meshgrid(fault_lats, rupture_lats)
         depths1, depths2 = np.meshgrid(fault_depths, rupture_depths)
-#        print lats1[0]
-#        print lats2[0]
-         # Calculate distance from pt to all faults, then
-        # find the minimum and equate to magnitude based on
-        # scaling relationship
+        # Calculate distance from pt to all fault
         distances = distance(lons1, lats1, depths1, lons2, lats2, depths2)
- #       print 'distances', distances
+        #       print 'distances', distances
         closest_distance_to_faults = np.min(distances)
-        print closest_distance_to_faults
+        print 'closest_distances', closest_distance_to_faults
         minimum_distance_list.append(closest_distance_to_faults)
+        # Find where the distance is less than the threshold min_distance
+        too_close_lons = lons2[np.where(distances < min_distance)]
+        too_close_lats = lats2[np.where(distances < min_distance)]
+        print too_close_lons
+        print too_close_lats
+        if too_close_lons.size > 0:
+            lon_indices = np.where(np.in1d(rupture_lons, too_close_lons))[0]
+            lat_indices = np.where(np.in1d(rupture_lats, too_close_lats))[0]
+            print lon_indices
+            print lat_indices
+            print np.intersect1d(lon_indices, lat_indices)
+            too_close_mags = rupture_mags[np.intersect1d(lon_indices, lat_indices)]
+            print too_close_mags
+            minimum_magnitude_intersecting_fault = min(too_close_mags)
+            print 'minimum_magnitude_intersecting_fault',\
+                minimum_magnitude_intersecting_fault
+                                      
     print 'Overall minimum', min(minimum_distance_list)
 #        pyplot.clf()
 #        pyplot.scatter(lons1, lons2)
