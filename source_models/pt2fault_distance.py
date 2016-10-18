@@ -54,7 +54,9 @@ def read_simplefault_source(simplefault_source_file):
         print fault.mfd.max_mag
     return sources
 
-def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
+def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
+                      filename = 'source_model.xml',
+                      buffer_distance = 5.):
     """Calculate distances from a pt source rupture plane
     to the fault sources to then reduce Mmax on events that are 
     within a certain distance
@@ -65,6 +67,11 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
     :param min_distance:
         Minimum distance (km) within which we want a point source 
         rupture to be from a fault.
+    :param filename:
+        Name of output nrml file for revised pt source model
+    :param buffer_distance:
+        Degrees, initial filter to only process pts within this
+        distance from the fault
     """
 
     # Extract the points of the fault source mesh
@@ -89,18 +96,16 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
 
     # Generate ruptures for point sources
     minimum_distance_list = []
-    buffer_distance = 5. # Degrees, initial filter to only process pts
+     # Degrees, initial filter to only process pts
     # within the region where we have faults
     revised_point_sources = {'Cratonic': [], 'Non_cratonic': []}
     for pt in pt_sources:
         # For speeding things up
-       # print pt.mfd.bin_width
         if pt.location.longitude < min_fault_lon - buffer_distance or \
            pt.location.longitude > max_fault_lon + buffer_distance or \
            pt.location.latitude < min_fault_lat - buffer_distance or \
            pt.location.latitude > max_fault_lat + buffer_distance:
             continue
-#        print pt.location
         rupture_mags = []
         rupture_lons = []
         rupture_lats = []
@@ -120,28 +125,23 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
         lons1,lons2 = np.meshgrid(fault_lons, rupture_lons)
         lats1,lats2 = np.meshgrid(fault_lats, rupture_lats)
         depths1, depths2 = np.meshgrid(fault_depths, rupture_depths)
+
         # Calculate distance from pt to all fault
         distances = distance(lons1, lats1, depths1, lons2, lats2, depths2)
-        #       print 'distances', distances
         closest_distance_to_faults = np.min(distances)
-        print 'closest_distances', closest_distance_to_faults
+        print 'Shortest pt to fault distance is', closest_distance_to_faults
         minimum_distance_list.append(closest_distance_to_faults)
+
         # Find where the distance is less than the threshold min_distance
         too_close_lons = lons2[np.where(distances < min_distance)]
         too_close_lats = lats2[np.where(distances < min_distance)]
-        print too_close_lons
-        print too_close_lats
         if too_close_lons.size > 0:
             lon_indices = np.where(np.in1d(rupture_lons, too_close_lons))[0]
             lat_indices = np.where(np.in1d(rupture_lats, too_close_lats))[0]
-            print lon_indices
-            print lat_indices
-            print np.intersect1d(lon_indices, lat_indices)
-            too_close_mags = rupture_mags[np.intersect1d(lon_indices, lat_indices)]
-            print too_close_mags
+            too_close_mags = rupture_mags[np.intersect1d(
+                lon_indices, lat_indices)]
+            print 'Magnitudes of rupture close to fault', too_close_mags
             minimum_magnitude_intersecting_fault = min(too_close_mags)
-            print 'minimum_magnitude_intersecting_fault',\
-                minimum_magnitude_intersecting_fault
             if minimum_magnitude_intersecting_fault >= \
                (pt.mfd.min_mag + pt.mfd.bin_width):
                 pt.mfd.max_mag = minimum_magnitude_intersecting_fault - \
@@ -149,20 +149,17 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
                 revised_point_sources[pt.tectonic_region_type].append(pt)
         else:
             revised_point_sources[pt.tectonic_region_type].append(pt)
-    print revised_point_sources                                  
-    print 'Overall minimum', min(minimum_distance_list)
+    print 'Overall minimum distance (km):', min(minimum_distance_list)
     source_group_list = []
     id = 0
+    source_model_file = filename 
+    print 'Writing to source model file %s' % source_model_file 
     for trt, sources in revised_point_sources.iteritems():
         source_group = SourceGroup(trt, sources = sources, id=id)
         id +=1
         source_group_list.append(source_group)
-    write_source_model('test.xml', source_group_list, name = 'Leonard2008')
-#        pyplot.clf()
-#        pyplot.scatter(lons1, lons2)
-#        pyplot.savefig('lons.png')
-#        sys.exit()
-        
+    write_source_model(source_model_file, source_group_list,
+                       name = 'Leonard2008')
 
 def plot_sources(point_source, fault_source):
    
@@ -193,4 +190,8 @@ if __name__ == "__main__":
     pt_sources = read_pt_source(pt_source_file)
     fault_sources = read_simplefault_source(simplefault_source_file)
     plot_sources = plot_sources(pt_sources, fault_sources)
-    pt2fault_distance(pt_sources, fault_sources)
+    revised_point_source_file = pt_source_file[:-4] + \
+                                '_filter_near_fault_sources.xml'
+    pt2fault_distance(pt_sources, fault_sources, 
+                      filename = revised_point_source_file,
+                      buffer_distance = 5.)
