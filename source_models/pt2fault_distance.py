@@ -5,7 +5,7 @@ to the MFD and nodal plane distirbution. Nearest distance to the fault is calcul
 import os, sys
 import numpy as np
 from openquake.commonlib.source import SourceModelParser
-from openquake.commonlib.sourceconverter import SourceConverter
+from openquake.commonlib.sourceconverter import SourceConverter, SourceGroup
 from openquake.commonlib.sourcewriter import write_source_model
 from openquake.commonlib.node import Node
 from openquake.commonlib.sourcewriter import obj_to_node
@@ -91,8 +91,10 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
     minimum_distance_list = []
     buffer_distance = 5. # Degrees, initial filter to only process pts
     # within the region where we have faults
+    revised_point_sources = {'Cratonic': [], 'Non_cratonic': []}
     for pt in pt_sources:
         # For speeding things up
+       # print pt.mfd.bin_width
         if pt.location.longitude < min_fault_lon - buffer_distance or \
            pt.location.longitude > max_fault_lon + buffer_distance or \
            pt.location.latitude < min_fault_lat - buffer_distance or \
@@ -140,8 +142,22 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5):
             minimum_magnitude_intersecting_fault = min(too_close_mags)
             print 'minimum_magnitude_intersecting_fault',\
                 minimum_magnitude_intersecting_fault
-                                      
+            if minimum_magnitude_intersecting_fault >= \
+               (pt.mfd.min_mag + pt.mfd.bin_width):
+                pt.mfd.max_mag = minimum_magnitude_intersecting_fault - \
+                                 pt.mfd.bin_width
+                revised_point_sources[pt.tectonic_region_type].append(pt)
+        else:
+            revised_point_sources[pt.tectonic_region_type].append(pt)
+    print revised_point_sources                                  
     print 'Overall minimum', min(minimum_distance_list)
+    source_group_list = []
+    id = 0
+    for trt, sources in revised_point_sources.iteritems():
+        source_group = SourceGroup(trt, sources = sources, id=id)
+        id +=1
+        source_group_list.append(source_group)
+    write_source_model('test.xml', source_group_list, name = 'Leonard2008')
 #        pyplot.clf()
 #        pyplot.scatter(lons1, lons2)
 #        pyplot.savefig('lons.png')
