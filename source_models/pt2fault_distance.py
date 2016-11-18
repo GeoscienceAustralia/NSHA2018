@@ -96,8 +96,6 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
 
     # Generate ruptures for point sources
     minimum_distance_list = []
-     # Degrees, initial filter to only process pts
-    # within the region where we have faults
     revised_point_sources = {'Cratonic': [], 'Non_cratonic': []}
     for pt in pt_sources:
         # For speeding things up

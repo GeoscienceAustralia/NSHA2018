@@ -34,7 +34,7 @@ def area2pt_source(area_source_file, discretisation=200.):
     converter = SourceConverter(50, 10, width_of_mfd_bin=0.1,
                                 area_source_discretization=discretisation)
     parser = SourceModelParser(converter)
-#    print [method for method in dir(parser) if callable(getattr(parser, method))]
+    print [method for method in dir(parser)]# if callable(getattr(parser, method))]
     try:
         sources = parser.parse_sources(area_source_file)
     except AttributeError: # Handle version 2.1 and above
@@ -43,11 +43,7 @@ def area2pt_source(area_source_file, discretisation=200.):
         for group in groups:
             for source in group:
                 sources.append(source)
-    #print sources
-
     name = 'test_point_model'
-    #   source_model = Node("sourceModel", {"name": name}, nodes=nodes)
-#    nodes = []
     new_pt_sources = {}
     for source in sources:
         pt_sources = area_to_point_sources(source)
@@ -60,12 +56,7 @@ def area2pt_source(area_source_file, discretisation=200.):
                 new_pt_sources[pt.tectonic_region_type] = [pt]
            # print [method for method in dir(pt) if callable(getattr(pt, method))]
           #  print [attribute for attribute in dir(pt)]
-     #       print new_pt_sources
-#        nodes += (map(obj_to_node, new_pt_sources))
-#    source_model = Node("sourceModel", {"name": name}, nodes=nodes)
     nrml_pt_file = area_source_file[:-4] + '_pts.xml'
-#    with open(nrml_pt_file, 'wb') as f:
-#        nrml.write([source_model], f, '%s')
     source_group_list = []
     id = 0
     for trt, sources in new_pt_sources.iteritems():
