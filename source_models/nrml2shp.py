@@ -17,12 +17,14 @@ def nrml2shp(nrml_source_file):
     :params area_source_file:
         nrml file for an area based source model
     """
-    shp_file_name = nrml_source_file[:-3] + 'shp'
-    print shp_file_name
+    
     parser = SourceModelParser()
     source_model = parser.read(nrml_source_file)
     shp_parser = ShapefileParser()
+    shp_file_name = nrml_source_file[:-4] + '_shape'
+    print shp_file_name
     shp_parser.write(shp_file_name, source_model)
+    
 
 if __name__ == "__main__":
     try:
