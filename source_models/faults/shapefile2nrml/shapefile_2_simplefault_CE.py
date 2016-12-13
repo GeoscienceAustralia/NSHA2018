@@ -18,9 +18,10 @@ Jonathan Griffin, Geoscience Australia, June 2016
 
 import os
 import ogr
+import argparse
 import numpy as np
 from geopy import distance
-from eq_hazard_tools.recurrence import fault_slip_rate_GR_conversion
+from NSHA2018.mfd import fault_slip_rate_GR_conversion
 from openquake.hazardlib.scalerel.wc1994 import WC1994
 from openquake.hazardlib.mfd import YoungsCoppersmith1985MFD
 
@@ -361,7 +362,6 @@ def nrml_from_shapefile(shapefile,
 ############################################################################
 
 if __name__ == '__main__':
-    import argparse
 
     parser = argparse.ArgumentParser(
         description='Convert a line shapefile to an openquake complex fault' +

@@ -13,6 +13,7 @@ Gareth Davies, Geoscience Australia, 2014
 
 import os
 import ogr
+import argparse
 
 def parse_line_shapefile(shapefile, shapefile_depth_attribute):
     """Read the line shapefile with contours on the fault plain
@@ -207,7 +208,6 @@ def nrml_from_shapefile(shapefile,
 ############################################################################
 
 if __name__ == '__main__':
-    import argparse
 
     parser = argparse.ArgumentParser(
         description='Convert a line shapefile to an openquake complex fault' +
