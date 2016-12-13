@@ -202,7 +202,7 @@ def sn_test(tr,tp,noise_win_len,sig_win_len,ratio):
     m1 = np.max(abs(noise_tr.data))
     m2 = np.max(abs(signal_tr.data))
     sn_test = 0 if (m1*ratio > m2) else 1
-    return sn_test
+    return sn_test, m1, m2
 
 
 
