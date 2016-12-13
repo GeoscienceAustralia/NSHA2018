@@ -58,6 +58,8 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
             sliprate = float(feature.GetField(shapefile_sliprate_attribute))
             # Convert from m/ma to mm/a
             sliprate = sliprate/1000
+            #slip uncertainty
+            #sliprate = sliprate-0.1*sliprate
         except ValueError:
             sliprate = '""'
         sliprates.append(sliprate)
@@ -271,11 +273,6 @@ if __name__ == '__main__':
                         'plain contours. Each line geometry has an ' +
                         'attribute defining its depth')
 
-#    parser.add_argument('-shapefile_depth_attribute', type=str, default=None,
-#                        help='Name of the attribute table column ' +
-#                        '(in shapefile) which contains the depth of each ' +
-#                        'contour')
-
     parser.add_argument('-shapefile_faultname_attribute', type=str, default=None,
                         help='Name of the attribute table column ' +
                         '(in shapefile) which contains the name of each ' +
@@ -294,13 +291,6 @@ if __name__ == '__main__':
     parser.add_argument('-source_model_name', type=str,
                         default='unnamed_source',
                         help='Name for the source model')
-
-#    parser.add_argument('-simple_fault_id', type=int, default=0,
-#                        help='integer id for the complex_fault')
-
-#    parser.add_argument('-complex_fault_name', type=str,
-#                        default='unnamed_complex_fault',
-#                        help='Name for the complex fault')
 
     parser.add_argument(
         '-simple_fault_tectonic_region',
