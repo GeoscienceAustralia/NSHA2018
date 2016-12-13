@@ -23,8 +23,9 @@ def nrml2shp(nrml_source_file):
     shp_parser = ShapefileParser()
     shp_file_name = nrml_source_file[:-4] + '_shape'
     print shp_file_name
-    shp_parser.write(shp_file_name, source_model)
-    
+    shp_parser.write(shp_file_name, source_model) 
+#    filebase = shp_parser.destination
+#    print filebase
 
 if __name__ == "__main__":
     try:
