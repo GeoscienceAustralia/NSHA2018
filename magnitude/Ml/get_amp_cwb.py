@@ -5,13 +5,13 @@
 
 import local_magnitude
 
-
-# In[8]:
+from catalogue.parsers import parse_ggcat
 
 #!/opt/anaconda-2.3.0/bin/python2
 """#!/opt/antelope/5.4/bin/python"""
 #%matplotlib inline
 import numpy as np
+import datetime
 from obspy.core import utcdatetime, event
 from obspy.core.event import Catalog, Event, Magnitude, Origin, StationMagnitude
 #from obspy.neic.client import Client
@@ -26,7 +26,7 @@ from obspy.io.xseed.utils import SEEDParserException
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib import pyplot
 # we will use dataless seed from IRIS to get station information
-parser = Parser("../../AU.dataless")
+parser = Parser("../../data/AU.dataless")
 # travel-time model will be iasp91 but could be any
 from obspy import taup
 vel_model = taup.TauPyModel(model="iasp91")
@@ -89,24 +89,19 @@ def max_p2t(data, delta):
      return (amplitude, period, delta*turning_points[np.argmax(amplitudes)][1])
 
 
-# In[10]:
 
 # initialize the cwb port
-client=Client(host='10.7.161.60',port=2061,debug=False, nonice=True)
+client=Client(host='10.7.161.60',port=2061,debug=False)#, nonice=True)
 eq=[]
 # here we read all events line by line
 
-
-# In[11]:
 
 # Instantiate catalogue object
 catalogue = Catalog()
 # Build Quakeml Event object
 
-
-# In[19]:
-
-# file to store outputs
+""" 
+JG's original method
 event_num = 0
 with open("../../eq2.txt",'r') as cat:
     for line in cat:
@@ -126,32 +121,44 @@ with open("../../eq2.txt",'r') as cat:
         mag_type = eq[16]
         mag_pref = float(eq[17])
         mag_source = eq[31].split(' ')[-1]
-
-        start_time=utcdatetime.UTCDateTime(yr,mon,day,hr,mn,int(sec),int((sec-int(sec))*100000))
-#        ''' correct the time if not UTC '''
-# Is this really needed??? Looks like may already be converted??
-#        if code=="AEST" :
-#            start_time-=36000
-#        if code=="WITA" or code=="AWST":
-#            start_time-=28800
         
+        start_time=utcdatetime.UTCDateTime(yr,mon,day,hr,mn,int(sec),int((sec-int(sec))*100000))
+"""
+##########################################################################
+# get GG cat data
+##########################################################################
+ggcat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
+
+for evnum, ev in enumerate(ggcat):
+    # only look for post 1990 data
+    if ev['datetime'] >= datetime.datetime(2010, 1, 1, 0, 0):
+        print evnum, ev['datetime']
+        #start_time=utcdatetime.UTCDateTime(yr,mon,day,hr,mn,int(sec),int((sec-int(sec))*100000))
+       
         # Build event object
-        event = Event(resource_id='GG_cat_' + str(event_num), creation_info='JG')
-        event_num += 1
+        event = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='JG')
+        
         origin = Origin()
-        origin.time = start_time
-        origin.longitude = lon
-        origin.latitude = lat
-        origin.depth = dep
+        origin.time = ev['datetime']
+        origin.longitude = ev['lon']
+        origin.latitude = ev['lat']
+        origin.depth = ev['dep']
+        
         event.origins.append(origin)
+        
         mag = Magnitude(creation_info='GG_cat')
-        mag.mag = mag_pref
-        mag.magnitude_type = mag_type
+        mag.mag = ev['prefmag']
+        mag.magnitude_type = ev['prefmagtype']
+        
         event.magnitudes.append(mag)
         
 
         ''' the time window to request the data will be 20 minutes, check maximum travel time and increase this value accordingly '''
-        end_time=start_time+960 # 16 minutes
+        #end_time=start_time+960 # 16 minutes
+        start_time = ev['datetime'] - datetime.timedelta(seconds=60)
+        end_time   = ev['datetime'] + datetime.timedelta(seconds=960) # 16 minutes
+        
+        
         ''' get all waveform data available, use wildcards to reduce the data volume and speedup the process,
         unfortunately we need to request few times for every number of characters that forms the station name '''
         st_3 = client.get_waveforms("AU", "???", "", "[BS]?[EN]", start_time,end_time)
@@ -276,9 +283,4 @@ with open("../../eq2.txt",'r') as cat:
 ##            if counter > 10:
 ##                break
 ##    figpdf.close()
-
-
-# In[ ]:
-
-
 
