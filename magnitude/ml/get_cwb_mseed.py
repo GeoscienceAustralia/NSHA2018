@@ -137,7 +137,7 @@ for evnum, ev in enumerate(ggcat):
         #start_time=utcdatetime.UTCDateTime(yr,mon,day,hr,mn,int(sec),int((sec-int(sec))*100000))
        
         # Build event object
-        event = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='JG')
+        event = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='AU')
         
         origin = Origin()
         origin.time = ev['datetime']
@@ -186,5 +186,5 @@ for evnum, ev in enumerate(ggcat):
         msfile = path.join('waves', ev['datetime'].strftime('%Y%m%d%H%M')+'.mseed')
         
         # now write streams for each event to mseed
-        st.write("example.mseed", format="MSEED")          
+        st.write(msfile, format="MSEED")          
 
