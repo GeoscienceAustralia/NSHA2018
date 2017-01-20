@@ -12,6 +12,7 @@ from catalogue.parsers import parse_ggcat
 #%matplotlib inline
 import numpy as np
 import datetime
+from os import path, makedirs
 from obspy.core import utcdatetime, event
 from obspy.core.event import Catalog, Event, Magnitude, Origin, StationMagnitude
 #from obspy.neic.client import Client
@@ -25,15 +26,24 @@ from obspy.io.xseed.utils import SEEDParserException
 # plot all traces into one pdf file
 from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib import pyplot
+
 # we will use dataless seed from IRIS to get station information
 parser = Parser("../../data/AU.dataless")
+
 # travel-time model will be iasp91 but could be any
 from obspy import taup
 vel_model = taup.TauPyModel(model="iasp91")
+
 #from obspy.taup.TauPyModel import get_travel_times
 # local modules
 #import local_magnitude
-r_earth = 6371
+
+##########################################################################
+# set constants and funcs
+##########################################################################
+
+r_earth = 6371.
+
 def sind(x): return np.sin(x / 180. * np.pi)
 def cosd(x): return np.cos(x / 180. * np.pi)
 def tand(x): return np.tan(x / 180. * np.pi)
@@ -44,15 +54,10 @@ def gps2DistDegree(lat1, lon1, lat2, lon2):
     return arccosd(sind(lat1) * sind(lat2) +
                    cosd(lat1) * cosd(lat2) * cosd(lon1 - lon2))
 
-
-# In[ ]:
-
-
-
-
-# In[9]:
-
+##########################################################################
 # here we define how we measure peak to peak amplitude and period
+##########################################################################
+# 
 def max_p2t(data, delta):
      """
      Function to find the maximum peak-to-trough amplitude and period of this \
@@ -93,8 +98,6 @@ def max_p2t(data, delta):
 # initialize the cwb port
 client=Client(host='10.7.161.60',port=2061,debug=False)#, nonice=True)
 eq=[]
-# here we read all events line by line
-
 
 # Instantiate catalogue object
 catalogue = Catalog()
@@ -177,6 +180,17 @@ for evnum, ev in enumerate(ggcat):
         # Now sort the streams by station and channel
         st.sort()
         
+        # check if waves folder exists
+        if not path.isdir('waves'):
+            makedirs('waves')
+            
+        # set mseed filename
+        msfile = path.join('waves', ev['datetime'].strftime('%Y%m%d%H%M')+'.mseed')
+        
+        # now write streams to mseed
+        st.write("example.mseed", format="MSEED")          
+
+"""        
         # Filter the stream - should it be done here on by trace???
   #      st.filter(bandpass, freqmin=0.5, freqmax=10., )
         # PDF file to plot all traces for this event
@@ -214,7 +228,7 @@ for evnum, ev in enumerate(ggcat):
             # Demean
             tr.detrend('demean')
             try:
-                tr.stats.great_circle_distance, azf, azb =                     gps2DistAzimuth(tr.stats.coordinates.latitude,tr.stats.coordinates.longitude,lat,lon)
+                tr.stats.great_circle_distance, azf, azb = gps2DistAzimuth(tr.stats.coordinates.latitude,tr.stats.coordinates.longitude,lat,lon)
                 travel_times=vel_model.get_travel_times(dep, tr.stats.distance)#,model="iasp91")
                 #print travel_times, type(travel_times)
                 try:
@@ -265,6 +279,7 @@ for evnum, ev in enumerate(ggcat):
                 # Calculate WA amplitudes and periods
 #                wave=wa_tr.slice(start_time+arrivals['time'],start_time+arrivals['time']+20)
 #                print len(wave.data)
+                
                 if len(wa_tr.data)>0:
                     wa_amp,period,delay=max_p2t(wa_tr.data,wa_tr.stats.delta)
                     local_mag = local_magnitude.calculate_local_magnitude(wa_amp/10e6,                                                                           [lon,lat,dep],                                                                          tr.stats.great_circle_distance/1000.)
@@ -284,3 +299,4 @@ for evnum, ev in enumerate(ggcat):
 ##                break
 ##    figpdf.close()
 
+"""
