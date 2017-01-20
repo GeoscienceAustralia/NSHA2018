@@ -14,7 +14,7 @@ try:
     from catalogue_tools import weichert_algorithm, bval2beta
     from fault_tools import get_oq_incrementalMFD, beta2bval, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly
-    from io_catalogues import parse_ggcat
+    from catalogue.parsers import parse_ggcat
     from misc_tools import listdir_extension
     from make_nsha_oq_inputs import write_oq_sourcefile
 except:
@@ -42,20 +42,22 @@ except:
 
 # load param file
 lines = open(paramfile).readlines()
-ggcatfile   = lines[0].split('=')[-1].strip()
-dec_flag    = lines[1].split('=')[-1].strip() # decluster flag
-shpfile     = lines[2].split('=')[-1].strip()
-outfolder   = lines[3].split('=')[-1].strip()
-outsrcshp      = lines[4].split('=')[-1].strip()
-bin_width   = float(lines[5].split('=')[-1].strip())
+rootfolder  = lines[0].split('=')[-1].strip()
+ggcatfile   = lines[1].split('=')[-1].strip()
+dec_flag    = lines[2].split('=')[-1].strip() # decluster flag
+shpfile     = lines[3].split('=')[-1].strip()
+outfolder   = path.join(rootfolder, lines[4].split('=')[-1].strip())
+outsrcshp   = lines[5].split('=')[-1].strip()
+bin_width   = float(lines[6].split('=')[-1].strip())
 
 # get export folder
 now = datetime.now()
 shpname = path.split(shpfile)
 if dec_flag == 'True':
-    outfolder = '_'.join((shpname[-1][0:-4], 'DEC', now.strftime('%Y-%m-%d')))
+    #outfolder = '_'.join((shpname[-1][0:-4], 'DEC', now.strftime('%Y-%m-%d')))
+    outfolder += '_'.join(('DEC', now.strftime('%Y-%m-%d')))
 else:
-    outfolder = '_'.join((shpname[-1][0:-4], now.strftime('%Y-%m-%d')))
+    outfolder += '_' + now.strftime('%Y-%m-%d')
 
 # check to see if exists
 if path.isdir(outfolder) == False:
@@ -103,6 +105,8 @@ new_bval_u = src_bval_u
 new_n0_b = src_n0
 new_n0_l = src_n0_l
 new_n0_u = src_n0_u
+
+print src_n0, new_n0_b
 #new_polys = []
 
 '''
@@ -563,7 +567,7 @@ for i in srcidx:
             m.plot(x, y, 'o', mec='k', mfc='none', mew=1.0, ms=ms)
             
         # make legend - set dummy x, y params
-        x, y= -10000, -10000
+        x, y= -100000, -100000
         
         # get marker sizes
         ms = 2.5 * 3.0
@@ -767,6 +771,7 @@ for record, shape in zip(records, shapes):
             newrec.append(record[idx])
     
     # write new records
+    print 'N0', src_n0[i], new_n0_b[i]
     if src_n0[i] != new_n0_b[i]:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
@@ -837,4 +842,5 @@ for rec, shape in zip(records, shapes):
 multimods = 'False'
 
 # now write OQ file
-write_oq_sourcefile(model, outfolder, outfolder, multimods)
+oqpath = path.join(outfolder)
+write_oq_sourcefile(model, oqpath, oqpath, multimods)
