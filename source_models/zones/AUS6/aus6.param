@@ -1,6 +1,7 @@
-CATALOGUE        = ..//Catalogues//GGcat-161025.csv
+ROOT FOLDER      = Domains
+CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
 DECLUSTERED      = False
-SHAPEFILE INPUT  = AUS6_NSHA18_2016-12-15//AUS6_NSHA18_MFD.shp
-OUTPUT FOLDER    = TEST
-SHAPEFILE OUTPUT = AUS6_NSHA18_MFD.shp
+SHAPEFILE INPUT  = Domains//shapefiles//DOMAINS_NSHA18.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = Domains_NSHA18_MFD.shp
 MFD BIN WIDTH    = 0.1

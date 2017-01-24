@@ -1,7 +1,7 @@
 from numpy import array, arange, argsort, sort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, zeros_like, ceil, floor, \
-                  ones_like, isnan
-from os import path, sep, mkdir, getcwd, system, walk, system
+                  ones_like, isnan, around
+from os import path, sep, mkdir, getcwd, system, walk
 from shapely.geometry import Point, Polygon
 from datetime import datetime
 from sys import argv
@@ -12,10 +12,11 @@ from mpl_toolkits.basemap import Basemap
 # import non-standard functions
 try:
     from catalogue_tools import weichert_algorithm, bval2beta
-    from fault_tools import get_oq_incrementalMFD, beta2bval, bval2beta
+    from fault_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly
     from catalogue.parsers import parse_ggcat
-    from misc_tools import listdir_extension
+    from catalogue.writers import ggcat2ascii
+    #from misc_tools import listdir_extension
     from make_nsha_oq_inputs import write_oq_sourcefile
 except:
     cwd = getcwd().split(sep)
@@ -95,7 +96,7 @@ src_bval_fix_sd = get_field_data(sf, 'BVAL_FIX_S', 'float') # too many chars - d
 src_mcomp = get_field_data(sf, 'MCOMP', 'str')
 src_ycomp = get_field_data(sf, 'YCOMP', 'str')
 src_ymax = get_field_data(sf, 'YMAX', 'float')
-src_sheef = get_field_data(sf, 'CAT_FILE', 'str')
+src_cat = get_field_data(sf, 'CAT_FILE', 'str')
 sortind = argsort(src_code)
 
 # initiate new arrays for writing new shpfile
@@ -105,9 +106,6 @@ new_bval_u = src_bval_u
 new_n0_b = src_n0
 new_n0_l = src_n0_l
 new_n0_u = src_n0_u
-
-print src_n0, new_n0_b
-#new_polys = []
 
 '''
 for i, si in enumerate(sortind):
@@ -152,20 +150,20 @@ for i in srcidx:
     out_idx = []
     
     """
-    # set SHEEF for given depth range
-    if src_sheef[i] == 'FULL':
-        ggcat = fullsheef
-    elif src_sheef[i] == 'DEEP':
-        ggcat = deepsheef
-    elif src_sheef[i] == 'CRUST':
-        ggcat = crustsheef
+    # set cat for given depth range
+    if src_cat[i] == 'FULL':
+        ggcat = fullcat
+    elif src_cat[i] == 'DEEP':
+        ggcat = deepcat
+    elif src_cat[i] == 'CRUST':
+        ggcat = crustcat
     """
     
     # get max decimal year and round up!
     lr = ggcat[-1]
     max_comp_yr = lr['year']+lr['month']/12.
     
-    # now loop through earthquakes in SHEEF
+    # now loop through earthquakes in cat
     for s in ggcat:
         
         # check if pt in poly and compile mag and years
@@ -296,7 +294,8 @@ for i in srcidx:
             
             # get dummy curve
             dummyN0 = 1.
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, src_mmin_reg[i], src_mmax[i], bin_width)
+            m_min_reg = src_mmin_reg[i] + bin_width/2.
+            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax[i], bin_width)
             
             # fit to lowest mahnitude considered
             bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
@@ -377,7 +376,7 @@ for i in srcidx:
         # fill new values
         ###############################################################################
         
-        print 'Filling new values for', src_code[i], '\n'
+        print 'Filling new values for', src_code[i]
         new_bval_b[i] = bval
         new_bval_l[i] = bval-sigb173
         new_bval_u[i] = bval+sigb173
@@ -452,7 +451,7 @@ for i in srcidx:
         h1 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=8)
         
         # plot best fit
-        mpltmin_best = 2.0
+        mpltmin_best = 2.0# + bin_width/2.
         plt_width = 0.1
         betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
         
@@ -496,7 +495,7 @@ for i in srcidx:
         # set legend title
         title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
               + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
-              + '\t'.join(('','','N0','Beta','bval','Mx')).expandtabs()
+              + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
               
         leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
                    fontsize=9, loc=3, title=title)
@@ -506,7 +505,7 @@ for i in srcidx:
         ###############################################################################
         # make map
         ###############################################################################
-        
+        print 'Making map for:', src_code[i]
         ax = plt.subplot(236)
         res = 'i'
         
@@ -658,10 +657,37 @@ for i in srcidx:
             mkdir(srcfolder)
         
         ###############################################################################
+        # export rates file
+        ###############################################################################
+        # get beta curve again at consistent mags
+        mpltmin_best = 2.0 + bin_width/2.
+        plt_width = 0.1
+        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)        
+        
+        header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT'
+        
+        rate_txt = header + '\n'
+        for mr in range(0,len(mrng)):
+            for bm in range(0, len(mfd_mrng)):
+                if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
+                    beta_curve_val = betacurve[bm]
+                    
+            line = ','.join((str(mrng[mr]), str(n_obs[mr]), str(cum_num[mr]), \
+                             str('%0.4e' % bin_rates[mr]), str('%0.4e' % cum_rates[mr]), \
+                             str('%0.4e' % beta_curve_val))) + '\n'
+            rate_txt += line
+                
+        # export to file
+        ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
+        f = open(ratefile, 'wb')
+        f.write(rate_txt)
+        f.close()
+                                 
+        ###############################################################################
         # export ggcat for source zone
         ###############################################################################
-        sheefpath = path.join(srcfolder, '_'.join((src_code[i], 'SHEEF_passed.dat')))
-        #write_sheef(ev_dict, sheefpath)
+        catfile = path.join(srcfolder, '_'.join((src_code[i], 'passed.dat')))
+        ggcat2ascii(ev_dict, catfile)
         
         # reorder out dict 
         ordidx = argsort(argsort(out_idx))
@@ -670,26 +696,26 @@ for i in srcidx:
             idx = where(ordidx == o)[0][0]
             new_dict.append(ev_out[idx])
         
-        sheefpath = path.join(srcfolder, '_'.join((src_code[i], 'SHEEF_failed.dat')))
-        #write_sheef(new_dict, sheefpath)
+        catfile = path.join(srcfolder, '_'.join((src_code[i], 'failed.dat')))
+        ggcat2ascii(ev_dict, catfile)
         
         ###############################################################################
         # export ggcat files to shp
         ###############################################################################
         
         # write "in" shapefile
-        insheef = '_'.join((src_code[i], 'SHEEF_passed'))+'.dat'
-        inshp = '_'.join((src_code[i], 'SHEEF_passed'))+'.shp'
-        sheefpath = path.join(srcfolder, insheef)
+        incat = '_'.join((src_code[i], 'passed'))+'.dat'
+        inshp = '_'.join((src_code[i], 'passed'))+'.shp'
+        catfile = path.join(srcfolder, incat)
         shppath = path.join(srcfolder, inshp)
-        #sheef2shp(sheefpath, shppath)
+        #cat2shp(catfile, shppath)
         
         # write "out" shapefile
-        outsheef = '_'.join((src_code[i], 'SHEEF_failed'))+'.dat'
-        outshp = '_'.join((src_code[i], 'SHEEF_failed'))+'.shp'
-        sheefpath = path.join(srcfolder, outsheef)
+        outcat = '_'.join((src_code[i], 'failed'))+'.dat'
+        outshp = '_'.join((src_code[i], 'failed'))+'.shp'
+        catfile = path.join(srcfolder, outcat)
         shppath = path.join(srcfolder, outshp)
-        #sheef2shp(sheefpath, shppath)
+        #cat2shp(catfile, shppath)
         
         ###############################################################################
         # save figures
@@ -810,8 +836,9 @@ for root, dirnames, filenames in walk(outfolder):
     #for filename in filter(filenames, '.pdf'):
     for filename in filenames:
         if filename.endswith('.pdf'):
-            print filename
-            pdffiles.append(path.join(root, filename))
+            if filename.startswith(outsrcshp.split('.shp')[0]) == False:
+                print filename
+                pdffiles.append(path.join(root, filename))
 
 # now merge files
 merger = PdfFileMerger()                              
