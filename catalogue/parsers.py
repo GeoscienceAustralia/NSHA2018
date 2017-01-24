@@ -17,7 +17,7 @@ def parse_ggcat(ggcatcsv):
     
     import csv
     from numpy import nan, isnan, floor
-    from parsers import checkint
+    from catalogue.parsers import checkint
     import datetime as dt
     
     # open file
