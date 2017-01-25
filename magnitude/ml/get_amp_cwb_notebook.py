@@ -11,7 +11,7 @@ from NSHA2018.magnitude.mw.Main.scripts import modules
 
 #!/opt/anaconda-2.3.0/bin/python2
 """#!/opt/antelope/5.4/bin/python"""
-get_ipython().magic(u'matplotlib inline')
+#get_ipython().magic(u'matplotlib inline')
 import numpy as np
 from obspy.core import utcdatetime, event
 from obspy.core.event import Catalog, Event, Magnitude, Origin, StationMagnitude
