@@ -136,12 +136,14 @@ ggcat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
 
 for evnum, ev in enumerate(ggcat): 
     # only look for post 1990 data
-    if ev['datetime'] >= datetime.datetime(2010, 1, 1, 0, 0):
+    if ev['datetime'] >= datetime.datetime(1990, 1, 1, 0, 0):
         
+        '''
         # for testing, get Moe data
         ev['datetime'] = datetime.datetime(2012,06,19,10,53)
         ev['lat'] = -38.304
         ev['lon'] = 146.200
+        '''
         
         print evnum, ev['datetime']
         
@@ -171,14 +173,14 @@ for evnum, ev in enumerate(ggcat):
         #end_time=start_time+960 # 16 minutes
         start_time = dt - datetime.timedelta(seconds=60)
         end_time   = dt + datetime.timedelta(seconds=960) # 16 minutes
-        end_time   = dt + datetime.timedelta(seconds=600) # 5 minutes
+        #end_time   = dt + datetime.timedelta(seconds=600) # 5 minutes
         
         
         ''' get all waveform data available, use wildcards to reduce the data volume and speedup the process,
         unfortunately we need to request few times for every number of characters that forms the station name '''
         # kluge to fix non-retrieval of data  - loop through alphabet integers
         for ch in range(ord('A'), ord('Z')+1):
-            print chr(ch)
+            print 'Stations beginning with ', chr(ch)
             st_3 = client.get_waveforms("AU", chr(ch)+"??", "", "[BSEH]?[ENZ]", start_time,end_time)
             st_4 = client.get_waveforms("AU", chr(ch)+"???", "", "[BSEH]?[ENZ]", start_time,end_time)
             if ch == ord('A'):            
