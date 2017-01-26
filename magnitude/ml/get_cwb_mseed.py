@@ -130,14 +130,27 @@ with open("../../eq2.txt",'r') as cat:
 ##########################################################################
 ggcat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
 
-for evnum, ev in enumerate(ggcat):
+##########################################################################
+# loop thru events and get data
+##########################################################################
+
+for evnum, ev in enumerate(ggcat): 
     # only look for post 1990 data
     if ev['datetime'] >= datetime.datetime(2010, 1, 1, 0, 0):
+        
+        # for testing, get Moe data
+        ev['datetime'] = datetime.datetime(2012,06,19,10,53)
+        ev['lat'] = -38.304
+        ev['lon'] = 146.200
+        
         print evnum, ev['datetime']
+        
+        # convert datetime object to UTCdatetime
+        dt = utcdatetime.UTCDateTime(ev['datetime'])
         #start_time=utcdatetime.UTCDateTime(yr,mon,day,hr,mn,int(sec),int((sec-int(sec))*100000))
        
         # Build event object
-        event = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='AU')
+        evnt = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='AU')
         
         origin = Origin()
         origin.time = ev['datetime']
@@ -145,19 +158,20 @@ for evnum, ev in enumerate(ggcat):
         origin.latitude = ev['lat']
         origin.depth = ev['dep']
         
-        event.origins.append(origin)
+        evnt.origins.append(origin)
         
         mag = Magnitude(creation_info='GG_cat')
         mag.mag = ev['prefmag']
         mag.magnitude_type = ev['prefmagtype']
         
-        event.magnitudes.append(mag)
+        evnt.magnitudes.append(mag)
         
 
         ''' the time window to request the data will be 20 minutes, check maximum travel time and increase this value accordingly '''
         #end_time=start_time+960 # 16 minutes
-        start_time = ev['datetime'] - datetime.timedelta(seconds=60)
-        end_time   = ev['datetime'] + datetime.timedelta(seconds=960) # 16 minutes
+        start_time = dt - datetime.timedelta(seconds=60)
+        end_time   = dt + datetime.timedelta(seconds=960) # 16 minutes
+        end_time   = dt + datetime.timedelta(seconds=300) # 5 minutes
         
         
         ''' get all waveform data available, use wildcards to reduce the data volume and speedup the process,
@@ -183,7 +197,7 @@ for evnum, ev in enumerate(ggcat):
             makedirs('waves')
             
         # set mseed filename
-        msfile = path.join('waves', ev['datetime'].strftime('%Y%m%d%H%M')+'.mseed')
+        msfile = path.join('waves', str(evnum)+'_'+ev['datetime'].strftime('%Y%m%d%H%M')+'.mseed')
         
         # now write streams for each event to mseed
         st.write(msfile, format="MSEED")          
