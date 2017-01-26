@@ -94,7 +94,7 @@ def max_p2t(data, delta):
 
 
 # initialize the cwb port
-client=Client(host='10.7.161.60',port=2061,debug=False)#, nonice=True)
+client=Client(host='10.7.161.60',port=2061,debug=False, timeout=60)
 eq=[]
 
 # Instantiate catalogue object
@@ -171,17 +171,27 @@ for evnum, ev in enumerate(ggcat):
         #end_time=start_time+960 # 16 minutes
         start_time = dt - datetime.timedelta(seconds=60)
         end_time   = dt + datetime.timedelta(seconds=960) # 16 minutes
-        end_time   = dt + datetime.timedelta(seconds=300) # 5 minutes
+        end_time   = dt + datetime.timedelta(seconds=600) # 5 minutes
         
         
         ''' get all waveform data available, use wildcards to reduce the data volume and speedup the process,
         unfortunately we need to request few times for every number of characters that forms the station name '''
-        st_3 = client.get_waveforms("AU", "???", "", "[BS]?[EN]", start_time,end_time)
-        st_4 = client.get_waveforms("AU", "????", "", "[BS]?[EN]", start_time,end_time)
-        if len(st_4) > 0:
-            st=st_3+st_4
-        else:
-            st=st_3
+        # kluge to fix non-retrieval of data  - loop through alphabet integers
+        for ch in range(ord('A'), ord('Z')+1):
+            print chr(ch)
+            st_3 = client.get_waveforms("AU", chr(ch)+"??", "", "[BSEH]?[ENZ]", start_time,end_time)
+            st_4 = client.get_waveforms("AU", chr(ch)+"???", "", "[BSEH]?[ENZ]", start_time,end_time)
+            if ch == ord('A'):            
+                if len(st_4) > 0:
+                    st=st_3+st_4
+                else:
+                    st=st_3
+            
+            else:
+                if len(st_4) > 0:
+                    st+=st_3+st_4
+                else:
+                    st+=st_3
 
         # Cleanup duplicate traces returned by server
  #       st.merge(-1) #-1 method only merges overlapping or adjacent traces with same i            
@@ -201,4 +211,5 @@ for evnum, ev in enumerate(ggcat):
         
         # now write streams for each event to mseed
         st.write(msfile, format="MSEED")          
-
+        
+        forcecrash=blah
