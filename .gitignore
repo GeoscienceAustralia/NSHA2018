@@ -5,3 +5,7 @@
 # OS Generated Files #
 ######################
 .DS_Store
+
+# Random Files #
+######################
+.hold

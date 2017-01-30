@@ -128,13 +128,13 @@ with open("../../eq2.txt",'r') as cat:
 ##########################################################################
 # get GG cat data
 ##########################################################################
-ggcat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
+cat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
 
 ##########################################################################
 # loop thru events and get data
 ##########################################################################
 
-for evnum, ev in enumerate(ggcat): 
+for evnum, ev in enumerate(cat): 
     # only look for post 1990 data
     if ev['datetime'] >= datetime.datetime(1990, 1, 1, 0, 0):
         
@@ -209,7 +209,7 @@ for evnum, ev in enumerate(ggcat):
             makedirs('waves')
             
         # set mseed filename
-        msfile = path.join('waves', str(evnum)+'_'+ev['datetime'].strftime('%Y%m%d%H%M')+'.mseed')
+        msfile = path.join('waves', ev['datetime'].strftime('%Y%m%d%H%M')+'.mseed')
         
         # now write streams for each event to mseed
         st.write(msfile, format="MSEED")          

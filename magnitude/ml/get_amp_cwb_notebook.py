@@ -4,7 +4,8 @@
 # In[1]:
 
 import local_magnitude
-from NSHA2018.magnitude.mw.Main.scripts import modules
+#from NSHA2018.magnitude.mw.Main.scripts import modules
+from magnitude.mw.Main.scripts import modules
 
 
 # In[2]:
@@ -28,13 +29,13 @@ from matplotlib.backends.backend_pdf import PdfPages
 from matplotlib import pyplot
 from matplotlib.dates import date2num
 # we will use dataless seed from IRIS to get station information
-parser = Parser("../../../AU.dataless")
+parser = Parser("../../data/AU.dataless")
 # travel-time model will be iasp91 but could be any
 from obspy import taup
 vel_model = taup.TauPyModel(model="iasp91")
 #from obspy.taup.TauPyModel import get_travel_times
 # local modules
-from NSHA2018.magnitude.ml import local_magnitude
+from magnitude.ml import local_magnitude
 r_earth = 6371
 def sind(x): return np.sin(x / 180. * np.pi)
 def cosd(x): return np.cos(x / 180. * np.pi)
@@ -94,7 +95,7 @@ def max_p2t(data, delta):
 # In[4]:
 
 # initialize the cwb port
-client=Client(host='10.7.161.60',port=2061,debug=False, nonice=True)
+client=Client(host='10.7.161.60',port=2061,debug=False)#, nonice=True)
 eq=[]
 # here we read all events line by line
 
