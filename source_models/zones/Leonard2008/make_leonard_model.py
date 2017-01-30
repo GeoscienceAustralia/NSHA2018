@@ -1,11 +1,11 @@
 import shapefile
 from os import path
 from shapely.geometry import Point, Polygon
-from mapping_tools import get_field_data, get_shp_centroid
+from tools.nsha_tools import get_field_data, get_shp_centroid
 
 
 ###############################################################################
-# parse AUS6 shp exported from MIF
+# parse Leonard shp exported from OQ
 ###############################################################################
 
 leoshp = path.join('shapefiles', 'source_model_leonard_2008.shp')
@@ -25,7 +25,7 @@ trt   = get_field_data(sf, 'trt', 'str')
 dep_b = get_field_data(sf, 'hd1', 'float')
 
 ###############################################################################
-# parse Leonard lookup csv
+# parse Leonard lookup csv to get completeness info
 ###############################################################################
 l08_lookup = 'leonard08_lookup.csv'
 
