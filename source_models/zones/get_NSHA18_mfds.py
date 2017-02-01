@@ -16,6 +16,8 @@ try:
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly
     from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
+    from tools.nsha_tools import toYearFraction
+    
     #from misc_tools import listdir_extension
     from make_nsha_oq_inputs import write_oq_sourcefile
 except:
@@ -23,6 +25,9 @@ except:
     pythonpath = sep.join(pt[0:-3])+sep+'tools'
     print '\nSet environmental variables, e.g.:\n\nexport PYTHONPATH='+pythonpath+':$PYTHONPATH\n'
 
+def timedelta2days_hours_minutes(td):
+    return td.days, td.seconds//3600, (td.seconds//60)%60
+        
 ###############################################################################
 # do check to see if running single source only
 ###############################################################################
@@ -146,6 +151,7 @@ for i in srcidx:
     
     mvect = []
     tvect = []
+    dec_tvect = []
     ev_dict = []
     out_idx = []
     
@@ -171,6 +177,7 @@ for i in srcidx:
         if pt.within(poly):
             mvect.append(s['prefmag'])
             tvect.append(s['datetime'])
+            dec_tvect.append(toYearFraction(s['datetime']))
             ev_dict.append(s)
             
     # get annual occurrence rates for each mag bin
@@ -184,15 +191,18 @@ for i in srcidx:
     # convert lists to arrays
     mvect = array(mvect)
     tvect = array(tvect)
+    dec_tvect = array(dec_tvect)
     
     # keep original vectors for plotting
     orig_mvect = mvect
     orig_tvect = tvect
+    orig_dec_tvect = dec_tvect
     
     # first remove all events smaller than min Mc mag
     didx = where(mvect < mcomps[0])[0]
     out_idx = didx
     tvect = delete(tvect, didx)
+    dec_tvect = delete(dec_tvect, didx)
     mvect = delete(mvect, didx)
     ev_out = array(ev_dict)[didx]
     ev_dict = delete(ev_dict, didx)
@@ -208,6 +218,7 @@ for i in srcidx:
         
         # now delete events
         tvect = delete(tvect, didx)
+        dec_tvect = delete(dec_tvect, didx)
         mvect = delete(mvect, didx)
         ev_out = hstack((ev_out, array(ev_dict)[didx]))
         ev_dict = delete(ev_dict, didx)
@@ -217,6 +228,7 @@ for i in srcidx:
     didx = where(tvect < ydt)[0]
     out_idx = hstack((out_idx, didx))
     tvect = delete(tvect, didx)
+    dec_tvect = delete(dec_tvect, didx)
     mvect = delete(mvect, didx)  
     ev_out = hstack((ev_out, array(ev_dict)[didx]))
     ev_dict = delete(ev_dict, didx)  
@@ -392,11 +404,18 @@ for i in srcidx:
         
         # plot original data
         ax = plt.subplot(231)
+
+        '''
+        # get ndays
+        td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
         
-        # cannot plot prior to 1700 - not sure why
-        dcut = datetime(1700,1,1,0,0)
+        ndays = timedelta2days_hours_minutes(td)[0]
+        '''
+        
+        # cannot plot prior to 1900 - not sure why
+        dcut = datetime(1900,1,1,0,0)
         didx = where(orig_tvect > dcut)[0]
-        h1 = plt.plot(orig_tvect[didx], orig_mvect[didx], 'bo')
+        h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
         
         # now loop thru completeness years and mags
         for yi in range(0, len(ycomps)-1):
@@ -405,27 +424,33 @@ for i in srcidx:
             
             # plt H completeness ranges
             if yi == 0:
-                plt.plot([ydt, max(tvect)], [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
+                plt.plot([toYearFraction(ydt), toYearFraction(max(tvect))], \
+                         [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
             else:
                 ydtp = datetime(ycomps[yi-1], 1, 1)
-                plt.plot([ydtp, ydt], [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
+                plt.plot([toYearFraction(ydtp), toYearFraction(ydt)], \
+                         [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
             
             # plt V completeness ranges
-            plt.plot([ydt, ydt], [mcomps[yi], mcomps[yi+1]], 'g-', lw=1.5)
+            plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
+                     [mcomps[yi], mcomps[yi+1]], 'g-', lw=1.5)
         
         # plt last H completeness range
         ydt = datetime(ycomps[-1], 1, 1)
         if ydt < dcut:
             ydt = dcut
         ydtp = datetime(ycomps[-2], 1, 1)
-        plt.plot([ydtp, ydt], [mcomps[-1], mcomps[-1]], 'g-', lw=1.5)
+        plt.plot([toYearFraction(ydtp), toYearFraction(ydt)], \
+                 [mcomps[-1], mcomps[-1]], 'g-', lw=1.5)
         
         # plt last V completeness
+        #dcut = 1900
         ymax = ax.get_ylim()[-1]
-        plt.plot([ydt, ydt], [mcomps[-1], ymax], 'g-', lw=1.5)
+        plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
+                 [mcomps[-1], ymax], 'g-', lw=1.5)
         
         didx = where(tvect > dcut)[0]        
-        h2 = plt.plot(tvect[didx], mvect[didx], 'ro')
+        h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
         plt.ylabel('Magnitude (MW)')
         plt.xlabel('Date')
         #plt.title(src_code[i] + ' Catalogue Completeness')
@@ -433,9 +458,10 @@ for i in srcidx:
         Npass = str(len(mvect))
         Nfail = str(len(orig_mvect) - len(mvect))
         plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
-        
-        # get xlims
+                
         tlim = ax.get_xlim()
+        #dttlim = [floor(tlim[0]), ceil(tlim[1])]
+        plt.xlim(tlim)
         
         ###############################################################################
         # plot MFD
@@ -616,14 +642,11 @@ for i in srcidx:
         # get ndays
         td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
         
-        def timedelta2days_hours_minutes(td):
-            return td.days, td.seconds//3600, (td.seconds//60)%60
-        
         ndays = timedelta2days_hours_minutes(td)[0]
         
         # get events M >= 3
-        dcut = 1900. # date cutoff for plotting - datetime cannot handle dates earlier than 1900???
         dates_ge_3 = []
+        dcut = 1900
         for ev in ev_dict:
             if ev['prefmag'] >= 3.0 and ev['datetime'].year >= dcut:
                 # get decimal years
@@ -640,11 +663,11 @@ for i in srcidx:
         
             # set xlims
             tlim = [int(round(x)) for x in tlim] # converting to ints
-            dttlim = [datetime.fromordinal(tlim[0]), datetime.fromordinal(tlim[1])] # converting from ordianl back to datetime
+            #dttlim = [datetime.fromordinal(tlim[0]), datetime.fromordinal(tlim[1])] # converting from ordianl back to datetime
             # now convert to decimal year - very ugly!
-            dttlim = [floor(dttlim[0].year), ceil(dttlim[1].year)]
+            #dttlim = [floor(dttlim[0].year), ceil(dttlim[1].year)]
             
-            plt.xlim(dttlim)
+            plt.xlim(tlim)
         
         ###############################################################################
         # make src folder

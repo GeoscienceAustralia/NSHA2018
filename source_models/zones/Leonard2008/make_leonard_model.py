@@ -1,8 +1,10 @@
 import shapefile
 from os import path
 from shapely.geometry import Point, Polygon
-from tools.nsha_tools import get_field_data, get_shp_centroid
-
+try:
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+except:
+    print 'Add PYTHONPATH to NSHA18 root directory'
 
 ###############################################################################
 # parse Leonard shp exported from OQ
@@ -40,8 +42,8 @@ for line in lines:
     dat = line.strip().split(',')
     lu_name.append(dat[2])
     lu_code.append(dat[1])
-    mcomp.append(dat[-1])
-    ycomp.append(dat[-2])
+    mcomp.append(dat[-2])
+    ycomp.append(dat[-1])
     
 ###############################################################################
 # get neotectonic domain number from centroid
