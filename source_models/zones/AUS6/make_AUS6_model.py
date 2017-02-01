@@ -1,14 +1,17 @@
 import shapefile
 from os import path
 from shapely.geometry import Point, Polygon
-from mapping_tools import get_field_data, get_field_index
+try:
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+except:
+    print 'Add PYTHONPATH to NSHA18 root directory'
 
 
 ###############################################################################
 # parse AUS6 shp exported from MIF
 ###############################################################################
 
-ausshp = 'AUS6_Zones.shp'
+ausshp = path.join('shapefiles','AUS6_Zones.shp')
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(ausshp)
@@ -39,6 +42,66 @@ for line in lines:
     mmax.append(float(dat[7]))
     mmin.append(float(dat[6]))  
     
+###############################################################################
+# get neotectonic domain number from centroid
+###############################################################################
+# load domains shp
+dsf = shapefile.Reader(path.join('..','Domains','shapefiles','DOMAINS_NSHA18.shp'))
+
+# get domains
+neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
+
+# get domain polygons
+dom_shapes = dsf.shapes()
+dom = []
+
+# loop through AUS6 zones
+for poly in shapes:
+    # get centroid of leonard sources
+    clon, clat = get_shp_centroid(poly.points)
+    point = Point(clon, clat)
+    print clon, clat
+    tmp_dom = -99
+    
+    # loop through domains and find point in poly
+    for neo_dom, dom_shape in zip(neo_doms, dom_shapes):
+        dom_poly = Polygon(dom_shape.points)
+        
+        # check if AUS6 centroid in domains poly
+        if point.within(dom_poly):
+            tmp_dom = neo_dom
+    
+    dom.append(tmp_dom)
+    
+###############################################################################
+# get TRT form Leonard08
+###############################################################################
+# load domains shp
+lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
+
+# get domains
+ltrt  = get_field_data(lsf, 'TRT', 'str')
+
+# get domain polygons
+l08_shapes = lsf.shapes()
+trt = []
+
+# loop through L08 zones
+for poly in shapes:
+    # get centroid of leonard sources
+    clon, clat = get_shp_centroid(poly.points)
+    point = Point(clon, clat)
+    tmp_trt = -99
+    
+    # loop through domains and find point in poly
+    for zone_trt, l_shape in zip(ltrt, l08_shapes):
+        l_poly = Polygon(l_shape.points)
+        
+        # check if leonard centroid in domains poly
+        if point.within(l_poly):
+            tmp_trt = zone_trt
+    
+    trt.append(tmp_trt)
     
 ###############################################################################
 # write initial shapefile
@@ -100,8 +163,8 @@ mcomp = '6.4;6.0;5.0;4.5;4.0;3.5;3.0'
 ycomp = '1980;1970;1965;1962;1958;1910;1880'
 mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
 ymax  = 2016
-trt   = 'TBD'
-dom   = -99
+#trt   = 'TBD'
+#dom   = -99
 cat   = 'GGcat-161025.csv'
 
 # loop through original records
@@ -113,7 +176,7 @@ for i, shape in enumerate(shapes):
     # write new records
     if i >= 0:
         w.record(name[i], code[i], src_ty, src_wt, dep_b, dep_u, dep_l, min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp, mcomp, ymax, trt, dom, cat)
+                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp, mcomp, ymax, trt[i], dom[i], cat)
         
 # now save area shapefile
 w.save(outshp)

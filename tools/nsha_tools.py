@@ -54,7 +54,7 @@ def get_field_data(sf, field, datatype):
             
     return data
 
-# converts datetime object to demial years
+# converts datetime object to decmial years
 # Slightly edited from: http://stackoverflow.com/questions/6451655/python-how-to-convert-datetime-dates-to-decimal-years    
 def toYearFraction(date):
     from datetime import datetime as dt

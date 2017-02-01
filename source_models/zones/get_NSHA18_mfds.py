@@ -1,6 +1,6 @@
 from numpy import array, arange, argsort, sort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, zeros_like, ceil, floor, \
-                  ones_like, isnan, around
+                  nan, isnan, around
 from os import path, sep, mkdir, getcwd, system, walk
 from shapely.geometry import Point, Polygon
 from datetime import datetime
@@ -55,6 +55,7 @@ shpfile     = lines[3].split('=')[-1].strip()
 outfolder   = path.join(rootfolder, lines[4].split('=')[-1].strip())
 outsrcshp   = lines[5].split('=')[-1].strip()
 bin_width   = float(lines[6].split('=')[-1].strip())
+#bval_shp    = lines[7].split('=')[-1].strip()
 
 # get export folder
 now = datetime.now()
@@ -111,11 +112,6 @@ new_bval_u = src_bval_u
 new_n0_b = src_n0
 new_n0_l = src_n0_l
 new_n0_u = src_n0_u
-
-'''
-for i, si in enumerate(sortind):
-    print i, si, src_code[sortind[i]]
-'''
 
 # if single source remove unnecessary data
 if single_src == True:
@@ -278,28 +274,53 @@ for i in srcidx:
         cum_rates = array(cum_rates)
         
         ###############################################################################
-        # calculate MFDs`
+        # calculate MFDs if at least 30 events
+        ###############################################################################
+        if len(mvect) >= 0:
+            # get magnitude indices being considered for regression        
+            midx = where(mrng >= src_mmin_reg[i])[0]
+            
+            # if beta not fixed, do Weichert
+            if src_bval_fix[i] == -99:
+                
+                # calculate weichert
+                bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
+                                                       mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
+                                                       bval=1.0, itstab=1E-5, maxiter=1000)
+                
+                beta = bval2beta(bval)
+                sigbeta = bval2beta(sigb)
+            
+            # else, fit curve using fixed beta and solve for N0
+            else:
+                
+                # set source beta
+                beta = src_bval_fix[i]
+                bval = beta2bval(beta)
+                sigbeta = src_bval_fix_sd[i]
+                
+                # get dummy curve
+                dummyN0 = 1.
+                m_min_reg = src_mmin_reg[i] + bin_width/2.
+                bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax[i], bin_width)
+                
+                # fit to lowest mahnitude considered
+                bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+                
+                # scale for N0
+                fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
+            
+            print 'beta = ', bval2beta(bval)
+            
+        ###############################################################################
+        # calculate MFDs using Leonard 08 if fewer than 30 events
         ###############################################################################
         
-        # get magnitude indices being considered for regression
-        
-        midx = where(mrng >= src_mmin_reg[i])[0]
-        
-        # if beta not fixed, do Weichert
-        if src_bval_fix[i] == -99:
-            
-            # calculate weichert
-            bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
-                                                   mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
-                                                   bval=1.0, itstab=1E-5, maxiter=1000)
-            
-            beta = bval2beta(bval)
-            sigbeta = bval2beta(sigb)
-        
-        # else, fit curve using fixed beta and solve for N0
         else:
+            # load Leonard zones
             
-            # set source beta
+            
+        
             beta = src_bval_fix[i]
             bval = beta2bval(beta)
             sigbeta = src_bval_fix_sd[i]
@@ -314,8 +335,7 @@ for i in srcidx:
             
             # scale for N0
             fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
-        
-        print 'beta = ', bval2beta(bval)
+            
         
         ###############################################################################
         # set confidence intervals from Table 1 in Weichert (1980)
@@ -387,7 +407,7 @@ for i in srcidx:
         ###############################################################################
         # fill new values
         ###############################################################################
-        
+
         print 'Filling new values for', src_code[i]
         new_bval_b[i] = bval
         new_bval_l[i] = bval-sigb173
@@ -630,8 +650,7 @@ for i in srcidx:
         # make pretty
         plt.xlabel('Hypocentral Depth (km)')
         plt.ylabel('Count')
-        plt.legend()
-        
+        plt.legend()        
         
         ###############################################################################
         # make cummulative M >= 3 plot
@@ -764,6 +783,9 @@ for i in srcidx:
 # write shapes to new shapefile
 ###############################################################################
 
+# Re-read original N0 values - not sure why i need to do this!!!
+src_n0 = get_field_data(sf, 'N0_BEST', 'float')
+
 # get original shapefile records, and rewrite
 records = sf.records()
 
@@ -821,11 +843,13 @@ for record, shape in zip(records, shapes):
     
     # write new records
     print 'N0', src_n0[i], new_n0_b[i]
+    # edit values    
     if src_n0[i] != new_n0_b[i]:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
                  new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
                  newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], newrec[25])
+    # don't edit values
     else:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
