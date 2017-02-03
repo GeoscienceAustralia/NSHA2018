@@ -13,6 +13,13 @@ def get_shp_centroid(shp_points):
     clon, clat = centroid.strip('PIONT').replace('(',' ').replace(')',' ').split()
     
     return float(clon), float(clat)
+    
+def get_shapely_centroid(poly):
+    
+    centroid = poly.centroid.wkt
+    clon, clat = centroid.strip('PIONT').replace('(',' ').replace(')',' ').split()
+    
+    return float(clon), float(clat)
 
 # returns index of field name = field
 def get_field_index(sf, field):

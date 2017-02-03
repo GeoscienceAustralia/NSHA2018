@@ -145,8 +145,8 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        dep_u = dep_b[i]
-        dep_l = dep_b[i]
+        dep_u = dep_b[i] - 0.5*dep_b[i]
+        dep_l = dep_b[i] + 0.5*dep_b[i]
         w.record(lu_name[i], code[i], src_ty, src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], l_dom[i], cat)
         

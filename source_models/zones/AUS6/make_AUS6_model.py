@@ -1,5 +1,6 @@
 import shapefile
 from os import path
+from numpy import array
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -39,7 +40,7 @@ for line in lines:
     dat = line.strip().split(',')
     name.append(dat[2])
     code.append(dat[3])
-    mmax.append(float(dat[7]))
+    #mmax.append(float(dat[7]))
     mmin.append(float(dat[6]))  
     
 ###############################################################################
@@ -49,7 +50,8 @@ for line in lines:
 dsf = shapefile.Reader(path.join('..','Domains','shapefiles','DOMAINS_NSHA18.shp'))
 
 # get domains
-neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
+neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
+neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
 
 # get domain polygons
 dom_shapes = dsf.shapes()
@@ -62,29 +64,34 @@ for poly in shapes:
     point = Point(clon, clat)
     print clon, clat
     tmp_dom = -99
+    tmp_mmax = -99
     
     # loop through domains and find point in poly
-    for neo_dom, dom_shape in zip(neo_doms, dom_shapes):
+    for neo_dom, neo_mx, dom_shape in zip(neo_doms, neo_mmax, dom_shapes):
         dom_poly = Polygon(dom_shape.points)
         
         # check if AUS6 centroid in domains poly
         if point.within(dom_poly):
             tmp_dom = neo_dom
+            tmp_mmax = neo_mx
     
     dom.append(tmp_dom)
+    mmax.append(tmp_mmax)
     
 ###############################################################################
-# get TRT form Leonard08
+# get TRT and depth form Leonard08
 ###############################################################################
 # load domains shp
 lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
 
 # get domains
 ltrt  = get_field_data(lsf, 'TRT', 'str')
+ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
 
 # get domain polygons
 l08_shapes = lsf.shapes()
 trt = []
+dep_b = []
 
 # loop through L08 zones
 for poly in shapes:
@@ -94,20 +101,23 @@ for poly in shapes:
     tmp_trt = -99
     
     # loop through domains and find point in poly
-    for zone_trt, l_shape in zip(ltrt, l08_shapes):
+    for zone_trt, zone_dep, l_shape in zip(ltrt, ldep, l08_shapes):
         l_poly = Polygon(l_shape.points)
         
         # check if leonard centroid in domains poly
         if point.within(l_poly):
             tmp_trt = zone_trt
+            tmp_dep = zone_dep
     
     trt.append(tmp_trt)
-    
+    dep_b.append(tmp_dep)
+
+dep_b = array(dep_b)    
 ###############################################################################
 # write initial shapefile
 ###############################################################################
 
-outshp = 'AUS6_NSHA18.shp'
+outshp = path.join('shapefiles','AUS6_NSHA18.shp')
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
@@ -142,9 +152,9 @@ w.field('CAT_FILE','C','50')
 
 src_wt = 1.0
 src_ty = 'area'
-dep_b = 10.
-dep_u = 5.
-dep_l = 15.
+#dep_b = 10.
+dep_u = dep_b - 0.5*dep_b
+dep_l = dep_b + 0.5*dep_b
 min_mag = 4.8
 min_rmag = 2.5
 #mmax[i]
@@ -175,7 +185,10 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        w.record(name[i], code[i], src_ty, src_wt, dep_b, dep_u, dep_l, min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        if code[i] == 'SEA':
+            mmax[i] = 7.5
+            
+        w.record(name[i], code[i], src_ty, src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp, mcomp, ymax, trt[i], dom[i], cat)
         
 # now save area shapefile

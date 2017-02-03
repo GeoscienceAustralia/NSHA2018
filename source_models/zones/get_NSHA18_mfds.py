@@ -1,6 +1,6 @@
 from numpy import array, arange, argsort, sort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, zeros_like, ceil, floor, \
-                  nan, isnan, around
+                  nan, isnan, around, diff
 from os import path, sep, mkdir, getcwd, system, walk
 from shapely.geometry import Point, Polygon
 from datetime import datetime
@@ -11,12 +11,12 @@ from mpl_toolkits.basemap import Basemap
 
 # import non-standard functions
 try:
-    from catalogue_tools import weichert_algorithm, bval2beta
+    from catalogue_tools import weichert_algorithm, aki_maximum_likelihood, bval2beta
     from fault_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly
     from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
-    from tools.nsha_tools import toYearFraction
+    from tools.nsha_tools import toYearFraction, get_shp_centroid, get_shapely_centroid
     
     #from misc_tools import listdir_extension
     from make_nsha_oq_inputs import write_oq_sourcefile
@@ -60,12 +60,13 @@ bin_width   = float(lines[6].split('=')[-1].strip())
 # get export folder
 now = datetime.now()
 shpname = path.split(shpfile)
+'''
 if dec_flag == 'True':
     #outfolder = '_'.join((shpname[-1][0:-4], 'DEC', now.strftime('%Y-%m-%d')))
     outfolder += '_'.join(('DEC', now.strftime('%Y-%m-%d')))
 else:
     outfolder += '_' + now.strftime('%Y-%m-%d')
-
+'''
 # check to see if exists
 if path.isdir(outfolder) == False:
     mkdir(outfolder)
@@ -113,6 +114,10 @@ new_n0_b = src_n0
 new_n0_l = src_n0_l
 new_n0_u = src_n0_u
 
+# set arrays for testing
+bval_vect = []
+bsig_vect = []
+
 # if single source remove unnecessary data
 if single_src == True:
     srcidx = where(array(src_code) == single_zone)[0]
@@ -135,7 +140,7 @@ ggcat = parse_ggcat(ggcatfile)
 
 # loop thru source zones
 for i in srcidx:
-
+    
     ###############################################################################
     # get earthquakes that pass completeness
     ###############################################################################
@@ -150,6 +155,9 @@ for i in srcidx:
     dec_tvect = []
     ev_dict = []
     out_idx = []
+    L08_b = False
+    Aki_ML = False
+    Weichert = False
     
     """
     # set cat for given depth range
@@ -246,7 +254,6 @@ for i in srcidx:
             # set temp cum mags & times
             cum_num.append(len(midx))
             
-            
             # for each central mag bin, get normalisation time
             src_ymax[i] = max_comp_yr
             idx = where(mcomps <= m+bin_width/2)[0]
@@ -276,28 +283,47 @@ for i in srcidx:
         ###############################################################################
         # calculate MFDs if at least 30 events
         ###############################################################################
-        if len(mvect) >= 0:
-            # get magnitude indices being considered for regression        
-            midx = where(mrng >= src_mmin_reg[i])[0]
-            
-            # if beta not fixed, do Weichert
+        
+        # get index of min reg mag and valid mag bins        
+        diff_cum = abs(hstack((diff(cum_rates), 0.)))
+        midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+        
+        # do Aki ML first if N events less than 50             
+        if len(mvect) >= 10 and len(mvect) < 100:
+            # if beta not fixed, do Aki ML
             if src_bval_fix[i] == -99:
                 
-                # calculate weichert
-                bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
-                                                       mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
-                                                       bval=1.0, itstab=1E-5, maxiter=1000)
-                
+                # do Aki max likelihood
+                bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
                 beta = bval2beta(bval)
                 sigbeta = bval2beta(sigb)
-            
+                
+                # now recalc N0
+                dummyN0 = 1.
+
+                bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax[i], bin_width)
+                
+                # fit to lowest magnitude considered and observed
+                Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+                
+                # solve for N0
+                fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
+                
+                print 'Aki ML b-value =', bval, sigb
+                
+                # add to bval arrays
+                bval_vect.append(bval)
+                bsig_vect.append(sigb)
+                
+                Aki_ML = True
+                
             # else, fit curve using fixed beta and solve for N0
             else:
-                
                 # set source beta
-                beta = src_bval_fix[i]
-                bval = beta2bval(beta)
-                sigbeta = src_bval_fix_sd[i]
+                bval = src_bval_fix[i]
+                beta = beta2bval(beta)
+                sigb = src_bval_fix_sd[i]
+                sigbeta = bval2beta(sigb)
                 
                 # get dummy curve
                 dummyN0 = 1.
@@ -309,34 +335,75 @@ for i in srcidx:
                 
                 # scale for N0
                 fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
+        
+        # do Weichert for zones with more events
+        elif len(mvect) >= 100:
+            # calculate weichert
+            bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
+                                                   mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
+                                                   bval=1.0, itstab=1E-4, maxiter=1000)
             
-            print 'beta = ', bval2beta(bval)
-            
+            beta = bval2beta(bval)
+            sigbeta = bval2beta(sigb)
+        
+            print 'Weichert b-value = ', bval, sigb
+            Weichert = True
+                        
         ###############################################################################
         # calculate MFDs using Leonard 08 if fewer than 30 events
         ###############################################################################
         
         else:
+            print 'Getting b-value from Leonard2008...'            
+            # set B-value to nan
+            bval = nan            
+            
             # load Leonard zones
+            lsf = shapefile.Reader(path.join('Leonard2008','shapefiles','LEONARD08_NSHA18_MFD.shp'))
             
+            # get Leonard polygons
+            l08_shapes = lsf.shapes()
             
-        
-            beta = src_bval_fix[i]
-            bval = beta2bval(beta)
-            sigbeta = src_bval_fix_sd[i]
+            # get Leonard b-values
+            lbval  = get_field_data(lsf, 'BVAL_BEST', 'str')
+            
+            # get centroid of current poly
+            clon, clat = get_shapely_centroid(poly)
+            point = Point(clon, clat)            
+            
+            # loop through zones and find point in poly
+            for zone_bval, l_shape in zip(lbval, l08_shapes):
+                l_poly = Polygon(l_shape.points)
+                
+                # check if leonard centroid in domains poly
+                if point.within(l_poly):
+                    bval = float(zone_bval)
+            
+            beta = bval2beta(bval)
+            sigb = 0.1
+            sigbeta = bval2beta(sigb)
+            
+            print 'Leonard2008 b-value =', bval, sigb
             
             # get dummy curve
             dummyN0 = 1.
-            m_min_reg = src_mmin_reg[i] + bin_width/2.
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax[i], bin_width)
+            #m_min_reg = src_mmin_reg[i] + bin_width/2.
+            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax[i], bin_width)
             
-            # fit to lowest mahnitude considered
-            bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+            # fit to lowest magnitude considered and observed
+            Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
             
-            # scale for N0
-            fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
+            # solve for N0
+            fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
             
-        
+            L08_b = True
+            Aki_ML = False
+            Weichert = False
+            
+            # add to bval arrays
+            bval_vect.append(bval)
+            bsig_vect.append(sigb)
+         
         ###############################################################################
         # set confidence intervals from Table 1 in Weichert (1980)
         ###############################################################################
@@ -372,37 +439,43 @@ for i in srcidx:
         ###############################################################################
         sigbeta173 = 1.73 * sigbeta
         sigb173 = 1.73 * sigb
-        
-        mpltmin = mrng[midx][0]
-        dummyN0 = 1.
-        
-        # get lower + 1 std
-        bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
-        # fit to err_lo
-        bc_lo100 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
-        # solve for N0
-        N0_lo100 = 10**(log10(bc_lo100[0]) + beta2bval(beta+sigbeta)*bc_mrng_lo[0])
-        
-        # get lower + 1.73 std
-        bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta173, dummyN0, mpltmin, src_mmax_l[i], bin_width)
-        # fit to err_lo
-        bc_lo173 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
-        # solve for N0
-        N0_lo173 = 10**(log10(bc_lo173[0]) + beta2bval(beta+sigbeta173)*bc_mrng_lo[0])
-        
-        # get upper - 1 std
-        bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta, dummyN0, mpltmin, src_mmax_u[i], bin_width)
-        # fit to err_up
-        bc_up100 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
-        # solve for N0
-        N0_up100 = 10**(log10(bc_up100[0]) + beta2bval(beta-sigbeta)*bc_mrng_up[0])
-        
-        # get upper - 1.73 std
-        bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta173, dummyN0, mpltmin, src_mmax_u[i], bin_width)
-        # fit to err_up
-        bc_up173 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
-        # solve for N0
-        N0_up173 = 10**(log10(bc_up173[0]) + beta2bval(beta-sigbeta173)*bc_mrng_up[0])
+
+        # preallocate data
+        N0_lo173 = nan
+        N0_up173 = nan
+
+        if not isnan(bval):
+            
+            mpltmin = mrng[midx][0]
+            dummyN0 = 1.
+            
+            # get lower + 1 std
+            bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
+            # fit to err_lo
+            bc_lo100 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
+            # solve for N0
+            N0_lo100 = 10**(log10(bc_lo100[0]) + beta2bval(beta+sigbeta)*bc_mrng_lo[0])
+            
+            # get lower + 1.73 std
+            bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta173, dummyN0, mpltmin, src_mmax_l[i], bin_width)
+            # fit to err_lo
+            bc_lo173 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
+            # solve for N0
+            N0_lo173 = 10**(log10(bc_lo173[0]) + beta2bval(beta+sigbeta173)*bc_mrng_lo[0])
+            
+            # get upper - 1 std
+            bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta, dummyN0, mpltmin, src_mmax_u[i], bin_width)
+            # fit to err_up
+            bc_up100 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
+            # solve for N0
+            N0_up100 = 10**(log10(bc_up100[0]) + beta2bval(beta-sigbeta)*bc_mrng_up[0])
+            
+            # get upper - 1.73 std
+            bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta173, dummyN0, mpltmin, src_mmax_u[i], bin_width)
+            # fit to err_up
+            bc_up173 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
+            # solve for N0
+            N0_up173 = 10**(log10(bc_up173[0]) + beta2bval(beta-sigbeta173)*bc_mrng_up[0])
         
         ###############################################################################
         # fill new values
@@ -486,67 +559,77 @@ for i in srcidx:
         ###############################################################################
         # plot MFD
         ###############################################################################
-        
-        # plot original data
-        ax = plt.subplot(132)
-        
-        # plt unique values
-        uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
-        plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
-                     yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
-        h1 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=8)
-        
-        # plot best fit
-        mpltmin_best = 2.0# + bin_width/2.
-        plt_width = 0.1
-        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
-        
-        #betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mmin, mrng[-1], bin_width)
-        h3 = plt.semilogy(mfd_mrng, betacurve, 'k-')
-        
-        # plot upper and lower curves
-        h1 = plt.semilogy(bc_mrng_up, bc_up173, '-', c='limegreen')
-        h2 = plt.semilogy(bc_mrng_up, bc_up100, 'b-')
-        h4 = plt.semilogy(bc_mrng_lo, bc_lo100, 'b-')
-        h5 = plt.semilogy(bc_mrng_lo, bc_lo173, '-', c='limegreen')
-        
-        plt.ylabel('Cumulative Rate (/yr)')
-        plt.xlabel('Magnitude (MW)')
-        
-        # get plotting limits
-        plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
-        yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
-        yexpmax = max(ceil(log10(betacurve)))
-        plt.ylim([10**yexpmin, 10**yexpmax])
-        
-        ###############################################################################
-        # get legend text
-        ###############################################################################
-        
-        up173_txt = '\t'.join(('Upper 1.73x', str('%0.1f' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
-                               str('%0.3f' % beta2bval(beta-sigbeta173)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
-                               
-        up100_txt = '\t'.join(('Upper 1.00x', str('%0.1f' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
-                               str('%0.3f' % beta2bval(beta-sigbeta)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
-                               
-        best_txt  = '\t'.join(('Best Estimate', str('%0.1f' % fn0), str('%0.2f' % beta), \
-                               str('%0.3f' % bval), str('%0.1f' % src_mmax[i]))).expandtabs()
-        
-        lo100_txt = '\t'.join(('Lower 1.00x', str('%0.1f' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
-                               str('%0.3f' % beta2bval(beta+sigbeta)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
-                               
-        lo173_txt = '\t'.join(('Lower 1.73x', str('%0.1f' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
-                               str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
-        
-        # set legend title
-        title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
-              + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
-              + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
-              
-        leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
-                   fontsize=9, loc=3, title=title)
-        plt.setp(leg.get_title(),fontsize=9)
-        plt.grid(which='both', axis='both')
+        if not isnan(bval):
+            # plot original data
+            ax = plt.subplot(132)
+            
+            # plt unique values
+            uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
+            plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
+                         yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
+            h1 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=8)
+            
+            # plot best fit
+            mpltmin_best = 2.0# + bin_width/2.
+            plt_width = 0.1
+
+            betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
+            
+            #betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mmin, mrng[-1], bin_width)
+            h3 = plt.semilogy(mfd_mrng, betacurve, 'k-')
+            
+            # plot upper and lower curves
+            h1 = plt.semilogy(bc_mrng_up, bc_up173, '-', c='limegreen')
+            h2 = plt.semilogy(bc_mrng_up, bc_up100, 'b-')
+            h4 = plt.semilogy(bc_mrng_lo, bc_lo100, 'b-')
+            h5 = plt.semilogy(bc_mrng_lo, bc_lo173, '-', c='limegreen')
+            
+            plt.ylabel('Cumulative Rate (/yr)')
+            plt.xlabel('Magnitude (MW)')
+            
+            # get plotting limits
+            plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
+            yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
+            yexpmax = max(ceil(log10(betacurve)))
+            plt.ylim([10**yexpmin, 10**yexpmax])
+            
+            ###############################################################################
+            # get legend text
+            ###############################################################################
+            
+            up173_txt = '\t'.join(('Upper 1.73x', str('%0.1f' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
+                                   str('%0.3f' % beta2bval(beta-sigbeta173)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
+                                   
+            up100_txt = '\t'.join(('Upper 1.00x', str('%0.1f' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
+                                   str('%0.3f' % beta2bval(beta-sigbeta)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
+                                   
+            best_txt  = '\t'.join(('Best Estimate', str('%0.1f' % fn0), str('%0.2f' % beta), \
+                                   str('%0.3f' % bval), str('%0.1f' % src_mmax[i]))).expandtabs()
+            
+            lo100_txt = '\t'.join(('Lower 1.00x', str('%0.1f' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
+                                   str('%0.3f' % beta2bval(beta+sigbeta)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
+                                   
+            lo173_txt = '\t'.join(('Lower 1.73x', str('%0.1f' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
+                                   str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
+            
+            # set legend title
+            if L08_b == True:
+                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                          + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                          + '\t'.join(('','','','N0','Beta','bval (L08)','Mx')).expandtabs()
+            elif Aki_ML == True:
+                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                          + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                          + '\t'.join(('','','','N0','Beta','bval (Aki)','Mx')).expandtabs()
+            else:
+                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                          + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                          + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
+                  
+            leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
+                       fontsize=9, loc=3, title=title)
+            plt.setp(leg.get_title(),fontsize=9)
+            plt.grid(which='both', axis='both')
         
         ###############################################################################
         # make map
@@ -739,7 +822,7 @@ for i in srcidx:
             new_dict.append(ev_out[idx])
         
         catfile = path.join(srcfolder, '_'.join((src_code[i], 'failed.dat')))
-        ggcat2ascii(ev_dict, catfile)
+        ggcat2ascii(new_dict, catfile)
         
         ###############################################################################
         # export ggcat files to shp
@@ -764,7 +847,15 @@ for i in srcidx:
         ###############################################################################
         
         # add plot sup title
-        plt.suptitle(src_name[i] + ' (' + src_code[i] + ')', fontsize=18)
+        suptitle = src_name[i] + ' (' + src_code[i] + ')'
+        if L08_b == True:
+            suptitle += ' - L08 b-values'
+        elif Aki_ML == True:
+            suptitle += ' - Aki ML'
+        elif Weichert == True:
+            suptitle += ' - Weichert'
+                
+        plt.suptitle(suptitle, fontsize=18)
         
         pngfile = '.'.join((src_code[i], 'mfd', 'png'))
         pngpath = path.join(srcfolder, pngfile)
@@ -778,12 +869,14 @@ for i in srcidx:
             plt.show()
         else:
             plt.clf()
+            plt.close()
     
 ###############################################################################
 # write shapes to new shapefile
 ###############################################################################
 
-# Re-read original N0 values - not sure why i need to do this!!!
+# Re-read original N0 values - not sure why i need to do this,
+# but seems to be getting overwritten somewhere
 src_n0 = get_field_data(sf, 'N0_BEST', 'float')
 
 # get original shapefile records, and rewrite
@@ -842,13 +935,14 @@ for record, shape in zip(records, shapes):
             newrec.append(record[idx])
     
     # write new records
-    print 'N0', src_n0[i], new_n0_b[i]
+    #print 'N0', src_n0[i], new_n0_b[i]
     # edit values    
     if src_n0[i] != new_n0_b[i]:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
                  new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
                  newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], newrec[25])
+    
     # don't edit values
     else:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
@@ -859,18 +953,15 @@ for record, shape in zip(records, shapes):
     i += 1  
     
 # now save area shapefile
-newshp = path.join(outfolder,outsrcshp)
+newshp = path.join(rootfolder,'shapefiles',outsrcshp)
 w.save(newshp)
 
 # write projection file
-prjfile = path.join(outfolder, outsrcshp.strip().split('.shp')[0]+'.prj')
+prjfile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'.prj')
 f = open(prjfile, 'wb')
 f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
 f.close()
 
-# not sure why, but delete "failed files from working folder
-system('rm *failed*')
-    
 ###############################################################################
 # merge all pdfs to single file
 ###############################################################################
@@ -879,7 +970,12 @@ from PyPDF2 import PdfFileMerger, PdfFileReader
 
 # get input files
 pdffiles = []
-for root, dirnames, filenames in walk(outfolder):
+
+# make out file name
+pdfbase = path.split(newshp)[-1].strip('shp')+'pdf'
+combined_pdf = path.join(rootfolder, 'mfd', pdfbase)
+
+for root, dirnames, filenames in walk(path.join(rootfolder, 'mfd')):
     #for filename in filter(filenames, '.pdf'):
     for filename in filenames:
         if filename.endswith('.pdf'):
@@ -892,7 +988,7 @@ merger = PdfFileMerger()
 for pdffile in pdffiles:                            
     merger.append(PdfFileReader(file(pdffile, 'rb')))
 
-merger.write(newshp.strip().split('.shp')[0]+'.pdf')
+merger.write(combined_pdf)
 
 ###############################################################################
 # make source dict for OQ input writer
@@ -916,5 +1012,5 @@ for rec, shape in zip(records, shapes):
 multimods = 'False'
 
 # now write OQ file
-oqpath = path.join(outfolder)
+oqpath = path.join(rootfolder)
 write_oq_sourcefile(model, oqpath, oqpath, multimods)
