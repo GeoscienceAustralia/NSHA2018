@@ -556,6 +556,11 @@ for i in srcidx:
         #dttlim = [floor(tlim[0]), ceil(tlim[1])]
         plt.xlim(tlim)
         
+        # sey ylim to one
+        ylims = array(ax.get_ylim())
+        ylims[0] = 2.5
+        plt.ylim(ylims)
+        
         ###############################################################################
         # plot MFD
         ###############################################################################
@@ -770,6 +775,11 @@ for i in srcidx:
             #dttlim = [floor(dttlim[0].year), ceil(dttlim[1].year)]
             
             plt.xlim(tlim)
+            
+            # sey ylim to zero
+            ylims = array(ax.get_ylim())
+            ylims[0] = 0
+            plt.ylim(ylims)
         
         ###############################################################################
         # make src folder

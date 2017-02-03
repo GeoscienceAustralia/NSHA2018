@@ -1,8 +1,11 @@
 import shapefile
 from os import path
 from shapely.geometry import Point, Polygon
-from mapping_tools import get_field_data, get_field_index
-
+from numpy import array
+try:
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+except:
+    print 'Add PYTHONPATH to NSHA18 root directory'
 
 ###############################################################################
 # parse AUS6 shp exported from MIF
@@ -21,7 +24,7 @@ for poly in shapes:
 src_name = get_field_data(sf, 'CODE', 'str')
 
 ###############################################################################
-# parse AUS6 lookup csv
+# parse Domains lookup csv
 ###############################################################################
 
 domcsv = 'Domains_Sep2011_lookup.csv'
@@ -32,7 +35,6 @@ code = []
 name = []
 mcomp = []
 ycomp = []
-trt = []
 
 lines = open(domcsv).readlines()[1:]
 for line in lines:
@@ -43,8 +45,45 @@ for line in lines:
     mmax.append(float(dat[3]))
     mcomp.append(dat[4])
     ycomp.append(dat[5])
-    trt.append(dat[6])
+    #trt.append(dat[6])
     
+###############################################################################
+# get TRT and depth form Leonard08
+###############################################################################
+# load domains shp
+lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
+
+# get domains
+ltrt  = get_field_data(lsf, 'TRT', 'str')
+ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
+
+# get domain polygons
+l08_shapes = lsf.shapes()
+trt = []
+dep_b = []
+
+# loop through L08 zones
+for poly in shapes:
+    # get centroid of leonard sources
+    clon, clat = get_shp_centroid(poly.points)
+    point = Point(clon, clat)
+    tmp_trt = -99
+    
+    # loop through domains and find point in poly
+    for zone_trt, zone_dep, l_shape in zip(ltrt, ldep, l08_shapes):
+        l_poly = Polygon(l_shape.points)
+        
+        # check if leonard centroid in domains poly
+        if point.within(l_poly):
+            tmp_trt = zone_trt
+            tmp_dep = zone_dep
+    
+    trt.append(tmp_trt)
+    dep_b.append(tmp_dep)
+
+dep_b = array(dep_b) 
+
+
 ###############################################################################
 # write initial shapefile
 ###############################################################################
@@ -84,9 +123,11 @@ w.field('CAT_FILE','C','50')
 
 src_wt = 1.0
 src_ty = 'area'
-dep_b = 10.
-dep_u = 5.
-dep_l = 15.
+
+# get upper & lower deps
+dep_u = dep_b - 0.5*dep_b
+dep_l = dep_b + 0.5*dep_b
+
 min_mag = 4.8
 min_rmag = 2.5
 #mmax[i]
@@ -114,7 +155,7 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        w.record(name[i], code[i], src_ty, src_wt, dep_b, dep_u, dep_l, min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(name[i], code[i], src_ty, src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
         
 # now save area shapefile
