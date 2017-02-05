@@ -804,6 +804,7 @@ for i in srcidx:
         rate_txt = header + '\n'
         for mr in range(0,len(mrng)):
             for bm in range(0, len(mfd_mrng)):
+                print around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2)
                 if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
                     beta_curve_val = betacurve[bm]
                     
