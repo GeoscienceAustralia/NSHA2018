@@ -33,13 +33,13 @@ auscsv = 'DIMAUS_lookup.csv'
 mmin = []
 mmax = []
 name = []
-code = []
+codes = []
 
 lines = open(auscsv).readlines()[1:]
 for line in lines:
     dat = line.strip().split(',')
     name.append(dat[1])
-    code.append(dat[2])
+    codes.append(dat[2])
     #mmax.append(float(dat[7]))
     mmin.append(float(dat[6]))  
     
@@ -58,7 +58,7 @@ dom_shapes = dsf.shapes()
 dom = []
 
 # loop through AUS6 zones
-for poly in shapes:
+for code, poly in zip(codes, shapes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
@@ -66,14 +66,21 @@ for poly in shapes:
     tmp_dom = -99
     tmp_mmax = -99
     
-    # loop through domains and find point in poly
-    for neo_dom, neo_mx, dom_shape in zip(neo_doms, neo_mmax, dom_shapes):
-        dom_poly = Polygon(dom_shape.points)
-        
-        # check if AUS6 centroid in domains poly
-        if point.within(dom_poly):
-            tmp_dom = neo_dom
-            tmp_mmax = neo_mx
+    # set Mmax values for zones outside of Domains
+    if code == 'WLBY' or code == 'PAPU' or code == 'BLHB' or code == 'EPPL' \
+       or code == 'SCOT':
+        tmp_dom = 7
+        tmp_mmax = 7.7
+    
+    # loop through domains and find point in poly    
+    else:                
+        for neo_dom, neo_mx, dom_shape in zip(neo_doms, neo_mmax, dom_shapes):
+            dom_poly = Polygon(dom_shape.points)
+            
+            # check if AUS6 centroid in domains poly
+            if point.within(dom_poly):
+                tmp_dom = neo_dom
+                tmp_mmax = neo_mx
     
     dom.append(tmp_dom)
     mmax.append(tmp_mmax)
@@ -100,7 +107,7 @@ for poly in shapes:
     point = Point(clon, clat)
     tmp_trt = -99
     
-    # loop through domains and find point in poly
+    # loop through Leonard zones and find point in poly
     for zone_trt, zone_dep, l_shape in zip(ltrt, ldep, l08_shapes):
         l_poly = Polygon(l_shape.points)
         
@@ -185,10 +192,7 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        if code[i] == 'SEA':
-            mmax[i] = 7.5
-            
-        w.record(name[i], code[i], src_ty, src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(name[i], codes[i], src_ty, src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp, mcomp, ymax, trt[i], dom[i], cat)
         
 # now save area shapefile

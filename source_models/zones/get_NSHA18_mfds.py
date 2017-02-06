@@ -247,6 +247,7 @@ for i in srcidx:
         # get cumulative rates for mags >= m
         cum_num = []
         n_yrs = []
+        mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
         
         for m in mrng:
             midx = where(array(mvect) >= m)[0]
@@ -265,6 +266,7 @@ for i in srcidx:
         # get events per mag bin
         n_obs = []
         for r in range(0, len(cum_num)-1):
+            
             n_obs.append(cum_num[r] - cum_num[r+1])
         n_obs.append(cum_num[-1])
         
@@ -378,6 +380,15 @@ for i in srcidx:
                 # check if leonard centroid in domains poly
                 if point.within(l_poly):
                     bval = float(zone_bval)
+                    
+            L08_b = True
+            Aki_ML = False
+            Weichert = False
+            
+            # for those odd sites outside of L08 bounds, assign b-vale
+            if isnan(bval):
+                bval = 0.85
+                L08_b = False
             
             beta = bval2beta(bval)
             sigb = 0.1
@@ -395,10 +406,6 @@ for i in srcidx:
             
             # solve for N0
             fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
-            
-            L08_b = True
-            Aki_ML = False
-            Weichert = False
             
             # add to bval arrays
             bval_vect.append(bval)
@@ -804,7 +811,6 @@ for i in srcidx:
         rate_txt = header + '\n'
         for mr in range(0,len(mrng)):
             for bm in range(0, len(mfd_mrng)):
-                print around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2)
                 if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
                     beta_curve_val = betacurve[bm]
                     
@@ -865,6 +871,8 @@ for i in srcidx:
             suptitle += ' - Aki ML'
         elif Weichert == True:
             suptitle += ' - Weichert'
+        else:
+            suptitle += ' - Fixed (0.85)'
                 
         plt.suptitle(suptitle, fontsize=18)
         
