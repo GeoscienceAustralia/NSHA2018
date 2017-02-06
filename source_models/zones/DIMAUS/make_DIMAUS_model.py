@@ -9,7 +9,7 @@ except:
 
 
 ###############################################################################
-# parse AUS6 shp exported from MIF
+# parse DIMAUS shp exported from MIF
 ###############################################################################
 
 ausshp = path.join('shapefiles','DIMAUS_source_model.shp')
