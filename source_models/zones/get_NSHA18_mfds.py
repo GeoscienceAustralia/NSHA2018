@@ -291,7 +291,7 @@ for i in srcidx:
         midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
         
         # do Aki ML first if N events less than 50             
-        if len(mvect) >= 10 and len(mvect) < 100:
+        if len(mvect) >= 10 and len(mvect) < 150:
             # if beta not fixed, do Aki ML
             if src_bval_fix[i] == -99:
                 
@@ -339,7 +339,7 @@ for i in srcidx:
                 fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
         
         # do Weichert for zones with more events
-        elif len(mvect) >= 100:
+        elif len(mvect) >= 150:
             # calculate weichert
             bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
                                                    mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
@@ -1022,10 +1022,11 @@ model = []
 
 # loop thru recs and make dict
 for rec, shape in zip(records, shapes):
-    m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_shape':array(shape.points), 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])],
-         'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-         'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
-    model.append(m)
+    if not float(rec[15]) == -99:
+        m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_shape':array(shape.points), 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])],
+             'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
+             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+        model.append(m)
 
 # assume single source model for now
 multimods = 'False'

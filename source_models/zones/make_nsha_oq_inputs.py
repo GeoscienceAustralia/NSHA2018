@@ -160,8 +160,9 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                 newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
                 
             newxml += '            </areaGeometry>\n'
-            newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
-            newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
+            newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+            #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
+            newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
@@ -187,18 +188,14 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
             # set nodal planes
             newxml += '            <nodalPlaneDist>\n'
             
-            newxml += '                <nodalPlane probability="0.125" strike="0.0" dip="90.0" rake="0.0" />\n'
-            newxml += '                <nodalPlane probability="0.125" strike="45.0" dip="90.0" rake="0.0" />\n'
-            newxml += '                <nodalPlane probability="0.125" strike="90.0" dip="90.0" rake="0.0" />\n'
-            newxml += '                <nodalPlane probability="0.125" strike="135.0" dip="90.0" rake="0.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="0.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="45.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="90.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="135.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="180.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="225.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="270.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.0625" strike="315.0" dip="30.0" rake="90.0" />\n'
+            newxml += '                <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />\n'
+#            newxml += '                <nodalPlane probability="0.0625" strike="45.0" dip="30.0" rake="90.0" />\n'
+            newxml += '                <nodalPlane probability="0.2" strike="90.0" dip="30.0" rake="90.0" />\n'
+#            newxml += '                <nodalPlane probability="0.0625" strike="135.0" dip="30.0" rake="90.0" />\n'
+            newxml += '                <nodalPlane probability="0.3" strike="180.0" dip="30.0" rake="90.0" />\n'
+#            newxml += '                <nodalPlane probability="0.0625" strike="225.0" dip="30.0" rake="90.0" />\n'
+            newxml += '                <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />\n'
+#            newxml += '                <nodalPlane probability="0.0625" strike="315.0" dip="30.0" rake="90.0" />\n'
     
             newxml += '            </nodalPlaneDist>\n'
             
@@ -310,7 +307,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                 
@@ -391,7 +388,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                     #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
