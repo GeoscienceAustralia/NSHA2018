@@ -9,7 +9,7 @@ except:
 
 
 ###############################################################################
-# parse DIMAUS shp exported from MIF
+# parse ARUP shp
 ###############################################################################
 
 ausshp = path.join('shapefiles','ARUP_source_model.shp')
@@ -22,10 +22,10 @@ for poly in shapes:
     polygons.append(Polygon(poly.points))
     
 # get src name
-src_name = get_field_data(sf, 'Name', 'str')
+#src_name = get_field_data(sf, 'Name', 'str')
 
 ###############################################################################
-# parse AUS6 lookup csv
+# parse ARUP lookup csv
 ###############################################################################
 
 auscsv = 'ARUP_source_model.csv'
@@ -40,7 +40,7 @@ for line in lines:
     codes.append('ZN'+dat[3]) # use "sub_zone" instead
     
 ###############################################################################
-# get neotectonic domain number from centroid
+# get neotectonic domain number and Mmax from zone centroid
 ###############################################################################
 # load domains shp
 dsf = shapefile.Reader(path.join('..','Domains','shapefiles','DOMAINS_NSHA18.shp'))
@@ -73,7 +73,7 @@ for code, poly in zip(codes, shapes):
         for neo_dom, neo_mx, dom_shape in zip(neo_doms, neo_mmax, dom_shapes):
             dom_poly = Polygon(dom_shape.points)
             
-            # check if AUS6 centroid in domains poly
+            # check if ARUP centroid in domains poly
             if point.within(dom_poly):
                 tmp_dom = neo_dom
                 tmp_mmax = neo_mx
@@ -82,24 +82,27 @@ for code, poly in zip(codes, shapes):
     mmax.append(tmp_mmax)
     
 ###############################################################################
-# get TRT and depth form Leonard08
+# get TRT, depth and completeness info from Leonard08
 ###############################################################################
 # load Leonard08 shp
 lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
 
-# get domains
+# get leonard08 data
 ltrt  = get_field_data(lsf, 'TRT', 'str')
 ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
 lycomp = get_field_data(lsf, 'YCOMP', 'str')
 lmcomp = get_field_data(lsf, 'MCOMP', 'str')
 
-# get domain polygons
+# get leonard08 polygons
 l08_shapes = lsf.shapes()
+
+# set variables to be filled
 trt = []
 dep_b = []
 ycomp = []
 mcomp = []
 
+# loop thru ARUP shapes
 for code, poly in zip(codes, shapes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
@@ -135,6 +138,7 @@ for code, poly in zip(codes, shapes):
                 tmp_mc = mc
                 tmp_yc = yc
     
+    # append new data
     trt.append(tmp_trt)
     dep_b.append(tmp_dep)
     mcomp.append(tmp_mc)
