@@ -1,0 +1,7 @@
+ROOT FOLDER      = Leonard2008
+CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+DECLUSTERED      = False
+SHAPEFILE INPUT  = Leonard2008//shapefiles//LEONARD08_NSHA18.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = LEONARD08_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1

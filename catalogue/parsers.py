@@ -1,4 +1,12 @@
 
+# checks if string can be converted to an int
+# returns nan if not
+def checkint(intstr):
+    try:
+        return int(intstr)
+    except:
+        from numpy import nan
+        return nan
 
 def parse_ggcat(ggcatcsv):
     """
@@ -9,7 +17,7 @@ def parse_ggcat(ggcatcsv):
     
     import csv
     from numpy import nan, isnan, floor
-    from misc_tools import checkint
+    from catalogue.parsers import checkint
     import datetime as dt
     
     # open file

@@ -1,0 +1,9 @@
+id,code,name,trt,msr,usd,lsd,min_mag,max_mag,hd1,hdweight1,sourcetype,mcomp,ycomp
+1,NA_1,Northwestern Passive Margin,Non_cratonic,WC1994,0,20,4,7.2,10,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880
+2,NA_2,Cratonic Australia,Cratonic,WC1994,0,10,4,7.2,5,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880
+3,NA_3,Non-cratonic Australia,Non_cratonic,WC1994,0,20,4,7.2,10,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880
+4,NA_4,Southeastern Passive Margin,Non_cratonic,WC1994,0,20,4,7.2,10,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880
+5,NWA,Northwestern Australia,Cratonic,WC1994,0,10,4,7.2,5,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880
+6,SA,South Australia,Non_cratonic,WC1994,0,20,4,7.2,10,1,areaSource,2.5;2.8;3.0;3.4;4.0;4.5;5.0;5.4;6.0,1980;1975;1965;1961;1958;1957;1947;1900;1840
+7,SEA,Southeastern Australia,Non_cratonic,WC1994,0,20,4,7.2,1,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880
+8,SWA,Southwestern Australia,Cratonic,WC1994,0,10,4,7.2,5,1,areaSource,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880

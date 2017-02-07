@@ -94,7 +94,7 @@ def max_p2t(data, delta):
 
 
 # initialize the cwb port
-client=Client(host='10.7.161.60',port=2061,debug=False)#, nonice=True)
+client=Client(host='10.7.161.60',port=2061,debug=False, timeout=60)
 eq=[]
 
 # Instantiate catalogue object
@@ -128,16 +128,31 @@ with open("../../eq2.txt",'r') as cat:
 ##########################################################################
 # get GG cat data
 ##########################################################################
-ggcat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
+cat = parse_ggcat('../../catalogue/data/GGcat-161025.csv')
 
-for evnum, ev in enumerate(ggcat):
+##########################################################################
+# loop thru events and get data
+##########################################################################
+
+for evnum, ev in enumerate(cat): 
     # only look for post 1990 data
-    if ev['datetime'] >= datetime.datetime(2010, 1, 1, 0, 0):
+    if ev['datetime'] >= datetime.datetime(1990, 1, 1, 0, 0):
+        
+        '''
+        # for testing, get Moe data
+        ev['datetime'] = datetime.datetime(2012,06,19,10,53)
+        ev['lat'] = -38.304
+        ev['lon'] = 146.200
+        '''
+        
         print evnum, ev['datetime']
+        
+        # convert datetime object to UTCdatetime
+        dt = utcdatetime.UTCDateTime(ev['datetime'])
         #start_time=utcdatetime.UTCDateTime(yr,mon,day,hr,mn,int(sec),int((sec-int(sec))*100000))
        
         # Build event object
-        event = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='AU')
+        evnt = Event(resource_id='GG_cat_' + str(evnum+1), creation_info='AU')
         
         origin = Origin()
         origin.time = ev['datetime']
@@ -145,29 +160,40 @@ for evnum, ev in enumerate(ggcat):
         origin.latitude = ev['lat']
         origin.depth = ev['dep']
         
-        event.origins.append(origin)
+        evnt.origins.append(origin)
         
         mag = Magnitude(creation_info='GG_cat')
         mag.mag = ev['prefmag']
         mag.magnitude_type = ev['prefmagtype']
         
-        event.magnitudes.append(mag)
+        evnt.magnitudes.append(mag)
         
 
         ''' the time window to request the data will be 20 minutes, check maximum travel time and increase this value accordingly '''
         #end_time=start_time+960 # 16 minutes
-        start_time = ev['datetime'] - datetime.timedelta(seconds=60)
-        end_time   = ev['datetime'] + datetime.timedelta(seconds=960) # 16 minutes
+        start_time = dt - datetime.timedelta(seconds=60)
+        end_time   = dt + datetime.timedelta(seconds=960) # 16 minutes
+        #end_time   = dt + datetime.timedelta(seconds=600) # 5 minutes
         
         
         ''' get all waveform data available, use wildcards to reduce the data volume and speedup the process,
         unfortunately we need to request few times for every number of characters that forms the station name '''
-        st_3 = client.get_waveforms("AU", "???", "", "[BS]?[EN]", start_time,end_time)
-        st_4 = client.get_waveforms("AU", "????", "", "[BS]?[EN]", start_time,end_time)
-        if len(st_4) > 0:
-            st=st_3+st_4
-        else:
-            st=st_3
+        # kluge to fix non-retrieval of data  - loop through alphabet integers
+        for ch in range(ord('A'), ord('Z')+1):
+            print 'Stations beginning with ', chr(ch)
+            st_3 = client.get_waveforms("AU", chr(ch)+"??", "", "[BSEH]?[ENZ]", start_time,end_time)
+            st_4 = client.get_waveforms("AU", chr(ch)+"???", "", "[BSEH]?[ENZ]", start_time,end_time)
+            if ch == ord('A'):            
+                if len(st_4) > 0:
+                    st=st_3+st_4
+                else:
+                    st=st_3
+            
+            else:
+                if len(st_4) > 0:
+                    st+=st_3+st_4
+                else:
+                    st+=st_3
 
         # Cleanup duplicate traces returned by server
  #       st.merge(-1) #-1 method only merges overlapping or adjacent traces with same i            
@@ -187,4 +213,5 @@ for evnum, ev in enumerate(ggcat):
         
         # now write streams for each event to mseed
         st.write(msfile, format="MSEED")          
-
+        
+        forcecrash=blah

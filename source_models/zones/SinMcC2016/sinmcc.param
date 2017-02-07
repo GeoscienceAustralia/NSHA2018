@@ -1,0 +1,7 @@
+ROOT FOLDER      = SinMcC2016
+CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+DECLUSTERED      = False
+SHAPEFILE INPUT  = SinMcC2016//shapefiles//SIN_MCC_NSHA18_UPDATE.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = SinMcC2016_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1
