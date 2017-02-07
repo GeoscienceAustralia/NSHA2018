@@ -1,0 +1,7 @@
+ROOT FOLDER      = NSHA13
+CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+DECLUSTERED      = False
+SHAPEFILE INPUT  = NSHA13//shapefiles//NSHA13_NSHA18.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = NSHA13_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1
