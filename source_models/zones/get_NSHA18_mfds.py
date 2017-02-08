@@ -895,7 +895,7 @@ for i in srcidx:
 ###############################################################################
 
 # Re-read original N0 values - not sure why i need to do this,
-# but seems to be getting overwritten somewhere
+# but seems to be getting overwritten somewhere!!!
 src_n0 = get_field_data(sf, 'N0_BEST', 'float')
 
 # get original shapefile records, and rewrite
@@ -948,14 +948,12 @@ for record, shape in zip(records, shapes):
     
         # make record tuple from input shapefile
         if j == 0:
-            #newrec = (record[idx],)
             newrec = [record[idx]]
         else:
             newrec.append(record[idx])
     
     # write new records
-    #print 'N0', src_n0[i], new_n0_b[i]
-    # edit values    
+    # update values   
     if src_n0[i] != new_n0_b[i]:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
@@ -975,7 +973,7 @@ for record, shape in zip(records, shapes):
 newshp = path.join(rootfolder,'shapefiles',outsrcshp)
 w.save(newshp)
 
-# write projection file
+# write projection file in WGS84
 prjfile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'.prj')
 f = open(prjfile, 'wb')
 f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
@@ -999,7 +997,7 @@ for root, dirnames, filenames in walk(path.join(rootfolder, 'mfd')):
     for filename in filenames:
         if filename.endswith('.pdf'):
             if filename.startswith(outsrcshp.split('.shp')[0]) == False:
-                print filename
+                print 'Adding', filename
                 pdffiles.append(path.join(root, filename))
 
 # now merge files
@@ -1018,6 +1016,7 @@ sf = shapefile.Reader(newshp)
 records = sf.records()
 shapes  = sf.shapes()
 
+# set model list
 model = []
 
 # loop thru recs and make dict

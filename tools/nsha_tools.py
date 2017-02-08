@@ -82,9 +82,26 @@ def toYearFraction(date):
     
         return date.year + fraction
     
-    # for dates < 1900, work out manually to nearest month
+    # for dates < 1900, work out manually to nearest month (should do something better, but fit for purpose!)
     except:
         return date.year + date.month/12.
+
+# checks if string can be converted to float value.  If not returns nan        
+def checkfloat(floatstr):
+    try:
+        return float(floatstr)
+    except:
+        from numpy import nan
+        return nan
+
+# checks if string can be converted to integer value.  If not returns nan       
+def checkint(intstr):
+    try:
+        return int(intstr)
+    except:
+        from numpy import nan
+        return nan   
+
     
     
     
