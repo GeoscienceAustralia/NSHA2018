@@ -12,19 +12,25 @@ February 2016
 import os
 import numpy as np 
 # To build source model
+import shapefile
+from shapely.geometry import Polygon
+import shapely.geometry
 from hmtk.sources.source_model import mtkSourceModel
 from hmtk.sources.point_source import mtkPointSource
 from openquake.hazardlib.geo.point import Point
 from openquake.hazardlib.mfd import TruncatedGRMFD
 from openquake.hazardlib.geo.nodalplane import NodalPlane
 from openquake.hazardlib.pmf import PMF
-
+try:
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+except:
+    print 'Add PYTHONPATH to NSHA18 root directory'
 
 # FIXME - define based on neotectonic domains
-min_mag = 4.5
-max_mag = 7.2
-depth = 10.0
-trt = 'Non_cratonic'
+#min_mag = 4.5
+#max_mag = 7.2
+#depth = 10.0
+#trt = 'Non_cratonic'
 
 #############################################
 # Parse original data
@@ -42,12 +48,53 @@ for location in data['f0']:
 a_vals = data['f1']/4. # Divide by 4 as cells are overlapping
 b_vals = data['f2']
 
+###############################################################################
+# get neotectonic domain number from centroid
+###############################################################################
+# load domains shp
+dsf = shapefile.Reader(os.path.join('..','..','zones','Domains','shapefiles','DOMAINS_NSHA18.shp'))
+# get domains
+neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
+dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
+# get domain polygons
+dom_shapes = dsf.shapes()
+#n_dom = []
+#n_mmax = []
+
+###############################################################################
+# get TRT, depth from Leonard08
+###############################################################################
+# load domains shp
+lsf = shapefile.Reader(os.path.join('..','..','zones','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
+
+# get domains
+ltrt  = get_field_data(lsf, 'TRT', 'str')
+ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
+# get domain polygons
+l08_shapes = lsf.shapes()
+
 # Build sources
 source_list = []
 for j in range(len(lons)):
     identifier = 'RC_' + str(j)
     name = 'Cuthbertson_' + str(j)
     point = Point(lons[j], lats[j], depth)
+    shapely_pt = shapely.geometry.Point(lons[j], lats[j]) # Need to use shapely functions
+    # Get parameters based on domain
+    # loop through domains and find point in poly
+    for neo_dom, mmax, dom_shape in zip(neo_doms, dom_mmax, dom_shapes):
+        dom_poly = Polygon(dom_shape.points)       
+        # check if leonard centroid in domains poly
+        if shapely_pt.within(dom_poly):
+            tmp_dom = neo_dom
+            max_mag = mmax
+    for zone_trt, zone_dep, l_shape in zip(ltrt, ldep, l08_shapes):
+        l_poly = Polygon(l_shape.points)
+        if shapely_pt.within(l_poly):
+            trt = zone_trt
+            depth = zone_dep
+    print max_mag, trt, depth                       
+    
     mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, a_vals[j], b_vals[j])
     hypo_depth_dist = PMF([(1.0, depth)])
     nodal_plane_dist = PMF([(0.3, NodalPlane(0, 30, 90)),
