@@ -35,6 +35,7 @@ trt = 'Non_cratonic'
 #############################################
 # Parse original data
 original_source_data = 'original_source_data/Aus_7_rates_and_area.txt'
+print 'Reading data from %s' % original_source_data
 data = np.genfromtxt(original_source_data, delimiter = ' ', 
                      skip_header = 1, dtype = ("|S24", float, float, int))
 #print data
@@ -45,7 +46,7 @@ for location in data['f0']:
     location = location.split('_')
     lons.append(float(location[1]))
     lats.append(float(location[2]))
-a_vals = data['f1']/4. # Divide by 4 as cells are overlapping
+a_vals = np.log10(data['f1']/4.) # Divide by 4 as cells are overlapping
 b_vals = data['f2']
 
 ###############################################################################
@@ -74,7 +75,9 @@ ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
 l08_shapes = lsf.shapes()
 
 # Build sources
+print 'Building point sources'
 source_list = []
+source_models = [] # Use later for logic tree
 for j in range(len(lons)):
     identifier = 'RC_' + str(j)
     name = 'Cuthbertson_' + str(j)
@@ -110,4 +113,38 @@ for j in range(len(lons)):
     source_list.append(point_source)
 source_model = mtkSourceModel(identifier=0, name='Cuthbertson2016',
                               sources = source_list)
-source_model.serialise_to_nrml('source_model_cuthbertson2016.xml')
+print 'Writing to NRML'
+outbase = 'cuthbertson2016'
+source_model_filename = outbase + '_source_model.xml'
+source_model.serialise_to_nrml(source_model_filename)
+source_models.append(source_model)
+
+######################################
+# Now write the source model logic tree file
+######################################
+print 'Writing logic tree file'
+newxml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+newxml += '<nrml xmlns:gml="http://www.opengis.net/gml"\n'
+newxml += '      xmlns="http://openquake.org/xmlns/nrml/0.4">\n\n'
+newxml += '    <logicTree logicTreeID="lt1">\n'
+newxml += '        <logicTreeBranchingLevel branchingLevelID="bl1">\n'
+newxml += '            <logicTreeBranchSet uncertaintyType="sourceModel"\n' \
+    '                                branchSetID="bs1">\n\n'
+
+# make branches
+for i, branch in enumerate(source_models):
+    newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
+    newxml += '                    <uncertaintyModel>'+source_model_filename+'</uncertaintyModel>\n'
+    newxml += '                    <uncertaintyWeight>'+str(1)+'</uncertaintyWeight>\n'
+    newxml += '                </logicTreeBranch>\n\n'
+    
+newxml += '            </logicTreeBranchSet>\n'
+newxml += '        </logicTreeBranchingLevel>\n'
+newxml += '    </logicTree>\n'
+newxml += '</nrml>'
+        
+# write logic tree to file
+outxml = outbase + '_source_model_logic_tree.xml'
+f = open(outxml,'w')
+f.write(newxml)
+f.close()
