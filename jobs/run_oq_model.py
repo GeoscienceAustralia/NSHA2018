@@ -84,6 +84,8 @@ f_out = open(run_script, 'w')
 f_out.write(outlines)
 f_out.close()
 
-cmd = 'qsub %s' % run_script
+# Change to output directory and submit job
+os.chdir(output_dir)
+cmd = 'qsub %s' % run_script_name
 print cmd
 os.system(cmd)
