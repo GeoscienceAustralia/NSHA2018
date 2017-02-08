@@ -34,8 +34,11 @@ model_path = join(sandpit_path, user, model_rel_path)
 job_file = join(model_path, 'job.ini')
 
 # Make output directory and copy input files
+model_output_base_source_folder = join(model_output_base, model_name)
+if not os.path.exists(model_output_base_source_folder):
+    os.mkdir(model_output_base_source_folder)
 output_dir_name = run_start_time + '_' + model_name + '_' + user
-output_dir = join(model_output_base, output_dir_name)
+output_dir = join(model_output_base_source_folder, output_dir_name)
 os.mkdir(output_dir)
 
 # Read job.ini file and find relevant input files
