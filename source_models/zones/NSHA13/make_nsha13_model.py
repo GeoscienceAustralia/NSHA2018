@@ -35,12 +35,21 @@ l08_lookup = 'NSHA13_source_model.csv'
 names = []
 codes = []
 
-# assume same order, but should check
+# get codes and source names
 lines = open(l08_lookup).readlines()[1:]
+
+# zone numbers based on 2013 update
 for line in lines:
-    dat = line.strip().split(',')
-    names.append(dat[1])
-    codes.append(dat[2])
+    dat = line.strip().split(',')    
+    if int(dat[0]) < 10:
+        codes.append('Z00' + str(dat[0]))
+        names.append('ZONE ' + str(dat[0]))
+    elif int(dat[0]) >= 10 and int(dat[0]) < 100:
+        codes.append('Z0' + str(dat[0]))
+        names.append('ZONE ' + str(dat[0]))
+    else:
+        codes.append('Z' + str(dat[0]))
+        names.append(dat[1])
     
 ###############################################################################
 # get neotectonic domain number from centroid
@@ -106,13 +115,13 @@ for code, poly in zip(codes, shapes):
     tmp_mc = -99
     tmp_yc = -99
     
-    if code == 'OSO':
+    if code == 'Z036':
         tmp_trt = 'Non_cratonic'
         tmp_dep = 10
         tmp_mc = lmcomp[0]
         tmp_yc = lycomp[0]
         
-    elif code == 'WPA' or code == 'PHL' or code == 'BND':
+    elif code == 'Z101' or code == 'Z102' or code == 'Z103':
         tmp_trt = 'Banda_Sea'
         tmp_dep = 10
         
