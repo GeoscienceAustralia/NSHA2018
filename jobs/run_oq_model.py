@@ -33,6 +33,11 @@ model_name = model_rel_path.split('/')[-1]
 model_path = join(sandpit_path, user, model_rel_path)
 job_file = join(model_path, 'job.ini')
 
+# Make output directory and copy input files
+output_dir_name = run_start_time + '_' + model_name + '_' + user
+output_dir = join(model_output_base, output_dir_name)
+os.mkdir(output_dir)
+
 # Read job.ini file and find relevant input files
 f_in = open(job_file, 'r')
 for line in f_in.readlines():
@@ -45,22 +50,22 @@ for line in f_in.readlines():
     if line.startswith('export_dir'):
         export_dir = line.split('=')[1].strip()
 f_in.close()
+
+# Copy files to output directory
+copy2(job_file, output_dir)
+copy2(src_lt_file, output_dir)
+copy2(gsim_lt_file, output_dir)
+
 # Find source models from logic tree file
+# and copy to output dir
 f_in = open(src_lt_file)
 for line in f_in.readlines():
     if 'source_model' in line:
         source_model_name = line.replace('>','<').split('<')[2]
         print source_model_name
         source_model_file = join(model_path, source_model_name)        
+        copy2(source_model_file, output_dir)
 f_in.close()    
-# Make output directory and copy input files
-output_dir_name = run_start_time + '_' + model_name + '_' + user
-output_dir = join(model_output_base, output_dir_name)
-os.mkdir(output_dir)
-copy2(job_file, output_dir)
-copy2(src_lt_file, output_dir)
-copy2(gsim_lt_file, output_dir)
-copy2(source_model_file, output_dir)
 
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
