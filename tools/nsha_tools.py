@@ -41,7 +41,6 @@ def get_field_data(sf, field, datatype):
     
     data = list of data in string or float fmt
     '''
-    from misc_tools import checkfloat, checkint 
     
     # get index
     findex = get_field_index(sf, field)
