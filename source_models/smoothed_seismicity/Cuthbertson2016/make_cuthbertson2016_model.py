@@ -26,21 +26,21 @@ try:
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
-# FIXME - define based on neotectonic domains
-#min_mag = 4.5
-#max_mag = 7.2
-#depth = 10.0
-#trt = 'Non_cratonic'
+# Default values - real values should be based on neotectonic domains
+min_mag = 4.5
+max_mag = 7.2
+depth = 10.0
+trt = 'Non_cratonic'
 
 #############################################
 # Parse original data
 original_source_data = 'original_source_data/Aus_7_rates_and_area.txt'
 data = np.genfromtxt(original_source_data, delimiter = ' ', 
                      skip_header = 1, dtype = ("|S24", float, float, int))
-print data
+#print data
 lons = []
 lats = []
-print data['f0']
+#print data['f0']
 for location in data['f0']:
     location = location.split('_')
     lons.append(float(location[1]))
@@ -78,8 +78,8 @@ source_list = []
 for j in range(len(lons)):
     identifier = 'RC_' + str(j)
     name = 'Cuthbertson_' + str(j)
-    point = Point(lons[j], lats[j], depth)
-    shapely_pt = shapely.geometry.Point(lons[j], lats[j]) # Need to use shapely functions
+    # Need to use shapely functions intially
+    shapely_pt = shapely.geometry.Point(lons[j], lats[j])
     # Get parameters based on domain
     # loop through domains and find point in poly
     for neo_dom, mmax, dom_shape in zip(neo_doms, dom_mmax, dom_shapes):
@@ -93,8 +93,9 @@ for j in range(len(lons)):
         if shapely_pt.within(l_poly):
             trt = zone_trt
             depth = zone_dep
-    print max_mag, trt, depth                       
-    
+#    print max_mag, trt, depth                       
+
+    point = Point(lons[j], lats[j], depth) # Openquake geometry Point
     mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, a_vals[j], b_vals[j])
     hypo_depth_dist = PMF([(1.0, depth)])
     nodal_plane_dist = PMF([(0.3, NodalPlane(0, 30, 90)),
