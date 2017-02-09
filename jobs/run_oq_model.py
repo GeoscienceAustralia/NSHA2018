@@ -12,9 +12,10 @@ import datetime
 # Parameters for building run_<model>.sh qsub job
 # Normally you would only need to change these, although
 # other parameters are hard coded at the bottom of the file
-ncpus = 256
+ncpus = 256 
 mem = '512GB'
-walltime = '03:00:00'
+walltime = '01:00:00'
+jobfs='200GB' 
 
 # Paths to sandpit and input path, assuming you have
 # a sandpit named after your NCI username
@@ -78,7 +79,7 @@ outlines += '#PBS -l ncpus=%i\n' % ncpus
 outlines += '#PBS -l mem=%s\n' % mem
 outlines += '#PBS -l wd\n'
 outlines += '#PBS -N oq512c512ht\n'
-outlines += '#PBS -l jobfs=200GB\n'
+outlines += '#PBS -l jobfs=%s\n' % jobfs
 outlines += '#PBS -l other=hyperthread\n\n'
 
 outlines += 'module load openquake/2.1.1\n'
