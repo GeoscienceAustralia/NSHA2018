@@ -30,6 +30,6 @@ Below these lines you should not need to change anything, however additional NCI
 
 The model is then simply run as `python run_oq_model.py`
 
-Standard output is written to `parjob.log` in the output directory.
+Standard output is written to `parjob.log` in the output directory. The output directory will be  a timestamped diretory, in this case under `/short/w84/NSHA18/PSHA_modelling/Cuthbertson2016`.
 
 After running the model the NCI will report on the resources actually used in a file in the outut directory with a name like `oq512c512ht.o<job_number>`. This can be used to adjust the resources erquested for future runs to ensure efficient use of the NCI. The default parameters given above are reasonable for a high resolution national scale model with a reasonable complex logic tree. Other models (e.g. a simple smoothed seismicity model) will use much less memory and wall time.
