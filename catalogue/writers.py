@@ -4,6 +4,17 @@ Created on Mon Jan 23 09:42:50 2017
 
 @author: u56903
 """
+def checkstr(num):
+    '''
+    check if number is nan.  If True, return blank ('')
+    '''
+    from numpy import isnan
+    
+    if isnan(num):
+        return ''
+    else:
+        return str(num)
+
 
 def ggcat2ascii(ggcat_dict, outfile):    
     '''
@@ -28,4 +39,36 @@ def ggcat2ascii(ggcat_dict, outfile):
     #f = open(path.join(outfolder, outfile), 'wb')
     f = open(outfile, 'wb')
     f.write(cattxt)
+    f.close()
+    
+def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
+    
+    '''
+    takes catalogue dictionary format as parsed by catalogues.parsers.parse_ggcat
+    
+    returns OQ compliant catalogue in csv fmt
+    '''
+    
+    # make oq cat dict
+    header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', 'longitude', 'latitude','depth','magnitude','magnitudeType','Agency'))
+    oq_dat = header + '\n'
+    
+    # loop thru eqs
+    for ggc in ggcat_dict:
+        # make datstr - strftime does not work for dats < 1900!
+        '''
+        datestr =  checkstr(ggc['datetime'].year) + checkstr(ggc['datetime'].month) + checkstr(ggc['datetime'].day) \
+                   + checkstr(ggc['datetime'].hour).zfill(2) + checkstr(ggc['datetime'].minute).zfill(2)
+        '''
+        datestr = '{0.year:4d} {0.month:02d} {0.day:02d} {0.hour:02d}{0.minute:02d}'.format(ggc['datetime'])              
+        
+        line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
+                         checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),'',checkstr(ggc['lon']),checkstr(ggc['lat']), \
+                         checkstr(ggc['dep']),checkstr(ggc['prefmag']),ggc['prefmagtype'],ggc['auth']))
+        oq_dat += line + '\n'
+        
+    #write to OQ out
+    print 'Writing HMTK csv...\n'
+    f = open(hmtkfile, 'wb')
+    f.write(oq_dat)
     f.close()

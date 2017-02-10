@@ -56,3 +56,40 @@ def parse_ggcat(ggcatcsv):
         ggcat.append(tmpdict)
         
     return ggcat
+
+"""  
+This prolly belongs in writers!  
+def ggcat2hmtk(ggcatcsv):
+    '''
+    Parses GG Cat in csv format and outputs it as HMTK catalogue class
+    '''    
+    from os import path
+    from writers import ggcat2hmtk_csv
+    
+    #####################################################
+    # parse catalogues
+    #####################################################
+    ggcat = parse_ggcat(ggcatcsv) 
+    
+    # reformat GG Cat
+    hmtk_csv = ggcatcsv.split('.')[0] + '_hmtk.csv' 
+    ggcat2hmtk_csv(ggcat, hmtk_csv)
+    
+"""
+ 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
