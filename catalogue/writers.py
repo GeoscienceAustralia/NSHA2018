@@ -27,7 +27,7 @@ def ggcat2ascii(ggcat_dict, outfile):
     
     for ev in ggcat_dict:
         # set string constant width
-        datestr = '{0.year:4d} {0.month:02d} {0.day:02d} {0.hour:02d}{0.minute:02d}'.format(ev['datetime'])              
+        datestr = '{0.year:4d} {0.month:02d} {0.day:02d} {0.hour:02d}{0.minute:02d}'.format(ev['datetime'])
         
         # make line        
         line = ' '.join((datestr, str("%0.3f" % ev['lon']), str("%0.3f" % ev['lat']), \
@@ -56,10 +56,6 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
     # loop thru eqs
     for ggc in ggcat_dict:
         # make datstr - strftime does not work for dats < 1900!
-        '''
-        datestr =  checkstr(ggc['datetime'].year) + checkstr(ggc['datetime'].month) + checkstr(ggc['datetime'].day) \
-                   + checkstr(ggc['datetime'].hour).zfill(2) + checkstr(ggc['datetime'].minute).zfill(2)
-        '''
         datestr = '{0.year:4d}{0.month:02d}{0.day:02d}{0.hour:02d}{0.minute:02d}'.format(ggc['datetime'])
         
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
@@ -68,7 +64,7 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
         oq_dat += line + '\n'
         
     #write to OQ out
-    print 'Writing HMTK csv...\n'
+    print 'Writing HMTK csv...'
     f = open(hmtkfile, 'wb')
     f.write(oq_dat)
     f.close()

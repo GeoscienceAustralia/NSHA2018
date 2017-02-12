@@ -5,14 +5,131 @@ Created on Fri Feb 10 13:30:27 2017
 @author: u56903
 """
 
-from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser#, CsvCatalogueWriter
+from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
 from hmtk.seismicity.utils import decimal_year, haversine
 from parsers import parse_ggcat
 from writers import ggcat2hmtk_csv
 import numpy as np
 import datetime as dt
+from os import path, remove
+from copy import deepcopy
 
-from os import path
+
+# does the grunt work to decluster catalogue
+def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
+    
+    # get number of events
+    neq = len(catalogue.data['magnitude'])  # Number of earthquakes
+    
+    # set periods of confidence
+    test_day_1 = dt.datetime(1960,1,1) # Earthquakes older than this are assumed to be very poorly located.
+    test_day_2 = dt.datetime(1970,1,1) # Earthquakes older than this are assumed to be poorly located.
+    
+    # set delta-magnitude threshold
+    delta_mag = 0.989 # Aftershocks must be less than 0.989 m.u. of the main shock (95% of the moment).
+    
+    # set time window
+    if method == 'Leonard08':
+        max_time = 10**((catalogue.data['magnitude']-1.85)*0.69)
+    elif method == 'Stien08':
+        max_time = 10**((catalogue.data['magnitude']-2.7)*1.1) + 4.0
+        
+    # get event time datevector
+    evdate = []
+    for i in range(0, neq):
+    
+        # get event dattime
+        evdate.append(dt.datetime(catalogue.data['year'][i], \
+                                  catalogue.data['month'][i], \
+                                  catalogue.data['day'][i]))
+    evdate = np.array(evdate)
+
+    if doAftershocks == True:
+        print 'Flagging aftershocks...'
+    else:
+        print 'Flagging foreshocks...'
+    
+    # loop through earthquakes
+    for i in range(0, neq):
+        
+        # set maximum distance window
+        max_dist = 10**((catalogue.data['magnitude'][i]-4.317)*0.6) \
+                         + 17.0/np.sqrt(catalogue.data['magnitude'][i])
+        
+        # set time-dependent distance cut-off
+        if (evdate[i] <= test_day_1 ):
+            max_dist = max_dist + 5.0
+        elif (evdate[i] <= test_day_2 ):
+            max_dist = max_dist + 10.0
+        
+        #########################################################################
+        # flag foreshocks
+        #########################################################################
+        
+        if doAftershocks == True:
+        
+            # for subsequent earthquakes, check distance from last event
+            inter_evdist = haversine(catalogue.data['longitude'][i+1:],
+                                     catalogue.data['latitude'][i+1:],
+                                     catalogue.data['longitude'][i],
+                                     catalogue.data['latitude'][i])
+             
+             # flatten distance array
+            inter_evdist = inter_evdist.flatten()
+            
+            # get inter-event time in days
+            inter_evtime = evdate[i+1:] - evdate[i]
+            inter_evdays = []
+            for t in inter_evtime:
+                inter_evdays.append(t.days)
+            
+            # get interevent magnitude
+            inter_evmag = delta_mag*catalogue.data['magnitude'][i] - catalogue.data['magnitude'][i+1:]
+                               
+            # now find aftershocks to flag
+            idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
+                            & (inter_evmag > 0.0))[0]
+                            
+            # set aftershock flag
+            flagvector[i+1+idx] = 1
+            
+        #########################################################################
+        # flag foreshocks
+        #########################################################################
+
+        elif doAftershocks == False:
+        
+            # for subsequent earthquakes, check distance from last event
+            inter_evdist = haversine(catalogue.data['longitude'][0:i],
+                                     catalogue.data['latitude'][0:i],
+                                     catalogue.data['longitude'][i],
+                                     catalogue.data['latitude'][i])
+             
+             # flatten distance array
+            inter_evdist = inter_evdist.flatten()
+            
+            # get inter-event time in days
+            inter_evtime = evdate[i] - evdate[0:i]
+            inter_evdays = []
+            for t in inter_evtime:
+                inter_evdays.append(t.days)
+            
+            # get interevent magnitude
+            inter_evmag = delta_mag*catalogue.data['magnitude'][i] - catalogue.data['magnitude'][0:i]
+                               
+            # now find aftershocks to flag
+            #(test_dist < max_dist && test_days > -max_time && test_days < 0.0 && test_mag >0.0)
+            idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
+                            & (inter_evmag > 0.0))[0]
+                            
+            # set forshock flag
+            flagvector[idx] = 1
+        
+    return flagvector
+
+#########################################################################
+# parse calalogue & convert to HMTK
+#########################################################################
 
 ggcatcsv = path.join('data', 'GGcat-161025.csv')
 ggdict = parse_ggcat(ggcatcsv)
@@ -27,112 +144,67 @@ ggcat2hmtk_csv(ggdict, hmtk_csv)
 parser = CsvCatalogueParser(hmtk_csv)
 ggcat = parser.read_file()
 
+#########################################################################
+# set variables for declustering
+#########################################################################
 
 # try following HMTK format
-print  'Using Leonard 2008 declustering...'
+method = 'Leonard08'
+if method == 'Leonard08':
+    print  'Using Leonard 2008 method...'
+if method == 'Stein08':
+    print  'Using Stein 2008 method...'
+
+# rename catalogue
 catalogue = ggcat
 
-# Get relevant parameters
-neq = len(catalogue.data['magnitude'])  # Number of earthquakes
-# Get decimal year (needed for time windows)
-year_dec = decimal_year(
-    catalogue.data['year'], catalogue.data['month'],
-    catalogue.data['day'])
-# Get space and time windows corresponding to each event
-'''
-sw_space, sw_time = (
-    config['time_distance_window'].calc(catalogue.data['magnitude']))
+# get number of events
+#neq = len(catalogue.data['magnitude'])  # Number of earthquakes
 
-# Initial Position Identifier
-eqid = np.arange(0, neq, 1)
-# Pre-allocate cluster index vectors
-vcl = np.zeros(neq, dtype=int)
-# Sort magnitudes into descending order
-id0 = np.flipud(np.argsort(catalogue.data['magnitude'],
-                           kind='heapsort'))
-longitude = catalogue.data['longitude'][id0]
-latitude = catalogue.data['latitude'][id0]
-#sw_space = sw_space[id0]
-#sw_time = sw_time[id0]
-year_dec = year_dec[id0]
-eqid = eqid[id0]
-'''
+# set flag for dependent
+flagvector = np.zeros(len(catalogue.data['magnitude']), dtype=int)
 
-method = 'Leonard08'
-# set periods of confidence
-test_day_1 = dt.datetime(1960,1,1) # Earthquakes older than this are assumed to be very poorly located.
-test_day_2 = dt.datetime(1970,1,1) # Earthquakes older than this are assumed to be poorly located.
-delta_mag = 0.989 # Aftershocks must be less than 0.989 m.u. of the main shock (95% of the moment).
+#########################################################################
+# call declustering
+#########################################################################
 
-# set time window
-if method == 'Leonard08':
-    max_time = 10**((catalogue.data['magnitude']-1.85)*0.69)
-elif method == 'Stien08':
-    max_time = 10**((catalogue.data['magnitude']-2.7)*1.1) + 4.0
-    
-# get event time datevector
-evdate = []
-for i in range(0, neq):
+# flag aftershocks
+doAftershocks = True
+flagvector_as = flag_dependent_events(catalogue, flagvector, doAftershocks, method)
 
-    # get event dattime
-    evdate.append(dt.datetime(catalogue.data['year'][i], \
-                              catalogue.data['month'][i], \
-                              catalogue.data['day'][i]))
+# flag aftershocks
+doAftershocks = False
+flagvector_asfs = flag_dependent_events(catalogue, flagvector_as, doAftershocks, method)
 
-evdate = np.array(evdate)
+#########################################################################
+# purge non-poissonian events
+#########################################################################
 
-# set flag for events to delete
-flagvector = np.zeros(neq, dtype=int)
+# adding to the catalog
+# The cluster flag (main shock or after/foreshock) and cluster index to the catalogue keys
+catalogue.data['cluster_flag'] = flagvector_asfs
 
-# loop through earthquakes
-print 'Looping through events...'
-for i in range(0, neq):
-    
-    # set maximum distance window
-    max_dist = 10**((catalogue.data['magnitude'][i]-4.317)*0.6) \
-                     + 17.0/np.sqrt(catalogue.data['magnitude'][i])
-    
-    # set time-dependent distance cut-off                 
-    if (evdate[i] <= test_day_1 ):
-        max_dist = max_dist + 5.0
-    elif (evdate[i] <= test_day_2 ):
-        max_dist = max_dist + 10.0
-           
-    # for subsequent earthquakes, check distance from last event
-    inter_evdist = haversine(catalogue.data['longitude'][i+1:],
-                       catalogue.data['latitude'][i+1:],
-                       catalogue.data['longitude'][i],
-                       catalogue.data['latitude'][i])
-                       
-    inter_evdist = inter_evdist.flatten()
-    
-    # get inter-event time
-    inter_evtime = evdate[i+1:] - evdate[i]
-    inter_evdays = []
-    for t in inter_evtime:
-        inter_evdays.append(t.days)
-    
-    # get interevent magnitude
-    inter_evmag = delta_mag*catalogue.data['magnitude'][i] - catalogue.data['magnitude'][i+1:]
-                       
-    #  Flagging aftershocks so test forward in time
-    #event_window = evdate[i] + dt.timedelta(days=max_time[i])  
-        
-    idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
-                    & (inter_evmag > 0.0))[0]
-                   
-    # set aftershocks
-    flagvector[i+1+idx] = 1
+# create a copy from the catalogue object to preserve it
+catalogue_l08 = deepcopy(catalogue)
 
-    
-  
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
+catalogue_l08.purge_catalogue(flagvector_asfs == 0) # cluster_flags == 0: mainshocks
+
+print 'Leonard 2008\tbefore: ', catalogue.get_number_events(), " after: ", catalogue_l08.get_number_events()
+
+#####################################################
+# write declustered catalogue
+#####################################################
+
+# setup the writer
+declustered_catalog_file = hmtk_csv.split('.')[0]+'_declustered.csv'
+
+# if it exists, delete previous file
+remove(declustered_catalog_file)
+
+# set-up writer
+writer = CsvCatalogueWriter(declustered_catalog_file) 
+
+# write
+writer.write_file(catalogue_l08)
+
+print 'Declustered catalogue: ok\n'
