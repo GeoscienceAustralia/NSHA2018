@@ -60,7 +60,7 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
         datestr =  checkstr(ggc['datetime'].year) + checkstr(ggc['datetime'].month) + checkstr(ggc['datetime'].day) \
                    + checkstr(ggc['datetime'].hour).zfill(2) + checkstr(ggc['datetime'].minute).zfill(2)
         '''
-        datestr = '{0.year:4d} {0.month:02d} {0.day:02d} {0.hour:02d}{0.minute:02d}'.format(ggc['datetime'])              
+        datestr = '{0.year:4d}{0.month:02d}{0.day:02d}{0.hour:02d}{0.minute:02d}'.format(ggc['datetime'])
         
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
                          checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),'',checkstr(ggc['lon']),checkstr(ggc['lat']), \
