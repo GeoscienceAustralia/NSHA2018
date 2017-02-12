@@ -14,9 +14,17 @@ import datetime as dt
 from os import path, remove
 from copy import deepcopy
 
-
 # does the grunt work to decluster catalogue
 def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
+	
+    '''
+    catalogue: dictionary of earthquakes in HMTK catalogue format
+    flagvector: integer vector of length of catalogue
+    doAftershocks: 
+        if == True: decluster aftershocks
+        if == False: decluster foreshocks
+    method: either "Leonard08" of "Stein08"
+    '''
     
     # get number of events
     neq = len(catalogue.data['magnitude'])  # Number of earthquakes
@@ -68,7 +76,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
         
         if doAftershocks == True:
         
-            # for subsequent earthquakes, check distance from last event
+            # for subsequent earthquakes, check distance from current event
             inter_evdist = haversine(catalogue.data['longitude'][i+1:],
                                      catalogue.data['latitude'][i+1:],
                                      catalogue.data['longitude'][i],
@@ -99,7 +107,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
 
         elif doAftershocks == False:
         
-            # for subsequent earthquakes, check distance from last event
+            # for earlier earthquakes, check distance from current event
             inter_evdist = haversine(catalogue.data['longitude'][0:i],
                                      catalogue.data['latitude'][0:i],
                                      catalogue.data['longitude'][i],
@@ -118,14 +126,15 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
             inter_evmag = delta_mag*catalogue.data['magnitude'][i] - catalogue.data['magnitude'][0:i]
                                
             # now find aftershocks to flag
-            #(test_dist < max_dist && test_days > -max_time && test_days < 0.0 && test_mag >0.0)
             idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
                             & (inter_evmag > 0.0))[0]
                             
-            # set forshock flag
+            # set foreshock flag
             flagvector[idx] = 1
         
     return flagvector
+
+# !!!!start main code here!!!!
 
 #########################################################################
 # parse calalogue & convert to HMTK
@@ -161,7 +170,7 @@ catalogue = ggcat
 # get number of events
 #neq = len(catalogue.data['magnitude'])  # Number of earthquakes
 
-# set flag for dependent
+# set flag for dependent events
 flagvector = np.zeros(len(catalogue.data['magnitude']), dtype=int)
 
 #########################################################################
@@ -180,8 +189,7 @@ flagvector_asfs = flag_dependent_events(catalogue, flagvector_as, doAftershocks,
 # purge non-poissonian events
 #########################################################################
 
-# adding to the catalog
-# The cluster flag (main shock or after/foreshock) and cluster index to the catalogue keys
+# adding cluster flag to the catalog
 catalogue.data['cluster_flag'] = flagvector_asfs
 
 # create a copy from the catalogue object to preserve it
