@@ -155,7 +155,8 @@ for i in range(0, neq):
     tdict = {'datetime':evdt, 'prefmag':cat.data['magnitude'][i], \
              'lon':cat.data['longitude'][i], 'lat':cat.data['latitude'][i], \
              'dep':cat.data['depth'][i], 'year':cat.data['year'][i], \
-             'month':cat.data['month'][i], 'fixdep':0}
+             'month':cat.data['month'][i], 'fixdep':0, 'prefmagtype':'MW', \
+             'auth':cat.data['Agency'][i]}
              	
     ggcat.append(tdict)
 
