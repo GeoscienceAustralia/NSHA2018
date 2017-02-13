@@ -8,6 +8,7 @@ from sys import argv
 import shapefile
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
+from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 
 # import non-standard functions
 try:
@@ -49,7 +50,7 @@ except:
 # load param file
 lines = open(paramfile).readlines()
 rootfolder  = lines[0].split('=')[-1].strip()
-ggcatfile   = lines[1].split('=')[-1].strip()
+hmtk_csv    = lines[1].split('=')[-1].strip()
 dec_flag    = lines[2].split('=')[-1].strip() # decluster flag
 shpfile     = lines[3].split('=')[-1].strip()
 outfolder   = path.join(rootfolder, lines[4].split('=')[-1].strip())
@@ -123,7 +124,6 @@ if single_src == True:
     srcidx = where(array(src_code) == single_zone)[0]
     ssi = where(sortind == srcidx)[0]
 
-# do all sources except Beaufort-Mackenzie Convergence (BMC)
 else:
     srcidx = range(len(src_code))
     
@@ -131,8 +131,34 @@ else:
 ###############################################################################
 # parse GGCat
 ###############################################################################
+'''Used to parse GGCat csv - now parse HMTK csv'''
+#ggcat = parse_ggcat(ggcatfile)
 
-ggcat = parse_ggcat(ggcatfile)
+# parse HMTK csv
+parser = CsvCatalogueParser(hmtk_csv)
+cat = parser.read_file()
+
+# get number of earthquakes
+neq = len(cat.data['magnitude'])
+
+# reformat HMTK dict to one expected for code below
+ggcat = []
+for i in range(0, neq):
+    # first make datestr
+    if not isnan(cat.data['second'][i]):
+        datestr = str(cat.data['eventID'][i]) \
+                  + str('%2.2f' % cat.data['second'][i])
+    else:
+        datestr = str(cat.data['eventID'][i]) + '00.00'
+    
+    evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
+    tdict = {'datetime':evdt, 'prefmag':cat.data['magnitude'][i], \
+             'lon':cat.data['longitude'][i], 'lat':cat.data['latitude'][i], \
+             'dep':cat.data['depth'][i], 'year':cat.data['year'][i], \
+             'month':cat.data['month'][i], 'fixdep':0}
+             	
+    ggcat.append(tdict)
+
 
 ###############################################################################
 # loop thru zones 
