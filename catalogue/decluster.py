@@ -6,7 +6,7 @@ Created on Fri Feb 10 13:30:27 2017
 """
 
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
-from hmtk.seismicity.utils import decimal_year, haversine
+from hmtk.seismicity.utils import haversine
 from parsers import parse_ggcat
 from writers import ggcat2hmtk_csv
 import numpy as np
@@ -18,16 +18,17 @@ from copy import deepcopy
 def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
 	
     '''
-    catalogue: dictionary of earthquakes in HMTK catalogue format
+    catalogue: dictionary of earthquakes in HMTK catalogue format, 
+               parsed using CsvCatalogueParser
     flagvector: integer vector of length of catalogue
     doAftershocks: 
         if == True: decluster aftershocks
         if == False: decluster foreshocks
-    method: either "Leonard08" of "Stein08"
+    method: either "Leonard08" or "Stein08"
     '''
     
     # get number of events
-    neq = len(catalogue.data['magnitude'])  # Number of earthquakes
+    neq = len(catalogue.data['magnitude'])
     
     # set periods of confidence
     test_day_1 = dt.datetime(1960,1,1) # Earthquakes older than this are assumed to be very poorly located.
@@ -40,13 +41,13 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
     if method == 'Leonard08':
         max_time = 10**((catalogue.data['magnitude']-1.85)*0.69)
     elif method == 'Stien08':
-        max_time = 10**((catalogue.data['magnitude']-2.7)*1.1) + 4.0
+        max_time = 10**((catalogue.data['magnitude']-2.70)*1.1) + 4.0
         
     # get event time datevector
     evdate = []
     for i in range(0, neq):
     
-        # get event dattime
+        # get event datetime
         evdate.append(dt.datetime(catalogue.data['year'][i], \
                                   catalogue.data['month'][i], \
                                   catalogue.data['day'][i]))
@@ -71,7 +72,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
             max_dist = max_dist + 10.0
         
         #########################################################################
-        # flag foreshocks
+        # flag aftershocks
         #########################################################################
         
         if doAftershocks == True:
@@ -92,7 +93,8 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
                 inter_evdays.append(t.days)
             
             # get interevent magnitude
-            inter_evmag = delta_mag*catalogue.data['magnitude'][i] - catalogue.data['magnitude'][i+1:]
+            inter_evmag = delta_mag*catalogue.data['magnitude'][i] \
+                          - catalogue.data['magnitude'][i+1:]
                                
             # now find aftershocks to flag
             idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
@@ -123,7 +125,8 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
                 inter_evdays.append(t.days)
             
             # get interevent magnitude
-            inter_evmag = delta_mag*catalogue.data['magnitude'][i] - catalogue.data['magnitude'][0:i]
+            inter_evmag = delta_mag*catalogue.data['magnitude'][i] \
+                          - catalogue.data['magnitude'][0:i]
                                
             # now find aftershocks to flag
             idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
@@ -164,14 +167,8 @@ if method == 'Leonard08':
 if method == 'Stein08':
     print  'Using Stein 2008 method...'
 
-# rename catalogue
-catalogue = ggcat
-
-# get number of events
-#neq = len(catalogue.data['magnitude'])  # Number of earthquakes
-
 # set flag for dependent events
-flagvector = np.zeros(len(catalogue.data['magnitude']), dtype=int)
+flagvector = np.zeros(len(ggcat.data['magnitude']), dtype=int)
 
 #########################################################################
 # call declustering
@@ -179,25 +176,25 @@ flagvector = np.zeros(len(catalogue.data['magnitude']), dtype=int)
 
 # flag aftershocks
 doAftershocks = True
-flagvector_as = flag_dependent_events(catalogue, flagvector, doAftershocks, method)
+flagvector_as = flag_dependent_events(ggcat, flagvector, doAftershocks, method)
 
-# flag aftershocks
+# flag foreshocks
 doAftershocks = False
-flagvector_asfs = flag_dependent_events(catalogue, flagvector_as, doAftershocks, method)
+flagvector_asfs = flag_dependent_events(ggcat, flagvector_as, doAftershocks, method)
 
 #########################################################################
 # purge non-poissonian events
 #########################################################################
 
 # adding cluster flag to the catalog
-catalogue.data['cluster_flag'] = flagvector_asfs
+ggcat.data['cluster_flag'] = flagvector_asfs
 
 # create a copy from the catalogue object to preserve it
-catalogue_l08 = deepcopy(catalogue)
+catalogue_l08 = deepcopy(ggcat)
 
 catalogue_l08.purge_catalogue(flagvector_asfs == 0) # cluster_flags == 0: mainshocks
 
-print 'Leonard 2008\tbefore: ', catalogue.get_number_events(), " after: ", catalogue_l08.get_number_events()
+print 'Leonard 2008\tbefore: ', ggcat.get_number_events(), " after: ", catalogue_l08.get_number_events()
 
 #####################################################
 # write declustered catalogue
