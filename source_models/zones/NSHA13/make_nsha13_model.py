@@ -71,18 +71,23 @@ for poly in shapes:
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
     print clon, clat
-    tmp_dom = -99
-    tmp_mmax  = -99
+    tmp_dom = 7
+    tmp_mmax  = 8.0
     
     # loop through domains and find point in poly
     for neo_dom, mmax, dom_shape in zip(neo_doms, dom_mmax, dom_shapes):
         dom_poly = Polygon(dom_shape.points)
         
-        # check if leonard centroid in domains poly
+        # check if NSHA18 centroid in domains poly
         if point.within(dom_poly):
             tmp_dom = neo_dom
             tmp_mmax = mmax
-    
+            
+        '''
+        else:
+            tmp_dom = 7
+            tmp_mmax = 8
+        '''
     n_dom.append(tmp_dom)
     n_mmax.append(tmp_mmax)
 

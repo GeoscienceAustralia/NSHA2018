@@ -1,5 +1,5 @@
 ROOT FOLDER      = NSHA13
-CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
 DECLUSTERED      = False
 SHAPEFILE INPUT  = NSHA13//shapefiles//NSHA13_NSHA18.shp
 OUTPUT FOLDER    = mfd
