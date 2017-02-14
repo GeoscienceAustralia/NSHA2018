@@ -10,10 +10,13 @@ def checkstr(num):
     '''
     from numpy import isnan
     
-    if isnan(num):
-        return ''
+    if  isinstance(num, basestring):
+        return num
     else:
-        return str(num)
+        if isnan(num):
+            return ''
+        else:
+            return str(num)
 
 
 def ggcat2ascii(ggcat_dict, outfile):    
@@ -60,7 +63,7 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
         
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
                          checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
-                         checkstr(ggc['dep']),checkstr(ggc['prefmag']),ggc['prefmagtype'],ggc['auth']))
+                         checkstr(ggc['dep']),checkstr(ggc['prefmag']),checkstr(ggc['prefmagtype']),ggc['auth']))
         oq_dat += line + '\n'
         
     #write to OQ out

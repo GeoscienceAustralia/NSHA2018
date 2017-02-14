@@ -7,7 +7,7 @@ Created on Fri Feb 10 13:30:27 2017
 
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
 from hmtk.seismicity.utils import haversine
-from parsers import parse_ggcat
+from parsers import parse_ggcat, parse_NSHA2012_catalogue
 from writers import ggcat2hmtk_csv
 import numpy as np
 import datetime as dt
@@ -142,8 +142,8 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
 #########################################################################
 # parse calalogue & convert to HMTK
 #########################################################################
-
-ggcatcsv = path.join('data', 'GGcat-161025.csv')
+'''
+#ggcatcsv = path.join('data', 'GGcat-161025.csv')
 ggdict = parse_ggcat(ggcatcsv)
 
 # set HMTK file name
@@ -155,7 +155,23 @@ ggcat2hmtk_csv(ggdict, hmtk_csv)
 # parse HMTK csv
 parser = CsvCatalogueParser(hmtk_csv)
 ggcat = parser.read_file()
+'''
 
+# Use 2012 NSHA catalogue
+nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.11.csv')
+nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
+
+# set HMTK file name
+hmtk_csv = nsha2012csv.split('.')[0] + '_hmtk.csv'
+
+# write HMTK csv
+ggcat2hmtk_csv(nsha_dict, hmtk_csv)
+
+# parse HMTK csv
+parser = CsvCatalogueParser(hmtk_csv)
+nshacat = parser.read_file()
+
+cat = nshacat
 #########################################################################
 # set variables for declustering
 #########################################################################
@@ -168,7 +184,7 @@ if method == 'Stein08':
     print  'Using Stein 2008 method...'
 
 # set flag for dependent events
-flagvector = np.zeros(len(ggcat.data['magnitude']), dtype=int)
+flagvector = np.zeros(len(cat.data['magnitude']), dtype=int)
 
 #########################################################################
 # call declustering
@@ -176,25 +192,25 @@ flagvector = np.zeros(len(ggcat.data['magnitude']), dtype=int)
 
 # flag aftershocks
 doAftershocks = True
-flagvector_as = flag_dependent_events(ggcat, flagvector, doAftershocks, method)
+flagvector_as = flag_dependent_events(cat, flagvector, doAftershocks, method)
 
 # flag foreshocks
 doAftershocks = False
-flagvector_asfs = flag_dependent_events(ggcat, flagvector_as, doAftershocks, method)
+flagvector_asfs = flag_dependent_events(cat, flagvector_as, doAftershocks, method)
 
 #########################################################################
 # purge non-poissonian events
 #########################################################################
 
 # adding cluster flag to the catalog
-ggcat.data['cluster_flag'] = flagvector_asfs
+cat.data['cluster_flag'] = flagvector_asfs
 
 # create a copy from the catalogue object to preserve it
-catalogue_l08 = deepcopy(ggcat)
+catalogue_l08 = deepcopy(cat)
 
 catalogue_l08.purge_catalogue(flagvector_asfs == 0) # cluster_flags == 0: mainshocks
 
-print 'Leonard 2008\tbefore: ', ggcat.get_number_events(), " after: ", catalogue_l08.get_number_events()
+print 'Leonard 2008\tbefore: ', cat.get_number_events(), " after: ", catalogue_l08.get_number_events()
 
 #####################################################
 # write declustered catalogue
