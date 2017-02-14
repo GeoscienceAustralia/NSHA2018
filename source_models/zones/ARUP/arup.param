@@ -1,5 +1,5 @@
 ROOT FOLDER      = ARUP
-CATALOGUE        = ..//..//catalogue//data//GGcat-161025_hmtk_declustered.csv
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
 DECLUSTERED      = False
 SHAPEFILE INPUT  = ARUP//shapefiles//ARUP_NSHA18.shp
 OUTPUT FOLDER    = mfd
