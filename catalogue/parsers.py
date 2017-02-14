@@ -51,45 +51,68 @@ def parse_ggcat(ggcatcsv):
             tmpdict['datetime'] = dt.datetime(tmpdict['year'], tmpdict['month'], tmpdict['day'], tmpdict['hour'], tmpdict['min'], 0)
         else:
             tmpdict['datetime'] = dt.datetime(tmpdict['year'], tmpdict['month'], tmpdict['day'])
-
         
         ggcat.append(tmpdict)
         
     return ggcat
 
-"""  
-This prolly belongs in writers!  
-def ggcat2hmtk(ggcatcsv):
+# parses catalogue of format used for the NSHA2012
+def parse_NSHA2012_catalogue(nsha2012cat):
     '''
-    Parses GG Cat in csv format and outputs it as HMTK catalogue class
-    '''    
+    nsha2012cat: catalogue is csv format
+    '''
     from os import path
-    from writers import ggcat2hmtk_csv
+    import csv
+    from numpy import nan
+    from datetime import datetime
     
-    #####################################################
-    # parse catalogues
-    #####################################################
-    ggcat = parse_ggcat(ggcatcsv) 
+    # for testing only
+    #nsha2012cat = path.join('data', 'AUSTCAT.MW.V0.11.csv')
     
-    # reformat GG Cat
-    hmtk_csv = ggcatcsv.split('.')[0] + '_hmtk.csv' 
-    ggcat2hmtk_csv(ggcat, hmtk_csv)
+    # open file
+    raw = open(nsha2012cat).readlines()[1:] # exclude header    
     
-"""
- 
+    # parse csv    
+    lines = csv.reader(raw)
     
+    # set array to append event dictionaries
+    austcat = []
     
+    # loop through events
+    for line in lines:
+        # set null vals to nans
+        for i in range(len(line)):
+           if len(str(line[i]))<1:
+              line[i] = nan
+        '''
+        line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
+                             checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
+                             checkstr(ggc['dep']),checkstr(ggc['prefmag']),ggc['prefmagtype'],ggc['auth']))
+        '''
+        # get datetime
+        evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M:%S')
+            
+        # fill temp dict
+        tmpdict = {'auth':line[7], 'place':line[29],'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
+                   'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[4]), 'lat':float(line[5]), 'dep':float(line[6]), \
+                   'prefmagtype':line[28], 'prefmag':float(line[27]), 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
+                   'mw':float(line[8]), 'mp':float(line[17]), 'fixdep':0}
+        
+        austcat.append(tmpdict)
+        
+    return austcat
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
