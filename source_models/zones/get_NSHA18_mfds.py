@@ -13,7 +13,7 @@ from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 # import non-standard functions
 try:
     from catalogue_tools import weichert_algorithm, aki_maximum_likelihood, bval2beta
-    from fault_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
+    from oq_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly
     from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
@@ -229,7 +229,12 @@ for i in srcidx:
     orig_tvect = tvect
     orig_dec_tvect = dec_tvect
     
-    # first remove all events smaller than min Mc mag
+    # first, remove NaN magnitudes - not sure why "< mcomps[0]" fails in next block
+    didx = where(isnan(mvect))[0]
+    tvect = delete(tvect, didx)
+    mvect = delete(mvect, didx)
+    
+    # second remove all events smaller than min Mc mag
     didx = where(mvect < mcomps[0])[0]
     out_idx = didx
     tvect = delete(tvect, didx)
@@ -274,6 +279,13 @@ for i in srcidx:
         # get cumulative rates for mags >= m
         cum_num = []
         n_yrs = []
+        
+        # assume Banda Sea sources
+        if src_mmax[i] == -99:
+            src_mmax[i] = 8.0
+            src_mmax_l[i] = 7.8
+            src_mmax_u[i] = 8.2
+            
         mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
         
         for m in mrng:
