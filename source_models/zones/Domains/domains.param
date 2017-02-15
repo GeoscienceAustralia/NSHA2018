@@ -1,5 +1,5 @@
 ROOT FOLDER      = Domains
-CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
 DECLUSTERED      = False
 SHAPEFILE INPUT  = Domains//shapefiles//DOMAINS_NSHA18.shp
 OUTPUT FOLDER    = mfd

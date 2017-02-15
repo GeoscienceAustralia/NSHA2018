@@ -1,5 +1,5 @@
 ROOT FOLDER      = SinMcC2016
-CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
 DECLUSTERED      = False
 SHAPEFILE INPUT  = SinMcC2016//shapefiles//SIN_MCC_NSHA18_UPDATE.shp
 OUTPUT FOLDER    = mfd

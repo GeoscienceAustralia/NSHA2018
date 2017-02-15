@@ -1,5 +1,5 @@
 ROOT FOLDER      = Leonard2008
-CATALOGUE        = ..//..//catalogue//data//GGcat-161025.csv
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
 DECLUSTERED      = False
 SHAPEFILE INPUT  = Leonard2008//shapefiles//LEONARD08_NSHA18.shp
 OUTPUT FOLDER    = mfd
