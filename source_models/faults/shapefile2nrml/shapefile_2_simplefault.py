@@ -18,13 +18,17 @@ Jonathan Griffin, Geoscience Australia, June 2016
 import os
 import argparse
 import ogr
+import shapefile
 from geopy import distance
+from shapely.geometry import Point, Polygon
+import numpy as np
 from NSHA2018.mfd import fault_slip_rate_GR_conversion
-from openquake.hazardlib.scalerel.wc1994 import WC1994
+from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
 
 def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
                          shapefile_dip_attribute, 
-                         shapefile_sliprate_attribute):
+                         shapefile_sliprate_attribute,
+                         shapefile_uplift_attribute):
     """Read the line shapefile with of fault surface traces and
     extrace data from attibute table
         Return a list of lists of [x,y] points defining each line
@@ -52,6 +56,9 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
         faultnames.append(faultname)
         try:
             dip = float(feature.GetField(shapefile_dip_attribute))
+            # Assume dips=0 is wrong, set to 45 degreee
+            if dip == 0.0:
+                dip = 45.0
         except ValueError:
             dip = '""'
         dips.append(dip)
@@ -59,10 +66,18 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
             sliprate = float(feature.GetField(shapefile_sliprate_attribute))
             # Convert from m/ma to mm/a
             sliprate = sliprate/1000
-            #slip uncertainty
-            #sliprate = sliprate-0.1*sliprate
         except ValueError:
             sliprate = '""'
+        # If sliprate not given, calculate from uplift rate
+        if sliprate == "" or sliprate == 0.0:
+            try:
+                upliftrate = float(feature.GetField(shapefile_uplift_attribute))
+                # Convert from m/ma to mm/a
+                upliftrate = upliftrate/1000
+                # Calculate sliprate using dip and uplift rate
+                sliprate = upliftrate*np.tan(dip*np.pi/180.)
+            except ValueError:
+                sliprate = '""'
         sliprates.append(sliprate)
         line = [list(pts) for pts in line]
         fault_length = 0
@@ -94,6 +109,80 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
 
     return fault_traces, faultnames, dips, sliprates, fault_lengths
 
+def b_value_from_region(fault_traces, region_shapefile):
+    """Get regional b-values for each fault
+    """
+    print 'Getting b-value from Leonard2008...'
+
+    driver = ogr.GetDriverByName("ESRI Shapefile")
+    data_source = driver.Open(region_shapefile, 0)
+    lsf = data_source.GetLayer()
+    lbval = []
+    for feature in lsf:
+        lbval.append(float(feature.GetField('BVAL_BEST')))
+#    geom = feature.GetGeometryRef()
+    lsf = shapefile.Reader(region_shapefile)
+    # get Leonard polygons                                      
+    l08_shapes = lsf.shapes()
+    # loop through faults and find point in poly
+    b_values = []
+    for fault_trace in fault_traces:
+        trace_b_list = []
+        for zone_bval, l_shape in zip(lbval, l08_shapes):
+            l_poly = Polygon(l_shape.points)
+        # check if leonard centroid in domains poly
+            for point in fault_trace:
+                pt = Point(point[0], point[1])
+                if pt.within(l_poly):
+                    bval = float(zone_bval)
+                    trace_b_list.append(bval)
+        # Find most common b_value
+        try:
+            (values,counts) = np.unique(trace_b_list,return_counts=True)
+            ind=np.argmax(counts)
+            b_values.append(values[ind])
+        except ValueError:
+            b_values.append(0.85) # Default value for points outside Leonard zones
+   # print b_values
+    return b_values
+
+def trt_from_domains(fault_traces, domains_shapefile):
+    """Get tectonic region type from domains
+    """
+
+    print 'Getting tectonic region type from Domains shapefile'
+    driver = ogr.GetDriverByName("ESRI Shapefile")
+    data_source = driver.Open(domains_shapefile, 0)
+    dsf = data_source.GetLayer()
+    trt_types = []
+    for feature in dsf:
+        trt_types.append(feature.GetField('TRT'))
+#    geom = feature.GetGeometryRef()
+    dsf = shapefile.Reader(domains_shapefile)
+    # get Leonard polygons                                                                  
+    dom_shapes = dsf.shapes()
+    # loop through faults and find point in poly                                            
+    trt_list = []
+    for fault_trace in fault_traces:
+        trace_trt_list = []
+        for zone_trt, dom_shape in zip(trt_types, dom_shapes):
+            dom_poly = Polygon(dom_shape.points)
+        # check if leonard centroid in domains poly                                         
+            for point in fault_trace:
+                pt = Point(point[0], point[1])
+                if pt.within(dom_poly):
+                    trt = zone_trt
+                    trace_trt_list.append(trt)
+        # Find most common trt
+        try:
+            (values,counts) = np.unique(trace_trt_list,return_counts=True)
+            ind=np.argmax(counts)
+            trt_list.append(values[ind])
+        except ValueError:
+            print 'Warning: setting fault TRT to default value'
+            trt_list.append('Non_cratonic') # Default value for points outside Domains model
+   # print b_values                                                
+    return trt_list
 
 def append_xml_header(output_xml,
                       source_model_name):
@@ -209,46 +298,60 @@ def nrml_from_shapefile(shapefile,
                         max_mag,
                         rake,
                         output_dir,
-                        quiet):
+                        shapefile_uplift_attribute=None,
+                        quiet = True):
     """Driver routine to convert nrml to shapefile
      
     """
     # Get geometry
     fault_traces, faultnames, dips, \
     sliprate, fault_lengths = parse_line_shapefile(shapefile,
-                                                  shapefile_faultname_attribute,
-                                                  shapefile_dip_attribute, 
-                                                  shapefile_sliprate_attribute)
+                                                   shapefile_faultname_attribute,
+                                                   shapefile_dip_attribute, 
+                                                   shapefile_sliprate_attribute,
+                                                   shapefile_uplift_attribute)
 
      # Output is written line-by-line to this list
     output_xml = []
 
     append_xml_header(output_xml, source_model_name)
 
+    # If b-value is not given, take from Leonard 2008 model
+    region_shapefile = '../zones/Leonard2008/shapefiles/LEONARD08_NSHA18_MFD.shp'
+    if b_value is None:
+        b_value = b_value_from_region(fault_traces, region_shapefile)
+    
+    # If tectonic region type is not given, take from domains model
+    domains_shapefile = '../zones/Domains/shapefiles/DOMAINS_NSHA18.shp'
+    if simple_fault_tectonic_region is None:
+        simple_fault_tectonic_region = trt_from_domains(fault_traces, domains_shapefile)
 
     # Loop through each fault and add source specific info
     for i in range(len(fault_traces)):
+        # Skip faults with zero or null sliprate
+        if sliprate[i] == "" or sliprate[i] == 0:
+            continue
         simple_fault_id = i
         A = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
         # Calculate M_max from scaling relations
-        scalrel = WC1994()
+        scalrel = Leonard2014_SCR()
         max_mag = scalrel.get_median_mag(A, float(rake))
 #        print A
         # Calculate GR a values from slip rate
         if sliprate[i] != '""':
-            print sliprate[i]
+           # print sliprate[i]
             a_value, moment_rate = fault_slip_rate_GR_conversion.slip2GR(sliprate[i], A,
-                                                                         float(b_value), 
+                                                                         float(b_value[i]), 
                                                                          float(max_mag),
                                                                          M_min=0.0)
         append_rupture_geometry(output_xml, fault_traces[i],
                                 dips[i], simple_fault_id,
                                 faultnames[i], upper_depth,
-                                lower_depth, simple_fault_tectonic_region)
+                                lower_depth, simple_fault_tectonic_region[i])
 
         append_earthquake_information(output_xml,
                                       magnitude_scaling_relation,
-                                      rupture_aspect_ratio, a_value, b_value,
+                                      rupture_aspect_ratio, a_value, b_value[i],
                                       min_mag, max_mag, rake)
 
     # Close xml
