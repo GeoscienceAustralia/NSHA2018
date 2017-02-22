@@ -13,6 +13,7 @@ Usage:
     
     python check_shape_overlap.py <path to shapefile> <ID field>
     
+e.g:
     python check_shape_overlap.py ARUP/shapefiles/ARUP_source_model.shp sub_zone
 '''    
 
