@@ -4497,7 +4497,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WSB" name="Wiso Basin" tectonicRegion="Cratonic">
+        <areaSource id="WSO" name="Wiso Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
