@@ -1,6 +1,6 @@
 import shapefile
 from os import path
-from numpy import array
+from numpy import array, around
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -18,7 +18,11 @@ print 'Reading source shapefile...'
 sf = shapefile.Reader(ausshp)
 shapes = sf.shapes()
 polygons = []
+newpoints = []
 for poly in shapes:
+    # first, let's round points to 3 decimal places
+    newpoints.append(array(around(poly.points, decimals=2)))
+    
     polygons.append(Polygon(poly.points))
     
 # get src name
@@ -217,8 +221,11 @@ cat   = 'GGcat-161025.csv'
 # loop through original records
 for i, shape in enumerate(shapes):
 
-    # set shape polygon
-    w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+    # set shape polygon # array(around(shape.points, decimals=3))
+    w.line(parts=[newpoints[i].tolist()], shapeType=shapefile.POLYGON)
+    
+    # using old shape poly
+    #w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
         
     # write new records
     if i >= 0:
