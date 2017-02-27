@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+OpenQuake-engine PSHA input model for Australia
+Version v1.0.0, 2015-01-21
+
+Copyright (C) 2015 GEM Foundation
+
+ORIGINAL MODEL Copyright © 2012 Geoscience Australia 
+ 
+THE WORK IS PROTECTED BY COPYRIGHT AND/OR OTHER APPLICABLE LAW. INSOFAR AS THIS
+WORK IS PROTECTED BY LAWS THAT NEIGHBOUR OR ARE SIMILARLY RELATED TO COPYRIGHT, 
+SUCH AS DATABASE RIGHTS AS INTRODUCED IN EUROPE BY THE  DIRECTIVE 96/9/EC, YOU 
+ALSO MAY USE THIS WORK UNDER THE TERMS OF CC BY-SA 3.0 (unported).
+
+ANY USE OF THE WORK OTHER THAN AS AUTHORIZED UNDER THIS LICENSE OR
+DIRECTLY ALLOWED BY THE APPLICABLE LAW IS PROHIBITED.
+
+If you have any questions or if you wish to seek permission to use this data 
+beyond what is offered by CC BY-SA 3.0 (unported), including use in 
+commercial/for-profit contexts, please contact the GEM Foundation at
+licensing@globalquakemodel.org
+
+DISCLAIMER:
+ 
+The MODEL provided herein represents GEM's interpretation of the original model
+proposed by Burbidge et al. (2012)  (hereafter indicated as the ORIGINAL MODEL).
+It was created by GEM, in the attempt of reproducing in the most faithful way 
+possible the ORIGINAL MODEL but IT IS NOT intended to be an alternative nor a 
+replacement implementation of the ORIGINAL MODEL. 
+ 
+The MODEL is released as an OpenQuake-engine tailored implementation on behalf 
+of scientists and engineers working within the GEM Foundation (Global 
+Earthquake Model).
+ 
+GEM provides it recognizing importance, authoritativeness and, transparency of 
+the ORIGINAL MODEL, for the purpose of open collaboration and in the hope that 
+it will be useful to the scientific, engineering, disaster risk and software 
+design communities.
+ 
+The MODEL is therefore provided WITHOUT ANY WARRANTY; without even the implied 
+warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. 
+The GEM Foundation, and the authors of the MODEL, assume no liability for  its use.
+
+For additional information, material and documentation about the ORIGINAL MODEL we 
+warmly invite the user to consult publications and website of Geoscience Australia 
+(http://www.ga.gov.au/)  
+
+-->
+
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+    <logicTree logicTreeID='lt1'>
+
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs1"
+                    applyToTectonicRegionType="Non_cratonic">
+
+<!-- GMPEs and weights as defined in table 16, page 50 of 'The 2012 Australian
+Earthquake Hazard Map. Record 2012/71' -->
+
+                <logicTreeBranch branchID="allen_2012">
+                    <uncertaintyModel>Allen2012</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="atkinson_boore_2006">
+                    <uncertaintyModel>AtkinsonBoore2006</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="chiou_youngs_2008">
+                    <uncertaintyModel>ChiouYoungs2008</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="somerville_et_al_2009NonCratonic">
+                    <uncertaintyModel>SomervilleEtAl2009NonCratonic</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+
+        <logicTreeBranchingLevel branchingLevelID="bl2">
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"
+                    applyToTectonicRegionType="Cratonic">
+
+<!-- GMPEs and weights as defined in table 16, page 50 of 'The 2012 Australian
+Earthquake Hazard Map. Record 2012/71' -->
+
+                <logicTreeBranch branchID="allen_2012">
+                    <uncertaintyModel>Allen2012</uncertaintyModel>
+                    <uncertaintyWeight>0.3</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="atkinson_boore_2006">
+                    <uncertaintyModel>AtkinsonBoore2006</uncertaintyModel>
+                    <uncertaintyWeight>0.3</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="chiou_youngs_2008">
+                    <uncertaintyModel>ChiouYoungs2008</uncertaintyModel>
+                    <uncertaintyWeight>0.1</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="somerville_et_al_2009Yilgarn">
+                    <uncertaintyModel>SomervilleEtAl2009YilgarnCraton</uncertaintyModel>
+                    <uncertaintyWeight>0.3</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+
+        <logicTreeBranchingLevel branchingLevelID="bl3">
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"
+                    applyToTectonicRegionType="Banda_Sea">
+
+<!-- GMPEs and weights as defined in table 16, page 50 of 'The 2012 Australian                                                      
+Earthquake Hazard Map. Record 2012/71' -->
+
+                <logicTreeBranch branchID="allen_2012">
+                    <uncertaintyModel>Allen2012</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="ZhaoEtAl2006SInter">
+                    <uncertaintyModel>ZhaoEtAl2006SInter</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="chiou_youngs_2008">
+                    <uncertaintyModel>ChiouYoungs2008</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="YoungsEtAl1997SInter">
+                    <uncertaintyModel>YoungsEtAl1997SInter</uncertaintyModel>
+                    <uncertaintyWeight>0.25</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+
+    </logicTree>
+</nrml>

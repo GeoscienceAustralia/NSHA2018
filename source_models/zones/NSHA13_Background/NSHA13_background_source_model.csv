@@ -1,0 +1,5 @@
+id,name,code,trt,msr,rar,usd,lsd,min_mag,max_mag,a_val,b_val,strike1,dip1,rake1,npweight1,hd1,hdweight1,sourcetype
+1,Non Cratonic Background Zone - Main,NCBM,Non_cratonic,WC1994,1,0,20,4.5,7.5,4.18,0.975,0,30,90,1,10,1,areaSource
+2,Non Cratonic Background Zone - Tasmania,NCBT,Non_cratonic,WC1994,1,0,20,4.5,7.5,2.963,0.975,0,30,90,1,10,1,areaSource
+3,Cratonic Background Zone,CBGZ,Cratonic,WC1994,1,0,15,4.5,7.5,3.596,0.778,0,30,90,1,7.5,1,areaSource
+4,Extended Background Zone,EBGZ,Non_cratonic,WC1994,1,0,20,4.5,7.7,3.172,0.74,0,30,90,1,10,1,areaSource

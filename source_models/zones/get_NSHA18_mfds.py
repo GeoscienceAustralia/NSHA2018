@@ -563,7 +563,7 @@ for i in srcidx:
             
             # plt H completeness ranges
             if yi == 0:
-                plt.plot([toYearFraction(ydt), toYearFraction(max(tvect))], \
+                plt.plot([toYearFraction(ydt), 2020], \
                          [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
             else:
                 ydtp = datetime(ycomps[yi-1], 1, 1)

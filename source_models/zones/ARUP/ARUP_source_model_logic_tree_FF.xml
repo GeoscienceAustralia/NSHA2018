@@ -8,7 +8,7 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>ARUP/ARUP_collapsed_rates_FF.xml</uncertaintyModel>
+                    <uncertaintyModel>ARUP_collapsed_rates_FF.xml</uncertaintyModel>
                     <uncertaintyWeight>1</uncertaintyWeight>
                 </logicTreeBranch>
 
