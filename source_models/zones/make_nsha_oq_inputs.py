@@ -64,7 +64,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
 
     from oq_tools import beta2bval, get_line_parallels
     from numpy import array, log10, max, min, tan, radians, unique, isinf
-    from os import path
+    from os import path, sep
     
     # set big bbox params
     bbmaxlon = -180
@@ -160,9 +160,10 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                 newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
                 
             newxml += '            </areaGeometry>\n'
-            newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+            #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+            newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
             #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
-            newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
+            newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
@@ -215,6 +216,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
              
             # rename source code if "." exists
             m['src_code'].replace('.', '')
+            src_code = m['src_code']
             
             if isinf(log10(m['src_N0'][0])) == False:
                 ###################################################################
@@ -307,7 +309,8 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                 
@@ -388,7 +391,8 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                     #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
@@ -450,7 +454,8 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
     
     # make branches
     for i, branch in enumerate(srcxmls):
-        logictreepath = logicpath + '/' + path.split(branch)[-1]
+        #logictreepath = logicpath + sep + path.split(branch)[-1]
+        logictreepath = path.split(branch)[-1]
         newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
         newxml += '                    <uncertaintyModel>'+logictreepath+'</uncertaintyModel>\n'
         newxml += '                    <uncertaintyWeight>'+str(m['src_reg_wt'])+'</uncertaintyWeight>\n'
