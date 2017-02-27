@@ -273,6 +273,10 @@ for i in srcidx:
     ev_out = hstack((ev_out, array(ev_dict)[didx]))
     ev_dict = delete(ev_dict, didx)  
     
+    # set values to avoid plotting issues later
+    new_bval_b[i] = 1.0
+    new_n0_b[i]   = 1E-30
+    
     # skip zone if no events pass completeness
     if len(mvect) != 0:
     
@@ -847,7 +851,7 @@ for i in srcidx:
         # get beta curve again at consistent mags
         mpltmin_best = 2.0 + bin_width/2.
         plt_width = 0.1
-        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)        
+        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
         
         header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT'
         
@@ -925,7 +929,7 @@ for i in srcidx:
         
         pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
         pdfpath = path.join(srcfolder, pdffile)
-        #plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
+        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
         
         if single_src == True:
             plt.show()
@@ -1103,7 +1107,7 @@ plt.savefig(bmap, format='pdf', bbox_inches='tight')
 
 # set figure
 plt.clf()
-fig = plt.figure(i+1, figsize=(13, 9))
+fig = plt.figure(i+2, figsize=(13, 9))
 
 # set national-scale basemap
 m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
@@ -1121,8 +1125,10 @@ m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, da
 m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 
 # get M5 rates
+
 new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
+
 m5_rates = array(new_n0_b) * exp(-new_beta  * 5.0) * (1 - exp(-new_beta * (src_mmax - 5.0))) \
            / (1 - exp(-new_beta * src_mmax))
 
@@ -1133,17 +1139,18 @@ for poly in polygons:
 src_area= array(src_area)
     
 # normalise M5 rates by area
-norm_m5_rates = 100**2 * m5_rates / src_area
-norm_m5_rates = m5_rates
+lognorm_m5_rates = log10(100**2 * m5_rates / src_area)
+#norm_m5_rates = m5_rates
     
 # get colour index
-ncolours=18
-r_min = min(norm_m5_rates)
-r_max = max(norm_m5_rates)
+ncolours=20
+r_min = -4.0
+r_max = -1.5
+r_rng = arange(r_min, r_max+0.1, 0.5)
 
 cindex = []
 # loop thru rates and get c-index
-for r in norm_m5_rates:
+for r in lognorm_m5_rates:
     idx = interp(r, [r_min, r_max], [0, ncolours-1])
     cindex.append(int(round(idx)))
     
@@ -1159,14 +1166,13 @@ labelpolygon(m2, plt, sf, 'CODE')
 # set colorbar
 plt.gcf().subplots_adjust(bottom=0.1)
 cax = fig.add_axes([0.33,0.05,0.34,0.02]) # setup colorbar axes.
-norm = colors.Normalize(vmin=b_min, vmax=b_max)
+norm = colors.Normalize(vmin=r_min, vmax=r_max)
 cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
 
 # set cb labels
-ticks = arange(r_min, r_max+0.1, 0.1)
+ticks = arange(r_min, r_max+0.5, 0.5)
 cb.set_ticks(ticks)
-labels = [str('%0.1f' % x) for x in ticks]
-#cb.set_ticklabels(labels, fontsize=10)
+labels = [str('%0.1e' % 10**x) for x in ticks]
 cb.ax.set_xticklabels(labels, fontsize=10)
 cb.set_label('M 5.0 / yr / 10,000 km**2', fontsize=12)
 

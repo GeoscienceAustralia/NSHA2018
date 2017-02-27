@@ -32,8 +32,8 @@
                 <upperSeismoDepth>5.0</upperSeismoDepth>
                 <lowerSeismoDepth>15.0</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>3.32774e-02 3.02644e-02 2.75343e-02 2.50595e-02 2.28153e-02 2.07793e-02 1.89316e-02 1.72540e-02 1.57302e-02 1.43457e-02 1.30872e-02 1.19429e-02 1.09019e-02 9.95472e-03 9.09247e-03 8.30728e-03 7.59203e-03 6.94027e-03 6.34616e-03 5.80442e-03 5.31029e-03 4.85943e-03 4.44793e-03 4.07224e-03 3.72914e-03 3.41572e-03 3.12932e-03 2.86755e-03 2.62822e-03 2.40935e-03 1.54616e-03 1.41795e-03 1.85740e-04 1.70399e-04</occurRates>
             </incrementalMFD>
@@ -94,8 +94,8 @@
                 <upperSeismoDepth>2.5</upperSeismoDepth>
                 <lowerSeismoDepth>7.5</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>4.71728e-01 3.99265e-01 3.37948e-01 2.86061e-01 2.42150e-01 2.04989e-01 1.73538e-01 1.46919e-01 1.24389e-01 1.05318e-01 8.91753e-02 7.55100e-02 6.39416e-02 5.41478e-02 4.58562e-02 3.88359e-02 3.28919e-02 2.78588e-02 2.35969e-02 1.99879e-02 1.69316e-02 1.43432e-02 1.21511e-02 1.02944e-02 8.72186e-03 7.38982e-03 6.26150e-03 5.30568e-03 4.49596e-03 3.80998e-03 2.26017e-03 1.91548e-03 2.31919e-04 1.96568e-04</occurRates>
             </incrementalMFD>
@@ -142,8 +142,8 @@
                 <upperSeismoDepth>5.0</upperSeismoDepth>
                 <lowerSeismoDepth>15.0</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>1.95890e-01 1.59763e-01 1.30326e-01 1.06334e-01 8.67768e-02 7.08304e-02 5.78258e-02 4.72182e-02 3.85639e-02 3.15019e-02 2.57380e-02 2.10327e-02 1.71909e-02 1.40534e-02 1.14906e-02 9.39689e-03 7.68605e-03 6.28782e-03 5.14485e-03 4.21038e-03 3.44623e-03 2.82125e-03 2.30999e-03 1.89170e-03 1.54940e-03 1.26925e-03 1.03991e-03 8.52152e-04 6.98400e-04 5.72476e-04 3.28529e-04 2.69375e-04 3.15577e-05 2.58830e-05</occurRates>
             </incrementalMFD>
@@ -181,8 +181,8 @@
                 <upperSeismoDepth>5.0</upperSeismoDepth>
                 <lowerSeismoDepth>15.0</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>7.10938e-03 6.77547e-03 6.46014e-03 6.16223e-03 5.88065e-03 5.61441e-03 5.36254e-03 5.12417e-03 4.89849e-03 4.68471e-03 4.48213e-03 4.29008e-03 4.10791e-03 3.93506e-03 3.77097e-03 3.61512e-03 3.46705e-03 3.32629e-03 3.19243e-03 3.06508e-03 2.94386e-03 2.82843e-03 2.71846e-03 2.61365e-03 2.51372e-03 2.41839e-03 2.32742e-03 2.24057e-03 2.15762e-03 2.07836e-03 1.39840e-03 1.34778e-03 1.84547e-04 1.77957e-04</occurRates>
             </incrementalMFD>
@@ -224,8 +224,8 @@
                 <upperSeismoDepth>2.5</upperSeismoDepth>
                 <lowerSeismoDepth>7.5</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>2.92899e-01 2.48682e-01 2.11157e-01 1.79308e-01 1.52276e-01 1.29329e-01 1.09849e-01 9.33110e-02 7.92689e-02 6.73453e-02 5.72198e-02 4.86206e-02 4.13170e-02 3.51133e-02 2.98434e-02 2.53665e-02 2.15628e-02 1.83310e-02 1.55848e-02 1.32510e-02 1.12676e-02 9.58182e-03 8.14888e-03 6.93078e-03 5.89522e-03 5.01478e-03 4.26616e-03 3.62958e-03 3.08822e-03 2.62781e-03 1.56534e-03 1.33218e-03 1.61975e-04 1.37869e-04</occurRates>
             </incrementalMFD>
@@ -264,8 +264,8 @@
                 <upperSeismoDepth>5.0</upperSeismoDepth>
                 <lowerSeismoDepth>15.0</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>9.74488e-02 7.72975e-02 6.13204e-02 4.86512e-02 3.86039e-02 3.06351e-02 2.43140e-02 1.92994e-02 1.53207e-02 1.21636e-02 9.65820e-03 7.66970e-03 6.09129e-03 4.83826e-03 3.84341e-03 3.05346e-03 2.42614e-03 1.92792e-03 1.53218e-03 1.21780e-03 9.68034e-04 7.69578e-04 6.11874e-04 4.86539e-04 3.86919e-04 3.07730e-04 2.44774e-04 1.94718e-04 1.54915e-04 1.23261e-04 6.86598e-05 5.46420e-05 6.21293e-06 4.94550e-06</occurRates>
             </incrementalMFD>
@@ -304,8 +304,8 @@
                 <upperSeismoDepth>5.0</upperSeismoDepth>
                 <lowerSeismoDepth>15.0</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>2.39023e-01 1.93511e-01 1.56690e-01 1.26895e-01 1.02781e-01 8.32630e-02 6.74615e-02 5.46671e-02 4.43060e-02 3.59141e-02 2.91160e-02 2.36083e-02 1.91453e-02 1.55283e-02 1.25964e-02 1.02196e-02 8.29253e-03 6.72979e-03 5.46232e-03 4.43420e-03 3.60010e-03 2.92330e-03 2.37407e-03 1.92830e-03 1.56644e-03 1.27266e-03 1.03412e-03 8.40395e-04 6.83055e-04 5.55245e-04 3.15986e-04 2.56927e-04 2.98475e-05 2.42750e-05</occurRates>
             </incrementalMFD>
@@ -340,8 +340,8 @@
                 <upperSeismoDepth>2.5</upperSeismoDepth>
                 <lowerSeismoDepth>7.5</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.05" binWidth="0.1">
                 <occurRates>1.17109e-01 1.02497e-01 8.97230e-02 7.85542e-02 6.87871e-02 6.02443e-02 5.27711e-02 4.62325e-02 4.05106e-02 3.55026e-02 3.11187e-02 2.72806e-02 2.39196e-02 2.09760e-02 1.83975e-02 1.61386e-02 1.41592e-02 1.24245e-02 1.09040e-02 9.57099e-03 8.40225e-03 7.37733e-03 6.47840e-03 5.68985e-03 4.99802e-03 4.39094e-03 3.85816e-03 3.39052e-03 2.97998e-03 2.61952e-03 1.61207e-03 1.41746e-03 1.78071e-04 1.56617e-04</occurRates>
             </incrementalMFD>

@@ -8,7 +8,7 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>NSHA13/NSHA13_collapsed_rates_FF.xml</uncertaintyModel>
+                    <uncertaintyModel>NSHA13_collapsed_rates_FF.xml</uncertaintyModel>
                     <uncertaintyWeight>1</uncertaintyWeight>
                 </logicTreeBranch>
 
