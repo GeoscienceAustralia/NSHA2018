@@ -751,7 +751,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="PAPU" name="Papuan Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -880,7 +881,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="BLHB" name="Bligh Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -960,7 +961,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="EPPL" name="Eastern-Papuan Plateau" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -1078,7 +1080,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="CARP" name="Carpentaria Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>

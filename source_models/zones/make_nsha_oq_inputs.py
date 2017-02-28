@@ -106,6 +106,9 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
     
     # start loop thru area sources
     for m in model:
+        # comment out sources with null activitiy rates
+        if m['src_N0'][-1] == -99.0:
+            newxml += '        <!--\n'
         
         #######################################################################
         # write area sources
@@ -215,8 +218,10 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
                      +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][1])+'"/>\n' \
                      +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][2])+'"/>\n'
             newxml += '            </hypoDepthDist>\n'
-            newxml += '        </areaSource>\n\n'
-            
+            if m['src_N0'][-1] == -99.0:
+                newxml += '        </areaSource>\n'
+            else:
+                newxml += '        </areaSource>\n\n'
         #######################################################################
         # now make fault sources
         #######################################################################
@@ -421,9 +426,16 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
                         newxml += '            <rake>90.0</rake>\n'
                     else:
                         newxml += '            <rake>0.0</rake>\n'
+                    
+                    if m['src_N0'][-1] == -99.0:
+                        newxml += '        </simpleFaultSource>\n'
+                    else:
+                        newxml += '        </simpleFaultSource>\n\n'
                 
-                    newxml += '        </simpleFaultSource>\n\n'
-                
+        # comment sources with null activity rates
+        if m['src_N0'][-1] == -99.0:
+            newxml += '        -->\n\n'
+    
     # finish nrml
     newxml += '    </sourceModel>\n'
     newxml += '</nrml>'

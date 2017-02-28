@@ -1744,7 +1744,8 @@
                 <hypoDepth probability="0.25" depth="7.5"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="Z039" name="ZONE 39" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -1779,7 +1780,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+
+        -->
         <areaSource id="Z004" name="ZONE 4" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>

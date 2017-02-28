@@ -360,7 +360,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="BEN" name="Bendigo" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -405,7 +406,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="BOW" name="Bowen" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -1448,6 +1449,7 @@
             </hypoDepthDist>
         </areaSource>
 
+        <!--
         <areaSource id="EBN" name="Eucumbene" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -1482,7 +1484,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-
+        -->
         <areaSource id="EXP" name="Exmouth Plateau" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -2349,7 +2351,8 @@
                 <hypoDepth probability="0.25" depth="7.5"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="KBB" name="Korumba Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -2396,7 +2399,7 @@
                 <hypoDepth probability="0.25" depth="7.5"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="LRB" name="Laura Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -2787,7 +2790,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="MIS" name="Mt Isa" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -2825,7 +2829,7 @@
                 <hypoDepth probability="0.25" depth="7.5"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="MDG" name="Murray Darling" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -3295,7 +3299,8 @@
                 <hypoDepth probability="0.25" depth="7.5"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="OBE" name="Otway Basin East" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -3345,7 +3350,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="OBW" name="Otway Basin West" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -3547,7 +3552,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="OVG" name="Ovens Valley Graben" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -3592,7 +3598,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="PTB" name="Perth Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -3977,7 +3983,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="SWL" name="Stawell" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -4029,7 +4036,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="SZR" name="Strzelecki Ranges" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -5441,7 +5448,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="STS" name="Stuart Shelf" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -5493,7 +5501,7 @@
                 <hypoDepth probability="0.25" depth="7.5"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="WHY" name="Whyalla" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -6087,7 +6095,8 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
-<!--
+
+        <!--
         <areaSource id="YEA" name="Yea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -6143,7 +6152,7 @@
                 <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
--->
+        -->
         <areaSource id="YAR" name="Yarrawonga" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
