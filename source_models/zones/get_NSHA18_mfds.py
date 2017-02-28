@@ -1,6 +1,6 @@
 from numpy import array, arange, argsort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, ceil, floor, \
-                  nan, isnan, around, diff, interp, exp
+                  nan, isnan, around, diff, interp, exp, ones_like
 from os import path, sep, mkdir, getcwd, system, walk
 from shapely.geometry import Point, Polygon
 from osgeo import ogr
@@ -46,6 +46,8 @@ try:
 except:
     single_src = False
 
+print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
+bestcurve = True
 ###############################################################################
 # get parameter values
 ###############################################################################
@@ -117,6 +119,10 @@ new_bval_u = src_bval_u
 new_n0_b = src_n0
 new_n0_l = src_n0_l
 new_n0_u = src_n0_u
+
+# reset Mmin to 4.8
+print '!!!Temporary fix - setting Mmin = 4.8!!!'
+src_mmin = 4.8 * ones_like(src_mmin)
 
 # set arrays for testing
 bval_vect = []
@@ -929,7 +935,7 @@ for i in srcidx:
         
         pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
         pdfpath = path.join(srcfolder, pdffile)
-        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
+        #plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
         
         if single_src == True:
             plt.show()
@@ -1233,4 +1239,4 @@ multimods = 'False'
 
 # now write OQ file
 oqpath = path.join(rootfolder)
-write_oq_sourcefile(model, oqpath, oqpath, multimods)
+write_oq_sourcefile(model, oqpath, oqpath, multimods, bestcurve)

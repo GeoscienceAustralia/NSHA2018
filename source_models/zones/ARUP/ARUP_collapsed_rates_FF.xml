@@ -28,13 +28,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>3.03945e-02 2.59217e-02 2.21126e-02 1.88678e-02 1.61029e-02 1.37464e-02 1.17375e-02 1.00244e-02 8.56326e-03 7.31668e-03 6.25292e-03 5.34494e-03 4.56975e-03 3.90779e-03 3.34238e-03 2.85934e-03 2.44658e-03 2.09379e-03 1.79221e-03 1.53434e-03 1.31381e-03 1.12517e-03 9.63780e-04 8.25675e-04 7.07474e-04 4.24403e-04 3.63762e-04 4.45473e-05 3.81935e-05 3.77384e-18</occurRates>
+                <occurRates>1.40487e-02 1.17223e-02 9.78120e-03 8.16150e-03 6.81001e-03 5.68232e-03 4.74136e-03 3.95623e-03 3.30110e-03 2.75446e-03 2.29834e-03 1.91775e-03 1.60018e-03 1.33520e-03 1.11410e-03 9.29616e-04 7.75678e-04 6.47231e-04 5.40054e-04 4.50624e-04 3.76004e-04 3.13740e-04 2.61787e-04 2.18437e-04 1.82265e-04 1.52083e-04 1.26899e-04 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -68,13 +68,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>4.57971e-02 3.97154e-02 3.44471e-02 2.98825e-02 2.59271e-02 2.24989e-02 1.95271e-02 1.69506e-02 1.47164e-02 1.27788e-02 1.10980e-02 9.63974e-03 8.37442e-03 7.27632e-03 6.32316e-03 5.49570e-03 4.77724e-03 4.15332e-03 3.61142e-03 3.14069e-03 2.73170e-03 2.37632e-03 2.06747e-03 1.25930e-03 1.09593e-03 1.36268e-04 1.18623e-04</occurRates>
+                <occurRates>3.03168e-02 2.59701e-02 2.22467e-02 1.90571e-02 1.63248e-02 1.39842e-02 1.19792e-02 1.02617e-02 8.79044e-03 7.53012e-03 6.45049e-03 5.52565e-03 4.73341e-03 4.05476e-03 3.47341e-03 2.97541e-03 2.54881e-03 2.18338e-03 1.87034e-03 1.60218e-03 1.37247e-03 1.17569e-03 1.00712e-03 8.62729e-04 7.39035e-04 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -116,13 +116,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>5.56151e-02 4.80622e-02 4.15428e-02 3.59142e-02 3.10539e-02 2.68562e-02 2.32301e-02 2.00971e-02 1.73897e-02 1.50497e-02 1.30268e-02 1.12777e-02 9.76511e-03 8.45681e-03 7.32501e-03 6.34572e-03 5.49824e-03 4.76470e-03 4.12969e-03 3.57986e-03 3.10372e-03 2.69132e-03 2.33407e-03 1.41717e-03 1.22942e-03 1.52383e-04 1.32233e-04</occurRates>
+                <occurRates>3.38856e-02 2.88673e-02 2.45921e-02 2.09501e-02 1.78475e-02 1.52043e-02 1.29526e-02 1.10344e-02 9.40024e-03 8.00810e-03 6.82213e-03 5.81180e-03 4.95109e-03 4.21785e-03 3.59321e-03 3.06106e-03 2.60773e-03 2.22154e-03 1.89254e-03 1.61226e-03 1.37349e-03 1.17008e-03 9.96795e-04 8.49174e-04 7.23414e-04 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -157,13 +157,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>1.35484e-02 1.08571e-02 8.70182e-03 6.97556e-03 5.59269e-03 4.48469e-03 3.59680e-03 2.88516e-03 2.31470e-03 1.85732e-03 1.49056e-03 1.19641e-03 9.60458e-04 7.71159e-04 6.19265e-04 4.97365e-04 3.99521e-04 3.20974e-04 2.57907e-04 2.07263e-04 1.66588e-04 1.33914e-04 1.07665e-04 8.65726e-05 6.96223e-05 3.91990e-05 3.15328e-05 3.62420e-06 2.91620e-06 2.77772e-19</occurRates>
+                <occurRates>8.94926e-03 7.08371e-03 5.60705e-03 4.43821e-03 3.51303e-03 2.78071e-03 2.20105e-03 1.74222e-03 1.37904e-03 1.09157e-03 8.64021e-04 6.83908e-04 5.41342e-04 4.28495e-04 3.39171e-04 2.68468e-04 2.12504e-04 1.68205e-04 1.33142e-04 1.05387e-04 8.34183e-05 6.60290e-05 5.22647e-05 4.13697e-05 3.27458e-05 2.59197e-05 2.05165e-05 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -201,13 +201,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>1.01448e-01 8.41522e-02 6.98094e-02 5.79145e-02 4.80489e-02 3.98657e-02 3.30777e-02 2.74466e-02 2.27750e-02 1.88992e-02 1.56835e-02 1.30152e-02 1.08013e-02 8.96411e-03 7.43960e-03 6.17448e-03 5.12460e-03 4.25331e-03 3.53021e-03 2.93009e-03 2.43201e-03 2.01863e-03 1.67553e-03 9.73535e-04 8.08083e-04 9.58222e-05 7.95386e-05</occurRates>
+                <occurRates>1.36564e-03 1.04011e-03 7.92172e-04 6.03338e-04 4.59518e-04 3.49981e-04 2.66554e-04 2.03014e-04 1.54621e-04 1.17763e-04 8.96915e-05 6.83114e-05 5.20277e-05 3.96256e-05 3.01799e-05 2.29858e-05 1.75065e-05 1.33334e-05 1.01551e-05 7.73437e-06 5.89069e-06 4.48650e-06 3.41704e-06 2.60250e-06 1.98213e-06 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -239,13 +239,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>1.16570e-02 1.05042e-02 9.46777e-03 8.53567e-03 7.69718e-03 6.94272e-03 6.26368e-03 5.65237e-03 5.10189e-03 4.60608e-03 4.15938e-03 3.75684e-03 3.39401e-03 3.06687e-03 2.77187e-03 2.50576e-03 2.26568e-03 2.04901e-03 1.85344e-03 1.67688e-03 1.51742e-03 1.37340e-03 1.24328e-03 1.12570e-03 1.01943e-03 6.46311e-04 5.85504e-04 7.57782e-05 6.86725e-05 6.98738e-18</occurRates>
+                <occurRates>6.85589e-03 6.07123e-03 5.37638e-03 4.76105e-03 4.21615e-03 3.73361e-03 3.30629e-03 2.92789e-03 2.59279e-03 2.29604e-03 2.03326e-03 1.80055e-03 1.59448e-03 1.41199e-03 1.25039e-03 1.10728e-03 9.80551e-04 8.68327e-04 7.68947e-04 6.80940e-04 6.03006e-04 5.33992e-04 4.72877e-04 4.18756e-04 3.70829e-04 3.28387e-04 2.90803e-04 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -297,13 +297,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>5.95244e-02 5.11730e-02 4.40005e-02 3.78394e-02 3.25462e-02 2.79979e-02 2.40891e-02 2.07292e-02 1.78408e-02 1.53572e-02 1.32214e-02 1.13844e-02 9.80406e-03 8.44440e-03 7.27439e-03 6.26741e-03 5.40062e-03 4.65439e-03 4.01184e-03 3.45849e-03 2.98189e-03 2.57133e-03 2.21760e-03 1.33895e-03 1.15507e-03 1.42368e-04 1.22849e-04</occurRates>
+                <occurRates>3.89226e-02 3.30532e-02 2.80689e-02 2.38362e-02 2.02418e-02 1.71894e-02 1.45973e-02 1.23961e-02 1.05268e-02 8.93938e-03 7.59135e-03 6.44660e-03 5.47448e-03 4.64894e-03 3.94790e-03 3.35257e-03 2.84701e-03 2.41769e-03 2.05311e-03 1.74351e-03 1.48059e-03 1.25733e-03 1.06773e-03 9.06716e-04 7.69986e-04 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -342,13 +342,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>3.64362e-02 3.01271e-02 2.49151e-02 2.06085e-02 1.70491e-02 1.41068e-02 1.16741e-02 9.66221e-03 7.99817e-03 6.62156e-03 5.48255e-03 4.53999e-03 3.75989e-03 3.11415e-03 2.57956e-03 2.13694e-03 1.77042e-03 1.46688e-03 1.21548e-03 1.00724e-03 8.34730e-04 6.91813e-04 5.73400e-04 4.75282e-04 3.93976e-04 2.28616e-04 1.89526e-04 2.24467e-05 1.86102e-05 1.80094e-18</occurRates>
+                <occurRates>3.12647e-03 2.44325e-03 1.90933e-03 1.49209e-03 1.16603e-03 9.11219e-04 7.12093e-04 5.56481e-04 4.34875e-04 3.39842e-04 2.65578e-04 2.07542e-04 1.62188e-04 1.26745e-04 9.90481e-05 7.74034e-05 6.04886e-05 4.72702e-05 3.69403e-05 2.88679e-05 2.25594e-05 1.76296e-05 1.37770e-05 1.07664e-05 8.41363e-06 6.57502e-06 5.13819e-06 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -391,13 +391,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>3.91574e-02 3.13538e-02 2.51090e-02 2.01107e-02 1.61096e-02 1.29064e-02 1.03415e-02 8.28744e-03 6.64228e-03 5.32442e-03 4.26860e-03 3.42260e-03 2.74464e-03 2.20126e-03 1.76569e-03 1.41649e-03 1.13649e-03 9.11964e-04 7.31886e-04 5.87440e-04 4.71561e-04 3.78588e-04 3.03982e-04 2.44109e-04 1.96052e-04 1.10232e-04 8.85521e-05 1.01635e-05 8.16650e-06 7.79644e-19</occurRates>
+                <occurRates>2.66778e-02 2.11325e-02 1.67399e-02 1.32603e-02 1.05040e-02 8.32059e-03 6.59106e-03 5.22102e-03 4.13577e-03 3.27610e-03 2.59512e-03 2.05569e-03 1.62839e-03 1.28991e-03 1.02179e-03 8.09396e-04 6.41153e-04 5.07882e-04 4.02312e-04 3.18687e-04 2.52444e-04 1.99970e-04 1.58404e-04 1.25478e-04 9.93957e-05 7.87351e-05 6.23690e-05 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -439,13 +439,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>7.56506e-02 6.59616e-02 5.75199e-02 5.01641e-02 4.37539e-02 3.81670e-02 3.32972e-02 2.90519e-02 2.53507e-02 2.21234e-02 1.93091e-02 1.68546e-02 1.47137e-02 1.28462e-02 1.12169e-02 9.79525e-03 8.55473e-03 7.47210e-03 6.52717e-03 5.70234e-03 4.98227e-03 4.35357e-03 3.80461e-03 3.32521e-03 2.90651e-03 1.77855e-03 1.55492e-03 1.94219e-04 1.69833e-04 1.69266e-17</occurRates>
+                <occurRates>5.84166e-02 5.05385e-02 4.37229e-02 3.78264e-02 3.27251e-02 2.83118e-02 2.44936e-02 2.11904e-02 1.83327e-02 1.58603e-02 1.37214e-02 1.18709e-02 1.02700e-02 8.88497e-03 7.68674e-03 6.65010e-03 5.75326e-03 4.97737e-03 4.30612e-03 3.72540e-03 3.22299e-03 2.78833e-03 2.41230e-03 2.08697e-03 1.80552e-03 1.56203e-03 1.35137e-03 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -475,13 +475,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>1.11471e-02 1.01735e-02 9.28824e-03 8.48292e-03 7.75001e-03 7.08269e-03 6.47485e-03 5.92095e-03 5.41601e-03 4.95552e-03 4.53540e-03 4.15199e-03 3.80194e-03 3.48225e-03 3.19018e-03 2.92327e-03 2.67926e-03 2.45613e-03 2.25204e-03 2.06530e-03 1.89439e-03 1.73794e-03 1.59467e-03 1.46346e-03 1.34325e-03 1.23310e-03 1.13215e-03 7.27650e-04 6.68259e-04 8.76656e-05 8.05303e-05 8.95354e-18</occurRates>
+                <occurRates>3.13628e-03 2.75431e-03 2.41886e-03 2.12427e-03 1.86555e-03 1.63835e-03 1.43881e-03 1.26358e-03 1.10969e-03 9.74538e-04 8.55848e-04 7.51614e-04 6.60075e-04 5.79684e-04 5.09084e-04 4.47083e-04 3.92632e-04 3.44813e-04 3.02818e-04 2.65938e-04 2.33549e-04 2.05105e-04 1.80125e-04 1.58188e-04 1.38922e-04 1.22003e-04 1.07144e-04 9.40949e-05 8.26351e-05 8.26932e-18 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -516,13 +516,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>2.40986e-02 2.11753e-02 1.86118e-02 1.63631e-02 1.43899e-02 1.26577e-02 1.11368e-02 9.80082e-03 8.62705e-03 7.59546e-03 6.68859e-03 5.89114e-03 5.18974e-03 4.57266e-03 4.02965e-03 3.55171e-03 3.13094e-03 2.76043e-03 2.43412e-03 2.14668e-03 1.89343e-03 1.67026e-03 1.47358e-03 1.30020e-03 1.14735e-03 7.08796e-04 6.25598e-04 7.88868e-05 6.96401e-05 6.97315e-18</occurRates>
+                <occurRates>4.60760e-03 3.87559e-03 3.25987e-03 2.74197e-03 2.30635e-03 1.93994e-03 1.63174e-03 1.37250e-03 1.15445e-03 9.71043e-04 8.16773e-04 6.87011e-04 5.77865e-04 4.86059e-04 4.08838e-04 3.43886e-04 2.89252e-04 2.43298e-04 2.04645e-04 1.72133e-04 1.44786e-04 1.21784e-04 1.02436e-04 8.61618e-05 7.24732e-05 6.09593e-05 5.12747e-05 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -567,13 +567,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>3.46330e-02 3.11646e-02 2.80516e-02 2.52565e-02 2.27459e-02 2.04900e-02 1.84624e-02 1.66392e-02 1.49994e-02 1.35241e-02 1.21964e-02 1.10012e-02 9.92491e-03 8.95553e-03 8.08221e-03 7.29524e-03 6.58592e-03 5.94644e-03 5.36981e-03 4.84975e-03 4.38062e-03 3.95736e-03 3.57541e-03 3.23069e-03 2.91951e-03 2.63857e-03 2.38489e-03 1.50901e-03 1.36418e-03 1.76180e-04 1.59296e-04 1.74522e-17</occurRates>
+                <occurRates>6.25094e-03 5.37398e-03 4.62005e-03 3.97190e-03 3.41467e-03 2.93562e-03 2.52378e-03 2.16971e-03 1.86532e-03 1.60363e-03 1.37865e-03 1.18524e-03 1.01896e-03 8.76006e-04 7.53109e-04 6.47454e-04 5.56621e-04 4.78532e-04 4.11397e-04 3.53682e-04 3.04063e-04 2.61405e-04 2.24732e-04 1.93204e-04 1.66099e-04 1.42797e-04 1.22763e-04 1.05541e-04 9.07341e-05 8.95089e-18 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -607,13 +607,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>1.03655e-01 8.40914e-02 6.82225e-02 5.53498e-02 4.49070e-02 3.64353e-02 2.95624e-02 2.39864e-02 1.94624e-02 1.57919e-02 1.28139e-02 1.03975e-02 8.43693e-03 6.84610e-03 5.55529e-03 4.50788e-03 3.65799e-03 2.96835e-03 2.40874e-03 1.95465e-03 1.58616e-03 1.28715e-03 1.04451e-03 8.47614e-04 6.87836e-04 5.58178e-04 4.52962e-04 2.57306e-04 2.08805e-04 2.42066e-05 1.96439e-05 2.03767e-18</occurRates>
+                <occurRates>5.05062e-04 3.70828e-04 2.72270e-04 1.99907e-04 1.46776e-04 1.07767e-04 7.91246e-05 5.80951e-05 4.26547e-05 3.13181e-05 2.29944e-05 1.68830e-05 1.23959e-05 9.10136e-06 6.68242e-06 4.90639e-06 3.60238e-06 2.64495e-06 1.94198e-06 1.42585e-06 1.04689e-06 7.68650e-07 5.64360e-07 4.14366e-07 3.04237e-07 2.23378e-07 1.64009e-07 1.20419e-07 8.84144e-08 8.05378e-21 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -661,13 +661,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>4.65937e-02 3.95829e-02 3.36331e-02 2.85826e-02 2.42948e-02 2.06539e-02 1.75617e-02 1.49349e-02 1.27033e-02 1.08069e-02 9.19517e-03 7.82510e-03 6.66026e-03 5.66975e-03 4.82732e-03 4.11072e-03 3.50104e-03 2.98226e-03 2.54074e-03 2.16492e-03 1.84497e-03 1.57253e-03 1.34053e-03 1.14292e-03 9.74577e-04 5.81804e-04 4.96250e-04 6.04765e-05 5.15977e-05 5.08461e-18</occurRates>
+                <occurRates>2.87129e-02 2.40554e-02 2.01534e-02 1.68844e-02 1.41456e-02 1.18510e-02 9.92869e-03 8.31817e-03 6.96889e-03 5.83848e-03 4.89142e-03 4.09799e-03 3.43326e-03 2.87636e-03 2.40979e-03 2.01890e-03 1.69141e-03 1.41705e-03 1.18719e-03 9.94621e-04 8.33284e-04 6.98118e-04 5.84877e-04 4.90005e-04 4.10522e-04 3.43932e-04 2.88143e-04 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -711,13 +711,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>2.59549e-02 2.30060e-02 2.03960e-02 1.80855e-02 1.60398e-02 1.42281e-02 1.26234e-02 1.12017e-02 9.94194e-03 8.82545e-03 7.83575e-03 6.95826e-03 6.18013e-03 5.48997e-03 4.87773e-03 4.33450e-03 3.85243e-03 3.42454e-03 3.04468e-03 2.70740e-03 2.40788e-03 2.14183e-03 1.90549e-03 1.69549e-03 1.50886e-03 1.34299e-03 1.19553e-03 7.45081e-04 6.63468e-04 8.44089e-05 7.51848e-05 8.20796e-18</occurRates>
+                <occurRates>1.67307e-02 1.46287e-02 1.27908e-02 1.11838e-02 9.77872e-03 8.55015e-03 7.47594e-03 6.53669e-03 5.71544e-03 4.99737e-03 4.36952e-03 3.82055e-03 3.34055e-03 2.92085e-03 2.55389e-03 2.23303e-03 1.95248e-03 1.70717e-03 1.49269e-03 1.30515e-03 1.14118e-03 9.97805e-04 8.72444e-04 7.62834e-04 6.66994e-04 5.83195e-04 5.09924e-04 4.45859e-04 3.89843e-04 3.88567e-17 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -753,13 +753,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>2.5</upperSeismoDepth>
-                <lowerSeismoDepth>7.5</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>3.71643e-02 3.28014e-02 2.89553e-02 2.55643e-02 2.25740e-02 1.99367e-02 1.76103e-02 1.55577e-02 1.37466e-02 1.21482e-02 1.07373e-02 9.49166e-03 8.39184e-03 7.42058e-03 6.56271e-03 5.80488e-03 5.13532e-03 4.54365e-03 4.02074e-03 3.55852e-03 3.14989e-03 2.78858e-03 2.46905e-03 1.53049e-03 1.35550e-03 1.71520e-04 1.51950e-04</occurRates>
+                <occurRates>2.56417e-02 2.23745e-02 1.95237e-02 1.70360e-02 1.48654e-02 1.29713e-02 1.13185e-02 9.87638e-03 8.61797e-03 7.51991e-03 6.56175e-03 5.72568e-03 4.99614e-03 4.35955e-03 3.80407e-03 3.31937e-03 2.89643e-03 2.52738e-03 2.20535e-03 1.92436e-03 1.67916e-03 1.46521e-03 1.27852e-03 1.11562e-03 9.73469e-04 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -793,13 +793,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>5.0</upperSeismoDepth>
-                <lowerSeismoDepth>15.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>2.0</ruptAspectRatio>
             <incrementalMFD minMag="4.85" binWidth="0.1">
-                <occurRates>4.12337e-01 3.76459e-01 3.43711e-01 3.13819e-01 2.86531e-01 2.61620e-01 2.38879e-01 2.18117e-01 1.99162e-01 1.81856e-01 1.66055e-01 1.51629e-01 1.38457e-01 1.26430e-01 1.15448e-01 1.05421e-01 9.62654e-02 8.79051e-02 8.02712e-02 7.33005e-02 6.69354e-02 6.11231e-02 5.58157e-02 5.09692e-02 4.65436e-02 2.97495e-02 2.71665e-02 3.54341e-03 3.23576e-03 3.28757e-16</occurRates>
+                <occurRates>1.22151e-03 9.96017e-04 8.12148e-04 6.62222e-04 5.39973e-04 4.40292e-04 3.59012e-04 2.92737e-04 2.38696e-04 1.94632e-04 1.58702e-04 1.29405e-04 1.05516e-04 8.60376e-05 7.01547e-05 5.72039e-05 4.66438e-05 3.80332e-05 3.10121e-05 2.52871e-05 2.06190e-05 1.68127e-05 1.37090e-05 1.11782e-05 9.11469e-06 7.43208e-06 6.06009e-06 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />

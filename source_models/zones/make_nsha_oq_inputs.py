@@ -6,12 +6,17 @@
 #            e.g. python make_openquake_source_file.py SWCan_T3EclC1.pkl swcan
 #####################################################################################
 
-def make_collapse_occurrence_text(m, binwid):
+def make_collapse_occurrence_text(m, binwid, bestcurve):
     from numpy import zeros
     from oq_tools import get_oq_incrementalMFD
     
-    bval_wt    = [0.68, 0.16, 0.16]
-    max_mag_wt = [0.60, 0.30, 0.10]
+    if bestcurve == False:
+        bval_wt    = [0.68, 0.16, 0.16]
+        max_mag_wt = [0.60, 0.30, 0.10]
+    else:
+        bval_wt    = [1.0, 0.0, 0.0]
+        max_mag_wt = [1.0, 0.0, 0.0]
+        
     wtd_list  = []
     maglen = 0
 
@@ -54,12 +59,13 @@ def make_collapse_occurrence_text(m, binwid):
 '''
 start main code here
 '''
-def write_oq_sourcefile(model, modelpath, logicpath, multimods):
+def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
     """
     model = a list of dictionaries for each area source
     modelpath = folder for sources to be included in source_model_logic_tree.xml
     logicpath = folder for logic tree
     multimods = argv[2] # for setting weights of alternative models (True or False)
+    bestcurve = True gives weight of 1 to best Mmax and b-value
     """
 
     from oq_tools import beta2bval, get_line_parallels
@@ -153,8 +159,10 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
     
             # set depth distribution
             if min(m['src_dep']) != max(m['src_dep']):
-                newxml += '                <upperSeismoDepth>'+str("%0.1f" % min(m['src_dep']))+'</upperSeismoDepth>\n'
-                newxml += '                <lowerSeismoDepth>'+str("%0.1f" % max(m['src_dep']))+'</lowerSeismoDepth>\n'
+                #newxml += '                <upperSeismoDepth>'+str("%0.1f" % min(m['src_dep']))+'</upperSeismoDepth>\n'
+                #newxml += '                <lowerSeismoDepth>'+str("%0.1f" % max(m['src_dep']))+'</lowerSeismoDepth>\n'
+                newxml += '                <upperSeismoDepth>0.0</upperSeismoDepth>\n'
+                newxml += '                <lowerSeismoDepth>20.0</lowerSeismoDepth>\n'
             else:
                 newxml += '                <upperSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])-10))+'</upperSeismoDepth>\n'
                 newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
@@ -167,7 +175,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
             
             # get weighted rates
             binwid = 0.1
-            octxt = make_collapse_occurrence_text(m, binwid)
+            octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
                                  
             newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
             newxml += '                <occurRates>'+octxt+'</occurRates>\n'
@@ -321,7 +329,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     if m['src_beta'][0] > -99:
                         # adjust N0 value to account for weighting of fault sources
                     
-                        octxt = make_collapse_occurrence_text(m, binwid)
+                        octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -402,7 +410,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     # do incremental MFD
                     if m['src_beta'][0] > -99:
                         
-                        octxt = make_collapse_occurrence_text(m, binwid)
+                        octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
