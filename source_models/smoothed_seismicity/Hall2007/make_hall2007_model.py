@@ -43,18 +43,29 @@ for filename in original_source_data_files:
     print 'Reading data from %s' % filename
     filebase = filename.split('/')[-1]
     data = np.genfromtxt(filename, skip_header = 2)
+    # Get dx and dy
+    f_in = open(filename, 'r')
+    header1 = f_in.readline()
+    header2 = f_in.readline()
+    header2 = header2.split()
+    dx = float(header2[1])
+    dy = float(header2[2])
+    print dx, dy
     # a values in paper defined as annual rate of M > 5
     # convert to OpenQuake a value defintion
+    # From Andreas: a0 = a5*10**(5*b)
+    # N = atot*dx*dy
+    # a = log10(N)
     b_val = region_b_values[filebase]
     try:
         lons = np.append(lons, data[:,0])
         lats = np.append(lats, data[:,1])
-        a_vals = np.append(a_vals, (np.log10(data[:,2]) + b_val*5.0))
+        a_vals = np.append(a_vals,  np.log10((data[:,2] + b_val*5.0)*dx*dy))
         b_vals = np.append(b_vals, np.ones(data[:,2].size)*b_val)
     except NameError:
         lons = data[:,0]
         lats = data[:,1]
-        a_vals = np.log10(data[:,2]) + b_val*5.0
+        a_vals = np.log10((data[:,2] + b_val*5.0)*dx*dy)
         b_vals = np.ones(data[:,2].size)*b_val
 print a_vals
 
