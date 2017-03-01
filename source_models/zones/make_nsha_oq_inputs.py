@@ -6,12 +6,17 @@
 #            e.g. python make_openquake_source_file.py SWCan_T3EclC1.pkl swcan
 #####################################################################################
 
-def make_collapse_occurrence_text(m, binwid):
+def make_collapse_occurrence_text(m, binwid, bestcurve):
     from numpy import zeros
     from oq_tools import get_oq_incrementalMFD
     
-    bval_wt    = [0.68, 0.16, 0.16]
-    max_mag_wt = [0.60, 0.30, 0.10]
+    if bestcurve == False:
+        bval_wt    = [0.68, 0.16, 0.16]
+        max_mag_wt = [0.60, 0.30, 0.10]
+    else:
+        bval_wt    = [1.0, 0.0, 0.0]
+        max_mag_wt = [1.0, 0.0, 0.0]
+        
     wtd_list  = []
     maglen = 0
 
@@ -54,17 +59,18 @@ def make_collapse_occurrence_text(m, binwid):
 '''
 start main code here
 '''
-def write_oq_sourcefile(model, modelpath, logicpath, multimods):
+def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
     """
     model = a list of dictionaries for each area source
     modelpath = folder for sources to be included in source_model_logic_tree.xml
     logicpath = folder for logic tree
     multimods = argv[2] # for setting weights of alternative models (True or False)
+    bestcurve = True gives weight of 1 to best Mmax and b-value
     """
 
     from oq_tools import beta2bval, get_line_parallels
     from numpy import array, log10, max, min, tan, radians, unique, isinf
-    from os import path
+    from os import path, sep
     
     # set big bbox params
     bbmaxlon = -180
@@ -100,6 +106,9 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
     
     # start loop thru area sources
     for m in model:
+        # comment out sources with null activitiy rates
+        if m['src_N0'][-1] == -99.0:
+            newxml += '        <!--\n'
         
         #######################################################################
         # write area sources
@@ -153,20 +162,23 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
     
             # set depth distribution
             if min(m['src_dep']) != max(m['src_dep']):
-                newxml += '                <upperSeismoDepth>'+str("%0.1f" % min(m['src_dep']))+'</upperSeismoDepth>\n'
-                newxml += '                <lowerSeismoDepth>'+str("%0.1f" % max(m['src_dep']))+'</lowerSeismoDepth>\n'
+                #newxml += '                <upperSeismoDepth>'+str("%0.1f" % min(m['src_dep']))+'</upperSeismoDepth>\n'
+                #newxml += '                <lowerSeismoDepth>'+str("%0.1f" % max(m['src_dep']))+'</lowerSeismoDepth>\n'
+                newxml += '                <upperSeismoDepth>0.0</upperSeismoDepth>\n'
+                newxml += '                <lowerSeismoDepth>20.0</lowerSeismoDepth>\n'
             else:
                 newxml += '                <upperSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])-10))+'</upperSeismoDepth>\n'
                 newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
                 
             newxml += '            </areaGeometry>\n'
-            newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+            #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+            newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
             #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
-            newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
+            newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
-            octxt = make_collapse_occurrence_text(m, binwid)
+            octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
                                  
             newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
             newxml += '                <occurRates>'+octxt+'</occurRates>\n'
@@ -206,8 +218,10 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                      +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][1])+'"/>\n' \
                      +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][2])+'"/>\n'
             newxml += '            </hypoDepthDist>\n'
-            newxml += '        </areaSource>\n\n'
-            
+            if m['src_N0'][-1] == -99.0:
+                newxml += '        </areaSource>\n'
+            else:
+                newxml += '        </areaSource>\n\n'
         #######################################################################
         # now make fault sources
         #######################################################################
@@ -215,6 +229,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
              
             # rename source code if "." exists
             m['src_code'].replace('.', '')
+            src_code = m['src_code']
             
             if isinf(log10(m['src_N0'][0])) == False:
                 ###################################################################
@@ -307,7 +322,8 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                 
@@ -318,7 +334,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     if m['src_beta'][0] > -99:
                         # adjust N0 value to account for weighting of fault sources
                     
-                        octxt = make_collapse_occurrence_text(m, binwid)
+                        octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -388,7 +404,8 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                     #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
@@ -398,7 +415,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                     # do incremental MFD
                     if m['src_beta'][0] > -99:
                         
-                        octxt = make_collapse_occurrence_text(m, binwid)
+                        octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -409,9 +426,16 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
                         newxml += '            <rake>90.0</rake>\n'
                     else:
                         newxml += '            <rake>0.0</rake>\n'
+                    
+                    if m['src_N0'][-1] == -99.0:
+                        newxml += '        </simpleFaultSource>\n'
+                    else:
+                        newxml += '        </simpleFaultSource>\n\n'
                 
-                    newxml += '        </simpleFaultSource>\n\n'
-                
+        # comment sources with null activity rates
+        if m['src_N0'][-1] == -99.0:
+            newxml += '        -->\n\n'
+    
     # finish nrml
     newxml += '    </sourceModel>\n'
     newxml += '</nrml>'
@@ -450,7 +474,8 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods):
     
     # make branches
     for i, branch in enumerate(srcxmls):
-        logictreepath = logicpath + '/' + path.split(branch)[-1]
+        #logictreepath = logicpath + sep + path.split(branch)[-1]
+        logictreepath = path.split(branch)[-1]
         newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
         newxml += '                    <uncertaintyModel>'+logictreepath+'</uncertaintyModel>\n'
         newxml += '                    <uncertaintyWeight>'+str(m['src_reg_wt'])+'</uncertaintyWeight>\n'

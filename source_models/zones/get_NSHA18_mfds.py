@@ -1,12 +1,14 @@
-from numpy import array, arange, argsort, sort, where, delete, hstack, sqrt, \
-                  unique, mean, percentile, log10, zeros_like, ceil, floor, \
-                  nan, isnan, around, diff
+from numpy import array, arange, argsort, where, delete, hstack, sqrt, \
+                  unique, mean, percentile, log10, ceil, floor, \
+                  nan, isnan, around, diff, interp, exp, ones_like
 from os import path, sep, mkdir, getcwd, system, walk
 from shapely.geometry import Point, Polygon
+from osgeo import ogr
 from datetime import datetime
 from sys import argv
 import shapefile
 import matplotlib.pyplot as plt
+from matplotlib import colors, colorbar
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 
@@ -14,7 +16,8 @@ from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 try:
     from catalogue_tools import weichert_algorithm, aki_maximum_likelihood, bval2beta
     from oq_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
-    from mapping_tools import get_field_data, get_field_index, drawoneshapepoly
+    from mapping_tools import get_field_data, get_field_index, drawoneshapepoly, \
+                              drawshapepoly, labelpolygon, get_WGS84_area
     from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
     from tools.nsha_tools import toYearFraction, get_shp_centroid, get_shapely_centroid
@@ -43,6 +46,8 @@ try:
 except:
     single_src = False
 
+print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
+bestcurve = True
 ###############################################################################
 # get parameter values
 ###############################################################################
@@ -115,6 +120,10 @@ new_n0_b = src_n0
 new_n0_l = src_n0_l
 new_n0_u = src_n0_u
 
+# reset Mmin to 4.8
+print '!!!Temporary fix - setting Mmin = 4.8!!!'
+src_mmin = 4.8 * ones_like(src_mmin)
+
 # set arrays for testing
 bval_vect = []
 bsig_vect = []
@@ -132,6 +141,7 @@ else:
 # parse GGCat
 ###############################################################################
 '''Used to parse GGCat csv - now parse HMTK csv'''
+print 'parsing catalogue...'
 #ggcat = parse_ggcat(ggcatfile)
 
 # parse HMTK csv
@@ -268,6 +278,10 @@ for i in srcidx:
     mvect = delete(mvect, didx)  
     ev_out = hstack((ev_out, array(ev_dict)[didx]))
     ev_dict = delete(ev_dict, didx)  
+    
+    # set values to avoid plotting issues later
+    new_bval_b[i] = 1.0
+    new_n0_b[i]   = 1E-30
     
     # skip zone if no events pass completeness
     if len(mvect) != 0:
@@ -843,7 +857,7 @@ for i in srcidx:
         # get beta curve again at consistent mags
         mpltmin_best = 2.0 + bin_width/2.
         plt_width = 0.1
-        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)        
+        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
         
         header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT'
         
@@ -921,11 +935,12 @@ for i in srcidx:
         
         pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
         pdfpath = path.join(srcfolder, pdffile)
-        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')
+        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
         
         if single_src == True:
             plt.show()
         else:
+            #plt.gcf().clear()
             plt.clf()
             plt.close()
     
@@ -1019,6 +1034,166 @@ f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,
 f.close()
 
 ###############################################################################
+# map b-value
+###############################################################################
+
+# set figure
+plt.clf()
+fig = plt.figure(i+1, figsize=(13, 9))
+
+# set national-scale basemap
+#112/155/-45/-10.5
+llcrnrlat = -45
+urcrnrlat = -5
+llcrnrlon = 105
+urcrnrlon = 155
+lon_0 = mean([llcrnrlon, urcrnrlon])
+lat_1 = percentile([llcrnrlat, urcrnrlat], 25)
+lat_2 = percentile([llcrnrlat, urcrnrlat], 75)
+
+m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
+            urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
+            projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
+            resolution='l',area_thresh=1000.)
+
+# annotate
+m2.drawcoastlines(linewidth=0.5,color='0.25')
+m2.drawcountries()
+m2.drawstates()
+#m2.fillcontinents(color='0.8', lake_color='1.0')
+    
+# draw parallels and meridians.
+ll_space = 6
+m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+
+
+# get colour index
+ncolours=18
+b_min = 0.5
+b_max = 1.4
+
+cindex = []
+
+# loop thru b values
+for b in new_bval_b:
+    idx = interp(b, [b_min, b_max], [0, ncolours-1])
+    cindex.append(int(round(idx)))
+    
+# get cmap
+cmap = plt.get_cmap('YlOrRd', ncolours)
+
+# plt source zone boundary
+drawshapepoly(m2, plt, sf, cindex=cindex, cmap=cmap, ncolours=ncolours, fillshape=True)
+
+# label polygons
+labelpolygon(m2, plt, sf, 'CODE')
+
+# set colorbar
+plt.gcf().subplots_adjust(bottom=0.1)
+cax = fig.add_axes([0.33,0.05,0.34,0.02]) # setup colorbar axes.
+norm = colors.Normalize(vmin=b_min, vmax=b_max)
+cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
+
+# set cb labels
+#linticks = array([0.01, 0.03, 0.1, 0.3 ])
+ticks = arange(b_min, b_max+0.1, 0.1)
+cb.set_ticks(ticks)
+labels = [str('%0.1f' % x) for x in ticks]
+#cb.set_ticklabels(labels, fontsize=10)
+cb.ax.set_xticklabels(labels, fontsize=10)
+cb.set_label('b-value', fontsize=12)
+
+# set filename
+bmap = path.join(rootfolder,rootfolder+'_b_val_map.pdf')
+plt.savefig(bmap, format='pdf', bbox_inches='tight')
+plt.gcf().clear()
+plt.clf()
+plt.close()
+
+###############################################################################
+# map activity rate of M5
+###############################################################################
+
+# set figure
+plt.clf()
+fig = plt.figure(i+2, figsize=(13, 9))
+
+# set national-scale basemap
+m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
+            urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
+            projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
+            resolution='l',area_thresh=1000.)
+
+# annotate
+m2.drawcoastlines(linewidth=0.5,color='0.25')
+m2.drawcountries()
+m2.drawstates()
+    
+# draw parallels and meridians.
+m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+
+# get M5 rates
+
+new_beta = bval2beta(array(new_bval_b))
+src_mmax = array(src_mmax)
+
+m5_rates = array(new_n0_b) * exp(-new_beta  * 5.0) * (1 - exp(-new_beta * (src_mmax - 5.0))) \
+           / (1 - exp(-new_beta * src_mmax))
+
+# get area (in km**2) of sources for normalisation
+src_area = [] 
+for poly in polygons:
+    src_area.append(get_WGS84_area(poly))
+src_area= array(src_area)
+    
+# normalise M5 rates by area
+lognorm_m5_rates = log10(100**2 * m5_rates / src_area)
+#norm_m5_rates = m5_rates
+    
+# get colour index
+ncolours=20
+r_min = -4.0
+r_max = -1.5
+r_rng = arange(r_min, r_max+0.1, 0.5)
+
+cindex = []
+# loop thru rates and get c-index
+for r in lognorm_m5_rates:
+    idx = interp(r, [r_min, r_max], [0, ncolours-1])
+    cindex.append(int(round(idx)))
+    
+# get cmap
+cmap = plt.get_cmap('rainbow', ncolours)
+
+# plt source zone boundary
+drawshapepoly(m2, plt, sf, cindex=cindex, cmap=cmap, ncolours=ncolours, fillshape=True)
+
+# label polygons
+labelpolygon(m2, plt, sf, 'CODE')
+
+# set colorbar
+plt.gcf().subplots_adjust(bottom=0.1)
+cax = fig.add_axes([0.33,0.05,0.34,0.02]) # setup colorbar axes.
+norm = colors.Normalize(vmin=r_min, vmax=r_max)
+cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
+
+# set cb labels
+ticks = arange(r_min, r_max+0.5, 0.5)
+cb.set_ticks(ticks)
+labels = [str('%0.1e' % 10**x) for x in ticks]
+cb.ax.set_xticklabels(labels, fontsize=10)
+cb.set_label('M 5.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
+
+# set filename
+rmap = path.join(rootfolder,rootfolder+'_m5_rate_map.pdf')
+plt.savefig(rmap, format='pdf', bbox_inches='tight')
+plt.gcf().clear()
+plt.clf()
+plt.close()
+
+###############################################################################
 # merge all pdfs to single file
 ###############################################################################
 
@@ -1029,9 +1204,9 @@ pdffiles = []
 
 # make out file name
 pdfbase = path.split(newshp)[-1].strip('shp')+'pdf'
-combined_pdf = path.join(rootfolder, 'mfd', pdfbase)
+combined_pdf = path.join(rootfolder, pdfbase)
 
-for root, dirnames, filenames in walk(path.join(rootfolder, 'mfd')):
+for root, dirnames, filenames in walk(rootfolder):
     #for filename in filter(filenames, '.pdf'):
     for filename in filenames:
         if filename.endswith('.pdf'):
@@ -1071,4 +1246,4 @@ multimods = 'False'
 
 # now write OQ file
 oqpath = path.join(rootfolder)
-write_oq_sourcefile(model, oqpath, oqpath, multimods)
+write_oq_sourcefile(model, oqpath, oqpath, multimods, bestcurve)
