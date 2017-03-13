@@ -94,9 +94,9 @@ outshp = path.join('shapefiles', 'DOMAINS_NSHA18.shp')
 w = shapefile.Writer(shapefile.POLYGON)
 w.field('SRC_NAME','C','50')
 w.field('CODE','C','10')
-#w.field('SRC_REGION','C','100')
 #w.field('SRC_REG_WT','F', 8, 3)
 w.field('SRC_TYPE','C','10')
+w.field('CLASS','C','10')
 w.field('SRC_WEIGHT','F', 8, 2)
 w.field('DEP_BEST','F', 8, 1)
 w.field('DEP_UPPER','F', 8, 1)
@@ -155,7 +155,7 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        w.record(name[i], code[i], src_ty, src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(name[i], code[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
         
 # now save area shapefile
