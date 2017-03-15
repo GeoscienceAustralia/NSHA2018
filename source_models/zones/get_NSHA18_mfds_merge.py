@@ -170,84 +170,41 @@ for i in range(0, neq):
              'auth':cat.data['Agency'][i]}
              	
     ggcat.append(tdict)
-
-###############################################################################
-# get unique zone classes and loop through to merge zones of similar class 
-###############################################################################
-
-unique_classes = unique(array(src_class))
-for uclass in unique_classes:
     
+# get max decimal year and round up!
+lr = ggcat[-1]
+max_comp_yr = lr['year']+lr['month']/12.
+
+###############################################################################
+# function to get events within polygon
+###############################################################################
+
+def get_events_in_poly(cat, poly):
+    
+    # set arrays
     mvect = []
     tvect = []
     dec_tvect = []
     ev_dict = []
-    out_idx = []
-    L08_b = False
-    Aki_ML = False
-    Weichert = False
     
-    ###############################################################################
-    # loop thru zones 
-    ###############################################################################
-    
-    # loop thru source zones
-    for i in srcidx:
+    # now loop through earthquakes in cat
+    for ev in cat:
         
-        if src_class[i] == uclass:
-        
-            # get polygon of interest
-            poly = polygons[i]
+        # check if pt in poly and compile mag and years
+        pt = Point(ev['lon'], ev['lat'])
+        if pt.within(poly):
+            mvect.append(ev['prefmag'])
+            tvect.append(ev['datetime'])
+            dec_tvect.append(toYearFraction(ev['datetime']))
+            ev_dict.append(ev)
             
-            print '\nCalculating MFD for:', src_code[i]
-            
-            """
-            # set cat for given depth range
-            if src_cat[i] == 'FULL':
-                ggcat = fullcat
-            elif src_cat[i] == 'DEEP':
-                ggcat = deepcat
-            elif src_cat[i] == 'CRUST':
-                ggcat = crustcat
-            """
-            
-            # get max decimal year and round up!
-            lr = ggcat[-1]
-            max_comp_yr = lr['year']+lr['month']/12.
-            
-            # now loop through earthquakes in cat
-            for s in ggcat:
-                
-                # check if pt in poly and compile mag and years
-                pt = Point(s['lon'], s['lat'])
-                if pt.within(poly):
-                    mvect.append(s['prefmag'])
-                    tvect.append(s['datetime'])
-                    dec_tvect.append(toYearFraction(s['datetime']))
-                    ev_dict.append(s)
-                    
-    ###############################################################################
-    # get earthquakes that pass completeness in merged zones
-    ###############################################################################
-        
-            
-    # get annual occurrence rates for each mag bin
-    ycomps = array([int(x) for x in src_ycomp[i].split(';')])
-    mcomps = array([float(x) for x in src_mcomp[i].split(';')])
-    
-    # set mag bins
-    mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
-    #mrng = arange(min(mcomps), src_mmax[i], bin_width)
-    
-    # convert lists to arrays
-    mvect = array(mvect)
-    tvect = array(tvect)
-    dec_tvect = array(dec_tvect)
-    
-    # keep original vectors for plotting
-    orig_mvect = mvect
-    orig_tvect = tvect
-    orig_dec_tvect = dec_tvect
+    return mvect, tvect, dec_tvect, ev_dict
+
+###############################################################################
+# return rates
+###############################################################################
+
+def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
     
     # first, remove NaN magnitudes - not sure why "< mcomps[0]" fails in next block
     didx = where(isnan(mvect))[0]
@@ -374,7 +331,7 @@ for uclass in unique_classes:
                 # solve for N0
                 fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
                 
-                print 'Aki ML b-value =', bval, sigb
+                print '    Aki ML b-value =', bval, sigb
                 
                 # add to bval arrays
                 bval_vect.append(bval)
@@ -411,7 +368,7 @@ for uclass in unique_classes:
             beta = bval2beta(bval)
             sigbeta = bval2beta(sigb)
         
-            print 'Weichert b-value = ', bval, sigb
+            print '    Weichert b-value = ', bval, sigb
             Weichert = True
                         
         ###############################################################################
@@ -457,7 +414,7 @@ for uclass in unique_classes:
             sigb = 0.1
             sigbeta = bval2beta(sigb)
             
-            print 'Leonard2008 b-value =', bval, sigb
+            print '    Leonard2008 b-value =', bval, sigb
             
             # get dummy curve
             dummyN0 = 1.
@@ -470,10 +427,7 @@ for uclass in unique_classes:
             # solve for N0
             fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
             
-            # add to bval arrays
-            bval_vect.append(bval)
-            bsig_vect.append(sigb)
-         
+            
         ###############################################################################
         # set confidence intervals from Table 1 in Weichert (1980)
         ###############################################################################
@@ -504,6 +458,117 @@ for uclass in unique_classes:
         err_up = array(err_up)
         err_lo = array(err_lo)
         
+    return bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo
+
+
+###############################################################################
+# get unique zone classes and loop through to merge zones of similar class 
+###############################################################################
+
+unique_classes = unique(array(src_class))
+class_bval = []
+class_bval_sig = []
+class_cum_rates = []
+class_err_up = []
+class_err_lo = []
+
+for uclass in unique_classes:
+    
+    total_mvect = []
+    total_tvect = []
+    total_dec_tvect = []
+    total_ev_dict = []
+    out_idx = []
+    L08_b = False
+    Aki_ML = False
+    Weichert = False
+    mcomps = [-9999]
+    
+    print '\nCalculating b-value for class:', uclass
+            
+    
+    ###############################################################################
+    # loop thru zones 
+    ###############################################################################
+    
+    # loop thru source zones
+    for i in srcidx:
+        
+        if src_class[i] == uclass:
+        
+            # get polygon of interest
+            poly = polygons[i]
+            
+            print '    Compiling data from:', src_code[i]
+            
+            mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly)
+            
+            # stack records into total arrays
+            total_mvect = hstack((total_mvect, array(mvect)))
+            total_tvect = hstack((total_tvect, array(tvect)))
+            total_dec_tvect = hstack((total_dec_tvect, array(dec_tvect)))
+            total_ev_dict = hstack((total_ev_dict, ev_dict))
+                    
+            ###############################################################################
+            # get earthquakes that pass completeness in merged zones
+            ###############################################################################
+                
+            # get most conservative completeness for given geologic class
+            temp_mcomp = array([float(x) for x in src_mcomp[i].split(';')])
+            if temp_mcomp[-1] > mcomps[0]:
+                ycomps = array([int(x) for x in src_ycomp[i].split(';')])
+                mcomps = array([float(x) for x in src_mcomp[i].split(';')])
+    
+    
+    ###############################################################################
+    # get b-values from joined zones
+    ###############################################################################
+    # set mag bins
+    mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
+    #mrng = arange(min(mcomps), src_mmax[i], bin_width)
+    
+    '''
+    # convert lists to arrays
+    mvect = array(mvect)
+    tvect = array(tvect)
+    dec_tvect = array(dec_tvect)
+    '''
+    
+    # keep original vectors for plotting
+    orig_mvect = total_mvect
+    orig_tvect = total_tvect
+    orig_dec_tvect = dec_tvect
+    
+    # get bval for combined zones data
+    bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
+          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, mrng)
+    
+    # add to class arrays
+    class_bval.append(bval)
+    class_bval_sig.append(sigb)
+    class_cum_rates.append(cum_rates)
+    class_err_up.append(err_up)
+    class_err_lo.append(err_lo)
+         
+    
+
+###############################################################################
+# loops through individual sources using class b-value
+###############################################################################
+
+print '!!!!!PLOT CLASS MFD IN ADDITION TO SOURCE MFD!!!!!'
+for i in srcidx:
+        
+    for uc in range(0, len(unique_classes)):
+        
+        # set b-value and class data
+        if src_class[i] == unique_classes[uc]:
+            bval = class_bval[uc]
+            bval_sig = class_bval_sig[uc]
+            
+            
+            
+"""            
         ###############################################################################
         # get upper and lower MFD bounds
         ###############################################################################
@@ -1257,3 +1322,4 @@ multimods = 'False'
 # now write OQ file
 oqpath = path.join(rootfolder)
 write_oq_sourcefile(model, oqpath, oqpath, multimods, bestcurve)
+"""
