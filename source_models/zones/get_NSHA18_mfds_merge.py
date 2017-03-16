@@ -201,6 +201,35 @@ def get_events_in_poly(cat, poly):
     return mvect, tvect, dec_tvect, ev_dict
 
 ###############################################################################
+# set confidence intervals from Table 1 in Weichert (1980)
+###############################################################################
+
+def get_confidence_intervals(n_obs, cum_rates):
+    fup = array([1.84, 3.30, 4.64, 5.92, 7.16, 8.38, 9.58, 10.8, 12.0, 13.1, 14.3])
+    dun = array([0.0, 0.173, 0.708, 1.37, 2.09, 2.84, 3.62, 4.42, 5.23, 6.06, 6.89])
+    
+    err_up = []
+    err_lo = []
+    for n in range(0, len(n_obs)):
+        N = sum(n_obs[n:])
+            
+        if N <= 0:
+            err_up.append(0)
+            err_lo.append(0)
+        elif N > 10:
+            s = sqrt(1. / N)
+            err_up.append((1. + s) * cum_rates[n] - cum_rates[n])
+            err_lo.append(cum_rates[n] - (1. - s) * cum_rates[n])
+        elif n < len((n_obs)):
+            err_up.append(fup[N]/N * cum_rates[n] - cum_rates[n])
+            err_lo.append(cum_rates[n] - dun[N]/N*cum_rates[n])
+        else:
+            err_up.append(0)
+            err_lo.append(0)
+             
+    return array(err_up), array(err_lo)
+
+###############################################################################
 # return rates
 ###############################################################################
 
@@ -414,51 +443,36 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
             sigb = 0.1
             sigbeta = bval2beta(sigb)
             
-            print '    Leonard2008 b-value =', bval, sigb
-            
-            # get dummy curve
-            dummyN0 = 1.
-            #m_min_reg = src_mmin_reg[i] + bin_width/2.
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax[i], bin_width)
-            
-            # fit to lowest magnitude considered and observed
-            Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
-            
             # solve for N0
-            fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
+            fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width)
             
-            
-        ###############################################################################
-        # set confidence intervals from Table 1 in Weichert (1980)
-        ###############################################################################
+            print '    Leonard2008 b-value =', bval, sigb
         
-        fup = array([1.84, 3.30, 4.64, 5.92, 7.16, 8.38, 9.58, 10.8, 12.0, 13.1, 14.3])
-        dun = array([0.0, 0.173, 0.708, 1.37, 2.09, 2.84, 3.62, 4.42, 5.23, 6.06, 6.89])
-        
-        err_up = []
-        err_lo = []
-        for n in range(0, len(n_obs)):
-            N = sum(n_obs[n:])
-                
-            if N <= 0:
-                err_up.append(0)
-                err_lo.append(0)
-            elif N > 10:
-                s = sqrt(1. / N)
-                err_up.append((1. + s) * cum_rates[n] - cum_rates[n])
-                err_lo.append(cum_rates[n] - (1. - s) * cum_rates[n])
-            elif n < len((n_obs)):
-                err_up.append(fup[N]/N * cum_rates[n] - cum_rates[n])
-                err_lo.append(cum_rates[n] - dun[N]/N*cum_rates[n])
-            else:
-                err_up.append(0)
-                err_lo.append(0)
-                 
-                
-        err_up = array(err_up)
-        err_lo = array(err_lo)
+        # get confidence intervals        
+        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
         
     return bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo
+
+###############################################################################
+# just fit a-value
+###############################################################################
+
+def fit_a_value(bval, mrng, src_mmax, bin_width):
+
+     beta = bval2beta(bval)
+     
+     # get dummy curve
+     dummyN0 = 1.
+     #m_min_reg = src_mmin_reg[i] + bin_width/2.
+     bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax, bin_width)
+     
+     # fit to lowest magnitude considered and observed
+     Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+     
+     # solve for N0
+     fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
+     
+     return fn0
 
 
 ###############################################################################
