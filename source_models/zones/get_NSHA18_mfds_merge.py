@@ -282,6 +282,7 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
     # skip zone if no events pass completeness
     if len(mvect) != 0:
     
+    print '!!!!put this section in own def!!!!'
     ###############################################################################
     # get annualised rates
     ###############################################################################
@@ -335,7 +336,7 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
         # calculate MFDs if at least 30 events
         ###############################################################################
         
-        # get index of min reg mag and valid mag bins        
+        # get index of min reg mag and valid mag bins
         diff_cum = abs(hstack((diff(cum_rates), 0.)))
         midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
         
@@ -457,7 +458,7 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
 # just fit a-value
 ###############################################################################
 
-def fit_a_value(bval, mrng, src_mmax, bin_width):
+def fit_a_value(bval, mrng, src_mmax, bin_width, midx):
 
      beta = bval2beta(bval)
      
@@ -572,6 +573,13 @@ for uclass in unique_classes:
 
 print '!!!!!PLOT CLASS MFD IN ADDITION TO SOURCE MFD!!!!!'
 for i in srcidx:
+    
+    # get completeness periods for zone
+    ycomps = array([int(x) for x in src_ycomp[i].split(';')])
+    mcomps = array([float(x) for x in src_mcomp[i].split(';')])
+    
+    # get mag range for zonea
+    mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
         
     for uc in range(0, len(unique_classes)):
         
@@ -580,9 +588,28 @@ for i in srcidx:
             bval = class_bval[uc]
             bval_sig = class_bval_sig[uc]
             
+    # get polygon of interest
+    poly = polygons[i]
+    
+    # now get events within zone of interest
+    mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, polygons[i])
+    
+    # get cum rates for zone of interest
+    zone_bval, zone_beta, zone_sigb, zone_sigbeta, zone_fn0, cum_rates, ev_out, err_up, err_lo = \
+          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, mrng)
+          
+    # get index of min reg mag and valid mag bins
+    diff_cum = abs(hstack((diff(cum_rates), 0.)))
+    midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+        
+    # get a-value using class bvalue
+    fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width, midx)
+    
+    # get zone confidence limits
+    err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
             
             
-"""            
+"""         
         ###############################################################################
         # get upper and lower MFD bounds
         ###############################################################################
