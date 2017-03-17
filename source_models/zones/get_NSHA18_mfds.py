@@ -279,7 +279,7 @@ for i in srcidx:
     ev_out = hstack((ev_out, array(ev_dict)[didx]))
     ev_dict = delete(ev_dict, didx)  
     
-    # set values to avoid plotting issues later
+    # set values to avoid plotting issues later on
     new_bval_b[i] = 1.0
     new_n0_b[i]   = 1E-30
     

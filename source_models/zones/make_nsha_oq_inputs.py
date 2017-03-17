@@ -70,7 +70,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
 
     from oq_tools import beta2bval, get_line_parallels
     from numpy import array, log10, max, min, tan, radians, unique, isinf
-    from os import path, sep
+    from os import path
     
     # set big bbox params
     bbmaxlon = -180
@@ -88,9 +88,11 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
     header += '<nrml xmlns:gml="http://www.opengis.net/gml"\n'
     header += '      xmlns="http://openquake.org/xmlns/nrml/0.4">\n\n'
     
+    '''
     # set wieghts
     bval_wt    = [0.68, 0.16, 0.16]
     max_mag_wt = [0.60, 0.30, 0.10]
+    '''
     branch_wt = []
     
     outbase = path.split(modelpath)[-1]
@@ -102,7 +104,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
     codes = []
     for m in model:
         codes.append(m['src_code'])
-    ucodes = unique(codes)
+    #ucodes = unique(codes)
     
     # start loop thru area sources
     for m in model:

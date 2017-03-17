@@ -156,13 +156,23 @@ neq = len(cat.data['magnitude'])
 ggcat = []
 for i in range(0, neq):
     # first make datestr
-    if not isnan(cat.data['second'][i]):
-        datestr = str(cat.data['eventID'][i]) \
-                  + str('%2.2f' % cat.data['second'][i])
-    else:
-        datestr = str(cat.data['eventID'][i]) + '00.00'
+    try:
+        if not isnan(cat.data['second'][i]):
+            datestr = str(cat.data['eventID'][i]) \
+                      + str('%2.2f' % cat.data['second'][i])
+        else:
+            datestr = str(cat.data['eventID'][i]) + '00.00'
+            
+        evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
     
-    evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
+    # if ID not date form, do it the hard way!
+    except:
+        datestr = ''.join((str(cat.data['year'][i]), str('%02d' % cat.data['month'][i]), 
+                           str('%02d' % cat.data['day'][i]), str('%02d' % cat.data['hour'][i]),
+                           str('%02d' % cat.data['minute'][i]), str('%0.2f' % cat.data['second'][i])))
+    
+        evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
+        
     tdict = {'datetime':evdt, 'prefmag':cat.data['magnitude'][i], \
              'lon':cat.data['longitude'][i], 'lat':cat.data['latitude'][i], \
              'dep':cat.data['depth'][i], 'year':cat.data['year'][i], \
@@ -198,7 +208,7 @@ def get_events_in_poly(cat, poly):
             dec_tvect.append(toYearFraction(ev['datetime']))
             ev_dict.append(ev)
             
-    return mvect, tvect, dec_tvect, ev_dict
+    return array(mvect), array(tvect), array(dec_tvect), ev_dict
 
 ###############################################################################
 # set confidence intervals from Table 1 in Weichert (1980)
@@ -228,12 +238,53 @@ def get_confidence_intervals(n_obs, cum_rates):
             err_lo.append(0)
              
     return array(err_up), array(err_lo)
+    
+###############################################################################
+# get annualised rates
+###############################################################################
+def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width):   
+    # get cumulative rates for mags >= m
+    cum_num = []
+    n_yrs = []
+    
+    for m in mrng:
+        midx = where(mvect >= m)[0]
+        
+        # set temp cum mags & times
+        cum_num.append(len(midx))
+        
+        # for each central mag bin, get normalisation time
+        src_ymax = max_comp_yr
+        idx = where(mcomps <= m+bin_width/2)[0]
+        if len(idx) > 0:
+            n_yrs.append(src_ymax - ycomps[idx[-1]])
+        else:
+            n_yrs.append(0)
+    
+    # get events per mag bin
+    n_obs = []
+    for r in range(0, len(cum_num)-1):
+        
+        n_obs.append(cum_num[r] - cum_num[r+1])
+    n_obs.append(cum_num[-1])
+    
+    n_obs = array(n_obs)
+    n_yrs = array(n_yrs)
+    bin_rates = n_obs / n_yrs
+    
+    # get cumulative rates per mag bin (/yr)
+    cum_rates = []
+    for m in mrng:
+        midx = where( array(mrng) >= m )[0]
+        cum_rates.append(sum(bin_rates[midx]))
+    
+    return array(cum_rates), array(cum_num), bin_rates,n_obs, n_yrs
 
 ###############################################################################
-# return rates
+# get events that pass completeness
 ###############################################################################
 
-def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
+def remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp):
     
     # first, remove NaN magnitudes - not sure why "< mcomps[0]" fails in next block
     didx = where(isnan(mvect))[0]
@@ -273,184 +324,135 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
     dec_tvect = delete(dec_tvect, didx)
     mvect = delete(mvect, didx)  
     ev_out = hstack((ev_out, array(ev_dict)[didx]))
-    ev_dict = delete(ev_dict, didx)  
+    ev_dict = delete(ev_dict, didx)
     
-    # set values to avoid plotting issues later
-    new_bval_b[i] = 1.0
-    new_n0_b[i]   = 1E-30
-    
-    # skip zone if no events pass completeness
-    if len(mvect) != 0:
-    
-    print '!!!!put this section in own def!!!!'
-    ###############################################################################
-    # get annualised rates
-    ###############################################################################
-        
-        # get cumulative rates for mags >= m
-        cum_num = []
-        n_yrs = []
-        
-        # assume Banda Sea sources
-        if src_mmax[i] == -99:
-            src_mmax[i] = 8.0
-            src_mmax_l[i] = 7.8
-            src_mmax_u[i] = 8.2
-            
-        mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
-        
-        for m in mrng:
-            midx = where(array(mvect) >= m)[0]
-            
-            # set temp cum mags & times
-            cum_num.append(len(midx))
-            
-            # for each central mag bin, get normalisation time
-            src_ymax[i] = max_comp_yr
-            idx = where(mcomps <= m+bin_width/2)[0]
-            if len(idx) > 0:
-                n_yrs.append(src_ymax[i] - ycomps[idx[-1]])
-            else:
-                n_yrs.append(0)
-        
-        # get events per mag bin
-        n_obs = []
-        for r in range(0, len(cum_num)-1):
-            
-            n_obs.append(cum_num[r] - cum_num[r+1])
-        n_obs.append(cum_num[-1])
-        
-        n_obs = array(n_obs)
-        n_yrs = array(n_yrs)
-        bin_rates = n_obs / n_yrs
-        
-        # get cumulative rates per mag bin (/yr)
-        cum_rates = []
-        for m in mrng:
-            midx = where( array(mrng) >= m )[0]
-            cum_rates.append(sum(bin_rates[midx]))
-        
-        cum_rates = array(cum_rates)
-        
-        ###############################################################################
-        # calculate MFDs if at least 30 events
-        ###############################################################################
-        
-        # get index of min reg mag and valid mag bins
-        diff_cum = abs(hstack((diff(cum_rates), 0.)))
-        midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
-        
-        # do Aki ML first if N events less than 50             
-        if len(mvect) >= 50 and len(mvect) < 150:
-            # if beta not fixed, do Aki ML
-            if src_bval_fix[i] == -99:
-                
-                # do Aki max likelihood
-                bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
-                beta = bval2beta(bval)
-                sigbeta = bval2beta(sigb)
-                
-                # now recalc N0
-                dummyN0 = 1.
+    return mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out
 
-                bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax[i], bin_width)
-                
-                # fit to lowest magnitude considered and observed
-                Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
-                
-                # solve for N0
-                fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
-                
-                print '    Aki ML b-value =', bval, sigb
-                
-                # add to bval arrays
-                bval_vect.append(bval)
-                bsig_vect.append(sigb)
-                
-                Aki_ML = True
-                
-            # else, fit curve using fixed beta and solve for N0
-            else:
-                # set source beta
-                bval = src_bval_fix[i]
-                beta = beta2bval(beta)
-                sigb = src_bval_fix_sd[i]
-                sigbeta = bval2beta(sigb)
-                
-                # get dummy curve
-                dummyN0 = 1.
-                m_min_reg = src_mmin_reg[i] + bin_width/2.
-                bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax[i], bin_width)
-                
-                # fit to lowest mahnitude considered
-                bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
-                
-                # scale for N0
-                fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
+###############################################################################
+# return rates
+###############################################################################
+
+def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
+    
+    mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
+         remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp)
+    
         
-        # do Weichert for zones with more events
-        elif len(mvect) >= 150:
-            # calculate weichert
-            bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
-                                                   mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
-                                                   bval=1.0, itstab=1E-4, maxiter=1000)
+    # get annualised rates
+    cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
+        get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width)
             
+    ###############################################################################
+    # calculate MFDs if at least 30 events
+    ###############################################################################
+    
+    # get index of min reg mag and valid mag bins
+    diff_cum = abs(hstack((diff(cum_rates), 0.)))
+    midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+    
+    # do Aki ML first if N events less than 50             
+    if len(mvect) >= 50 and len(mvect) < 150:
+        # if beta not fixed, do Aki ML
+        if src_bval_fix[i] == -99:
+            
+            # do Aki max likelihood
+            bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
             beta = bval2beta(bval)
             sigbeta = bval2beta(sigb)
-        
-            print '    Weichert b-value = ', bval, sigb
-            Weichert = True
-                        
-        ###############################################################################
-        # calculate MFDs using Leonard 08 if fewer than 50 events
-        ###############################################################################
-        
-        else:
-            print 'Getting b-value from Leonard2008...'            
-            # set B-value to nan
-            bval = nan            
             
-            # load Leonard zones
-            lsf = shapefile.Reader(path.join('Leonard2008','shapefiles','LEONARD08_NSHA18_MFD.shp'))
+            # now recalc N0
+            dummyN0 = 1.
+
+            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax[i], bin_width)
             
-            # get Leonard polygons
-            l08_shapes = lsf.shapes()
-            
-            # get Leonard b-values
-            lbval  = get_field_data(lsf, 'BVAL_BEST', 'str')
-            
-            # get centroid of current poly
-            clon, clat = get_shapely_centroid(poly)
-            point = Point(clon, clat)            
-            
-            # loop through zones and find point in poly
-            for zone_bval, l_shape in zip(lbval, l08_shapes):
-                l_poly = Polygon(l_shape.points)
-                
-                # check if leonard centroid in domains poly
-                if point.within(l_poly):
-                    bval = float(zone_bval)
-                    
-            L08_b = True
-            Aki_ML = False
-            Weichert = False
-            
-            # for those odd sites outside of L08 bounds, assign b-vale
-            if isnan(bval):
-                bval = 0.85
-                L08_b = False
-            
-            beta = bval2beta(bval)
-            sigb = 0.1
-            sigbeta = bval2beta(sigb)
+            # fit to lowest magnitude considered and observed
+            Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
             
             # solve for N0
-            fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width)
+            fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
             
-            print '    Leonard2008 b-value =', bval, sigb
+            print '    Aki ML b-value =', bval, sigb
+            
+            # add to bval arrays
+            bval_vect.append(bval)
+            bsig_vect.append(sigb)
+            
+        # else, fit curve using fixed beta and solve for N0
+        else:
+            # set source beta
+            bval = src_bval_fix[i]
+            beta = beta2bval(beta)
+            sigb = src_bval_fix_sd[i]
+            sigbeta = bval2beta(sigb)
+            
+            # get dummy curve
+            dummyN0 = 1.
+            m_min_reg = src_mmin_reg[i] + bin_width/2.
+            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax[i], bin_width)
+            
+            # fit to lowest mahnitude considered
+            bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+            
+            # scale for N0
+            fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
+    
+    # do Weichert for zones with more events
+    elif len(mvect) >= 150:
+        # calculate weichert
+        bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
+                                               mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
+                                               bval=1.0, itstab=1E-4, maxiter=1000)
         
-        # get confidence intervals        
-        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
+        beta = bval2beta(bval)
+        sigbeta = bval2beta(sigb)
+    
+        print '    Weichert b-value = ', bval, sigb
+                    
+    ###############################################################################
+    # calculate MFDs using Leonard 08 if fewer than 50 events
+    ###############################################################################
+    
+    else:
+        print 'Getting b-value from Leonard2008...'            
+        # set B-value to nan
+        bval = nan            
+        
+        # load Leonard zones
+        lsf = shapefile.Reader(path.join('Leonard2008','shapefiles','LEONARD08_NSHA18_MFD.shp'))
+        
+        # get Leonard polygons
+        l08_shapes = lsf.shapes()
+        
+        # get Leonard b-values
+        lbval  = get_field_data(lsf, 'BVAL_BEST', 'str')
+        
+        # get centroid of current poly
+        clon, clat = get_shapely_centroid(poly)
+        point = Point(clon, clat)            
+        
+        # loop through zones and find point in poly
+        for zone_bval, l_shape in zip(lbval, l08_shapes):
+            l_poly = Polygon(l_shape.points)
+            
+            # check if leonard centroid in domains poly
+            if point.within(l_poly):
+                bval = float(zone_bval)
+                
+        # for those odd sites outside of L08 bounds, assign b-vale
+        if isnan(bval):
+            bval = 0.85
+        
+        beta = bval2beta(bval)
+        sigb = 0.1
+        sigbeta = bval2beta(sigb)
+        
+        # solve for N0
+        fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width)
+        
+        print '    Leonard2008 b-value =', bval, sigb
+        
+    # get confidence intervals        
+    err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
         
     return bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo
 
@@ -484,8 +486,16 @@ unique_classes = unique(array(src_class))
 class_bval = []
 class_bval_sig = []
 class_cum_rates = []
+class_mrng = []
 class_err_up = []
 class_err_lo = []
+class_idxs = []
+class_codes = []
+class_mvect = []
+class_lavect = []
+class_lovect = []
+class_fn0 = []
+class_area = []
 
 for uclass in unique_classes:
     
@@ -493,11 +503,16 @@ for uclass in unique_classes:
     total_tvect = []
     total_dec_tvect = []
     total_ev_dict = []
-    out_idx = []
+    #out_idx = []
+    class_idx = []
+    class_code = []
+    lavect = []
+    lovect = []
     L08_b = False
     Aki_ML = False
     Weichert = False
     mcomps = [-9999]
+    cum_area = 0
     
     print '\nCalculating b-value for class:', uclass
             
@@ -510,18 +525,23 @@ for uclass in unique_classes:
     for i in srcidx:
         
         if src_class[i] == uclass:
+            class_idx.append(i)
+            class_code.append(src_code[i])
         
             # get polygon of interest
             poly = polygons[i]
+            
+            # get cumulative class area
+            cum_area += get_WGS84_area(poly)
             
             print '    Compiling data from:', src_code[i]
             
             mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly)
             
             # stack records into total arrays
-            total_mvect = hstack((total_mvect, array(mvect)))
-            total_tvect = hstack((total_tvect, array(tvect)))
-            total_dec_tvect = hstack((total_dec_tvect, array(dec_tvect)))
+            total_mvect = hstack((total_mvect, mvect))
+            total_tvect = hstack((total_tvect, tvect))
+            total_dec_tvect = hstack((total_dec_tvect, dec_tvect))
             total_ev_dict = hstack((total_ev_dict, ev_dict))
                     
             ###############################################################################
@@ -533,21 +553,14 @@ for uclass in unique_classes:
             if temp_mcomp[-1] > mcomps[0]:
                 ycomps = array([int(x) for x in src_ycomp[i].split(';')])
                 mcomps = array([float(x) for x in src_mcomp[i].split(';')])
+                
+            # set mag bins
+            mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
     
     
     ###############################################################################
     # get b-values from joined zones
     ###############################################################################
-    # set mag bins
-    mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
-    #mrng = arange(min(mcomps), src_mmax[i], bin_width)
-    
-    '''
-    # convert lists to arrays
-    mvect = array(mvect)
-    tvect = array(tvect)
-    dec_tvect = array(dec_tvect)
-    '''
     
     # keep original vectors for plotting
     orig_mvect = total_mvect
@@ -562,18 +575,36 @@ for uclass in unique_classes:
     class_bval.append(bval)
     class_bval_sig.append(sigb)
     class_cum_rates.append(cum_rates)
+    class_mrng.append(mrng)
     class_err_up.append(err_up)
     class_err_lo.append(err_lo)
-         
+    class_idxs.append(class_idx)
+    class_codes.append(class_code)
+    class_mvect.append(total_mvect)
+    class_fn0.append(fn0)
+    class_area.append(cum_area)
     
-
+    # get event coords
+    for e in total_ev_dict:
+        lavect.append(e['lat'])
+        lovect.append(e['lon'])
+    
+    class_lavect.append(lavect)
+    class_lovect.append(lovect)
+    
 ###############################################################################
 # loops through individual sources using class b-value
 ###############################################################################
 
-print '!!!!!PLOT CLASS MFD IN ADDITION TO SOURCE MFD!!!!!'
+src_area = [] 
+
 for i in srcidx:
+    print '\nFitting MFD for', src_code[i]
     
+    # set values to avoid plotting issues later
+    new_bval_b[i] = 1.0
+    new_n0_b[i]   = 1E-30
+        
     # get completeness periods for zone
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
     mcomps = array([float(x) for x in src_mcomp[i].split(';')])
@@ -588,38 +619,65 @@ for i in srcidx:
             bval = class_bval[uc]
             bval_sig = class_bval_sig[uc]
             
+            source_class = unique_classes[uc]
+            class_idx = uc
+    
+    # set beta params       
+    beta = bval2beta(bval)
+    sigbeta = bval2beta(sigb)
+            
     # get polygon of interest
     poly = polygons[i]
+    
+    # get area (in km**2) of sources for normalisation
+    src_area.append(get_WGS84_area(poly))
     
     # now get events within zone of interest
     mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, polygons[i])
     
-    # get cum rates for zone of interest
-    zone_bval, zone_beta, zone_sigb, zone_sigbeta, zone_fn0, cum_rates, ev_out, err_up, err_lo = \
-          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, mrng)
-          
-    # get index of min reg mag and valid mag bins
-    diff_cum = abs(hstack((diff(cum_rates), 0.)))
-    midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
-        
-    # get a-value using class bvalue
-    fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width, midx)
+    # skip zone if no events pass completeness
+    if len(mvect) != 0:
+        # assume Banda Sea sources
+        if src_mmax[i] == -99:
+            src_mmax[i] = 8.0
+            src_mmax_l[i] = 7.8
+            src_mmax_u[i] = 8.2
     
-    # get zone confidence limits
-    err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
+    
+    
+        # preserve original arrays for plotting
+        orig_mvect = mvect
+        orig_tvect = tvect
+        orig_dec_tvect = dec_tvect
+        
+        # remove incomplete events
+        mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
+             remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
             
+        # get annualised rates
+        cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
+            get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width)
             
-"""         
+        # get index of min reg mag and valid mag bins
+        diff_cum = abs(hstack((diff(cum_rates), 0.)))
+        midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+        
+        # get a-value using region class b-value
+        fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width, midx)
+        
+        # get zone confidence limits
+        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)            
+                
         ###############################################################################
         # get upper and lower MFD bounds
         ###############################################################################
         sigbeta173 = 1.73 * sigbeta
         sigb173 = 1.73 * sigb
-
+    
         # preallocate data
         N0_lo173 = nan
         N0_up173 = nan
-
+    
         if not isnan(bval):
             
             mpltmin = mrng[midx][0]
@@ -656,7 +714,7 @@ for i in srcidx:
         ###############################################################################
         # fill new values
         ###############################################################################
-
+    
         print 'Filling new values for', src_code[i]
         new_bval_b[i] = bval
         new_bval_l[i] = bval-sigb173
@@ -673,15 +731,8 @@ for i in srcidx:
         
         # plot original data
         ax = plt.subplot(231)
-
-        '''
-        # get ndays
-        td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
-        
-        ndays = timedelta2days_hours_minutes(td)[0]
-        '''
-        
-        # cannot plot prior to 1900 - not sure why
+    
+        # cannot plot datetime prior to 1900 - not sure why!
         dcut = datetime(1900,1,1,0,0)
         didx = where(orig_tvect > dcut)[0]
         h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
@@ -744,19 +795,39 @@ for i in srcidx:
             # plot original data
             ax = plt.subplot(132)
             
-            # plt unique values
-            uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
-            plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
-                         yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
-            h1 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=8)
+            # plt class cum rates first        
+            uidx = unique(class_cum_rates[class_idx][::-1], return_index=True, return_inverse=True)[1]
+            #plt.errorbar(class_mrng[class_idx][::-1][uidx], class_cum_rates[class_idx][::-1][uidx], \
+            #             yerr=[class_err_lo[class_idx][::-1][uidx], class_err_up[class_idx][::-1][uidx]], fmt='k.')
+            h10 = plt.semilogy(class_mrng[class_idx][::-1][uidx], class_cum_rates[class_idx][::-1][uidx], \
+                               'o', mec='b', mfc='none', ms=7)
             
             # plot best fit
             mpltmin_best = 2.0# + bin_width/2.
             plt_width = 0.1
-
+            
+            # get class betacurve
+            classbetacurve, mfd_mrng = get_oq_incrementalMFD(beta, class_fn0[class_idx], \
+                                                             mpltmin_best, class_mrng[class_idx][-1], \
+                                                             plt_width)
+            # plt class beta
+            h30 = plt.semilogy(mfd_mrng, classbetacurve, '--', c='0.2')
+            
+            #################################################################################
+            # get area normalised rates
+            areanormcurve = classbetacurve * src_area[-1] / class_area[class_idx]
+            h40 = plt.semilogy(mfd_mrng, areanormcurve, '--', c='r')
+            
+            #################################################################################
+            # now plt unique values for current source
+            uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
+            plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
+                         yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
+            h0 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=7)
+            
+            # get betacurve for source
             betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
             
-            #betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mmin, mrng[-1], bin_width)
             h3 = plt.semilogy(mfd_mrng, betacurve, 'k-')
             
             # plot upper and lower curves
@@ -771,7 +842,7 @@ for i in srcidx:
             # get plotting limits
             plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
             yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
-            yexpmax = max(ceil(log10(betacurve)))
+            yexpmax = ceil(log10(max(class_cum_rates[class_idx])))
             plt.ylim([10**yexpmin, 10**yexpmax])
             
             ###############################################################################
@@ -794,6 +865,10 @@ for i in srcidx:
                                    str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
             
             # set legend title
+            title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                      + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                      + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
+            '''
             if L08_b == True:
                 title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
                           + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
@@ -806,10 +881,18 @@ for i in srcidx:
                 title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
                           + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
                           + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
-                  
+            '''      
             leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
                        fontsize=9, loc=3, title=title)
             plt.setp(leg.get_title(),fontsize=9)
+            
+            # plt second legend
+            plt.legend([h0[0], h10[0], h30[0], h40[0]], ['Zone Rates', 'Class Rates', 'Class Fit', 'Area Norm'], \
+                       fontsize=10, loc=1, numpoints=1)
+                       
+            # replot first legend
+            plt.gca().add_artist(leg)
+                       
             plt.grid(which='both', axis='both')
         
         ###############################################################################
@@ -817,22 +900,26 @@ for i in srcidx:
         ###############################################################################
         print 'Making map for:', src_code[i]
         ax = plt.subplot(236)
-        res = 'i'
+        res = 'l'
         
-        # get map bounds
+        '''    
+        # get map bounds- for single zone
         bnds = poly.bounds
-        mbuff = 0.2 * (bnds[2] - bnds[0])
-        llcrnrlat = bnds[1] - mbuff/2.
-        urcrnrlat = bnds[3] + mbuff/2.
-        llcrnrlon = bnds[0] - mbuff
-        urcrnrlon = bnds[2] + mbuff
+        '''
+        
+        # set national-scale basemap
+        llcrnrlat = -44
+        urcrnrlat = -6
+        llcrnrlon = 107
+        urcrnrlon = 152
+    
         lon_0 = mean([llcrnrlon, urcrnrlon])
         lat_1 = percentile([llcrnrlat, urcrnrlat], 25)
         lat_2 = percentile([llcrnrlat, urcrnrlat], 75)
         
         if urcrnrlat > 90.0:
             urcrnrlat = 90.0
-        
+        '''
         # get parallel/meridian spacing
         if bnds[2] - bnds[0] < 0.5:
             ll_space = 0.25
@@ -844,12 +931,15 @@ for i in srcidx:
             ll_space = 4.0
         else:
             ll_space = 6.0
+        '''
+        # draw parallels and meridians.
+        ll_space = 10
         
         # set map projection
         m = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
                     urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
                     projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
-                    resolution=res,area_thresh=1000.)
+                    resolution=res,area_thresh=10000.)
         
         # annotate
         m.drawcoastlines(linewidth=0.5,color='k')
@@ -861,29 +951,41 @@ for i in srcidx:
         m.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
         m.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
         
-        # plt source zone boundary
-        drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=2., col='r')
+        # plt earthquakes boundaries for all zones in class
+        for code in class_codes[class_idx]:
+            drawoneshapepoly(m, plt, sf, 'CODE', code, lw=1.5, col='b')
+        
+        # plt current source zone boundary
+        drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=1.5, col='r')
         
         # map all earthquakes
         #x, y = m(eqlo, eqla)
         #size = 2.5 * eqmw
         #m.scatter(x, y, marker='o', s=size, edgecolors='0.3', mfc='none', lw=0.5)
         
+        '''
         # map earthquakes that pass completeness
         for e in ev_dict:
-            ms = 2.5 * e['prefmag']
+            ms = 2.0 * e['prefmag']
             x, y = m(e['lon'], e['lat'])
             m.plot(x, y, 'o', mec='k', mfc='none', mew=1.0, ms=ms)
+        '''
+        # map all earthquakes in class    
+        for la, lo, mag in zip(class_lavect[class_idx], class_lovect[class_idx], class_mvect[class_idx]):
+            if mag >= 3.0:
+                ms = 1.75 * mag
+                x, y = m(lo, la)
+                m.plot(x, y, 'o', mec='k', mfc='none', mew=0.5, ms=ms)
             
         # make legend - set dummy x, y params
         x, y= -100000, -100000
         
         # get marker sizes
-        ms = 2.5 * 3.0
+        ms = 1.75 * 3.0
         l1 = m.plot(x, y, 'ko', ms=ms)
-        ms = 2.5 * 5.0
+        ms = 1.75 * 5.0
         l2 = m.plot(x, y, 'ko', ms=ms)
-        ms = 2.5 * 7.0
+        ms = 1.75 * 7.0
         l3 = m.plot(x, y, 'ko', ms=ms)
         plt.legend([l1[0], l2[0], l3[0]],['3.0', '5.0', '7.0'], fontsize=10, numpoints=1)
         
@@ -946,9 +1048,6 @@ for i in srcidx:
         
             # set xlims
             tlim = [int(round(x)) for x in tlim] # converting to ints
-            #dttlim = [datetime.fromordinal(tlim[0]), datetime.fromordinal(tlim[1])] # converting from ordianl back to datetime
-            # now convert to decimal year - very ugly!
-            #dttlim = [floor(dttlim[0].year), ceil(dttlim[1].year)]
             
             plt.xlim(tlim)
             
@@ -1041,17 +1140,18 @@ for i in srcidx:
         elif Weichert == True:
             suptitle += ' - Weichert'
         else:
-            suptitle += ' - Fixed (0.85)'
+            suptitle += ' - Class: '+source_class
                 
         plt.suptitle(suptitle, fontsize=18)
         
         pngfile = '.'.join((src_code[i], 'mfd', 'png'))
         pngpath = path.join(srcfolder, pngfile)
-        #plt.savefig(pngpath, format='png', bbox_inches='tight')
+        plt.savefig(pngpath, format='png', bbox_inches='tight')
         
         pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
         pdfpath = path.join(srcfolder, pdffile)
-        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
+        print 'Saving file:', pdfpath
+        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash (sometimes) on rhe-compute for unknown reason
         
         if single_src == True:
             plt.show()
@@ -1158,7 +1258,6 @@ plt.clf()
 fig = plt.figure(i+1, figsize=(13, 9))
 
 # set national-scale basemap
-#112/155/-45/-10.5
 llcrnrlat = -45
 urcrnrlat = -5
 llcrnrlon = 105
@@ -1259,9 +1358,6 @@ m5_rates = array(new_n0_b) * exp(-new_beta  * 5.0) * (1 - exp(-new_beta * (src_m
            / (1 - exp(-new_beta * src_mmax))
 
 # get area (in km**2) of sources for normalisation
-src_area = [] 
-for poly in polygons:
-    src_area.append(get_WGS84_area(poly))
 src_area= array(src_area)
     
 # normalise M5 rates by area
@@ -1319,7 +1415,7 @@ from PyPDF2 import PdfFileMerger, PdfFileReader
 pdffiles = []
 
 # make out file name
-pdfbase = path.split(newshp)[-1].strip('shp')+'pdf'
+pdfbase = path.split(newshp)[-1].strip('shp')+'MERGE.pdf'
 combined_pdf = path.join(rootfolder, pdfbase)
 
 for root, dirnames, filenames in walk(rootfolder):
@@ -1363,4 +1459,3 @@ multimods = 'False'
 # now write OQ file
 oqpath = path.join(rootfolder)
 write_oq_sourcefile(model, oqpath, oqpath, multimods, bestcurve)
-"""
