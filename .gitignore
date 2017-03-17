@@ -8,5 +8,5 @@
 
 # Random Files #
 ######################
-.hold
-.mfd.pdf
+*.hold
+*.mfd.pdf
