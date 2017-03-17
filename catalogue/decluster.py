@@ -134,7 +134,8 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
                             
             # set foreshock flag
             flagvector[idx] = 1
-        
+            
+    
     return flagvector
 
 # !!!!start main code here!!!!
@@ -198,12 +199,18 @@ flagvector_as = flag_dependent_events(cat, flagvector, doAftershocks, method)
 doAftershocks = False
 flagvector_asfs = flag_dependent_events(cat, flagvector_as, doAftershocks, method)
 
+# now find mannually picked foreshocks/aftershocks
+idx = np.where(cat.data['flag'] == 1)[0]
+flagvector_asfsman = flagvector_asfs
+flagvector_asfsman[idx] = 1
+        
+
 #########################################################################
 # purge non-poissonian events
 #########################################################################
 
 # adding cluster flag to the catalog
-cat.data['cluster_flag'] = flagvector_asfs
+cat.data['cluster_flag'] = flagvector_asfsman
 
 # create a copy from the catalogue object to preserve it
 catalogue_l08 = deepcopy(cat)
@@ -217,7 +224,7 @@ print 'Leonard 2008\tbefore: ', cat.get_number_events(), " after: ", catalogue_l
 #####################################################
 
 # setup the writer
-declustered_catalog_file = hmtk_csv.split('.')[0]+'_declustered.csv'
+declustered_catalog_file = hmtk_csv.split('.')[0]+'_declustered_test.csv'
 
 # if it exists, delete previous file
 remove(declustered_catalog_file)
