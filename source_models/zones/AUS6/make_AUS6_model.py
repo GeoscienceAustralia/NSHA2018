@@ -74,6 +74,10 @@ for code, poly in zip(codes, shapes):
         if point.within(dom_poly):
             tmp_dom = neo_dom
             tmp_mmax = neo_mx
+            
+    if code == 'SEA':
+        tmp_dom = 7
+        tmp_mmax = 7.7
     
     dom.append(tmp_dom)
     mmax.append(tmp_mmax)
@@ -150,6 +154,7 @@ w.field('CODE','C','10')
 #w.field('SRC_REGION','C','100')
 #w.field('SRC_REG_WT','F', 8, 3)
 w.field('SRC_TYPE','C','10')
+w.field('CLASS','C','10')
 w.field('SRC_WEIGHT','F', 8, 2)
 w.field('DEP_BEST','F', 8, 1)
 w.field('DEP_UPPER','F', 8, 1)
@@ -214,7 +219,7 @@ for i, shape in enumerate(shapes):
         if codes[i] == 'SEA':
             mmax[i] = 7.5
             
-        w.record(name[i], codes[i], src_ty, src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(name[i], codes[i], src_ty, str('%01d' % dom[i]), src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
         
 # now save area shapefile

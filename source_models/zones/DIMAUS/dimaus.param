@@ -1,7 +1,7 @@
 ROOT FOLDER      = DIMAUS
 CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
 DECLUSTERED      = False
-SHAPEFILE INPUT  = DIMAUS//shapefiles//DIMAUS_NSHA18_FIXEDSHAPES.shp
+SHAPEFILE INPUT  = DIMAUS//shapefiles//DIMAUS_NSHA18.shp
 OUTPUT FOLDER    = mfd
 SHAPEFILE OUTPUT = DIMAUS_NSHA18_MFD.shp
 MFD BIN WIDTH    = 0.1

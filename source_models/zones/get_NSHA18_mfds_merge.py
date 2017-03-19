@@ -332,7 +332,7 @@ def remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp):
 # return rates
 ###############################################################################
 
-def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
+def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng, src_mmax, src_mmin_reg, src_bval_fix):
     
     mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
          remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp)
@@ -348,12 +348,12 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
     
     # get index of min reg mag and valid mag bins
     diff_cum = abs(hstack((diff(cum_rates), 0.)))
-    midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+    midx = where((mrng >= src_mmin_reg) & (diff_cum > 0.))[0]
     
     # do Aki ML first if N events less than 50             
     if len(mvect) >= 50 and len(mvect) < 150:
         # if beta not fixed, do Aki ML
-        if src_bval_fix[i] == -99:
+        if src_bval_fix == -99:
             
             # do Aki max likelihood
             bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
@@ -363,13 +363,16 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
             # now recalc N0
             dummyN0 = 1.
 
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax[i], bin_width)
+            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax, bin_width)
             
             # fit to lowest magnitude considered and observed
             Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
             
+            # !!!!!! check into why this must be done - I suspect it may be that there is an Mmax eq in the zones !!!!
+            fidx = midx[0]
+            
             # solve for N0
-            fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[midx][0])
+            fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[fidx])
             
             print '    Aki ML b-value =', bval, sigb
             
@@ -380,15 +383,15 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
         # else, fit curve using fixed beta and solve for N0
         else:
             # set source beta
-            bval = src_bval_fix[i]
+            bval = src_bval_fix
             beta = beta2bval(beta)
-            sigb = src_bval_fix_sd[i]
+            sigb = src_bval_fix_sd
             sigbeta = bval2beta(sigb)
             
             # get dummy curve
             dummyN0 = 1.
-            m_min_reg = src_mmin_reg[i] + bin_width/2.
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax[i], bin_width)
+            m_min_reg = src_mmin_reg + bin_width/2.
+            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax, bin_width)
             
             # fit to lowest mahnitude considered
             bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
@@ -447,7 +450,7 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng):
         sigbeta = bval2beta(sigb)
         
         # solve for N0
-        fn0 = fit_a_value(bval, mrng, src_mmax[i], bin_width)
+        fn0 = fit_a_value(bval, mrng, src_mmax, bin_width, midx)
         
         print '    Leonard2008 b-value =', bval, sigb
         
@@ -569,7 +572,8 @@ for uclass in unique_classes:
     
     # get bval for combined zones data
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
-          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, mrng)
+          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, \
+                   mcomps, ycomps, mrng, src_mmax[i], src_mmin_reg[i], src_bval_fix[i])
     
     # add to class arrays
     class_bval.append(bval)
@@ -649,6 +653,9 @@ for i in srcidx:
         orig_mvect = mvect
         orig_tvect = tvect
         orig_dec_tvect = dec_tvect
+        
+    # check to see if mvect still non-zero length
+    if len(mvect) != 0:
         
         # remove incomplete events
         mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
