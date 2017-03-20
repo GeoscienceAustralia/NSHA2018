@@ -227,7 +227,10 @@ print 'Leonard 2008\tbefore: ', cat.get_number_events(), " after: ", catalogue_l
 declustered_catalog_file = hmtk_csv.split('.')[0]+'_declustered_test.csv'
 
 # if it exists, delete previous file
-remove(declustered_catalog_file)
+try:
+    remove(declustered_catalog_file)
+except:
+    print declustered_catalog_file, 'does not exist' 
 
 # set-up writer
 writer = CsvCatalogueWriter(declustered_catalog_file) 

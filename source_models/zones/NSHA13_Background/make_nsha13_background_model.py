@@ -58,8 +58,8 @@ dom_shapes = dsf.shapes()
 n_dom = []
 n_mmax = []
 
-# loop through L08 zones
-for poly in shapes:
+# loop through Domains zones
+for poly, code in zip(shapes, codes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
@@ -76,11 +76,10 @@ for poly in shapes:
             tmp_dom = neo_dom
             tmp_mmax = mmax
             
-        '''
-        else:
+        if code == 'EBGZ':
             tmp_dom = 7
-            tmp_mmax = 8
-        '''
+            tmp_mmax = 7.7
+        
     n_dom.append(tmp_dom)
     n_mmax.append(tmp_mmax)
 
@@ -160,6 +159,7 @@ w.field('CODE','C','10')
 #w.field('SRC_REGION','C','100')
 #w.field('SRC_REG_WT','F', 8, 3)
 w.field('SRC_TYPE','C','10')
+w.field('CLASS','C','10')
 w.field('SRC_WEIGHT','F', 8, 2)
 w.field('DEP_BEST','F', 8, 1)
 w.field('DEP_UPPER','F', 8, 1)
@@ -218,7 +218,7 @@ for i, shape in enumerate(shapes):
     if i >= 0:
         dep_u = dep_b[i] - 0.5*dep_b[i]
         dep_l = dep_b[i] + 0.5*dep_b[i]
-        w.record(names[i], codes[i], src_ty, src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
+        w.record(names[i], codes[i], src_ty, str('%01d' % n_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], n_dom[i], cat)
         
 # now save area shapefile

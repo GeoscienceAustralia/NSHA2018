@@ -52,28 +52,36 @@ for line in lines:
 dsf = shapefile.Reader(path.join('..','Domains','shapefiles','DOMAINS_NSHA18.shp'))
 # get domains
 neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
+dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
 
 # get domain polygons
 dom_shapes = dsf.shapes()
 l_dom = []
+n_mmax = []
 
 # loop through L08 zones
-for poly in shapes:
+for poly, cd in zip(shapes, code):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
     print clon, clat
-    tmp_dom = -99
+    #tmp_dom = -99
     
     # loop through domains and find point in poly
-    for neo_dom, dom_shape in zip(neo_doms, dom_shapes):
+    for neo_dom, neo_mmax, dom_shape in zip(neo_doms, dom_mmax, dom_shapes):
         dom_poly = Polygon(dom_shape.points)
         
         # check if leonard centroid in domains poly
         if point.within(dom_poly):
             tmp_dom = neo_dom
+            tmp_mmax = neo_mmax
+    
+    if cd == 'NA_4':
+        tmp_dom = 7
+        tmp_mmax = 7.7
     
     l_dom.append(tmp_dom)
+    n_mmax.append(tmp_mmax)
             
    
 ###############################################################################
@@ -89,6 +97,7 @@ w.field('CODE','C','10')
 #w.field('SRC_REGION','C','100')
 #w.field('SRC_REG_WT','F', 8, 3)
 w.field('SRC_TYPE','C','10')
+w.field('CLASS','C','10')
 w.field('SRC_WEIGHT','F', 8, 2)
 w.field('DEP_BEST','F', 8, 1)
 w.field('DEP_UPPER','F', 8, 1)
@@ -147,7 +156,7 @@ for i, shape in enumerate(shapes):
     if i >= 0:
         dep_u = dep_b[i] - 0.5*dep_b[i]
         dep_l = dep_b[i] + 0.5*dep_b[i]
-        w.record(lu_name[i], code[i], src_ty, src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(lu_name[i], code[i], src_ty, str('%01d' % l_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, dom_mmax[i], dom_mmax[i]-0.2, dom_mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], l_dom[i], cat)
         
 # now save area shapefile

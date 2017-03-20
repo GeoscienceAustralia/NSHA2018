@@ -1,9 +1,9 @@
 from numpy import array, arange, argsort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, ceil, floor, \
                   nan, isnan, around, diff, interp, exp, ones_like
-from os import path, sep, mkdir, getcwd, system, walk
+from os import path, sep, mkdir, getcwd, walk
 from shapely.geometry import Point, Polygon
-from osgeo import ogr
+#from osgeo import ogr
 from datetime import datetime
 from sys import argv
 import shapefile
@@ -18,7 +18,7 @@ try:
     from oq_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly, \
                               drawshapepoly, labelpolygon, get_WGS84_area
-    from catalogue.parsers import parse_ggcat
+    #from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
     from tools.nsha_tools import toYearFraction, get_shp_centroid, get_shapely_centroid
     
@@ -1211,8 +1211,10 @@ for root, dirnames, filenames in walk(rootfolder):
     for filename in filenames:
         if filename.endswith('.pdf'):
             if filename.startswith(outsrcshp.split('.shp')[0]) == False:
-                print 'Adding', filename
-                pdffiles.append(path.join(root, filename))
+                # ignore results from merged src files
+                if filename.endswith('_NSHA18_MFD.MERGE.pdf') == False:
+                    print 'Adding', filename
+                    pdffiles.append(path.join(root, filename))
 
 # now merge files
 merger = PdfFileMerger()                              

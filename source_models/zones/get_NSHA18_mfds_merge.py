@@ -1,9 +1,9 @@
 from numpy import array, arange, argsort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, ceil, floor, \
                   nan, isnan, around, diff, interp, exp, ones_like
-from os import path, sep, mkdir, getcwd, system, walk
+from os import path, sep, mkdir, getcwd, walk
 from shapely.geometry import Point, Polygon
-from osgeo import ogr
+#from osgeo import ogr
 from datetime import datetime
 from sys import argv
 import shapefile
@@ -18,7 +18,7 @@ try:
     from oq_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly, \
                               drawshapepoly, labelpolygon, get_WGS84_area
-    from catalogue.parsers import parse_ggcat
+    #from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
     from tools.nsha_tools import toYearFraction, get_shp_centroid, get_shapely_centroid
     
@@ -343,7 +343,7 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng, src_mmax, src
         get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width)
             
     ###############################################################################
-    # calculate MFDs if at least 30 events
+    # calculate MFDs if at least 50 events
     ###############################################################################
     
     # get index of min reg mag and valid mag bins
@@ -654,13 +654,13 @@ for i in srcidx:
         orig_tvect = tvect
         orig_dec_tvect = dec_tvect
         
-    # check to see if mvect still non-zero length
-    if len(mvect) != 0:
-        
         # remove incomplete events
         mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
              remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
-            
+        
+    # check to see if mvect still non-zero length after removing incomplete events
+    if len(mvect) != 0:
+        
         # get annualised rates
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
             get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width)
@@ -1048,7 +1048,7 @@ for i in srcidx:
         
         # make cummulative plot
         didx = where(dates_ge_3 > dcut)[0]
-        if ndays > 0:
+        if ndays > 0 and len(didx) > 0:
             plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
             plt.xlabel('Event Year')
             plt.ylabel('Count | MW >= 3.0')
@@ -1183,6 +1183,7 @@ w = shapefile.Writer(shapefile.POLYGON)
 w.field('SRC_NAME','C','100')
 w.field('CODE','C','10')
 w.field('SRC_TYPE','C','10')
+#w.field('CLASS','C','10')
 w.field('SRC_WEIGHT','F', 8, 2)
 w.field('DEP_BEST','F', 8, 1)
 w.field('DEP_UPPER','F', 8, 1)
@@ -1430,8 +1431,11 @@ for root, dirnames, filenames in walk(rootfolder):
     for filename in filenames:
         if filename.endswith('.pdf'):
             if filename.startswith(outsrcshp.split('.shp')[0]) == False:
-                print 'Adding', filename
-                pdffiles.append(path.join(root, filename))
+                # ignore results from single src file                
+                if not filename.endswith('_NSHA18_MFD.pdf'):
+                    if not filename.endswith('_NSHA18_MFD.MERGE.pdf'):
+                        print 'Adding', filename
+                        pdffiles.append(path.join(root, filename))
 
 # now merge files
 merger = PdfFileMerger()                              

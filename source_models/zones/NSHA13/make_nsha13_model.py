@@ -219,15 +219,20 @@ cat   = 'GGcat-161025.csv'
 # loop through original records
 for i, shape in enumerate(shapes):
 
-    # set shape polygon
-    w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
-        
     # write new records
     if i >= 0:
-        dep_u = dep_b[i] - 0.5*dep_b[i]
-        dep_l = dep_b[i] + 0.5*dep_b[i]
-        w.record(names[i], codes[i], src_ty, str('%01d' % n_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], n_dom[i], cat)
+        # # ignore banda sea sources
+        if codes[i] == 'Z101' or codes[i] == 'Z102' or codes[i] == 'Z103':
+            print 'Ignoring', codes[i]
+    
+        else:
+            # set shape polygon
+            w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        
+            dep_u = dep_b[i] - 0.5*dep_b[i]
+            dep_l = dep_b[i] + 0.5*dep_b[i]
+            w.record(names[i], codes[i], src_ty, str('%01d' % n_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
+                     n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], n_dom[i], cat)
         
 # now save area shapefile
 w.save(outshp)
