@@ -66,7 +66,7 @@ n_dom = []
 n_mmax = []
 
 # loop through L08 zones
-for poly in shapes:
+for poly, code in zip(shapes, codes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
@@ -83,11 +83,9 @@ for poly in shapes:
             tmp_dom = neo_dom
             tmp_mmax = mmax
             
-        '''
-        else:
-            tmp_dom = 7
-            tmp_mmax = 8
-        '''
+        if code == 'Z019':
+            tmp_dom = 2
+
     n_dom.append(tmp_dom)
     n_mmax.append(tmp_mmax)
 

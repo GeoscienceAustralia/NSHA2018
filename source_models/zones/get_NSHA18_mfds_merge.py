@@ -566,9 +566,9 @@ for uclass in unique_classes:
     ###############################################################################
     
     # keep original vectors for plotting
-    orig_mvect = total_mvect
-    orig_tvect = total_tvect
-    orig_dec_tvect = dec_tvect
+    class_orig_mvect = total_mvect
+    class_orig_tvect = total_tvect
+    class_orig_dec_tvect = dec_tvect
     
     # get bval for combined zones data
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
@@ -605,10 +605,6 @@ src_area = []
 for i in srcidx:
     print '\nFitting MFD for', src_code[i]
     
-    # set values to avoid plotting issues later
-    new_bval_b[i] = 1.0
-    new_n0_b[i]   = 1E-30
-        
     # get completeness periods for zone
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
     mcomps = array([float(x) for x in src_mcomp[i].split(';')])
@@ -625,6 +621,13 @@ for i in srcidx:
             
             source_class = unique_classes[uc]
             class_idx = uc
+    
+    # set values to avoid plotting issues later
+    try:
+        new_bval_b[i] = bval
+    except:
+        new_bval_b[i] = 1.0
+    new_n0_b[i]   = 1E-30
     
     # set beta params       
     beta = bval2beta(bval)
@@ -646,8 +649,6 @@ for i in srcidx:
             src_mmax[i] = 8.0
             src_mmax_l[i] = 7.8
             src_mmax_u[i] = 8.2
-    
-    
     
         # preserve original arrays for plotting
         orig_mvect = mvect
@@ -733,8 +734,8 @@ for i in srcidx:
         ###############################################################################
         # plot earthquakes that pass completeness
         ###############################################################################
-    
-        fig = plt.figure(i, figsize=(20, 9))
+        plt.clf()
+        fig = plt.figure(i+2, figsize=(20, 9)) # not sure why, but 2nd plot always a dud, so do i+2
         
         # plot original data
         ax = plt.subplot(231)
@@ -1263,7 +1264,7 @@ f.close()
 
 # set figure
 plt.clf()
-fig = plt.figure(i+1, figsize=(13, 9))
+fig = plt.figure(221, figsize=(13, 9))
 
 # set national-scale basemap
 llcrnrlat = -45
@@ -1340,7 +1341,7 @@ plt.close()
 
 # set figure
 plt.clf()
-fig = plt.figure(i+2, figsize=(13, 9))
+fig = plt.figure(222, figsize=(13, 9))
 
 # set national-scale basemap
 m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \

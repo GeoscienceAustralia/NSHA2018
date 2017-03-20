@@ -9,4 +9,7 @@
 # Random Files #
 ######################
 *.hold
-*.mfd.pdf
+*mfd.pdf
+*.png
+*b_val_map.pdf
+*m5_rate_map.pdf

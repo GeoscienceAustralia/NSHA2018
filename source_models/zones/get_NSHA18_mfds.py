@@ -536,6 +536,7 @@ for i in srcidx:
             bc_up173 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
             # solve for N0
             N0_up173 = 10**(log10(bc_up173[0]) + beta2bval(beta-sigbeta173)*bc_mrng_up[0])
+            
         
         ###############################################################################
         # fill new values
@@ -553,7 +554,8 @@ for i in srcidx:
         # plot earthquakes that pass completeness
         ###############################################################################
     
-        fig = plt.figure(i, figsize=(20, 9))
+        plt.clf()
+        fig = plt.figure(i+2, figsize=(20, 9)) # not sure why, but 2nd plot always a dud, so do i+2
         
         # plot original data
         ax = plt.subplot(231)
@@ -635,7 +637,7 @@ for i in srcidx:
             h1 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=8)
             
             # plot best fit
-            mpltmin_best = 2.0# + bin_width/2.
+            mpltmin_best = 2.0 # + bin_width/2.
             plt_width = 0.1
 
             betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
@@ -690,10 +692,36 @@ for i in srcidx:
                 title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
                           + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
                           + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
+                          
+            ###############################################################################
+            # plot b=1 as per Sinadinovski & McCue
+            ###############################################################################
+            
+            bc_tmp, b1_mrng = get_oq_incrementalMFD(bval2beta(1.0), dummyN0, mpltmin_best+ bin_width/2., mrng[-1], plt_width)
+            
+            # get magnitude index for normalisation
+            idx_b1 = where(around(b1_mrng, 2) == around(mrng[::-1][uidx][1], 2))[0]
+            
+            # fit to max event rate (at index 1 of uidx)d
+            bc_1 = cum_rates[::-1][uidx][1] * (bc_tmp / bc_tmp[idx_b1])
+            	
+            # now plot
+            h11 = plt.semilogy(b1_mrng, bc_1, 'r--')
+            
+            ###############################################################################
+            # now do legends
+            ###############################################################################
                   
             leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
                        fontsize=9, loc=3, title=title)
             plt.setp(leg.get_title(),fontsize=9)
+            
+            # plt second legend
+            plt.legend([h11[0]], ['b = 1'], fontsize=10, loc=1, numpoints=1)
+                       
+            # replot first legend
+            plt.gca().add_artist(leg)
+            
             plt.grid(which='both', axis='both')
         
         ###############################################################################
@@ -1039,7 +1067,7 @@ f.close()
 
 # set figure
 plt.clf()
-fig = plt.figure(i+1, figsize=(13, 9))
+fig = plt.figure(221, figsize=(13, 9))
 
 # set national-scale basemap
 #112/155/-45/-10.5
@@ -1117,7 +1145,7 @@ plt.close()
 
 # set figure
 plt.clf()
-fig = plt.figure(i+2, figsize=(13, 9))
+fig = plt.figure(222, figsize=(13, 9))
 
 # set national-scale basemap
 m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
