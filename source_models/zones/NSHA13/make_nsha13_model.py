@@ -83,8 +83,9 @@ for poly, code in zip(shapes, codes):
             tmp_dom = neo_dom
             tmp_mmax = mmax
             
-        if code == 'Z019':
+        if code == 'Z019' or code == 'Z017':
             tmp_dom = 2
+            tmp_mmax = 7.5
 
     n_dom.append(tmp_dom)
     n_mmax.append(tmp_mmax)

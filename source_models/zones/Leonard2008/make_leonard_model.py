@@ -29,6 +29,7 @@ dep_b = get_field_data(sf, 'hd1', 'float')
 ###############################################################################
 # parse Leonard lookup csv to get completeness info
 ###############################################################################
+#l08_lookup = 'leonard08_alt_mc_lookup.csv'
 l08_lookup = 'leonard08_lookup.csv'
 
 lu_code = []
@@ -58,6 +59,7 @@ dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
 dom_shapes = dsf.shapes()
 l_dom = []
 n_mmax = []
+n_class = []
 
 # loop through L08 zones
 for poly, cd in zip(shapes, code):
@@ -79,9 +81,24 @@ for poly, cd in zip(shapes, code):
     if cd == 'NA_4':
         tmp_dom = 7
         tmp_mmax = 7.7
+    elif cd == 'SA':
+        tmp_dom = 2
+        tmp_mmax = 7.5
+
+    tmp_class = str('%01d' % tmp_dom)
+    
+    if cd == 'SEA':
+        tmp_dom = 4
+        tmp_mmax = 7.5
+        tmp_class = '4a'
+    elif cd == 'NA_3':
+        tmp_dom = 4
+        tmp_mmax = 7.5
+        tmp_class = '4b'
     
     l_dom.append(tmp_dom)
     n_mmax.append(tmp_mmax)
+    n_class.append(tmp_class)
             
    
 ###############################################################################
@@ -156,7 +173,7 @@ for i, shape in enumerate(shapes):
     if i >= 0:
         dep_u = dep_b[i] - 0.5*dep_b[i]
         dep_l = dep_b[i] + 0.5*dep_b[i]
-        w.record(lu_name[i], code[i], src_ty, str('%01d' % l_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, dom_mmax[i], dom_mmax[i]-0.2, dom_mmax[i]+0.2, \
+        w.record(lu_name[i], code[i], src_ty, n_class[i], src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, dom_mmax[i], dom_mmax[i]-0.2, dom_mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], l_dom[i], cat)
         
 # now save area shapefile

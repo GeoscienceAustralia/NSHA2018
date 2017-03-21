@@ -78,6 +78,11 @@ for code, poly in zip(codes, shapes):
     if code == 'SEA':
         tmp_dom = 7
         tmp_mmax = 7.7
+        
+    # change Spencer Gulf from Craton to Sprigg Oro
+    elif code == 'SPG':
+        tmp_dom = 2
+        tmp_mmax = 7.5
     
     dom.append(tmp_dom)
     mmax.append(tmp_mmax)

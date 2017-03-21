@@ -56,6 +56,8 @@ lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA
 # get domains
 ltrt  = get_field_data(lsf, 'TRT', 'str')
 ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
+lycomp = get_field_data(lsf, 'YCOMP', 'str')
+lmcomp = get_field_data(lsf, 'MCOMP', 'str')
 
 # get domain polygons
 l08_shapes = lsf.shapes()
@@ -68,18 +70,25 @@ for poly in shapes:
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
     tmp_trt = -99
+    tmp_mc = -99
+    tmp_yc = -99
     
     # loop through domains and find point in poly
-    for zone_trt, zone_dep, l_shape in zip(ltrt, ldep, l08_shapes):
+    for zone_trt, zone_dep, yc, mc, l_shape \
+        in zip(ltrt, ldep, lycomp, lmcomp, l08_shapes):
         l_poly = Polygon(l_shape.points)
         
         # check if leonard centroid in domains poly
         if point.within(l_poly):
             tmp_trt = zone_trt
             tmp_dep = zone_dep
+            tmp_mc = mc
+            tmp_yc = yc
     
     trt.append(tmp_trt)
     dep_b.append(tmp_dep)
+    #mcomp.append(tmp_mc)
+    #ycomp.append(tmp_yc)
 
 dep_b = array(dep_b) 
 

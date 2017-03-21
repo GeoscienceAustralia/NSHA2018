@@ -559,8 +559,14 @@ for uclass in unique_classes:
                 
             # set mag bins
             mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
-    
-    
+            
+            # remove events with M < min mcomps
+            didx = where(total_mvect < min(mcomps)-bin_width/2)[0]
+            total_tvect = delete(total_tvect, didx)
+            total_mvect = delete(total_mvect, didx)
+            total_dec_tvect = delete(total_dec_tvect, didx)
+            total_ev_dict = delete(total_ev_dict, didx)
+       
     ###############################################################################
     # get b-values from joined zones
     ###############################################################################
@@ -1291,11 +1297,10 @@ ll_space = 6
 m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 
-
 # get colour index
-ncolours=18
+ncolours=14
 b_min = 0.5
-b_max = 1.4
+b_max = 1.2
 
 cindex = []
 
@@ -1324,6 +1329,7 @@ cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
 ticks = arange(b_min, b_max+0.1, 0.1)
 cb.set_ticks(ticks)
 labels = [str('%0.1f' % x) for x in ticks]
+
 #cb.set_ticklabels(labels, fontsize=10)
 cb.ax.set_xticklabels(labels, fontsize=10)
 cb.set_label('b-value', fontsize=12)
@@ -1359,7 +1365,6 @@ m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, da
 m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 
 # get M5 rates
-
 new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
 
@@ -1415,6 +1420,84 @@ plt.clf()
 plt.close()
 
 ###############################################################################
+# map activity rate of M6
+###############################################################################
+
+# set figure
+plt.clf()
+fig = plt.figure(333, figsize=(13, 9))
+
+# set national-scale basemap
+m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
+            urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
+            projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
+            resolution='l',area_thresh=1000.)
+
+# annotate
+m2.drawcoastlines(linewidth=0.5,color='0.25')
+m2.drawcountries()
+m2.drawstates()
+    
+# draw parallels and meridians.
+m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+
+# get M5 rates
+new_beta = bval2beta(array(new_bval_b))
+src_mmax = array(src_mmax)
+
+m6_rates = array(new_n0_b) * exp(-new_beta  * 6.0) * (1 - exp(-new_beta * (src_mmax - 6.0))) \
+           / (1 - exp(-new_beta * src_mmax))
+
+# get area (in km**2) of sources for normalisation
+src_area= array(src_area)
+    
+# normalise M5 rates by area
+lognorm_m6_rates = log10(100**2 * m6_rates / src_area)
+#norm_m5_rates = m5_rates
+    
+# get colour index
+ncolours=20
+r_min = -5.0
+r_max = -2.5
+r_rng = arange(r_min, r_max+0.1, 0.5)
+
+cindex = []
+# loop thru rates and get c-index
+for r in lognorm_m6_rates:
+    idx = interp(r, [r_min, r_max], [0, ncolours-1])
+    cindex.append(int(round(idx)))
+    
+# get cmap
+cmap = plt.get_cmap('rainbow', ncolours)
+
+# plt source zone boundary
+drawshapepoly(m2, plt, sf, cindex=cindex, cmap=cmap, ncolours=ncolours, fillshape=True)
+
+# label polygons
+labelpolygon(m2, plt, sf, 'CODE')
+
+# set colorbar
+plt.gcf().subplots_adjust(bottom=0.1)
+cax = fig.add_axes([0.33,0.05,0.34,0.02]) # setup colorbar axes.
+norm = colors.Normalize(vmin=r_min, vmax=r_max)
+cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
+
+# set cb labels
+ticks = arange(r_min, r_max+0.5, 0.5)
+cb.set_ticks(ticks)
+labels = [str('%0.1e' % 10**x) for x in ticks]
+cb.ax.set_xticklabels(labels, fontsize=10)
+cb.set_label('M 6.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
+
+# set filename
+rmap = path.join(rootfolder,rootfolder+'_m6_rate_map.pdf')
+plt.savefig(rmap, format='pdf', bbox_inches='tight')
+plt.gcf().clear()
+plt.clf()
+plt.close()
+
+###############################################################################
 # merge all pdfs to single file
 ###############################################################################
 
@@ -1435,8 +1518,10 @@ for root, dirnames, filenames in walk(rootfolder):
                 # ignore results from single src file                
                 if not filename.endswith('_NSHA18_MFD.pdf'):
                     if not filename.endswith('_NSHA18_MFD.MERGE.pdf'):
-                        print 'Adding', filename
-                        pdffiles.append(path.join(root, filename))
+                        if not filename.endswith('_NSHA18_MFD_M4.MERGE.pdf'):
+                            if not filename.endswith('_NSHA18_MFD_M4_GK.MERGE.pdf'):
+                                print 'Adding', filename
+                                pdffiles.append(path.join(root, filename))
 
 # now merge files
 merger = PdfFileMerger()                              

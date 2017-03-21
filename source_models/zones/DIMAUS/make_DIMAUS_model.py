@@ -95,6 +95,7 @@ for code, poly in zip(codes, shapes):
 # get TRT and depth form Leonard08
 ###############################################################################
 # load domains shp
+#lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18_ATL_MC.shp'))
 lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
 
 # get domains
