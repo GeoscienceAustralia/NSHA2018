@@ -963,7 +963,7 @@ for i in srcidx:
         
         pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
         pdfpath = path.join(srcfolder, pdffile)
-        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash for unknown reason
+        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash (sometimes) on rhe-compute for unknown reason
         
         if single_src == True:
             plt.show()
