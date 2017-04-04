@@ -201,7 +201,7 @@ def decluster_SCR(method, cat):
 # do Gardner & Knopoff (1974 declustering)
 def decluster_GK74(catalogue):
     from hmtk.seismicity.declusterer.dec_gardner_knopoff import GardnerKnopoffType1
-    from hmtk.seismicity.declusterer.distance_time_windows import GardnerKnopoffWindow, GruenthalWindow
+    from hmtk.seismicity.declusterer.distance_time_windows import GardnerKnopoffWindow
     
     decluster_config = {'time_distance_window': GardnerKnopoffWindow(),
                         'fs_time_prop': 1.0}
@@ -260,7 +260,7 @@ def decluster_GK74(catalogue):
 # !!!!start main code here!!!!
 #########################################################################
 
-leonard = False
+leonard = True
 #########################################################################
 # parse calalogue & convert to HMTK
 #########################################################################
@@ -270,10 +270,10 @@ nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.11.csv')
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # set HMTK file name
-hmtk_csv = nsha2012csv.split('.')[0] + '_hmtk.csv'
+hmtk_csv = nsha2012csv.split('.')[0] + '_hmtk_mx_revml.csv'
 
 # write HMTK csv
-#ggcat2hmtk_csv(nsha_dict, hmtk_csv)
+ggcat2hmtk_csv(nsha_dict, hmtk_csv)
 
 # parse HMTK csv
 parser = CsvCatalogueParser(hmtk_csv)
