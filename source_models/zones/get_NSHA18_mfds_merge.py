@@ -561,6 +561,13 @@ for uclass in unique_classes:
             # set mag bins
             mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
             
+            # remove events with NaN mags
+            didx = where(isnan(total_mvect))[0]
+            total_tvect = delete(total_tvect, didx)
+            total_mvect = delete(total_mvect, didx)
+            total_dec_tvect = delete(total_dec_tvect, didx)
+            total_ev_dict = delete(total_ev_dict, didx)
+            
             # remove events with M < min mcomps
             didx = where(total_mvect < min(mcomps)-bin_width/2)[0]
             total_tvect = delete(total_tvect, didx)
