@@ -17,4 +17,4 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Uses hierarchical structure as outlined in Appendix A of Burbidge (2012) to determine preferred magnitude type
 	- Uses Grünthal et al. (2003) ML-MW conversions
 	- Preferred magnitude column is MX_REVML
-	- Further details on the catalogue's development is [here] (https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
+	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
