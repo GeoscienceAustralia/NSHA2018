@@ -11,7 +11,7 @@ except:
 # parse Leonard shp exported from OQ
 ###############################################################################
 
-leoshp = path.join('shapefiles', 'NSHA13_background_source_model.shp')
+leoshp = path.join('..', '..', 'shapefiles', 'NSHA13_background', 'NSHA13_background_source_model.shp')
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(leoshp)
@@ -48,7 +48,7 @@ for line in lines:
 # get neotectonic domain number from centroid
 ###############################################################################
 # load domains shp
-dsf = shapefile.Reader(path.join('..','Domains','shapefiles','DOMAINS_NSHA18.shp'))
+dsf = shapefile.Reader(path.join('..', '..', 'shapefiles', 'Domains','DOMAINS_NSHA18.shp'))
 # get domains
 neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
 dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
@@ -86,8 +86,8 @@ for poly, code in zip(shapes, codes):
 ###############################################################################
 # get TRT, depth, mcomp & ycomp form Leonard08
 ###############################################################################
-# load domains shp
-lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
+# load Leonard shp
+lsf = shapefile.Reader(path.join('..', '..', 'shapefiles','Leonard2008','LEONARD08_NSHA18.shp'))
 
 # get domains
 ltrt  = get_field_data(lsf, 'TRT', 'str')
