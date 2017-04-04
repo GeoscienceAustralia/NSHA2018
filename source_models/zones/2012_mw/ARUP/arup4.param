@@ -1,0 +1,7 @@
+ROOT FOLDER      = ARUP
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
+DECLUSTERED      = False
+SHAPEFILE INPUT  = ARUP//shapefiles//ARUP_NSHA18_M4.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = ARUP_NSHA18_MFD_M4.shp
+MFD BIN WIDTH    = 0.1

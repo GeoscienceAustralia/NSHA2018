@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 from matplotlib import colors, colorbar
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
+from tools.nsha_tools import toYearFraction, get_shapely_centroid
 
 # import non-standard functions
 try:
@@ -20,7 +21,7 @@ try:
                               drawshapepoly, labelpolygon, get_WGS84_area
     #from catalogue.parsers import parse_ggcat
     from catalogue.writers import ggcat2ascii
-    from tools.nsha_tools import toYearFraction, get_shp_centroid, get_shapely_centroid
+    
     
     #from misc_tools import listdir_extension
     from make_nsha_oq_inputs import write_oq_sourcefile
