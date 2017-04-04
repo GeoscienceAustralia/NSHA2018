@@ -422,7 +422,7 @@ def get_mfds(mvect, tvect, dec_tvect, ev_dict, mcomp, ycomp, mrng, src_mmax, src
         bval = nan            
         
         # load Leonard zones
-        lsf = shapefile.Reader(path.join('Leonard2008','shapefiles','LEONARD08_NSHA18_MFD.shp'))
+        lsf = shapefile.Reader(path.join('shapefiles','Leonard2008','LEONARD08_NSHA18_MFD.shp'))
         
         # get Leonard polygons
         l08_shapes = lsf.shapes()
@@ -1336,7 +1336,8 @@ cb.ax.set_xticklabels(labels, fontsize=10)
 cb.set_label('b-value', fontsize=12)
 
 # set filename
-bmap = path.join(rootfolder,rootfolder+'_b_val_map.pdf')
+modelsplit = path.split(rootfolder)[-1] 
+bmap = path.join(rootfolder,modelsplit+'_b_val_map.pdf')
 plt.savefig(bmap, format='pdf', bbox_inches='tight')
 plt.gcf().clear()
 plt.clf()
@@ -1414,7 +1415,7 @@ cb.ax.set_xticklabels(labels, fontsize=10)
 cb.set_label('M 5.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
 
 # set filename
-rmap = path.join(rootfolder,rootfolder+'_m5_rate_map.pdf')
+rmap = path.join(rootfolder,modelsplit+'_m5_rate_map.pdf')
 plt.savefig(rmap, format='pdf', bbox_inches='tight')
 plt.gcf().clear()
 plt.clf()
@@ -1492,7 +1493,7 @@ cb.ax.set_xticklabels(labels, fontsize=10)
 cb.set_label('M 6.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
 
 # set filename
-rmap = path.join(rootfolder,rootfolder+'_m6_rate_map.pdf')
+rmap = path.join(rootfolder,modelsplit+'_m6_rate_map.pdf')
 plt.savefig(rmap, format='pdf', bbox_inches='tight')
 plt.gcf().clear()
 plt.clf()
