@@ -65,15 +65,17 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
             flag = '1'
         else:
             flag = '0'
-        '''
+        
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
                          checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
                          checkstr(ggc['dep']),checkstr(ggc['prefmag']),checkstr(ggc['prefmagtype']),ggc['auth'], flag))
-        '''                 
+                         
+        '''
+        # for making MX_REV_ML file        
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
                          checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
                          checkstr(ggc['dep']),checkstr(ggc['mx_rev_ml']),checkstr(ggc['mx_rev_src']),ggc['auth'], flag))
-                         
+        '''                 
         oq_dat += line + '\n'
         
     #write to OQ out
