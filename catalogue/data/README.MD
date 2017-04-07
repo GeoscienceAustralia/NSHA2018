@@ -12,6 +12,7 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Includes Ghasemi et al (2016) MW estimates
 	- Uses updated 2017 ML-MW conversions based on existing Australian data
 	- Further details [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/matlab/README.MD)
+	- Background on the 2012 catalogue's development and a description of fields is [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
 	
 * AUSTCAT_hmtk.csv: full catalogue developed for the 2012 NSHA in HMTK format:
 	- Preferred magnitude is in MW as per 2012 conversions
