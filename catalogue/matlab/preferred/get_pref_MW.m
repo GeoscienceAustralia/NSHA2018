@@ -9,7 +9,7 @@
 %
 % Author: T. Allen (2011-01-11)
 % *************************************************************************
-outfile = 'AUSTCAT.MW.V0.12.csv';
+outfile = '..\..\AUSTCAT.MW.V0.12.csv';
 
 % load data
 

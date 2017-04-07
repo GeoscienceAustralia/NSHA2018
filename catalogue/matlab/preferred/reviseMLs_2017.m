@@ -59,7 +59,7 @@ mcorr = textread('mcorr.dat','%f','delimiter',',');
 
 %% read station info
 disp('Reading station info...');
-sitefile = 'AUST.SeismographStations.txt';
+sitefile = '..\stationData\AUST.SeismographStations.txt';
 fid = fopen(sitefile);
 % skip header rows
 for i = 1:7
@@ -119,7 +119,7 @@ fid = fopen('Aus.net');
 %    = textscan(fid,'%s%f%f%f%s%s%d%d','Delimiter','\t');
 
 [srcstns, srclon, srclat, srcelv, srcstarty,srcstartm,srcstopy,srcstopm] ...
-    = textread('Aus.net','%s%f%f%f%s%s%s%s','delimiter','\t'); % file from RC
+    = textread('..\stationData\Aus.net','%s%f%f%f%s%s%s%s','delimiter','\t'); % file from RC
 
 srcstart = [];
 srcstop  = [];
@@ -323,6 +323,28 @@ disp('Looping thru events...')
             end
         end
         
+        % correct pre-1994 Cuthbertson events to Michael-Leiba & Manafant assuming Richter   
+        if ~isnan(mdat_pref(i).MDAT_prefML) & mdat_pref(i).MDAT_dateNum < datenum(1994,1,1) ...
+           & strcmp(mdat_pref(i).MDAT_prefMLSrc,'GG') == 1
+            % get station A
+            R35_A = mdat_pref(i).MDAT_prefML - R35_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
+                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat_pref(i).MDAT_MLrevdist = rhyp(dminind);                 
+                mdat_pref(i).MDAT_MLminstn = stns(dminind);
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                                          + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
+                mdat_pref(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat_pref(i).MDAT_MLminstn = stns(gt50lt180);
+            end
+        end
+        
         % correct post-2002 MEL events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
         if ~isnan(mdat_pref(i).MDAT_prefML) & mdat_pref(i).MDAT_dateNum > datenum(2002,1,1) ...
            & strcmp(mdat_pref(i).MDAT_prefMLSrc,'MEL') == 1
@@ -339,6 +361,74 @@ disp('Looping thru events...')
             elseif ~isempty(gt50lt180) % get between 50-180 km
                 [dmindist dminind] = min(abs(rhyp-180));
                 mdat_pref(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                                          + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
+                mdat_pref(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat_pref(i).MDAT_MLminstn = stns(gt50lt180);
+            end
+        end
+        
+        % correct post-2002 RC events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
+        if ~isnan(mdat_pref(i).MDAT_prefML) & mdat_pref(i).MDAT_dateNum > datenum(2002,1,1) ...
+           & strcmp(mdat_pref(i).MDAT_prefMLSrc,'RC') == 1
+            % get station A
+            BJ84_A = mdat_pref(i).MDAT_prefML - BJ84_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
+                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat_pref(i).MDAT_MLrevdist = rhyp(dminind);                 
+                mdat_pref(i).MDAT_MLminstn = stns(dminind);
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                                          + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
+                mdat_pref(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat_pref(i).MDAT_MLminstn = stns(gt50lt180);
+            end
+        end
+        
+        % correct post-2002 GG events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
+        if ~isnan(mdat_pref(i).MDAT_prefML) & mdat_pref(i).MDAT_dateNum > datenum(2002,1,1) ...
+           & strcmp(mdat_pref(i).MDAT_prefMLSrc,'GG') == 1
+            % get station A
+            BJ84_A = mdat_pref(i).MDAT_prefML - BJ84_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
+                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat_pref(i).MDAT_MLrevdist = rhyp(dminind);                 
+                mdat_pref(i).MDAT_MLminstn = stns(dminind);
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                                          + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
+                mdat_pref(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat_pref(i).MDAT_MLminstn = stns(gt50lt180);
+            end
+        end
+        
+        % catch remaining events post-1990 (e.g. QEDB, QDM, GSQ)
+        if ~isnan(mdat_pref(i).MDAT_prefML) & mdat_pref(i).MDAT_dateNum >= datenum(1990,1,1) ...
+           & strcmp(mdat_pref(i).MDAT_prefMLSrc,'MEL') == 0 & strcmp(mdat_pref(i).MDAT_prefMLSrc,'AUST') == 0 ...
+           & strcmp(mdat_pref(i).MDAT_prefMLSrc,'RC') == 0 & strcmp(mdat_pref(i).MDAT_prefMLSrc,'GG') == 0
+           disp(mdat_pref(i).MDAT_prefMLSrc)
+            % get station A
+            R35_A = mdat_pref(i).MDAT_prefML - R35_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
+                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat_pref(i).MDAT_MLrevdist = rhyp(dminind);                 
+                mdat_pref(i).MDAT_MLminstn = stns(dminind);
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat_pref(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat_pref(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
                 mdat_pref(i).MDAT_MLminstn = stns(gt50lt180);

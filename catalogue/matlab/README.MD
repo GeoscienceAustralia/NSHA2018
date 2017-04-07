@@ -6,12 +6,12 @@ The 2012 NSHA catalogue is used as the starting poitnt for the development of th
 	- use MEL corrections for all RC solutions
 	- assume Ricther (1935) for all QEDB solutions and correct to MLM92
 	- use Russell Cuthbertson's updated list of Australian seismic stations to determine event-station distances
-3) Run Preferred\reviseMLs_2017.m:
+3) Run "peferred\reviseMLs_2017.m":
 	- generates mdat_pref12.mat
-4) Run "Append_Preferred_MWs\refmt_au_mw_tables.py"
+4) Run "append_mw\refmt_au_mw_tables.py"
 	- makes "combined_au_mw.dat"
-5) Run "Append_Preferred_MWs\append_mw.m"
+5) Run "append_mw\append_mw.m"
 	- append MW estimates from "combined_au_mw.dat"
 	- generates mdat_mw_pref12.mat
-6) Run "Preferred\get_pref_MW.m"
+6) Run "preferred\get_pref_MW.m"
 	- make final catalogue (AUSTCAT.MW.V0.12.csv)

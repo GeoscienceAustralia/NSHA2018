@@ -9,7 +9,7 @@
 % load data
 if exist('mdat_pref','var') ~= 1
     disp('Loading mdat_pref12');
-    load ..\Preferred\mdat_pref12.mat;
+    load ..\preferred\mdat_pref12.mat;
 end
 
 %% pre-define polygons modified from shown in Allen 2010 AEES manuscript
