@@ -14,4 +14,4 @@ The 2012 NSHA catalogue is used as the starting poitnt for the development of th
 	- append MW estimates from "combined_au_mw.dat"
 	- generates mdat_mw_pref12.mat
 6) Run "Preferred\get_pref_MW.m"
-	- make final catalogue
+	- make final catalogue (AUSTCAT.MW.V0.12.csv)
