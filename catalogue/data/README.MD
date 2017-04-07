@@ -8,6 +8,7 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
 	
 * AUSTCAT.MW.V0.12.csv: Raw Australian earthquake catalogue updated for the 2018 NSHA:
+	- Based on AUSTCAT.MW.V0.11.csv
 	- Updated logic for ML corrections
 	- Includes Ghasemi et al (2016) MW estimates
 	- Uses updated 2017 ML-MW conversions based on existing Australian data
