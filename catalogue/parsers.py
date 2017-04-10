@@ -83,18 +83,23 @@ def parse_NSHA2012_catalogue(nsha2012cat):
         for i in range(len(line)):
            if len(str(line[i]))<1:
               line[i] = nan
-        '''
-        line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
-                             checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
-                             checkstr(ggc['dep']),checkstr(ggc['prefmag']),ggc['prefmagtype'],ggc['auth']))
-        '''
+        
         # get datetime
         evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M:%S')
             
         # fill temp dict
+        '''
+        # V0.11
         tmpdict = {'auth':line[7], 'place':line[29],'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
                    'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[4]), 'lat':float(line[5]), 'dep':float(line[6]), \
                    'prefmagtype':line[28], 'prefmag':float(line[27]), 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
+                   'mw':float(line[8]), 'mp':float(line[17]), 'fixdep':0, 'datetime':evdt, 'dependence':str(line[3]), 'mx_orig':float(line[20]), \
+                   'mx_rev_ml':float(line[21]), 'mx_rev_src':line[22]}
+        ''' 
+        # V0.12          
+        tmpdict = {'auth':line[7], 'place':line[30],'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
+                   'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[4]), 'lat':float(line[5]), 'dep':float(line[6]), \
+                   'prefmagtype':line[29], 'prefmag':float(line[28]), 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
                    'mw':float(line[8]), 'mp':float(line[17]), 'fixdep':0, 'datetime':evdt, 'dependence':str(line[3]), 'mx_orig':float(line[20]), \
                    'mx_rev_ml':float(line[21]), 'mx_rev_src':line[22]}
         

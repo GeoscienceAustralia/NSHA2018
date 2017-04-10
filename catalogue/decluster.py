@@ -266,11 +266,11 @@ leonard = True
 #########################################################################
 
 # Use 2012 NSHA catalogue
-nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.11.csv')
+nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # set HMTK file name
-hmtk_csv = nsha2012csv.split('.')[0] + '_hmtk_mx_revml.csv'
+hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk.csv'
 
 # write HMTK csv
 ggcat2hmtk_csv(nsha_dict, hmtk_csv)
