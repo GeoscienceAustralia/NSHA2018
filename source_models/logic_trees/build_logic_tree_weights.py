@@ -8,8 +8,11 @@ March 2017
 
 import os, sys
 from os.path import join
+import copy
 import numpy as np
 import scipy.io
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 num_ssc_experts = 15
@@ -146,12 +149,29 @@ weighted_sum = sum(ssc_responses.values())
 ######################################################
 # Utility functions
 
-def get_weights(q_list, weighted_sum):
+def get_weights(q_list, weighted_sum, percentile = None):
     ind = []
     for q in q_list:
         index = ids.index(q)
         ind.append(index)
     weights =  weighted_sum[ind][:,1]
+    sum_weights = sum(weights)
+    if percentile is not None: 
+        # remove low scoring models and re-weight class
+        w_sum = 0
+        orig_weights = copy.copy(weights)
+        new_weight_list = np.zeros(len(orig_weights)) # list to store models we are keeping
+        for i in range(len(orig_weights)):
+            if w_sum < percentile:
+                max_weight_index = np.argmax(orig_weights)
+                max_weight = orig_weights[max_weight_index]
+                w_sum += max_weight
+                new_weight_list[max_weight_index] =  orig_weights[max_weight_index]
+                orig_weights[max_weight_index] = 0
+            else:
+                # Normalise remaining weights
+                weights = new_weight_list/sum(new_weight_list)*sum_weights
+                break    
     return weights
 
 def autolabel(rects, ax, fontsize = 12):
@@ -165,11 +185,14 @@ def autolabel(rects, ax, fontsize = 12):
                 ha='center', va='bottom', fontsize = fontsize)
 
 def bar_plot(q_list, weight_list, label_list, filename, title, fontsize = 12,
-             xlabelfont = None, fig_path = fig_path, wide=False):
+             xlabelfont = None, fig_path = fig_path, wide=False, colour_list = None):
     width = 0.35
     x_vals = np.arange(len(q_list))
     fig, ax = plt.subplots()
-    rects1 = ax.bar(x_vals, weight_list, width, color='b')
+    if colour_list is not None:
+        rects1 = ax.bar(x_vals, weight_list, width, color=colour_list)
+    else:
+        rects1 = ax.bar(x_vals, weight_list, width, color='b')
     if xlabelfont is None:
         xlabelfont = fontsize
     ax.set_ylabel('Weight')
@@ -414,7 +437,7 @@ calib_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation
 gmm_weights_file = join(calib_path, 'ground.motion.model.calib.weight.%s.mat') % fig_cw #'sourceCalibWeights_format7.m')
 
 gmm_weights = scipy.io.loadmat(gmm_weights_file)
-#print gmm_weights
+print gmm_weights
 gmm_weights = np.array(gmm_weights['gmm_calibration_weight']).flatten()
 #print gmm_weights
 
@@ -425,6 +448,51 @@ target_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitatio
 #gmm_weights
 gmm_responses = {}
 for i in range(num_gmm_experts):
+    filename = 'Results_expert%i.csv' % (i+1)
+    filepath = join(target_path, 'ground_motion_results', filename)
+    if i == 0:
+        # get question ids
+        ids = []
+        f_in = open(filepath, 'r')
+        header = f_in.readline()
+        for line in f_in.readlines():
+            ids.append(line.split(',')[0])
+        f_in.close()
+        S1a = ids[0:4]
+        S1b = ids[4:8]
+        S1c = ids[8:13]
+        S2a = ids[13:17]
+        S2b = ids[17:24]
+        S2c = ids[24:27]
+        S2d = ids[27:30]
+        S3a = ids[30:34]
+        S3b = ids[34:41]
+        S3c = ids[41:44]
+        S3d = ids[44:47]
+        S4a = ids[47:51]
+        S4b = ids[51:58]
+        S4c = ids[58:61]
+        S4d = ids[61:64]
+        S4e = ids[64:68]
+        S5a = ids[68:73]
+        S5b = ids[73:78]
+        set_list = [S1a,S1b,S1c,S2a,S2b,S2c,S2d,S3a,S3b,S3c,S3d,
+                    S4a,S4b,S4c,S4d,S4e,S5a,S5b]
+        for q_set in set_list:
+            print q_set
+        # link ids to index
+        set_indices = []
+        question_index_list = 0
+        for q_set in set_list:
+            q_set_indices = []
+            for question in q_set:
+                q_set_indices.append(question_index_list)
+                question_index_list +=1
+            set_indices.append(q_set_indices)
+        #print set_indices
+        # After checking data digitisation, these are known errors where 
+        # expert responses don't sum to 1. These will be rescaled
+        known_errors = [[4,S2a], [2, S1b], [7,S4e]]
     print 'Reading response from expert', i+1
     filename = 'Results_expert%i.csv' % (i+1)
     filepath = join(target_path, 'ground_motion_results', filename)
@@ -438,6 +506,50 @@ for i in range(num_gmm_experts):
         print 'Missing values for expert  %i!!!' % (i+1)
         print 'Currently setting all nan to zero'
         data = np.nan_to_num(data)
+
+    print 'Sum of weights for expert %i is %.3f' % (i+1, sum(data[:,1]))
+    S1_suma = sum(data[0:4,1])
+    S1_sumb = sum(data[4:8,1])
+    S1_sumc = sum(data[8:13,1])
+    S2_suma = sum(data[13:17,1])
+    S2_sumb = sum(data[17:24,1])
+    S2_sumc = sum(data[24:27,1])
+    S2_sumd = sum(data[27:30,1])
+    S3_suma = sum(data[30:34,1])
+    S3_sumb = sum(data[34:41,1])
+    S3_sumc = sum(data[41:44,1])
+    S3_sumd = sum(data[44:47,1])
+    S4_suma = sum(data[47:51,1])
+    S4_sumb = sum(data[51:58,1])
+    S4_sumc = sum(data[58:61,1])
+    S4_sumd = sum(data[61:64,1])
+    S4_sume = sum(data[64:68,1])
+    S5_suma = sum(data[68:73,1])
+    S5_sumb = sum(data[73:78,1])
+    qlist_sum = [S1_suma,S1_sumb,S1_sumc,S2_suma,S2_sumb,S2_sumc,S2_sumd,
+                 S3_suma,S3_sumb,S3_sumc,S3_sumd,S4_suma,S4_sumb,S4_sumc,
+                 S4_sumd,S4_sume,S5_suma,S5_sumb]
+    expected_qlist_sum = [1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1., 1.]
+    for j in range(len(qlist_sum)):
+#        print (j+1), qlist_sum[j]
+        if np.allclose(qlist_sum[j],expected_qlist_sum[j], rtol=1e-05):
+            pass
+        else:
+            print (j+1), qlist_sum[j]
+            print 'Responses for Question set do not sum to expected %.f' %  expected_qlist_sum[j]
+            print set_list[(j)]
+            for ke in known_errors:
+                if ke[0] == i+1:
+                    if ke[1] == set_list[j]:
+                       # print data
+                        print 'Known error for expert, normalising values'
+                       # print (i+1), set_list[j]
+                        original_values = data[set_indices[j][0]:(set_indices[j][-1]+1)]
+                        normalised_values = original_values/qlist_sum[j]*expected_qlist_sum[j]
+                      #  print original_values, sum(original_values)
+                       # print normalised_values, sum(normalised_values)
+                        data[set_indices[j][0]:(set_indices[j][-1]+1)] = normalised_values
+                       # print data
     weighted_data = data*gmm_weights[i]
     gmm_responses[str(i+1)] = weighted_data
 weighted_sum = sum(gmm_responses.values())
@@ -495,6 +607,11 @@ bar_plot(banda_gmm_region_qlist, banda_gmm_region_w, banda_gmm_region_labels, \
 c_gmm_aust_qlist = ['S2Q1', 'S2Q2', 'S2Q3', 'S2Q4']
 c_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Som2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
 c_gmm_aust_w = get_weights(c_gmm_aust_qlist, weighted_sum)
+# Remove Allen2012 reduced sigma model for now, renormalise other values
+c_gmm_aust_w = np.delete(c_gmm_aust_w,1)
+del c_gmm_aust_qlist[1]
+del c_gmm_aust_labels[1]
+c_gmm_aust_w = c_gmm_aust_w/sum(c_gmm_aust_w)
 c_gmm_aust_w = largest_remainder(c_gmm_aust_w, expected_sum = 1, precision = 3)
 print c_gmm_aust_w, sum(c_gmm_aust_w)
 c_gmm_aust_region_w = c_gmm_aust_w *c_gmm_region_w[0]
@@ -542,13 +659,20 @@ c_gmm_model_all_labels += c_gmm_eur_labels
 bar_plot(c_gmm_eur_qlist, c_gmm_eur_w, c_gmm_eur_labels, \
          'cratonic_gmm_european_weights.png', \
          'Cratonic Eurpean GMM Weights', fig_path = gmm_fig_path)
+# Collate for percentile calcs later
+c_gmm_w_list = [c_gmm_aust_region_w, c_gmm_ceus_region_w, c_gmm_cal_region_w, c_gmm_eur_region_w]
 
 ##############
 # Non-cratonic and Extended models
 # Non-cratonic and Extended GMM Australian models
 nc_ex_gmm_aust_qlist = ['S3Q1', 'S3Q2', 'S3Q3', 'S3Q4']
-nc_ex_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Some2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
+nc_ex_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Som2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
 nc_ex_gmm_aust_w = get_weights(nc_ex_gmm_aust_qlist, weighted_sum)
+# Remove Allen2012 reduced sigma model for now, renormalise other values
+nc_ex_gmm_aust_w = np.delete(nc_ex_gmm_aust_w, 1)
+del nc_ex_gmm_aust_qlist[1]
+del nc_ex_gmm_aust_labels[1]
+nc_ex_gmm_aust_w = nc_ex_gmm_aust_w/sum(nc_ex_gmm_aust_w)
 nc_ex_gmm_aust_w = largest_remainder(nc_ex_gmm_aust_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_aust_w, sum(nc_ex_gmm_aust_w)
 nc_ex_gmm_aust_region_w = nc_ex_gmm_aust_w *nc_ex_gmm_region_w[0]
@@ -596,6 +720,8 @@ nc_ex_gmm_model_all_labels += nc_ex_gmm_eur_labels
 bar_plot(nc_ex_gmm_eur_qlist, nc_ex_gmm_eur_w, nc_ex_gmm_eur_labels, \
          'nc_ex_gmm_european_weights.png', \
          'Non-cratonic and Extended Eurpean GMM Weights', fig_path = gmm_fig_path)
+# Collate for percentile calcs later
+nc_ex_gmm_w_list = [nc_ex_gmm_aust_region_w, nc_ex_gmm_ceus_region_w, nc_ex_gmm_cal_region_w, nc_ex_gmm_eur_region_w]
 
 ##############
 # Banda Sea models
@@ -603,6 +729,11 @@ bar_plot(nc_ex_gmm_eur_qlist, nc_ex_gmm_eur_w, nc_ex_gmm_eur_labels, \
 banda_gmm_aust_qlist = ['S4Q1', 'S4Q2', 'S4Q3', 'S4Q4']
 banda_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Som2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
 banda_gmm_aust_w = get_weights(banda_gmm_aust_qlist, weighted_sum)
+# Remove Allen2012 reduced sigma model for now, renormalise other values
+banda_gmm_aust_w = np.delete(banda_gmm_aust_w, 1)
+del banda_gmm_aust_qlist[1]
+del banda_gmm_aust_labels[1]
+banda_gmm_aust_w = banda_gmm_aust_w/sum(banda_gmm_aust_w)
 banda_gmm_aust_w = largest_remainder(banda_gmm_aust_w, expected_sum = 1, precision = 3)
 print banda_gmm_aust_w, sum(banda_gmm_aust_w)
 banda_gmm_aust_region_w = banda_gmm_aust_w *banda_gmm_region_w[0]
@@ -652,9 +783,10 @@ bar_plot(banda_gmm_eur_qlist, banda_gmm_eur_w, banda_gmm_eur_labels, \
          'Banda Sea Eurpean GMM Weights', fig_path = gmm_fig_path)
 
 # Banda Sea GMM intraslab models
+#percentile = 0.75
 banda_gmm_inslab_qlist = ['S4Q18', 'S4Q19', 'S4Q20', 'S4Q21']
 banda_gmm_inslab_labels = ['Abrahamson\n2015SSlab', 'AtkBoore\n2003SSlab', 'Garcia\n2005SSlab', 'MegaPan\n2010']
-banda_gmm_inslab_w = get_weights(banda_gmm_inslab_qlist, weighted_sum)
+banda_gmm_inslab_w = get_weights(banda_gmm_inslab_qlist, weighted_sum)#, percentile = percentile)
 banda_gmm_inslab_w = largest_remainder(banda_gmm_inslab_w, expected_sum = 1, precision = 3)
 print banda_gmm_inslab_w, sum(banda_gmm_inslab_w)
 banda_gmm_inslab_region_w = banda_gmm_inslab_w *banda_gmm_region_w[4]
@@ -663,6 +795,8 @@ banda_gmm_model_all_labels += banda_gmm_inslab_labels
 bar_plot(banda_gmm_inslab_qlist, banda_gmm_inslab_w, banda_gmm_inslab_labels, \
          'banda_gmm_inslab_weights.png', \
          'Banda Sea Intraslab GMM Weights', fig_path = gmm_fig_path)
+# Collate for percentile calcs later
+banda_gmm_w_list = [banda_gmm_aust_region_w, banda_gmm_ceus_region_w, banda_gmm_cal_region_w, banda_gmm_eur_region_w, banda_gmm_inslab_region_w]
 
 ##########################
 # GMM Cutoff distances
@@ -697,3 +831,332 @@ bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels, \
 bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels, \
          'noncratonic_extended_gmm_all_weights.png', \
          'Non-cratonic and Extended All Model Weights', fig_path = gmm_fig_path, fontsize=10, wide=2)
+################################
+# Sort by weight and identy nth percentile cutoff
+import copy
+percentiles = [0.75, 0.8]
+colour_in = 'b'
+colour_out = 'r'
+for percentile in percentiles:
+    print 'Cut-off percentile of', (100*percentile)
+    banda_gmm_w_sum = 0
+    banda_gmm_model_all_w_copy = copy.copy(banda_gmm_model_all_w)
+    banda_gmm_colour_list = [colour_out]*len(banda_gmm_model_all_w)
+    banda_gmm_reduced_list = [] # list to store models we are keeping
+    banda_gmm_reduced_labels = []
+    for i in range(len(banda_gmm_model_all_w_copy)):
+        max_weight_index = np.argmax(banda_gmm_model_all_w_copy)
+        max_weight = banda_gmm_model_all_w_copy[max_weight_index]
+        banda_gmm_w_sum += max_weight
+        if banda_gmm_w_sum < percentile:
+            # Weights we are keeping
+            banda_gmm_colour_list[max_weight_index] = colour_in
+            banda_gmm_reduced_list.append(banda_gmm_model_all_w_copy[max_weight_index])
+            banda_gmm_reduced_labels.append(banda_gmm_model_all_labels[max_weight_index])
+            banda_gmm_model_all_w_copy[max_weight_index] = 0
+        else:
+            break
+    bar_plot(banda_gmm_model_all_w, banda_gmm_model_all_w, banda_gmm_model_all_labels, \
+             'banda_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Banda Sea All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5, \
+             colour_list = banda_gmm_colour_list)
+    # Re-normalise weights for remaining GMMs
+    banda_gmm_reduced_list = banda_gmm_reduced_list/sum(banda_gmm_reduced_list)
+#    print banda_gmm_reduced_list, sum(banda_gmm_reduced_list)
+    bar_plot(banda_gmm_reduced_list, banda_gmm_reduced_list, banda_gmm_reduced_labels, \
+             'banda_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Banda Sea Selected Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+    #############
+    c_gmm_w_sum = 0
+    c_gmm_model_all_w_copy = copy.copy(c_gmm_model_all_w)
+    c_gmm_colour_list = [colour_out]*len(c_gmm_model_all_w)
+    c_gmm_reduced_list = [] # list to store models we are keeping
+    c_gmm_reduced_labels = []
+    for i in range(len(c_gmm_model_all_w_copy)):
+        max_weight_index = np.argmax(c_gmm_model_all_w_copy)
+        max_weight = c_gmm_model_all_w_copy[max_weight_index]
+        c_gmm_w_sum += max_weight
+        if c_gmm_w_sum < percentile:
+            # Weights we are keeping
+            c_gmm_colour_list[max_weight_index] = colour_in
+            c_gmm_reduced_list.append(c_gmm_model_all_w_copy[max_weight_index])
+            c_gmm_reduced_labels.append(c_gmm_model_all_labels[max_weight_index])
+            c_gmm_model_all_w_copy[max_weight_index] = 0
+        else:
+            break
+    bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels, \
+             'c_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Cratonic All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5, \
+             colour_list = c_gmm_colour_list)
+    # Re-normalise weights for remaining GMMs
+    c_gmm_reduced_list = c_gmm_reduced_list/sum(c_gmm_reduced_list)
+    bar_plot(c_gmm_reduced_list, c_gmm_reduced_list, c_gmm_reduced_labels, \
+             'c_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Cratonic Selected Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+    #############
+    nc_ex_gmm_w_sum = 0
+    nc_ex_gmm_model_all_w_copy = copy.copy(nc_ex_gmm_model_all_w)
+    nc_ex_gmm_colour_list = [colour_out]*len(nc_ex_gmm_model_all_w)
+    nc_ex_gmm_reduced_list = [] # list to store models we are keeping
+    nc_ex_gmm_reduced_labels = []
+    for i in range(len(nc_ex_gmm_model_all_w_copy)):
+        max_weight_index = np.argmax(nc_ex_gmm_model_all_w_copy)
+        max_weight = nc_ex_gmm_model_all_w_copy[max_weight_index]
+        nc_ex_gmm_w_sum += max_weight
+        if nc_ex_gmm_w_sum < percentile:
+            # Weights we are keeping
+            nc_ex_gmm_colour_list[max_weight_index] = colour_in
+            nc_ex_gmm_reduced_list.append(nc_ex_gmm_model_all_w_copy[max_weight_index])
+            nc_ex_gmm_reduced_labels.append(nc_ex_gmm_model_all_labels[max_weight_index])
+            nc_ex_gmm_model_all_w_copy[max_weight_index] = 0
+        else:
+            break
+    bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels, \
+             'nc_ex_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Non-cratonic and Extended All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5, \
+             colour_list = nc_ex_gmm_colour_list)
+    # Re-normalise weights for remaining GMMs
+    nc_ex_gmm_reduced_list = nc_ex_gmm_reduced_list/sum(nc_ex_gmm_reduced_list)
+    bar_plot(nc_ex_gmm_reduced_list, nc_ex_gmm_reduced_list, nc_ex_gmm_reduced_labels, \
+             'nc_ex_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Non-cratonic and Extended Selected Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+
+################################
+# Sort by weight and identify nth percentile cutoff with reweighting
+percentiles = [0.75, 0.8]
+colour_in = 'b'
+colour_out = 'r'
+
+for percentile in percentiles:
+    print 'Cut-off percentile of', (100*percentile)
+    banda_gmm_w_sum = 0
+    banda_gmm_model_all_w_copy = copy.copy(banda_gmm_model_all_w)
+    banda_gmm_colour_list = [colour_out]*len(banda_gmm_model_all_w)
+    banda_gmm_reduced_list = [] # list to store models we are keeping
+    banda_gmm_reduced_labels = []
+    for i in range(len(banda_gmm_model_all_w_copy)):
+        max_weight_index = np.argmax(banda_gmm_model_all_w_copy)
+        max_weight = banda_gmm_model_all_w_copy[max_weight_index]
+        banda_gmm_w_sum += max_weight
+        if banda_gmm_w_sum < percentile:
+            # Weights we are keeping
+            banda_gmm_colour_list[max_weight_index] = colour_in
+            banda_gmm_reduced_list.append(banda_gmm_model_all_w_copy[max_weight_index])
+            banda_gmm_reduced_labels.append(banda_gmm_model_all_labels[max_weight_index])
+            banda_gmm_model_all_w_copy[max_weight_index] = 0
+        else:
+            break
+    bar_plot(banda_gmm_model_all_w, banda_gmm_model_all_w, banda_gmm_model_all_labels, \
+             'banda_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Banda Sea All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5, \
+             colour_list = banda_gmm_colour_list)
+    # Re-normalise weights for remaining GMMs
+    banda_gmm_reduced_list = banda_gmm_reduced_list/sum(banda_gmm_reduced_list)
+    num_kept_models = len(banda_gmm_reduced_list)
+#    print banda_gmm_reduced_list, sum(banda_gmm_reduced_list)
+    bar_plot(banda_gmm_reduced_list, banda_gmm_reduced_list, banda_gmm_reduced_labels, \
+             'banda_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Banda Sea Selected Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+
+    # Now we want to elimate the lowest weighted models and redistribute within each 
+    # region type. This will give a different weighting to the .._reduced_list and
+    # aims to preserve the original regional weights
+    banda_gmm_orig = copy.copy(banda_gmm_w_list)
+    print type(banda_gmm_orig)
+    print banda_gmm_orig
+    print type(banda_gmm_orig[1])
+    num_models = sum(len(item) for item in banda_gmm_orig)
+    print num_models
+    while num_models > num_kept_models:
+        min_weight = 1
+        for i in range(len(banda_gmm_orig)):
+            if sum(banda_gmm_orig[i]) > 0:
+                reg_min = min(k for k in banda_gmm_orig[i] if k > 0)
+                reg_min_index = np.where(banda_gmm_orig[i] == reg_min)
+                print 'reg_min', reg_min
+                print 'reg_min_index', reg_min_index
+                if reg_min < min_weight:
+                    min_weight = reg_min
+                    min_region_index = i
+                    j = reg_min_index
+                    print 'i,j', i,j
+            else:
+                pass
+        # set minimum element to zero and renormalise region weights
+        region_sum = sum(banda_gmm_orig[min_region_index])
+        print region_sum
+        banda_gmm_orig[min_region_index][j] = 0
+        print banda_gmm_orig[min_region_index], sum(banda_gmm_orig[min_region_index])
+        if sum(banda_gmm_orig[min_region_index]) > 0:
+               banda_gmm_orig[min_region_index] = banda_gmm_orig[min_region_index]/sum(banda_gmm_orig[min_region_index])*region_sum
+        print banda_gmm_orig[min_region_index], sum(banda_gmm_orig[min_region_index])
+        num_models -= 1
+    print banda_gmm_orig#, sum(sum(m for m in banda_gmm_orig))
+    banda_gmm_final_weights = np.concatenate(banda_gmm_orig).ravel()
+    banda_gmm_final_weights = banda_gmm_final_weights/sum(banda_gmm_final_weights)
+    print banda_gmm_final_weights
+    print sum(banda_gmm_final_weights)
+    bar_plot(banda_gmm_final_weights, banda_gmm_final_weights, banda_gmm_model_all_labels, \
+             'banda_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Banda Sea Re-normalised Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+   # sys.exit()
+
+    ###################
+    c_gmm_w_sum = 0
+    c_gmm_model_all_w_copy = copy.copy(c_gmm_model_all_w)
+    c_gmm_colour_list = [colour_out]*len(c_gmm_model_all_w)
+    c_gmm_reduced_list = [] # list to store models we are keeping
+    c_gmm_reduced_labels = []
+    for i in range(len(c_gmm_model_all_w_copy)):
+        max_weight_index = np.argmax(c_gmm_model_all_w_copy)
+        max_weight = c_gmm_model_all_w_copy[max_weight_index]
+        c_gmm_w_sum += max_weight
+        if c_gmm_w_sum < percentile:
+            # Weights we are keeping
+            c_gmm_colour_list[max_weight_index] = colour_in
+            c_gmm_reduced_list.append(c_gmm_model_all_w_copy[max_weight_index])
+            c_gmm_reduced_labels.append(c_gmm_model_all_labels[max_weight_index])
+            c_gmm_model_all_w_copy[max_weight_index] = 0
+        else:
+            break
+    bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels, \
+             'c_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
+             'C Sea All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5, \
+             colour_list = c_gmm_colour_list)
+    # Re-normalise weights for remaining GMMs
+    c_gmm_reduced_list = c_gmm_reduced_list/sum(c_gmm_reduced_list)
+    num_kept_models = len(c_gmm_reduced_list)
+#    print c_gmm_reduced_list, sum(c_gmm_reduced_list)
+    bar_plot(c_gmm_reduced_list, c_gmm_reduced_list, c_gmm_reduced_labels, \
+             'c_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
+             'C Sea Selected Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+
+    # Now we want to elimate the lowest weighted models and redistribute within each 
+    # region type. This will give a different weighting to the .._reduced_list and
+    # aims to preserve the original regional weights
+    c_gmm_orig = copy.copy(c_gmm_w_list)
+    print type(c_gmm_orig)
+    print c_gmm_orig
+    print type(c_gmm_orig[1])
+    num_models = sum(len(item) for item in c_gmm_orig)
+    print num_models
+    while num_models > num_kept_models:
+        min_weight = 1
+        for i in range(len(c_gmm_orig)):
+            if sum(c_gmm_orig[i]) > 0:
+                reg_min = min(k for k in c_gmm_orig[i] if k > 0)
+                reg_min_index = np.where(c_gmm_orig[i] == reg_min)
+                print 'reg_min', reg_min
+                print 'reg_min_index', reg_min_index
+                if reg_min < min_weight:
+                    min_weight = reg_min
+                    min_region_index = i
+                    j = reg_min_index
+                    print 'i,j', i,j
+            else:
+                pass
+        # set minimum element to zero and renormalise region weights
+        region_sum = sum(c_gmm_orig[min_region_index])
+        print region_sum
+        c_gmm_orig[min_region_index][j] = 0
+        print c_gmm_orig[min_region_index], sum(c_gmm_orig[min_region_index])
+        if sum(c_gmm_orig[min_region_index]) > 0:
+               c_gmm_orig[min_region_index] = c_gmm_orig[min_region_index]/sum(c_gmm_orig[min_region_index])*region_sum
+        print c_gmm_orig[min_region_index], sum(c_gmm_orig[min_region_index])
+        num_models -= 1
+    print c_gmm_orig#, sum(sum(m for m in c_gmm_orig))
+    c_gmm_final_weights = np.concatenate(c_gmm_orig).ravel()
+    c_gmm_final_weights = c_gmm_final_weights/sum(c_gmm_final_weights)
+    print c_gmm_final_weights
+    print sum(c_gmm_final_weights)
+    bar_plot(c_gmm_final_weights, c_gmm_final_weights, c_gmm_model_all_labels, \
+             'c_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Cratonic Re-normalised Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+
+
+    ###########################
+    nc_ex_gmm_w_sum = 0
+    nc_ex_gmm_model_all_w_copy = copy.copy(nc_ex_gmm_model_all_w)
+    nc_ex_gmm_colour_list = [colour_out]*len(nc_ex_gmm_model_all_w)
+    nc_ex_gmm_reduced_list = [] # list to store models we are keeping
+    nc_ex_gmm_reduced_labels = []
+    for i in range(len(nc_ex_gmm_model_all_w_copy)):
+        max_weight_index = np.argmax(nc_ex_gmm_model_all_w_copy)
+        max_weight = nc_ex_gmm_model_all_w_copy[max_weight_index]
+        nc_ex_gmm_w_sum += max_weight
+        if nc_ex_gmm_w_sum < percentile:
+            # Weights we are keeping
+            nc_ex_gmm_colour_list[max_weight_index] = colour_in
+            nc_ex_gmm_reduced_list.append(nc_ex_gmm_model_all_w_copy[max_weight_index])
+            nc_ex_gmm_reduced_labels.append(nc_ex_gmm_model_all_labels[max_weight_index])
+            nc_ex_gmm_model_all_w_copy[max_weight_index] = 0
+        else:
+            break
+    bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels, \
+             'nc_ex_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Nc_Ex Sea All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5, \
+             colour_list = nc_ex_gmm_colour_list)
+    # Re-normalise weights for remaining GMMs
+    nc_ex_gmm_reduced_list = nc_ex_gmm_reduced_list/sum(nc_ex_gmm_reduced_list)
+    num_kept_models = len(nc_ex_gmm_reduced_list)
+#    print nc_ex_gmm_reduced_list, sum(nc_ex_gmm_reduced_list)
+    bar_plot(nc_ex_gmm_reduced_list, nc_ex_gmm_reduced_list, nc_ex_gmm_reduced_labels, \
+             'nc_ex_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Nc_Ex Sea Selected Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
+
+    # Now we want to elimate the lowest weighted models and redistribute within each 
+    # region type. This will give a different weighting to the .._reduced_list and
+    # aims to preserve the original regional weights
+    nc_ex_gmm_orig = copy.copy(nc_ex_gmm_w_list)
+    print type(nc_ex_gmm_orig)
+    print nc_ex_gmm_orig
+    print type(nc_ex_gmm_orig[1])
+    num_models = sum(len(item) for item in nc_ex_gmm_orig)
+    print num_models
+    while num_models > num_kept_models:
+        min_weight = 1
+        for i in range(len(nc_ex_gmm_orig)):
+            if sum(nc_ex_gmm_orig[i]) > 0:
+                reg_min = min(k for k in nc_ex_gmm_orig[i] if k > 0)
+                reg_min_index = np.where(nc_ex_gmm_orig[i] == reg_min)
+                print 'reg_min', reg_min
+                print 'reg_min_index', reg_min_index
+                if reg_min < min_weight:
+                    min_weight = reg_min
+                    min_region_index = i
+                    j = reg_min_index
+                    print 'i,j', i,j
+            else:
+                pass
+        # set minimum element to zero and renormalise region weights
+        region_sum = sum(nc_ex_gmm_orig[min_region_index])
+        print region_sum
+        nc_ex_gmm_orig[min_region_index][j] = 0
+        print nc_ex_gmm_orig[min_region_index], sum(nc_ex_gmm_orig[min_region_index])
+        if sum(nc_ex_gmm_orig[min_region_index]) > 0:
+               nc_ex_gmm_orig[min_region_index] = nc_ex_gmm_orig[min_region_index]/sum(nc_ex_gmm_orig[min_region_index])*region_sum
+        print nc_ex_gmm_orig[min_region_index], sum(nc_ex_gmm_orig[min_region_index])
+        num_models -= 1
+    print nc_ex_gmm_orig#, sum(sum(m for m in nc_ex_gmm_orig))
+    nc_ex_gmm_final_weights = np.concatenate(nc_ex_gmm_orig).ravel()
+    nc_ex_gmm_final_weights = nc_ex_gmm_final_weights/sum(nc_ex_gmm_final_weights)
+    print nc_ex_gmm_final_weights
+    print sum(nc_ex_gmm_final_weights)
+    bar_plot(nc_ex_gmm_final_weights, nc_ex_gmm_final_weights, nc_ex_gmm_model_all_labels, \
+             'nc_ex_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
+             'Non-cratonic and Extended Re-normalised Model Weights', fig_path = gmm_fig_path, \
+             fontsize=10, wide=2.5)
