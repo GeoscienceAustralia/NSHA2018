@@ -270,7 +270,7 @@ nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # set HMTK file name
-hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk.csv'
+hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig.csv'
 
 # write HMTK csv
 ggcat2hmtk_csv(nsha_dict, hmtk_csv)

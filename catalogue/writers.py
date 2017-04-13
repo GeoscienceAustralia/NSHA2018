@@ -53,9 +53,20 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
     '''
     
     # make oq cat dict
-    header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', 'longitude', 'latitude','depth','magnitude','magnitudeType','Agency', 'flag'))
+    header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', \
+                       'longitude', 'latitude','depth','magnitude','magnitudeType', \
+                       'Agency', 'flag', 'mx_origML', 'mx_origType', 'mx_revML', 'pref_mw'))
     oq_dat = header + '\n'
     
+    '''
+    tmpdict = {'auth':line[7], 'place':line[30],'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
+                   'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[4]), 'lat':float(line[5]), 'dep':float(line[6]), \
+                   'prefmag':float(line[28]), 'prefmagtype':line[29], 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
+                   'mw':float(line[8]), 'mp':float(line[17]), 'fixdep':0, 'datetime':evdt, 'dependence':str(line[3]), 'mx_orig':float(line[20]), \
+                   'mx_origType':omt, 'mx_rev_ml':float(line[21]), 'mx_rev_src':line[22], 'mw_src':line[-2]}
+    '''
+                   
+                   
     # loop thru eqs
     for ggc in ggcat_dict:
         # make datstr - strftime does not work for dats < 1900!
@@ -66,9 +77,11 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
         else:
             flag = '0'
         
+        # set Original magnitude as main magnitude for declustering (mx_orig) and add additional columns
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
                          checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
-                         checkstr(ggc['dep']),checkstr(ggc['prefmag']),checkstr(ggc['prefmagtype']),ggc['auth'], flag))
+                         checkstr(ggc['dep']),checkstr(ggc['mx_orig']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
+                         checkstr(ggc['mx_orig']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_rev_ml']), checkstr(ggc['prefmag'])))
                          
         '''
         # for making MX_REV_ML file        

@@ -17,17 +17,22 @@ Jonathan Griffin, Geoscience Australia, June 2016
 """
 
 import os
-import ogr
 import argparse
-import numpy as np
+import ogr
+import shapefile
 from geopy import distance
+from shapely.geometry import Point, Polygon
+import numpy as np
 from NSHA2018.mfd import fault_slip_rate_GR_conversion
-from openquake.hazardlib.scalerel.wc1994 import WC1994
+from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
+from NSHA2018.source_models.faults.shapefile2nrml.shapefile_2_simplefault \
+    import b_value_from_region, trt_from_domains
 from openquake.hazardlib.mfd import YoungsCoppersmith1985MFD
 
 def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
                          shapefile_dip_attribute, 
-                         shapefile_sliprate_attribute):
+                         shapefile_sliprate_attribute,
+                         shapefile_uplift_attribute):
     """Read the line shapefile with of fault surface traces and
     extrace data from attibute table
         Return a list of lists of [x,y] points defining each line
@@ -66,6 +71,16 @@ def parse_line_shapefile(shapefile,shapefile_faultname_attribute,
             #sliprate = sliprate-0.1*sliprate
         except ValueError:
             sliprate = '""'
+        # If sliprate not given, calculate from uplift rate
+        if sliprate == "" or sliprate == 0.0:
+            try:
+                upliftrate = float(feature.GetField(shapefile_uplift_attribute))
+                # Convert from m/ma to mm/a
+                upliftrate = upliftrate/1000
+                # Calculate sliprate using dip and uplift rate
+                sliprate = upliftrate*np.tan(dip*np.pi/180.)
+            except ValueError:
+                sliprate = '""'
         sliprates.append(sliprate)
         line = [list(pts) for pts in line]
         fault_length = 0
@@ -213,7 +228,7 @@ def append_earthquake_information_inc(output_xml, magnitude_scaling_relation,
     print 'Final moment rate error',  moment_error
 
     # Now trim the distribution to just above min_mag
-    print mags, rates
+    #print mags, rates
     mags = np.array(mags)
     rates = rates[np.where(mags >= float(min_mag))]
     mags = mags[np.where(mags >= float(min_mag))]
@@ -288,7 +303,8 @@ def nrml_from_shapefile(shapefile,
                         rake,
                         output_dir,
                         incremental_mfd,
-                        quiet):
+                        shapefile_uplift_attribute=None,
+                        quiet=True):
     """Driver routine to convert nrml to shapefile
      
     """
@@ -297,20 +313,33 @@ def nrml_from_shapefile(shapefile,
     sliprate, fault_lengths = parse_line_shapefile(shapefile,
                                                   shapefile_faultname_attribute,
                                                   shapefile_dip_attribute, 
-                                                  shapefile_sliprate_attribute)
+                                                  shapefile_sliprate_attribute,
+                                                  shapefile_uplift_attribute)
 
      # Output is written line-by-line to this list
     output_xml = []
 
     append_xml_header(output_xml, source_model_name)
 
+    # If b-value is not given, take from Leonard 2008 model
+    region_shapefile = '../zones/Leonard2008/shapefiles/LEONARD08_NSHA18_MFD.shp'
+    if b_value is None:
+        b_value = b_value_from_region(fault_traces, region_shapefile)
+    
+    # If tectonic region type is not given, take from domains model
+    domains_shapefile = '../zones/Domains/shapefiles/DOMAINS_NSHA18.shp'
+    if simple_fault_tectonic_region is None:
+        simple_fault_tectonic_region = trt_from_domains(fault_traces, domains_shapefile)
 
     # Loop through each fault and add source specific info
     for i in range(len(fault_traces)):
+       # Skip faults with zero or null sliprate
+        if sliprate[i] == "" or sliprate[i] == 0:
+            continue 
         simple_fault_id = i
         A = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
         # Calculate M_max from scaling relations
-        scalrel = WC1994()
+        scalrel = Leonard2014_SCR()
         bin_width = 0.1
         max_mag = scalrel.get_median_mag(A, float(rake))
         char_mag = max_mag - 0.25 #characteristic magnitude for OQ def
@@ -320,7 +349,7 @@ def nrml_from_shapefile(shapefile,
             print sliprate[i]
             # just to calculate the moment rate, need to fix this function
             a_value, moment_rate = fault_slip_rate_GR_conversion.slip2GR(sliprate[i], A,
-                                                                         float(b_value), 
+                                                                         float(b_value[i]), 
                                                                          float(max_mag),
                                                                          M_min=0.0)
             a_value=None # We aren't using the a value
@@ -337,17 +366,17 @@ def nrml_from_shapefile(shapefile,
         append_rupture_geometry(output_xml, fault_traces[i],
                                 dips[i], simple_fault_id,
                                 faultnames[i], upper_depth,
-                                lower_depth, simple_fault_tectonic_region)
+                                lower_depth, simple_fault_tectonic_region[i])
 
         if incremental_mfd:
             append_earthquake_information_inc(output_xml,
                                           magnitude_scaling_relation,
-                                          rupture_aspect_ratio, char_mag, b_value,
+                                          rupture_aspect_ratio, char_mag, b_value[i],
                                           min_mag, max_mag, rake, moment_rate, bin_width)
         else:
             append_earthquake_information_YC(output_xml,
                                           magnitude_scaling_relation,
-                                          rupture_aspect_ratio, char_mag, b_value,
+                                          rupture_aspect_ratio, char_mag, b_value[i],
                                           min_mag, max_mag, rake, moment_rate, bin_width)
 
     # Close xml
