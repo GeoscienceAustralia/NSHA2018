@@ -144,7 +144,18 @@ for i in range(num_ssc_experts):
     weighted_data = data*ssc_weights[i]
     ssc_responses[str(i+1)] = weighted_data
 weighted_sum = sum(ssc_responses.values())
-#print weighted_sum
+# Write weights to file to use later
+final_weight_file = join(target_path, 'seismic_source_results', 'seismic_source_model_weights_raw_%s.csv' % fig_cw)
+f_out = open(final_weight_file,'w')
+header = 'Id,0.1,0.5,0.9\n'
+f_out.write(header)
+for i in range(len(ids)):
+    outline = ids[i] + ',' + str(weighted_sum[i][0]) + ',' + str(weighted_sum[i][1]) \
+              + ',' + str(weighted_sum[i][2]) + '\n'
+    f_out.write(outline)
+f_out.close()
+
+print weighted_sum
 
 ######################################################
 # Utility functions
@@ -261,6 +272,68 @@ def largest_remainder(weights, expected_sum=1, precision=0):
 ######################################################
 # Calculate and plot seismic source model logic tree weights
 
+# Fault clustering
+cl_c_qlist = ['S1Q1', 'S1Q2']
+cl_c_labels = ['Poisson', 'Clustered']
+cl_c_w = get_weights(cl_c_qlist, weighted_sum)
+cl_c_w = largest_remainder(cl_c_w, expected_sum = 1, precision = 3)
+print cl_c_w, sum(cl_c_w)
+cl_nc_qlist = ['S1Q3', 'S1Q4']
+cl_nc_labels = ['Poisson', 'Clustered']
+cl_nc_w = get_weights(cl_nc_qlist, weighted_sum)
+cl_nc_w = largest_remainder(cl_nc_w, expected_sum = 1, precision = 3)
+print cl_nc_w, sum(cl_nc_w)
+cl_ex_qlist = ['S1Q5', 'S1Q6']
+cl_ex_labels = ['Poisson', 'Clustered']
+cl_ex_w = get_weights(cl_ex_qlist, weighted_sum)
+cl_ex_w = largest_remainder(cl_ex_w, expected_sum = 1, precision = 3)
+print cl_ex_w, sum(cl_ex_w)
+cl_type_qlist = ['S1Q7', 'S1Q8']
+cl_type_labels = ['Time\n independent', 'Time\n dependent']
+cl_type_w = get_weights(cl_type_qlist, weighted_sum)
+cl_type_w = largest_remainder(cl_type_w, expected_sum = 1, precision = 3)
+print cl_type_w, sum(cl_type_w)
+
+cl_qlists = [cl_c_qlist, cl_nc_qlist, cl_ex_qlist, cl_type_qlist]
+cl_weight_lists = [cl_c_w, cl_nc_w, cl_ex_w, cl_type_w]
+cl_label_lists = [cl_c_labels, cl_nc_labels, cl_ex_labels, cl_type_labels]
+cl_title_list = ['Cratonic', 'Non-cratonic', 'Extended', 'Clustering Method']
+bar_subplots(cl_qlists, cl_weight_lists, cl_label_lists, 'clustering_weights.png', cl_title_list)
+
+# MFD and integration method
+# Cratonic
+mfd_c_qlist = ['S1Q9', 'S1Q10', 'S1Q11', 'S1Q12', 'S1Q13', 'S1Q14', 'S1Q15', 'S1Q16', 'S1Q17']
+mfd_c_labels = ['YC \nAdd', 'YC \nMB', 'YC \nGeom', 
+                'GR \nAdd', 'GR \nMB', 'GR \nGeom',
+                'MM \nAdd', 'MM \nMB', 'MM \nGeom']
+mfd_c_w = get_weights(mfd_c_qlist, weighted_sum)
+mfd_c_w = largest_remainder(mfd_c_w, expected_sum = 1, precision = 3)
+print mfd_c_w, sum(mfd_c_w)
+# Non-cratonic
+mfd_nc_qlist = ['S1Q18', 'S1Q19', 'S1Q20', 'S1Q21', 'S1Q22', 'S1Q23', 'S1Q24', 'S1Q25', 'S1Q26']
+mfd_nc_labels = ['YC \nAdd', 'YC \nMB', 'YC \nGeom', 
+                'GR \nAdd', 'GR \nMB', 'GR \nGeom',
+                'MM \nAdd', 'MM \nMB', 'MM \nGeom']
+mfd_nc_w = get_weights(mfd_nc_qlist, weighted_sum)
+mfd_nc_w = largest_remainder(mfd_nc_w, expected_sum = 1, precision = 3)
+print mfd_nc_w, sum(mfd_nc_w)
+# Extended
+mfd_ex_qlist = ['S1Q27', 'S1Q28', 'S1Q29', 'S1Q30', 'S1Q31', 'S1Q32', 'S1Q33', 'S1Q34', 'S1Q35']
+mfd_ex_labels = ['YC \nAdd', 'YC \nMB', 'YC \nGeom', 
+                'GR \nAdd', 'GR \nMB', 'GR \nGeom',
+                'MM \nAdd', 'MM \nMB', 'MM \nGeom']
+mfd_ex_w = get_weights(mfd_ex_qlist, weighted_sum)
+mfd_ex_w = largest_remainder(mfd_ex_w, expected_sum = 1, precision = 3)
+print mfd_ex_w, sum(mfd_ex_w)
+
+mfd_qlists = [mfd_c_qlist, mfd_nc_qlist, mfd_ex_qlist]
+mfd_weight_lists = [mfd_c_w, mfd_nc_w, mfd_ex_w]
+mfd_label_lists = [mfd_c_labels, mfd_nc_labels, mfd_ex_labels]
+mfd_title_list = ['Cratonic', 'Non-cratonic', 'Extended']
+bar_subplots(mfd_qlists, mfd_weight_lists, mfd_label_lists, \
+             'fault_mfd_integration_weights.png', mfd_title_list, \
+             num_row = 3, num_col = 1, fontsize = 10)
+
 # Source type
 src_type =['S2Q1', 'S2Q2', 'S2Q3', 'S2Q4', 'S2Q5']
 src_labels = ['Smoothed', 'Background', 'Regional', 'Seismotec', 'Smoothed \n+ faults']
@@ -368,67 +441,23 @@ bar_subplots(dec_qlists, dec_weight_lists, dec_label_lists, \
              'declustering_weights.png',dec_title_list, \
              num_row=1, num_col=2)
 
-# Fault clustering
-cl_c_qlist = ['S1Q1', 'S1Q2']
-cl_c_labels = ['Poisson', 'Clustered']
-cl_c_w = get_weights(cl_c_qlist, weighted_sum)
-cl_c_w = largest_remainder(cl_c_w, expected_sum = 1, precision = 3)
-print cl_c_w, sum(cl_c_w)
-cl_nc_qlist = ['S1Q3', 'S1Q4']
-cl_nc_labels = ['Poisson', 'Clustered']
-cl_nc_w = get_weights(cl_nc_qlist, weighted_sum)
-cl_nc_w = largest_remainder(cl_nc_w, expected_sum = 1, precision = 3)
-print cl_nc_w, sum(cl_nc_w)
-cl_ex_qlist = ['S1Q5', 'S1Q6']
-cl_ex_labels = ['Poisson', 'Clustered']
-cl_ex_w = get_weights(cl_ex_qlist, weighted_sum)
-cl_ex_w = largest_remainder(cl_ex_w, expected_sum = 1, precision = 3)
-print cl_ex_w, sum(cl_ex_w)
-cl_type_qlist = ['S1Q7', 'S1Q8']
-cl_type_labels = ['Time\n independent', 'Time\n dependent']
-cl_type_w = get_weights(cl_type_qlist, weighted_sum)
-cl_type_w = largest_remainder(cl_type_w, expected_sum = 1, precision = 3)
-print cl_type_w, sum(cl_type_w)
-
-cl_qlists = [cl_c_qlist, cl_nc_qlist, cl_ex_qlist, cl_type_qlist]
-cl_weight_lists = [cl_c_w, cl_nc_w, cl_ex_w, cl_type_w]
-cl_label_lists = [cl_c_labels, cl_nc_labels, cl_ex_labels, cl_type_labels]
-cl_title_list = ['Cratonic', 'Non-cratonic', 'Extended', 'Clustering Method']
-bar_subplots(cl_qlists, cl_weight_lists, cl_label_lists, 'clustering_weights.png', cl_title_list)
-
-# MFD and integration method
-# Cratonic
-mfd_c_qlist = ['S1Q9', 'S1Q10', 'S1Q11', 'S1Q12', 'S1Q13', 'S1Q14', 'S1Q15', 'S1Q16', 'S1Q17']
-mfd_c_labels = ['YC \nAdd', 'YC \nMB', 'YC \nGeom', 
-                'GR \nAdd', 'GR \nMB', 'GR \nGeom',
-                'MM \nAdd', 'MM \nMB', 'MM \nGeom']
-mfd_c_w = get_weights(mfd_c_qlist, weighted_sum)
-mfd_c_w = largest_remainder(mfd_c_w, expected_sum = 1, precision = 3)
-print mfd_c_w, sum(mfd_c_w)
-# Non-cratonic
-mfd_nc_qlist = ['S1Q18', 'S1Q19', 'S1Q20', 'S1Q21', 'S1Q22', 'S1Q23', 'S1Q24', 'S1Q25', 'S1Q26']
-mfd_nc_labels = ['YC \nAdd', 'YC \nMB', 'YC \nGeom', 
-                'GR \nAdd', 'GR \nMB', 'GR \nGeom',
-                'MM \nAdd', 'MM \nMB', 'MM \nGeom']
-mfd_nc_w = get_weights(mfd_nc_qlist, weighted_sum)
-mfd_nc_w = largest_remainder(mfd_nc_w, expected_sum = 1, precision = 3)
-print mfd_nc_w, sum(mfd_nc_w)
-# Extended
-mfd_ex_qlist = ['S1Q27', 'S1Q28', 'S1Q29', 'S1Q30', 'S1Q31', 'S1Q32', 'S1Q33', 'S1Q34', 'S1Q35']
-mfd_ex_labels = ['YC \nAdd', 'YC \nMB', 'YC \nGeom', 
-                'GR \nAdd', 'GR \nMB', 'GR \nGeom',
-                'MM \nAdd', 'MM \nMB', 'MM \nGeom']
-mfd_ex_w = get_weights(mfd_ex_qlist, weighted_sum)
-mfd_ex_w = largest_remainder(mfd_ex_w, expected_sum = 1, precision = 3)
-print mfd_ex_w, sum(mfd_ex_w)
-
-mfd_qlists = [mfd_c_qlist, mfd_nc_qlist, mfd_ex_qlist]
-mfd_weight_lists = [mfd_c_w, mfd_nc_w, mfd_ex_w]
-mfd_label_lists = [mfd_c_labels, mfd_nc_labels, mfd_ex_labels]
-mfd_title_list = ['Cratonic', 'Non-cratonic', 'Extended']
-bar_subplots(mfd_qlists, mfd_weight_lists, mfd_label_lists, \
-             'fault_mfd_integration_weights.png', mfd_title_list, \
-             num_row = 3, num_col = 1, fontsize = 10)
+all_ssc_weights = [cl_c_w, cl_nc_w, cl_ex_w, cl_type_w, mfd_c_w, mfd_nc_w, mfd_ex_w, \
+                   src_type_w, ss_w, bg_w, rg_w, st_w, arc_mmax_w, pro_mmax_w, nc_mmax_w, ex_mmax_w, \
+                   b_w, mcomp_w, ss_dec_w, dec_w]
+# flatten list
+all_weights = []
+for sublist in all_ssc_weights:
+    for item in sublist:
+        all_weights.append(item)
+# Write weights to file to use later
+final_weight_file = join(target_path, 'seismic_source_results', 'seismic_source_model_weights_rounded_%s.csv' % fig_cw)
+f_out = open(final_weight_file,'w')
+header = 'Id,Weight\n'
+f_out.write(header)
+for i in range(len(ids)):
+    outline = ids[i] + ',' + str(all_weights[i]) + '\n'
+    f_out.write(outline)
+f_out.close()
 
 ######################################################
 # Calculate and plot ground motion logic tree weights
