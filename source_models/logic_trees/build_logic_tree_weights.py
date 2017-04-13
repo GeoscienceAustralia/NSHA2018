@@ -450,7 +450,8 @@ for sublist in all_ssc_weights:
     for item in sublist:
         all_weights.append(item)
 # Write weights to file to use later
-final_weight_file = join(target_path, 'seismic_source_results', 'seismic_source_model_weights_rounded_%s.csv' % fig_cw)
+shared_path = '../../shared'
+final_weight_file = join(shared_path, 'seismic_source_model_weights_rounded_%s.csv' % fig_cw)
 f_out = open(final_weight_file,'w')
 header = 'Id,Weight\n'
 f_out.write(header)
@@ -1143,7 +1144,8 @@ for percentile in percentiles:
     outline += '    </logicTree>\n'
     outline += '</nrml>'
 
-    gmm_path = join(target_path, 'ground_motion_results', 'gmm_logic_tree')
+   # gmm_path = join(target_path, 'ground_motion_results', 'gmm_logic_tree')
+    gmm_path = shared_path
     xml_filename = join(gmm_path, 'NSHA18_Aus_GMPE_%ithp_logic_tree.xml' % int(100*percentile))
     f_out = open(xml_filename, 'w')
     f_out.write(outline)
