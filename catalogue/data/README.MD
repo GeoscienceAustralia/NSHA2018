@@ -51,3 +51,17 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Based on AUSTCAT.MW.V0.12.csv
 	- Preferred magnitude is in MW as per 2017 conversions
 	- Declustered using Leonard (2008) algorithm
+	
+* AUSTCAT_V0.12_hmtk_mx_orig.csv: full catalogue with original observatory magnitudes (mx) developed for the 2018 NSHA in HMTK format:
+	- Based on AUSTCAT.MW.V0.12.csv
+	- Preferred magnitude is Mx, where Mx is the preferred original magnitude
+	- Catalogue is appended with [MX_REVML](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt) and preferred Mw as per 2017 conversions
+	- Not declustered
+
+* AUSTCAT_V0.12_hmtk_mx_orig_declustered.csv: full catalogue with original observatory magnitudes (mx) developed for the 2018 NSHA in HMTK format:
+	- Based on AUSTCAT.MW.V0.12.csv
+	- Preferred magnitude is Mx, where Mx is the preferred original magnitude
+	- Declustered using Leonard (2008) algorithm
+	- The HMTK writer does not preserve appended fields
+
+
