@@ -437,7 +437,7 @@ calib_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation
 gmm_weights_file = join(calib_path, 'ground.motion.model.calib.weight.%s.mat') % fig_cw #'sourceCalibWeights_format7.m')
 
 gmm_weights = scipy.io.loadmat(gmm_weights_file)
-print gmm_weights
+#print gmm_weights
 gmm_weights = np.array(gmm_weights['gmm_calibration_weight']).flatten()
 #print gmm_weights
 
@@ -600,6 +600,27 @@ print banda_gmm_region_w, sum(banda_gmm_region_w)
 bar_plot(banda_gmm_region_qlist, banda_gmm_region_w, banda_gmm_region_labels, \
          'banda_sea_gmm_region_weights.png', \
          'Banda Sea GMM Region Weights', fig_path = gmm_fig_path)
+
+label_to_oq_gmm_dict = {'Allen2012' : 'Allen2012', 'Allen2012 \n RedSigma' : None,
+                        'Som2009 \n Non-cratonic' : 'SomervilleEtAl2009NonCratonic',
+                        'Som2009 \n Yilgarn' : 'SomervilleEtAl2009YilgarnCraton',
+                        'AtkBoore\n2006' : 'AtkinsonBoore2006', 
+                        'AtkBoore\n2006\nMod2011' : 'AtkinsonBoore2006Modified2011',
+                        'Campbell\n2003' : 'Campbell2003',
+                        'Pezeshk\n2011' : 'PezeshkEtAl2011',
+                        'Silva2002\nMwNSHMP\n2008' : 'SilvaEtAl2002MwNSHMP2008',
+                        'Toro\n2002' : 'ToroEtAl2002', 
+                        'YenAtk\n2015' : None,
+                        'Boore2014' : 'BooreEtAl2014',
+                        'ChiYou2008' : 'ChiouYoungs2008',
+                        'ChiYou2014' : 'ChiouYoungs2014',
+                        'ChiYo2008\nSWISS01' : 'ChiouYoungs2008SWISS01', 
+                        'Rietbrock\n2013SS' : 'RietbrockEtAl2013SelfSimilar',
+                        'Zhao2006\nAscSWISS05' : 'ZhaoEtAl2006AscSWISS05',
+                        'Abrahamson\n2015SSlab' : 'AbrahamsonEtAl2015SSlab',
+                        'AtkBoore\n2003SSlab' : 'AtkinsonBoore2003SSlab',
+                        'Garcia\n2005SSlab' : 'GarciaEtAl2005SSlab',
+                        'MegaPan\n2010' : 'MegawatiPan2010'}
 
 ##############
 # Cratonic models
@@ -896,6 +917,8 @@ for percentile in percentiles:
         num_models -= 1
     banda_gmm_final_weights = np.concatenate(banda_gmm_orig).ravel()
     banda_gmm_final_weights = banda_gmm_final_weights/sum(banda_gmm_final_weights)
+    # Round to 3 decimal places using largest remainder method
+    banda_gmm_final_weights = largest_remainder(banda_gmm_final_weights, expected_sum = 1, precision = 3)
     print banda_gmm_final_weights, sum(banda_gmm_final_weights)
     bar_plot(banda_gmm_final_weights, banda_gmm_final_weights, banda_gmm_model_all_labels, \
              'banda_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
@@ -961,6 +984,8 @@ for percentile in percentiles:
         num_models -= 1
     c_gmm_final_weights = np.concatenate(c_gmm_orig).ravel()
     c_gmm_final_weights = c_gmm_final_weights/sum(c_gmm_final_weights)
+    # Round to 3 decimal places using largest remainder method
+    c_gmm_final_weights = largest_remainder(c_gmm_final_weights, expected_sum = 1, precision = 3)
     print c_gmm_final_weights, sum(c_gmm_final_weights)
     bar_plot(c_gmm_final_weights, c_gmm_final_weights, c_gmm_model_all_labels, \
              'c_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
@@ -1027,8 +1052,70 @@ for percentile in percentiles:
         num_models -= 1
     nc_ex_gmm_final_weights = np.concatenate(nc_ex_gmm_orig).ravel()
     nc_ex_gmm_final_weights = nc_ex_gmm_final_weights/sum(nc_ex_gmm_final_weights)
+    # Round to 3 decimal places using largest remainder method
+    nc_ex_gmm_final_weights = largest_remainder(nc_ex_gmm_final_weights, expected_sum = 1, precision = 3)
     print nc_ex_gmm_final_weights, sum(nc_ex_gmm_final_weights)
     bar_plot(nc_ex_gmm_final_weights, nc_ex_gmm_final_weights, nc_ex_gmm_model_all_labels, \
              'nc_ex_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
              'Non-cratonic and Extended Re-normalised Model Weights', fig_path = gmm_fig_path, \
              fontsize=10, wide=2.5)
+
+    # Now write out to openquake nrml file
+    outline = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    outline += '<nrml xmlns:gml="http://www.opengis.net/gml"\n'
+    outline += '      xmlns="http://openquake.org/xmlns/nrml/0.4">\n'
+    outline += '    <logicTree logicTreeID="lt1">\n\n'
+    outline += '<!-- GMM selection and weights defined through expert elicitation process, using calibration\n' \
+               'power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->\n\n'
+    outline += '        <logicTreeBranchingLevel branchingLevelID="bl1">\n\n'
+    outline += '            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs1"\n'
+    outline += '                    applyToTectonicRegionType="Non_cratonic">\n\n'
+    for i in range(len(nc_ex_gmm_model_all_labels)):
+        gmm_name = label_to_oq_gmm_dict[nc_ex_gmm_model_all_labels[i]]
+        weight = nc_ex_gmm_final_weights[i]
+        if weight > 0:
+            outline += '                <logicTreeBranch branchID="%s">\n' % gmm_name
+            outline += '                    <uncertaintyModel>%s</uncertaintyModel>\n' % gmm_name
+            outline += '                    <uncertaintyWeight>%.3f</uncertaintyWeight>\n' % weight
+            outline += '                </logicTreeBranch>\n\n'
+    outline += '           </logicTreeBranchSet>\n\n'
+    outline += '        </logicTreeBranchingLevel>\n\n'
+
+    outline += '        <logicTreeBranchingLevel branchingLevelID="bl2">\n\n'
+    outline += '            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"\n'
+    outline += '                    applyToTectonicRegionType="Cratonic">\n\n'
+
+    for i in range(len(c_gmm_model_all_labels)):
+        gmm_name = label_to_oq_gmm_dict[c_gmm_model_all_labels[i]]
+        weight = c_gmm_final_weights[i]
+        if weight > 0:
+            outline += '                <logicTreeBranch branchID="%s">\n' % gmm_name
+            outline += '                    <uncertaintyModel>%s</uncertaintyModel>\n' % gmm_name
+            outline += '                    <uncertaintyWeight>%.3f</uncertaintyWeight>\n' % weight
+            outline += '                </logicTreeBranch>\n\n'
+    outline += '           </logicTreeBranchSet>\n\n'
+    outline += '        </logicTreeBranchingLevel>\n\n'
+
+    outline += '        <logicTreeBranchingLevel branchingLevelID="bl3">\n\n'
+    outline += '            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"\n'
+    outline += '                    applyToTectonicRegionType="Banda_Sea">\n\n'
+
+    for i in range(len(banda_gmm_model_all_labels)):
+        gmm_name = label_to_oq_gmm_dict[banda_gmm_model_all_labels[i]]
+        weight = banda_gmm_final_weights[i]
+        if weight > 0:
+            outline += '                <logicTreeBranch branchID="%s">\n' % gmm_name
+            outline += '                    <uncertaintyModel>%s</uncertaintyModel>\n' % gmm_name
+            outline += '                    <uncertaintyWeight>%.3f</uncertaintyWeight>\n' % weight
+            outline += '                </logicTreeBranch>\n\n'
+
+    outline += '           </logicTreeBranchSet>\n\n'
+    outline += '        </logicTreeBranchingLevel>\n\n'
+    outline += '    </logicTree>\n'
+    outline += '</nrml>'
+
+    gmm_path = join(target_path, 'ground_motion_results', 'gmm_logic_tree')
+    xml_filename = join(gmm_path, 'NSHA18_Aus_GMPE_%ithp_logic_tree.xml' % int(100*percentile))
+    f_out = open(xml_filename, 'w')
+    f_out.write(outline)
+    f_out.close()
