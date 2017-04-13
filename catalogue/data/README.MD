@@ -3,7 +3,7 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 * AUSTCAT.MW.V0.11.csv: Raw Australian earthquake catalogue developed for the 2012 NSHA:
 	- Preserves all magnitude types and converted magnitudes
 	- Uses hierarchical structure as outlined in Appendix A of Burbidge (2012) to determine preferred magnitude type
-	- Uses Grünthal et al. (2003) ML-MW conversions
+	- Uses Grünthal et al. (2003) as preferred ML-MW conversions
 	- Preferred magnitude column is MX_REVML
 	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
 
