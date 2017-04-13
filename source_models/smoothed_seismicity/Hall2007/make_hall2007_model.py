@@ -51,6 +51,7 @@ for filename in original_source_data_files:
     dx = float(header2[1])
     dy = float(header2[2])
     print dx, dy
+    dxdy = dx*dy
     # a values in paper defined as annual rate of M > 5
     # convert to OpenQuake a value defintion
     # From Andreas: a0 = a5*10**(5*b)
@@ -60,12 +61,16 @@ for filename in original_source_data_files:
     try:
         lons = np.append(lons, data[:,0])
         lats = np.append(lats, data[:,1])
-        a_vals = np.append(a_vals,  np.log10((data[:,2] + b_val*5.0)*dx*dy))
+#        a_vals = np.append(a_vals, data[:,2]*np.power(10, b_val*5.0)/100.)
+        a_vals = np.append(a_vals, np.log10(data[:,2]*np.power(10,5*b_val)*dxdy))
         b_vals = np.append(b_vals, np.ones(data[:,2].size)*b_val)
     except NameError:
         lons = data[:,0]
         lats = data[:,1]
-        a_vals = np.log10((data[:,2] + b_val*5.0)*dx*dy)
+#        a_vals = np.log10((data[:,2] + b_val*5.0)*dxdy)
+#        a_vals = data[:,2]*np.power(10, b_val*5.0)/100.
+#       a_vals = np.log10(data[:,2]*np.power(10,5*b_val)*dxdy)
+        a_vals = np.log10(data[:,2]*np.power(10,5*b_val)*dxdy)
         b_vals = np.ones(data[:,2].size)*b_val
 print a_vals
 
