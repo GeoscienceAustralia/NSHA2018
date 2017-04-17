@@ -85,7 +85,10 @@ def parse_NSHA2012_catalogue(nsha2012cat):
               line[i] = nan
         
         # get datetime
-        evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M:%S')
+        try:
+            evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M:%S')
+        except:
+            evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M')
         
         # get original magnitude type
         omt = str(line[22]).strip('REV_')
