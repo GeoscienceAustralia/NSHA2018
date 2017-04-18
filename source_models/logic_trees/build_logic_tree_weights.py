@@ -145,6 +145,19 @@ for i in range(num_ssc_experts):
     ssc_responses[str(i+1)] = weighted_data
 weighted_sum = sum(ssc_responses.values())
 # Write weights to file to use later
+# Get names from templates
+sets = []
+classes = []
+values = []
+mapping_file = join(target_path, 'seismic_source_results', 'question_mapping.csv')
+f_in = open(mapping_file, 'r')
+header = f_in.readline()
+for line in f_in.readlines():
+    row = line.rstrip().split(',')
+    sets.append(row[1])
+    classes.append(row[2])
+    values.append(row[3])
+f_in.close()
 final_weight_file = join(target_path, 'seismic_source_results', 'seismic_source_model_weights_raw_%s.csv' % fig_cw)
 f_out = open(final_weight_file,'w')
 header = 'Id,0.1,0.5,0.9\n'
@@ -155,7 +168,7 @@ for i in range(len(ids)):
     f_out.write(outline)
 f_out.close()
 
-print weighted_sum
+#print weighted_sum
 
 ######################################################
 # Utility functions
@@ -453,10 +466,11 @@ for sublist in all_ssc_weights:
 shared_path = '../../shared'
 final_weight_file = join(shared_path, 'seismic_source_model_weights_rounded_%s.csv' % fig_cw)
 f_out = open(final_weight_file,'w')
-header = 'Id,Weight\n'
+header = 'Id,Set,Class,Value,Weight\n'
 f_out.write(header)
 for i in range(len(ids)):
-    outline = ids[i] + ',' + str(all_weights[i]) + '\n'
+    outline = ids[i] + ',' + sets[i] + ',' + classes[i] + \
+              ',' + values[i] + ',' + str(all_weights[i]) + '\n'
     f_out.write(outline)
 f_out.close()
 
