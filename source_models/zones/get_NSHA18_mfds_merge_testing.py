@@ -1296,8 +1296,14 @@ fields = sf.fields[1:]
 simpleFields = [x[0] for x in fields]
 header = ','.join(simpleFields)
 
+csvtxt = header + '\n'
 for rec in records:
+    newline = ','.join(rec) + '\n'
+    csvtxt += newline
     
+f = open(newshp.strip('.shp'+'.csv'), 'wb')
+f.write(csvtxt)
+f.close()
 
 '''
 # code from here: https://gist.github.com/bertspaan/8220892
