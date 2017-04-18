@@ -126,9 +126,15 @@ new_n0_u = src_n0_u
 # reset Mmin to 4.8
 print '!!!Temporary fix - setting Mmin = 4.8!!!'
 src_mmin = 4.8 * ones_like(src_mmin)
+#src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
-depmin = -99
-depmax = 99
+# set deep depth range
+depmin = 9.
+depmax = 99. # only get events GE 10 km
+
+#depmin = -99.
+#depmax = 10. # only get events GE 10 km
+    
 
 # set arrays for testing
 bval_vect = []
@@ -141,8 +147,7 @@ if single_src == True:
 
 else:
     srcidx = range(len(src_code))
-    
-    
+
 ###############################################################################
 # parse GGCat
 ###############################################################################
@@ -190,6 +195,21 @@ for i in range(0, neq):
 lastRec = ggcat[-1]
 year_max = lastRec['year'] + lastRec['month']/12.
 
+# apply Hadi's ML-MW conversion to mcomps
+def convert_mcomps(mcomps):
+    '''
+    a1 = 0.68531993
+    a2 = 1.05590293
+    a3 = 1.05582863
+    mx = 4.5
+    my = a1 * mx + a2
+    
+    idx = where(mcomps <= mx)[0]
+    mcomps[idx] = a1 * mcomps[idx] + a2
+    idx = where(mcomps > mx)[0]
+    mcomps[idx] = a3 * (mcomps[idx] - mx) + my
+    '''
+    return mcomps
 
 ###############################################################################
 # get unique zone classes and loop through to merge zones of similar class 
@@ -249,6 +269,7 @@ for uclass in unique_classes:
             
             print '    Compiling data from:', src_code[i]
             
+            #mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly)
             mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly, depmin, depmax)
             
             # stack records into total arrays
@@ -260,15 +281,18 @@ for uclass in unique_classes:
             ###############################################################################
             # get earthquakes that pass completeness in merged zones
             ###############################################################################
-                
+            
             # get most conservative completeness for given geologic class
             temp_mcomp = array([float(x) for x in src_mcomp[i].split(';')])
             if temp_mcomp[-1] > mcomps[0]:
                 ycomps = array([int(x) for x in src_ycomp[i].split(';')])
                 mcomps = array([float(x) for x in src_mcomp[i].split(';')])
-                
-            # set mag bins
-            mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
+            
+            mcomps = convert_mcomps(mcomps)
+            
+            mcompmin = around(ceil(min(mcomps)*10.) / 10., decimals=1)
+            mrng = arange(mcompmin-bin_width/2, src_mmax[i], bin_width)
+            
             
             # remove events with NaN mags
             didx = where(isnan(total_mvect))[0]
@@ -333,8 +357,14 @@ for i in srcidx:
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
     mcomps = array([float(x) for x in src_mcomp[i].split(';')])
     
+    # correct Mc curves for ML-MW conversions        
+    mcomps = convert_mcomps(mcomps)
+    
     # get mag range for zonea
-    mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
+    mcompmin = around(ceil(min(mcomps)*10.) / 10., decimals=1)
+    mrng = arange(mcompmin-bin_width/2, src_mmax[i], bin_width)
+    
+    
         
     for uc in range(0, len(unique_classes)):
         
@@ -1253,7 +1283,7 @@ for pdffile in pdffiles:
 merger.write(combined_pdf)
 
 ###############################################################################
-# make source dict for OQ input writer
+# write summary csv
 ###############################################################################
 
 # read new shapefile
@@ -1261,15 +1291,64 @@ sf = shapefile.Reader(newshp)
 records = sf.records()
 shapes  = sf.shapes()
 
+# make header
+fields = sf.fields[1:]
+simpleFields = [x[0] for x in fields]
+header = ','.join(simpleFields)
+
+for rec in records:
+    
+
+'''
+# code from here: https://gist.github.com/bertspaan/8220892
+def dbf2csv(dbffile):
+    import csv
+    from dbfpy import dbf
+    
+    if dbffile.endswith('.dbf'):
+        print "Converting %s to csv" % dbffile
+        csv_fn = dbffile[:-4]+ ".csv"
+        with open(csv_fn,'wb') as csvfile:
+            in_db = dbf.Dbf(dbffile)
+            out_csv = csv.writer(csvfile)
+            names = []
+            for field in in_db.header.fields:
+                names.append(field.name)
+            out_csv.writerow(names)
+            for rec in in_db:
+                out_csv.writerow(rec.fieldData)
+            in_db.close()
+            print "Done..."
+    else:
+      print "Filename does not end with .dbf"
+
+dbffile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'.dbf')
+dbf2csv(dbffile)
+
+  
+
+summary_txt = 'src_code,trt,src_dep,src_N0,src_bval,min_mag,max_mag,min_mag_reg'
+
+for rec, shape in zip(records, shapes):
+    
+'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_dep':rec[4],
+             'src_N0':[float(rec[12])], 'src_beta':rec[15], bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
+             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':min_mag, 'src_weight':float(rec[3]), 'src_reg_wt':1
+'''
+###############################################################################
+# make source dict for OQ input writer
+###############################################################################
+
 # set model list
 model = []
 
 # loop thru recs and make dict
 for rec, shape in zip(records, shapes):
     if not float(rec[15]) == -99:
+        min_mag = src_mmin[0]
         m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_shape':array(shape.points), 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])],
              'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':min_mag, 'src_weight':float(rec[3]), 'src_reg_wt':1}
         model.append(m)
 
 # assume single source model for now
