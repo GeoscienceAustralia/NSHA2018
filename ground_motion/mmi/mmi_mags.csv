@@ -1,5 +1,5 @@
 184101272155,4.70,7,Newcastle Earthquake
-184210271930,4.90,9,Newcastle Earthquake
+184210271930,4.80,9,Newcastle Earthquake
 185911211850,5.60,10,Circular Head Earthquake
 186806181400,4.80,20,Maitland Earthquake
 186808291850,5.50,6,Mt Hotham Earthquake
@@ -8,10 +8,10 @@
 187106131055,2.60,2,Tumut Aftershock
 187106180000,3.50,3,Tumut Aftershock
 187109161125,2.90,5,Tumut Earthquake
-187202031310,4.50,26,Tumut Earthquake
+187202031310,4.60,26,Tumut Earthquake
 187210181850,5.40,27,Jenolan Caves Earthquake
 187511111050,3.50,3,Mackay Earthquake
-187511241100,3.10,7,Warwick Earthquake
+187511241100,3.00,7,Warwick Earthquake
 187702262145,3.60,22,Ipswick Earthquake
 188002030630,5.10,27,Southwest Tasmania Earthquake
 188008101900,3.60,5,Warwick Earthquake
@@ -49,11 +49,11 @@
 190209200925,4.50,12,Warooka Aftershock
 190209200937,4.60,46,Warooka Aftershock
 190209210410,3.40,15,Spalding Aftershock
-190304062352,4.50,16,Warnambool Earthquake
+190304062352,4.40,16,Warnambool Earthquake
 190307141029,4.90,40,Warnambool Earthquake
 190308141140,3.40,10,Clare Earthquake
 190407090930,3.00,23,Melbourne Earthquake
-190508211835,4.40,37,Riverton Earthquake
+190508211835,4.30,37,Riverton Earthquake
 190611190718,nan,0,Indian Ocean Earthquake
 190804091625,4.80,19,Peterborough Earthquake
 190805040950,4.10,15,Queenstown Earthquake
@@ -65,7 +65,7 @@
 191305011620,4.60,10,Kilcoy Earthquake
 191312181354,5.10,10,Ravenswood Earthquake
 191405281321,3.40,19,Adelaide Earthquake
-191606101751,5.40,7,Seal Rocks Earthquake
+191606101751,5.30,7,Seal Rocks Earthquake
 191806061814,6.90,16,Bundaberg Earthquake
 191806061823,5.50,2,Bundaberg Aftershock
 191806061920,5.60,2,Bundaberg Aftershock
@@ -88,25 +88,25 @@
 194903102230,4.40,70,Dalton-Gunning Earthquake
 195004051950,3.30,15,Mackay Earthquake
 195006190900,2.50,29,Atherton Earthquake
-195112302034,2.50,12,Delubra Earthquake
+195112302034,2.40,12,Delubra Earthquake
 195203110609,3.30,52,Bolgart Earthquake
 195206240144,3.50,32,Maryborough Earthquake
 195211190159,3.90,11,Gunning Earthquake
 195302061749,3.30,18,Dawes Earthquake
 195312031542,4.20,39,Many Peaks Earthquake
-195312031558,2.50,10,Many Peaks Aftershock
-195403022015,2.70,22,Adelaide Aftershock
-195405040705,2.50,16,Mourilyan Earthquake
+195312031558,2.10,10,Many Peaks Aftershock
+195403022015,2.60,22,Adelaide Aftershock
+195405040705,2.10,16,Mourilyan Earthquake
 195409191037,4.80,27,St George Earthquake
 195409212029,3.10,17,Biggenden Earthquake
 195502011109,3.10,16,Murgon Earthquake
 195504102236,3.00,10,Mt Stanley Earthquake
 195508301352,4.60,42,Gabalong Earthquake
 195509100612,3.40,7,Gayndah Earthquake
-195512010533,2.50,3,Mt Perry Earthquake
+195512010533,2.30,3,Mt Perry Earthquake
 195801010007,4.40,18,Queenstown Earthquake
 195812011038,4.40,51,Cairns Earthquake
-195903021222,2.50,28,Adelaide Earthquake
+195903021222,2.30,28,Adelaide Earthquake
 195909090417,3.90,14,Melrose Earthquake
 195910122123,3.90,15,Uralla/Tamworth Earthquake
 195911020117,4.80,21,Mamblin Earthquake
@@ -121,7 +121,7 @@
 196501252022,5.60,13,Hawker Earthquake
 196506032159,4.50,78,Goondiwindi Earthquake
 196707180748,4.00,16,Mundubbera Earthquake
-196810140258,6.60,83,Meckering Earthquake
+196810140258,6.50,83,Meckering Earthquake
 196906171954,5.00,23,Landor Earthquake
 196906201115,4.50,85,South Gippsland Earthquake
 197003101715,5.10,133,Calingiri Earthquake
@@ -136,7 +136,7 @@
 197303091909,6.00,219,Picton Earthquake
 197306031108,3.80,16,Strahan Earthquake
 197307291358,5.10,6,Dorrigo Earthquake
-197405220923,3.70,1,Freycinet Peninsula Earthquake
+197405220923,3.60,1,Freycinet Peninsula Earthquake
 197407091046,4.80,56,Meckering Earthquake
 197409042317,4.70,9,Manmanning Earthquake
 197410290314,nan,0,Banda Sea Earthquake
@@ -144,12 +144,12 @@
 197503062351,5.50,11,Kimberley Earthquake
 197507141802,3.90,15,Willunga Earthquake
 197507242223,5.80,6,Marble Bar Earthquake
-197511121029,2.50,6,Coalstoun Lakes Earthquake
+197511121029,2.40,6,Coalstoun Lakes Earthquake
 197602271144,2.70,13,Gladstone Earthquake
 197607021441,3.60,9,Arthurs Lake Earthquake
-197607090827,2.50,73,Preston Earthquake
+197607090827,2.40,73,Preston Earthquake
 197608231914,3.90,34,Lockhart Earthquake
-197609220433,3.90,22,Gold Coast Earthquake
+197609220433,3.80,22,Gold Coast Earthquake
 197610010046,3.10,12,Dawes Earthquake
 197610290604,4.70,45,Meckering Earthquake
 197703050604,4.70,5,Inglewood Earthquake
@@ -160,13 +160,13 @@
 197708202155,2.70,43,Adelaide Earthquake
 197709222055,3.40,94,St Leonards Earthquake
 197712021332,4.30,102,Balliang Earthquake
-197804261153,2.50,11,Esk Earthquake
+197804261153,2.00,11,Esk Earthquake
 197805010342,5.30,17,Maroonah Homestead Earthquake
 197805041134,3.10,27,Burnie Earthquake
 197805241737,3.80,5,Scartwater Earthquake
 197806091231,3.00,12,Margaret River Earthquake
 197810200052,3.40,6,Orford Earthquake
-197904162324,2.50,33,Scoresby Earthquake
+197904162324,2.00,33,Scoresby Earthquake
 197904231545,nan,0,Rowley Shoals Earthquake
 197906020948,5.90,117,Cadoux Earthquake
 197907040918,3.80,17,Truro Earthquake
@@ -175,10 +175,10 @@
 197910221113,4.70,9,Kimba Earthquake
 198004150038,5.20,32,Kimba Earthquake
 198009042105,3.90,34,Ashford Earthquake
-198011130856,4.90,31,Clare Valley Earthquake
+198011130856,4.80,31,Clare Valley Earthquake
 198012080012,6.00,8,Offshore Fremantle Earthquake
 198012100435,5.50,27,Cadoux Earthquake
-198103241834,2.70,7,Tenthill Earthquake
+198103241834,2.60,7,Tenthill Earthquake
 198104072015,5.00,34,Cadoux Earthquake
 198105101439,3.60,5,Monogorilby Earthquake
 198106162133,4.90,82,Bass Strait Earthquake
@@ -188,23 +188,23 @@
 198111151658,4.50,73,Appin Earthquake
 198111300209,3.90,16,Suggan Buggan Earthquake
 198201240406,3.80,16,Cadoux Earthquake
-198202061524,4.70,56,Cadoux Earthquake
+198202061524,4.60,56,Cadoux Earthquake
 198203041002,3.70,54,Inverell Earthquake
 198203090009,3.20,24,Corryong Earthquake
 198205200736,3.10,7,West Wyalong Earthquake
 198206080313,2.70,10,Glen Innes Earthquake
 198206090432,2.80,14,Glen Innes Earthquake
-198207050902,2.50,7,Glen Innes Earthquake
+198207050902,2.10,7,Glen Innes Earthquake
 198211211134,5.10,174,Wonnangatta Earthquake
 198211260011,3.90,37,West Wyalong Earthquake
-198301260616,5.10,34,Cadoux Earthquake
+198301260616,5.00,34,Cadoux Earthquake
 198303072326,3.80,42,Bowning Earthquake
 198304081933,4.70,32,Milparinka Earthquake
 198306201733,4.90,33,Milparinka Earthquake
 198311240530,nan,0,Timor Earthquake
 198311251956,nan,0,Tasman Sea Earthquake
 198312291742,4.80,14,Beltana Earthquake
-198403040712,2.50,11,Cooyar Earthquake
+198403040712,2.30,11,Cooyar Earthquake
 198408090630,3.90,43,Oolong Earthquake
 198410300629,4.20,116,Murgon Earthquake
 198502080823,5.10,42,Fraser Is. Earthquake
@@ -213,12 +213,12 @@
 198508021216,4.60,4,Proserpine Earthquake
 198510101334,4.90,21,Cadoux Earthquake
 198510230049,nan,0,Timor Sea Earthquake
-198511272318,4.50,27,Cadoux Earthquake
-198511282051,2.50,52,Canberra Earthquake
+198511272318,4.40,27,Cadoux Earthquake
+198511282051,2.10,52,Canberra Earthquake
 198512020619,3.50,15,Coalstoun Lakes Earthquake
 198601071006,2.70,6,Oolong Earthquake
 198601080955,2.90,30,Somerset Dam Earthquake
-198601152211,4.00,26,Augusta Earthquake
+198601152211,3.90,26,Augusta Earthquake
 198602202143,3.50,40,Upper Colo Earthquake
 198603160153,5.00,45,Temma Earthquake
 198603300853,6.30,17,Marryat Creek Earthquake
@@ -231,11 +231,11 @@
 198706130434,3.00,19,Bega Earthquake
 198706161326,2.60,19,Oolong Earthquake
 198706170132,nan,0,Banda Sea Earthquake
-198706191332,3.70,10,Dampier Earthquake
-198706200823,2.50,12,Oolong Earthquake
+198706191332,3.60,10,Dampier Earthquake
+198706200823,2.40,12,Oolong Earthquake
 198706241504,4.70,78,Lithgow Earthquake
-198706262328,2.50,21,Oolong Earthquake
-198707050528,2.50,20,Wooroloo Earthquake
+198706262328,2.20,21,Oolong Earthquake
+198707050528,2.00,20,Wooroloo Earthquake
 198712221506,5.30,113,Nhill Earthquake
 198801060342,4.20,32,Wyalkatchem Earthquake
 198801220036,6.40,15,Tennant Creek First Earthquake
@@ -259,7 +259,7 @@
 198910151135,4.00,16,Craddock Earthquake
 198911080506,4.00,22,Beachport Earthquake
 198912272326,5.90,230,Newcastle Earthquake
-198912290908,2.50,31,Newcastle Earthquake
+198912290908,2.20,31,Newcastle Earthquake
 199001170638,4.50,64,Meckering Earthquake
 199001262325,2.90,4,Beachport Earthquake
 199002210452,2.90,7,Beachport Earthquake
@@ -273,49 +273,49 @@
 199006111508,3.10,11,Clare Earthquake
 199006132023,3.20,16,Laura Earthquake
 199010052211,3.50,10,Warramboo Earthquake
-199012021507,2.50,10,Kambah Earthquake
+199012021507,2.40,10,Kambah Earthquake
 199102121818,2.70,10,Maitland Earthquake
 199103090136,4.10,47,Kalgoorlie Earthquake
 199104091400,4.00,10,Karratha Earthquake
 199105110904,3.20,44,Willalooka Earthquake
 199106101200,3.40,22,Bajool Earthquake
-199107131935,2.50,8,Mundubbera Earthquake
+199107131935,2.20,8,Mundubbera Earthquake
 199107201529,2.50,8,Evatt Earthquake
 199108061411,4.00,22,Georgetown Earthquake
 199108170628,3.60,48,Truro Earthquake
 199108191858,4.30,18,Tumby Bay Earthquake
 199109221701,3.20,16,Albany Earthquake
 199109232119,4.40,6,Shay Gap Earthquake
-199109240436,2.50,6,St George Earthquake
+199109240436,2.20,6,St George Earthquake
 199109281505,3.20,2,St George Earthquake
-199111221739,2.50,9,Proston Earthquake
+199111221739,2.00,9,Proston Earthquake
 199112011813,2.90,27,Borumba Reservoir Earthquake
-199112130448,4.10,12,Cranbrook Earthquake
-199201112131,2.50,4,Proston Earthquake
-199203030335,2.50,5,Widgee Earthquake
+199112130448,4.00,12,Cranbrook Earthquake
+199201112131,2.00,4,Proston Earthquake
+199203030335,2.40,5,Widgee Earthquake
 199203110035,2.70,4,Mundubbera Earthquake
 199205271017,3.00,34,Appila Earthquake
 199206111914,3.90,22,Laura Earthquake
-199208172015,3.90,32,Clare Earthquake
+199208172015,3.80,32,Clare Earthquake
 199209301118,6.30,4,Arnhem Land Earthquake
-199210110203,4.40,21,Temora Earthquake
-199211252127,2.50,11,Gayndah Earthquake
+199210110203,4.30,21,Temora Earthquake
+199211252127,2.20,11,Gayndah Earthquake
 199212202052,nan,0,Banda Sea Earthquake
 199304251802,2.70,11,Gold Coast Earthquake
 199305081600,3.10,10,Willunga Earthquake
-199308220956,2.50,2,Borumba Dam Earthquake
+199308220956,2.00,2,Borumba Dam Earthquake
 199311250406,4.20,6,Lady Elliot Island Earthquake
 199404201302,3.60,7,Frances Earthquake
 199404261549,5.30,59,Bonnie Rock Earthquake
-199405210859,2.50,20,Albury Earthquake
-199406171152,2.50,4,Whitsundays Earthquake
+199405210859,2.00,20,Albury Earthquake
+199406171152,2.00,4,Whitsundays Earthquake
 199407040910,2.70,3,Numil Downs Earthquake
 199407171135,3.20,17,Mount Mitchell Earthquake
 199408061103,4.50,200,Ellalong Earthquake
 199408102037,4.60,40,Eudunda Earthquake
 199408210553,3.30,31,Eugowra Earthquake
 199409040108,2.50,4,Chillagoe Earthquake
-199409061344,2.50,9,Gunghalin Earthquake
+199409061344,2.40,9,Gunghalin Earthquake
 199410111034,4.30,19,Salmon Gums Earthquake
 199411232053,3.30,14,Talbot Brook Earthquake
 199503171741,3.20,14,Cardwell Earthquake
@@ -326,15 +326,15 @@
 199606171122,nan,0,Flores Sea Earthquake
 199606181331,3.40,42,Meckering Earthquake
 199606211456,4.20,47,Meckering Earthquake
-199607180540,2.50,98,Acacia Ridge Earthquake
+199607180540,2.40,98,Acacia Ridge Earthquake
 199608130430,5.10,23,The Range Earthquake
-199609250749,4.50,79,Thomson Dam Earthquake
+199609250749,4.40,79,Thomson Dam Earthquake
 199610180528,4.90,13,Perth Basin Earthquake
 199610260854,3.30,15,Gnowangerup Earthquake
 199612101254,3.40,22,Picton Earthquake
-199612261320,2.50,7,Mount Perry Earthquake
+199612261320,2.00,7,Mount Perry Earthquake
 199703050615,4.90,103,Burra Earthquake
-199707081000,3.40,14,Port Macquarie Earthquake
+199707081000,3.30,14,Port Macquarie Earthquake
 199707082134,4.80,81,Geraldton Earthquake
 199708100920,6.50,15,Collier Bay Earthquake
 199708231730,4.80,50,Mole Creek Earthquake
@@ -352,7 +352,7 @@
 199903051358,3.20,15,Grenfell Earthquake
 199903140013,3.80,28,West Wyalong Earthquake
 199903170158,3.80,95,Appin Earthquake
-199906211359,2.50,27,Canberra Earthquake
+199906211359,2.20,27,Canberra Earthquake
 199908181101,4.40,113,Gladstone Earthquake
 199911120757,4.30,21,Darwin Earthquake
 200003161326,3.80,32,Gaffneys Creek Earthquake
@@ -360,7 +360,7 @@
 200109280254,4.30,18,Burakin Earthquake
 200110191743,5.50,24,Ravensthorpe Earthquake
 200112281631,4.40,5,Burakin Earthquake
-200212141338,2.50,64,Brisbane Earthquake
+200212141338,2.40,64,Brisbane Earthquake
 200306241607,2.50,127,Murphy's Creek Earthquake
 200310032225,3.00,14,Red Hill Earthquake
 200312111019,4.00,160,Bowral Earthquake
