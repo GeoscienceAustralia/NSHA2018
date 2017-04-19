@@ -265,7 +265,7 @@ leonard = True
 # parse calalogue & convert to HMTK
 #########################################################################
 prefmag = 'orig' # declusters based on original catalogue magnitude
-#prefmag = 'mw' # declusters based on preferred mw catalogue
+prefmag = 'mw' # declusters based on preferred mw catalogue
 
 # Use 2012 NSHA catalogue
 nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
