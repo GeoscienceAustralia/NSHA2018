@@ -1,4 +1,4 @@
-"""Object for storing logic tree parameters
+"""Object for storing and accessing logic tree parameters
 """
 
 import os, sys
@@ -12,7 +12,6 @@ class LogicTreeBranch(object):
     def __init__(self, branch_value, branch_weight):
         """Instantiate class
         """
-#        self.branch_class = branch_class
         self.value = branch_value
         self.weight = branch_weight
 
@@ -32,7 +31,7 @@ class LogicTreeSet(object):
     """Class for storing multiple logic tree branches 
     related to similar parameters
     """
-    def __init__(self,set_name):#, set_classes, set_values, set_weights):
+    def __init__(self,set_name):
         self.set_name = set_name
         self.set_classes = {}
     
@@ -47,8 +46,6 @@ class LogicTree(object):
         self.sets = {}
         if filename is not None:
             self.lt_from_file(filename)
-        #else:
-        #    return
 
     def add_set(self, set_name):
         self.sets[set_name] = LogicTreeSet(set_name)
@@ -56,7 +53,6 @@ class LogicTree(object):
     def lt_from_file(self,filename):
         """Build logic trees from parameters in a file
         """
-        
         f_in = open(filename,'r')
         header = f_in.readline()
         for line in f_in.readlines():
@@ -73,8 +69,6 @@ class LogicTree(object):
             else:
                 self.add_set(branch_set)
                 self.sets[branch_set].add_class(branch_class)
-            # Add individual branch values and weightings
-#            print self.sets[branch_set]
             self.sets[branch_set].set_classes[branch_class].add_branch(branch_value, branch_weight)
 
     def get_weights(self, set_name, class_name):
