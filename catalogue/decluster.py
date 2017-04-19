@@ -264,16 +264,21 @@ leonard = True
 #########################################################################
 # parse calalogue & convert to HMTK
 #########################################################################
+prefmag = 'orig' # declusters based on original catalogue magnitude
+#prefmag = 'mw' # declusters based on preferred mw catalogue
 
 # Use 2012 NSHA catalogue
 nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # set HMTK file name
-hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig.csv'
+if prefmag == 'orig':
+    hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig.csv'
+elif prefmag == 'mw':
+    hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk.csv'
 
 # write HMTK csv
-ggcat2hmtk_csv(nsha_dict, hmtk_csv)
+ggcat2hmtk_csv(nsha_dict, hmtk_csv, prefmag)
 
 # parse HMTK csv
 parser = CsvCatalogueParser(hmtk_csv)
