@@ -18,22 +18,27 @@ import matplotlib.pyplot as plt
 num_ssc_experts = 15
 num_gmm_experts = 10
 
-cw = '0p4'
-fig_cw = 'p0.' + cw[-1]
+cw = '0p4' # just change this to get different calibration powers
+fig_cw = 'p' + cw[0] + '.' + cw[-1]
 
 #########################################################
 # Seismic source model
 calib_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/'
-ssc_weights_file = join(calib_path, 'source.calib.files', 'source.model.calib.weight.cw%s.mat') %cw #'sourceCalibWeights_format7.m')
-
-ssc_weights = scipy.io.loadmat(ssc_weights_file)
-#print ssc_weights
-ssc_weights = np.array(ssc_weights['source_calibration_weight']).flatten()
+if cw == '0p0':
+    # Equal weights
+    ssc_weights = np.ones(num_ssc_experts)/num_ssc_experts
+else:
+    ssc_weights_file = join(calib_path, 'source.calib.files', 'source.model.calib.weight.cw%s.mat') %cw #'sourceCalibWeights_format7.m')
+    ssc_weights = scipy.io.loadmat(ssc_weights_file)
+    #print ssc_weights
+    ssc_weights = np.array(ssc_weights['source_calibration_weight']).flatten()
 #print ssc_weights
 
 # Load in target responses for seismic source mode,l
 target_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
 fig_path =join(target_path, 'seismic_source_results', 'Figures_%s') % fig_cw
+if not os.path.exists(fig_path):
+    os.makedirs(fig_path)
 ssc_weights
 ssc_responses = {}
 
@@ -183,7 +188,7 @@ def get_weights(q_list, weighted_sum, percentile = None):
     if percentile is not None: 
         # remove low scoring models and re-weight class
         w_sum = 0
-        orig_weights = copy.copy(weights)
+        orig_weights = copy.deepcopy(weights)
         new_weight_list = np.zeros(len(orig_weights)) # list to store models we are keeping
         for i in range(len(orig_weights)):
             if w_sum < percentile:
@@ -478,11 +483,15 @@ f_out.close()
 # Calculate and plot ground motion logic tree weights
 # Load data
 calib_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/GMPE/'
-gmm_weights_file = join(calib_path, 'ground.motion.model.calib.weight.%s.mat') % fig_cw #'sourceCalibWeights_format7.m')
-
-gmm_weights = scipy.io.loadmat(gmm_weights_file)
-#print gmm_weights
-gmm_weights = np.array(gmm_weights['gmm_calibration_weight']).flatten()
+if cw == '0p0':
+    # Equal weights
+    gmm_weights = np.ones(num_gmm_experts)/num_gmm_experts
+else:
+    gmm_weights_file = join(calib_path, 'ground.motion.model.calib.weight.%s.mat') % fig_cw #'sourceCalibWeights_format7.m')
+    
+    gmm_weights = scipy.io.loadmat(gmm_weights_file)
+    #print gmm_weights
+    gmm_weights = np.array(gmm_weights['gmm_calibration_weight']).flatten()
 #print gmm_weights
 
 # Load in target responses for ground motion model
@@ -615,6 +624,8 @@ banda_gmm_model_all_w = []
 banda_gmm_model_all_labels = []
 
 gmm_fig_path = fig_path =join(target_path, 'ground_motion_results', 'Figures_%s') % fig_cw
+if not os.path.exists(gmm_fig_path):
+    os.makedirs(gmm_fig_path)
 # Cratonic GMM type
 c_gmm_region_qlist = ['S1Q1', 'S1Q2', 'S1Q3', 'S1Q4']
 c_gmm_region_labels = ['Australian', 'CEUS', 'California', 'European']
@@ -905,7 +916,7 @@ colour_out = 'r'
 for percentile in percentiles:
     print 'Cut-off percentile of', (100*percentile)
     banda_gmm_w_sum = 0
-    banda_gmm_model_all_w_copy = copy.copy(banda_gmm_model_all_w)
+    banda_gmm_model_all_w_copy = copy.deepcopy(banda_gmm_model_all_w)
     banda_gmm_colour_list = [colour_out]*len(banda_gmm_model_all_w)
     banda_gmm_reduced_list = [] # list to store models we are keeping
     banda_gmm_reduced_labels = []
@@ -938,8 +949,11 @@ for percentile in percentiles:
     # Now we want to elimate the lowest weighted models and redistribute within each 
     # region type. This will give a different weighting to the .._reduced_list and
     # aims to preserve the original regional weights
-    banda_gmm_orig = copy.copy(banda_gmm_w_list)
+    banda_gmm_orig = copy.deepcopy(banda_gmm_w_list)
     num_models = sum(len(item) for item in banda_gmm_orig)
+    # Remove models that already have zero weighting from count
+    num_nonzero = sum(np.count_nonzero(item) for item in banda_gmm_orig)
+    num_models = num_models - (num_models - num_nonzero)
     print 'Keeping %i models from %i initial models' % (num_kept_models, num_models)
     while num_models > num_kept_models:
         min_weight = 1
@@ -950,7 +964,7 @@ for percentile in percentiles:
                 if reg_min < min_weight:
                     min_weight = reg_min
                     min_region_index = i
-                    j = reg_min_index
+                    j = reg_min_index[0][0]
             else:
                 pass
         # set minimum element to zero and renormalise region weights
@@ -972,7 +986,7 @@ for percentile in percentiles:
     ###################
     # Cratonic
     c_gmm_w_sum = 0
-    c_gmm_model_all_w_copy = copy.copy(c_gmm_model_all_w)
+    c_gmm_model_all_w_copy = copy.deepcopy(c_gmm_model_all_w)
     c_gmm_colour_list = [colour_out]*len(c_gmm_model_all_w)
     c_gmm_reduced_list = [] # list to store models we are keeping
     c_gmm_reduced_labels = []
@@ -1005,8 +1019,11 @@ for percentile in percentiles:
     # Now we want to elimate the lowest weighted models and redistribute within each 
     # region type. This will give a different weighting to the .._reduced_list and
     # aims to preserve the original regional weights
-    c_gmm_orig = copy.copy(c_gmm_w_list)
+    c_gmm_orig = copy.deepcopy(c_gmm_w_list)
     num_models = sum(len(item) for item in c_gmm_orig)
+    # Remove models that already have zero weighting from count
+    num_nonzero = sum(np.count_nonzero(item) for item in c_gmm_orig)
+    num_models = num_models - (num_models - num_nonzero)
     print 'Keeping %i models from %i initial models' % (num_kept_models, num_models)
     while num_models > num_kept_models:
         min_weight = 1
@@ -1017,7 +1034,7 @@ for percentile in percentiles:
                 if reg_min < min_weight:
                     min_weight = reg_min
                     min_region_index = i
-                    j = reg_min_index
+                    j = reg_min_index[0][0] # Just get first index
             else:
                 pass
         # set minimum element to zero and renormalise region weights
@@ -1027,6 +1044,7 @@ for percentile in percentiles:
                c_gmm_orig[min_region_index] = c_gmm_orig[min_region_index]/sum(c_gmm_orig[min_region_index])*region_sum
         num_models -= 1
     c_gmm_final_weights = np.concatenate(c_gmm_orig).ravel()
+ #   print 'c_gmm_final_weights', c_gmm_final_weights
     c_gmm_final_weights = c_gmm_final_weights/sum(c_gmm_final_weights)
     # Round to 3 decimal places using largest remainder method
     c_gmm_final_weights = largest_remainder(c_gmm_final_weights, expected_sum = 1, precision = 3)
@@ -1040,7 +1058,7 @@ for percentile in percentiles:
     ###########################
     # Non-cratonic and extended
     nc_ex_gmm_w_sum = 0
-    nc_ex_gmm_model_all_w_copy = copy.copy(nc_ex_gmm_model_all_w)
+    nc_ex_gmm_model_all_w_copy = copy.deepcopy(nc_ex_gmm_model_all_w)
     nc_ex_gmm_colour_list = [colour_out]*len(nc_ex_gmm_model_all_w)
     nc_ex_gmm_reduced_list = [] # list to store models we are keeping
     nc_ex_gmm_reduced_labels = []
@@ -1073,8 +1091,11 @@ for percentile in percentiles:
     # Now we want to elimate the lowest weighted models and redistribute within each 
     # region type. This will give a different weighting to the .._reduced_list and
     # aims to preserve the original regional weights
-    nc_ex_gmm_orig = copy.copy(nc_ex_gmm_w_list)
+    nc_ex_gmm_orig = copy.deepcopy(nc_ex_gmm_w_list)
     num_models = sum(len(item) for item in nc_ex_gmm_orig)
+    # Remove models that already have zero weighting from count
+    num_nonzero = sum(np.count_nonzero(item) for item in nc_ex_gmm_orig)
+    num_models = num_models - (num_models - num_nonzero)
     print 'Keeping %i models from %i initial models' % (num_kept_models, num_models)
     while num_models > num_kept_models:
         min_weight = 1
@@ -1085,7 +1106,7 @@ for percentile in percentiles:
                 if reg_min < min_weight:
                     min_weight = reg_min
                     min_region_index = i
-                    j = reg_min_index
+                    j = reg_min_index[0][0]
             else:
                 pass
         # set minimum element to zero and renormalise region weights
@@ -1160,7 +1181,7 @@ for percentile in percentiles:
 
    # gmm_path = join(target_path, 'ground_motion_results', 'gmm_logic_tree')
     gmm_path = shared_path
-    xml_filename = join(gmm_path, 'NSHA18_Aus_GMPE_%ithp_logic_tree.xml' % int(100*percentile))
+    xml_filename = join(gmm_path, 'NSHA18_Aus_GMPE_%ithp_logic_tree_cal_power_%s.xml' % (int(100*percentile), fig_cw))
     f_out = open(xml_filename, 'w')
     f_out.write(outline)
     f_out.close()
