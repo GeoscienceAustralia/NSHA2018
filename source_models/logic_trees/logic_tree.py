@@ -71,14 +71,19 @@ class LogicTree(object):
                 self.sets[branch_set].add_class(branch_class)
             self.sets[branch_set].set_classes[branch_class].add_branch(branch_value, branch_weight)
 
-    def get_weights(self, set_name, class_name):
+    def get_weights(self, set_name, class_name, branch_value = None):
         """Returns all branches and weights for a given set
         and class"""
         branch_values = []
         branch_weights = []
         for branch, lt_b in self.sets[set_name].set_classes[class_name].branches.iteritems():
-            branch_values.append(lt_b.value)
-            branch_weights.append(lt_b.weight)
+            if branch_values is not None:
+                if lt_b.value == branch_value:
+                     branch_values.append(lt_b.value)
+                     branch_weights.append(lt_b.weight)
+            else:
+                branch_values.append(lt_b.value)
+                branch_weights.append(lt_b.weight)
         return branch_values, branch_weights
 
     def list_sets(self):
