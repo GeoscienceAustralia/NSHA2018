@@ -294,7 +294,7 @@ cat = nshacat
 #########################################################################
 # if Leonard == True
 #########################################################################
-'''
+
 if leonard == True:
     # try following HMTK format
     method = 'Leonard08'
@@ -308,8 +308,7 @@ if leonard == True:
 # do GK74    
 else: 
     decluster_GK74(cat)
-'''
-    
+   
 #########################################################################
 # merge extra columns removed by HMTK parser
 #########################################################################
@@ -317,7 +316,7 @@ prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
 
 from misc_tools import dict2array, checkfloat
 
-declustered_catalog_file = 'AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
+#declustered_catalog_file = 'AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
 
 # get data arrays from original catalogue
 for key in nsha_dict[0].keys():
@@ -353,7 +352,7 @@ for line in lines[1:]:
     # replace orig mag in "magnitude" column
     # prefmag = MW
     if prefmag2 == 'mw':
-        newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',' + ','.join(dat[17:]) \
+        newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',MW,' + ','.join(dat[18:]) \
                 + ',' + ','.join((str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
                             str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
                             
