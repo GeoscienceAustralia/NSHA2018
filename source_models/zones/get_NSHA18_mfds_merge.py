@@ -1253,6 +1253,32 @@ for pdffile in pdffiles:
 merger.write(combined_pdf)
 
 ###############################################################################
+# write summary csv
+###############################################################################
+
+# read new shapefile
+sf = shapefile.Reader(newshp)
+records = sf.records()
+shapes  = sf.shapes()
+
+# make header
+fields = sf.fields[1:]
+simpleFields = [x[0] for x in fields]
+header = ','.join(simpleFields)
+
+csvtxt = header + '\n'
+for rec in records:
+    newline = ','.join(rec) + '\n'
+    csvtxt += newline
+
+csvbase = path.split(newshp)[-1].strip('shp')+'pdf'
+combined_csv = path.join(rootfolder, csvbase)
+   
+f = open(combined_csv, 'wb')
+f.write(csvtxt)
+f.close()
+
+###############################################################################
 # make source dict for OQ input writer
 ###############################################################################
 

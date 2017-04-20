@@ -196,6 +196,8 @@ def decluster_SCR(method, cat):
     writer.write_file(catalogue_l08)
     
     print 'Declustered catalogue: ok\n'
+    
+    return declustered_catalog_file
 
 
 # do Gardner & Knopoff (1974 declustering)
@@ -264,21 +266,24 @@ leonard = True
 #########################################################################
 # parse calalogue & convert to HMTK
 #########################################################################
-prefmag = 'orig' # declusters based on original catalogue magnitude
-prefmag = 'mw' # declusters based on preferred mw catalogue
+'''
+recommend declustering on original magnitudes given the declustering algorithm 
+was based on these magnitudes
+'''
+prefmag1 = 'orig' # declusters based on original catalogue magnitude
 
 # Use 2012 NSHA catalogue
 nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # set HMTK file name
-if prefmag == 'orig':
+if prefmag1 == 'orig':
     hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig.csv'
-elif prefmag == 'mw':
+elif prefmag1 == 'mw':
     hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk.csv'
 
 # write HMTK csv
-ggcat2hmtk_csv(nsha_dict, hmtk_csv, prefmag)
+ggcat2hmtk_csv(nsha_dict, hmtk_csv, prefmag1)
 
 # parse HMTK csv
 parser = CsvCatalogueParser(hmtk_csv)
@@ -289,6 +294,7 @@ cat = nshacat
 #########################################################################
 # if Leonard == True
 #########################################################################
+'''
 if leonard == True:
     # try following HMTK format
     method = 'Leonard08'
@@ -297,8 +303,102 @@ if leonard == True:
     if method == 'Stein08':
         print  'Using Stein 2008 method...'
         
-    decluster_SCR(method, cat)
+    declustered_catalog_filename = decluster_SCR(method, cat)
 
 # do GK74    
 else: 
     decluster_GK74(cat)
+'''
+    
+#########################################################################
+# merge extra columns removed by HMTK parser
+#########################################################################
+prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
+
+from misc_tools import dict2array, checkfloat
+
+declustered_catalog_file = 'AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
+
+# get data arrays from original catalogue
+for key in nsha_dict[0].keys():
+    exec(key + ' = dict2array(nsha_dict, key)')
+
+# make datestr list
+datestr = []
+for i in range(0, len(nsha_dict)):
+    datestr.append(''.join((str(nsha_dict[i]['year']), str('%02d' % nsha_dict[i]['month']), \
+                       str('%02d' % nsha_dict[i]['day']), str('%02d' % nsha_dict[i]['hour']), \
+                       str('%02d' % nsha_dict[i]['min']))))
+
+datestr = np.array(datestr)
+
+# parse declustered file and add cols
+lines = open(path.join('data', declustered_catalog_file)).readlines()
+
+newheader = lines[0].strip() + ',mx_origML,mx_origType,mx_revML,pref_mw\n'
+newtxt = newheader
+
+#  all new variables are introduced using the "exec" command above
+for line in lines[1:]:
+    dat = line.strip().split(',')    
+    
+    # match earthquake info
+    eqidx = np.where((datestr == dat[0]))[0]
+                     # & (lon == np.around(checkfloat(dat[9]), decimals=3))
+                     # & (lat == np.around(checkfloat(dat[10]), decimals=3)))[0] 
+    # testing
+    if len(eqidx) > 1:
+        print datestr[eqidx][0], eqidx
+    
+    # replace orig mag in "magnitude" column
+    # prefmag = MW
+    if prefmag2 == 'mw':
+        newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',' + ','.join(dat[17:]) \
+                + ',' + ','.join((str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
+                            str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
+                            
+    # keep orig mag in "magnitude" column
+    else:
+        newline = ','.join((line.strip(), str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
+                            str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
+    
+    newtxt += newline
+
+# re-write declustered catalogue
+if prefmag2 == 'mw':
+    declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
+else:
+    declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig_declustered_test2.csv' 
+
+f = open(declustered_csv, 'wb')
+f.write(newtxt)
+f.close()
+  
+
+# if prefmag2 == 'mw', 
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

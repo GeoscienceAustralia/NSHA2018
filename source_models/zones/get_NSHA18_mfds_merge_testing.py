@@ -132,9 +132,9 @@ src_mmin = 4.8 * ones_like(src_mmin)
 depmin = 9.
 depmax = 99. # only get events GE 10 km
 
-#depmin = -99.
-#depmax = 10. # only get events GE 10 km
-    
+# set shallow depth range
+depmin = -99.
+depmax = 10. # only get events GE 10 km
 
 # set arrays for testing
 bval_vect = []
@@ -1300,47 +1300,14 @@ csvtxt = header + '\n'
 for rec in records:
     newline = ','.join(rec) + '\n'
     csvtxt += newline
-    
-f = open(newshp.strip('.shp'+'.csv'), 'wb')
+
+csvbase = path.split(newshp)[-1].strip('shp')+'csv'
+combined_csv = path.join(rootfolder, csvbase)
+   
+f = open(combined_csv, 'wb')
 f.write(csvtxt)
 f.close()
 
-'''
-# code from here: https://gist.github.com/bertspaan/8220892
-def dbf2csv(dbffile):
-    import csv
-    from dbfpy import dbf
-    
-    if dbffile.endswith('.dbf'):
-        print "Converting %s to csv" % dbffile
-        csv_fn = dbffile[:-4]+ ".csv"
-        with open(csv_fn,'wb') as csvfile:
-            in_db = dbf.Dbf(dbffile)
-            out_csv = csv.writer(csvfile)
-            names = []
-            for field in in_db.header.fields:
-                names.append(field.name)
-            out_csv.writerow(names)
-            for rec in in_db:
-                out_csv.writerow(rec.fieldData)
-            in_db.close()
-            print "Done..."
-    else:
-      print "Filename does not end with .dbf"
-
-dbffile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'.dbf')
-dbf2csv(dbffile)
-
-  
-
-summary_txt = 'src_code,trt,src_dep,src_N0,src_bval,min_mag,max_mag,min_mag_reg'
-
-for rec, shape in zip(records, shapes):
-    
-'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_dep':rec[4],
-             'src_N0':[float(rec[12])], 'src_beta':rec[15], bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':min_mag, 'src_weight':float(rec[3]), 'src_reg_wt':1
-'''
 ###############################################################################
 # make source dict for OQ input writer
 ###############################################################################
