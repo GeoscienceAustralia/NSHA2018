@@ -1,4 +1,4 @@
-"""Object for storing logic tree parameters
+"""Object for storing and accessing logic tree parameters
 """
 
 import os, sys
@@ -12,7 +12,6 @@ class LogicTreeBranch(object):
     def __init__(self, branch_value, branch_weight):
         """Instantiate class
         """
-#        self.branch_class = branch_class
         self.value = branch_value
         self.weight = branch_weight
 
@@ -32,7 +31,7 @@ class LogicTreeSet(object):
     """Class for storing multiple logic tree branches 
     related to similar parameters
     """
-    def __init__(self,set_name):#, set_classes, set_values, set_weights):
+    def __init__(self,set_name):
         self.set_name = set_name
         self.set_classes = {}
     
@@ -47,8 +46,6 @@ class LogicTree(object):
         self.sets = {}
         if filename is not None:
             self.lt_from_file(filename)
-        #else:
-        #    return
 
     def add_set(self, set_name):
         self.sets[set_name] = LogicTreeSet(set_name)
@@ -56,7 +53,6 @@ class LogicTree(object):
     def lt_from_file(self,filename):
         """Build logic trees from parameters in a file
         """
-        
         f_in = open(filename,'r')
         header = f_in.readline()
         for line in f_in.readlines():
@@ -64,7 +60,7 @@ class LogicTree(object):
             branch_set = row[1]
             branch_class = row[2]
             branch_value = row[3]
-            branch_weight = row[4]
+            branch_weight = float(row[4])
             if branch_set in self.sets:
                 if branch_class in self.sets[branch_set].set_classes:
                     pass
@@ -73,13 +69,44 @@ class LogicTree(object):
             else:
                 self.add_set(branch_set)
                 self.sets[branch_set].add_class(branch_class)
-            # Add individual branch values and weightings
-#            print self.sets[branch_set]
             self.sets[branch_set].set_classes[branch_class].add_branch(branch_value, branch_weight)
-        print self.sets
+
+    def get_weights(self, set_name, class_name):
+        """Returns all branches and weights for a given set
+        and class"""
+        branch_values = []
+        branch_weights = []
+        for branch, lt_b in self.sets[set_name].set_classes[class_name].branches.iteritems():
+            branch_values.append(lt_b.value)
+            branch_weights.append(lt_b.weight)
+        return branch_values, branch_weights
+
+    def list_sets(self):
+        """Print all set names
+        """
+        for set_name, obj in self.sets.iteritems():
+            print set_name
+            
+    def list_classes(self, set_name=None):
+        """Print class names of given set, or
+        all if set_name is not specified"""
+        if set_name is not None:
+            print 'Set name:', set_name
+            for class_name, obj in self.sets[set_name].set_classes.iteritems():
+                print class_name
+        else:
+            for set_name, obj in self.sets.iteritems():
+                 print 'Set name:', set_name
+                 for class_name, obj in self.sets[set_name].set_classes.iteritems():
+                     print class_name
             
 if __name__ == "__main__":
     lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    print lt.sets['Mmax'].set_classes['Proterozoic'].branches
-    for branch, lt_b in lt.sets['Mmax'].set_classes['Proterozoic'].branches.iteritems():
-        print lt_b.value, lt_b.weight
+    lt.list_sets()
+    lt.list_classes('FSM_MFD')
+    branch_values, branch_weights = lt.get_weights('Mmax', 'Proterozoic')
+    print branch_values
+    print branch_weights
+    branch_values, branch_weights = lt.get_weights('FSM_MFD', 'Cratonic')
+    print branch_values
+    print branch_weights

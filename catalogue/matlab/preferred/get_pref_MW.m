@@ -9,13 +9,13 @@
 %
 % Author: T. Allen (2011-01-11)
 % *************************************************************************
-outfile = '..\..\AUSTCAT.MW.V0.12.csv';
+outfile = '..\..\data\AUSTCAT.MW.V0.12.csv';
 
 % load data
 
 if exist('mdat_pref','var') ~= 1
     disp('Loading mdat_mw_pref 12');
-    load ..\Append_Preferred_MWs\mdat_mw_pref12.mat;
+    load ..\append_mw\mdat_mw_pref12.mat;
 end
 
 % if exist('mdat','var') ~= 1
@@ -98,9 +98,9 @@ ind = find([mdat_pref.MDAT_MLrev] > mx & [mdat_pref.zone] == 1 & ~isnan([mdat_pr
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_MLrev] + a2 * ([mdat_pref(ind).MDAT_MLrev] - mx) + a3;
 
 % for pref ML
-ind = find([mdat_pref.MDAT_prefML] <= mx & [mdat_pref.zone] == 1 & ~isnan([mdat_pref.MDAT_prefML]));
+ind = find([mdat_pref.MDAT_prefML] <= mx & [mdat_pref.zone] == 1 & isnan([mdat_pref.MDAT_MLrev]));
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a3;
-ind = find([mdat_pref.MDAT_prefML] > mx & [mdat_pref.zone] == 1 & ~isnan([mdat_pref.MDAT_prefML]));
+ind = find([mdat_pref.MDAT_prefML] > mx & [mdat_pref.zone] == 1 & isnan([mdat_pref.MDAT_MLrev]));
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a2 * ([mdat_pref(ind).MDAT_prefML] - mx) + a3;
 
 % note, changed max zone number to use SEA conversion for offshore events
@@ -113,9 +113,9 @@ ind = find([mdat_pref.MDAT_MLrev] > mx & [mdat_pref.zone] >= 2 & [mdat_pref.zone
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_MLrev] + a2 * ([mdat_pref(ind).MDAT_MLrev] - mx) + a3;
 
 % for pref ML
-ind = find([mdat_pref.MDAT_prefML] <= mx & [mdat_pref.zone] >= 2 & [mdat_pref.zone] <= 5 & ~isnan([mdat_pref.MDAT_prefML]));
+ind = find([mdat_pref.MDAT_prefML] <= mx & [mdat_pref.zone] >= 2 & [mdat_pref.zone] <= 5 & isnan([mdat_pref.MDAT_MLrev]));
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a3;
-ind = find([mdat_pref.MDAT_prefML] > mx & [mdat_pref.zone] >= 2 & [mdat_pref.zone] <= 5 & ~isnan([mdat_pref.MDAT_prefML]));
+ind = find([mdat_pref.MDAT_prefML] > mx & [mdat_pref.zone] >= 2 & [mdat_pref.zone] <= 5 & isnan([mdat_pref.MDAT_MLrev]));
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a2 * ([mdat_pref(ind).MDAT_prefML] - mx) + a3;
 
 
@@ -135,9 +135,9 @@ ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a2 * ([mdat_pref(ind).MDAT_pre
 disp('Converting ML to MW using Ghasemi...');
 
 % set HG fixed mx reg coefs
-a1 = 0.68531993;
-a2 = 1.05590293;
-a3 = 1.05582863;
+a1 = 0.66199378;
+a2 = 1.2156352;
+a3 = 1.07488336;
 mx = 4.5;
 my = a1 * mx + a2;
 
@@ -153,9 +153,9 @@ ind = find([mdat_pref.MDAT_MLrev] > mx  & ~isnan([mdat_pref.MDAT_MLrev]));
 ML2MWG(ind) = a3 * ([mdat_pref(ind).MDAT_MLrev] - mx) + my;
 
 % for pref ML
-ind = find([mdat_pref.MDAT_prefML] <= mx & ~isnan([mdat_pref.MDAT_prefML]));
+ind = find([mdat_pref.MDAT_prefML] <= mx & isnan([mdat_pref.MDAT_MLrev]));
 ML2MWG(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a2;
-ind = find([mdat_pref.MDAT_prefML] > mx & ~isnan([mdat_pref.MDAT_prefML]));
+ind = find([mdat_pref.MDAT_prefML] > mx & isnan([mdat_pref.MDAT_MLrev]));
 ML2MWG(ind) =  a3 * ([mdat_pref(ind).MDAT_prefML] - mx) + my;
 
 %% set fields

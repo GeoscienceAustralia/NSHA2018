@@ -44,7 +44,10 @@ def ggcat2ascii(ggcat_dict, outfile):
     f.write(cattxt)
     f.close()
     
-def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
+def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
+    '''
+    prefmag = 'orig' or 'mw'
+    '''
     
     '''
     takes catalogue dictionary format as parsed by catalogues.parsers.parse_ggcat
@@ -78,11 +81,18 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile):
             flag = '0'
         
         # set Original magnitude as main magnitude for declustering (mx_orig) and add additional columns
-        line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
-                         checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
-                         checkstr(ggc['dep']),checkstr(ggc['mx_orig']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
-                         checkstr(ggc['mx_orig']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_rev_ml']), checkstr(ggc['prefmag'])))
-                         
+        if prefmag == 'orig':
+            line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
+                             checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
+                             checkstr(ggc['dep']),checkstr(ggc['mx_orig']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
+                             checkstr(ggc['mx_orig']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_rev_ml']), checkstr(ggc['prefmag'])))
+        
+        # else use pref mw
+        else:
+            line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
+                             checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
+                             checkstr(ggc['dep']),checkstr(ggc['prefmag']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
+                             checkstr(ggc['mx_orig']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_rev_ml']), checkstr(ggc['prefmag'])))     
         '''
         # for making MX_REV_ML file        
         line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
