@@ -332,7 +332,7 @@ for i in range(0, len(nsha_dict)):
 datestr = np.array(datestr)
 
 # parse declustered file and add cols
-lines = open(path.join('data', declustered_catalog_file)).readlines()
+lines = open(path.join('data', declustered_catalog_filename)).readlines()
 
 newheader = lines[0].strip() + ',mx_origML,mx_origType,mx_revML,pref_mw\n'
 newtxt = newheader
@@ -342,9 +342,10 @@ for line in lines[1:]:
     dat = line.strip().split(',')    
     
     # match earthquake info
-    eqidx = np.where((datestr == dat[0]))[0]
-                     # & (lon == np.around(checkfloat(dat[9]), decimals=3))
-                     # & (lat == np.around(checkfloat(dat[10]), decimals=3)))[0] 
+    eqidx = np.where((datestr == dat[0]) \
+                     & (lon >= checkfloat(dat[9])-0.001) & (lon <= checkfloat(dat[9])+0.001) \
+                     & (lat >= checkfloat(dat[10])-0.001) & (lat <= checkfloat(dat[10])+0.001))
+    
     # testing
     if len(eqidx) > 1:
         print datestr[eqidx][0], eqidx
