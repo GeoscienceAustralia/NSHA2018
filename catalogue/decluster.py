@@ -385,30 +385,3 @@ f.write(newtxt)
 f.close()
   
 
-# if prefmag2 == 'mw', 
-
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

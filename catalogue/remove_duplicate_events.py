@@ -66,7 +66,6 @@ while i < len(datestr):
             notehb = where(auth[eqidx] != 'EHB')[0]
             delidx = hstack((delidx, eqidx[notehb]))
         
-        
         # increment to next event
         i += len(eqidx) - 1
         
