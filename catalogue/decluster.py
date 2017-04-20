@@ -181,7 +181,7 @@ def decluster_SCR(method, cat):
     #####################################################
     
     # setup the writer
-    declustered_catalog_file = hmtk_csv.split('.')[0]+'_declustered_test.csv'
+    declustered_catalog_file = '.'.join(hmtk_csv.split('.')[0:2])+'_declustered_test.csv'
     
     # if it exists, delete previous file
     try:
@@ -312,11 +312,14 @@ else:
 #########################################################################
 # merge extra columns removed by HMTK parser
 #########################################################################
+print 'Merging stripped columns...\n'
+
 prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
 
 from misc_tools import dict2array, checkfloat
 
-#declustered_catalog_file = 'AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
+# for testing
+declustered_catalog_filename = 'data/AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
 
 # get data arrays from original catalogue
 for key in nsha_dict[0].keys():
@@ -332,30 +335,37 @@ for i in range(0, len(nsha_dict)):
 datestr = np.array(datestr)
 
 # parse declustered file and add cols
-lines = open(path.join('data', declustered_catalog_filename)).readlines()
+lines = open(path.join(declustered_catalog_filename)).readlines()
 
+# set new header
 newheader = lines[0].strip() + ',mx_origML,mx_origType,mx_revML,pref_mw\n'
 newtxt = newheader
 
-#  all new variables are introduced using the "exec" command above
+#  all new variables are invoked using the "exec" command above
 for line in lines[1:]:
     dat = line.strip().split(',')    
     
     # match earthquake info
-    eqidx = np.where((datestr == dat[0]) \
-                     & (lon >= checkfloat(dat[9])-0.001) & (lon <= checkfloat(dat[9])+0.001) \
-                     & (lat >= checkfloat(dat[10])-0.001) & (lat <= checkfloat(dat[10])+0.001))
+    if np.isnan(float(dat[16])):
+        eqidx = np.where((datestr == dat[0]) \
+                         & (lon >= checkfloat(dat[9])-0.01) & (lon <= checkfloat(dat[9])+0.01) \
+                         & (lat >= checkfloat(dat[10])-0.01) & (lat <= checkfloat(dat[10])+0.01))[0]
+    else:
+        eqidx = np.where((datestr == dat[0]) \
+                         & (lon >= checkfloat(dat[9])-0.01) & (lon <= checkfloat(dat[9])+0.01) \
+                         & (lat >= checkfloat(dat[10])-0.01) & (lat <= checkfloat(dat[10])+0.01) \
+                         & (mx_orig >= checkfloat(dat[16])-0.1) & (mx_orig <= checkfloat(dat[16])+0.1))[0]
     
     # testing
     if len(eqidx) > 1:
-        print datestr[eqidx][0], eqidx
+        print datestr[eqidx[0]], eqidx
     
     # replace orig mag in "magnitude" column
     # prefmag = MW
     if prefmag2 == 'mw':
-        newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',MW,' + ','.join(dat[18:]) \
-                + ',' + ','.join((str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
-                            str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
+        newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',,MW,' \
+                  + ','.join((str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
+                              str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
                             
     # keep orig mag in "magnitude" column
     else:
