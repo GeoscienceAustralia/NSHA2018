@@ -205,6 +205,24 @@ def append_rupture_geometry(output_xml, trace, dip,
     output_xml.append('      </simpleFaultGeometry>')
     return
 
+def append_incremental_mfd(output_xml, magnitude_scale_rel,
+                           rupture_aspect_ratio, rake,
+                           min_mag, bin_width, rates):
+    """Creates output xml in increment MFD format from 
+    given rate parameters
+    """
+    output_xml.append('      <magScaleRel>' +
+                      str(magnitude_scale_rel) + '</magScaleRel>')
+    output_xml.append(
+        '      <ruptAspectRatio>' + str(rupture_aspect_ratio) + '</ruptAspectRatio>')
+    output_xml.append('      <incrementalMFD minMag="' +
+                      str(min_mag) + '" binWidth="' + str(bin_width) + '">')
+    output_xml.append('          <occurRates>' + ' '.join(str(rt) for rt in rates ) +
+                      '</occurRates>')
+    output_xml.append('      </incrementalMFD>')
+    output_xml.append('      <rake>' + str(rake) + '</rake>')
+    output_xml.append('    </simpleFaultSource>')
+    
 def sliprate2GR_incremental(sliprate, fault_area, b_value,
                             max_mag, min_mag = 0.0, bin_width = 0.1):
     """Converts a sliprate and b-value into a Gutenberg-

@@ -21,7 +21,7 @@ shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
 shapefile_uplift_attribute = 'UP_RT_LT'
-source_model_name = 'National_Fault_Source_Model_2018'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed'
 simple_fault_tectonic_region = None # Define based on neotectonic domains
 magnitude_scaling_relation = 'Leonard2014_SCR'
 rupture_aspect_ratio = 1
@@ -56,13 +56,24 @@ trts = shp2nrml.trt_from_domains(fault_traces, domains_shapefile,
 b_values = shp2nrml.b_value_from_region(fault_traces, 
                                         b_region_shapefile, 
                                         default_b = 1.0)
+# Output to be appened line by line to this list
+output_xml_add = []
+output_xml_mb = []
+output_xml_geom = []
+output_xmls = [output_xml_add, output_xml_mb, output_xml_geom]
+# Append nrml headers
+shp2nrml.append_xml_header(output_xml_add, ('%s_additive' % source_model_name))
+shp2nrml.append_xml_header(output_xml_mb, ('%s_moment_balanced' % source_model_name))
+shp2nrml.append_xml_header(output_xml_geom, ('%s_geom_filtered' % source_model_name))
 
 for i, fault_trace in enumerate(fault_traces):
+     # Get basic parameters
      fault_area = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
      sliprate = sliprates[i]
      trt = trts[i]
      faultname = faultnames[i]
      b_value = b_values[i]
+     dip = dips[i]
      print 'Calculating rates for %s in domain %s' % (faultname, trt)
      # Calculate M_max from scaling relations
      scalrel = Leonard2014_SCR()
@@ -71,8 +82,13 @@ for i, fault_trace in enumerate(fault_traces):
      max_mag = np.round((max_mag-0.05), 1) + 0.05
      print 'Maximum magnitude is %.3f' % max_mag
 
-     # Get b-value and trt from domains
-#     trt = shp2nrml.trt_from_domains
+     # Append geometry information
+     for output_xml in output_xmls:
+          shp2nrml.append_rupture_geometry(output_xml, fault_trace,
+                                           dip, i, faultname,
+                                           upper_depth, lower_depth,
+                                           trt)
+                                           
 
      # Get truncated Gutenberg-Richter rates
      gr_mags, gr_rates, moment_rate = \
@@ -81,20 +97,17 @@ for i, fault_trace in enumerate(fault_traces):
                                           min_mag, bin_width)
          
      gr_mags = np.around(gr_mags, 2)# Rounding to ensure equality of magnitude bins
-     print gr_mags
-     print gr_rates
      gr_add_value, gr_add_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_Add')
      gr_mb_value, gr_mb_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_MB')
      gr_geom_value, gr_geom_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_Geom')
-     print gr_add_weight
+
      # Get Youngs and Coppersmith 1985 Characteristic rates
      char_mag = gr_mags[-1] - 0.25 + 0.05 # Adding 0.05 avoids round issues
+     print char_mag, b_value, min_mag, max_mag, moment_rate, bin_width
      ce_mags, ce_rates = shp2nrml.momentrate2YC_incremental(char_mag, b_value,
                                                             min_mag, max_mag,
                                                             moment_rate, bin_width)
      ce_mags = np.around(ce_mags, 2)# Rounding to ensure equality of magnitude bins
-     print ce_mags, type(ce_mags)
-     print ce_rates
      ce_add_value, ce_add_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'YC_Add')
      ce_mb_value, ce_mb_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'YC_MB')
      ce_geom_value, ce_geom_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'YC_Geom')
@@ -105,8 +118,6 @@ for i, fault_trace in enumerate(fault_traces):
                                                             moment_rate,
                                                             bin_width)
      mm_mags = np.around(mm_mags, 2) # Rounding to ensure equality of magnitude bins
-     print mm_mags
-     print mm_rates
      mm_add_value, mm_add_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'MM_Add')
      mm_mb_value, mm_mb_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'MM_MB')
      mm_geom_value, mm_geom_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'MM_Geom')
@@ -128,11 +139,45 @@ for i, fault_trace in enumerate(fault_traces):
               np.sum(ce_geom_weight*ce_rates[np.where(ce_mags == mag_bin)]) + \
               np.sum(mm_geom_weight*mm_rates[np.where(mm_mags == mag_bin)])
           geom_rates.append(geom_rate)
-     print gr_mags,
-     print additive_rates
-     print mb_rates
-     print geom_rates
-     sys.exit()
+
+     # Append collapsed weights to xml
+     shp2nrml.append_incremental_mfd(output_xml_add, magnitude_scaling_relation,
+                                     rupture_aspect_ratio, rake,
+                                     min(gr_mags), bin_width, additive_rates)
+     shp2nrml.append_incremental_mfd(output_xml_mb, magnitude_scaling_relation,
+                                     rupture_aspect_ratio, rake,
+                                     min(gr_mags), bin_width, mb_rates)
+     shp2nrml.append_incremental_mfd(output_xml_geom, magnitude_scaling_relation,
+                                     rupture_aspect_ratio, rake,
+                                     min(gr_mags), bin_width, geom_rates)
+
+# Close xml
+for output_xml in output_xmls:
+     output_xml.append('  </sourceModel>')
+     output_xml.append('</nrml>')
+# Add newlines
+output_xml_add = [oxml + '\n' for oxml in output_xml_add]
+output_xml_mb = [oxml + '\n' for oxml in output_xml_mb]
+output_xml_geom = [oxml + '\n' for oxml in output_xml_geom]
+# Write to file
+try:
+     os.mkdir(source_model_name)
+except:
+     pass
+
+f = open(os.path.join(source_model_name, source_model_name + '_additive.xml'),
+         'w')
+f.writelines(output_xml_add)
+f.close()
+f = open(os.path.join(source_model_name, source_model_name + '_moment_balance.xml'),
+         'w')
+f.writelines(output_xml_mb)
+f.close()
+f = open(os.path.join(source_model_name, source_model_name + '_geom_filtered.xml'),
+         'w')
+f.writelines(output_xml_geom)
+f.close() 
+#sys.exit()
                                                           
 
 
