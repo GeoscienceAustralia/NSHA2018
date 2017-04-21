@@ -29,68 +29,80 @@ ML2MWA = ones(size(mdat_pref)) * NaN;
 ML2MWG = ones(size(mdat_pref)) * NaN;
 prefFinalMW = ones(size(mdat_pref)) * NaN;
 
-%% Convert MS to MW using Di Giacomo et al (2015)
+%% Convert MS to MW using Di Giacomo et al (2015) for zone 4
 
 % conversion for shallow earthquakes (h < 70 km)
 disp('Converting MS to MW...');
 % for 3.0 <= MS <= 6.1
 ind1 = find([mdat_pref.MDAT_dep] <= 70 & [mdat_pref.MDAT_prefMS] >= 3.0 ...
-           & [mdat_pref.MDAT_prefMS] <= 6.47);
+           & [mdat_pref.MDAT_prefMS] <= 6.47 & [mdat_pref.zone] == 4);
 % include those events with NaN depth       
 ind2 = find(isnan([mdat_pref.MDAT_dep]) & [mdat_pref.MDAT_prefMS] >= 3.0 ...
-           & [mdat_pref.MDAT_prefMS] <= 6.47);
+           & [mdat_pref.MDAT_prefMS] <= 6.47 & [mdat_pref.zone] == 4);
 % include those events h > 70 and no mb   
 ind3 = find([mdat_pref.MDAT_dep] > 70  & [mdat_pref.MDAT_prefMS] >= 3.0 ...
-           & [mdat_pref.MDAT_prefMS] <= 6.47 & isnan([mdat_pref.MDAT_prefmb]));
+           & [mdat_pref.MDAT_prefMS] <= 6.47 & isnan([mdat_pref.MDAT_prefmb]) ...
+           & [mdat_pref.zone] == 4);
 
 ind = [ind1, ind2, ind3];       
 MS2MW(ind) = 0.67 * [mdat_pref(ind).MDAT_prefMS] + 2.13;
 
 % for 6.47 < MS <= 8.2! (Ignore upper lim for now)
-ind1 = find([mdat_pref.MDAT_dep] <= 70 & [mdat_pref.MDAT_prefMS] > 6.47);
+ind1 = find([mdat_pref.MDAT_dep] <= 70 & [mdat_pref.MDAT_prefMS] > 6.47 ...
+             & [mdat_pref.zone] == 4);
 % include those events with NaN depth       
-ind2 = find(isnan([mdat_pref.MDAT_dep]) & [mdat_pref.MDAT_prefMS] > 6.47);
+ind2 = find(isnan([mdat_pref.MDAT_dep]) & [mdat_pref.MDAT_prefMS] > 6.47 ...
+             & [mdat_pref.zone] == 4);
 % include those events h > 70 and no mb   
 ind3 = find([mdat_pref.MDAT_dep] > 70  & [mdat_pref.MDAT_prefMS] > 6.47 ...
-            & isnan([mdat_pref.MDAT_prefmb]));
+            & isnan([mdat_pref.MDAT_prefmb]) & [mdat_pref.zone] == 4);
 
 ind = [ind1, ind2, ind3];       
 MS2MW(ind) = 1.10 * [mdat_pref(ind).MDAT_prefMS] - 0.67;
 
-%% Convert mb to MW using Di Giacomo et al (2015) for events above latitude -13 deg
+%% Convert MS to MW using Ghasemi (2017) for Aust events
+c1 = 0.84896727404297323;
+c2 = 1.0509630268292971;
+
+% for 3.0 <= MS <= 7.0
+ind = find(~isnan([mdat_pref.MDAT_prefMS]) & [mdat_pref.zone] ~= 4);
+MS2MW(ind) = c1 * [mdat_pref(ind).MDAT_prefMS] + c2;
+
+%% Convert mb to MW using Di Giacomo et al (2015) for zone 4
 
 disp('Converting mb to MW...');
 % for 3.5 <= mb <= 6.2
-ind = find([mdat_pref.MDAT_prefmb] >= 4 & [mdat_pref.MDAT_prefmb] <= 7.0 ...
-      & [mdat_pref.MDAT_lat] > -13);
+ind = find([mdat_pref.MDAT_prefmb] >= 4 & [mdat_pref.MDAT_prefmb] <= 6.2 ...
+           & [mdat_pref.zone] == 4);
 mb2MW(ind) = 1.38 * [mdat_pref(ind).MDAT_prefmb] - 1.79;
 
-%% Convert mb to MW using Allen (2012) for events below latitude -13 deg
-c1 = 0.7362;
-c2 = 0.7374;
-c3 = 0.9707;
-mx = 5.0905;
+%% Convert mb to MW using Allen (2012) for events below latitude -13 deg - out-dated!
+% c1 = 0.7362;
+% c2 = 0.7374;
+% c3 = 0.9707;
+% mx = 5.0905;
 
-ind = find([mdat_pref.MDAT_prefmb] >= 3.0 & [mdat_pref.MDAT_prefmb] < mx ...
-      & [mdat_pref.MDAT_lat] <= -13);
-mb2MW(ind) = c1 * [mdat_pref(ind).MDAT_prefmb] + c3;
-ind = find([mdat_pref.MDAT_prefmb] >= mx & [mdat_pref.MDAT_prefmb] <= 6.5 ...
-           & [mdat_pref.MDAT_lat] <= -13);
-mb2MW(ind) = c1 * [mdat_pref(ind).MDAT_prefmb] ...
-             + c2 * ([mdat_pref(ind).MDAT_prefmb] - mx) + c3;
-% include AUST and MGO mb's to 3.0
-% ind = find([mdat_pref.MDAT_prefmb] >= 3.0 & [mdat_pref.MDAT_prefmb] < 3.5 ...
-%       & strcmp({mdat_pref.MDAT_prefmbSrc},'MGO'));
-% mb2MW(ind) = 0.85 * [mdat_pref(ind).MDAT_prefmb] + 1.03;
-% ind = find([mdat_pref.MDAT_prefmb] >= 3.0 & [mdat_pref.MDAT_prefmb] < 3.5 ...
-%       & strcmp({mdat_pref.MDAT_prefmbSrc},'AUST'));
-% mb2MW(ind) = 0.85 * [mdat_pref(ind).MDAT_prefmb] + 1.03;
+% ind = find([mdat_pref.MDAT_prefmb] >= 3.0 & [mdat_pref.MDAT_prefmb] < mx ...
+%        & [mdat_pref.zone] == 4);
+% mb2MW(ind) = c1 * [mdat_pref(ind).MDAT_prefmb] + c3;
+% ind = find([mdat_pref.MDAT_prefmb] >= mx & [mdat_pref.MDAT_prefmb] <= 6.5 ...
+%             & [mdat_pref.zone] == 4);
+% mb2MW(ind) = c1 * [mdat_pref(ind).MDAT_prefmb] ...
+%              + c2 * ([mdat_pref(ind).MDAT_prefmb] - mx) + c3;
+         
+%% Convert mb to MW using Ghasemi (2017) for Aust events
+c1 = 1.1438907424442797;
+c2 = -0.87192285009579173;
 
-%% Convert ML to MW using Allen conversions
+% for 3.0 <= MS <= 7.0
+ind = find(~isnan([mdat_pref.MDAT_prefmb]) & [mdat_pref.zone] ~= 4);
+mb2MW(ind) = c1 * [mdat_pref(ind).MDAT_prefmb] + c2;
+
+%% Convert ML to MW using Allen conversions - out-dated, but preserve in catalogue
 % mx = 4.2;
 
 disp('Converting ML to MW in CWA...');
-[a1 a2 a3 mx] = textread('F:\Catalogues\ML2MW\WA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
+[a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\WA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
 % for ML rev
 ind = find([mdat_pref.MDAT_MLrev] <= mx & [mdat_pref.zone] == 1 & ~isnan([mdat_pref.MDAT_MLrev]));
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_MLrev] + a3;
@@ -105,7 +117,7 @@ ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_prefML] + a2 * ([mdat_pref(ind).MDAT_pre
 
 % note, changed max zone number to use SEA conversion for offshore events
 disp('Converting ML to MW in eastern & south Australia...');
-[a1 a2 a3 mx] = textread('F:\Catalogues\ML2MW\EA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
+[a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\EA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
 % for ML rev
 ind = find([mdat_pref.MDAT_MLrev] <= mx & [mdat_pref.zone] >= 2 & [mdat_pref.zone] <= 5 & ~isnan([mdat_pref.MDAT_MLrev]));
 ML2MWA(ind) = a1 * [mdat_pref(ind).MDAT_MLrev] + a3;
@@ -174,27 +186,30 @@ for i = 1:length(mdat_pref)
     if ~isnan(mdat_pref(i).MDAT_prefMW)
         mdat_pref(i).prefFinalMW = mdat_pref(i).MDAT_prefMW;
         mdat_pref(i).prefFinalMWSrc = mdat_pref(i).MDAT_prefMWSrc;
-% take larger of MS/mb >= 6.0
-    elseif mdat_pref(i).MS2MW >= 6.0 | mdat_pref(i).mb2MW >= 6.0
-        maxM = max([mdat_pref(i).MS2MW mdat_pref(i).mb2MW]);
-        if mdat_pref(i).MS2MW == maxM
+
+% take larger of MS/mb >= 5.75
+    elseif mdat_pref(i).MS2MW > 5.75 | mdat_pref(i).mb2MW > 5.75
+        maxM = max([mdat_pref(i).MDAT_prefMS mdat_pref(i).MDAT_prefmb]); % deliberately use orig mag here
+        if mdat_pref(i).MDAT_prefMS == maxM
             mdat_pref(i).prefFinalMW = mdat_pref(i).MS2MW;
             mdat_pref(i).prefFinalMWSrc = 'MS2MW';
-        elseif mdat_pref(i).mb2MW == maxM
+        elseif mdat_pref(i).MDAT_prefmb == maxM
             mdat_pref(i).prefFinalMW = mdat_pref(i).mb2MW;
             mdat_pref(i).prefFinalMWSrc = 'mb2MW';
         end
-% take ML-MW   
+        
+% take ML-MW
     elseif ~isnan(mdat_pref(i).ML2MWG)
         mdat_pref(i).prefFinalMW = mdat_pref(i).ML2MWG;
         mdat_pref(i).prefFinalMWSrc = 'ML2MWG';
+
 % take larger of MS/mb < 6.0        
     elseif ~isnan(mdat_pref(i).MS2MW) | ~isnan(mdat_pref(i).mb2MW)
-        maxM = max([mdat_pref(i).MS2MW mdat_pref(i).mb2MW]);
-        if mdat_pref(i).MS2MW == maxM
+        maxM = max([mdat_pref(i).MDAT_prefMS mdat_pref(i).MDAT_prefmb]); % deliberately use orig mag here
+        if mdat_pref(i).MDAT_prefMS == maxM
             mdat_pref(i).prefFinalMW = mdat_pref(i).MS2MW;
             mdat_pref(i).prefFinalMWSrc = 'MS2MW';
-        elseif mdat_pref(i).mb2MW == maxM
+        elseif mdat_pref(i).MDAT_prefmb == maxM
             mdat_pref(i).prefFinalMW = mdat_pref(i).mb2MW;
             mdat_pref(i).prefFinalMWSrc = 'mb2MW';
         else
