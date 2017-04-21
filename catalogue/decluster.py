@@ -314,12 +314,12 @@ else:
 #########################################################################
 print 'Merging stripped columns...\n'
 
-prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
+prefmag2 = 'orig' # replaces orig mag with preferred MW in declustered catalogue
 
 from misc_tools import dict2array, checkfloat
 
 # for testing
-declustered_catalog_filename = 'data/AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
+#declustered_catalog_filename = 'data/AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
 
 # get data arrays from original catalogue
 for key in nsha_dict[0].keys():
@@ -358,7 +358,7 @@ for line in lines[1:]:
     
     # testing
     if len(eqidx) > 1:
-        print datestr[eqidx[0]], eqidx
+        print 'Possible duplicate:', datestr[eqidx[0]], eqidx
     
     # replace orig mag in "magnitude" column
     # prefmag = MW
@@ -378,7 +378,7 @@ for line in lines[1:]:
 if prefmag2 == 'mw':
     declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
 else:
-    declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig_declustered_test2.csv' 
+    declustered_csv = declustered_catalog_filename 
 
 f = open(declustered_csv, 'wb')
 f.write(newtxt)

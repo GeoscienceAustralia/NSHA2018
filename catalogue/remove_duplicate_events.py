@@ -14,7 +14,7 @@ nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # get data arrays from original catalogue
-print array(nsha_dict[0].keys())
+print array(nsha_dict[0].keys()), '\n'
 for key in nsha_dict[0].keys():
     exec(key + ' = dict2array(nsha_dict, key)')
 
@@ -81,7 +81,7 @@ newlines = array(lines)
 # delete duplicate lines - inc delidx because of header row
 newlines = delete(newlines, delidx+1)
 
-f = open(nsha2012csv.strip('csv')+'.del.csv', 'wb')
+f = open(nsha2012csv.strip('.csv')+'.del.csv', 'wb')
 f.writelines(newlines)
 f.close()
 
