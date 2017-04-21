@@ -7,6 +7,7 @@ April 2017
 """
 
 import os, sys
+import numpy as np
 from NSHA2018.source_models.faults.shapefile2nrml import shapefile_2_simplefault, \
     shapefile_2_simplefault_CE, shapefile_2_simplefault_MM, shp2nrml
 from NSHA2018.source_models.logic_trees import logic_tree
@@ -66,6 +67,8 @@ for i, fault_trace in enumerate(fault_traces):
      # Calculate M_max from scaling relations
      scalrel = Leonard2014_SCR()
      max_mag = scalrel.get_median_mag(fault_area, float(rake))
+     # Round to nearest 0.05 mag unit
+     max_mag = np.round((max_mag-0.05), 1) + 0.05
      print 'Maximum magnitude is %.3f' % max_mag
 
      # Get b-value and trt from domains
@@ -76,25 +79,59 @@ for i, fault_trace in enumerate(fault_traces):
          shp2nrml.sliprate2GR_incremental(sliprate, fault_area,
                                           b_value, max_mag, 
                                           min_mag, bin_width)
+         
+     gr_mags = np.around(gr_mags, 2)# Rounding to ensure equality of magnitude bins
      print gr_mags
      print gr_rates
-     gr_value, gr_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_Add')
-     print gr_weight
+     gr_add_value, gr_add_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_Add')
+     gr_mb_value, gr_mb_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_MB')
+     gr_geom_value, gr_geom_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'GR_Geom')
+     print gr_add_weight
      # Get Youngs and Coppersmith 1985 Characteristic rates
      char_mag = gr_mags[-1] - 0.25 + 0.05 # Adding 0.05 avoids round issues
-     yc_mags, yc_rates = shp2nrml.momentrate2YC_incremental(char_mag, b_value,
+     ce_mags, ce_rates = shp2nrml.momentrate2YC_incremental(char_mag, b_value,
                                                             min_mag, max_mag,
                                                             moment_rate, bin_width)
-     print yc_mags
-     print yc_rates
-     
+     ce_mags = np.around(ce_mags, 2)# Rounding to ensure equality of magnitude bins
+     print ce_mags, type(ce_mags)
+     print ce_rates
+     ce_add_value, ce_add_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'YC_Add')
+     ce_mb_value, ce_mb_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'YC_MB')
+     ce_geom_value, ce_geom_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'YC_Geom')
 
      # Get Maximum Magnitude distirbution
      mm_max_mag = gr_mags[-1] + 0.1 # Avoid rounding issues
      mm_mags, mm_rates = shp2nrml.momentrate2MM_incremental(mm_max_mag, 
                                                             moment_rate,
                                                             bin_width)
-     print mm_mags, mm_rates
+     mm_mags = np.around(mm_mags, 2) # Rounding to ensure equality of magnitude bins
+     print mm_mags
+     print mm_rates
+     mm_add_value, mm_add_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'MM_Add')
+     mm_mb_value, mm_mb_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'MM_MB')
+     mm_geom_value, mm_geom_weight = lt.get_weights('FSM_MFD', trt, branch_value = 'MM_Geom')
+
+     # Calculate collapsed weights
+     additive_rates = []
+     mb_rates = []
+     geom_rates = []
+     for mag_bin in gr_mags:
+          additive_rate = np.sum(gr_add_weight*gr_rates[np.where(gr_mags == mag_bin)]) + \
+              np.sum(ce_add_weight*ce_rates[np.where(ce_mags == mag_bin)]) + \
+              np.sum(mm_add_weight*mm_rates[np.where(mm_mags == mag_bin)])
+          additive_rates.append(additive_rate)
+          mb_rate = np.sum(gr_mb_weight*gr_rates[np.where(gr_mags == mag_bin)]) + \
+              np.sum(ce_mb_weight*ce_rates[np.where(ce_mags == mag_bin)]) + \
+              np.sum(mm_mb_weight*mm_rates[np.where(mm_mags == mag_bin)])
+          mb_rates.append(mb_rate)
+          geom_rate = np.sum(gr_geom_weight*gr_rates[np.where(gr_mags == mag_bin)]) + \
+              np.sum(ce_geom_weight*ce_rates[np.where(ce_mags == mag_bin)]) + \
+              np.sum(mm_geom_weight*mm_rates[np.where(mm_mags == mag_bin)])
+          geom_rates.append(geom_rate)
+     print gr_mags,
+     print additive_rates
+     print mb_rates
+     print geom_rates
      sys.exit()
                                                           
 

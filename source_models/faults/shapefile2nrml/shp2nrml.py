@@ -226,7 +226,11 @@ def sliprate2GR_incremental(sliprate, fault_area, b_value,
 def momentrate2YC_incremental(characteristic_mag, b_value,
                               min_mag, max_mag,
                               moment_rate, bin_width):
-
+    """Converts a moment rate and b-value into a Youngs &
+    Coppersmith 1985 characteristic distribution, 
+    then converts this to an OpenQuake incremental MFD
+    (to facilitate collapsing of rates with other MFDs)
+    """
     mfd = YoungsCoppersmith1985MFD.from_total_moment_rate(min_mag=0.01,
                                                           b_val=float(b_value),
                                                           char_mag=characteristic_mag, 
@@ -261,3 +265,29 @@ def momentrate2YC_incremental(characteristic_mag, b_value,
     rates = rates[np.where(mags >= float(min_mag))]
     mags = mags[np.where(mags >= float(min_mag))]
     return mags, rates
+
+def momentrate2MM_incremental(max_mag, moment_rate, bin_width):
+   """Converts a moment rate and maximum magmitnude into a
+    maximum magnitude distribution as an OpenQuake incremental MFD
+    (to facilitate collapsing of rates with other MFDs)
+    """
+   max_mag = np.around(max_mag, 2)
+   mags = np.arange(max_mag - 0.5, max_mag, bin_width)
+   print 'mag_values', mags
+   moment_values = np.power(10, (1.5*mags+16.05))/1e7
+   rate = moment_rate/np.sum(moment_values)
+   print 'rate', rate
+   
+   # check rates sum as expected
+   total_moment_rate = 0
+   for i in range(len(mags)):
+       moment = np.power(10, (1.5*mags[i]+16.05))
+       moment = moment/1e7 #Nm
+       inc_moment_rate = moment*rate
+       total_moment_rate += inc_moment_rate
+   moment_error = (total_moment_rate - moment_rate)/moment_rate
+   print 'Final moment rate error',  moment_error
+   print moment_rate, total_moment_rate
+   rates = np.ones(len(mags))*rate
+   print 'Total_rate', sum(rates)
+   return mags, rates
