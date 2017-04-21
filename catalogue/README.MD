@@ -6,17 +6,17 @@ The 2012 NSHA catalogue is used as the starting poitnt for the development of th
 	- use MEL corrections for all RC solutions
 	- assume Ricther (1935) for all QEDB solutions and correct to MLM92
 	- use Russell Cuthbertson's updated list of Australian seismic stations to determine event-station distances
-3) Run 'matlab\peferred\reviseMLs_2017.m':
-	- generates mdat_pref12.mat
-4) Run 'matlab\append_mw\refmt_au_mw_tables.py'
-	- makes 'combined_au_mw.dat'
-5) Run 'append_mw\append_mw.m'
-	- append MW estimates from 'combined_au_mw.dat'
-	- generates 'mdat_mw_pref12.mat'
-6) Run 'matlab\preferred\get_pref_MW.m'
-	- make final catalogue: data\AUSTCAT.MW.V0.12.csv
-7) A number of duplicate events were identified in the catalogue.  These were removed by running: 'remove_duplicate_events.py'
-9) Declustering was performed using 'decluster.py':
-	- Deculsters using Leonard (2008) algorithm on original catalogue magnitudes (e.g., ML, SM, mb, etc.).  This declustering algorithm was developed using original catalogue magnitudes, so this is appropriate.
-	- Deculstering performed on 'AUSTCAT_V0.12_hmtk_mx_orig.csv'
-	- Generates 'AUSTCAT_V0.12_hmtk_declustered.csv' and supplants preferred MW into 'magnitude' column after declustering
+3) Run '''matlab\peferred\reviseMLs_2017.m''':
+	- generates '''mdat_pref12.mat'''
+4) Run '''matlab\append_mw\refmt_au_mw_tables.py'''
+	- makes '''combined_au_mw.dat'''
+5) Run '''append_mw\append_mw.m'''
+	- append MW estimates from '''combined_au_mw.dat'''
+	- generates '''mdat_mw_pref12.mat'''
+6) Run '''matlab\preferred\get_pref_MW.m'''
+	- make final catalogue: '''data\AUSTCAT.MW.V0.12.csv'''
+7) A number of duplicate events were identified in the catalogue.  These were removed by running: '''remove_duplicate_events.py'''
+9) Declustering was performed using '''decluster.py''':
+	- Deculsters using Leonard (2008) algorithm on original catalogue magnitudes (e.g., ML, MS, mb, etc.).  This declustering algorithm was developed using original catalogue magnitudes, so this is appropriate.
+	- Deculstering performed on '''AUSTCAT_V0.12_hmtk_mx_orig.csv'''
+	- Generates '''AUSTCAT_V0.12_hmtk_declustered.csv''' and supplants preferred MW into '''magnitude''' column after declustering
