@@ -134,7 +134,7 @@ depmax = 99. # only get events GE 10 km
 
 # set shallow depth range
 depmin = -99.
-depmax = 10. # only get events GE 10 km
+depmax = 99. # only get events GE 10 km
 
 # set arrays for testing
 bval_vect = []
@@ -149,47 +149,11 @@ else:
     srcidx = range(len(src_code))
 
 ###############################################################################
-# parse GGCat
+# parse catalogue
 ###############################################################################
 '''Used to parse GGCat csv - now parse HMTK csv'''
-print 'parsing catalogue...'
-#ggcat = parse_ggcat(ggcatfile)
 
-# parse HMTK csv
-parser = CsvCatalogueParser(hmtk_csv)
-cat = parser.read_file()
-
-# get number of earthquakes
-neq = len(cat.data['magnitude'])
-
-# reformat HMTK dict to one expected for code below
-ggcat = []
-for i in range(0, neq):
-    # first make datestr
-    try:
-        if not isnan(cat.data['second'][i]):
-            datestr = str(cat.data['eventID'][i]) \
-                      + str('%2.2f' % cat.data['second'][i])
-        else:
-            datestr = str(cat.data['eventID'][i]) + '00.00'
-            
-        evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
-    
-    # if ID not date form, do it the hard way!
-    except:
-        datestr = ''.join((str(cat.data['year'][i]), str('%02d' % cat.data['month'][i]), 
-                           str('%02d' % cat.data['day'][i]), str('%02d' % cat.data['hour'][i]),
-                           str('%02d' % cat.data['minute'][i]), str('%0.2f' % cat.data['second'][i])))
-    
-        evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
-        
-    tdict = {'datetime':evdt, 'prefmag':cat.data['magnitude'][i], \
-             'lon':cat.data['longitude'][i], 'lat':cat.data['latitude'][i], \
-             'dep':cat.data['depth'][i], 'year':cat.data['year'][i], \
-             'month':cat.data['month'][i], 'fixdep':0, 'prefmagtype':'MW', \
-             'auth':cat.data['Agency'][i]}
-             	
-    ggcat.append(tdict)
+ggcat, neq = parse_hmtk_cat(hmtk_csv)
     
 # get max decimal year and round up!
 lastRec = ggcat[-1]
@@ -198,9 +162,9 @@ year_max = lastRec['year'] + lastRec['month']/12.
 # apply Hadi's ML-MW conversion to mcomps
 def convert_mcomps(mcomps):
     '''
-    a1 = 0.68531993
-    a2 = 1.05590293
-    a3 = 1.05582863
+    a1 = 0.66199378
+    a2 = 1.2156352
+    a3 = 1.2156352
     mx = 4.5
     my = a1 * mx + a2
     
@@ -233,6 +197,7 @@ class_area = []
 for uclass in unique_classes:
     
     total_mvect = []
+    total_mxvect = []
     total_tvect = []
     total_dec_tvect = []
     total_ev_dict = []
@@ -269,11 +234,19 @@ for uclass in unique_classes:
             
             print '    Compiling data from:', src_code[i]
             
-            #mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly)
-            mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly, depmin, depmax)
+            '''
+            mvect  = preferred MW
+            mxvect = preferred original magnitudes
+            tvect  = datetime array
+            dec_tvect = decimal datetime
+            ev_dict = event dictionary
+            '''
+            mvect, mxvect, tvect, dec_tvect, ev_dict \
+                   = get_events_in_poly(ggcat, poly, depmin, depmax)
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
+            total_mxvect = hstack((total_mxvect, mxvect))
             total_tvect = hstack((total_tvect, tvect))
             total_dec_tvect = hstack((total_dec_tvect, dec_tvect))
             total_ev_dict = hstack((total_ev_dict, ev_dict))
@@ -293,11 +266,11 @@ for uclass in unique_classes:
             mcompmin = around(ceil(min(mcomps)*10.) / 10., decimals=1)
             mrng = arange(mcompmin-bin_width/2, src_mmax[i], bin_width)
             
-            
             # remove events with NaN mags
             didx = where(isnan(total_mvect))[0]
             total_tvect = delete(total_tvect, didx)
             total_mvect = delete(total_mvect, didx)
+            total_mxvect = delete(total_mxvect, didx)
             total_dec_tvect = delete(total_dec_tvect, didx)
             total_ev_dict = delete(total_ev_dict, didx)
             
@@ -305,6 +278,7 @@ for uclass in unique_classes:
             didx = where(total_mvect < min(mcomps)-bin_width/2)[0]
             total_tvect = delete(total_tvect, didx)
             total_mvect = delete(total_mvect, didx)
+            total_mxvect = delete(total_mxvect, didx)
             total_dec_tvect = delete(total_dec_tvect, didx)
             total_ev_dict = delete(total_ev_dict, didx)
        
@@ -314,12 +288,17 @@ for uclass in unique_classes:
     
     # keep original vectors for plotting
     class_orig_mvect = total_mvect
+    class_orig_mxvect = total_mxvect
     class_orig_tvect = total_tvect
     class_orig_dec_tvect = dec_tvect
     
     # get bval for combined zones data - assumes call Leonard 2008 won't be invoked!
+    a1 = 0.66199378
+    a2 = 1.2156352
+    src_mmin_reg[i] = a1 * 3. + a2
+    
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
-          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, \
+          get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
                    mcomps, ycomps, year_max, mrng, src_mmax[i], src_mmin_reg[i], \
                    src_bval_fix[i], src_bval_fix_sd[i], bin_width, poly)
     
@@ -363,9 +342,7 @@ for i in srcidx:
     # get mag range for zonea
     mcompmin = around(ceil(min(mcomps)*10.) / 10., decimals=1)
     mrng = arange(mcompmin-bin_width/2, src_mmax[i], bin_width)
-    
-    
-        
+
     for uc in range(0, len(unique_classes)):
         
         # set b-value and class data
@@ -397,10 +374,14 @@ for i in srcidx:
     src_area.append(get_WGS84_area(poly))
     
     # now get events within zone of interest
-    mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, polygons[i], depmin, depmax)
+    mvect, mxvect, tvect, dec_tvect, ev_dict \
+        = get_events_in_poly(ggcat, polygons[i], depmin, depmax)
+        
+    #print '\nreset mxvect to mvect - DELETE!!!!\n'
+    #mxvect = mvect
     
     # skip zone if no events pass completeness
-    if len(mvect) != 0:
+    if len(mxvect) != 0:
         # assume Banda Sea sources
         if src_mmax[i] == -99:
             src_mmax[i] = 8.0
@@ -409,17 +390,18 @@ for i in srcidx:
     
         # preserve original arrays for plotting
         orig_mvect = mvect
+        orig_mxvect = mxvect
         orig_tvect = tvect
         orig_dec_tvect = dec_tvect
         
-        # remove incomplete events
-        mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
-             remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
+        # remove incomplete events based on original catalogue magnitudes (mxvect)
+        mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
+             remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
         
     # check to see if mvect still non-zero length after removing incomplete events
-    if len(mvect) != 0:
+    if len(mxvect) != 0:
         
-        # get annualised rates
+        # get annualised rates based on preferred MW (mvect)
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
             get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, year_max)
             
@@ -500,7 +482,7 @@ for i in srcidx:
         # cannot plot datetime prior to 1900 - not sure why!
         dcut = datetime(1900,1,1,0,0)
         didx = where(orig_tvect > dcut)[0]
-        h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
+        h1 = plt.plot(orig_dec_tvect[didx], orig_mxvect[didx], 'bo')
         
         # now loop thru completeness years and mags
         for yi in range(0, len(ycomps)-1):
@@ -535,13 +517,13 @@ for i in srcidx:
                  [mcomps[-1], ymax], 'g-', lw=1.5)
         
         didx = where(tvect > dcut)[0]        
-        h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
-        plt.ylabel('Magnitude (MW)')
+        h2 = plt.plot(dec_tvect[didx], mxvect[didx], 'ro')
+        plt.ylabel('Catalogue Magnitude (Mx)')
         plt.xlabel('Date')
         #plt.title(src_code[i] + ' Catalogue Completeness')
         
-        Npass = str(len(mvect))
-        Nfail = str(len(orig_mvect) - len(mvect))
+        Npass = str(len(mxvect))
+        Nfail = str(len(orig_mxvect) - len(mxvect))
         plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
                 
         tlim = ax.get_xlim()
@@ -798,7 +780,7 @@ for i in srcidx:
         dates_ge_3 = []
         dcut = 1900
         for ev in ev_dict:
-            if ev['prefmag'] >= 3.0 and ev['datetime'].year >= dcut:
+            if ev['mx_origML'] >= 3.0 and ev['datetime'].year >= dcut:
                 # get decimal years
                 dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
         
@@ -809,7 +791,7 @@ for i in srcidx:
         if ndays > 0 and len(didx) > 0:
             plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
             plt.xlabel('Event Year')
-            plt.ylabel('Count | MW >= 3.0')
+            plt.ylabel('Count | Mx >= 3.0')
         
             # set xlims
             tlim = [int(round(x)) for x in tlim] # converting to ints
