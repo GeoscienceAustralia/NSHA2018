@@ -234,13 +234,16 @@ for uclass in unique_classes:
             
             print '    Compiling data from:', src_code[i]
             
+            # definitions of arrays extracted from catalogue
             '''
-            mvect  = preferred MW
-            mxvect = preferred original magnitudes
-            tvect  = datetime array
-            dec_tvect = decimal datetime
-            ev_dict = event dictionary
+            mvect: preferred MW
+            mxvect: preferred original magnitudes
+            tvect: datetime array
+            dec_tvect: decimal datetime
+            ev_dict: event dictionary
             '''
+            
+            # get earthquakes within source zones
             mvect, mxvect, tvect, dec_tvect, ev_dict \
                    = get_events_in_poly(ggcat, poly, depmin, depmax)
             
@@ -261,10 +264,14 @@ for uclass in unique_classes:
                 ycomps = array([int(x) for x in src_ycomp[i].split(';')])
                 mcomps = array([float(x) for x in src_mcomp[i].split(';')])
             
-            mcomps = convert_mcomps(mcomps)
+            # get mag range for mfd
+            mcompmin = min(mcomps)
             
-            mcompmin = around(ceil(min(mcomps)*10.) / 10., decimals=1)
-            mrng = arange(mcompmin-bin_width/2, src_mmax[i], bin_width)
+            # convert min Mx to MW
+            #mcompminmw = aus_ml2mw(mcompmin) - not needed now that mcomps in MW
+            
+            mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
+            mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
             
             # remove events with NaN mags
             didx = where(isnan(total_mvect))[0]
@@ -292,11 +299,7 @@ for uclass in unique_classes:
     class_orig_tvect = total_tvect
     class_orig_dec_tvect = dec_tvect
     
-    # get bval for combined zones data - assumes call Leonard 2008 won't be invoked!
-    a1 = 0.66199378
-    a2 = 1.2156352
-    src_mmin_reg[i] = a1 * 3. + a2
-    
+    # get bval for combined zones data - uses new MW estimates ("total_mvect") to do cleaning
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
           get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
                    mcomps, ycomps, year_max, mrng, src_mmax[i], src_mmin_reg[i], \
@@ -315,7 +318,7 @@ for uclass in unique_classes:
     class_fn0.append(fn0)
     class_area.append(cum_area)
     
-    # get event coords
+    # get event coords for plotting
     for e in total_ev_dict:
         lavect.append(e['lat'])
         lovect.append(e['lon'])
@@ -336,13 +339,14 @@ for i in srcidx:
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
     mcomps = array([float(x) for x in src_mcomp[i].split(';')])
     
-    # correct Mc curves for ML-MW conversions        
-    mcomps = convert_mcomps(mcomps)
-    
     # get mag range for zonea
-    mcompmin = around(ceil(min(mcomps)*10.) / 10., decimals=1)
-    mrng = arange(mcompmin-bin_width/2, src_mmax[i], bin_width)
-
+    mcompmin = min(mcomps)
+            
+    # convert min Mx to MW
+    #mcompminmw = aus_ml2mw(mcompmin) # now defining Mc in terms of MW
+    mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
+    mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
+            
     for uc in range(0, len(unique_classes)):
         
         # set b-value and class data
@@ -356,12 +360,13 @@ for i in srcidx:
             bval_vect.append(bval)
             bsig_vect.append(sigb)
             
-    # set values to avoid plotting issues later
+    # set null values to avoid plotting issues later
     try:
         new_bval_b[i] = bval
     except:
         new_bval_b[i] = 1.0
-    new_n0_b[i]   = 1E-30
+    
+    new_n0_b[i] = 1E-30
     
     # set beta params       
     beta = bval2beta(bval)
@@ -377,11 +382,8 @@ for i in srcidx:
     mvect, mxvect, tvect, dec_tvect, ev_dict \
         = get_events_in_poly(ggcat, polygons[i], depmin, depmax)
         
-    #print '\nreset mxvect to mvect - DELETE!!!!\n'
-    #mxvect = mvect
-    
     # skip zone if no events pass completeness
-    if len(mxvect) != 0:
+    if len(mvect) != 0:
         # assume Banda Sea sources
         if src_mmax[i] == -99:
             src_mmax[i] = 8.0
@@ -394,12 +396,12 @@ for i in srcidx:
         orig_tvect = tvect
         orig_dec_tvect = dec_tvect
         
-        # remove incomplete events based on original catalogue magnitudes (mxvect)
+        # remove incomplete events based on new MW estimates (mvect)
         mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
              remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
         
     # check to see if mvect still non-zero length after removing incomplete events
-    if len(mxvect) != 0:
+    if len(mvect) != 0:
         
         # get annualised rates based on preferred MW (mvect)
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
@@ -413,8 +415,8 @@ for i in srcidx:
         fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
         
         # get zone confidence limits
-        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)            
-                
+        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
+        
         ###############################################################################
         # get upper and lower MFD bounds
         ###############################################################################
@@ -480,9 +482,18 @@ for i in srcidx:
         ax = plt.subplot(231)
     
         # cannot plot datetime prior to 1900 - not sure why!
+        # plot all events
         dcut = datetime(1900,1,1,0,0)
         didx = where(orig_tvect > dcut)[0]
-        h1 = plt.plot(orig_dec_tvect[didx], orig_mxvect[didx], 'bo')
+        h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
+        
+        # replot those that pass completeness
+        didx = where(tvect > dcut)[0]
+        h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
+        plt.ylabel('Moment Magnitude (MW)')
+        plt.xlabel('Date')
+        #plt.title(src_code[i] + ' Catalogue Completeness')
+        
         
         # now loop thru completeness years and mags
         for yi in range(0, len(ycomps)-1):
@@ -516,14 +527,8 @@ for i in srcidx:
         plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
                  [mcomps[-1], ymax], 'g-', lw=1.5)
         
-        didx = where(tvect > dcut)[0]        
-        h2 = plt.plot(dec_tvect[didx], mxvect[didx], 'ro')
-        plt.ylabel('Catalogue Magnitude (Mx)')
-        plt.xlabel('Date')
-        #plt.title(src_code[i] + ' Catalogue Completeness')
-        
-        Npass = str(len(mxvect))
-        Nfail = str(len(orig_mxvect) - len(mxvect))
+        Npass = str(len(mvect))
+        Nfail = str(len(orig_mvect) - len(mvect))
         plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
                 
         tlim = ax.get_xlim()
@@ -780,7 +785,7 @@ for i in srcidx:
         dates_ge_3 = []
         dcut = 1900
         for ev in ev_dict:
-            if ev['mx_origML'] >= 3.0 and ev['datetime'].year >= dcut:
+            if ev['prefmag'] >= 3.5 and ev['datetime'].year >= dcut:
                 # get decimal years
                 dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
         
@@ -791,7 +796,7 @@ for i in srcidx:
         if ndays > 0 and len(didx) > 0:
             plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
             plt.xlabel('Event Year')
-            plt.ylabel('Count | Mx >= 3.0')
+            plt.ylabel('Count | MW >= 3.5')
         
             # set xlims
             tlim = [int(round(x)) for x in tlim] # converting to ints
