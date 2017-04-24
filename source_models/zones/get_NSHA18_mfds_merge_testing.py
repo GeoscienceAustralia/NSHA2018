@@ -211,6 +211,8 @@ for uclass in unique_classes:
     Weichert = False
     mcomps = [-9999]
     cum_area = 0
+    class_mmin_reg = 9.0
+    class_mmax = nan
     
     print '\nCalculating b-value for class:', uclass
             
@@ -288,6 +290,13 @@ for uclass in unique_classes:
             total_mxvect = delete(total_mxvect, didx)
             total_dec_tvect = delete(total_dec_tvect, didx)
             total_ev_dict = delete(total_ev_dict, didx)
+            
+            # set min regression magnitude
+            if src_mmin_reg[i] < class_mmin_reg:
+                class_mmin_reg = src_mmin_reg[i]
+                
+            # set class mmax
+            class_mmax = src_mmax[i]
        
     ###############################################################################
     # get b-values from joined zones
@@ -302,7 +311,7 @@ for uclass in unique_classes:
     # get bval for combined zones data - uses new MW estimates ("total_mvect") to do cleaning
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
           get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
-                   mcomps, ycomps, year_max, mrng, src_mmax[i], src_mmin_reg[i], \
+                   mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
                    src_bval_fix[i], src_bval_fix_sd[i], bin_width, poly)
     
     # add to class arrays
@@ -398,7 +407,7 @@ for i in srcidx:
         
         # remove incomplete events based on new MW estimates (mvect)
         mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
-             remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
+             remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
         
     # check to see if mvect still non-zero length after removing incomplete events
     if len(mvect) != 0:

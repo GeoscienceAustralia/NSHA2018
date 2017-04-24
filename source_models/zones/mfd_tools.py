@@ -146,8 +146,9 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
     cum_num = []
     n_yrs = []
     
+    # add small number to deal with precission issues
     for m in mrng:
-        midx = where(mvect >= m)[0]
+        midx = where(mvect+1E-7 >= m)[0]
         
         # set temp cum mags & times
         cum_num.append(len(midx))
@@ -184,7 +185,7 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
 # get events that pass completeness
 ###############################################################################
 # assume Mc based on original catalogue magnitudes
-def remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps):
+def remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width):
     
     # first, remove NaN magnitudes - not sure why "< mcomps[0]" fails in next block
     didx = where(isnan(mvect))[0] # use mvect here, as may be some instances where MW is not calculated
@@ -194,8 +195,10 @@ def remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, y
     mxvect = delete(mxvect, didx)
     ev_dict = delete(ev_dict, didx)
     
-    # second remove all events smaller than min Mc mag
-    didx = where(mvect < mcomps[0])[0]
+    # second remove all events smaller than min Mc mag minus bin_width / 2
+    halfbw = bin_width / 2.
+    
+    didx = where(mvect < mcomps[0]-halfbw)[0]
     out_idx = didx
     tvect = delete(tvect, didx)
     dec_tvect = delete(dec_tvect, didx)
@@ -210,7 +213,7 @@ def remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, y
         ydt = datetime(ycomps[yi], 1, 1)
         
         # find events that meet Y and M+1 thresholds
-        didx = where((tvect < ydt) & (mvect < mcomps[yi+1]))[0]
+        didx = where((tvect < ydt) & (mvect < mcomps[yi+1]-halfbw))[0]
         out_idx = hstack((out_idx, didx))
         
         # now delete events
@@ -243,7 +246,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     
     # remove incomplete events based on original preferred magnitudes (mxvect)
     mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
-         remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
+         remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
         
     # get annualised rates using preferred MW (mvect)
     cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
@@ -312,6 +315,9 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
                                                mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
                                                bval=1.1, itstab=1E-4, maxiter=1000)
+        
+        print mrng[midx]+bin_width/2
+        print src_mmin_reg
         
         beta = bval2beta(bval)
         sigbeta = bval2beta(sigb)
