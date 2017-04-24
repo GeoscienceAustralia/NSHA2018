@@ -6,21 +6,20 @@ Geoscience Australia April 2017
 
 import os, sys
 
-from openquake.commonlib.source import SourceModelParser
-from openquake.commonlib.sourceconverter import SourceConverter, \
+from openquake.hazardlib.nrml import SourceModelParser
+from openquake.hazardlib.sourceconverter import SourceConverter, \
     area_to_point_sources, SourceGroup
-from openquake.commonlib.sourcewriter import write_source_model
+from openquake.hazardlib.sourcewriter import write_source_model
 
-def nrml2sourcelist(area_source_file, investigation_time-50, 
+def nrml2sourcelist(area_source_file, investigation_time=50, 
                     rupture_mesh_spacing=10., width_of_mfd_bin=0.1,
-                    area_source_discretization=10.):
+                    area_source_discretisation=10.):
     """Parser nrml file containing area sources and read into
     a list of source objects
     """
     converter = SourceConverter(50, 10, width_of_mfd_bin=0.1,
-                                area_source_discretization=discretisation)
+                                area_source_discretization=area_source_discretisation)
     parser = SourceModelParser(converter)
-    print [method for method in dir(parser)]# if callable(getattr(parser, method))]
     try:
         sources = parser.parse_sources(area_source_file)
     except AttributeError: # Handle version 2.1 and above
@@ -31,9 +30,9 @@ def nrml2sourcelist(area_source_file, investigation_time-50,
                 sources.append(source)
     return sources
 
-def area2pt_source(area_source_file, investigation_time=50, 
-                    rupture_mesh_spacing=10., width_of_mfd_bin=0.1,
-                    area_source_discretization=10.,
+def area2pt_source(area_source_file, sources = None, investigation_time=50, 
+                   rupture_mesh_spacing=10., width_of_mfd_bin=0.1,
+                   area_source_discretisation=10.,
                    filename = None):
     """Calls OpenQuake parsers to read area source model
     from source_mode.xml type file, convert to point sources
@@ -45,8 +44,12 @@ def area2pt_source(area_source_file, investigation_time=50,
         which defines the distance between resulting point
         sources.
     """
-    sources = nrml2sourcelist(area_source_file)
-    name = 'test_point_model'
+    if sources is None:
+        sources = nrml2sourcelist(area_source_file, investigation_time=investigation_time, 
+                                  rupture_mesh_spacing=rupture_mesh_spacing, 
+                                  width_of_mfd_bin=width_of_mfd_bin,
+                                  area_source_discretisation=area_source_discretisation)
+    name = '%s_points' % filename
     new_pt_sources = {}
     for source in sources:
         pt_sources = area_to_point_sources(source)

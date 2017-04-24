@@ -4,18 +4,18 @@ to the MFD and nodal plane distirbution. Nearest distance to the fault is calcul
 
 import os, sys
 import numpy as np
-from openquake.commonlib.source import SourceModelParser
-from openquake.commonlib.sourceconverter import SourceConverter, SourceGroup
-from openquake.commonlib.sourcewriter import write_source_model
-from openquake.commonlib.node import Node
-from openquake.commonlib.sourcewriter import obj_to_node
-from openquake.commonlib import nrml
+from openquake.hazardlib.nrml import SourceModelParser
+from openquake.hazardlib.sourceconverter import SourceConverter, SourceGroup
+from openquake.hazardlib.sourcewriter import write_source_model
+#from openquake.commonlib.node import Node
+from openquake.hazardlib.sourcewriter import obj_to_node
+from openquake.hazardlib import nrml
 from openquake.hazardlib.geo.surface.simple_fault import SimpleFaultSurface
 from openquake.hazardlib.geo.geodetic import distance, geodetic_distance
 from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
 #plotting
 from matplotlib import pyplot
-from hmtk.plotting.mapping import HMTKBaseMap
+#from hmtk.plotting.mapping import HMTKBaseMap
 
 
 def read_pt_source(pt_source_file):
@@ -32,14 +32,14 @@ def read_pt_source(pt_source_file):
         for group in groups:
             for source in group:
                 sources.append(source)
-    for pt in sources:
-        print pt.mfd.max_mag
+#    for pt in sources:
+#        print pt.mfd.max_mag
     return sources
 
-def read_simplefault_source(simplefault_source_file):
+def read_simplefault_source(simplefault_source_file, rupture_mesh_spacing = 10):
     """Read nrml source model into simpmle fault objects
     """
-    converter = SourceConverter(50, 2, width_of_mfd_bin=0.1,
+    converter = SourceConverter(50, rupture_mesh_spacing, width_of_mfd_bin=0.1,
                                 area_source_discretization=200.)
     parser = SourceModelParser(converter)
     try:
@@ -51,7 +51,18 @@ def read_simplefault_source(simplefault_source_file):
             for source in group:
                 sources.append(source)
     for fault in sources:
-        print fault.mfd.max_mag
+       # print [method for method in dir(fault)]
+       # print [method for method in dir(fault.mfd)]
+
+#######Probably not actually needed now
+        # Add max_mag attribute if needed:
+#        try:
+#            print fault.mfd.max_mag
+#        except AttributeError:
+#            min_mag, max_mag = fault.mfd.get_min_max_mag()
+#            fault.mfd.max_mag = max_mag
+#            print fault.mfd.max_mag
+        pass
     return sources
 
 def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
@@ -98,6 +109,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
     minimum_distance_list = []
     revised_point_sources = {'Cratonic': [], 'Non_cratonic': []}
     for pt in pt_sources:
+        print 'Looping over point sources'
         # For speeding things up
         if pt.location.longitude < min_fault_lon - buffer_distance or \
            pt.location.longitude > max_fault_lon + buffer_distance or \
@@ -108,23 +120,31 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
         rupture_lons = []
         rupture_lats = []
         rupture_depths = []
+        rupture_strikes = []
+        rupture_dips = []
         ruptures = pt.iter_ruptures()
         for rupture in ruptures:
             rupture_mags.append(rupture.mag)
             rupture_lons.append(rupture.surface.corner_lons)
             rupture_lats.append(rupture.surface.corner_lats)
             rupture_depths.append(rupture.surface.corner_depths)
+            rupture_strikes.append(rupture.surface.strike)
+            rupture_strikes.append(rupture.surface.dip)
         rupture_mags = np.array(rupture_mags).flatten()
         # make the same length as the corners
         rupture_mags = np.repeat(rupture_mags, 4)
+        rupture_strikes = np.repeat(rupture_strikes, 4)
+        rupture_dips = np.repeat(rupture_dips, 4)
         rupture_lons = np.array(rupture_lons).flatten()
         rupture_lats = np.array(rupture_lats).flatten()
         rupture_depths = np.array(rupture_depths).flatten()
+        print 'Doing meshgrid'
         lons1,lons2 = np.meshgrid(fault_lons, rupture_lons)
         lats1,lats2 = np.meshgrid(fault_lats, rupture_lats)
         depths1, depths2 = np.meshgrid(fault_depths, rupture_depths)
 
         # Calculate distance from pt to all fault
+        print 'Distance calculations'
         distances = distance(lons1, lats1, depths1, lons2, lats2, depths2)
         closest_distance_to_faults = np.min(distances)
         print 'Shortest pt to fault distance is', closest_distance_to_faults
@@ -137,8 +157,14 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
             lon_indices = np.where(np.in1d(rupture_lons, too_close_lons))[0]
             lat_indices = np.where(np.in1d(rupture_lats, too_close_lats))[0]
             too_close_mags = rupture_mags[np.intersect1d(
-                lon_indices, lat_indices)]
+                    lon_indices, lat_indices)]
+            too_close_strikes = rupture_strikes[np.intersect1d(
+                    lon_indices, lat_indices)]
+            too_close_dips = rupture_dips[np.intersect1d(
+                    lon_indices, lat_indices)]
             print 'Magnitudes of rupture close to fault', too_close_mags
+            print 'Strikes of rupture close to fault', too_close_strikes
+            print 'Dips of rupture close to fault', too_close_dips
             minimum_magnitude_intersecting_fault = min(too_close_mags)
             if minimum_magnitude_intersecting_fault >= \
                (pt.mfd.min_mag + pt.mfd.bin_width):
@@ -160,7 +186,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
                        name = 'Leonard2008')
 
 def plot_sources(point_source, fault_source):
-   
+    from hmtk.plotting.mapping import HMTKBaseMap
     llon, ulon, llat, ulat = 105, 155, -45, -5,
     map_config = {'min_lon': np.floor(llon), 'max_lon': np.ceil(ulon),
                   'min_lat': np.floor(llat), 'max_lat': np.ceil(ulat), 'resolution':'i'}

@@ -6,14 +6,24 @@ Geoscience Australia
 April 2017
 """
 
+#module use ~access/modules
+#module load pythonlib/basemap
+
 import os, sys
 import numpy as np
 from NSHA2018.source_models.faults.shapefile2nrml import shapefile_2_simplefault, \
     shapefile_2_simplefault_CE, shapefile_2_simplefault_MM, shp2nrml
 from NSHA2018.source_models.logic_trees import logic_tree
-from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser
+from NSHA2018.source_models.utils.area_sources import nrml2sourcelist, area2pt_source
+from NSHA2018.source_models.utils.pt2fault_distance import read_simplefault_source, \
+    pt2fault_distance
+#from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser
+from openquake.hazardlib.sourcewriter import write_source_model
 from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
 from subprocess import call
+
+from openquake.hazardlib.sourceconverter import SourceConverter, \
+    area_to_point_sources, SourceGroup
 
 # Basic parameters
 shapefile = 'FSM/FSD_simple_faults.shp'
@@ -30,13 +40,19 @@ lower_depth = 20.0
 a_value = None
 b_region_shapefile =  '../zones/shapefiles/Leonard2008/LEONARD08_NSHA18_MFD.shp'
 default_b = 1.0#None # Get from Leonard 2008 regions
-min_mag = 4.5
+min_mag = 5.5 #4.8
 #max_mag = 7.5 #None # Get from scaling
 rake = 90
 output_dir = source_model_name
 combined_output_dir = 'National_Seismotectonic_Source_Model_2018'
 bin_width = 0.1 # Width of MFD bins in magnitude units
 domains_shapefile = '../zones/shapefiles/Domains/DOMAINS_NSHA18.shp'
+
+area_source_model = '../zones/2012_mw_mar17/NSHA13/NSHA13_collapsed_rates_FF.xml'
+investigation_time = 50
+fault_mesh_spacing = 2 #2 Fault source mesh
+rupture_mesh_spacing = 50 #10 # Area source mesh
+area_source_discretisation = 100 #20
 
 # Get logic tree information
 lt = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
@@ -159,7 +175,7 @@ for output_xml in output_xmls:
 output_xml_add = [oxml + '\n' for oxml in output_xml_add]
 output_xml_mb = [oxml + '\n' for oxml in output_xml_mb]
 output_xml_geom = [oxml + '\n' for oxml in output_xml_geom]
-# Write to file
+# Write to file fault models on their own
 try:
      os.mkdir(source_model_name)
 except:
@@ -177,7 +193,41 @@ f = open(os.path.join(source_model_name, source_model_name + '_geom_filtered.xml
          'w')
 f.writelines(output_xml_geom)
 f.close() 
-#sys.exit()
-                                                          
+
+#Free memory
+del output_xml_add
+del output_xml_mb
+del output_xml_geom
+# Now read in the area source model
+print 'Reading area source model %s' % area_source_model
+area_sources = nrml2sourcelist(area_source_model, 
+                          investigation_time=investigation_time, 
+                          rupture_mesh_spacing=rupture_mesh_spacing, 
+                          width_of_mfd_bin=bin_width,
+                          area_source_discretisation=area_source_discretisation)
+# Convert area sources to point sources for filtering
+print 'Converting to point sources'
+point_sources = area2pt_source(area_source_model, sources=area_sources)
+pt_source_list = []
+for source_group in point_sources:
+     for source in source_group:
+          pt_source_list.append(source)
+
+# Apply additive approach
 
 
+# Build new area source file as point sources
+# and apply geometrically filtered approach to 
+# the points sources
+#fsm_file_list = [os.path.join(source_model_name, source_model_name + '_additive.xml'),
+#                 os.path.join(source_model_name, source_model_name + '_moment_balance.xml'),
+#                 os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')]
+print 'Applying geometrical filtering'
+fsm =  os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')
+fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
+revised_point_sources = area_source_model[:-4] + '_pts_geom_filtered.xml'
+pt2fault_distance(pt_source_list, fault_sources,
+                  filename = revised_point_sources,
+                  buffer_distance = 1.) # Make buffer distance larger, reduced for memory issues
+
+# Apply additive approach
