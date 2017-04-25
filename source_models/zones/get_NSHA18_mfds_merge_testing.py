@@ -418,7 +418,18 @@ for i in srcidx:
             
         # get index of min reg mag and valid mag bins
         diff_cum = abs(hstack((diff(cum_rates), 0.)))
-        midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+        midx = where((mrng >= src_mmin_reg[i]-bin_width/2) & (diff_cum > 0.))[0]
+        
+        # make sure there is at least 3 observations for a-value calculations
+        if len(midx) < 3:
+            idxstart = midx[0] - 1
+            
+            while idxstart >= 0 and len(midx) < 3:
+                # if num observations greater than zero, add to midx
+                if n_obs[idxstart] > 0:
+                    midx = hstack((idxstart, midx))
+                    
+                idxstart -= 1
         
         # get a-value using region class b-value
         fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
@@ -1190,7 +1201,7 @@ m2.drawstates()
 m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 
-# get M5 rates
+# get M6 rates
 new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
 
@@ -1200,9 +1211,8 @@ m6_rates = array(new_n0_b) * exp(-new_beta  * 6.0) * (1 - exp(-new_beta * (src_m
 # get area (in km**2) of sources for normalisation
 src_area= array(src_area)
     
-# normalise M5 rates by area
+# normalise M6 rates by area
 lognorm_m6_rates = log10(100**2 * m6_rates / src_area)
-#norm_m5_rates = m5_rates
     
 # get colour index
 ncolours=20

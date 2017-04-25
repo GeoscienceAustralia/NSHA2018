@@ -258,9 +258,20 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     
     # get index of min reg mag and valid mag bins
     diff_cum = abs(hstack((diff(cum_rates), 0.)))
-    midx = where((mrng >= src_mmin_reg) & (isfinite(diff_cum)))[0]
+    midx = where((mrng >= src_mmin_reg-bin_width/2.) & (isfinite(diff_cum)))[0]
     
-    # do Aki ML first if N events less than 50             
+    # make sure there is at least 3 observations for b-value calculations
+    if len(midx) < 3:
+        idxstart = midx[0] - 1
+        
+        while idxstart >= 0 and len(midx) < 3:
+            # if num observations greater than zero, add to midx
+            if n_obs[idxstart] > 0:
+                xmidx = hstack((idxstart, midx))
+                
+            idxstart -= 1
+        
+    # do Aki ML first if N events less than 50
     if len(mvect) >= 50 and len(mvect) < 80:
         # if beta not fixed, do Aki ML
         if src_bval_fix == -99:
@@ -285,11 +296,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
             fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[fidx])
             
             print '    Aki ML b-value =', bval, sigb
-            
-            # add to bval arrays
-            #bval_vect.append(bval)
-            #bsig_vect.append(sigb)
-            
+                        
         # else, fit curve using fixed beta and solve for N0
         else:
             # set source beta
@@ -315,9 +322,6 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
                                                mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
                                                bval=1.1, itstab=1E-4, maxiter=1000)
-        
-        print mrng[midx]+bin_width/2
-        print src_mmin_reg
         
         beta = bval2beta(bval)
         sigbeta = bval2beta(sigb)

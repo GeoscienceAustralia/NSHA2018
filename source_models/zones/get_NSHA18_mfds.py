@@ -244,8 +244,10 @@ for i in srcidx:
     tvect = delete(tvect, didx)
     mvect = delete(mvect, didx)
     
-    # second remove all events smaller than min Mc mag
-    didx = where(mvect < mcomps[0])[0]
+    # second remove all events smaller than min Mc mag minus hald bin
+    halfbin = bin_width / 2.0
+    
+    didx = where(mvect < mcomps[0]-halfbin)[0]
     out_idx = didx
     tvect = delete(tvect, didx)
     dec_tvect = delete(dec_tvect, didx)
@@ -259,7 +261,7 @@ for i in srcidx:
         ydt = datetime(ycomps[yi], 1, 1)
         
         # find events that meet Y and M+1 thresholds
-        didx = where((tvect < ydt) & (mvect < mcomps[yi+1]))[0]
+        didx = where((tvect < ydt) & (mvect < mcomps[yi+1]-halfbin))[0]
         out_idx = hstack((out_idx, didx))
         
         # now delete events
@@ -414,7 +416,7 @@ for i in srcidx:
             bval = nan            
             
             # load Leonard zones
-            lsf = shapefile.Reader(path.join('Leonard2008','shapefiles','LEONARD08_NSHA18_MFD.shp'))
+            lsf = shapefile.Reader(path.join('shapefiles','Leonard2008','LEONARD08_NSHA18_MFD.shp'))
             
             # get Leonard polygons
             l08_shapes = lsf.shapes()
