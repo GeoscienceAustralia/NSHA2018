@@ -267,55 +267,55 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         while idxstart >= 0 and len(midx) < 3:
             # if num observations greater than zero, add to midx
             if n_obs[idxstart] > 0:
-                xmidx = hstack((idxstart, midx))
+                midx = hstack((idxstart, midx))
                 
             idxstart -= 1
         
-    # do Aki ML first if N events less than 50
-    if len(mvect) >= 50 and len(mvect) < 80:
-        # if beta not fixed, do Aki ML
-        if src_bval_fix == -99:
-            
-            # do Aki max likelihood
-            bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
-            beta = bval2beta(bval)
-            sigbeta = bval2beta(sigb)
-            
-            # now recalc N0
-            dummyN0 = 1.
+    # first, check if using fixed bval and fit curve using to solve for N0
+    if src_bval_fix > 0:
+        print '    Using fixed b-value =', src_bval_fix, src_bval_fix_sd        
+        
+        # set source beta
+        bval = src_bval_fix
+        beta = bval2beta(bval)
+        sigb = src_bval_fix_sd
+        sigbeta = bval2beta(sigb)
+        
+        # get dummy curve
+        dummyN0 = 1.
+        m_min_reg = src_mmin_reg + bin_width/2.
+        bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax, bin_width)
+        
+        # fit to lowest mahnitude considered
+        bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+        
+        # scale for N0
+        fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
 
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax, bin_width)
+    # do Aki ML first if N events less than 50
+    elif len(mvect) >= 50 and len(mvect) < 80:
             
-            # fit to lowest magnitude considered and observed
-            Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
-            
-            # !!!!!! check into why this must be done - I suspect it may be that there is an Mmax eq in the zones !!!!
-            fidx = midx[0]
-            
-            # solve for N0
-            fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[fidx])
-            
-            print '    Aki ML b-value =', bval, sigb
+        # do Aki max likelihood
+        bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
+        beta = bval2beta(bval)
+        sigbeta = bval2beta(sigb)
+        
+        # now recalc N0
+        dummyN0 = 1.
+
+        bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax, bin_width)
+        
+        # fit to lowest magnitude considered and observed
+        Nminmag = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
+        
+        # !!!!!! check into why this must be done - I suspect it may be that there is an Mmax eq in the zones !!!!
+        fidx = midx[0]
+        
+        # solve for N0
+        fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[fidx])
+        
+        print '    Aki ML b-value =', bval, sigb
                         
-        # else, fit curve using fixed beta and solve for N0
-        else:
-            # set source beta
-            bval = src_bval_fix
-            beta = beta2bval(beta)
-            sigb = src_bval_fix_sd
-            sigbeta = bval2beta(sigb)
-            
-            # get dummy curve
-            dummyN0 = 1.
-            m_min_reg = src_mmin_reg + bin_width/2.
-            bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, m_min_reg, src_mmax, bin_width)
-            
-            # fit to lowest mahnitude considered
-            bc_lo100 = cum_rates[midx][0] * (bc_tmp / bc_tmp[0])
-            
-            # scale for N0
-            fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
-    
     # do Weichert for zones with more events
     elif len(mvect) >= 80:
         # calculate weichert
@@ -329,16 +329,16 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         print '    Weichert b-value = ', bval, sigb
                     
     ###############################################################################
-    # calculate MFDs using Leonard 08 if fewer than 50 events
+    # calculate MFDs using NSHA13_Background if fewer than 50 events
     ###############################################################################
     
     else:
-        print 'Getting b-value from Leonard2008...'            
+        print 'Getting b-value from NSHA Background...'            
         # set B-value to nan
         bval = nan            
         
         # load Leonard zones
-        lsf = shapefile.Reader(path.join('shapefiles','Leonard2008','LEONARD08_NSHA18_MFD.shp'))
+        lsf = shapefile.Reader(path.join('shapefiles','NSHA13_Background','NSHA13_Background_NSHA18_MFD.shp'))
         
         # get Leonard polygons
         l08_shapes = lsf.shapes()

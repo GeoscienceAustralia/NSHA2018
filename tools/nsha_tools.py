@@ -41,6 +41,7 @@ def get_field_data(sf, field, datatype):
     
     data = list of data in string or float fmt
     '''
+    from numpy import array
     
     # get index
     findex = get_field_index(sf, field)
@@ -58,7 +59,7 @@ def get_field_data(sf, field, datatype):
         elif datatype == 'int':
             data.append(checkint(rec[findex]))
             
-    return data
+    return array(data)
 
 # converts datetime object to decmial years
 # Slightly edited from: http://stackoverflow.com/questions/6451655/python-how-to-convert-datetime-dates-to-decimal-years    

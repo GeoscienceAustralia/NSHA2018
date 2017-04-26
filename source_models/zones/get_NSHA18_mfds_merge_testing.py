@@ -125,7 +125,7 @@ new_n0_u = src_n0_u
 
 # reset Mmin to 4.8
 print '!!!Temporary fix - setting Mmin = 4.8!!!'
-src_mmin = 4.8 * ones_like(src_mmin)
+src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
 # set deep depth range
@@ -297,6 +297,11 @@ for uclass in unique_classes:
                 
             # set class mmax
             class_mmax = src_mmax[i]
+            
+            # set class b-values
+            fixed_bval = src_bval_fix[i]
+            fixed_bval_sig = src_bval_fix_sd[i]
+            
        
     ###############################################################################
     # get b-values from joined zones
@@ -312,7 +317,7 @@ for uclass in unique_classes:
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
           get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
                    mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
-                   src_bval_fix[i], src_bval_fix_sd[i], bin_width, poly)
+                   fixed_bval, fixed_bval_sig, bin_width, poly)
     
     # add to class arrays
     class_bval.append(bval)
@@ -367,7 +372,7 @@ for i in srcidx:
             class_idx = uc
             
             bval_vect.append(bval)
-            bsig_vect.append(sigb)
+            bsig_vect.append(bval_sig)
             
     # set null values to avoid plotting issues later
     try:
@@ -379,7 +384,7 @@ for i in srcidx:
     
     # set beta params       
     beta = bval2beta(bval)
-    sigbeta = bval2beta(sigb)
+    sigbeta = bval2beta(bval_sig)
             
     # get polygon of interest
     poly = polygons[i]
@@ -441,7 +446,7 @@ for i in srcidx:
         # get upper and lower MFD bounds
         ###############################################################################
         sigbeta173 = 1.73 * sigbeta
-        sigb173 = 1.73 * sigb
+        sigb173 = 1.73 * bval_sig
     
         # preallocate data
         N0_lo173 = nan
@@ -486,8 +491,13 @@ for i in srcidx:
     
         print 'Filling new values for', src_code[i]
         new_bval_b[i] = bval
-        new_bval_l[i] = bval-sigb173
-        new_bval_u[i] = bval+sigb173
+        #new_bval_l[i] = bval-sigb173
+        #new_bval_u[i] = bval+sigb173
+        
+        # Use +/- 1 sigma
+        new_bval_l[i] = bval-bval_sig
+        new_bval_u[i] = bval+bval_sig
+        
         new_n0_b[i]   = fn0
         new_n0_l[i]   = N0_lo173
         new_n0_u[i]   = N0_up173
@@ -964,11 +974,11 @@ w.field('MMAX_UPPER','F', 8, 2)
 w.field('N0_BEST','F', 8, 5)
 w.field('N0_LOWER','F', 8, 5)
 w.field('N0_UPPER','F', 8, 5)
-w.field('BVAL_BEST','F', 8, 5)
-w.field('BVAL_LOWER','F', 8, 5)
-w.field('BVAL_UPPER','F', 8, 5)
-w.field('BVAL_FIX','F', 8, 2)
-w.field('BVAL_FIX_S','F', 8, 2)
+w.field('BVAL_BEST','F', 8, 3)
+w.field('BVAL_LOWER','F', 8, 3)
+w.field('BVAL_UPPER','F', 8, 3)
+w.field('BVAL_FIX','F', 8, 3)
+w.field('BVAL_FIX_S','F', 8, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','30')
 w.field('YMAX','F', 8, 0)
@@ -1262,7 +1272,7 @@ plt.close()
 # merge all pdfs to single file
 ###############################################################################
 
-from PyPDF2 import PdfFileMerger, PdfFileReader 
+from PyPDF2 import PdfFileMerger, PdfFileReader
 
 # get input files
 pdffiles = []

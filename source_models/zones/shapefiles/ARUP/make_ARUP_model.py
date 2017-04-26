@@ -1,6 +1,6 @@
 import shapefile
 from os import path
-from numpy import array
+from numpy import array, zeros_like, where
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -45,7 +45,7 @@ for line in lines:
 # get neotectonic superdomains number and Mmax from zone centroid
 ###############################################################################
 # get path to reference shapefile
-shapepath = open('..//ref_shape.txt').read()
+shapepath = open('..//reference_shp.txt').read()
 
 # load domains shp
 dsf = shapefile.Reader(shapepath)
@@ -54,10 +54,14 @@ dsf = shapefile.Reader(shapepath)
 neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
 neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
 neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
+neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float')
 neo_trt  = get_field_data(dsf, 'TRT', 'str')
 neo_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
 neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
 neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
+
+# get bval sigma
+bval_sig = neo_bval - neo_bval_l
 
 # get domain polygons
 dom_shapes = dsf.shapes()
@@ -67,6 +71,8 @@ trt = []
 dep_b = []
 ycomp = []
 mcomp = []
+bval_fix = []
+bval_sig_fix = []
 
 # loop through ARUP zones
 for code, poly in zip(codes, shapes):
@@ -79,6 +85,8 @@ for code, poly in zip(codes, shapes):
     if code == 'ZN7c':
         tmp_dom = 7
         tmp_mmax = 7.7
+        
+        
     
     # loop through domains and find point in poly    
     else:                
@@ -98,15 +106,23 @@ for code, poly in zip(codes, shapes):
         dep_b.append(-99)
         ycomp.append(-99)
         mcomp.append(-99)
+        bval_fix.append(-99)
+        bval_sig_fix.append(-99)
     # fill real values
     else:
+        if code == 'ZN5':
+            matchidx = -1
+            
         dom.append(neo_doms[matchidx])
         mmax.append(neo_mmax[matchidx])
         trt.append(neo_trt[matchidx])
         dep_b.append(neo_dep[matchidx])
         ycomp.append(neo_ycomp[matchidx])
         mcomp.append(neo_mcomp[matchidx])
+        bval_fix.append(neo_bval[matchidx])
+        bval_sig_fix.append(bval_sig[matchidx])
 
+dep_b = array(dep_b)
     
 """    
 ###############################################################################
@@ -174,7 +190,8 @@ dep_b = array(dep_b)
 # write initial shapefile
 ###############################################################################
 
-outshp = path.join('shapefiles','ARUP_NSHA18.shp')
+#outshp = path.join('shapefiles','ARUP_NSHA18.shp')
+outshp = 'ARUP_NSHA18.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
@@ -196,11 +213,11 @@ w.field('MMAX_UPPER','F', 8, 2)
 w.field('N0_BEST','F', 8, 5)
 w.field('N0_LOWER','F', 8, 5)
 w.field('N0_UPPER','F', 8, 5)
-w.field('BVAL_BEST','F', 8, 5)
-w.field('BVAL_LOWER','F', 8, 5)
-w.field('BVAL_UPPER','F', 8, 5)
-w.field('BVAL_FIX','F', 8, 2)
-w.field('BVAL_FIX_S','F', 8, 2)
+w.field('BVAL_BEST','F', 8, 3)
+w.field('BVAL_LOWER','F', 8, 3)
+w.field('BVAL_UPPER','F', 8, 3)
+w.field('BVAL_FIX','F', 8, 3)
+w.field('BVAL_FIX_S','F', 8, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','50')
 w.field('YMAX','F', 8, 0)
@@ -211,9 +228,16 @@ w.field('CAT_FILE','C','50')
 src_wt = 1.0
 src_ty = 'area'
 #dep_b = 10.
+
 dep_u = 0.5 * array(dep_b)
-dep_l = 1.5 * array(dep_b)
-min_mag = 4.8
+
+idx = where(dep_b > 7.)[0]
+dep_l = zeros_like(dep_b)
+dep_l[idx] = 1.5 * array(dep_b[idx])
+idx = where(dep_b < 7.)[0]
+dep_l[idx] = 2 * array(dep_b[idx])
+
+min_mag = 4.5
 min_rmag = 4.0
 #mmax[i]
 #mmax_l = mmax[i]-0.2
@@ -224,15 +248,15 @@ n0_u = -99
 bval = -99
 bval_l = -99
 bval_u = -99
-bval_fix = -99
-bval_fix_sig = -99
+#bval_fix = -99
+#bval_fix_sig = -99
 '''
 ycomp = '1880;1910;1958;1962;1965;1970;1980'
 mcomp = '6.4;6.0;5.0;4.5;4.0;3.5;3.0'
 ycomp = '1980;1970;1965;1962;1958;1910;1880'
 mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
 '''
-ymax  = 2016
+ymax  = 2011
 #trt   = 'TBD'
 #dom   = -99
 cat   = 'GGcat-161025.csv'
@@ -246,7 +270,7 @@ for i, shape in enumerate(shapes):
     # write new records
     if i >= 0:
         w.record(name[i], codes[i], src_ty, neo_domains[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
+                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
         
 # now save area shapefile
 w.save(outshp)
