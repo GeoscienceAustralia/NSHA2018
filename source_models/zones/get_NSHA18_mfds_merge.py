@@ -149,7 +149,7 @@ else:
 '''Used to parse GGCat csv - now parse HMTK csv'''
 print 'parsing catalogue...'
 #ggcat = parse_ggcat(ggcatfile)
-
+"""
 # parse HMTK csv
 parser = CsvCatalogueParser(hmtk_csv)
 cat = parser.read_file()
@@ -185,6 +185,11 @@ for i in range(0, neq):
              'auth':cat.data['Agency'][i]}
              	
     ggcat.append(tdict)
+"""
+
+'''Used to parse GGCat csv - now parse HMTK csv'''
+
+ggcat, neq = parse_hmtk_cat(hmtk_csv)
     
 # get max decimal year and round up!
 lastRec = ggcat[-1]
@@ -249,7 +254,18 @@ for uclass in unique_classes:
             
             print '    Compiling data from:', src_code[i]
             
-            mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, poly, depmin, depmax)
+             # definitions of arrays extracted from catalogue
+            '''
+            mvect: preferred MW
+            mxvect: preferred original magnitudes
+            tvect: datetime array
+            dec_tvect: decimal datetime
+            ev_dict: event dictionary
+            '''
+            
+            # get earthquakes within source zones
+            mvect, mxvect, tvect, dec_tvect, ev_dict \
+                   = get_events_in_poly(ggcat, poly, depmin, depmax)
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
@@ -295,7 +311,7 @@ for uclass in unique_classes:
     
     # get bval for combined zones data - assumes call Leonard 2008 won't be invoked!
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
-          get_mfds(total_mvect, total_tvect, total_dec_tvect, total_ev_dict, \
+          get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
                    mcomps, ycomps, year_max, mrng, src_mmax[i], src_mmin_reg[i], \
                    src_bval_fix[i], src_bval_fix_sd[i], bin_width, poly)
     

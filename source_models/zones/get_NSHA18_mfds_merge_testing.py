@@ -12,7 +12,7 @@ from matplotlib import colors, colorbar
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
-from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value
+from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat
 
 # import non-standard functions
 try:
@@ -791,23 +791,26 @@ for i in srcidx:
         plt.legend()        
         
         ###############################################################################
-        # make cummulative M >= 3 plot
+        # make cummulative M >= 3 plot of non filtered events
         ###############################################################################
         
         ax = plt.subplot(234)
         
         # get ndays
-        td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
+        #td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
+        td = orig_tvect[-1] - orig_tvect[0]
         
         ndays = timedelta2days_hours_minutes(td)[0]
         
         # get events M >= 3
         dates_ge_3 = []
         dcut = 1900
-        for ev in ev_dict:
-            if ev['prefmag'] >= 3.5 and ev['datetime'].year >= dcut:
+        for omag, otime in zip(orig_mvect, orig_tvect):
+            #if ev['prefmag'] >= 3.5 and ev['datetime'].year >= dcut:
+            if omag >= 3.5 and otime.year >= dcut:
                 # get decimal years
-                dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
+                #dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
+                dates_ge_3.append(otime.year + float(otime.strftime('%j'))/365.) # ignore leap years for now
         
         dates_ge_3 = array(dates_ge_3)        
         
