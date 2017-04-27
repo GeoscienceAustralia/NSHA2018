@@ -27,8 +27,8 @@ for poly in shapes:
 ###############################################################################
 # parse ARUP lookup csv
 ###############################################################################
-
-arupcsv = 'ARUP_source_model.csv'
+# input file modified to classify Tasmainia as non-cratonic from super domains
+arupcsv = 'ARUP_source_model.edit.csv'
 
 name = []
 codes = []
@@ -76,28 +76,25 @@ bval_sig_fix = []
 
 # loop through ARUP zones
 for code, poly in zip(codes, shapes):
+    print code, code.startswith('ZN7')
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
     print clon, clat
     
-    # set Mmax values for zones outside of Domains
-    if code == 'ZN7c':
-        tmp_dom = 7
-        tmp_mmax = 7.7
-        
-        
-    
     # loop through domains and find point in poly    
-    else:                
-        matchidx = -99
-        for i in range(0, len(dom_shapes)):
-            dom_poly = Polygon(dom_shapes[i].points)
-            
-            # check if ARUP centroid in domains poly
-            if point.within(dom_poly):
-                matchidx = i
+    matchidx = -99
+    for i in range(0, len(dom_shapes)):
+        dom_poly = Polygon(dom_shapes[i].points)
+        
+        # check if ARUP centroid in domains poly
+        if point.within(dom_poly):
+            matchidx = i
     
+    if code.startswith('ZN7') or code == 'ZN5':
+        matchidx = -1
+        print 'Fixing index: ', code
+            
     # set dummy values
     if matchidx == -99:
         dom.append(-99)
@@ -110,9 +107,6 @@ for code, poly in zip(codes, shapes):
         bval_sig_fix.append(-99)
     # fill real values
     else:
-        if code == 'ZN5':
-            matchidx = -1
-            
         dom.append(neo_doms[matchidx])
         mmax.append(neo_mmax[matchidx])
         trt.append(neo_trt[matchidx])

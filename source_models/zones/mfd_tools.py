@@ -260,6 +260,10 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     diff_cum = abs(hstack((diff(cum_rates), 0.)))
     midx = where((mrng >= src_mmin_reg-bin_width/2.) & (isfinite(diff_cum)))[0]
     
+    # check if length of midx = 0 and get highest non-zero mag
+    if len(midx) == 0:
+        midx = [where(isfinite(diff_cum))[0][-1]]
+    
     # make sure there is at least 3 observations for b-value calculations
     if len(midx) < 3:
         idxstart = midx[0] - 1

@@ -83,21 +83,19 @@ for code, poly in zip(codes, shapes):
     tmp_dom = -99
     tmp_mmax = -99
     
-    # set Mmax values for zones outside of Domains
-    if code == 'ZN7a' or code == 'ZN7b':
-        tmp_dom = 7
-        tmp_mmax = 7.7
-    
     # loop through domains and find point in poly    
-    else:                
-        matchidx = -99
-        for i in range(0, len(dom_shapes)):
-            dom_poly = Polygon(dom_shapes[i].points)
-            
-            # check if ARUP centroid in domains poly
-            if point.within(dom_poly):
-                matchidx = i
+    matchidx = -99
+    for i in range(0, len(dom_shapes)):
+        dom_poly = Polygon(dom_shapes[i].points)
+        
+        # check if ARUP centroid in domains poly
+        if point.within(dom_poly):
+            matchidx = i
     
+    if code.startswith('ZN7') or code == 'ZN5':
+        matchidx = -1
+        print 'Fixing index: ', code
+            
     # set dummy values
     if matchidx == -99:
         dom.append(-99)

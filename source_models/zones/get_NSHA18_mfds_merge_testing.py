@@ -124,7 +124,7 @@ new_n0_l = src_n0_l
 new_n0_u = src_n0_u
 
 # reset Mmin to 4.8
-print '!!!Temporary fix - setting Mmin = 4.8!!!'
+print '!!!Setting Mmin = 4.5!!!'
 src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
@@ -425,6 +425,10 @@ for i in srcidx:
         diff_cum = abs(hstack((diff(cum_rates), 0.)))
         midx = where((mrng >= src_mmin_reg[i]-bin_width/2) & (diff_cum > 0.))[0]
         
+        # check if length of midx = 0 and get highest non-zero mag
+        if len(midx) == 0:
+            midx = [where(isfinite(diff_cum))[0][-1]]
+        
         # make sure there is at least 3 observations for a-value calculations
         if len(midx) < 3:
             idxstart = midx[0] - 1
@@ -625,7 +629,8 @@ for i in srcidx:
             plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
             yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
             yexpmax = ceil(log10(max(class_cum_rates[class_idx])))
-            plt.ylim([10**yexpmin, 10**yexpmax])
+            #plt.ylim([10**yexpmin, 10**yexpmax])
+            plt.ylim([1E-6, 100]) # for comparison across zones
             
             ###############################################################################
             # get legend text
@@ -674,7 +679,7 @@ for i in srcidx:
                        
             # replot first legend
             plt.gca().add_artist(leg)
-                       
+            
             plt.grid(which='both', axis='both')
         
         ###############################################################################
