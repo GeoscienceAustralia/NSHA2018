@@ -37,8 +37,8 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Based on AUSTCAT.MW.V0.11.csv
 	- Updated logic for ML corrections
 	- Includes Ghasemi et al (2016) MW estimates where applicable
-	- Uses updated 2017 ML-MW conversions based on existing Australian data
-	- Uses GEM-ISC MS-MW conversions (Di Giacomo et al., 2015) where applicable
+	- Uses updated 2017 ML, MS & mb to MW conversions for Australian earthquakes
+	- Uses GEM-ISC MS & mb to MW conversions (Di Giacomo et al., 2015) for events outside Australia (e.g. Banda Sea)
 	- Further details [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/matlab/README.MD)
 	- Background on the 2012 catalogue's development and a description of fields is [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
 	
@@ -65,7 +65,7 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Preferred magnitude is in MW as per 2017 conversions
 	- Declustered using Leonard (2008) algorithm using original calatogue magnitudes (mx)
 	- Magnitude used for deculstering is replaced by preferred MW
-	- Catalogue adds several additional magnitude columns to standard HMTL format.  Details are [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt) and preferred Mw as per 2017 conversions
+	- Catalogue adds several additional magnitude columns to standard HMTK format.  Details are [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt) and preferred Mw as per 2017 conversions
 	
 
 
