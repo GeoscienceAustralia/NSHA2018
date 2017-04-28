@@ -1,0 +1,5 @@
+id,name,trt,msr,rar,usd,lsd,min_mag,max_mag,a_val,b_val,strike1,dip1,rake1,npweight1,hd1,hdweight1,sourcetype
+1,Non cratonic background zone main,Non_cratonic,WC1994,1.0,0.0,20.0,4.5,7.5,4.18,0.975,0.0,30.0,90.0,1.0,10.0,1.0,areaSource
+2,Non cratonic background zone tas,Non_cratonic,WC1994,1.0,0.0,20.0,4.5,7.5,2.963,0.975,0.0,30.0,90.0,1.0,10.0,1.0,areaSource
+3,Cratonic background zone,Cratonic,WC1994,1.0,0.0,15.0,4.5,7.5,3.596,0.778,0.0,30.0,90.0,1.0,7.5,1.0,areaSource
+4,Extended background zone,Non_cratonic,WC1994,1.0,0.0,20.0,4.5,7.7,3.172,0.74,0.0,30.0,90.0,1.0,10.0,1.0,areaSource
