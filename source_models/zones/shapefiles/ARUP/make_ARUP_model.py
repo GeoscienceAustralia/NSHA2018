@@ -76,7 +76,6 @@ bval_sig_fix = []
 
 # loop through ARUP zones
 for code, poly in zip(codes, shapes):
-    print code, code.startswith('ZN7')
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)

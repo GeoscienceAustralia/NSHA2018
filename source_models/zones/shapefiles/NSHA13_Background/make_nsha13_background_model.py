@@ -1,6 +1,6 @@
 import shapefile
 from os import path
-from numpy import array
+from numpy import array, zeros_like, where
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -79,6 +79,10 @@ for poly, code in zip(shapes, codes):
         if code == 'EBGZ':
             tmp_dom = 7
             tmp_mmax = 7.7
+        
+        if code == 'NCBT':
+            tmp_dom = 4
+            tmp_mmax = 7.5
         
     n_dom.append(tmp_dom)
     n_mmax.append(tmp_mmax)
@@ -186,11 +190,17 @@ w.field('CAT_FILE','C','50')
 
 src_wt = 1.0
 src_ty = 'area'
-#dep_b = 10.
-#dep_u = 5.
-#dep_l = 15.
-#min_mag = 4.8
-min_rmag = 2.5
+
+dep_u = 0.5 * array(dep_b)
+
+idx = where(dep_b > 7.)[0]
+dep_l = zeros_like(dep_b)
+dep_l[idx] = 1.5 * array(dep_b[idx])
+idx = where(dep_b < 7.)[0]
+dep_l[idx] = 2 * array(dep_b[idx])
+
+min_mag = 4.5
+min_rmag = 4.0
 #mmax[i]
 #mmax_l = mmax[i]-0.2
 #mmax_u = mmax[i]+0.2
@@ -204,7 +214,7 @@ bval_fix = -99
 bval_fix_sig = -99
 #ycomp = '1980;1970;1965;1962;1958;1910;1880'
 #mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
-ymax  = 2016
+ymax  = 2011
 #dom   = -99
 cat   = 'GGcat-161025.csv'
 
@@ -216,9 +226,7 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        dep_u = dep_b[i] - 0.5*dep_b[i]
-        dep_l = dep_b[i] + 0.5*dep_b[i]
-        w.record(names[i], codes[i], src_ty, str('%01d' % n_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
+        w.record(names[i], codes[i], src_ty, str('%01d' % n_dom[i]), src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], n_dom[i], cat)
         
 # now save area shapefile
