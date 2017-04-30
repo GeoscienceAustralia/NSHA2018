@@ -6,30 +6,47 @@
 #            e.g. python make_openquake_source_file.py SWCan_T3EclC1.pkl swcan
 #####################################################################################
 
-def make_collapse_occurrence_text(m, binwid, bestcurve):
-    from numpy import zeros
+def make_collapse_occurrence_text(m, binwid, meta):
+    from numpy import zeros, argmax
     from oq_tools import get_oq_incrementalMFD
+    '''
+    best_beta: boolean; True if only using best curve
+    mx_vals: array of Mmax values
+    mx_wts: array of Mmax weights
+    '''
     
-    if bestcurve == False:
-        bval_wt    = [0.68, 0.16, 0.16]
-        max_mag_wt = [0.60, 0.30, 0.10]
+    # get beta-value wts: [best b, low b, high b]
+    if meta['best_beta'] == False:
+        #bval_wt    = [0.68, 0.16, 0.16]
+        beta_wts    = [0.5, 0.3, 0.2]
     else:
-        bval_wt    = [1.0, 0.0, 0.0]
-        max_mag_wt = [1.0, 0.0, 0.0]
+        beta_wts   = [1.0]
+        
+    # get mmax weights
+    if meta['best_mx'] == False:
+        mx_wts = meta['mx_wts']
+        mx_vals = meta['mx_vals']
+    
+    # else, find modal Mmax
+    else:
+        modal_idx = argmax(meta['mx_wts'])
+        mx_wts  = meta['mx_wts'][modal_idx]
+        mx_vals = meta['mx_vals'][modal_idx]
         
     wtd_list  = []
     maglen = 0
 
-    for i, bwt in enumerate(bval_wt):
+    for beta_val, beta_wt in zip(m['src_beta'], beta_wts):
         # get effective rate
         effN0 = m['src_N0'][i] * m['src_weight']
         
-        for j, mwt in enumerate(max_mag_wt):
+        for mx, mxwt in zip(mx_vals, mx_wts):
             
-            betacurve, mrange = get_oq_incrementalMFD(m['src_beta'][i], effN0, \
-                                                      m['min_mag'], m['max_mag'][j], \
+            betacurve, mrange = get_oq_incrementalMFD(betaval, effN0, \
+                                                      m['min_mag'], mx, \
                                                       binwid)
-            wtd_list.append(betacurve * bwt * mwt)  
+            
+            wtd_list.append(betacurve * beta_wt * mxwt)  
             
             # get max length of arrays
             if len(betacurve) > maglen:
@@ -59,13 +76,13 @@ def make_collapse_occurrence_text(m, binwid, bestcurve):
 '''
 start main code here
 '''
-def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
+def write_oq_sourcefile(model, meta):
     """
     model = a list of dictionaries for each area source
     modelpath = folder for sources to be included in source_model_logic_tree.xml
     logicpath = folder for logic tree
     multimods = argv[2] # for setting weights of alternative models (True or False)
-    bestcurve = True gives weight of 1 to best Mmax and b-value
+    meta = True gives weight of 1 to best Mmax and b-value
     """
 
     from oq_tools import beta2bval, get_line_parallels
@@ -180,7 +197,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
             
             # get weighted rates
             binwid = 0.1
-            octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
+            octxt = make_collapse_occurrence_text(m, binwid, meta)
                                  
             newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
             newxml += '                <occurRates>'+octxt+'</occurRates>\n'
@@ -336,7 +353,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
                     if m['src_beta'][0] > -99:
                         # adjust N0 value to account for weighting of fault sources
                     
-                        octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
+                        octxt = make_collapse_occurrence_text(m, binwid, meta)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -417,7 +434,7 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
                     # do incremental MFD
                     if m['src_beta'][0] > -99:
                         
-                        octxt = make_collapse_occurrence_text(m, binwid, bestcurve)
+                        octxt = make_collapse_occurrence_text(m, binwid, meta)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -494,3 +511,38 @@ def write_oq_sourcefile(model, modelpath, logicpath, multimods, bestcurve):
     f.write(newxml)
     f.close()
     
+    
+###############################################################################
+# make source dict for OQ input writer
+###############################################################################
+
+def src_shape2dict(modelshp):
+    import shapefile  
+    from numpy import array
+    from oq_tools import get_oq_incrementalMFD
+    from tools.nsha_tools import beta2bval, bval2beta
+    
+    # read new shapefile
+    sf = shapefile.Reader(modelshp)
+    records = sf.records()
+    shapes  = sf.shapes()
+
+    # set model list
+    model = []
+    
+    # loop thru recs and make dict
+    for rec, shape in zip(records, shapes):
+        if not float(rec[15]) == -99:
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_shape':array(shape.points), 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])],
+                 'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
+                 'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+            model.append(m)
+    
+    # assume single source model for now
+    #multimods = 'False'
+    
+    # now write OQ file
+    #oqpath = path.join(rootfolder)
+    #write_oq_sourcefile(model, oqpath, oqpath, multimods, meta)
+    
+    return model

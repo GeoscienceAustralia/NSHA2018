@@ -102,6 +102,11 @@ def checkint(intstr):
         from numpy import nan
         return nan   
 
-    
-    
-    
+def bval2beta(bval):
+    from numpy import log
+    return log(10**bval)
+
+def beta2bval(beta):
+    from numpy import log10, exp
+    return log10(exp(beta))
+

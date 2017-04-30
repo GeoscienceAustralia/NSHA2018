@@ -133,8 +133,8 @@ depmin = 9.
 depmax = 99. # only get events GE 10 km
 
 # set shallow depth range
-depmin = -99.
-depmax = 99. # only get events GE 10 km
+#depmin = -99.
+#depmax = 99. # only get events GE 10 km
 
 # set arrays for testing
 bval_vect = []
@@ -1331,7 +1331,7 @@ combined_csv = path.join(rootfolder, csvbase)
 f = open(combined_csv, 'wb')
 f.write(csvtxt)
 f.close()
-
+"""
 ###############################################################################
 # make source dict for OQ input writer
 ###############################################################################
@@ -1354,3 +1354,4 @@ multimods = 'False'
 # now write OQ file
 oqpath = path.join(rootfolder)
 write_oq_sourcefile(model, oqpath, oqpath, multimods, bestcurve)
+"""
