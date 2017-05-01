@@ -25,7 +25,7 @@ try:
     
     
     #from misc_tools import listdir_extension
-    from make_nsha_oq_inputs import write_oq_sourcefile
+    #from make_nsha_oq_inputs import write_oq_sourcefile
 except:
     cwd = getcwd().split(sep)
     pythonpath = sep.join(pt[0:-3])+sep+'tools'
@@ -129,7 +129,7 @@ src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
 # set deep depth range
-depmin = 9.
+depmin = -99.
 depmax = 99. # only get events GE 10 km
 
 # set shallow depth range
@@ -499,8 +499,8 @@ for i in srcidx:
         #new_bval_u[i] = bval+sigb173
         
         # Use +/- 1 sigma
-        new_bval_l[i] = bval-bval_sig
-        new_bval_u[i] = bval+bval_sig
+        new_bval_l[i] = bval+bval_sig # lower curve, so higher b
+        new_bval_u[i] = bval-bval_sig # upper curve, so lower b
         
         new_n0_b[i]   = fn0
         new_n0_l[i]   = N0_lo173
