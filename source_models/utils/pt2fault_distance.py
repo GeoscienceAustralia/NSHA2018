@@ -223,9 +223,24 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
     print 'Overall minimum distance (km):', min(minimum_distance_list)
     source_group_list = []
     id = 0
+    # Write pts to source model on their own 
     source_model_file = filename 
     print 'Writing to source model file %s' % source_model_file 
     for trt, sources in revised_point_sources.iteritems():
+        source_group = SourceGroup(trt, sources = sources, id=id)
+        id +=1
+        source_group_list.append(source_group)
+    write_source_model(source_model_file, source_group_list,
+                       name = 'Leonard2008')
+    # Write pts to source model with faults
+    source_model_file = filename[:-4] +'_inc_faults.xml'
+    print 'Writing to source model file %s' % source_model_file
+    
+#    revised_point_sources.append(fault_sources)
+    for trt, sources in revised_point_sources.iteritems():
+        for fault_source in fault_sources:
+            if fault_source.tectonic_region_type == trt:
+                sources.append(fault_source)
         source_group = SourceGroup(trt, sources = sources, id=id)
         id +=1
         source_group_list.append(source_group)
