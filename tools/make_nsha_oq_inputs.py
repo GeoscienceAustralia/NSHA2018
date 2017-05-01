@@ -6,8 +6,8 @@
 #            e.g. python make_openquake_source_file.py SWCan_T3EclC1.pkl swcan
 #####################################################################################
 
-def make_collapse_occurrence_text(m, binwid, meta):
-    from numpy import zeros, argmax
+def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
+    from numpy import array, zeros, argmax, zeros_like
     from oq_tools import get_oq_incrementalMFD
     '''
     best_beta: boolean; True if only using best curve
@@ -15,38 +15,47 @@ def make_collapse_occurrence_text(m, binwid, meta):
     mx_wts: array of Mmax weights
     '''
     
-    # get beta-value wts: [best b, low b, high b]
-    if meta['best_beta'] == False:
-        #bval_wt    = [0.68, 0.16, 0.16]
-        beta_wts    = [0.5, 0.3, 0.2]
-    else:
-        beta_wts   = [1.0]
-        
-    # get mmax weights
-    if meta['best_mx'] == False:
-        mx_wts = meta['mx_wts']
-        mx_vals = meta['mx_vals']
+    # set mx arrays from mx dictionary using zone trt
+    mx_vals = mx_dict[m['trt']]['mx_vals']
+    mx_wts  = mx_dict[m['trt']]['mx_wts']
     
-    # else, find modal Mmax
-    else:
-        modal_idx = argmax(meta['mx_wts'])
-        mx_wts  = meta['mx_wts'][modal_idx]
-        mx_vals = meta['mx_vals'][modal_idx]
+    # REMOVE ME WHEN FINISHED TESTING
+    mx_wts = [0.1, 0.2, 0.4, 0.2, 0.1]
         
+    # if using one Mx only
+    if meta['one_mx'] == True:
+        # find highest weighted
+        if meta['mx_idx'] == -1:
+            # find and set model Mmax
+            mxidx = argmax(array(mx_wts))
+            
+            # reset weight
+            mx_wts = zeros_like(mx_wts)
+            mx_wts[mxidx] = 1.0
+        
+        # else use pre-defined index
+        else:
+            # reset weight
+            mx_wts = zeros_like(mx_wts)
+            mx_wts[meta['mx_idx']] = 1.0
+        
+    
     wtd_list  = []
     maglen = 0
 
-    for beta_val, beta_wt in zip(m['src_beta'], beta_wts):
+    for beta_val, beta_wt, N0 in zip(m['src_beta'], meta['beta_wts'], m['src_N0']):
         # get effective rate
-        effN0 = m['src_N0'][i] * m['src_weight']
+        effN0 = N0 * m['src_weight']
         
         for mx, mxwt in zip(mx_vals, mx_wts):
             
-            betacurve, mrange = get_oq_incrementalMFD(betaval, effN0, \
+            betacurve, mrange = get_oq_incrementalMFD(beta_val, effN0, \
                                                       m['min_mag'], mx, \
                                                       binwid)
             
-            wtd_list.append(betacurve * beta_wt * mxwt)  
+            print beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
+            
+            wtd_list.append(betacurve * beta_wt * mxwt)
             
             # get max length of arrays
             if len(betacurve) > maglen:
@@ -69,14 +78,14 @@ def make_collapse_occurrence_text(m, binwid, meta):
     octxt = str('%0.5e' % occ_rates[0])
     for bc in occ_rates[1:]:
         octxt += ' ' + str('%0.5e' % bc)
-        
+    
+    print occ_rates[0]
     return octxt
-
 
 '''
 start main code here
 '''
-def write_oq_sourcefile(model, meta):
+def write_oq_sourcefile(model, meta, mx_dict):
     """
     model = a list of dictionaries for each area source
     modelpath = folder for sources to be included in source_model_logic_tree.xml
@@ -86,7 +95,7 @@ def write_oq_sourcefile(model, meta):
     """
 
     from oq_tools import beta2bval, get_line_parallels
-    from numpy import array, log10, max, min, tan, radians, unique, isinf
+    from numpy import log10, max, min, tan, radians, isinf
     from os import path
     
     # set big bbox params
@@ -94,11 +103,6 @@ def write_oq_sourcefile(model, meta):
     bbmaxlat = -90
     bbminlon = 180
     bbminlat = 90
-    
-    # Write 1 model file
-    betalist = ['bb','bl','bu']
-    maglist = ['mb','ml','mu']
-    srcxmls = []
     
     # make xml header
     header = '<?xml version="1.0" encoding="utf-8"?>\n'
@@ -110,9 +114,8 @@ def write_oq_sourcefile(model, meta):
     bval_wt    = [0.68, 0.16, 0.16]
     max_mag_wt = [0.60, 0.30, 0.10]
     '''
-    branch_wt = []
-    
-    outbase = path.split(modelpath)[-1]
+
+    outbase = path.split(meta['modelPath'])[-1]
     
     # start xml text
     newxml = header + '    <sourceModel name="'+outbase+'_collapsed">\n\n'
@@ -190,14 +193,14 @@ def write_oq_sourcefile(model, meta):
                 newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
                 
             newxml += '            </areaGeometry>\n'
-            #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-            newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+            newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+            #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
             #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
-            newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
+            newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
-            octxt = make_collapse_occurrence_text(m, binwid, meta)
+            octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
                                  
             newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
             newxml += '                <occurRates>'+octxt+'</occurRates>\n'
@@ -341,8 +344,8 @@ def write_oq_sourcefile(model, meta):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                 
@@ -353,7 +356,7 @@ def write_oq_sourcefile(model, meta):
                     if m['src_beta'][0] > -99:
                         # adjust N0 value to account for weighting of fault sources
                     
-                        octxt = make_collapse_occurrence_text(m, binwid, meta)
+                        octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -423,8 +426,8 @@ def write_oq_sourcefile(model, meta):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        #newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-                        newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
                     newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
                     #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
@@ -434,7 +437,7 @@ def write_oq_sourcefile(model, meta):
                     # do incremental MFD
                     if m['src_beta'][0] > -99:
                         
-                        octxt = make_collapse_occurrence_text(m, binwid, meta)
+                        octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -463,25 +466,31 @@ def write_oq_sourcefile(model, meta):
     print '\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
     
     # write new data to file
-    outxml = path.join(modelpath, ''.join((outbase,'_collapsed_rates_FF.xml')))
+    outxml = path.join(meta['modelPath'], meta['modelFile'])
     #outxml = '/'.join((src_folder, ''.join((outbase,'_',bl,'_',ml,'.xml'))))
     f = open(outxml,'w')
     f.write(newxml)
-    f.close() 
+    f.close()
     
-    srcxmls.append(outxml)
-        
-    ######################################################################
-    # now that the source file have been written, make the logic tree file
-    ######################################################################
+    #srcxmls.append(outxml)
+    return outxml
+
+######################################################################
+# now that the source file have been written, make the logic tree file
+######################################################################
+
+def make_logic_tree(srcxmls, branch_wts, meta):    
+    from os import path
     
     # if multimodel - adjust weights
-    if multimods == 'True':
-        branch_wt = array(branch_wt)
+    '''
+    if meta['multiMods'] == 'True':
+        branch_wts = array(branch_wts)
         branch_wt *= m['src_reg_wt']
         print 'Branch Weights: ', m['src_reg_wt']
         #else:
         #    full_wt = concatenate((branch_wt, branch_wt, branch_wt))
+    '''
     
     newxml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     newxml += '<nrml xmlns:gml="http://www.opengis.net/gml"\n'
@@ -492,12 +501,12 @@ def write_oq_sourcefile(model, meta):
           '                                branchSetID="bs1">\n\n'
     
     # make branches
-    for i, branch in enumerate(srcxmls):
+    for i, srcxml in enumerate(srcxmls):
         #logictreepath = logicpath + sep + path.split(branch)[-1]
-        logictreepath = path.split(branch)[-1]
+        logictreepath = path.split(srcxml)[-1]
         newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
         newxml += '                    <uncertaintyModel>'+logictreepath+'</uncertaintyModel>\n'
-        newxml += '                    <uncertaintyWeight>'+str(m['src_reg_wt'])+'</uncertaintyWeight>\n'
+        newxml += '                    <uncertaintyWeight>'+str(branch_wts[i])+'</uncertaintyWeight>\n'
         newxml += '                </logicTreeBranch>\n\n'
     
     newxml += '            </logicTreeBranchSet>\n'
@@ -506,7 +515,10 @@ def write_oq_sourcefile(model, meta):
     newxml += '</nrml>'
         
     # write logic tree to file
-    outxml = path.join(logicpath, ''.join((outbase, '_source_model_logic_tree_FF.xml')))
+    outxml = path.join(meta['modelPath'], 
+                       ''.join((meta['modelFile'].split('.')[0][:-11], 
+                                '_source_model_logic_tree.xml')))
+                                
     f = open(outxml,'w')
     f.write(newxml)
     f.close()
@@ -519,8 +531,8 @@ def write_oq_sourcefile(model, meta):
 def src_shape2dict(modelshp):
     import shapefile  
     from numpy import array
-    from oq_tools import get_oq_incrementalMFD
-    from tools.nsha_tools import beta2bval, bval2beta
+    #from oq_tools import get_oq_incrementalMFD
+    from tools.nsha_tools import bval2beta
     
     # read new shapefile
     sf = shapefile.Reader(modelshp)
@@ -533,16 +545,13 @@ def src_shape2dict(modelshp):
     # loop thru recs and make dict
     for rec, shape in zip(records, shapes):
         if not float(rec[15]) == -99:
-            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_shape':array(shape.points), 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])],
-                 'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-                 'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 
+                 'trt':rec[23], 'src_shape':array(shape.points), 
+                 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])], 
+                 'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 
+                 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
+                 'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 
+                 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
             model.append(m)
-    
-    # assume single source model for now
-    #multimods = 'False'
-    
-    # now write OQ file
-    #oqpath = path.join(rootfolder)
-    #write_oq_sourcefile(model, oqpath, oqpath, multimods, meta)
     
     return model
