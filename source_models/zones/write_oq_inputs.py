@@ -184,9 +184,6 @@ elif outputType == '2':
                                 bSuffix[i], 'm'+str(j+1), 
                                 'xml'))
             
-            # make output filename
-            #modelFile = path.join('test', xmlfile)
-            
             #set metadata dict
             meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
                     'multiMods':False, 'one_mx':True, 'mx_idx':j}

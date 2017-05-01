@@ -516,7 +516,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
         
     # write logic tree to file
     outxml = path.join(meta['modelPath'], 
-                       ''.join((meta['modelFile'].split('.')[0][:-11], 
+                       ''.join((meta['modelFile'].split('.')[0][:-10], 
                                 '_source_model_logic_tree.xml')))
                                 
     f = open(outxml,'w')
