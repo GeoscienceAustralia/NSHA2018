@@ -7,14 +7,25 @@ shpfile = argv[1] # input shapefile
 
 outputType = argv[2]
 
-'''
+"""
 set outputType:
     0 = best parameters only - use 
     1 = collapsed rates
     2 = multiple file
     3 = best beta, multiple Mmax
     4 = multiple beta, best Mmax
-'''
+
+best: best b-value and Mmax (is the same as the highest weighted file in multimod
+
+collapsed: All variations of b-value and Mmax collapsed into one file
+
+multimod: ach combination of b-value and Mmax has its own source file - 15 files in total (should give the same results as above)
+
+mmax_var: collapsed rate file for testing hazard sensitivity by just varying Mmax
+
+bval_var: collapsed rate file for testing hazard sensitivity by varying b-value
+
+"""
     
 # get model dictionary from shapefile
 model = src_shape2dict(shpfile)
@@ -22,7 +33,7 @@ model = src_shape2dict(shpfile)
 # split model path
 splitpath = shpfile.split(sep)[:-2]
 
-# set beta wts
+# set beta wts - keep these consistent accross models and zones
 beta_wts   = [0.5, 0.2, 0.3] # best, lower (hi b), upper (lo b)
 
 # set Mmax array and weights
@@ -58,7 +69,7 @@ for line in lines:
         mxv.append(float(dat[3]))
         mxw.append(float(dat[4]))
         
-        # use Proterozoic as generic "cratonic"
+        # use Proterozoic as generic "Cratonic"
         if dat[2] == 'Proterozoic':
             trt.append('Cratonic')
             mxv.append(float(dat[3]))
@@ -78,10 +89,45 @@ for ut in unq_trt:
     mx_dict[ut] = td
 
 ##############################################################################
+# use best beta & Mmax
+##############################################################################
+
+if outputType == '0':
+    
+    splitpath.append('best')
+    modPath = sep.join(splitpath)
+    
+    # check to see if exists
+    if path.isdir(modPath) == False:
+        mkdir(modPath)
+        
+    # get output filename
+    xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.best.xml'
+    
+    # reset beta weights
+    tmp_bwts = [1.0, 0.0, 0.0] # only use best beta
+    
+    #set metadata dict
+    meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
+            'multiMods':False, 'one_mx':True, 'mx_idx':-1} # need to search for best Mmax
+    	
+    # check to see if exists
+    if path.isdir(meta['modelPath']) == False:
+        mkdir(meta['modelPath'])
+    
+    # now write source files
+    outxml = write_oq_sourcefile(model, meta, mx_dict)
+    srcxmls.append(outxml)
+    
+    # get branch weight
+    branch_wts = [1.0]
+
+
+##############################################################################
 # just write collapsed rates
 ##############################################################################
 
-if outputType == '1':
+elif outputType == '1':
     
     splitpath.append('collapsed')
     modPath = sep.join(splitpath)
@@ -132,13 +178,7 @@ elif outputType == '2':
         
         # loop thru mmax - other end will get appropriate TRT
         for j in range(0, len(mx_dict['Archean']['mx_vals'])):
-            
-            '''
-            # set temp beta wt array
-            tmp_mwts = zeros_like(array(mx_wts))
-            tmp_mwts[j] = 1.0
-            '''
-        
+                    
             # get output filename
             xmlfile = '.'.join((path.split(shpfile)[-1].strip('.shp')[:-11],
                                 bSuffix[i], 'm'+str(j+1), 
@@ -175,14 +215,6 @@ elif outputType == '3':
     if path.isdir(modPath) == False:
         mkdir(modPath)
         
-    branch_wts = []
-    
-    '''    
-    # find and set model Mmax
-    mxidx = argmax(array(mx_wts))
-    tmp_mx = [mx_vals[mxidx]]
-    '''
-    
     # get output filename
     xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.bvar.xml'
     
@@ -214,10 +246,9 @@ elif outputType == '4':
     if path.isdir(modPath) == False:
         mkdir(modPath)
         
+    # reset beta weights
     tmp_bwts = [1.0, 0.0, 0.0] # only use best beta
     
-    branch_wts = []
-            
     # get output filename
     xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.mvar.xml'
     
@@ -244,19 +275,3 @@ make_logic_tree(srcxmls, branch_wts, meta)
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        

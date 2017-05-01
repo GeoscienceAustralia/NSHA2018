@@ -53,7 +53,7 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
                                                       m['min_mag'], mx, \
                                                       binwid)
             
-            print beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
+            #print beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
             
             wtd_list.append(betacurve * beta_wt * mxwt)
             
