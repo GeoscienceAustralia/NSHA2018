@@ -228,6 +228,6 @@ fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_s
 revised_point_sources = area_source_model[:-4] + '_pts_geom_filtered.xml'
 pt2fault_distance(pt_source_list, fault_sources,
                   filename = revised_point_sources,
-                  buffer_distance = 1.) # Make buffer distance larger, reduced for memory issues
+                  buffer_distance = 100.) # Make buffer distance larger, reduced for memory issues
 
 # Apply additive approach

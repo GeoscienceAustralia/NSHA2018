@@ -4,12 +4,14 @@ to the MFD and nodal plane distirbution. Nearest distance to the fault is calcul
 
 import os, sys
 import numpy as np
+import copy
 from openquake.hazardlib.nrml import SourceModelParser
 from openquake.hazardlib.sourceconverter import SourceConverter, SourceGroup
 from openquake.hazardlib.sourcewriter import write_source_model
-#from openquake.commonlib.node import Node
 from openquake.hazardlib.sourcewriter import obj_to_node
 from openquake.hazardlib import nrml
+from openquake.hazardlib.geo.nodalplane import NodalPlane
+from openquake.hazardlib.pmf import PMF
 from openquake.hazardlib.geo.surface.simple_fault import SimpleFaultSurface
 from openquake.hazardlib.geo.geodetic import distance, geodetic_distance
 from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
@@ -65,9 +67,9 @@ def read_simplefault_source(simplefault_source_file, rupture_mesh_spacing = 10):
         pass
     return sources
 
-def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
+def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                       filename = 'source_model.xml',
-                      buffer_distance = 5.):
+                      buffer_distance = 100.):
     """Calculate distances from a pt source rupture plane
     to the fault sources to then reduce Mmax on events that are 
     within a certain distance
@@ -81,7 +83,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
     :param filename:
         Name of output nrml file for revised pt source model
     :param buffer_distance:
-        Degrees, initial filter to only process pts within this
+        Km, initial filter to only process pts within this
         distance from the fault
     """
 
@@ -107,14 +109,34 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
 
     # Generate ruptures for point sources
     minimum_distance_list = []
-    revised_point_sources = {'Cratonic': [], 'Non_cratonic': []}
+    revised_point_sources = {'Cratonic': [], 'Non_cratonic': [], 
+                             'Extended': [], 'Banda': []}
     for pt in pt_sources:
         print 'Looping over point sources'
-        # For speeding things up
-        if pt.location.longitude < min_fault_lon - buffer_distance or \
-           pt.location.longitude > max_fault_lon + buffer_distance or \
-           pt.location.latitude < min_fault_lat - buffer_distance or \
-           pt.location.latitude > max_fault_lat + buffer_distance:
+        # For speeding things up filter based on initial distances
+        # to find points very far from or very close to a fault
+        pt_depths = []
+        for probs, depths in pt.hypocenter_distribution.data:
+            pt_depths.append(depths)
+        np_probs = []
+        np_list = []
+        for prob, nodal_plane in pt.nodal_plane_distribution.data:
+            np_probs.append(prob)
+            np_list.append(nodal_plane)
+        centroid_distances = []
+        for pt_depth in pt_depths:
+            centroid_distances.append(distance(pt.location.longitude, pt.location.latitude,
+                                      pt_depth, fault_lons, fault_lats, fault_depths))
+        centroid_distances = np.array(centroid_distances).flatten()
+        print 'Minimum distance', min(centroid_distances)
+        print 'Maximum distance', max(centroid_distances)
+        if (min(centroid_distances)) > buffer_distance:
+            # Keep point as it, not within buffer distance of any faults
+            revised_point_sources[pt.tectonic_region_type].append(pt)
+            continue
+        if (min(centroid_distances)) < min_distance:
+            # Discard point sources as too close to a fault
+            print 'Discarding point source, too close to a fault'
             continue
         rupture_mags = []
         rupture_lons = []
@@ -129,7 +151,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
             rupture_lats.append(rupture.surface.corner_lats)
             rupture_depths.append(rupture.surface.corner_depths)
             rupture_strikes.append(rupture.surface.strike)
-            rupture_strikes.append(rupture.surface.dip)
+            rupture_dips.append(rupture.surface.dip)
         rupture_mags = np.array(rupture_mags).flatten()
         # make the same length as the corners
         rupture_mags = np.repeat(rupture_mags, 4)
@@ -165,12 +187,37 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5,
             print 'Magnitudes of rupture close to fault', too_close_mags
             print 'Strikes of rupture close to fault', too_close_strikes
             print 'Dips of rupture close to fault', too_close_dips
-            minimum_magnitude_intersecting_fault = min(too_close_mags)
-            if minimum_magnitude_intersecting_fault >= \
-               (pt.mfd.min_mag + pt.mfd.bin_width):
-                pt.mfd.max_mag = minimum_magnitude_intersecting_fault - \
-                                 pt.mfd.bin_width
-                revised_point_sources[pt.tectonic_region_type].append(pt)
+           # minimum_magnitude_intersecting_fault = min(too_close_mags)
+            unique_strikes = np.unique(rupture_strikes)
+            unique_dips = np.unique(rupture_dips)
+            for prob, nodal_plane in pt.nodal_plane_distribution.data:
+                # We are now splitting the source into many with different 
+                # combinations of Mmaxs and nodal planes
+                new_pt = copy.deepcopy(pt)
+                new_np = NodalPlane(nodal_plane.strike, nodal_plane.dip, nodal_plane.rake)
+                new_np_distribution = PMF([(1.0, new_np)]) # weight of nodal plane is 1 as making 
+                # a separate source
+                # Calculate new rates based on probability of original nodal plane
+                new_pt.nodal_plane_distribution = new_np_distribution
+                b_val = pt.mfd.b_val
+                # rescale a value in log sapce
+                a_val = np.log10(np.power(10, pt.mfd.a_val)*prob)
+                new_pt.mfd.modify_set_ab(a_val, b_val)
+                pair_index = np.where(np.logical_and(too_close_strikes == nodal_plane.strike,
+                                                         too_close_dips == nodal_plane.dip))
+                 # Deal with intersecting cases
+                if len(pair_index[0]) > 0:
+                    intersecting_magnitudes = too_close_mags[pair_index]
+                    minimum_magnitude_intersecting_fault = min(intersecting_magnitudes)
+                    if minimum_magnitude_intersecting_fault >= \
+                            (pt.mfd.min_mag + pt.mfd.bin_width):
+                       new_pt.mfd.max_mag = minimum_magnitude_intersecting_fault - \
+                            pt.mfd.bin_width
+                else:
+                    pass
+                # Append revised source for given nodal plane distribution to 
+                # list of revised sources
+                revised_point_sources[pt.tectonic_region_type].append(new_pt)
         else:
             revised_point_sources[pt.tectonic_region_type].append(pt)
     print 'Overall minimum distance (km):', min(minimum_distance_list)
