@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Wrapper script for running model and capturing provenance
 """
 
@@ -8,39 +9,42 @@ from shutil import copy2
 import subprocess
 import getpass
 import datetime
+import argparse
 
-# Parameters for building run_<model>.sh qsub job
-# Normally you would only need to change these, although
-# other parameters are hard coded at the bottom of the file
-ncpus = 256 
-mem = '512GB'
-walltime = '01:00:00'
-jobfs='200GB' 
+parser = argparse.ArgumentParser(description='Build NCI run scripts for OpenQuake models' \
+                                     'capturing appropriate provenance data')
+parser.add_argument('-param_file', type=str, default=None,
+                    help='Name of file containing model run parameters')
+args = parser.parse_args()
 
-# Paths to sandpit and input path, assuming you have
-# a sandpit named after your NCI username
-sandpit_path = '/short/w84/NSHA18/sandpit/'
-model_rel_path = 'NSHA2018/source_models/smoothed_seismicity/Cuthbertson2016'
-# All outputs will be under this directory
-model_output_base = '/short/w84/NSHA18/PSHA_modelling/'
-
-########################################################
-# Nothing should change below here
-####################################################### 
+params = {}
+try:
+    f_in = open(args.param_file, 'r')
+except TypeError:
+    parser.print_help()
+    raise Exception(('params file %s not found' % args.param_file))
+for line in f_in.readlines():
+    row = line.split('=')
+    params[row[0].rstrip()] = row[1].rstrip().lstrip()
 
 user = getpass.getuser()
 run_start_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-model_name = model_rel_path.split('/')[-1]
-model_path = join(sandpit_path, user, model_rel_path)
-job_file = join(model_path, 'job.ini')
+model_name = params['model_rel_path'].split('/')[-1]
+model_path = join(params['sandpit_path'], user, params['model_rel_path'])
+job_file = join(model_path, params['job_file'])
 
 # Make output directory and copy input files
-model_output_base_source_folder = join(model_output_base, model_name)
+model_output_base_source_folder = join(params['model_output_base'], model_name)
 if not os.path.exists(model_output_base_source_folder):
     os.mkdir(model_output_base_source_folder)
 output_dir_name = run_start_time + '_' + model_name + '_' + user
 output_dir = join(model_output_base_source_folder, output_dir_name)
 os.mkdir(output_dir)
+
+# We want to ensure we are using the same ground motion models
+# for all model runs
+gsim_lt_file = join(params['sandpit_path'], user, params['gsim_lt_rel_path'],
+                    params['gsim_lt_filename'])
 
 # Read job.ini file and find relevant input files
 f_in = open(job_file, 'r')
@@ -50,7 +54,10 @@ for line in f_in.readlines():
         src_lt_file = join(model_path, src_lt)
     if line.startswith('gsim_logic_tree_file'):
         gsim_lt = line.split('=')[1].strip()
-        gsim_lt_file = join(model_path, gsim_lt)
+        if gsim_lt != params['gsim_lt_filename']:
+            msg = 'Ground motion logic tree filename %s as specified in run_oq_model.py' \
+                'different to %s specified in job.ini file' 
+            raise ValueError(msg)
     if line.startswith('export_dir'):
         export_dir = line.split('=')[1].strip()
 f_in.close()
@@ -66,7 +73,6 @@ f_in = open(src_lt_file)
 for line in f_in.readlines():
     if 'source_model' in line:
         source_model_name = line.replace('>','<').split('<')[2]
-        print source_model_name
         source_model_file = join(model_path, source_model_name)        
         copy2(source_model_file, output_dir)
 f_in.close()    
@@ -74,12 +80,12 @@ f_in.close()
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
 outlines += '#PBS -q normal\n'
-outlines += '#PBS -l walltime=%s\n' %walltime
-outlines += '#PBS -l ncpus=%i\n' % ncpus
-outlines += '#PBS -l mem=%s\n' % mem
+outlines += '#PBS -l walltime=%s\n' % params['walltime']
+outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
+outlines += '#PBS -l mem=%s\n' % params['mem']
 outlines += '#PBS -l wd\n'
 outlines += '#PBS -N oq512c512ht\n'
-outlines += '#PBS -l jobfs=%s\n' % jobfs
+outlines += '#PBS -l jobfs=%s\n' % params['jobfs']
 outlines += '#PBS -l other=hyperthread\n\n'
 
 outlines += 'module load openquake/2.1.1\n'
