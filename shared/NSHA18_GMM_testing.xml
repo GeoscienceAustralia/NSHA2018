@@ -83,7 +83,7 @@ Earthquake Hazard Map. Record 2012/71' -->
         </logicTreeBranchingLevel>
 
         <logicTreeBranchingLevel branchingLevelID="bl2">
-            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"
                     applyToTectonicRegionType="Cratonic">
 
 <!-- GMPEs and weights as defined in table 16, page 50 of 'The 2012 Australian
@@ -113,7 +113,7 @@ Earthquake Hazard Map. Record 2012/71' -->
         </logicTreeBranchingLevel>
         
         <logicTreeBranchingLevel branchingLevelID="bl1">
-            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs1"
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"
                     applyToTectonicRegionType="Extended">
 
 <!-- GMPEs and weights assumed to be the same as Non_cratonic -->
