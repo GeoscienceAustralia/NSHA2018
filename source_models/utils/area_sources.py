@@ -6,10 +6,12 @@ Geoscience Australia April 2017
 
 import os, sys
 
-from openquake.hazardlib.nrml import SourceModelParser
+from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
 from openquake.hazardlib.sourceconverter import SourceConverter, \
     area_to_point_sources, SourceGroup
-from openquake.hazardlib.sourcewriter import write_source_model
+from openquake.hazardlib.sourcewriter import write_source_model, obj_to_node
+from openquake.baselib.node import Node
+from openquake.hazardlib import nrml
 
 def nrml2sourcelist(area_source_file, investigation_time=50, 
                     rupture_mesh_spacing=10., width_of_mfd_bin=0.1,
@@ -33,7 +35,8 @@ def nrml2sourcelist(area_source_file, investigation_time=50,
 def area2pt_source(area_source_file, sources = None, investigation_time=50, 
                    rupture_mesh_spacing=10., width_of_mfd_bin=0.1,
                    area_source_discretisation=10.,
-                   filename = None):
+                   filename = None, nrml_version = '04',
+                   name = None):
     """Calls OpenQuake parsers to read area source model
     from source_mode.xml type file, convert to point sources
     and write to a new nrml source model file.
@@ -49,7 +52,8 @@ def area2pt_source(area_source_file, sources = None, investigation_time=50,
                                   rupture_mesh_spacing=rupture_mesh_spacing, 
                                   width_of_mfd_bin=width_of_mfd_bin,
                                   area_source_discretisation=area_source_discretisation)
-    name = '%s_points' % filename
+    if name is None:
+        name = '%s_points' % filename
     new_pt_sources = {}
     for source in sources:
         pt_sources = area_to_point_sources(source)
@@ -70,6 +74,19 @@ def area2pt_source(area_source_file, sources = None, investigation_time=50,
         id +=1
         source_group_list.append(source_group)
     if filename is not None:
-        write_source_model(nrml_pt_file, source_group_list,
-                           name = filename)
+        if nrml_version == '04':
+            source_list = []
+            for trt, sources in new_pt_sources.iteritems():
+                for source in sources:
+                    source_list.append(source)
+            nodes = list(map(obj_to_node, sorted(source_list)))
+            source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+            with open(nrml_pt_file, 'wb') as f:
+                nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+        # This will write version 0.5
+        elif nrml_version == '05':
+            write_source_model(nrml_pt_file, source_group_list,
+                               name = filename)
+        else:
+            print 'Warning: nrml version not specfied, xml not created'
     return source_group_list

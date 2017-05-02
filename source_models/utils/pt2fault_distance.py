@@ -5,10 +5,11 @@ to the MFD and nodal plane distirbution. Nearest distance to the fault is calcul
 import os, sys
 import numpy as np
 import copy
-from openquake.hazardlib.nrml import SourceModelParser
+from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
 from openquake.hazardlib.sourceconverter import SourceConverter, SourceGroup
 from openquake.hazardlib.sourcewriter import write_source_model
 from openquake.hazardlib.sourcewriter import obj_to_node
+from openquake.baselib.node import Node
 from openquake.hazardlib import nrml
 from openquake.hazardlib.geo.nodalplane import NodalPlane
 from openquake.hazardlib.pmf import PMF
@@ -69,7 +70,8 @@ def read_simplefault_source(simplefault_source_file, rupture_mesh_spacing = 10):
 
 def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                       filename = 'source_model.xml',
-                      buffer_distance = 100.):
+                      buffer_distance = 100., nrml_version = '04',
+                      name = None):
     """Calculate distances from a pt source rupture plane
     to the fault sources to then reduce Mmax on events that are 
     within a certain distance
@@ -87,6 +89,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
         distance from the fault
     """
 
+    if name is None:
+        name = filename[:-4] + '_geom_filtered'
     # Extract the points of the fault source mesh
     fault_lons = []
     fault_lats = []
@@ -190,10 +194,14 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
            # minimum_magnitude_intersecting_fault = min(too_close_mags)
             unique_strikes = np.unique(rupture_strikes)
             unique_dips = np.unique(rupture_dips)
+            id_index = 0
             for prob, nodal_plane in pt.nodal_plane_distribution.data:
+                id_index += 1
                 # We are now splitting the source into many with different 
                 # combinations of Mmaxs and nodal planes
                 new_pt = copy.deepcopy(pt)
+                new_pt.source_id = new_pt.source_id + ("_%i" % id_index)
+                new_pt.name = new_pt.name + ("_%i" % id_index)
                 new_np = NodalPlane(nodal_plane.strike, nodal_plane.dip, nodal_plane.rake)
                 new_np_distribution = PMF([(1.0, new_np)]) # weight of nodal plane is 1 as making 
                 # a separate source
@@ -221,31 +229,60 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
         else:
             revised_point_sources[pt.tectonic_region_type].append(pt)
     print 'Overall minimum distance (km):', min(minimum_distance_list)
-    source_group_list = []
-    id = 0
-    # Write pts to source model on their own 
+
+    # Write pts to source model on their own
     source_model_file = filename 
     print 'Writing to source model file %s' % source_model_file 
-    for trt, sources in revised_point_sources.iteritems():
-        source_group = SourceGroup(trt, sources = sources, id=id)
-        id +=1
-        source_group_list.append(source_group)
-    write_source_model(source_model_file, source_group_list,
-                       name = 'Leonard2008')
+    if nrml_version == '04':
+        source_list = []
+        for trt, sources in revised_point_sources.iteritems():
+            for source in sources:
+                source_list.append(source)
+        nodes = list(map(obj_to_node, sorted(source_list)))
+        source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+        with open(source_model_file, 'wb') as f:
+            nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+    elif nrml_version == '05':
+        source_group_list = []
+        id = 0
+        for trt, sources in revised_pt_sources.iteritems():
+            source_group = SourceGroup(trt, sources = sources, id=id)
+            id +=1
+            source_group_list.append(source_group)
+        write_source_model(nrml_pt_file, source_group_list,
+                           name = name)
+    else:
+        print 'Warning: nrml version not specfied, xml not created'
+
     # Write pts to source model with faults
     source_model_file = filename[:-4] +'_inc_faults.xml'
+    name = name +'_inc_faults'
     print 'Writing to source model file %s' % source_model_file
-    
-#    revised_point_sources.append(fault_sources)
-    for trt, sources in revised_point_sources.iteritems():
+    if nrml_version == '04':
+        source_list = []
+        for trt, sources in revised_point_sources.iteritems():
+            for source in sources:
+                source_list.append(source)
         for fault_source in fault_sources:
-            if fault_source.tectonic_region_type == trt:
-                sources.append(fault_source)
-        source_group = SourceGroup(trt, sources = sources, id=id)
-        id +=1
-        source_group_list.append(source_group)
-    write_source_model(source_model_file, source_group_list,
-                       name = 'Leonard2008')
+            source_list.append(fault_source)
+        nodes = list(map(obj_to_node, sorted(source_list)))
+        source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+        with open(source_model_file, 'wb') as f:
+            nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+    elif nrml_version == '05':
+        source_group_list = []
+        id = 0
+        for trt, sources in revised_pt_sources.iteritems():
+            for fault_source in fault_sources:
+                if fault_source.tectonic_region_type == trt:
+                    sources.append(fault_source)
+            source_group = SourceGroup(trt, sources = sources, id=id)
+            id +=1
+            source_group_list.append(source_group)
+        write_source_model(nrml_pt_file, source_group_list,
+                           name = name)
+    else:
+        print 'Warning: nrml version not specfied, xml not created'
 
 def plot_sources(point_source, fault_source):
     from hmtk.plotting.mapping import HMTKBaseMap
