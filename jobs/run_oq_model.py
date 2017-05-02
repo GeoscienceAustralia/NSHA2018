@@ -82,7 +82,7 @@ except IOError:
 # and copy to output dir
 f_in = open(src_lt_file)
 for line in f_in.readlines():
-    if 'source_model' in line:
+    if '.xml' in line:
         source_model_name = line.replace('>','<').split('<')[2]
         source_model_file = join(model_path, source_model_name)        
         copy2(source_model_file, output_dir)
