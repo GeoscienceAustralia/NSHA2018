@@ -34,6 +34,8 @@ model_path = join(params['sandpit_path'], user, params['model_rel_path'])
 job_file = join(model_path, params['job_file'])
 
 # Make output directory and copy input files
+if not os.path.exists(params['model_output_base']):
+    os.mkdir(params['model_output_base'])
 model_output_base_source_folder = join(params['model_output_base'], model_name)
 if not os.path.exists(model_output_base_source_folder):
     os.mkdir(model_output_base_source_folder)
@@ -43,7 +45,7 @@ os.mkdir(output_dir)
 
 # We want to ensure we are using the same ground motion models
 # for all model runs
-gsim_lt_file = join(params['sandpit_path'], user, params['gsim_lt_rel_path'],
+gsim_lt_file = join(params['sandpit_path'], user, params['shared_rel_path'],
                     params['gsim_lt_filename'])
 
 # Read job.ini file and find relevant input files
@@ -56,8 +58,13 @@ for line in f_in.readlines():
         gsim_lt = line.split('=')[1].strip()
         if gsim_lt != params['gsim_lt_filename']:
             msg = 'Ground motion logic tree filename %s as specified in run_oq_model.py' \
-                'different to %s specified in job.ini file' 
+                'different to %s specified in %s' \
+                % (params['gsim_lt_filename'], gsim_lt, job_file.split('/')[-1])
             raise ValueError(msg)
+    if line.startswith('sites_csv'):
+        sites_filename = line.split('=')[1].strip()
+        sites_file = join(params['sandpit_path'], user, params['shared_rel_path'],
+                          sites_filename)
     if line.startswith('export_dir'):
         export_dir = line.split('=')[1].strip()
 f_in.close()
@@ -66,6 +73,10 @@ f_in.close()
 copy2(job_file, output_dir)
 copy2(src_lt_file, output_dir)
 copy2(gsim_lt_file, output_dir)
+try:
+    copy2(sites_file, output_dir)
+except IOError:
+    print 'Warning: No site file found, is this intended?'
 
 # Find source models from logic tree file
 # and copy to output dir
