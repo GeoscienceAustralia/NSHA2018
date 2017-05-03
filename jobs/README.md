@@ -5,6 +5,10 @@ Contains top level scripts for running openquake models on the NCI. The main scr
 	 
     export PATH=$PATH:/<path_to_sandpit>/sandpit/<user_name>/NSHA2018/jobs	
 
+You should also check that the script is executable. If not, run:
+    
+    chmod +x run_oq_model.py
+
 **Usage**
 
 The script uses a parameter file params.txt and is run as:
