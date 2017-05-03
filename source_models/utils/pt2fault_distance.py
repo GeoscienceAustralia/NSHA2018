@@ -120,6 +120,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
         print 'Looping over point sources'
         # For speeding things up filter based on initial distances
         # to find points very far from or very close to a fault
+        mfd_type = type(pt.mfd).__name__
         pt_depths = []
         for probs, depths in pt.hypocenter_distribution.data:
             pt_depths.append(depths)
@@ -208,10 +209,18 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                 # a separate source
                 # Calculate new rates based on probability of original nodal plane
                 new_pt.nodal_plane_distribution = new_np_distribution
-                b_val = pt.mfd.b_val
-                # rescale a value in log sapce
-                a_val = np.log10(np.power(10, pt.mfd.a_val)*prob)
-                new_pt.mfd.modify_set_ab(a_val, b_val)
+                if mfd_type == 'TruncatedGRMFD':
+                    b_val = pt.mfd.b_val
+                    # rescale a value in log sapce
+                    a_val = np.log10(np.power(10, pt.mfd.a_val)*prob)
+                    new_pt.mfd.modify_set_ab(a_val, b_val)
+                if mfd_type == 'EvenlyDiscretizedMFD':
+                    mag_bins, rates = zip(*pt.mfd.get_annual_occurrence_rates())
+                    mag_bins = np.array(mag_bins)
+                    rates = np.array(rates)
+                    new_rates = rates*prob
+                    new_pt.mfd.modify_set_mfd(new_pt.mfd.min_mag, new_pt.mfd.bin_width,
+                                              list(new_rates))
                 pair_index = np.where(np.logical_and(too_close_strikes == nodal_plane.strike,
                                                          too_close_dips == nodal_plane.dip))
                  # Deal with intersecting cases
@@ -220,16 +229,26 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                     minimum_magnitude_intersecting_fault = min(intersecting_magnitudes)
                     if minimum_magnitude_intersecting_fault >= \
                             (pt.mfd.min_mag + pt.mfd.bin_width):
-                       new_pt.mfd.max_mag = minimum_magnitude_intersecting_fault - \
-                            pt.mfd.bin_width
+                        new_mmax = minimum_magnitude_intersecting_fault - \
+                                pt.mfd.bin_width
+                        if mfd_type == 'TruncatedGRMFD':
+                            new_pt.mfd.max_mag = new_mmax
+                        if mfd_type == 'EvenlyDiscretizedMFD':
+                            trimmed_rates = new_rates[np.where(mag_bins <= new_mmax)]
+                    else:
+                        print 'Minimum magnitude intersects fault, discarding source'
+                        continue
+                            
                 else:
                     pass
                 # Append revised source for given nodal plane distribution to 
                 # list of revised sources
+                print 'Appending revised source'
                 revised_point_sources[pt.tectonic_region_type].append(new_pt)
         else:
             id_index += 1
             pt.source_id = "%i" % id_index
+            'Appending original source'
             revised_point_sources[pt.tectonic_region_type].append(pt)
     print 'Overall minimum distance (km):', min(minimum_distance_list)
 

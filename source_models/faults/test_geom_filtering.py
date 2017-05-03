@@ -14,8 +14,8 @@ area_source_model = os.path.join(filepath, 'source_model_adelaide.xml')
 bin_width = 0.1
 investigation_time = 50
 fault_mesh_spacing = 2 #2 Fault source mesh
-rupture_mesh_spacing = 10 #10 # Area source mesh
-area_source_discretisation = 50 #20
+rupture_mesh_spacing = 2 #10 # Area source mesh
+area_source_discretisation = 10 #20
 
 # Read in the area source model
 print 'Reading area source model %s' % area_source_model
