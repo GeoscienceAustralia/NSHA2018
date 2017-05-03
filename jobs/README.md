@@ -8,13 +8,14 @@ Contains top level scripts for running openquake models on the NCI. The main scr
 **Usage**
 
 The script uses a parameter file params.txt and is run as:
+
     run_oq_model.py -param_file params.txt
 
 Based on the parameters defined in `params.txt`, an output directory for the job will be created capturing timestamp, model name and user information. All relevant input files (`.xml` and `.ini`) are copied to the output directory to ensure provenance is captured.
 
 An NCI run script is created and the job submitted to the NCI queue.
 
-The user should edit `params.txt` to defined the NCI resources required and the location of the input data. Note that as currently written, it assumes you have a sandpit folder specified by your username under the folder `sandpit_path`.
+The user should edit `params.txt` to defined the NCI resources required and the location of the input data. Note that as currently written, it assumes you have a sandpit folder specified by your username under the folder specified by the variable `<sandpit_path>`.
 
     ncpus = 256 
     mem = 256GB
@@ -27,7 +28,7 @@ The user should edit `params.txt` to defined the NCI resources required and the 
     model_output_base = /short/w84/NSHA18/PSHA_modelling/
     job_file = job.ini
     
-You should not need to change anything in run_oq_model.py, however additional NCI job parameters are defined towards the end of the file. All your source mode input data adn the job file (i.e. `source model.xml`, `source_model_logic_tree.xml` and `job.ini`) should be under the directory specified by `/<sandpit_path>/<username>/<model_rel_path>`. Ground motion model files (`gsim_logic_tree`) and sites files (if required; `stes.csv`) are generally shared bewteen many models and therefore these are stored in the path defined by `shared_rel_path`. These are standard OpenQuake input files.
+You should not need to change anything in run_oq_model.py, however additional NCI job parameters are defined towards the end of the file. All your source mode input data and the job file (i.e. `source model.xml`, `source_model_logic_tree.xml` and `job.ini`) should be under the directory specified by `/<sandpit_path>/<username>/<model_rel_path>`. Ground motion model files (`gsim_logic_tree`) and sites files (if required; `sites.csv`) are generally shared between many models and therefore these are stored in the path defined by `/<sandpit_path>/<username>/<shared_rel_path>`. These are all standard OpenQuake input files.
 
 Standard output is written to `parjob.log` in the output directory. The output directory will be  a timestamped diretory, in this case under `/short/w84/NSHA18/PSHA_modelling/Adelaide_faults`.
 
