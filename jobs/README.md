@@ -15,7 +15,7 @@ Based on the parameters defined in `params.txt`, an output directory for the job
 
 An NCI run script is created and the job submitted to the NCI queue.
 
-The user should edit `params.txt` to defined the NCI resources required and the location of the input data. Note that as currently written, it assumes you have a sandpit folder specified by your username under the folder specified by the variable `<sandpit_path>`.
+The user should edit `params.txt` to defined the NCI resources required and the location of the input data. Note that as currently written, it assumes you have a sandpit folder specified by your username under the folder specified by the variable `<sandpit_path>`. Example contents of `params.txt` are given here:
 
     ncpus = 256 
     mem = 256GB
