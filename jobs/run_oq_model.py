@@ -76,7 +76,10 @@ copy2(gsim_lt_file, output_dir)
 try:
     copy2(sites_file, output_dir)
 except IOError:
-    print 'Warning: No site file found, is this intended?'
+    msg = 'Sites file %s not found!' % sites_file
+    raise IOError(msg)
+except NameError:
+    print 'Warning: No sites file specified, is this intended?'
 
 # Find source models from logic tree file
 # and copy to output dir
