@@ -188,7 +188,11 @@ if __name__ == "__main__":
     
     if ii != 0:
         # adjust x axes
-        #fig.subplots_adjust(hspace=0.2)
+        # add xlabel to last subplot
+        if period == 'PGA' or period == 'PGV':
+            plt.xlabel(' '.join(('Mean', period, 'Hazard (g)')), fontsize=13)
+        else:
+            plt.xlabel(' '.join(('Mean','SA['+period+']', 'Hazard (g)')), fontsize=13)
         
         if period == 'PGA' or period == 'PGV':
             plt.savefig(path.join(outputdir, '_'.join(('oq_hazcurves', period, jobsstr,str(i)+'.png'))), format='png',bbox_inches='tight')
