@@ -91,6 +91,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
 
     if name is None:
         name = filename[:-4] + '_geom_filtered'
+    id_index = 0 # We need to re-number all sources to avoid duplicate ids
     # Extract the points of the fault source mesh
     fault_lons = []
     fault_lats = []
@@ -191,17 +192,17 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
             print 'Magnitudes of rupture close to fault', too_close_mags
             print 'Strikes of rupture close to fault', too_close_strikes
             print 'Dips of rupture close to fault', too_close_dips
-           # minimum_magnitude_intersecting_fault = min(too_close_mags)
             unique_strikes = np.unique(rupture_strikes)
             unique_dips = np.unique(rupture_dips)
-            id_index = 0
+            src_name_index = 0
             for prob, nodal_plane in pt.nodal_plane_distribution.data:
                 id_index += 1
+                src_name_index += 1
                 # We are now splitting the source into many with different 
                 # combinations of Mmaxs and nodal planes
                 new_pt = copy.deepcopy(pt)
-                new_pt.source_id = new_pt.source_id + ("_%i" % id_index)
-                new_pt.name = new_pt.name + ("_%i" % id_index)
+                new_pt.source_id ="%i" % id_index
+                new_pt.name = new_pt.name + ("_%i" % src_name_index)
                 new_np = NodalPlane(nodal_plane.strike, nodal_plane.dip, nodal_plane.rake)
                 new_np_distribution = PMF([(1.0, new_np)]) # weight of nodal plane is 1 as making 
                 # a separate source
@@ -227,6 +228,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                 # list of revised sources
                 revised_point_sources[pt.tectonic_region_type].append(new_pt)
         else:
+            id_index += 1
+            pt.source_id = "%i" % id_index
             revised_point_sources[pt.tectonic_region_type].append(pt)
     print 'Overall minimum distance (km):', min(minimum_distance_list)
 
@@ -264,6 +267,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
             for source in sources:
                 source_list.append(source)
         for fault_source in fault_sources:
+            id_index += 1
+            fault_source.source_id = "%i" % id_index
             source_list.append(fault_source)
         nodes = list(map(obj_to_node, sorted(source_list)))
         source_model = Node("sourceModel", {"name": name}, nodes=nodes)
@@ -275,6 +280,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
         for trt, sources in revised_pt_sources.iteritems():
             for fault_source in fault_sources:
                 if fault_source.tectonic_region_type == trt:
+                    id_index += 1
+                    fault_source.source_id = "%i" % id_index
                     sources.append(fault_source)
             source_group = SourceGroup(trt, sources = sources, id=id)
             id +=1
