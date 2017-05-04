@@ -21,10 +21,10 @@ import matplotlib.pyplot as plt
 import matplotlib as mpl
 from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan
-from mapping_tools import drawshapepoly, labelpolygon, get_map_polygons, mask_outside_polygons
+from tools.mapping_tools import drawshapepoly, labelpolygon, get_map_polygons, mask_outside_polygons, cpt2colormap
 
 import shapefile
-from gmt_tools import cpt2colormap
+#from gmt_tools import cpt2colormap
 from shapely.geometry import Point, Polygon
 
 mpl.rcParams['pdf.fonttype'] = 42
@@ -32,16 +32,17 @@ mpl.rcParams['pdf.fonttype'] = 42
 drawshape = True
 #bbox = '-133/-120/48/56'
 
+# set map file to plot
 gridfile = argv[1]
-#key = argv[2] # fmt = PGA_10, SA02_10, etc
 
-model = gridfile.split('_')[-1].strip('.csv')
+# get model
+model = path.split(gridfile)[-1].split('_')[2] # this will likely need modifying depending on filename format
 
-
-res = 'l'
+# set map resolution
+res = 'l' 
 
 # parse sol file 
-lines = open(gridfile).readlines()[2:]
+lines = open(gridfile).readlines()
 
 # make grid dictionary
 grddict = []
@@ -51,8 +52,9 @@ if lines[0].startswith('#'):
     line = lines[1]
 else:
     line = lines[0]
-keys = line.strip().split(',')[2:]
 
+# get dictionary keys
+keys = line.strip().split(',')[2:]
 
 print '\nReading', model
 for line in lines[2:]:
@@ -60,24 +62,28 @@ for line in lines[2:]:
     dat = line.strip().split(',')
     tmpdict['lon'] = float(dat[0])
     tmpdict['lat'] = float(dat[1])
-    tmpdict['PGA_10'] = float(dat[2])
-    tmpdict['PGA_02'] = float(dat[3])
-    tmpdict['SA02_10'] = float(dat[4])
-    tmpdict['SA02_02'] = float(dat[5])
-    tmpdict['SA10_10'] = float(dat[6])
-    tmpdict['SA10_02'] = float(dat[7])
     
+    # fill keys
+    idx = 2
+    for key in keys:
+        tmpdict[key] = float(dat[idx])
+        idx += 1
+    
+    # add to grid list
     grddict.append(tmpdict)
     
 '''    
 # now make maps
 '''
-keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
+#keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
 
 for i, key in enumerate(keys):
     
-    period = key.split('_')[0]
-    probability = str(float(key.split('_')[-1])).split('.')[0]+'%'
+    # get IM period
+    period = key.split('-')[0]
+    
+    # get map probability of exceedance
+    probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
     
     figure = plt.figure(i,figsize=(19,12))
     #bbox = argv[1].split('/')
@@ -192,10 +198,8 @@ for i, key in enumerate(keys):
     masked_array = ma.array(transhaz, mask=isnan(transhaz))
     #masked_array = masked_array.set_fill_value(0)
     
-    # get colormap
-    cptfile = '/Users/tallen/Documents//DATA//GMT//cpt//temperature.cpt'
-    #cptfile = '/Users/tallen/Documents/DATA//GMT//cpt//precip3_16lev.cpt'
-    cptfile = '/Users/tallen/Documents//DATA//GMT//cpt//cw1-013.cpt'
+    # get colormap from cpt file
+    cptfile = 'cw1-013.cpt'
     ncols = 9
     
     #cmap = cm.rainbow
@@ -357,6 +361,6 @@ for i, key in enumerate(keys):
     if path.isdir(key) == False:
         mkdir(key)
     
-    plt.savefig(path.join(key, gridfile.strip('.csv')+'.'+key+'.png'), dpi=150, format='png', bbox_inches='tight')
+    plt.savefig(gridfile.strip('csv')+key+'.png', dpi=150, format='png', bbox_inches='tight')
     
 plt.show()
