@@ -28,7 +28,7 @@ trt   = get_field_data(sf, 'trt', 'str')
 dep_b = get_field_data(sf, 'hd1', 'float')
 
 ###############################################################################
-# parse Leonard lookup csv to get completeness info
+# parse NSHA background lookup csv to get completeness info
 ###############################################################################
 nsha_lookup = 'NSHA13_background_source_model.csv'
 

@@ -1,6 +1,6 @@
 import shapefile
 from os import path
-from numpy import array
+from numpy import array, zeros_like, where
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -11,32 +11,34 @@ except:
 # parse neo domains
 ###############################################################################
 
-leoshp = path.join('shapefiles', 'NSHA13_regional_source_model.shp')
+nshashp = 'NSHA13_regional_source_model.shp'
+nshashp = 'NSHA13_regional_source_model_simplified.shp' # alternate model removing fill zones
 
 print 'Reading source shapefile...'
-sf = shapefile.Reader(leoshp)
+sf = shapefile.Reader(nshashp)
 shapes = sf.shapes()
 polygons = []
 for poly in shapes:
     polygons.append(Polygon(poly.points))
-    
+
+'''    
 # get shp data
-code  = get_field_data(sf, 'name', 'str')
 mmax  = get_field_data(sf, 'max_mag', 'float')
 mmin  = get_field_data(sf, 'min_mag', 'float')
 trt   = get_field_data(sf, 'trt', 'str')
 dep_b = get_field_data(sf, 'hd1', 'float')
-
+'''
 ###############################################################################
-# parse Leonard lookup csv to get completeness info
+# parse NSHA lookup csv to get completeness info
 ###############################################################################
-l08_lookup = 'NSHA13_source_model.csv'
+nsha_lookup = 'NSHA13_source_model.csv'
+nsha_lookup = 'NSHA13_source_model_simplified.csv' # alternate model removing fill zones
 
 names = []
 codes = []
 
 # get codes and source names
-lines = open(l08_lookup).readlines()[1:]
+lines = open(nsha_lookup).readlines()[1:]
 
 # zone numbers based on 2013 update
 for line in lines:
@@ -52,116 +54,90 @@ for line in lines:
         names.append(dat[1])
     
 ###############################################################################
-# get neotectonic domain number from centroid
+# get neotectonic superdomains number and Mmax from zone centroid
 ###############################################################################
+# get path to reference shapefile
+shapepath = open('..//reference_shp.txt').read()
+
 # load domains shp
-dsf = shapefile.Reader(path.join('..','Domains','shapefiles','DOMAINS_NSHA18.shp'))
+dsf = shapefile.Reader(shapepath)
+
 # get domains
-neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
-dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
+neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
+neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
+neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
+neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float') # lower curve, higher b-value
+neo_trt  = get_field_data(dsf, 'TRT', 'str')
+neo_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
+neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
+neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
+
+# get bval sigma
+bval_sig = neo_bval_l - neo_bval
 
 # get domain polygons
 dom_shapes = dsf.shapes()
-n_dom = []
-n_mmax = []
-
-# loop through L08 zones
-for poly, code in zip(shapes, codes):
-    # get centroid of leonard sources
-    clon, clat = get_shp_centroid(poly.points)
-    point = Point(clon, clat)
-    print clon, clat
-    tmp_dom = 7
-    tmp_mmax  = 8.0
-    
-    # loop through domains and find point in poly
-    for neo_dom, mmax, dom_shape in zip(neo_doms, dom_mmax, dom_shapes):
-        dom_poly = Polygon(dom_shape.points)
-        
-        # check if NSHA18 centroid in domains poly
-        if point.within(dom_poly):
-            tmp_dom = neo_dom
-            tmp_mmax = mmax
-            
-        if code == 'Z019' or code == 'Z017':
-            tmp_dom = 2
-            tmp_mmax = 7.5
-
-    n_dom.append(tmp_dom)
-    n_mmax.append(tmp_mmax)
-
-###############################################################################
-# get TRT, depth, mcomp & ycomp form Leonard08
-###############################################################################
-# load domains shp
-lsf = shapefile.Reader(path.join('..','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
-
-# get domains
-ltrt  = get_field_data(lsf, 'TRT', 'str')
-ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
-lycomp = get_field_data(lsf, 'YCOMP', 'str')
-lmcomp = get_field_data(lsf, 'MCOMP', 'str')
-
-# get domain polygons
-l08_shapes = lsf.shapes()
+dom = []
+mmax = []
 trt = []
 dep_b = []
 ycomp = []
 mcomp = []
+bval_fix = []
+bval_sig_fix = []
 
-# loop through L08 zones
+# loop through ARUP zones
 for code, poly in zip(codes, shapes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
     point = Point(clon, clat)
-    tmp_trt = -99
-    tmp_dep = -99
-    tmp_mc = -99
-    tmp_yc = -99
+    print clon, clat
     
-    if code == 'Z036':
-        tmp_trt = 'Non_cratonic'
-        tmp_dep = 10
-        tmp_mc = lmcomp[0]
-        tmp_yc = lycomp[0]
+    # loop through domains and find point in poly    
+    matchidx = -99
+    for i in range(0, len(dom_shapes)):
+        dom_poly = Polygon(dom_shapes[i].points)
         
-    elif code == 'Z101' or code == 'Z102' or code == 'Z103':
-        tmp_trt = 'Banda_Sea'
-        tmp_dep = 10
-        
-        # use ISC-GEM completeness (Storchak et al., PEPI, 2015, doi: 10.1016/j.pepi.2014.06.009)
-        tmp_yc = '1960;1918;1900'
-        tmp_mc = '5.5;6.25;7.5'
-        
-    # loop through Leonard zones and find point in poly
-    else:
-        for zone_trt, zone_dep, yc, mc, l_shape \
-            in zip(ltrt, ldep, lycomp, lmcomp, l08_shapes):
-            l_poly = Polygon(l_shape.points)
+        # check if ARUP centroid in domains poly
+        if point.within(dom_poly):
+            matchidx = i
+    
+    if code == 'Z017':
+        matchidx = 0
+        print 'Fixing index: ', code
             
-            # check if leonard centroid in domains poly
-            if point.within(l_poly):
-                tmp_trt = zone_trt
-                tmp_dep = zone_dep
-                tmp_mc = mc
-                tmp_yc = yc
-    
-    trt.append(tmp_trt)
-    dep_b.append(tmp_dep)
-    mcomp.append(tmp_mc)
-    ycomp.append(tmp_yc)
-    
-dep_b = array(dep_b)             
+    # set dummy values
+    if matchidx == -99:
+        dom.append(-99)
+        mmax.append(-99)
+        trt.append(-99)
+        dep_b.append(-99)
+        ycomp.append(-99)
+        mcomp.append(-99)
+        bval_fix.append(-99)
+        bval_sig_fix.append(-99)
+    # fill real values
+    else:
+        dom.append(neo_doms[matchidx])
+        mmax.append(neo_mmax[matchidx])
+        trt.append(neo_trt[matchidx])
+        dep_b.append(neo_dep[matchidx])
+        ycomp.append(neo_ycomp[matchidx])
+        mcomp.append(neo_mcomp[matchidx])
+        bval_fix.append(neo_bval[matchidx])
+        bval_sig_fix.append(bval_sig[matchidx])
+
+dep_b = array(dep_b)
    
 ###############################################################################
 # write initial shapefile
 ###############################################################################
 
-outshp = path.join('shapefiles', 'NSHA13_NSHA18.shp')
+outshp = 'NSHA13_NSHA18.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
-w.field('SRC_NAME','C','50')
+w.field('SRC_NAME','C','100')
 w.field('CODE','C','10')
 #w.field('SRC_REGION','C','100')
 #w.field('SRC_REG_WT','F', 8, 3)
@@ -179,41 +155,44 @@ w.field('MMAX_UPPER','F', 8, 2)
 w.field('N0_BEST','F', 8, 5)
 w.field('N0_LOWER','F', 8, 5)
 w.field('N0_UPPER','F', 8, 5)
-w.field('BVAL_BEST','F', 8, 5)
-w.field('BVAL_LOWER','F', 8, 5)
-w.field('BVAL_UPPER','F', 8, 5)
-w.field('BVAL_FIX','F', 8, 2)
-w.field('BVAL_FIX_S','F', 8, 2)
+w.field('BVAL_BEST','F', 8, 3)
+w.field('BVAL_LOWER','F', 8, 3)
+w.field('BVAL_UPPER','F', 8, 3)
+w.field('BVAL_FIX','F', 8, 3)
+w.field('BVAL_FIX_S','F', 8, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','50')
 w.field('YMAX','F', 8, 0)
 w.field('TRT','C','100')
-w.field('DOMAIN','I', 2, 0)
+w.field('DOMAIN','F', 2, 0)
 w.field('CAT_FILE','C','50')
 
 src_wt = 1.0
 src_ty = 'area'
-#dep_b = 10.
-#dep_u = 5.
-#dep_l = 15.
-#min_mag = 4.8
-min_rmag = 2.5
-#mmax[i]
-#mmax_l = mmax[i]-0.2
-#mmax_u = mmax[i]+0.2
+
+dep_u = 0.5 * array(dep_b)
+idx = where(dep_b > 7.)[0]
+dep_l = zeros_like(dep_b)
+dep_l[idx] = 1.5 * array(dep_b[idx])
+idx = where(dep_b < 7.)[0]
+dep_l[idx] = 2 * array(dep_b[idx])
+
+
+min_mag = 4.5
+min_rmag = 4.0
+
 n0 = -99
 n0_l = -99
 n0_u = -99
 bval = -99
 bval_l = -99
 bval_u = -99
-bval_fix = -99
-bval_fix_sig = -99
+
 #ycomp = '1980;1970;1965;1962;1958;1910;1880'
 #mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
 ymax  = 2016
 #dom   = -99
-cat   = 'GGcat-161025.csv'
+cat   = 'AUSTCAT_V0.12_hmtk_declustered.csv'
 
 # loop through original records
 for i, shape in enumerate(shapes):
@@ -228,11 +207,9 @@ for i, shape in enumerate(shapes):
             # set shape polygon
             w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
         
-            dep_u = dep_b[i] - 0.5*dep_b[i]
-            dep_l = dep_b[i] + 0.5*dep_b[i]
-            w.record(names[i], codes[i], src_ty, str('%01d' % n_dom[i]), src_wt, dep_b[i], dep_u, dep_l, mmin[i], min_rmag, n_mmax[i], n_mmax[i]-0.2, n_mmax[i]+0.2, \
-                     n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_fix_sig, ycomp[i], mcomp[i], ymax, trt[i], n_dom[i], cat)
-        
+            w.record(names[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
+
 # now save area shapefile
 w.save(outshp)
 

@@ -128,7 +128,7 @@ print '!!!Setting Mmin = 4.5!!!'
 src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
-# set deep depth range
+# set all plausible depths
 depmin = -99.
 depmax = 99. # only get events GE 10 km
 
@@ -319,6 +319,31 @@ for uclass in unique_classes:
                    mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
                    fixed_bval, fixed_bval_sig, bin_width, poly)
     
+    # get a-value using fixed region class b-value if assigned - need to do this to fit the class rates!
+    if not fixed_bval == -99.0:
+        
+        # get index of min reg mag and valid mag bins
+        diff_cum = abs(hstack((diff(cum_rates), 0.)))
+        midx = where((mrng >= class_mmin_reg-bin_width/2) & (diff_cum > 0.))[0]
+
+        # check if length of midx = 0 and get highest non-zero mag
+        if len(midx) == 0:
+            midx = [where(isfinite(diff_cum))[0][-1]]
+        
+        # make sure there is at least 4 observations for a-value calculations
+        if len(midx) < 5:
+            idxstart = midx[0] - 1
+            
+            while idxstart >= 0 and len(midx) < 5:
+                # if num observations greater than zero, add to midx
+                if n_obs[idxstart] > 0:
+                    midx = hstack((idxstart, midx))
+                    
+                idxstart -= 1
+        
+        # reset fn0 based on fixed b-value        
+        fn0 = fit_a_value(fixed_bval, mrng, cum_rates, class_mmax, bin_width, midx)
+        
     # add to class arrays
     class_bval.append(bval)
     class_bval_sig.append(sigb)
@@ -429,11 +454,11 @@ for i in srcidx:
         if len(midx) == 0:
             midx = [where(isfinite(diff_cum))[0][-1]]
         
-        # make sure there is at least 3 observations for a-value calculations
-        if len(midx) < 3:
+        # make sure there is at least 4 observations for a-value calculations
+        if len(midx) < 5:
             idxstart = midx[0] - 1
             
-            while idxstart >= 0 and len(midx) < 3:
+            while idxstart >= 0 and len(midx) < 5:
                 # if num observations greater than zero, add to midx
                 if n_obs[idxstart] > 0:
                     midx = hstack((idxstart, midx))

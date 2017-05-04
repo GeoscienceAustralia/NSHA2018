@@ -79,7 +79,6 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     for bc in occ_rates[1:]:
         octxt += ' ' + str('%0.5e' % bc)
     
-    print occ_rates[0]
     return octxt
 
 '''
@@ -516,7 +515,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
         
     # write logic tree to file
     outxml = path.join(meta['modelPath'], 
-                       ''.join((meta['modelFile'].split('.')[0][:-10], 
+                       ''.join((meta['modelFile'].split('.')[0].split('_')[0], #[:-10], 
                                 '_source_model_logic_tree.xml')))
                                 
     f = open(outxml,'w')
