@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from numpy import array, exp, log, interp, ceil, around, arange
 from tools.oq_tools import return_annualised_haz_curves
 import matplotlib.pylab as plt
-from os import path
+from os import path, mkdir
 import warnings, sys
 #from gmt_tools import cpt2colormap 
 
@@ -36,6 +36,10 @@ if __name__ == "__main__":
     jobsstr = '_'.join([x.strip() for x in jobs])
     hazcurvelabels = [x.strip().replace('\\n', '\n') for x in hazcurvelabels]
     
+    # check to see if exists
+    if path.isdir(outputdir) == False:
+        mkdir(outputdir)
+
     ###############################################################################
     # parse site file
     ###############################################################################
