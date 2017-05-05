@@ -164,7 +164,7 @@ if __name__ == "__main__":
             plt.ylabel('Annual Probabability of Exceedance', fontsize=14)
       
         if ii == 1:
-            plt.legend(hazcurvelabels, fontsize=11)
+            plt.legend(hazcurvelabels, fontsize=9)
         
         if ii == 4 or ii == 5 or ii == 6:
             if period == 'PGA' or period == 'PGV':
