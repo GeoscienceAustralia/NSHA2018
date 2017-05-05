@@ -17,9 +17,9 @@ conf_file = sys.argv[1]
 # get paths for input files
 lines = open(conf_file).readlines()
 hazcurvefile1 = lines[0].split('=')[-1].strip()
-job1 = hazcurvefile1.split('/')[-2]
+job1 = hazcurvefile1.split('/')[0]
 hazcurvefile2 = lines[1].split('=')[-1].strip()
-job2 = hazcurvefile2.split('/')[-2]
+job2 = hazcurvefile2.split('/')[0]
 outputdir     = lines[2].split('=')[-1].strip()
 sitelistfile  = lines[3].split('=')[-1].strip()
 period        = lines[4].split('=')[-1].strip()
