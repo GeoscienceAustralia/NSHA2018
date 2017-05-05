@@ -1,4 +1,5 @@
-from tools.make_nsha_oq_inputs import src_shape2dict, write_oq_sourcefile, make_logic_tree
+from tools.make_nsha_oq_inputs import src_shape2dict, write_oq_sourcefile, \
+                                      make_logic_tree, test_beta_curves
 from numpy import array, zeros_like, where, unique
 from sys import argv
 from os import path, mkdir, sep
@@ -12,8 +13,8 @@ set outputType:
     0 = best parameters only - use 
     1 = collapsed rates
     2 = multiple file
-    3 = best beta, multiple Mmax
-    4 = multiple beta, best Mmax
+    3 = multiple beta, best Mmax
+    4 = best beta, multiple Mmax
 
 best: best b-value and Mmax (is the same as the highest weighted file in multimod
 
@@ -29,6 +30,7 @@ bval_var: collapsed rate file for testing hazard sensitivity by varying b-value
     
 # get model dictionary from shapefile
 model = src_shape2dict(shpfile)
+model = [model[0]]
 
 # split model path
 splitpath = shpfile.split(sep)[:-2]
@@ -102,7 +104,7 @@ if outputType == '0':
         mkdir(modPath)
         
     # get output filename
-    xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.best.xml'
+    xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'best.xml'
     
     # reset beta weights
     tmp_bwts = [1.0, 0.0, 0.0] # only use best beta
@@ -270,5 +272,9 @@ elif outputType == '4':
 ##############################################################################
 make_logic_tree(srcxmls, branch_wts, meta)
 
+##############################################################################
+# plot curves for testing
+##############################################################################
 
+#test_beta_curves(model[0], 0.1, meta, mx_dict)
 

@@ -8,7 +8,7 @@
 
 def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     from numpy import array, zeros, argmax, zeros_like
-    from oq_tools import get_oq_incrementalMFD
+    from tools.oq_tools import get_oq_incrementalMFD
     '''
     best_beta: boolean; True if only using best curve
     mx_vals: array of Mmax values
@@ -42,7 +42,7 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     
     wtd_list  = []
     maglen = 0
-
+    
     for beta_val, beta_wt, N0 in zip(m['src_beta'], meta['beta_wts'], m['src_N0']):
         # get effective rate
         effN0 = N0 * m['src_weight']
@@ -53,7 +53,7 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
                                                       m['min_mag'], mx, \
                                                       binwid)
             
-            #print beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
+            #print m['src_weight'], betacurve[0], beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
             
             wtd_list.append(betacurve * beta_wt * mxwt)
             
@@ -67,7 +67,9 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
         # go element by element
         for r, rate in enumerate(rates):
             wtd_rates[r] += rate
-                
+    
+    #print wtd_rates[0]    
+       
     # convert cummulative rates to annual occurrence rates
     occ_rates = []
     for b in range(0, len(wtd_rates[0:-1])):
@@ -78,8 +80,30 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     octxt = str('%0.5e' % occ_rates[0])
     for bc in occ_rates[1:]:
         octxt += ' ' + str('%0.5e' % bc)
-    
+    #print octxt.split()[0]
     return octxt
+
+def test_beta_curves(m, binwid, meta, mx_dict):
+    from tools.oq_tools import get_oq_incrementalMFD
+    import matplotlib.pyplot as plt
+    
+    mx_vals = mx_dict[m['trt']]['mx_vals']
+    
+    bbc, bmrange = get_oq_incrementalMFD(m['src_beta'][0], m['src_N0'][0], \
+                                        m['min_mag'], mx_vals[2], \
+                                        binwid)
+    lbc, lmrange = get_oq_incrementalMFD(m['src_beta'][1], m['src_N0'][1], \
+                                        m['min_mag'], mx_vals[0], \
+                                        binwid)
+    ubc, umrange = get_oq_incrementalMFD(m['src_beta'][2], m['src_N0'][2], \
+                                        m['min_mag'], mx_vals[4], \
+                                        binwid)
+    
+    plt.semilogy(bmrange, bbc, 'r-')
+    plt.semilogy(lmrange, lbc, 'b-')
+    plt.semilogy(umrange, ubc, 'g-')
+    
+    plt.show()
 
 '''
 start main code here

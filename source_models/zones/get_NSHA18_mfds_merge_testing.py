@@ -480,6 +480,8 @@ for i in srcidx:
         # preallocate data
         N0_lo173 = nan
         N0_up173 = nan
+        N0_lo100 = nan
+        N0_up100 = nan
     
         if not isnan(bval):
             
@@ -528,8 +530,8 @@ for i in srcidx:
         new_bval_u[i] = bval-bval_sig # upper curve, so lower b
         
         new_n0_b[i]   = fn0
-        new_n0_l[i]   = N0_lo173
-        new_n0_u[i]   = N0_up173
+        new_n0_l[i]   = N0_lo100
+        new_n0_u[i]   = N0_up100
         
         ###############################################################################
         # plot earthquakes that pass completeness

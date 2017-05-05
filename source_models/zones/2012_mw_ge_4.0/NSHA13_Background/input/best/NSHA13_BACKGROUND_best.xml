@@ -2,7 +2,7 @@
 <nrml xmlns:gml="http://www.opengis.net/gml"
       xmlns="http://openquake.org/xmlns/nrml/0.4">
 
-    <sourceModel name="multimod_collapsed">
+    <sourceModel name="best_collapsed">
 
         <areaSource id="NCBM" name="Non Cratonic Background Zone - Main" tectonicRegion="Non_cratonic">
             <areaGeometry>
@@ -359,7 +359,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.0</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>7.71431e-02 5.84079e-02 4.42228e-02 3.34827e-02 2.53510e-02 1.91942e-02 1.45327e-02 1.10032e-02 8.33094e-03 6.30767e-03 4.77577e-03 3.61591e-03 2.73774e-03 2.07285e-03 1.56943e-03 1.18827e-03 8.99686e-04 6.81186e-04 5.15751e-04 3.90494e-04 2.95658e-04 2.23853e-04 1.69488e-04 1.28326e-04 9.71600e-05 7.35635e-05 5.56976e-05 4.21708e-05 3.19291e-05 2.41747e-05 1.83035e-05 1.38583e-05 0.00000e+00</occurRates>
+                <occurRates>7.71431e-02 5.84079e-02 4.42228e-02 3.34827e-02 2.53510e-02 1.91942e-02 1.45327e-02 1.10032e-02 8.33094e-03 6.30767e-03 4.77577e-03 3.61591e-03 2.73774e-03 2.07285e-03 1.56943e-03 1.18827e-03 8.99686e-04 6.81186e-04 5.15751e-04 3.90494e-04 2.95658e-04 2.23853e-04 1.69488e-04 1.28326e-04 9.71600e-05 7.35635e-05 5.56976e-05 4.21708e-05 3.19291e-05 2.41747e-05 1.83035e-05 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
