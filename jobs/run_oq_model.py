@@ -39,7 +39,7 @@ if not os.path.exists(params['model_output_base']):
 model_output_base_source_folder = join(params['model_output_base'], model_name)
 if not os.path.exists(model_output_base_source_folder):
     os.mkdir(model_output_base_source_folder)
-output_dir_name = '_'.join((run_start_time, model_name, params['job_type'], user))
+output_dir_name = '_'.join((params['job_type'], run_start_time, model_name, user))
 output_dir = join(model_output_base_source_folder, output_dir_name)
 os.mkdir(output_dir)
 
