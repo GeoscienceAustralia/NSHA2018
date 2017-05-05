@@ -8,3 +8,4 @@ shared_rel_path = NSHA2018/shared
 gsim_lt_filename = NSHA18_GMM_testing.xml
 model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/lt_testing/NSHA13_Background
 job_file = job_capitals.ini
+job_type = hazcurve
