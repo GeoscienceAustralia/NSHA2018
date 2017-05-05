@@ -54,14 +54,14 @@ dsf = shapefile.Reader(shapepath)
 neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
 neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
 neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
-neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float')
+neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float') # lower curve, higher b-value
 neo_trt  = get_field_data(dsf, 'TRT', 'str')
 neo_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
 neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
 neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
 
 # get bval sigma
-bval_sig = neo_bval - neo_bval_l
+bval_sig = neo_bval_l - neo_bval
 
 # get domain polygons
 dom_shapes = dsf.shapes()

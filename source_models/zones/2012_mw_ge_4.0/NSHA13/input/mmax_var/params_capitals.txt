@@ -1,0 +1,11 @@
+ncpus = 256 
+mem = 256GB
+walltime = 0:40:00
+jobfs = 300GB
+sandpit_path = /short/w84/NSHA18/sandpit/
+model_rel_path = NSHA2018/source_models/zones/2012_mw_ge_4.0/NSHA13/input/mmax_var
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_GMM_testing.xml
+model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/lt_testing/NSHA13
+job_file = job_capitals.ini
+job_type = hazcurve

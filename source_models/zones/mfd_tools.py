@@ -264,11 +264,11 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     if len(midx) == 0:
         midx = [where(isfinite(diff_cum))[0][-1]]
     
-    # make sure there is at least 3 observations for b-value calculations
-    if len(midx) < 3:
+    # make sure there is at least 4 observations for b-value calculations
+    if len(midx) < 5:
         idxstart = midx[0] - 1
         
-        while idxstart >= 0 and len(midx) < 3:
+        while idxstart >= 0 and len(midx) < 5:
             # if num observations greater than zero, add to midx
             if n_obs[idxstart] > 0:
                 midx = hstack((idxstart, midx))
