@@ -91,7 +91,8 @@ if __name__ == "__main__":
     
     # make path to hazcurvefile
     #hazcurvefile1 = path.join(relativepaths[0], ''.join(('hazard_curve-mean_',jobs[0],'-SA(',period,').xml'))) # will need to be changed with OQ V2.2
-    hazcurvefile1 = path.join(relativepaths[0], 'hazard_curve-mean_1.csv')
+    rootpath = path.split(conf_file)[0]
+    hazcurvefile1 = path.join(rootpath, relativepaths[0], 'hazard_curve-mean_1.csv')
     
     # get data from first job
     curves1, curlon1, curlat1, metadata1, imls1 = get_oq_haz_curves(hazcurvefile1)
@@ -118,7 +119,7 @@ if __name__ == "__main__":
             filestr = ''.join(('hazard_curve-mean-SA(',period,')_',jobs[jj].strip(),'.csv'))
             hazcurvefilex = path.join(root, relativepaths[jj].strip(), filestr)
             '''
-            hazcurvefilex = path.join(relativepaths[jj].strip(), 'hazard_curve-mean_1.csv')
+            hazcurvefilex = path.join(rootpath, relativepaths[jj].strip(), 'hazard_curve-mean_1.csv')
             
             # get data from subsequent jobs
             curvepath = path.join(conf_file.split(path.sep)[0:-1])

@@ -30,7 +30,7 @@ bval_var: collapsed rate file for testing hazard sensitivity by varying b-value
     
 # get model dictionary from shapefile
 model = src_shape2dict(shpfile)
-model = [model[0]]
+#model = [model[0]]
 
 # split model path
 splitpath = shpfile.split(sep)[:-2]
