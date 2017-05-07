@@ -86,6 +86,7 @@ for i, key in enumerate(keys):
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
     
     figure = plt.figure(i,figsize=(19,12))
+    ax = figure.subplots(111)
     #bbox = argv[1].split('/')
     
     bbox = '108/153/-44/-8'
@@ -251,6 +252,17 @@ for i, key in enumerate(keys):
     m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
     
     ##########################################################################################
+    # plot contour
+    ##########################################################################################
+    
+    x, y = m(lonlist, latlist)
+    levels = arange(0.02, 0.3, 0.02) #[0.02, 0.04, 0.06, 0.08, 0.1, 0.]
+    CS = m.contour(x, y, hazvals, levels, colors='k')
+    
+    plt.clabel(CS, inline=1, fontsize=8)
+
+    
+    ##########################################################################################
     # get land & lake polygons for masking
     ##########################################################################################
     polys = get_map_polygons(m)
@@ -265,6 +277,19 @@ for i, key in enumerate(keys):
         plt.fill(poly[:,0], poly[:,1], 'lightskyblue')
         polygons.append(poly)
     
+    
+    ##########################################################################################
+    # add GA logo
+    ##########################################################################################
+    
+    # load logo
+    im = plt.imread('logo.jpg')
+    
+    # set bbox for logo
+    newax = figure.add_axes([0.1,0.75,0.2,0.02]) #, zorder=-1)
+    newax.imshow(im)
+    newax.axis('off')
+        
     
     '''
     # superimpose area source shapefile
