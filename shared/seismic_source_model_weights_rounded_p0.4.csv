@@ -12,7 +12,7 @@ S1Q10,FSM_MFD,Cratonic,YC_MB,0.022
 S1Q11,FSM_MFD,Cratonic,YC_Geom,0.124
 S1Q12,FSM_MFD,Cratonic,GR_Add,0.224
 S1Q13,FSM_MFD,Cratonic,GR_MB,0.103
-S1Q14,FSM_MFD,Cratonic,GA_Geom,0.069
+S1Q14,FSM_MFD,Cratonic,GR_Geom,0.069
 S1Q15,FSM_MFD,Cratonic,MM_Add,0.059
 S1Q16,FSM_MFD,Cratonic,MM_MB,0.01
 S1Q17,FSM_MFD,Cratonic,MM_Geom,0.035
@@ -21,7 +21,7 @@ S1Q19,FSM_MFD,Non_cratonic,YC_MB,0.022
 S1Q20,FSM_MFD,Non_cratonic,YC_Geom,0.16
 S1Q21,FSM_MFD,Non_cratonic,GR_Add,0.168
 S1Q22,FSM_MFD,Non_cratonic,GR_MB,0.05
-S1Q23,FSM_MFD,Non_cratonic,GA_Geom,0.092
+S1Q23,FSM_MFD,Non_cratonic,GR_Geom,0.092
 S1Q24,FSM_MFD,Non_cratonic,MM_Add,0.053
 S1Q25,FSM_MFD,Non_cratonic,MM_MB,0.009
 S1Q26,FSM_MFD,Non_cratonic,MM_Geom,0.035
@@ -30,7 +30,7 @@ S1Q28,FSM_MFD,Extended,YC_MB,0.028
 S1Q29,FSM_MFD,Extended,YC_Geom,0.166
 S1Q30,FSM_MFD,Extended,GR_Add,0.167
 S1Q31,FSM_MFD,Extended,GR_MB,0.033
-S1Q32,FSM_MFD,Extended,GA_Geom,0.095
+S1Q32,FSM_MFD,Extended,GR_Geom,0.095
 S1Q33,FSM_MFD,Extended,MM_Add,0.059
 S1Q34,FSM_MFD,Extended,MM_MB,0.016
 S1Q35,FSM_MFD,Extended,MM_Geom,0.04
