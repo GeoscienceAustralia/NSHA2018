@@ -63,7 +63,7 @@ neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
 neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
 
 # get bval sigma
-bval_sig = neo_bval - neo_bval_l
+bval_sig = neo_bval_l - neo_bval
 
 # get domain polygons
 dom_shapes = dsf.shapes()
@@ -92,7 +92,7 @@ for code, poly in zip(codes, shapes):
         if point.within(dom_poly):
             matchidx = i
     
-    if code == 'SEA' or code == 'MBG':
+    if code == 'SEA' or code == 'MBG' or code == 'BAS':
         matchidx = -1
             
     # set dummy values
@@ -193,7 +193,7 @@ mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
 ymax  = 2011
 #trt   = 'TBD'
 #dom   = -99
-cat   = 'GGcat-161025.csv'
+cat   = 'AUSTCAT_V0.12_hmtk_declustered.csv'
 
 # loop through original records
 for i, shape in enumerate(shapes):

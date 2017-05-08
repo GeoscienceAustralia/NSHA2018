@@ -338,6 +338,7 @@ for uclass in unique_classes:
                 # if num observations greater than zero, add to midx
                 if n_obs[idxstart] > 0:
                     midx = hstack((idxstart, midx))
+                    print '    get lower mag M', midx
                     
                 idxstart -= 1
         
@@ -462,6 +463,7 @@ for i in srcidx:
                 # if num observations greater than zero, add to midx
                 if n_obs[idxstart] > 0:
                     midx = hstack((idxstart, midx))
+                    print '    get lower mag M2', midx
                     
                 idxstart -= 1
         

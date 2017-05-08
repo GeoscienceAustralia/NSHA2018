@@ -37,9 +37,9 @@ neo_domains = []
 lines = open(arupcsv).readlines()[1:]
 for line in lines:
     dat = line.strip().split(',')
-    name.append(dat[3])
-    codes.append('ZN'+dat[2]) # use "sub_zone" instead
-    neo_domains.append(dat[1])
+    name.append('Zone '+dat[1])
+    codes.append('ZN'+dat[1]) # use "sub_zone" instead
+    neo_domains.append(dat[2])
     
 ###############################################################################
 # get neotectonic domain number and Mmax from zone centroid
@@ -61,7 +61,7 @@ neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
 neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
 
 # get bval sigma
-bval_sig = neo_bval - neo_bval_l
+bval_sig = neo_bval_l - neo_bval
 
 # get domain polygons
 dom_shapes = dsf.shapes()

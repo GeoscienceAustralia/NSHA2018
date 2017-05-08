@@ -272,6 +272,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
             # if num observations greater than zero, add to midx
             if n_obs[idxstart] > 0:
                 midx = hstack((idxstart, midx))
+                print '    get lower mag T', midx
                 
             idxstart -= 1
         
