@@ -39,6 +39,113 @@ def read_pt_source(pt_source_file):
 #        print pt.mfd.max_mag
     return sources
 
+def merge_rates(pt, added_pt, method='Add'):
+    """Merge the rates of multiple mfds
+    """
+    if method == 'Add':
+        if pt.mfd_type == 'EvenlyDiscretizedMFD':
+            mag_bins, rates = zip(*pt.mfd.get_annual_occurrence_rates())
+            mag_bins = np.array(mag_bins)
+            rates = np.array(rates)
+            added_pt_mag_bins = zip(*added_pt.mfd.get_annual_occurrence_rates()) 
+            added_pt_mag_bins = np.array(added_pt_mag_bins)
+            added_pt_rates = np.array(added_pt_rates)
+            new_rates = []
+            for mag_bin in mag_bins:
+                total_rate = np.sum(rates[np.where(mag_bins == mag_bin)]) + \
+                    np.sum(added_pt_rates[np.where(added_pt_mag_bins == mag_bin)])
+                new_rates.append(total_rate)
+            return new_rates
+    else:
+        msg = 'Method not yet defined for mfd type %s' % pt.mfd_type
+        raise(mgs)
+
+def combine_pt_sources(point_source_list, filename, name, nrml_version='04'):
+    """Method for combining lists of point sources that are received
+    and summing rates for co-located points
+    """
+    # Get ids
+    combined_pt_sources = []
+    for pt in point_source_list[0]:
+        for source_model in point_source_list[1:]:
+            print source_model
+            for pt_source in source_model:
+                if pt_source.source_id == pt.source_id:
+                    new_rates = merge_rates(pt, pt_source)
+                    pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
+                                          list(new_rates))
+                    source_model.remove(pt_source)
+    # once all overlapping point sources have been merged, add all to list
+    # This should work as we have added rates to the first source model as
+    # we have gone and removed sources in the same locations from the other
+    # source mode lists
+    for source_model in point_source_list:
+        for pt in source_model:
+            combined_pt_sources.append(pt)
+    
+    if nrml_version == '04':
+#        for source in combined_pt_sources:
+#            source_list.append(source)
+#            id_index = max(id_index, source.source_id)
+        nodes = list(map(obj_to_node, sorted(combined_pt_sources)))
+        source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+        with open(filename, 'wb') as f:
+            nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+    return combined_pt_sources
+        
+
+def write_combined_faults_points(point_sources, fault_sources,
+                                filename, name, nrml_version='04'):
+    """Write pts and fault sources to file
+    :param point_sources:
+       list without trt or dict with trt key of point sources
+    """
+    print 'Writing to source model file %s' % filename
+    id_index = 0
+    if nrml_version == '04':
+        if type(point_sources) == dict:
+            source_list = []
+            for trt, sources in point_sources.iteritems():
+                for source in sources:
+                    source_list.append(source)
+                    id_index = max(id_index, source.source_id)
+        elif type(point_sources) == list:
+            source_list = point_sources
+            for source in source_list:
+                source_list.append(source)
+                id_index = max(id_index, source.source_id)
+        for fault_source in fault_sources:
+            id_index += 1
+            fault_source.source_id = "%i" % id_index
+            source_list.append(fault_source)
+        nodes = list(map(obj_to_node, sorted(source_list)))
+        source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+        with open(filename, 'wb') as f:
+            nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+    elif nrml_version == '05':
+        if type(point_sources) == dict:
+            source_group_list = []
+            id = 0
+            for trt, sources in point_sources.iteritems():
+                for source in sources:
+                    id_index = max(id_index, source.source_id)
+            for trt, sources in point_sources.iteritems():
+                for fault_source in fault_sources:
+                    if fault_source.tectonic_region_type == trt:
+                        id_index += 1
+                        fault_source.source_id = "%i" % id_index
+                        sources.append(fault_source)
+                source_group = SourceGroup(trt, sources = sources, id=id)
+                id +=1
+                source_group_list.append(source_group)
+            write_source_model(filename, source_group_list,
+                               name = name)
+        elif type(point_sources) == list:
+            msg = 'Method not yet implemented for nrml version 0.5'
+            raise(msg)
+    else:
+        print 'Warning: nrml version not specfied, xml not created'
+
 def read_simplefault_source(simplefault_source_file, rupture_mesh_spacing = 10):
     """Read nrml source model into simpmle fault objects
     """
@@ -71,7 +178,8 @@ def read_simplefault_source(simplefault_source_file, rupture_mesh_spacing = 10):
 def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                       filename = 'source_model.xml',
                       buffer_distance = 100., nrml_version = '04',
-                      name = None):
+                      name=None):
+
     """Calculate distances from a pt source rupture plane
     to the fault sources to then reduce Mmax on events that are 
     within a certain distance
@@ -190,9 +298,9 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                     lon_indices, lat_indices)]
             too_close_dips = rupture_dips[np.intersect1d(
                     lon_indices, lat_indices)]
-            print 'Magnitudes of rupture close to fault', too_close_mags
-            print 'Strikes of rupture close to fault', too_close_strikes
-            print 'Dips of rupture close to fault', too_close_dips
+        #    print 'Magnitudes of rupture close to fault', too_close_mags
+        #    print 'Strikes of rupture close to fault', too_close_strikes
+        #    print 'Dips of rupture close to fault', too_close_dips
             unique_strikes = np.unique(rupture_strikes)
             unique_dips = np.unique(rupture_dips)
             src_name_index = 0
@@ -212,15 +320,18 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
                 if mfd_type == 'TruncatedGRMFD':
                     b_val = pt.mfd.b_val
                     # rescale a value in log sapce
-                    a_val = np.log10(np.power(10, pt.mfd.a_val)*prob)
+                    a_val = np.log10(np.power(10, pt.mfd.a_val)*prob)#*area_src_weight))
                     new_pt.mfd.modify_set_ab(a_val, b_val)
-                if mfd_type == 'EvenlyDiscretizedMFD':
+                elif mfd_type == 'EvenlyDiscretizedMFD':
                     mag_bins, rates = zip(*pt.mfd.get_annual_occurrence_rates())
                     mag_bins = np.array(mag_bins)
                     rates = np.array(rates)
-                    new_rates = rates*prob
+                    new_rates = rates*prob#*area_src_weight)
                     new_pt.mfd.modify_set_mfd(new_pt.mfd.min_mag, new_pt.mfd.bin_width,
                                               list(new_rates))
+                else:
+                    msg = 'Weighting method for mfd type %s not yet defined' % mfd_type
+                    raise(msg)
                 pair_index = np.where(np.logical_and(too_close_strikes == nodal_plane.strike,
                                                          too_close_dips == nodal_plane.dip))
                  # Deal with intersecting cases
@@ -267,11 +378,11 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
     elif nrml_version == '05':
         source_group_list = []
         id = 0
-        for trt, sources in revised_pt_sources.iteritems():
+        for trt, sources in revised_point_sources.iteritems():
             source_group = SourceGroup(trt, sources = sources, id=id)
             id +=1
             source_group_list.append(source_group)
-        write_source_model(nrml_pt_file, source_group_list,
+        write_source_model(source_model_file, source_group_list,
                            name = name)
     else:
         print 'Warning: nrml version not specfied, xml not created'
@@ -279,36 +390,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
     # Write pts to source model with faults
     source_model_file = filename[:-4] +'_inc_faults.xml'
     name = name +'_inc_faults'
-    print 'Writing to source model file %s' % source_model_file
-    if nrml_version == '04':
-        source_list = []
-        for trt, sources in revised_point_sources.iteritems():
-            for source in sources:
-                source_list.append(source)
-        for fault_source in fault_sources:
-            id_index += 1
-            fault_source.source_id = "%i" % id_index
-            source_list.append(fault_source)
-        nodes = list(map(obj_to_node, sorted(source_list)))
-        source_model = Node("sourceModel", {"name": name}, nodes=nodes)
-        with open(source_model_file, 'wb') as f:
-            nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
-    elif nrml_version == '05':
-        source_group_list = []
-        id = 0
-        for trt, sources in revised_pt_sources.iteritems():
-            for fault_source in fault_sources:
-                if fault_source.tectonic_region_type == trt:
-                    id_index += 1
-                    fault_source.source_id = "%i" % id_index
-                    sources.append(fault_source)
-            source_group = SourceGroup(trt, sources = sources, id=id)
-            id +=1
-            source_group_list.append(source_group)
-        write_source_model(nrml_pt_file, source_group_list,
-                           name = name)
-    else:
-        print 'Warning: nrml version not specfied, xml not created'
+    write_combined_faults_points(revised_point_sources, fault_sources,
+                                source_model_file, name, nrml_version='04')
 
 def plot_sources(point_source, fault_source):
     from hmtk.plotting.mapping import HMTKBaseMap
