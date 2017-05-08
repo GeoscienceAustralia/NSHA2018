@@ -77,7 +77,7 @@ for line in lines[2:]:
 '''
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
 
-for i, key in enumerate(keys):
+for i, key in enumerate([keys[1]]): # just plot 1!
     
     # get IM period
     period = key.split('-')[0]
@@ -85,8 +85,11 @@ for i, key in enumerate(keys):
     # get map probability of exceedance
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
     
-    figure = plt.figure(i,figsize=(19,12))
-    ax = figure.subplots(111)
+    #figure = plt.figure(i,figsize=(19,12))
+    plt.clf()
+    plt.cla()
+    figure, ax = plt.subplots(i+1,figsize=(19,12))
+    #ax = plt.subplots(111)
     #bbox = argv[1].split('/')
     
     bbox = '108/153/-44/-8'
@@ -255,12 +258,14 @@ for i, key in enumerate(keys):
     # plot contour
     ##########################################################################################
     
-    x, y = m(lonlist, latlist)
-    levels = arange(0.02, 0.3, 0.02) #[0.02, 0.04, 0.06, 0.08, 0.1, 0.]
-    CS = m.contour(x, y, hazvals, levels, colors='k')
+    x, y = m(xs, ys)
+    if probability == '10%':
+        levels = arange(0.02, 0.3, 0.02)
+    elif probability == '2%':
+        levels = arange(0.05, 0.3, 0.05)
+    CS = m.contour(x, y, 10**resampled, levels, colors='k')
     
-    plt.clabel(CS, inline=1, fontsize=8)
-
+    plt.clabel(CS, inline=1, fontsize=10)
     
     ##########################################################################################
     # get land & lake polygons for masking
@@ -277,19 +282,26 @@ for i, key in enumerate(keys):
         plt.fill(poly[:,0], poly[:,1], 'lightskyblue')
         polygons.append(poly)
     
+    plt.title(' '.join((model, T, probability, 'in 50-Year Mean Hazard on Site Class B/C')))
+    
+    # get map bbox
+    map_bbox = ax.get_position().extents
     
     ##########################################################################################
     # add GA logo
     ##########################################################################################
     
     # load logo
-    im = plt.imread('logo.jpg')
+    im = plt.imread('../logo.png')
     
     # set bbox for logo
-    newax = figure.add_axes([0.1,0.75,0.2,0.02]) #, zorder=-1)
+    imoff = 0.02
+    logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
+    logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
+    newax = figure.add_axes(logo_bbox) #, zorder=-1)
     newax.imshow(im)
     newax.axis('off')
-        
+     
     
     '''
     # superimpose area source shapefile
@@ -358,8 +370,6 @@ for i, key in enumerate(keys):
     make colourbar
     ###########################################################################################
     '''
-    
-    plt.title(' '.join((model, T, probability, 'in 50-Year Mean Hazard on Site Class B/C')))
     
     
     # set colourbar
