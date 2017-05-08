@@ -357,9 +357,9 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>7.89049e-02 6.01545e-02 4.58842e-02 3.50178e-02 2.67388e-02 2.04277e-02 1.56143e-02 1.19412e-02 9.13675e-03 6.99445e-03 5.35711e-03 4.10507e-03 3.14718e-03 2.41396e-03 1.85244e-03 1.42220e-03 1.09239e-03 8.39440e-04 6.45353e-04 4.96360e-04 3.81931e-04 2.94007e-04 2.26420e-04 1.74441e-04 1.34450e-04 1.03669e-04 7.99658e-05 6.17061e-05 4.76339e-05 3.31061e-05 1.98917e-05 6.58806e-06 1.69766e-06</occurRates>
+                <occurRates>7.89049e-02 6.01545e-02 4.58842e-02 3.50178e-02 2.67388e-02 2.04277e-02 1.56143e-02 1.19412e-02 9.13675e-03 6.99445e-03 5.35711e-03 4.10507e-03 3.14718e-03 2.41396e-03 1.85244e-03 1.42220e-03 1.09239e-03 8.39440e-04 6.45353e-04 4.96360e-04 3.81931e-04 2.94007e-04 2.26420e-04 1.74441e-04 1.34450e-04 1.03669e-04 7.99658e-05 6.17061e-05 4.76339e-05 3.10462e-05 1.50324e-05 6.06102e-06 1.49394e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -557,9 +557,9 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>4.65076e-03 3.57003e-03 2.74170e-03 2.10652e-03 1.61922e-03 1.24520e-03 9.57983e-04 7.37334e-04 5.67745e-04 4.37343e-04 3.37030e-04 2.59830e-04 2.00392e-04 1.54611e-04 1.19334e-04 9.21404e-05 7.11697e-05 5.49916e-05 4.25060e-05 3.28665e-05 2.54217e-05 1.96697e-05 1.52241e-05 1.17870e-05 9.12876e-06 7.07214e-06 5.48048e-06 4.24827e-06 3.29404e-06 2.29937e-06 1.38746e-06 4.61437e-07 1.19391e-07</occurRates>
+                <occurRates>4.65076e-03 3.57003e-03 2.74170e-03 2.10652e-03 1.61922e-03 1.24520e-03 9.57983e-04 7.37334e-04 5.67745e-04 4.37343e-04 3.37030e-04 2.59830e-04 2.00392e-04 1.54611e-04 1.19334e-04 9.21404e-05 7.11697e-05 5.49916e-05 4.25060e-05 3.28665e-05 2.54217e-05 1.96697e-05 1.52241e-05 1.17870e-05 9.12876e-06 7.07214e-06 5.48048e-06 4.24827e-06 3.29404e-06 2.15630e-06 1.04852e-06 4.24522e-07 1.05064e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -1150,9 +1150,9 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.94647e-01 1.61587e-01 1.34161e-01 1.11404e-01 9.25197e-02 7.68467e-02 6.38371e-02 5.30368e-02 4.40696e-02 3.66233e-02 3.04391e-02 2.53025e-02 2.10353e-02 1.74901e-02 1.45442e-02 1.20961e-02 1.00613e-02 8.36981e-03 6.96359e-03 5.79436e-03 4.82205e-03 4.01340e-03 3.34077e-03 2.78121e-03 2.31565e-03 1.92826e-03 1.60587e-03 1.33754e-03 1.00277e-03 6.49765e-04 2.32023e-04 6.44485e-05</occurRates>
+                <occurRates>1.94647e-01 1.61587e-01 1.34161e-01 1.11404e-01 9.25197e-02 7.68467e-02 6.38371e-02 5.30368e-02 4.40696e-02 3.66233e-02 3.04391e-02 2.53025e-02 2.10353e-02 1.74901e-02 1.45442e-02 1.20961e-02 1.00613e-02 8.36981e-03 6.96359e-03 5.79436e-03 4.82205e-03 4.01340e-03 3.34077e-03 2.78121e-03 2.31565e-03 1.92826e-03 1.60587e-03 1.33754e-03 9.51514e-04 4.89180e-04 2.34343e-04 8.70055e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -2306,9 +2306,9 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.02806e-01 8.52207e-02 7.06642e-02 5.86112e-02 4.86282e-02 4.03573e-02 3.35028e-02 2.78205e-02 2.31085e-02 1.92000e-02 1.59571e-02 1.32656e-02 1.10311e-02 9.17555e-03 7.63419e-03 6.35348e-03 5.28904e-03 4.40411e-03 3.66820e-03 3.05606e-03 2.54673e-03 2.12283e-03 1.76994e-03 1.47608e-03 1.23132e-03 1.02739e-03 8.57449e-04 7.15789e-04 5.97676e-04 4.99169e-04 3.75296e-04 2.43900e-04 8.73608e-05 2.43430e-05</occurRates>
+                <occurRates>1.02806e-01 8.52208e-02 7.06642e-02 5.86112e-02 4.86282e-02 4.03573e-02 3.35028e-02 2.78205e-02 2.31085e-02 1.92000e-02 1.59571e-02 1.32656e-02 1.10311e-02 9.17555e-03 7.63419e-03 6.35348e-03 5.28904e-03 4.40411e-03 3.66820e-03 3.05606e-03 2.54673e-03 2.12283e-03 1.76994e-03 1.47608e-03 1.23132e-03 1.02739e-03 8.57449e-04 7.15789e-04 5.97676e-04 4.99169e-04 3.59033e-04 2.16723e-04 7.45479e-05 2.14218e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -2317,9 +2317,9 @@
                 <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="2.5"/>
-                <hypoDepth probability="0.25" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 

@@ -116,8 +116,8 @@ for code, poly in zip(codes, shapes):
     tmp_mc = -99
     tmp_yc = -99
     
-    if code == 'Z036':
-        tmp_trt = 'Non_cratonic'
+    if code == 'EBGZ':
+        tmp_trt = 'Extended'
         tmp_dep = 10
         tmp_mc = lmcomp[0]
         tmp_yc = lycomp[0]

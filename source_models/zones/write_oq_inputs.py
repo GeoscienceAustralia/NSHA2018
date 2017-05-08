@@ -39,8 +39,8 @@ splitpath = shpfile.split(sep)[:-2]
 beta_wts   = [0.5, 0.2, 0.3] # best, lower (hi b), upper (lo b)
 
 # set Mmax array and weights
-print '\n!!!! temporary override to compare rate collapse method !!!!\n'
-mx_wts  = [0.1, 0.2, 0.4, 0.2, 0.1] # for testing
+#print '\n!!!! temporary override to compare rate collapse method !!!!\n'
+#mx_wts  = [0.1, 0.2, 0.4, 0.2, 0.1] # for testing
 
 # check that input folder
 splitpath.append('input')

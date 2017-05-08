@@ -20,7 +20,7 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     mx_wts  = mx_dict[m['trt']]['mx_wts']
     
     # REMOVE ME WHEN FINISHED TESTING
-    mx_wts = [0.1, 0.2, 0.4, 0.2, 0.1]
+    #mx_wts = [0.1, 0.2, 0.4, 0.2, 0.1]
         
     # if using one Mx only
     if meta['one_mx'] == True:
@@ -137,6 +137,9 @@ def write_oq_sourcefile(model, meta, mx_dict):
     bval_wt    = [0.68, 0.16, 0.16]
     max_mag_wt = [0.60, 0.30, 0.10]
     '''
+    
+    # set rupture aspect ratio
+    aspectratio = '1.5' # balance between L14 and Cea14 surface rupture lengths
 
     outbase = path.split(meta['modelPath'])[-1]
     
@@ -219,7 +222,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
             newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
             #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
             #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
-            newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
+            newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
@@ -370,7 +373,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                         newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
                         #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
-                    newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
+                    newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
                 
                     '''
                     # now get appropriate MFD
@@ -452,7 +455,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                         newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
                         #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
-                    newxml += '            <ruptAspectRatio>1.0</ruptAspectRatio>\n'
+                    newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
                     #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
                     '''
                     # now get appropriate MFD
