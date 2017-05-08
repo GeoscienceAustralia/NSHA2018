@@ -1,3 +1,5 @@
+import numpy as np
+
 def largest_remainder(weights, expected_sum=1, precision=0):
     """Use largest remainder method to round weights such that
     the sum to 1.
@@ -5,6 +7,9 @@ def largest_remainder(weights, expected_sum=1, precision=0):
     params expected_sum: The total the weights should sum to
     params precision: Number of decimal places to round to
     """
+    # Ensure is array
+    if type(weights) == list:
+        weights = np.array(weights)
     total_number = expected_sum*np.power(10,precision)
     weights = weights*np.power(10,precision)
     updated_weights = np.floor(weights)
