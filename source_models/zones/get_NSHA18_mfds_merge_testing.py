@@ -321,7 +321,10 @@ for uclass in unique_classes:
     
     # get a-value using fixed region class b-value if assigned - need to do this to fit the class rates!
     if not fixed_bval == -99.0:
-        
+        # get annualised rates based on preferred MW (mvect)
+        cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
+            get_annualised_rates(mcomps, ycomps, total_mvect, mrng, bin_width, year_max)
+            
         # get index of min reg mag and valid mag bins
         diff_cum = abs(hstack((diff(cum_rates), 0.)))
         midx = where((mrng >= class_mmin_reg-bin_width/2) & (diff_cum > 0.))[0]

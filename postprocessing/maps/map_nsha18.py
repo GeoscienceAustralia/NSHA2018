@@ -36,7 +36,7 @@ drawshape = True
 gridfile = argv[1]
 
 # get model
-model = path.split(gridfile)[-1].split('_')[2] # this will likely need modifying depending on filename format
+model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
 
 # set map resolution
 res = 'l' 
@@ -77,7 +77,7 @@ for line in lines[2:]:
 '''
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
 
-for i, key in enumerate([keys[1]]): # just plot 1!
+for i, key in enumerate([keys[0]]): # just plot 1!
     
     # get IM period
     period = key.split('-')[0]
@@ -198,7 +198,8 @@ for i, key in enumerate([keys[1]]): # just plot 1!
     # transform to map projection
     nx = int((m.xmax-m.xmin)/2000.)+1
     ny = int((m.ymax-m.ymin)/2000.)+1
-    transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
+    #transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
+    transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
     masked_array = ma.array(transhaz, mask=isnan(transhaz))
     #masked_array = masked_array.set_fill_value(0)
     
@@ -246,8 +247,8 @@ for i, key in enumerate([keys[1]]): # just plot 1!
     try:
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
-        cptfile = '/Users/tallen/Documents/DATA/GMT/cpt/precip3_16lev.cpt'
-        #cptfile = '/Users/tallen/Documents/DATA/GMT/cpt/temperature.cpt'
+        cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+        cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=False)
     
     print 'Making map...'    
@@ -263,7 +264,7 @@ for i, key in enumerate([keys[1]]): # just plot 1!
         levels = arange(0.02, 0.3, 0.02)
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
-    CS = m.contour(x, y, 10**resampled, levels, colors='k')
+    CS = m.contour(x, y, 10**resampled.T, levels, colors='k')
     
     plt.clabel(CS, inline=1, fontsize=10)
     
@@ -292,12 +293,16 @@ for i, key in enumerate([keys[1]]): # just plot 1!
     ##########################################################################################
     
     # load logo
-    im = plt.imread('../logo.png')
+    try:
+        im = plt.imread('../GAlogo.png')
+    except:
+        im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
     
     # set bbox for logo
     imoff = 0.02
     logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
     logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
+    logo_bbox = [map_bbox[0]+0.115,map_bbox[1]-0.03,0.15,0.15]
     newax = figure.add_axes(logo_bbox) #, zorder=-1)
     newax.imshow(im)
     newax.axis('off')
@@ -396,6 +401,6 @@ for i, key in enumerate([keys[1]]): # just plot 1!
     if path.isdir(key) == False:
         mkdir(key)
     
-    plt.savefig(gridfile.strip('csv')+key+'.png', dpi=150, format='png', bbox_inches='tight')
+    plt.savefig(gridfile.strip('csv')+key+'.png', dpi=300, format='png', bbox_inches='tight')
     
 plt.show()

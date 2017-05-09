@@ -1,0 +1,7 @@
+ROOT FOLDER      = 2012_mw_ge_4.0//Leonard08
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_V0.12_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//Leonard2008//Leonard08_NSHA18.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = Leonard08_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1

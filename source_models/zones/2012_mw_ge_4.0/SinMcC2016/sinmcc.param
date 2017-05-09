@@ -1,0 +1,7 @@
+ROOT FOLDER      = 2012_mw_ge_4.0//SinMcC2016
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_V0.12_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//SinMcC2016//SIN_MCC_NSHA18_UPDATE.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = SinMcC2016_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1
