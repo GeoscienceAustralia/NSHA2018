@@ -99,6 +99,8 @@ for code, poly in zip(codes, shapes):
     
     if code == 'OSGB' or code == 'EAPM' or code == 'WARM':
         matchidx = -1
+    elif code == 'GAWL':
+        matchidx = 0
             
     # set dummy values
     if matchidx == -99:
@@ -131,7 +133,6 @@ dep_b = array(dep_b)
 
 outshp = 'Domains_NSHA18.shp'
 
-# set shapefile to write to
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
 w.field('SRC_NAME','C','100')

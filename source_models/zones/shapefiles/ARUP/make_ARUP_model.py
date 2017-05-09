@@ -68,6 +68,7 @@ dom_shapes = dsf.shapes()
 dom = []
 mmax = []
 trt = []
+nclass = []
 dep_b = []
 ycomp = []
 mcomp = []
@@ -87,11 +88,14 @@ for code, poly in zip(codes, shapes):
         dom_poly = Polygon(dom_shapes[i].points)
         
         # check if ARUP centroid in domains poly
-        if point.within(dom_poly):
+        if point.within(dom_poly): 
             matchidx = i
     
-    if code.startswith('ZN7') or code == 'ZN5':
+    if code.startswith('ZN7') or code == 'ZN5' or code == 'ZN6b':
         matchidx = -1
+        print 'Fixing index: ', code
+    elif code.startswith('ZN1b'):
+        matchidx = 0
         print 'Fixing index: ', code
             
     # set dummy values
@@ -104,6 +108,7 @@ for code, poly in zip(codes, shapes):
         mcomp.append(-99)
         bval_fix.append(-99)
         bval_sig_fix.append(-99)
+        nclass.append(-99)
     # fill real values
     else:
         dom.append(neo_doms[matchidx])
@@ -114,6 +119,7 @@ for code, poly in zip(codes, shapes):
         mcomp.append(neo_mcomp[matchidx])
         bval_fix.append(neo_bval[matchidx])
         bval_sig_fix.append(bval_sig[matchidx])
+        #nclass.append(-99)
 
 dep_b = array(dep_b)
     
@@ -262,7 +268,7 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        w.record(name[i], codes[i], src_ty, neo_domains[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(name[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
         
 # now save area shapefile

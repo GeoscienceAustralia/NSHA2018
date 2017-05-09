@@ -102,7 +102,7 @@ for code, poly in zip(codes, shapes):
         if point.within(dom_poly):
             matchidx = i
     
-    if code == 'Z017':
+    if code == 'Z017' or code == 'Z019':
         matchidx = 0
         print 'Fixing index: ', code
             

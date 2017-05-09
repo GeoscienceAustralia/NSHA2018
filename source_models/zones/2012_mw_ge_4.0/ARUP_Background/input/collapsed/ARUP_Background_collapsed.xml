@@ -4,7 +4,7 @@
 
     <sourceModel name="collapsed_collapsed">
 
-        <areaSource id="ZN1a" name="Zone 1a" tectonicRegion="Cratonic">
+        <areaSource id="ZN1a" name="Zone 1a" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -34,7 +34,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>9.32270e-03 7.76247e-03 6.46413e-03 5.38360e-03 4.48423e-03 3.73555e-03 3.11223e-03 2.59323e-03 2.16102e-03 1.80107e-03 1.50124e-03 1.25147e-03 1.04337e-03 8.69974e-04 7.25476e-04 6.05046e-04 5.04663e-04 4.20981e-04 3.51214e-04 2.93040e-04 2.44529e-04 2.04070e-04 1.70323e-04 1.42172e-04 1.18686e-04 9.90901e-05 8.27381e-05 6.90916e-05 4.92773e-05 2.53984e-05 1.21980e-05 4.54017e-06</occurRates>
+                <occurRates>4.36484e-03 3.35055e-03 2.57315e-03 1.97701e-03 1.51967e-03 1.16864e-03 8.99087e-04 6.92003e-04 5.32840e-04 4.10455e-04 3.16310e-04 2.43855e-04 1.88072e-04 1.45105e-04 1.11997e-04 8.64756e-05 6.67942e-05 5.16106e-05 3.98927e-05 3.08458e-05 2.38587e-05 1.84604e-05 1.42881e-05 1.10623e-05 8.56750e-06 6.63732e-06 5.14352e-06 3.98708e-06 3.09152e-06 2.02372e-06 9.84054e-07 3.98421e-07 9.86046e-08</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -43,9 +43,9 @@
                 <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="2.5"/>
-                <hypoDepth probability="0.25" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -167,7 +167,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>6.75010e-03 5.62251e-03 4.68383e-03 3.90232e-03 3.25159e-03 2.70969e-03 2.25836e-03 1.88242e-03 1.56924e-03 1.30831e-03 1.09089e-03 9.09706e-04 7.58697e-04 6.32826e-04 5.27895e-04 4.40411e-04 3.67465e-04 3.06633e-04 2.55900e-04 2.13582e-04 1.78282e-04 1.48831e-04 1.24258e-04 1.03753e-04 8.66406e-05 7.23578e-05 6.04355e-05 5.04827e-05 4.21731e-05 2.97381e-05 1.55741e-05 6.79008e-06 1.80929e-06</occurRates>
+                <occurRates>4.65074e-03 3.57002e-03 2.74169e-03 2.10651e-03 1.61921e-03 1.24519e-03 9.57979e-04 7.37330e-04 5.67742e-04 4.37341e-04 3.37028e-04 2.59829e-04 2.00391e-04 1.54610e-04 1.19333e-04 9.21399e-05 7.11693e-05 5.49913e-05 4.25057e-05 3.28663e-05 2.54215e-05 1.96696e-05 1.52240e-05 1.17870e-05 9.12869e-06 7.07208e-06 5.48044e-06 4.24824e-06 3.29402e-06 2.15628e-06 1.04851e-06 4.24518e-07 1.05063e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />

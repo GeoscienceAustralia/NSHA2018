@@ -178,7 +178,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN1b" name="Southern South Australia" tectonicRegion="Cratonic">
+        <areaSource id="ZN1b" name="Southern South Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -208,7 +208,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>9.32270e-03 7.76247e-03 6.46413e-03 5.38360e-03 4.48423e-03 3.73555e-03 3.11223e-03 2.59323e-03 2.16102e-03 1.80107e-03 1.50124e-03 1.25147e-03 1.04337e-03 8.69974e-04 7.25476e-04 6.05046e-04 5.04663e-04 4.20981e-04 3.51214e-04 2.93040e-04 2.44529e-04 2.04070e-04 1.70323e-04 1.42172e-04 1.18686e-04 9.90901e-05 8.27381e-05 6.90916e-05 4.92773e-05 2.53984e-05 1.21980e-05 4.54017e-06</occurRates>
+                <occurRates>4.36484e-03 3.35055e-03 2.57315e-03 1.97701e-03 1.51967e-03 1.16864e-03 8.99087e-04 6.92003e-04 5.32840e-04 4.10455e-04 3.16310e-04 2.43855e-04 1.88072e-04 1.45105e-04 1.11997e-04 8.64756e-05 6.67942e-05 5.16106e-05 3.98927e-05 3.08458e-05 2.38587e-05 1.84604e-05 1.42881e-05 1.10623e-05 8.56750e-06 6.63732e-06 5.14352e-06 3.98708e-06 3.09152e-06 2.02372e-06 9.84054e-07 3.98421e-07 9.86046e-08</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -217,9 +217,9 @@
                 <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="2.5"/>
-                <hypoDepth probability="0.25" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -628,7 +628,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN6b" name="West Coast" tectonicRegion="Cratonic">
+        <areaSource id="ZN6b" name="West Coast" tectonicRegion="Extended">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -666,7 +666,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>3.01892e-02 2.50889e-02 2.08530e-02 1.73345e-02 1.44115e-02 1.19829e-02 9.96480e-03 8.28764e-03 6.89363e-03 5.73480e-03 4.77138e-03 3.97029e-03 3.30411e-03 2.75005e-03 2.28917e-03 1.90577e-03 1.58677e-03 1.32132e-03 1.10041e-03 9.16549e-04 7.63495e-04 6.36074e-04 5.29981e-04 4.41634e-04 3.68057e-04 3.06774e-04 2.55723e-04 2.13192e-04 1.51803e-04 7.81144e-05 3.74550e-05 1.39186e-05</occurRates>
+                <occurRates>3.45948e-02 2.87181e-02 2.38464e-02 1.98067e-02 1.64560e-02 1.36759e-02 1.13686e-02 9.45315e-03 7.86257e-03 6.54139e-03 5.44367e-03 4.53136e-03 3.77294e-03 3.14228e-03 2.61771e-03 2.18128e-03 1.81806e-03 1.51571e-03 1.26396e-03 1.05428e-03 8.79603e-04 7.34043e-04 6.12717e-04 5.11565e-04 4.27212e-04 3.56850e-04 2.98145e-04 2.49154e-04 2.08259e-04 1.74115e-04 1.25362e-04 7.57486e-05 2.60817e-05 7.50209e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -675,9 +675,9 @@
                 <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="2.5"/>
-                <hypoDepth probability="0.25" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 

@@ -95,6 +95,9 @@ for code, poly in zip(codes, shapes):
     if code.startswith('ZN7') or code == 'ZN5':
         matchidx = -1
         print 'Fixing index: ', code
+    elif code == 'ZN1a':
+        matchidx = 0
+        print 'Fixing index: ', code
             
     # set dummy values
     if matchidx == -99:
@@ -264,7 +267,7 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        w.record(name[i], codes[i], src_ty, neo_domains[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+        w.record(name[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
                  n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
         
 # now save area shapefile

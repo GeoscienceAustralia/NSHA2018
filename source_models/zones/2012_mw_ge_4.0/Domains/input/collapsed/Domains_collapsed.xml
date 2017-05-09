@@ -891,7 +891,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="GAWL" name="GAWL" tectonicRegion="Cratonic">
+        <areaSource id="GAWL" name="GAWL" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1048,7 +1048,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.16165e-02 9.66885e-03 8.04876e-03 6.70094e-03 5.57951e-03 4.64631e-03 3.86966e-03 3.22322e-03 2.68508e-03 2.23706e-03 1.86401e-03 1.55335e-03 1.29462e-03 1.07911e-03 8.99571e-04 7.49992e-04 6.25356e-04 5.21490e-04 4.34925e-04 3.62769e-04 3.02617e-04 2.52467e-04 2.10651e-04 1.75779e-04 1.46696e-04 1.22438e-04 1.02202e-04 8.53193e-05 6.08329e-05 3.13451e-05 1.50496e-05 5.59991e-06</occurRates>
+                <occurRates>5.17017e-03 3.96668e-03 3.04475e-03 2.33818e-03 1.79640e-03 1.38077e-03 1.06178e-03 8.16834e-04 6.28668e-04 4.84052e-04 3.72859e-04 2.87325e-04 2.21502e-04 1.70826e-04 1.31795e-04 1.01720e-04 7.85382e-05 6.06615e-05 4.68707e-05 3.62279e-05 2.80114e-05 2.16657e-05 1.67632e-05 1.29742e-05 1.00449e-05 7.77931e-06 6.02658e-06 4.67014e-06 3.62006e-06 2.36901e-06 1.15162e-06 4.66135e-07 1.15331e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -1057,9 +1057,9 @@
                 <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="2.5"/>
-                <hypoDepth probability="0.25" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
