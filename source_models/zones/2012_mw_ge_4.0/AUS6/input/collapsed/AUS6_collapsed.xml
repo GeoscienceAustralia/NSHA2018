@@ -550,6 +550,7 @@
                                 149.3629 -35.4609
                                 149.3617 -35.6775
                                 149.0127 -36.2691
+                                148.7970 -36.1073
                                 148.4383 -35.8488
                                 148.4892 -35.7801
                                 148.3448 -35.2993
@@ -1135,6 +1136,13 @@
                                 147.8224 -36.8441
                                 148.1442 -36.4900
                                 148.4383 -35.8488
+                                148.7970 -36.1073
+                                148.7625 -36.1572
+                                148.5630 -36.1942
+                                148.6109 -36.4488
+                                148.8109 -36.4102
+                                148.7625 -36.1572
+                                148.7970 -36.1073
                                 149.0127 -36.2691
                                 148.8748 -36.4564
                                 148.6903 -36.6352
@@ -4821,7 +4829,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WSB" name="Wiso Basin" tectonicRegion="Cratonic">
+        <areaSource id="WSO" name="Wiso Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5332,7 +5340,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="FLR" name="Flinders Ranges" tectonicRegion="Non_cratonic">
+        <areaSource id="FLR" name="Flinders Ranges" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5383,7 +5391,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.01654e-02 7.78445e-03 5.96412e-03 4.57167e-03 3.50601e-03 2.69003e-03 2.06492e-03 1.58581e-03 1.21842e-03 9.36563e-04 7.20228e-04 5.54105e-04 4.26482e-04 3.28393e-04 2.52968e-04 1.94947e-04 1.50294e-04 1.15915e-04 8.94341e-05 6.90293e-05 5.32998e-05 4.11697e-05 3.18116e-05 2.45893e-05 1.90133e-05 1.47067e-05 1.13793e-05 8.80763e-06 6.81930e-06 4.45756e-06 2.16450e-06 8.75161e-07 2.16304e-07</occurRates>
+                <occurRates>1.24504e-02 1.03640e-02 8.62827e-03 7.18411e-03 5.98238e-03 4.98227e-03 4.14985e-03 3.45692e-03 2.88004e-03 2.39970e-03 1.99971e-03 1.66658e-03 1.38911e-03 1.15797e-03 9.65400e-04 8.04944e-04 6.71233e-04 5.59795e-04 4.66910e-04 3.89479e-04 3.24925e-04 2.71100e-04 2.26216e-04 1.88783e-04 1.57561e-04 1.31516e-04 1.09788e-04 9.16593e-05 6.53582e-05 3.36793e-05 1.61715e-05 6.01781e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />
@@ -5392,9 +5400,9 @@
                 <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="10.0"/>
-                <hypoDepth probability="0.25" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="15.0"/>
+                <hypoDepth probability="0.50" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="2.5"/>
+                <hypoDepth probability="0.25" depth="10.0"/>
             </hypoDepthDist>
         </areaSource>
 

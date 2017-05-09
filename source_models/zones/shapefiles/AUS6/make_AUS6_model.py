@@ -94,6 +94,8 @@ for code, poly in zip(codes, shapes):
     
     if code == 'SEA' or code == 'MBG' or code == 'BAS':
         matchidx = -1
+    elif code == 'FLR':
+        matchidx = 2
             
     # set dummy values
     if matchidx == -99:
