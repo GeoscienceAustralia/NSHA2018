@@ -731,6 +731,8 @@ class HelmstetterEtAl2007(HelmstetterNearestNeighbour):
         """
 
         """
+        max_llh_params = [None, None]
+        max_poiss_llh = -999999999999999.
         for kval in krange:
             for rval in r_min_range:
                 self.config["k"] = kval
@@ -752,8 +754,12 @@ class HelmstetterEtAl2007(HelmstetterNearestNeighbour):
                 poiss_llh = probs.poisson_loglikelihood()
                 kagan_i0 = probs.get_i0()
                 kagan_i1 = probs.get_i1()
-                print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
-                    poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1)
+#                print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
+#                    poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1)
+                if poiss_llh > max_poiss_llh:
+                    max_llh_params = [kval, rval]
+                    max_poiss_llh = poiss_llh
+        return max_llh_params, max_poiss_llh
 
 class FixedWidthSmoothing(HelmstetterEtAl2007):
     """
