@@ -79,7 +79,8 @@ for line in lines[2:]:
 ##############################################################################
 
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
-
+#plt.clf()
+#plt.cla()
 for i, key in enumerate([keys[0]]): # just plot 1 for now!
     
     # get IM period
@@ -89,9 +90,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
     
     #figure = plt.figure(i,figsize=(19,12))
-    plt.clf()
-    plt.cla()
-    figure, ax = plt.subplots(i+1,figsize=(19,12))    
+    
+    figure, ax = plt.subplots(i+1,figsize=(16,12))    
     
     bbox = bbox.split('/')
     minlon = float(bbox[0])
@@ -264,9 +264,9 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         levels = arange(0.02, 0.3, 0.02)
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
-    CS = m.contour(x, y, 10**resampled.T, levels, colors='k')
+    csm = m.contour(x, y, 10**resampled.T, levels, colors='k')
     
-    plt.clabel(CS, inline=1, fontsize=10)
+    plt.clabel(csm, inline=1, fontsize=10)
     
     ##########################################################################################
     # get land & lake polygons for masking
@@ -398,7 +398,67 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         mkdir(key)
     
     # now save file
-    plt.savefig(path.join((key, gridfile.strip('csv')+key+'.png')), dpi=300, \
+    #plt.savefig(path.join((key, gridfile.strip('csv')+key+'.png')), dpi=300, \
+    #            format='png', bbox_inches='tight')
+    plt.savefig(gridfile.strip('csv')+key+'.png', dpi=300, \
                 format='png', bbox_inches='tight')
     
-plt.show()
+    plt.show()
+    
+    ##########################################################################################
+    # make shapfile of countour lines
+    ##########################################################################################
+    
+    # setup shapefile
+    outshp = model.replace(' ','_') + '_contours.shp'
+
+    # set shapefile to write to
+    w = shapefile.Writer(shapefile.POLYLINE)
+    w.field('LEVELS','F', 5, 2)
+        
+    # have to re-contour using un-transformed lat/lons
+    cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
+    
+    # loop through contour levels
+    for l, lev in enumerate(cs.levels):
+        contours = cs.collections[l].get_paths()
+        
+        # now loop through multiple paths within level
+        for cnt in contours:
+            lons = cnt.vertices[:,0]
+            lats = cnt.vertices[:,0]
+            
+            # add polyline to shapefile
+            w.line(parts=[cnt.vertices], shapeType=shapefile.POLYLINE)
+            
+            # add level attribute
+            w.record(lev)
+
+    # now save area shapefile
+    w.save(outshp)
+    
+    # write projection file
+    prjfile = outshp.strip().split('.shp')[0]+'.prj'
+    f = open(prjfile, 'wb')
+    f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
+    f.close()
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
