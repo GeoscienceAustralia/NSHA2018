@@ -100,11 +100,6 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     maxlat = float(bbox[3])
     mbuff = 1.
     
-    # build data to plot
-    hazvals = []
-    latlist = []
-    lonlist = []
-    
     '''
     # get shpfile for masking hazard values
     shpfile = solfile.split('.')[0]
@@ -114,6 +109,11 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     sf = sf.shapes()
     maskpoly = Polygon(sf[0].points)
     '''
+    
+    # build data to plot
+    hazvals = []
+    latlist = []
+    lonlist = []
     
     # add buffer to data
     for gridval in grddict:
