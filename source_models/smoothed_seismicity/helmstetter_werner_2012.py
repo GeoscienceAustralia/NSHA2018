@@ -754,7 +754,7 @@ class HelmstetterEtAl2007(HelmstetterNearestNeighbour):
                 poiss_llh = probs.poisson_loglikelihood()
                 kagan_i0 = probs.get_i0()
                 kagan_i1 = probs.get_i1()
-#                print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
+                print "Poisson LLH = %.6f" % poiss_llh #,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
 #                    poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1)
                 if poiss_llh > max_poiss_llh:
                     max_llh_params = [kval, rval]
