@@ -1,9 +1,6 @@
-
 # coding: utf-8
 
-# In[1]:
-
-get_ipython().magic(u'matplotlib inline')
+#get_ipython().magic(u'matplotlib inline')
 
 from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity
 #from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
@@ -59,6 +56,8 @@ from hmtk.seismicity.max_magnitude.cumulative_moment_release import CumulativeMo
 from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity 
 from hmtk.seismicity.smoothing.kernels.isotropic_gaussian import IsotropicGaussian 
 
+#from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueWriter
+import helmstetter_werner_2012 as h_w
 # To build source model
 from hmtk.sources.source_model import mtkSourceModel
 from hmtk.sources.point_source import mtkPointSource
@@ -66,12 +65,7 @@ from openquake.hazardlib.geo.point import Point
 from openquake.hazardlib.mfd import TruncatedGRMFD
 from openquake.hazardlib.geo.nodalplane import NodalPlane
 from openquake.hazardlib.pmf import PMF
-#from nrml.models import HypocentralDepth
-#nrml.models import HypocentralDepth
 print "Everything Imported OK!"
-
-
-# In[2]:
 
 ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_declustered.csv"
 parser = CsvCatalogueParser(ifile)
@@ -84,16 +78,10 @@ print "The catalogue contains %g events" % neq
 bbox = catalogue.get_bounding_box()
 print "Catalogue ranges from %.4f E to %.4f E Longitude and %.4f N to %.4f N Latitude\n" % bbox
 
-
-# In[3]:
-
 catalogue.sort_catalogue_chronologically()
 index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["depth"] >= 0.0) 
 catalogue.purge_catalogue(index)
 catalogue.get_number_events()
-
-
-# In[4]:
 
 # Copying the catalogue and saving it under a new name "catalogue_clean"
 catalogue_clean = deepcopy(catalogue)
@@ -105,25 +93,17 @@ catalogue_clean.data['year']
 catalogue_clean.get_decimal_time()
 catalogue_clean.data['longitude']
 
-
-# In[5]:
-
 catalogue_depth_clean = deepcopy(catalogue_clean)
 index = catalogue_depth_clean.data['depth']>=0.
 catalogue_depth_clean.purge_catalogue(index)
 catalogue_clean.get_number_events()
 
-
-# In[6]:
-
-source_model_file = "../zones/2012_mw_ge_4.0/NSHA13_Background/input/best/NSHA13_BACKGROUND_best.xml"
+#source_model_file = "../zones/2012_mw_ge_4.0/NSHA13_Background/input/best/NSHA13_BACKGROUND_best.xml"
+source_model_file = 'Aus_cont_testzone.xml'
 parser = nrmlSourceModelParser(source_model_file)
 
 # Parse the seismic sources and save them into a variable called "source_model"
 source_model = parser.read_file("Aus Source Model 1") # You need to supply a name for the source model
-
-
-# In[7]:
 
 # Map configuration
 llon, ulon, llat, ulat = catalogue_clean.get_bounding_box()
@@ -151,47 +131,13 @@ for source in source_model.sources:
     # Add on the catalogue
     src_basemap.add_catalogue(source.catalogue, overlay=False)
 
-
-# In[8]:
-
 completeness_table_a = np.array([[1990., 3.0],
                                  [1980., 3.5],
                                  [1965., 4.0]])
 plot_magnitude_time_density(source.catalogue, 0.1, 1.0,
                             completeness=completeness_table_a)
 
-
-# In[9]:
-
-grid_lims = [110., 160.0, 1., -45.0, -5.0, 1., 0., 50., 50.]
-#smoother2 = SmoothedSeismicity(grid_lims2, use_3d=False, bvalue=0.9)
-#config = {"Length_Limit": 3.0, "BandWidth": 100.0, "increment":False}
-#data = smoother2.run_analysis(catalogue, config, comp_table)
-
-
-# In[10]:
-
-#smoother2.write_to_csv("Australia_JonoCat_v3.csv")
-#writer.write_file(catalogue, magnitude_table=comp_table)
-
-
-# In[11]:
-
-from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueWriter
-
-
-# In[12]:
-
-writer = CsvCatalogueWriter("Australia_Cat_Mgt4p5.csv")
-writer.write_file(source.catalogue, magnitude_table=completeness_table_a)
-
-
-# In[13]:
-
-import helmstetter_werner_2012 as h_w
-
-
-# In[14]:
+grid_lims = [110., 160.0, 0.1, -45.0, -5.0, 0.1, 0., 20., 20.]
 
 try:
     os.remove("Aus1_tmp.hdf5")
@@ -207,18 +153,12 @@ smoother._get_catalogue_completeness_weights(completeness_table_a)
 smoother.build_catalogue_2_grid_array()
 smoother.run_smoothing(config["r_min"], config["bandwidth"])
 
-
-# In[15]:
-
 np.savetxt("Australia_FixedWidth2_50km.csv",
            np.column_stack([smoother.grid, smoother.rates]),
            delimiter=",",
            fmt=["%.4f", "%.4f", "%.8e"],
           header="longitude,latitude,rate" 
           )
-
-
-# In[16]:
 
 try:
     os.remove("Aus1_tmp2.hdf5")
@@ -227,7 +167,7 @@ except OSError:
 config = {"k": 3,
           "r_min": 1.0E-7, 
           "bvalue": 1.0, "mmin": 3.0,
-          "learning_start": 1965, "learning_end": 2003,
+          "learning_start": 1990, "learning_end": 2003,
           "target_start": 2004, "target_end": 2013}
 
 smoother = h_w.HelmstetterEtAl2007(grid_lims, config, source.catalogue, storage_file="Aus1_tmp2.hdf5")
@@ -236,8 +176,7 @@ smoother._get_catalogue_completeness_weights(completeness_table_a)
 smoother.build_distance_arrays()
 smoother.build_catalogue_2_grid_array()
 # Exhaustive smoothing
-#smoother.exhaustive_smoothing(np.arange(3,51,1),np.arange())
-params, poiss_llh = smoother.exhaustive_smoothing(np.arange(3,51,1), np.arange(1.0e-6,1.0e-5,2.0e-6))
+params, poiss_llh = smoother.exhaustive_smoothing(np.arange(3,6,1), np.arange(1.0e-6,1.0e-5,2.0e-6))
 print params, poiss_llh
 smoother.config["k"] = params[0]
 smoother.config["r_min"] = params[1]
@@ -250,23 +189,18 @@ np.savetxt("Australia_Adaptive_K3.csv",
           header="longitude,latitude,rate" 
           )
 
-
-# In[26]:
-
 # Creating a basemap - input a cconfiguration and (if desired) a title
 basemap1 = HMTKBaseMap(map_config, 'Smoothed seismicity rate')
 basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
 basemap1.m.drawparallels(np.arange(llon, ulon, 5))
-#print smoother.data[:,0]
-#print smoother.data[:,1]
 # Adding the smoothed grip to the basemap
 #sym = (2., 3.,'cx')
 x,y = basemap1.m(smoother.grid[:,0], smoother.grid[:,1])
-basemap1.m.scatter(x, y, marker = 's', c = np.log10(smoother.rates), cmap = plt.cm.coolwarm, zorder=10)
+basemap1.m.scatter(x, y, marker = 's', c = np.log10(smoother.rates), cmap = plt.cm.coolwarm, zorder=10, lw=0, vmin=-6.5, vmax=1.5)
 basemap1.m.drawcoastlines(linewidth=1, zorder=50) # Add coastline on top
 #basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
 #basemap1.m.drawparallels(np.arange(llon, ulon, 5))
-plt.colorbar(label='log10(Smoothed rate per cell)')
+plt.colorbar()#label='log10(Smoothed rate per cell)')
 #plt.legend()
 #basemap1.m.scatter(x, y, marker = 's', c = smoother.data[:,4], cmap = plt.cm.coolwarm, zorder=10)
 #basemap1.m.scatter([150],[22], marker='o')
@@ -274,10 +208,51 @@ plt.colorbar(label='log10(Smoothed rate per cell)')
 
 #(smoother.data[0], smoother.data[1])
 #basemap1.add_catalogue(catalogue_depth_clean, erlay=False)
-plt.savefig('/media/sf_openquake_shared_files/Australia/catalogue/smoothed_%i_%i_2.png' %                         (smoothing_config["BandWidth"], smoothing_config["Length_Limit"]))
+plt.savefig('./smoothed_%i_%i_%i_%i_%i_%.6f.png' %             (smoother.config["k"], smoother.config["learning_start"],
+            smoother.config["learning_end"], smoother.config["target_start"],
+            smoother.config["target_end"],smoother.config["r_min"]))
 
-
-# In[ ]:
-
-
+# Build nrml input file of point sources
+#smoother_filename = "Australia_Adaptive_K3.csv"
+source_list = []
+#i=0
+min_mag = 4.5
+max_mag = 7.2
+bval = 1.0 # just define as 1 for time being
+# Read in data again to solve number fomatting issue in smoother.data
+# For some reason it just returns 0 for all a values
+data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
+#print max(data[:,4])
+#print data[:,4]
+#print len(data[:,4])
+for j in range(len(data[:,2])):
+#    print smoother.data[j,:]
+    identifier = 'ASS_' + str(j)
+    name = 'Helmstetter_' + str(j)
+    point = Point(data[j,0],data[j,1],
+                10)
+    rate = data[j,2]
+    # Convert rate to a value??
+    #aval = rate
+    aval = np.log10(rate) + bval*config["mmin"]
+    #print rate, aval
+    mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bval)
+    hypo_depth_dist = PMF([(1.0, 10.0)])
+    nodal_plane_dist = PMF([(0.25, NodalPlane(0, 30, 90)),
+                            (0.25, NodalPlane(90, 30, 90)),
+                            (0.25, NodalPlane(180, 30, 90)),
+                            (0.25, NodalPlane(270, 30, 90))])
+    point_source = mtkPointSource(identifier, name, geometry=point, mfd=mfd,
+                           mag_scale_rel = 'WC1994', rupt_aspect_ratio=1.5,
+                           upper_depth = 0.1, lower_depth = 20.0,
+                           trt = 'Non_cratonic', nodal_plane_dist = nodal_plane_dist,
+                           hypo_depth_dist = hypo_depth_dist)
+    source_list.append(point_source)
+#    i+=1
+#    if j==1000:
+#        break
+    
+source_model = mtkSourceModel(identifier=0, name='Helmstetter_K4',
+                              sources = source_list)
+source_model.serialise_to_nrml(('source_model_smoothed_adaptive_K%i_0.1.xml' % smoother.config['k']))
 
