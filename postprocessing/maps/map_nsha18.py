@@ -2,14 +2,11 @@
 """
 Created on Thu Apr 30 11:47:02 2015
 
-convert gridded hazard to shp
+convert gridded hazard to map
 
 Usage:
-    python sol2map.py minlon/maxlon/minlat/maxlat
+    python map_nsha18.py <path to csv file>
     
-    eg:
-    
-    python sol2map.py -140/-114/52/70
 
 @author: tallen
 """
@@ -22,30 +19,34 @@ import matplotlib as mpl
 from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan
 from tools.mapping_tools import drawshapepoly, labelpolygon, get_map_polygons, mask_outside_polygons, cpt2colormap
-
 import shapefile
 #from gmt_tools import cpt2colormap
 from shapely.geometry import Point, Polygon
 
+##############################################################################
+# set some default values here
+##############################################################################
 mpl.rcParams['pdf.fonttype'] = 42
 
-drawshape = True
-#bbox = '-133/-120/48/56'
+drawshape = False # decides whether to overlay seismic sources
 
-# set map file to plot
-gridfile = argv[1]
-
-# get model
-model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
+bbox = '108/153/-44/-8' # map boundary - lon1/lon2/lat1/lat2
 
 # set map resolution
 res = 'l' 
 
-# parse sol file 
-lines = open(gridfile).readlines()
+##############################################################################
+# parse hazard map file
+##############################################################################
 
-# make grid dictionary
-grddict = []
+# set map file to plot
+gridfile = argv[1]
+
+# get model name from input file
+model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
+
+# parse hazard grid file 
+lines = open(gridfile).readlines()
 
 # get keys for model
 if lines[0].startswith('#'):
@@ -56,12 +57,13 @@ else:
 # get dictionary keys
 keys = line.strip().split(',')[2:]
 
+# make grid dictionary
+grddict = []
+
 print '\nReading', model
 for line in lines[2:]:
-    tmpdict = {}
     dat = line.strip().split(',')
-    tmpdict['lon'] = float(dat[0])
-    tmpdict['lat'] = float(dat[1])
+    tmpdict = {'lon':float(dat[0]), 'lat':float(dat[1])}
     
     # fill keys
     idx = 2
@@ -72,12 +74,13 @@ for line in lines[2:]:
     # add to grid list
     grddict.append(tmpdict)
     
-'''    
+##############################################################################    
 # now make maps
-'''
+##############################################################################
+
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
 
-for i, key in enumerate([keys[0]]): # just plot 1!
+for i, key in enumerate([keys[0]]): # just plot 1 for now!
     
     # get IM period
     period = key.split('-')[0]
@@ -88,11 +91,8 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     #figure = plt.figure(i,figsize=(19,12))
     plt.clf()
     plt.cla()
-    figure, ax = plt.subplots(i+1,figsize=(19,12))
-    #ax = plt.subplots(111)
-    #bbox = argv[1].split('/')
+    figure, ax = plt.subplots(i+1,figsize=(19,12))    
     
-    bbox = '108/153/-44/-8'
     bbox = bbox.split('/')
     minlon = float(bbox[0])
     maxlon = float(bbox[1])
@@ -106,13 +106,13 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     lonlist = []
     
     '''
-    # get shpfile name
+    # get shpfile for masking hazard values
     shpfile = solfile.split('.')[0]
     
     inshape = '../Grids/2005_grids/canada_2005grid_released.shp'
     sf = shapefile.Reader(inshape)
     sf = sf.shapes()
-    poly = Polygon(sf[0].points)
+    maskpoly = Polygon(sf[0].points)
     '''
     
     # add buffer to data
@@ -127,13 +127,13 @@ for i, key in enumerate([keys[0]]): # just plot 1!
         '''
         # mask grid points outside defined grid to avoid extrapolation
         point = Point(gridval['lon'], gridval['lat'])
-        if point.within(poly) == False:
+        if point.within(maskpoly) == False:
             hazvals.append(nan)
         else:
             hazvals.append(gridval[key])
         '''
     
-    idx = array(range(0, len(lonlist), 100))
+    #idx = array(range(0, len(lonlist), 100)) # resample for quickly testing mapping
     idx = array(range(0, len(lonlist), 1))
     lonlist = array(lonlist)[idx]
     latlist = array(latlist)[idx]
@@ -153,7 +153,7 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     m = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
                 urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
                 projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
-                resolution='l',area_thresh=1000.)
+                resolution=res,area_thresh=1000.)
                 
     #m.drawmapboundary(fill_color='lightgray')
     #m.fillcontinents(color='white',lake_color='lightgray',zorder=0)
@@ -248,8 +248,8 @@ for i, key in enumerate([keys[0]]): # just plot 1!
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
         cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
-        cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
-        cmap, zvals = cpt2colormap(cptfile, ncolours, rev=False)
+        #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
+        cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     
     print 'Making map...'    
     cmap.set_bad('w', 1.0)
@@ -280,7 +280,7 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     polygons = []
     for polygon in m.lakepolygons:
         poly = polygon.get_coords()
-        plt.fill(poly[:,0], poly[:,1], 'lightskyblue')
+        plt.fill(poly[:,0], poly[:,1], '0.9')
         polygons.append(poly)
     
     plt.title(' '.join((model, T, probability, 'in 50-Year Mean Hazard on Site Class B/C')))
@@ -320,7 +320,7 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     '''
     '''
     ###########################################################################################
-    annotate probabilities
+    annotate cities
     ###########################################################################################
     '''
     """
@@ -374,8 +374,7 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     ###########################################################################################
     make colourbar
     ###########################################################################################
-    '''
-    
+    '''    
     
     # set colourbar
     plt.gcf().subplots_adjust(bottom=0.1)
@@ -390,10 +389,7 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     labels = [str('%0.2f' % 10**x) for x in logticks]
     cb.set_ticklabels(labels)
     
-    # get map probabiltiy from filename
-    probstr = '2'# yrs
-    itime = '2,475'
-    
+    # set title
     titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
     cb.set_label(titlestr, fontsize=12)
     
@@ -401,6 +397,8 @@ for i, key in enumerate([keys[0]]): # just plot 1!
     if path.isdir(key) == False:
         mkdir(key)
     
-    plt.savefig(gridfile.strip('csv')+key+'.png', dpi=300, format='png', bbox_inches='tight')
+    # now save file
+    plt.savefig(path.join((key, gridfile.strip('csv')+key+'.png')), dpi=300, \
+                format='png', bbox_inches='tight')
     
 plt.show()
