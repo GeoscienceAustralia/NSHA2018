@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='utf-8'?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+    <sourceModel name="Austrlian Area Sources">
+        <areaSource id="1" name="Continent" tectonicRegion="Stable Continental Crust">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+								111.243543532325333 -17.890151746611032
+								120.587681102711159 -13.676128920750756
+								126.450669382168925 -10.37819801355576
+								132.130439277893629 -9.462106094890483
+								145.047335331074038 -9.920152054223122
+								156.956530273722649 -24.302795177267967
+								156.681702698123047 -29.524519113660048
+								148.71170300573516 -45.739346074035446
+								142.665496342544316 -45.739346074035446
+								138.543082708550571 -41.433714056308645
+								109.136532119395198 -40.517622137643365
+								108.678486160062562 -30.074174264859209
+								108.678486160062562 -30.074174264859209
+								111.243543532325333 -17.890151746611032                             
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>30.0</lowerSeismoDepth>
+            </areaGeometry>
+
+            <magScaleRel>WC1994</magScaleRel>
+
+            <ruptAspectRatio>1.</ruptAspectRatio>
+
+            <truncGutenbergRichterMFD aValue="" bValue="" minMag="" maxMag="" />
+
+            <nodalPlaneDist>
+                <nodalPlane probability="0.5" strike="0" dip="30.0" rake="90.0" />
+                <nodalPlane probability="0.5" strike="180" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+
+            <hypoDepthDist>
+                <hypoDepth probability="0.7" depth="5.0" />
+                <hypoDepth probability="0.3" depth="15.0" />
+            </hypoDepthDist>
+        </areaSource>
+    </sourceModel>
+</nrml>
