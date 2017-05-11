@@ -22,24 +22,20 @@ def gr2inc_mmax(mfd, mmaxs, weights):
     """Function to convert a GR distribution to incremental MFD and 
     collapse Mmax logic tree branches
     """
+    mfd_type = type(mfd).__name__
     if mfd_type != 'TruncatedGRMFD':
         msg = 'Input MFD should be of type TruncatedGRMFD'
         raise(msg)
     # Ensure we get rates for all mmax values
     mfd.max_mag = max(mmaxs)
-    mag_bins, rates = zip(*pt.mfd.get_annual_occurrence_rates())
+    mag_bins, rates = zip(*mfd.get_annual_occurrence_rates())
     mag_bins = np.array(mag_bins)
     rates = np.array(rates)
     new_rates = np.zeros(len(mag_bins))
     for mmax, weight in zip(mmaxs, weights):
-        print mmax
-        print weight
-        idx = np.where(mag_bins == mmax)
-        print new_rates
+        idx = np.where(np.isclose(mag_bins,(mmax-0.05), rtol=1e-2))[0][-1]+1
         new_rates[:idx] += rates[:idx]*weight
-        print rates[:idx]*weight
-        print new_rates
-    new_mfd = EvenlyDiscretizedMFD(mfd.min_mag, mfd.bin_width, new_rates)
+    new_mfd = EvenlyDiscretizedMFD(mfd.min_mag, mfd.bin_width, list(new_rates))
     return new_mfd
         
 
@@ -90,6 +86,10 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
             mmax_values, mmax_weights = lt.get_weights('Mmax', 'Proterozoic')
         else:
             mmax_values, mmax_weights = lt.get_weights('Mmax', trt)
+        mmax_values = [float(i) for i in mmax_values]
+        mmax_weights = [float(i) for i in mmax_weights]
+        print mmax_values
+        print mmax_weights
         mmaxs[trt] = mmax_values
         mmaxs_w[trt] = mmax_weights
 
@@ -107,10 +107,10 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
                     pt.tectonic_region_type = zone_trt
                     pt.nodal_plane_distribution = nodal_plane_dist
                     pt.hypocenter_distribution = hypo_depth_dict[zone_trt]
+                    pt.rupture_aspect_ratio=2
                     mfd = pt.mfd
                     new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt])
                     pt.mfd = new_mfd
-                    print type(pt.mfd).__name_
                     merged_pts.append(pt)
     
     name = outfile.rstrip('.xml')
@@ -122,6 +122,7 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
 
 
 if __name__ == "__main__":
+#    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}
     filedict = {'Cratonic': 'source_model_Australia_Adaptive_K3_b0.819.csv.xml',
                 'Non_cratonic': 'source_model_Australia_Adaptive_K3_b1.208.csv.xml',
                 'Extended': 'source_model_Australia_Adaptive_K3_b0.835.csv.xml'}
