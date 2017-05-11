@@ -23,9 +23,10 @@ def gr2inc_mmax(mfd, mmaxs, weights):
     collapse Mmax logic tree branches
     """
     mfd_type = type(mfd).__name__
+  #  print mfd_type
     if mfd_type != 'TruncatedGRMFD':
-        msg = 'Input MFD should be of type TruncatedGRMFD'
-        raise(msg)
+        msg = 'Input MFD should be of type TruncatedGRMFD, found type %s' % mfd_type
+        raise TypeError(msg)
     # Ensure we get rates for all mmax values
     mfd.max_mag = max(mmaxs)
     mag_bins, rates = zip(*mfd.get_annual_occurrence_rates())
@@ -100,18 +101,22 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
         pts = read_pt_source(filename)
 #        shapes = np.where(trt_types
         for zone_trt, dom_shape in zip(trt_types, dom_shapes):
-            dom_poly = Polygon(dom_shape.points)
-            for pt in pts:
-                pt_loc = Point(pt.location.x, pt.location.y)
-                if pt_loc.within(dom_poly):
-                    pt.tectonic_region_type = zone_trt
-                    pt.nodal_plane_distribution = nodal_plane_dist
-                    pt.hypocenter_distribution = hypo_depth_dict[zone_trt]
-                    pt.rupture_aspect_ratio=2
-                    mfd = pt.mfd
-                    new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt])
-                    pt.mfd = new_mfd
-                    merged_pts.append(pt)
+            print zone_trt
+            print dom_shape
+            if zone_trt == trt:
+                print 'TRT %s, procesing shape %s' % (zone_trt, dom_shape)
+                dom_poly = Polygon(dom_shape.points)
+                for pt in pts:
+                    pt_loc = Point(pt.location.x, pt.location.y)
+                    if pt_loc.within(dom_poly):
+                        pt.tectonic_region_type = zone_trt
+                        pt.nodal_plane_distribution = nodal_plane_dist
+                        pt.hypocenter_distribution = hypo_depth_dict[zone_trt]
+                        pt.rupture_aspect_ratio=2
+                        mfd = pt.mfd
+                        new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt])
+                        pt.mfd = new_mfd
+                        merged_pts.append(pt)
     
     name = outfile.rstrip('.xml')
     if nrml_version == '04':
