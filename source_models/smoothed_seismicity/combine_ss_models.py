@@ -41,7 +41,7 @@ def gr2inc_mmax(mfd, mmaxs, weights):
         
 
 def combine_ss_models(filedict, domains_shp, lt, outfile,
-                      nrml_version = '04', id_base = 'ASS'):
+                      nrml_version = '04'):#, id_base = 'ASS'):
     """ Combine smoothed seismicity models based on tectonic region types
     :params filedict:
         dict of form filedict[trt] = filename specifying input file for that region
@@ -140,4 +140,4 @@ if __name__ == "__main__":
     domains_shp = '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
     outfile = 'source_model_Australia_Adaptive_K3_merged.xml'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    combine_ss_models(filedict, domains_shp, lt, outfile, nrml_version = '04', idbase='ASS')
+    combine_ss_models(filedict, domains_shp, lt, outfile, nrml_version = '04')#, idbase='ASS')
