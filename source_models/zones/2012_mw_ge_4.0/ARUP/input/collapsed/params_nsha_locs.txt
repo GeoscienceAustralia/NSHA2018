@@ -7,5 +7,5 @@ model_rel_path = NSHA2018/source_models/zones/2012_mw_ge_4.0/ARUP/input/collapse
 shared_rel_path = NSHA2018/shared
 gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4.xml
 model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/background/ARUP
-job_file = job_localities.ini
+job_file = job_nsha_localities.ini
 job_type = hazcurve
