@@ -9,7 +9,7 @@ from os import path, getcwd, walk
 from logic_tree import LogicTree
 
 # parse expert elicitation weights
-lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
+lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
 
 # get list of source files from area sources
 xmllist = []
@@ -24,6 +24,9 @@ for root, dirnames, filenames in walk(rootfolder):
 # set up metadata dictionary
 modelPath = getcwd()
 meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml'}
+
+# get set weights
+
 
 # now get model weights
 bak_mods, bak_wts = lt.get_weights('Source_model', 'Background')
