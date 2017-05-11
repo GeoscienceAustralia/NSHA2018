@@ -23,9 +23,10 @@ def gr2inc_mmax(mfd, mmaxs, weights):
     collapse Mmax logic tree branches
     """
     mfd_type = type(mfd).__name__
+  #  print mfd_type
     if mfd_type != 'TruncatedGRMFD':
-        msg = 'Input MFD should be of type TruncatedGRMFD'
-        raise(msg)
+        msg = 'Input MFD should be of type TruncatedGRMFD, found type %s' % mfd_type
+        raise TypeError(msg)
     # Ensure we get rates for all mmax values
     mfd.max_mag = max(mmaxs)
     mag_bins, rates = zip(*mfd.get_annual_occurrence_rates())
@@ -40,7 +41,7 @@ def gr2inc_mmax(mfd, mmaxs, weights):
         
 
 def combine_ss_models(filedict, domains_shp, lt, outfile,
-                      nrml_version = '04'):
+                      nrml_version = '04', id_base = 'ASS'):
     """ Combine smoothed seismicity models based on tectonic region types
     :params filedict:
         dict of form filedict[trt] = filename specifying input file for that region
@@ -93,6 +94,7 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
         mmaxs[trt] = mmax_values
         mmaxs_w[trt] = mmax_weights
 
+    pt_ids = []
     for trt, filename in filedict.iteritems():
         print trt
         print 'Parsing %s' % filename
@@ -100,18 +102,27 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
         pts = read_pt_source(filename)
 #        shapes = np.where(trt_types
         for zone_trt, dom_shape in zip(trt_types, dom_shapes):
-            dom_poly = Polygon(dom_shape.points)
-            for pt in pts:
-                pt_loc = Point(pt.location.x, pt.location.y)
-                if pt_loc.within(dom_poly):
-                    pt.tectonic_region_type = zone_trt
-                    pt.nodal_plane_distribution = nodal_plane_dist
-                    pt.hypocenter_distribution = hypo_depth_dict[zone_trt]
-                    pt.rupture_aspect_ratio=2
-                    mfd = pt.mfd
-                    new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt])
-                    pt.mfd = new_mfd
-                    merged_pts.append(pt)
+            print zone_trt
+            print dom_shape
+            if zone_trt == trt:
+                print 'TRT %s, procesing shape %s' % (zone_trt, dom_shape)
+                dom_poly = Polygon(dom_shape.points)
+                for pt in pts:
+                    pt_loc = Point(pt.location.x, pt.location.y)
+                    if pt_loc.within(dom_poly):
+                        pt.tectonic_region_type = zone_trt
+                        pt.nodal_plane_distribution = nodal_plane_dist
+                        pt.hypocenter_distribution = hypo_depth_dict[zone_trt]
+                        pt.rupture_aspect_ratio=2
+                        mfd = pt.mfd
+                        new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt])
+                        pt.mfd = new_mfd
+                        if pt.source_id in pt_ids:
+                            print 'Point source %s already exists!' % pt.source_id
+                            print 'Skipping this source for trt %s' % zone_trt
+                        else:
+                            merged_pts.append(pt)
+                            pt_ids.append(pt.source_id)
     
     name = outfile.rstrip('.xml')
     if nrml_version == '04':
@@ -129,4 +140,4 @@ if __name__ == "__main__":
     domains_shp = '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
     outfile = 'source_model_Australia_Adaptive_K3_merged.xml'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    combine_ss_models(filedict, domains_shp, lt, outfile, nrml_version = '04')
+    combine_ss_models(filedict, domains_shp, lt, outfile, nrml_version = '04', idbase='ASS')
