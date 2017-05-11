@@ -5,7 +5,8 @@ Geoscience Australia April 2017
 """
 
 import os, sys
-
+import copy
+import numpy as np
 from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
 from openquake.hazardlib.sourceconverter import SourceConverter, \
     area_to_point_sources, SourceGroup
@@ -31,6 +32,73 @@ def nrml2sourcelist(area_source_file, investigation_time=50,
             for source in group:
                 sources.append(source)
     return sources
+
+def weighted_pt_source(pt_sources, weights, name,
+                       filename=None, nrml_version='04'):
+    """Scales rates by weights for collapsing logic trees
+    :param pt_sources:
+        list of PointSource objects
+    :param weights:
+        dict contains weights for each tectonic
+        region type, e.g. weights[trt] = 0.2
+    :param filenam:
+        path to output file, if provided will
+        be written to nrml format as defined by
+        nrml_version
+    :param  nrml_version:
+        version of nrml schema to use
+    :returns weighted_pt_sources:
+        list of PointSource objects with activity rates
+        scaled by weights
+    """
+    weighted_point_sources = []
+    for pt in pt_sources:
+        new_pt = copy.deepcopy(pt) # Copy sources to avoid messing with original data
+        mfd_type = type(pt.mfd).__name__
+        trt = pt.tectonic_region_type
+        weight = weights[trt]
+        if mfd_type == 'TruncatedGRMFD':
+            b_val = pt.mfd.b_val
+            # rescale a value in log sapce
+            a_val = np.log10(np.power(10, pt.mfd.a_val)*weight)
+            new_pt.mfd.modify_set_ab(a_val, b_val)
+        elif mfd_type == 'EvenlyDiscretizedMFD':
+            mag_bins, rates = zip(*pt.mfd.get_annual_occurrence_rates())
+            mag_bins = np.array(mag_bins)
+            rates = np.array(rates)
+            new_rates = rates*weight
+            new_pt.mfd.modify_set_mfd(new_pt.mfd.min_mag, new_pt.mfd.bin_width,
+                                      list(new_rates))
+        else:
+            msg = 'Weighting method for mfd type %s not yet defined' % mfd_type
+            raise(msg)
+        weighted_point_sources.append(new_pt)
+    # Now write out
+    if filename is not None:
+        source_model_file = filename 
+        print 'Writing to source model file %s' % source_model_file 
+        if nrml_version == '04':
+#            source_list = []
+#            for source in weighted_point_sources:
+#                source_list.append(source)
+            nodes = list(map(obj_to_node, sorted(weighted_point_sources)))
+            source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+            with open(source_model_file, 'wb') as f:
+                nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+        elif nrml_version == '05':
+            msg = 'Method not yet implemented for nrml version 0.5'
+            raise(msg)
+#            source_group_list = []
+#            id = 0
+#            for trt, sources in weighted_sources.iteritems():
+#                source_group = SourceGroup(trt, sources = sources, id=id)
+#                id +=1
+#                source_group_list.append(source_group)
+#            write_source_model(nrml_pt_file, source_group_list,
+#                               name = name)
+        else:
+            print 'Warning: nrml version not specfied, xml not created'
+    return weighted_point_sources
 
 def area2pt_source(area_source_file, sources = None, investigation_time=50, 
                    rupture_mesh_spacing=10., width_of_mfd_bin=0.1,

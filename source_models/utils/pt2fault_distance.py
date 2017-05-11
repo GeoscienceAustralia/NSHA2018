@@ -43,11 +43,12 @@ def merge_rates(pt, added_pt, method='Add'):
     """Merge the rates of multiple mfds
     """
     if method == 'Add':
-        if pt.mfd_type == 'EvenlyDiscretizedMFD':
+        mfd_type = type(pt.mfd).__name__
+        if mfd_type == 'EvenlyDiscretizedMFD':
             mag_bins, rates = zip(*pt.mfd.get_annual_occurrence_rates())
             mag_bins = np.array(mag_bins)
             rates = np.array(rates)
-            added_pt_mag_bins = zip(*added_pt.mfd.get_annual_occurrence_rates()) 
+            added_pt_mag_bins, added_pt_rates = zip(*added_pt.mfd.get_annual_occurrence_rates()) 
             added_pt_mag_bins = np.array(added_pt_mag_bins)
             added_pt_rates = np.array(added_pt_rates)
             new_rates = []
@@ -57,7 +58,7 @@ def merge_rates(pt, added_pt, method='Add'):
                 new_rates.append(total_rate)
             return new_rates
     else:
-        msg = 'Method not yet defined for mfd type %s' % pt.mfd_type
+        msg = 'Method not yet defined for mfd type %s' % mfd_type
         raise(mgs)
 
 def combine_pt_sources(point_source_list, filename, name, nrml_version='04'):
@@ -68,7 +69,7 @@ def combine_pt_sources(point_source_list, filename, name, nrml_version='04'):
     combined_pt_sources = []
     for pt in point_source_list[0]:
         for source_model in point_source_list[1:]:
-            print source_model
+   #         print source_model
             for pt_source in source_model:
                 if pt_source.source_id == pt.source_id:
                     new_rates = merge_rates(pt, pt_source)
