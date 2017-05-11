@@ -121,14 +121,12 @@ for code, poly in zip(codes, shapes):
 
 dep_b = array(dep_b)
 
-
 ###############################################################################
 # write initial shapefile
 ###############################################################################
 
 outshp = 'AUS6_NSHA18.shp'
 
-# set shapefile to write to
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
 w.field('SRC_NAME','C','100')
