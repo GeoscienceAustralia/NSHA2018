@@ -41,7 +41,7 @@ def gr2inc_mmax(mfd, mmaxs, weights):
         
 
 def combine_ss_models(filedict, domains_shp, lt, outfile,
-                      nrml_version = '04'):
+                      nrml_version = '04', id_base = 'ASS'):
     """ Combine smoothed seismicity models based on tectonic region types
     :params filedict:
         dict of form filedict[trt] = filename specifying input file for that region
@@ -94,6 +94,7 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
         mmaxs[trt] = mmax_values
         mmaxs_w[trt] = mmax_weights
 
+    pt_ids = []
     for trt, filename in filedict.iteritems():
         print trt
         print 'Parsing %s' % filename
@@ -116,7 +117,12 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
                         mfd = pt.mfd
                         new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt])
                         pt.mfd = new_mfd
-                        merged_pts.append(pt)
+                        if pt.source_id in pt_ids:
+                            print 'Point source %s already exists!' % pt.source_id
+                            print 'Skipping this source for trt %s' % zone_trt
+                        else:
+                            merged_pts.append(pt)
+                            pt_ids.append(pt.source_id)
     
     name = outfile.rstrip('.xml')
     if nrml_version == '04':
@@ -134,4 +140,4 @@ if __name__ == "__main__":
     domains_shp = '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
     outfile = 'source_model_Australia_Adaptive_K3_merged.xml'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    combine_ss_models(filedict, domains_shp, lt, outfile, nrml_version = '04')
+    combine_ss_models(filedict, domains_shp, lt, outfile, nrml_version = '04', idbase='ASS')
