@@ -77,7 +77,7 @@ class LogicTree(object):
         branch_values = []
         branch_weights = []
         for branch, lt_b in self.sets[set_name].set_classes[class_name].branches.iteritems():
-            if branch_values is not None:
+            if branch_value is not None:
                 if lt_b.value == branch_value:
                      branch_values.append(lt_b.value)
                      branch_weights.append(lt_b.weight)
@@ -110,6 +110,9 @@ if __name__ == "__main__":
     lt.list_sets()
     lt.list_classes('FSM_MFD')
     branch_values, branch_weights = lt.get_weights('Mmax', 'Proterozoic')
+    print branch_values
+    print branch_weights
+    branch_values, branch_weights = lt.get_weights('Mmax', 'Proterozoic', '7.3')
     print branch_values
     print branch_weights
     branch_values, branch_weights = lt.get_weights('FSM_MFD', 'Cratonic')
