@@ -198,8 +198,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # transform to map projection
     nx = int((m.xmax-m.xmin)/2000.)+1
     ny = int((m.ymax-m.ymin)/2000.)+1
-    #transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
-    transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
+    transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
+    #transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
     masked_array = ma.array(transhaz, mask=isnan(transhaz))
     #masked_array = masked_array.set_fill_value(0)
     
@@ -264,7 +264,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         levels = arange(0.02, 0.3, 0.02)
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
-    csm = m.contour(x, y, 10**resampled.T, levels, colors='k')
+    #csm = m.contour(x, y, 10**resampled.T, levels, colors='k')
+    csm = m.contour(x, y, 10**resampled, levels, colors='k')
     
     plt.clabel(csm, inline=1, fontsize=10)
     
@@ -302,14 +303,33 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     imoff = 0.02
     logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
     logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
-    logo_bbox = [map_bbox[0]+0.115,map_bbox[1]-0.03,0.15,0.15]
+    logo_bbox = [map_bbox[0]+0.07,map_bbox[1]-0.07,0.25,0.25]
+    newax = figure.add_axes(logo_bbox) #, zorder=-1)
+    newax.imshow(im)
+    newax.axis('off')
+    
+    ##########################################################################################
+    # add CC-by
+    ##########################################################################################
+    
+    # load logo
+    try:
+        im = plt.imread('../ccby_narrow.png')
+    except:
+        im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/cby_narrow.png')
+    
+    # set bbox for logo
+    imoff = 0.02
+    logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
+    logo_bbox = [0.74,map_bbox[1]-0.03,0.1,0.1]
     newax = figure.add_axes(logo_bbox) #, zorder=-1)
     newax.imshow(im)
     newax.axis('off')
      
-    
-    '''
+    ##########################################################################################
     # superimpose area source shapefile
+    ##########################################################################################
+    '''
     shpfile =['..//final_inputs//SWCan_T3EclC_area1.shp', \
               '..//final_inputs//WArctic_area.shp']
     if drawshape == True:
@@ -418,6 +438,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         
     # have to re-contour using un-transformed lat/lons
     cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
+    plt.close(figure)
     
     # loop through contour levels
     for l, lev in enumerate(cs.levels):
