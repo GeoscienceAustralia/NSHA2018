@@ -13,7 +13,7 @@ Usage:
 from sys import argv
 from matplotlib.mlab import griddata
 from matplotlib import colors, colorbar #, cm
-from os import path, mkdir
+from os import path, mkdir, getcwd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from mpl_toolkits.basemap import Basemap
@@ -34,6 +34,9 @@ bbox = '108/153/-44/-8' # map boundary - lon1/lon2/lat1/lat2
 
 # set map resolution
 res = 'i' 
+
+# get current working directory (and computer!)
+cwd = getcwd()
 
 ##############################################################################
 # parse hazard map file
@@ -202,8 +205,13 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # transform to map projection
     nx = int((m.xmax-m.xmin)/2000.)+1
     ny = int((m.ymax-m.ymin)/2000.)+1
-    #transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
-    transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
+    
+    # differences in the way different machines deal with grids - weird!
+    if cwd.startswith('/nas'):
+        transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
+    else:
+        transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
+    
     masked_array = ma.array(transhaz, mask=isnan(transhaz))
     #masked_array = masked_array.set_fill_value(0)
     
@@ -462,7 +470,12 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     w.field('LEVELS','F', 5, 2)
         
     # have to re-contour using un-transformed lat/lons
-    cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
+    # differences in the way different machines deal with grids - weird!
+    if cwd.startswith('/nas'):
+        cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
+    else:
+        cs = plt.contour(xs, ys, 10**resampled, levels, colors='k')
+
     plt.close(figure)
     
     # loop through contour levels
