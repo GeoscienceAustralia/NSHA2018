@@ -32,6 +32,10 @@ meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml'
 # get set weights
 src_type, src_wts = lt.get_weights('Source_model', 'Source_type')
 
+# temporarily set regional weights to seimotectonic weights
+print '\!!!!REMEMBER TO DELETE SETTING REGIONAL WEIGHT TO SEISMOTECTONIC WEIGHT!!!!\n'
+src_wts[2] = src_wts[-1]
+
 # set branch weights
 branch_wts = array([])
 branch_files = []
@@ -40,9 +44,13 @@ branch_files = []
 for st, sw in zip(src_type, src_wts):
     print '\n'+st
     src_type_wts = []
+    
+    orig_st = st
+    
     # assume smoothed faults same weight as smoothed seis
     if st == 'Smoothed_faults':
         st = 'Smoothed_seismicity'
+        sw = 0.0 # set to zero for now!
         
     # get weights within source type
     models, mod_wts = lt.get_weights('Source_model', st)
@@ -57,13 +65,19 @@ for st, sw in zip(src_type, src_wts):
             	
                 # do a couple of checks
                 if mod == 'NSHA13' and xl.upper().startswith('NSHA13_BACKGROUND'):
-                    print 'Not adding '+xl+' to '+st+' set'
+                    print 'Not adding '+xl+' to '+orig_st+' set'
                 
-                elif mod == 'DIMAUS' and st == 'Seismotectonic':
-                    print 'Not adding '+xl+' to '+st+' set'
+                elif mod == 'DIMAUS' and orig_st == 'Seismotectonic':
+                    print 'Not adding '+xl+' to '+orig_st+' set'
                     
-                elif mod == 'AUS6' and st == 'Seismotectonic':
-                    print 'Not adding '+xl+' to '+st+' set'
+                elif mod == 'NSHA13' and orig_st == 'Seismotectonic':
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'AUS6' and orig_st == 'Seismotectonic':
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'GA_adaptive' and orig_st == 'Smoothed_faults':
+                    print 'Not adding '+xl+' to '+orig_st+' set'
                 
                 # else, add file to list
                 else:
@@ -79,6 +93,8 @@ for st, sw in zip(src_type, src_wts):
                      
                     # add model paths
                     branch_files.append(path.join(xp, xl))
+                    
+                    #print xl, mod, st, mw
                     
     # re-normalise source type weights if within type neq 1.0
     src_type_wts = array(src_type_wts) / sum(src_type_wts)
