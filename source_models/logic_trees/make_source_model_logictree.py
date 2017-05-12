@@ -16,7 +16,7 @@ lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv'
 # get list of source files from area sources with collapsed rates
 xmllist = []
 xmlpath = []
-rootfolder = path.join('..', '..', 'jobs', 'complete_model' )
+rootfolder = path.join('..', 'complete_model' )
 for root, dirnames, filenames in walk(rootfolder):
     for filename in filenames:
         if filename.endswith('.xml'): #filename.endswith('_collapsed.xml') and path.split(root)[-1] == 'collapsed':
