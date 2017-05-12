@@ -13,20 +13,21 @@ from numpy import array, hstack
 # parse expert elicitation weights
 lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
 
-# get list of source files from area sources
+# get list of source files from area sources with collapsed rates
 xmllist = []
 xmlpath = []
-rootfolder = path.join('..', 'zones', '2012_mw_ge_4.0' )
+rootfolder = path.join('..', '..', 'jobs', 'complete_model' )
 for root, dirnames, filenames in walk(rootfolder):
     for filename in filenames:
-        if filename.endswith('_collapsed.xml') and path.split(root)[-1] == 'collapsed':
+        if filename.endswith('.xml'): #filename.endswith('_collapsed.xml') and path.split(root)[-1] == 'collapsed':
             xmllist.append(filename)
             xmlpath.append(root)
 
 
 # set up metadata dictionary
 modelPath = getcwd() # path where source logit tree is to be saved
-meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml'}
+meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml', 
+        'splitXMLPath': True} # assume source files in job dir 
 
 # get set weights
 src_type, src_wts = lt.get_weights('Source_model', 'Source_type')
@@ -102,5 +103,6 @@ if not sum(branch_wts) == 1.0:
 updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=4)
 
 # write source model logic tree
-print '\nUse full file paths!!!'
 make_logic_tree(branch_files, updated_weights, meta)
+
+

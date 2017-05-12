@@ -111,7 +111,7 @@ if outputType == '0':
     
     #set metadata dict
     meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':True, 'mx_idx':-1} # need to search for best Mmax
+            'multiMods':False, 'one_mx':True, 'mx_idx':-1, 'splitXMLPath': True} # need to search for best Mmax
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:
@@ -143,7 +143,7 @@ elif outputType == '1':
     
     #set metadata dict
     meta = {'beta_wts':beta_wts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':False}
+            'multiMods':False, 'one_mx':False, 'splitXMLPath': True}
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:
@@ -188,7 +188,7 @@ elif outputType == '2':
             
             #set metadata dict
             meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-                    'multiMods':False, 'one_mx':True, 'mx_idx':j}
+                    'multiMods':False, 'one_mx':True, 'mx_idx':j, 'splitXMLPath': True}
             	
             # check to see if exists
             if path.isdir(meta['modelPath']) == False:
@@ -219,7 +219,7 @@ elif outputType == '3':
     
     #set metadata dict
     meta = {'beta_wts':beta_wts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':True, 'mx_idx':-1} # need to search for best Mmax
+            'multiMods':False, 'one_mx':True, 'mx_idx':-1, 'splitXMLPath': True} # need to search for best Mmax
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:
@@ -253,7 +253,7 @@ elif outputType == '4':
     
     #set metadata dict
     meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':False}
+            'multiMods':False, 'one_mx':False, 'splitXMLPath': True}
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:

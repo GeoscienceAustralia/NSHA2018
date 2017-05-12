@@ -529,7 +529,11 @@ def make_logic_tree(srcxmls, branch_wts, meta):
     # make branches
     for i, srcxml in enumerate(srcxmls):
         #logictreepath = logicpath + sep + path.split(branch)[-1]
-        logictreepath = path.split(srcxml)[-1]
+        if meta['splitXMLPath'] == True:
+            logictreepath = path.split(srcxml)[-1]
+        else:
+            logictreepath = srcxml
+            
         newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
         newxml += '                    <uncertaintyModel>'+logictreepath+'</uncertaintyModel>\n'
         newxml += '                    <uncertaintyWeight>'+str(branch_wts[i])+'</uncertaintyWeight>\n'
