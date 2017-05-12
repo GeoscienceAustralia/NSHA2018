@@ -252,12 +252,12 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
         try:
-            cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+            nascptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
             #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
-            cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+            cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
         except:
-            cptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
-            cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+            ncicptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
+            cmap, zvals = cpt2colormap(ncicptfile, ncolours, rev=True)
 
     
     print 'Making map...'    
