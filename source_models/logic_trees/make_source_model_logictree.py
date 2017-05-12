@@ -7,6 +7,7 @@ Created on Thu May 11 17:41:07 2017
 from os import path, getcwd, walk
 from tools.make_nsha_oq_inputs import make_logic_tree
 from logic_tree import LogicTree
+from source_models.utils.utils import largest_remainder
 
 # parse expert elicitation weights
 lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
@@ -66,7 +67,7 @@ for st, sw in zip(src_type, src_wts):
                     # multiply ARUP models by 0.5
                     if mod.startswith('ARUP'):
                        mod_wt = 0.5
-                       print 'Modifying ARUP model'
+                       print 'Modifying ARUP model weight'
                     else:
                        mod_wt = 1.0
                        
@@ -81,7 +82,10 @@ for st, sw in zip(src_type, src_wts):
 # check weights sum to one!
 if not sum(branch_wts) == 1.0:
     print '\nWeights do not sum to 1.0!'
+    
+# do largest remainder method to make sure numbers 
+updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=4)
 
 # write source model logic tree
 print '\nUse full file paths!!!'
-make_logic_tree(branch_files, branch_wts, meta)
+make_logic_tree(branch_files, updated_weights, meta)

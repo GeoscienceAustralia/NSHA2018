@@ -12,16 +12,16 @@ Usage:
 """
 from sys import argv
 from matplotlib.mlab import griddata
-from matplotlib import colors, colorbar, cm
+from matplotlib import colors, colorbar #, cm
 from os import path, mkdir
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan
-from tools.mapping_tools import drawshapepoly, labelpolygon, get_map_polygons, mask_outside_polygons, cpt2colormap
+from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
 #from gmt_tools import cpt2colormap
-from shapely.geometry import Point, Polygon
+#from shapely.geometry import Point, Polygon
 
 ##############################################################################
 # set some default values here
@@ -33,7 +33,7 @@ drawshape = False # decides whether to overlay seismic sources
 bbox = '108/153/-44/-8' # map boundary - lon1/lon2/lat1/lat2
 
 # set map resolution
-res = 'l' 
+res = 'i' 
 
 ##############################################################################
 # parse hazard map file
@@ -41,6 +41,10 @@ res = 'l'
 
 # set map file to plot
 gridfile = argv[1]
+
+# get map name for plotting
+modelName = argv[2]
+
 
 # get model name from input file
 model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
@@ -125,7 +129,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
             hazvals.append(gridval[key])
             
         '''
-        # mask grid points outside defined grid to avoid extrapolation
+        # mask grid points outside defined grid to avoid extrapolation - this is slow!
         point = Point(gridval['lon'], gridval['lat'])
         if point.within(maskpoly) == False:
             hazvals.append(nan)
@@ -153,7 +157,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     m = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
                 urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
                 projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
-                resolution=res,area_thresh=1000.)
+                resolution=res,area_thresh=2000.)
                 
     #m.drawmapboundary(fill_color='lightgray')
     #m.fillcontinents(color='white',lake_color='lightgray',zorder=0)
@@ -198,8 +202,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # transform to map projection
     nx = int((m.xmax-m.xmin)/2000.)+1
     ny = int((m.ymax-m.ymin)/2000.)+1
-    transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
-    #transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
+    #transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
+    transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
     masked_array = ma.array(transhaz, mask=isnan(transhaz))
     #masked_array = masked_array.set_fill_value(0)
     
@@ -247,16 +251,21 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     try:
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
-        cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
-        #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
-        cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+        try:
+            cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+            #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
+            cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+        except:
+            cptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
+            cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+
     
     print 'Making map...'    
     cmap.set_bad('w', 1.0)
     m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
     
     ##########################################################################################
-    # plot contour
+    # plot contours
     ##########################################################################################
     
     x, y = m(xs, ys)
@@ -264,8 +273,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         levels = arange(0.02, 0.3, 0.02)
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
-    #csm = m.contour(x, y, 10**resampled.T, levels, colors='k')
-    csm = m.contour(x, y, 10**resampled, levels, colors='k')
+    csm = m.contour(x, y, 10**resampled.T, levels, colors='k')
+    #csm = m.contour(x, y, 10**resampled, levels, colors='k')
     
     plt.clabel(csm, inline=1, fontsize=10)
     
@@ -284,7 +293,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         plt.fill(poly[:,0], poly[:,1], '0.9')
         polygons.append(poly)
     
-    plt.title(' '.join((model, T, probability, 'in 50-Year Mean Hazard on Site Class B/C')))
+    titlestr = ' '.join((modelName, T, probability, 'in 50-Year Mean Hazard on AS1170.4 Site Class '))    
+    plt.title(titlestr+'$\mathregular{B_e}$')
     
     # get map bbox
     map_bbox = ax.get_position().extents
@@ -297,7 +307,11 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     try:
         im = plt.imread('../GAlogo.png')
     except:
-        im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
+        # cover all bases
+        try:
+            im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
+        except:
+            im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/GAlogo.png')
     
     # set bbox for logo
     imoff = 0.02
@@ -316,7 +330,12 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     try:
         im = plt.imread('../ccby_narrow.png')
     except:
-        im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/cby_narrow.png')
+        # covering all bases again
+        try:
+            im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
+        except:
+            im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
+
     
     # set bbox for logo
     imoff = 0.02
@@ -417,11 +436,12 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     if path.isdir(key) == False:
         mkdir(key)
     
-    # now save file
-    #plt.savefig(path.join((key, gridfile.strip('csv')+key+'.png')), dpi=300, \
-    #            format='png', bbox_inches='tight')
-    plt.savefig(gridfile.strip('csv')+key+'.png', dpi=300, \
+    # now save png file
+    plt.savefig('hazard_map_'+modelName.replace(' ','_')+'.'+key+'.png', dpi=300, \
                 format='png', bbox_inches='tight')
+    # save pdf file
+    plt.savefig('hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf', dpi=300, \
+                format='pdf', bbox_inches='tight')
     
     plt.show()
     
@@ -429,8 +449,13 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # make shapfile of countour lines
     ##########################################################################################
     
+    # check to see if shapefile contours exists
+    if path.isdir('contours') == False:
+        mkdir('contours')
+    
     # setup shapefile
-    outshp = model.replace(' ','_') + '_contours.shp'
+    outshp = path.join('contours', '_'.join((modelName.replace(' ','_'), key, \
+                       'contours.shp')))
 
     # set shapefile to write to
     w = shapefile.Writer(shapefile.POLYLINE)
