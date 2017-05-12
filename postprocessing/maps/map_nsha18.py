@@ -281,8 +281,11 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         levels = arange(0.02, 0.3, 0.02)
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
-    csm = m.contour(x, y, 10**resampled.T, levels, colors='k')
-    #csm = m.contour(x, y, 10**resampled, levels, colors='k')
+    
+    if cwd.startswith('/nas'):
+        csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
+    else:
+        csm = plt.contour(x, y, 10**resampled, levels, colors='k')        
     
     plt.clabel(csm, inline=1, fontsize=10)
     
