@@ -67,7 +67,7 @@ keys = line.strip().split(',')[2:]
 # make grid dictionary
 grddict = []
 
-print '\nReading', model
+print '\nReading', modelName
 for line in lines[2:]:
     dat = line.strip().split(',')
     tmpdict = {'lon':float(dat[0]), 'lat':float(dat[1])}
@@ -216,16 +216,16 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     #masked_array = masked_array.set_fill_value(0)
     
     # get colormap from cpt file
-    cptfile = 'cw1-013.cpt'
-    ncols = 9
+    cptfile = 'cw1-013_mod.cpt'
+    #ncols = 9
     
     #cmap = cm.rainbow
     if period == 'PGA':
         
         if probability == '10%':
-            ncolours = 14
+            ncolours = 13
             vmin = -2.
-            vmax = -0.25
+            vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
             
         elif probability == '2%':
             ncolours = 12
@@ -443,16 +443,23 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
     cb.set_label(titlestr, fontsize=12)
     
+    '''
     # check to see if exists
     if path.isdir(key) == False:
         mkdir(key)
+    '''
     
+    # check to see if maps exists
+    if path.isdir('maps') == False:
+        mkdir('maps')
+        
     # now save png file
-    plt.savefig('hazard_map_'+modelName.replace(' ','_')+'.'+key+'.png', dpi=300, \
-                format='png', bbox_inches='tight')
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.png'), \
+                dpi=300, format='png', bbox_inches='tight')
+    
     # save pdf file
-    plt.savefig('hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf', dpi=300, \
-                format='pdf', bbox_inches='tight')
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
+                dpi=300, format='pdf', bbox_inches='tight')
     
     plt.show()
     

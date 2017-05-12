@@ -1,6 +1,6 @@
 ROOT FOLDER      = 2012_ml//NSHA13
-CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_mx_revml_declustered.csv
-DECLUSTERED      = False
+CATALOGUE        = ..//..//catalogue//data//AUSTCAT_V0.12_hmtk_mx_orig_declustered.csv
+DECLUSTERED      = True
 SHAPEFILE INPUT  = shapefiles//NSHA13//NSHA13_NSHA18.shp
 OUTPUT FOLDER    = mfd
 SHAPEFILE OUTPUT = NSHA13_NSHA18_MFD.shp
