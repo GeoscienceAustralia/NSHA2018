@@ -1,6 +1,6 @@
 import shapefile
 from os import path
-from numpy import array, zeros_like, where
+from numpy import array, zeros_like, where, around
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -18,8 +18,13 @@ print 'Reading source shapefile...'
 sf = shapefile.Reader(ausshp)
 shapes = sf.shapes()
 polygons = []
+newpoints = []
 for poly in shapes:
+    # first, let's round points to 2 decimal places
+    newpoints.append(array(around(poly.points, decimals=2)))
+    
     polygons.append(Polygon(poly.points))
+
     
 # get src name
 src_name = get_field_data(sf, 'Name', 'str')
@@ -199,7 +204,8 @@ cat   = 'AUSTCAT_V0.12_hmtk_declustered.csv'
 for i, shape in enumerate(shapes):
 
     # set shape polygon
-    w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+    #w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+    w.line(parts=[newpoints[i].tolist()], shapeType=shapefile.POLYGON)
         
     # write new records
     if i >= 0:
