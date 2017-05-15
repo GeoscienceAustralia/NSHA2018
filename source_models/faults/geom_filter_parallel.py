@@ -21,8 +21,9 @@ t0 = pypar.time()
 fault_mesh_spacing = 2 #2 Fault source mesh                     
 rupture_mesh_spacing = 2 #10 # Area source mesh                                                         
 area_source_discretisation = 10 #20 
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed'
-area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6'
+#area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 geom_pt_sources_filename =  area_source_model[:-4] + '_pts_geom_weighted.xml'
 geom_pt_sources = read_pt_source(geom_pt_sources_filename)
 
@@ -32,12 +33,14 @@ def chunks(l, n):
         yield l[i:i + n]
 
 # Split sources
-list_length = len(geom_pt_sources) / proc
+list_length = len(geom_pt_sources) / (proc+16)
+print list_length
 if (len(geom_pt_sources) % proc) > 0:
     list_length +=1
 pt_list = list(chunks(geom_pt_sources, list_length))
-print pt_list
-
+#print pt_list
+print len(pt_list)
+#sys.exit()
 fsm =  os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
 
@@ -47,16 +50,18 @@ for i in range(0, list_length, 1):
         run = "%03d" % i
         # Apply geometrical filtering                                                                        
         print 'Applying geometrical filtering for run %s' % run
-        geom_filtered_pt_sources_sublist = geom_pt_sources_filename.rstrip('.xml') + \
+        geom_filtered_pt_sources = geom_pt_sources_filename.rstrip('.xml') + \
             '_' + run + '.xml'
-        pt2fault_distance(pt_list[i], fault_sources, min_distance=5.0,
-                          filename=geom_filtered_pt_sources,
-                          buffer_distance = 100.,
-                          name=source_model_name)
-        
+        try:
+            pt2fault_distance(pt_list[i], fault_sources, min_distance=5.0,
+                              filename=geom_filtered_pt_sources,
+                              buffer_distance = 50.,
+                              name=source_model_name)
+        except IndexError:
+            print 'List index %i out of range' % i
 
 
-    pypar.barrier()
+pypar.barrier()
 if myid == 0:
     tmp_pt_source_filename_list = []
     tmp_pt_source_list = []

@@ -24,8 +24,8 @@ from matplotlib import pyplot
 def read_pt_source(pt_source_file):
     """Read nrml source model into pt source objects
     """
-    converter = SourceConverter(50, 10, width_of_mfd_bin=0.1,
-                                area_source_discretization=200.)
+    converter = SourceConverter(50, 2, width_of_mfd_bin=0.1,
+                                area_source_discretization=10.)
     parser = SourceModelParser(converter)
     try:
         sources = parser.parse_sources(pt_source_file)
@@ -61,9 +61,12 @@ def merge_rates(pt, added_pt, method='Add'):
         msg = 'Method not yet defined for mfd type %s' % mfd_type
         raise(mgs)
 
-def combine_pt_sources(point_source_list, filename, name, nrml_version='04'):
+def combine_pt_sources(point_source_list, filename, name, nrml_version='04',
+                       id_location_flag = 'location'):
     """Method for combining lists of point sources that are received
     and summing rates for co-located points
+    Sources are joined based on id_location_flag, which can be 'id'
+    or 'location'
     """
     # Get ids
     combined_pt_sources = []
@@ -71,11 +74,22 @@ def combine_pt_sources(point_source_list, filename, name, nrml_version='04'):
         for source_model in point_source_list[1:]:
    #         print source_model
             for pt_source in source_model:
-                if pt_source.source_id == pt.source_id:
-                    new_rates = merge_rates(pt, pt_source)
-                    pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
-                                          list(new_rates))
-                    source_model.remove(pt_source)
+                if id_location_flag == 'id':
+                    if pt_source.source_id == pt.source_id:
+                        new_rates = merge_rates(pt, pt_source)
+                        pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
+                                              list(new_rates))
+                        source_model.remove(pt_source)
+                elif id_location_flag == 'location':
+                    # Check if location and nodal planes are the same
+                    if pt_source.location.x == pt.location.x and \
+                            pt_source.location.y == pt.location.y:
+                        if pt_source.nodal_plane_distribution.data == pt.nodal_plane_distribution.data:
+                            new_rates = merge_rates(pt, pt_source)
+                            pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
+                                                  list(new_rates))
+                            source_model.remove(pt_source)
+                        
     # once all overlapping point sources have been merged, add all to list
     # This should work as we have added rates to the first source model as
     # we have gone and removed sources in the same locations from the other
@@ -102,22 +116,28 @@ def write_combined_faults_points(point_sources, fault_sources,
        list without trt or dict with trt key of point sources
     """
     print 'Writing to source model file %s' % filename
-    id_index = 0
+    ps_id_index = 1
+    fs_id_index = 1
     if nrml_version == '04':
         if type(point_sources) == dict:
             source_list = []
             for trt, sources in point_sources.iteritems():
                 for source in sources:
+                    source.source_id = 'PS_%i' % ps_id_index
                     source_list.append(source)
-                    id_index = max(id_index, source.source_id)
+                    ps_id_index += 1
+#                    id_index = max(id_index, source.source_id)
         elif type(point_sources) == list:
             source_list = point_sources
             for source in source_list:
+                source.source_id = 'PS_%i' % ps_id_index
                 source_list.append(source)
-                id_index = max(id_index, source.source_id)
+                ps_id_index += 1
+#                id_index = max(id_index, source.source_id)
         for fault_source in fault_sources:
-            id_index += 1
-            fault_source.source_id = "%i" % id_index
+#            id_index += 1
+            fault_source.source_id = "FS_%i" % fs_id_index
+            fs_id_index += 1
             source_list.append(fault_source)
         nodes = list(map(obj_to_node, sorted(source_list)))
         source_model = Node("sourceModel", {"name": name}, nodes=nodes)
@@ -243,8 +263,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
             centroid_distances.append(distance(pt.location.longitude, pt.location.latitude,
                                       pt_depth, fault_lons, fault_lats, fault_depths))
         centroid_distances = np.array(centroid_distances).flatten()
-        print 'Minimum distance', min(centroid_distances)
-        print 'Maximum distance', max(centroid_distances)
+  #      print 'Minimum distance', min(centroid_distances)
+  #      print 'Maximum distance', max(centroid_distances)
         if (min(centroid_distances)) > buffer_distance:
             # Keep point as it, not within buffer distance of any faults
             revised_point_sources[pt.tectonic_region_type].append(pt)
@@ -362,7 +382,8 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
             pt.source_id = "%i" % id_index
             'Appending original source'
             revised_point_sources[pt.tectonic_region_type].append(pt)
-    print 'Overall minimum distance (km):', min(minimum_distance_list)
+    if len(minimum_distance_list) > 0:
+        print 'Overall minimum distance (km):', min(minimum_distance_list)
 
     # Write pts to source model on their own
     source_model_file = filename 
