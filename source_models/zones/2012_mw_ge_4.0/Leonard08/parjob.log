@@ -1,0 +1,293 @@
+WARNING:root:DB server started with /apps/python/2.7.11/bin/python, listening on localhost:1999...
+CONFIG PATH /apps/openquake/2.1.1/src/oq-engine/openquake.cfg
+INFO:root:Using celery@r1000, celery@r1001, celery@r1004, celery@r1152, celery@r1248, celery@r1252, celery@r1253, celery@r1382, celery@r1393, celery@r1415, celery@r1418, celery@r1420, celery@r1428, celery@r1435, celery@r1477, celery@r1620, celery@r1694, celery@r1769, celery@r1802, celery@r1803, celery@r1808, celery@r1809, celery@r1810, celery@r1811, celery@r1812, celery@r1813, celery@r1842, celery@r1843, celery@r1849, celery@r1880, celery@r580, celery@r720, celery@r723, celery@r725, celery@r726, celery@r748, celery@r752, celery@r760, celery@r762, celery@r774, celery@r786, celery@r791, celery@r792, celery@r810, celery@r811, celery@r815, celery@r816, celery@r819, celery@r825, celery@r843, celery@r879, celery@r912, celery@r913, celery@r930, celery@r945, celery@r958, celery@r976, celery@r978, celery@r980, celery@r981, celery@r983, celery@r984, celery@r986, celery@r992, 2048 cores
+[2017-05-15 16:05:08,376 #1 INFO] Using engine version 2.1.1-gitc1bb44c
+[2017-05-15 16:05:08,524 #1 INFO] Using hazardlib version 0.21.1-git92fea18
+[2017-05-15 16:05:14,698 #1 INFO] Read 41173 hazard site(s)
+[2017-05-15 16:05:14,831 #1 INFO] Instantiating the source-sites filter
+[2017-05-15 16:05:19,445 #1 INFO] Instantiated 7 sources from /short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/background/Leonard08_tia/collapsed/maps_20170515_155953_collapsed_tia547/Leonard08_collapsed.xml
+[2017-05-15 16:05:54,419 #1 INFO] Processed source model 1/1 with 252 gsim path(s)
+[2017-05-15 16:05:54,641 #1 INFO] Filtering composite source model
+[2017-05-15 16:06:18,185 #1 INFO] Using a maxweight of 4610
+[2017-05-15 16:06:18,530 #1 INFO] Sending source group #1 of 3 (Extended, 1 sources)
+[2017-05-15 16:06:28,964 #1 INFO] Splitting AreaSource "NA_1" in 3749 sources
+[2017-05-15 16:06:29,186 #1 INFO] Submitting  "classical" tasks
+[2017-05-15 16:06:29,525 #1 INFO] Sending source group #2 of 3 (Cratonic, 3 sources)
+[2017-05-15 16:09:01,675 #1 INFO] Splitting AreaSource "NA_2" in 63097 sources
+[2017-05-15 16:09:37,772 #1 INFO] Splitting AreaSource "NWA" in 12045 sources
+[2017-05-15 16:09:43,743 #1 INFO] Splitting AreaSource "SWA" in 1738 sources
+[2017-05-15 16:09:44,009 #1 INFO] Sending source group #3 of 3 (Non_cratonic, 3 sources)
+[2017-05-15 16:11:09,573 #1 INFO] Splitting AreaSource "NA_3" in 28232 sources
+[2017-05-15 16:11:24,632 #1 INFO] Splitting AreaSource "SA" in 4004 sources
+[2017-05-15 16:11:56,661 #1 INFO] Splitting AreaSource "SEA" in 8543 sources
+[2017-05-15 16:11:57,630 #1 INFO] Sent 0 light and 1029 heavy tasks
+[2017-05-15 16:11:57,765 #1 INFO] Sent 1.01 GB of data in 1029 task(s)
+[2017-05-15 16:18:12,616 #1 INFO] classical   1%
+[2017-05-15 16:22:00,963 #1 INFO] classical   2%
+[2017-05-15 16:23:11,408 #1 INFO] classical   3%
+[2017-05-15 16:24:37,004 #1 INFO] classical   4%
+[2017-05-15 16:25:25,046 #1 INFO] classical   5%
+[2017-05-15 16:26:22,621 #1 INFO] classical   6%
+[2017-05-15 16:27:15,157 #1 INFO] classical   7%
+[2017-05-15 16:27:50,302 #1 INFO] classical   8%
+[2017-05-15 16:28:02,727 #1 INFO] classical   9%
+[2017-05-15 16:28:19,581 #1 INFO] classical  10%
+[2017-05-15 16:28:37,362 #1 INFO] classical  11%
+[2017-05-15 16:29:08,461 #1 INFO] classical  12%
+[2017-05-15 16:29:27,358 #1 INFO] classical  13%
+[2017-05-15 16:30:05,984 #1 INFO] classical  14%
+[2017-05-15 16:30:33,558 #1 INFO] classical  15%
+[2017-05-15 16:30:40,775 #1 INFO] classical  16%
+[2017-05-15 16:30:48,307 #1 INFO] classical  17%
+[2017-05-15 16:30:56,943 #1 INFO] classical  18%
+[2017-05-15 16:30:59,857 #1 INFO] classical  19%
+[2017-05-15 16:31:02,024 #1 INFO] classical  20%
+[2017-05-15 16:31:05,354 #1 INFO] classical  21%
+[2017-05-15 16:31:08,348 #1 INFO] classical  22%
+[2017-05-15 16:31:11,402 #1 INFO] classical  23%
+[2017-05-15 16:31:15,391 #1 INFO] classical  24%
+[2017-05-15 16:31:17,331 #1 INFO] classical  25%
+[2017-05-15 16:31:21,039 #1 INFO] classical  26%
+[2017-05-15 16:31:23,909 #1 INFO] classical  27%
+[2017-05-15 16:31:26,990 #1 INFO] classical  28%
+[2017-05-15 16:31:29,295 #1 INFO] classical  29%
+[2017-05-15 16:31:31,810 #1 INFO] classical  30%
+[2017-05-15 16:31:33,155 #1 INFO] classical  31%
+[2017-05-15 16:31:35,768 #1 INFO] classical  32%
+[2017-05-15 16:31:38,032 #1 INFO] classical  33%
+[2017-05-15 16:31:39,590 #1 INFO] classical  34%
+[2017-05-15 16:31:41,247 #1 INFO] classical  35%
+[2017-05-15 16:31:42,965 #1 INFO] classical  36%
+[2017-05-15 16:31:44,378 #1 INFO] classical  37%
+[2017-05-15 16:31:45,630 #1 INFO] classical  38%
+[2017-05-15 16:31:47,114 #1 INFO] classical  39%
+[2017-05-15 16:31:48,523 #1 INFO] classical  40%
+[2017-05-15 16:31:49,726 #1 INFO] classical  41%
+[2017-05-15 16:31:51,124 #1 INFO] classical  42%
+[2017-05-15 16:31:52,424 #1 INFO] classical  43%
+[2017-05-15 16:31:53,947 #1 INFO] classical  44%
+[2017-05-15 16:31:56,151 #1 INFO] classical  45%
+[2017-05-15 16:31:57,649 #1 INFO] classical  46%
+[2017-05-15 16:31:58,963 #1 INFO] classical  47%
+[2017-05-15 16:32:00,204 #1 INFO] classical  48%
+[2017-05-15 16:32:01,503 #1 INFO] classical  49%
+[2017-05-15 16:32:03,184 #1 INFO] classical  50%
+[2017-05-15 16:32:08,090 #1 INFO] classical  51%
+[2017-05-15 16:32:12,842 #1 INFO] classical  52%
+[2017-05-15 16:32:15,470 #1 INFO] classical  53%
+[2017-05-15 16:32:16,831 #1 INFO] classical  54%
+[2017-05-15 16:32:18,255 #1 INFO] classical  55%
+[2017-05-15 16:32:19,806 #1 INFO] classical  56%
+[2017-05-15 16:32:21,513 #1 INFO] classical  57%
+[2017-05-15 16:32:23,489 #1 INFO] classical  58%
+[2017-05-15 16:32:25,188 #1 INFO] classical  59%
+[2017-05-15 16:32:26,639 #1 INFO] classical  60%
+[2017-05-15 16:32:28,451 #1 INFO] classical  61%
+[2017-05-15 16:32:30,056 #1 INFO] classical  62%
+[2017-05-15 16:32:31,685 #1 INFO] classical  63%
+[2017-05-15 16:32:33,171 #1 INFO] classical  64%
+[2017-05-15 16:32:34,233 #1 INFO] classical  65%
+[2017-05-15 16:32:35,830 #1 INFO] classical  66%
+[2017-05-15 16:32:37,237 #1 INFO] classical  67%
+[2017-05-15 16:32:38,415 #1 INFO] classical  68%
+[2017-05-15 16:32:40,122 #1 INFO] classical  69%
+[2017-05-15 16:32:41,324 #1 INFO] classical  70%
+[2017-05-15 16:32:42,511 #1 INFO] classical  71%
+[2017-05-15 16:32:44,355 #1 INFO] classical  72%
+[2017-05-15 16:32:45,680 #1 INFO] classical  73%
+[2017-05-15 16:32:47,103 #1 INFO] classical  74%
+[2017-05-15 16:32:48,116 #1 INFO] classical  75%
+[2017-05-15 16:32:49,814 #1 INFO] classical  76%
+[2017-05-15 16:32:51,227 #1 INFO] classical  77%
+[2017-05-15 16:32:52,373 #1 INFO] classical  78%
+[2017-05-15 16:32:53,330 #1 INFO] classical  79%
+[2017-05-15 16:32:54,556 #1 INFO] classical  80%
+[2017-05-15 16:32:55,972 #1 INFO] classical  81%
+[2017-05-15 16:32:57,088 #1 INFO] classical  82%
+[2017-05-15 16:32:58,400 #1 INFO] classical  83%
+[2017-05-15 16:32:59,882 #1 INFO] classical  84%
+[2017-05-15 16:33:01,134 #1 INFO] classical  85%
+[2017-05-15 16:33:02,586 #1 INFO] classical  86%
+[2017-05-15 16:33:04,176 #1 INFO] classical  87%
+[2017-05-15 16:33:05,293 #1 INFO] classical  88%
+[2017-05-15 16:33:06,357 #1 INFO] classical  89%
+[2017-05-15 16:33:09,542 #1 INFO] classical  90%
+[2017-05-15 16:33:16,428 #1 INFO] classical  91%
+[2017-05-15 16:33:26,344 #1 INFO] classical  92%
+[2017-05-15 16:33:36,028 #1 INFO] classical  93%
+[2017-05-15 16:33:53,381 #1 INFO] classical  94%
+[2017-05-15 16:34:08,745 #1 INFO] classical  95%
+[2017-05-15 16:34:28,911 #1 INFO] classical  96%
+[2017-05-15 16:34:39,041 #1 INFO] classical  97%
+[2017-05-15 16:35:21,785 #1 INFO] classical  98%
+[2017-05-15 16:35:37,855 #1 INFO] classical  99%
+[2017-05-15 16:37:30,436 #1 INFO] classical 100%
+[2017-05-15 16:37:30,746 #1 INFO] Received 4.42 GB of data, maximum per task 7.88 MB
+[2017-05-15 16:37:30,858 #1 WARNING] Reducing the logic tree of Leonard08_collapsed.xml from 2268 to 252 realizations
+[2017-05-15 16:37:54,404 #1 INFO] exported realizations: [u'./results_maps/realizations_1.csv']
+[2017-05-15 16:37:55,175 #1 INFO] Building hazard curves
+[2017-05-15 16:38:03,174 #1 INFO] Submitting 252 "build_hcurves_and_stats" tasks
+[2017-05-15 16:38:07,061 #1 INFO] Sent 70.93 MB of data in 252 task(s)
+[2017-05-15 16:38:18,674 #1 INFO] build_hcurves_and_stats   1%
+[2017-05-15 16:38:33,929 #1 INFO] build_hcurves_and_stats   2%
+[2017-05-15 16:38:43,743 #1 INFO] build_hcurves_and_stats   3%
+[2017-05-15 16:38:57,590 #1 INFO] build_hcurves_and_stats   4%
+[2017-05-15 16:39:07,363 #1 INFO] build_hcurves_and_stats   5%
+[2017-05-15 16:39:22,685 #1 INFO] build_hcurves_and_stats   6%
+[2017-05-15 16:39:33,376 #1 INFO] build_hcurves_and_stats   7%
+[2017-05-15 16:39:48,673 #1 INFO] build_hcurves_and_stats   8%
+[2017-05-15 16:39:58,958 #1 INFO] build_hcurves_and_stats   9%
+[2017-05-15 16:40:14,145 #1 INFO] build_hcurves_and_stats  10%
+[2017-05-15 16:40:24,967 #1 INFO] build_hcurves_and_stats  11%
+[2017-05-15 16:40:40,007 #1 INFO] build_hcurves_and_stats  12%
+[2017-05-15 16:40:50,318 #1 INFO] build_hcurves_and_stats  13%
+[2017-05-15 16:41:05,895 #1 INFO] build_hcurves_and_stats  14%
+[2017-05-15 16:41:16,321 #1 INFO] build_hcurves_and_stats  15%
+[2017-05-15 16:41:31,730 #1 INFO] build_hcurves_and_stats  16%
+[2017-05-15 16:41:42,084 #1 INFO] build_hcurves_and_stats  17%
+[2017-05-15 16:41:57,599 #1 INFO] build_hcurves_and_stats  18%
+[2017-05-15 16:42:09,214 #1 INFO] build_hcurves_and_stats  19%
+[2017-05-15 16:42:25,353 #1 INFO] build_hcurves_and_stats  20%
+[2017-05-15 16:42:35,814 #1 INFO] build_hcurves_and_stats  21%
+[2017-05-15 16:42:51,259 #1 INFO] build_hcurves_and_stats  22%
+[2017-05-15 16:43:01,508 #1 INFO] build_hcurves_and_stats  23%
+[2017-05-15 16:43:16,811 #1 INFO] build_hcurves_and_stats  24%
+[2017-05-15 16:43:27,597 #1 INFO] build_hcurves_and_stats  25%
+[2017-05-15 16:43:43,066 #1 INFO] build_hcurves_and_stats  26%
+[2017-05-15 16:43:58,279 #1 INFO] build_hcurves_and_stats  27%
+[2017-05-15 16:44:08,148 #1 INFO] build_hcurves_and_stats  28%
+[2017-05-15 16:44:22,765 #1 INFO] build_hcurves_and_stats  29%
+[2017-05-15 16:44:32,602 #1 INFO] build_hcurves_and_stats  30%
+[2017-05-15 16:44:47,283 #1 INFO] build_hcurves_and_stats  31%
+[2017-05-15 16:44:58,937 #1 INFO] build_hcurves_and_stats  32%
+[2017-05-15 16:45:13,455 #1 INFO] build_hcurves_and_stats  33%
+[2017-05-15 16:45:23,623 #1 INFO] build_hcurves_and_stats  34%
+[2017-05-15 16:45:38,450 #1 INFO] build_hcurves_and_stats  35%
+[2017-05-15 16:45:48,477 #1 INFO] build_hcurves_and_stats  36%
+[2017-05-15 16:46:04,074 #1 INFO] build_hcurves_and_stats  37%
+[2017-05-15 16:46:15,295 #1 INFO] build_hcurves_and_stats  38%
+[2017-05-15 16:46:30,192 #1 INFO] build_hcurves_and_stats  39%
+[2017-05-15 16:46:39,946 #1 INFO] build_hcurves_and_stats  40%
+[2017-05-15 16:46:54,962 #1 INFO] build_hcurves_and_stats  41%
+[2017-05-15 16:47:05,380 #1 INFO] build_hcurves_and_stats  42%
+[2017-05-15 16:47:24,162 #1 INFO] build_hcurves_and_stats  43%
+[2017-05-15 16:47:40,099 #1 INFO] build_hcurves_and_stats  44%
+[2017-05-15 16:48:06,208 #1 INFO] build_hcurves_and_stats  45%
+[2017-05-15 16:48:24,968 #1 INFO] build_hcurves_and_stats  46%
+[2017-05-15 16:48:40,681 #1 INFO] build_hcurves_and_stats  47%
+[2017-05-15 16:48:56,848 #1 INFO] build_hcurves_and_stats  48%
+[2017-05-15 16:49:16,416 #1 INFO] build_hcurves_and_stats  49%
+[2017-05-15 16:49:32,378 #1 INFO] build_hcurves_and_stats  50%
+[2017-05-15 16:49:54,321 #1 INFO] build_hcurves_and_stats  51%
+[2017-05-15 16:50:10,303 #1 INFO] build_hcurves_and_stats  52%
+[2017-05-15 16:50:23,182 #1 INFO] build_hcurves_and_stats  53%
+[2017-05-15 16:50:46,842 #1 INFO] build_hcurves_and_stats  54%
+[2017-05-15 16:51:03,507 #1 INFO] build_hcurves_and_stats  55%
+[2017-05-15 16:51:20,003 #1 INFO] build_hcurves_and_stats  56%
+[2017-05-15 16:51:31,502 #1 INFO] build_hcurves_and_stats  57%
+[2017-05-15 16:51:51,896 #1 INFO] build_hcurves_and_stats  58%
+[2017-05-15 16:52:09,100 #1 INFO] build_hcurves_and_stats  59%
+[2017-05-15 16:52:35,522 #1 INFO] build_hcurves_and_stats  60%
+[2017-05-15 16:52:55,982 #1 INFO] build_hcurves_and_stats  61%
+[2017-05-15 16:53:20,058 #1 INFO] build_hcurves_and_stats  62%
+[2017-05-15 16:53:46,285 #1 INFO] build_hcurves_and_stats  63%
+[2017-05-15 16:54:07,612 #1 INFO] build_hcurves_and_stats  64%
+[2017-05-15 16:54:29,364 #1 INFO] build_hcurves_and_stats  65%
+[2017-05-15 16:54:53,045 #1 INFO] build_hcurves_and_stats  66%
+[2017-05-15 16:55:07,151 #1 INFO] build_hcurves_and_stats  67%
+[2017-05-15 16:55:30,153 #1 CRITICAL] 
+Traceback (most recent call last):
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/calculators/base.py", line 192, in run
+    self.result = self.execute()
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/calculators/classical.py", line 488, in execute
+    nbytes = reduce(self.save_hcurves, res, AccumDict())
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commonlib/parallel.py", line 250, in __iter__
+    for fut in self.futures:
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commonlib/parallel.py", line 434, in _iterfutures
+    for task_id, result_dict in rset.iter_native():
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/celery/backends/amqp.py", line 275, in get_many
+    wait(timeout=timeout)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/kombu/connection.py", line 288, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 95, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 303, in drain_events
+    chanmap, None, timeout=timeout,
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 366, in _wait_multiple
+    channel, method_sig, args, content = read_timeout(timeout)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 330, in read_timeout
+    return self.method_reader.read_method()
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/method_framing.py", line 189, in read_method
+    raise m
+IOError: Socket closed
+[2017-05-15 16:55:30,529 #1 CRITICAL] Traceback (most recent call last):
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/engine/engine.py", line 179, in run_calc
+    _do_run_calc(calc, exports, hazard_calculation_id)
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/engine/engine.py", line 212, in _do_run_calc
+    close=False)  # don't close the datastore too soon
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/calculators/base.py", line 192, in run
+    self.result = self.execute()
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/calculators/classical.py", line 488, in execute
+    nbytes = reduce(self.save_hcurves, res, AccumDict())
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commonlib/parallel.py", line 250, in __iter__
+    for fut in self.futures:
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commonlib/parallel.py", line 434, in _iterfutures
+    for task_id, result_dict in rset.iter_native():
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/celery/backends/amqp.py", line 275, in get_many
+    wait(timeout=timeout)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/kombu/connection.py", line 288, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 95, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 303, in drain_events
+    chanmap, None, timeout=timeout,
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 366, in _wait_multiple
+    channel, method_sig, args, content = read_timeout(timeout)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 330, in read_timeout
+    return self.method_reader.read_method()
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/method_framing.py", line 189, in read_method
+    raise m
+IOError: Socket closed
+
+[2017-05-15 16:55:30,836 #1 WARNING] Revoking 82 tasks
+CONFIG PATH /apps/openquake/2.1.1/src/oq-engine/openquake.cfg
+Traceback (most recent call last):
+  File "/apps/openquake/2.1.1/bin/oq", line 9, in <module>
+    load_entry_point('openquake.engine', 'console_scripts', 'oq')()
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commands/__main__.py", line 50, in oq
+    parser.callfunc()
+  File "/apps/openquake/2.1.1/src/oq-hazardlib/openquake/baselib/sap.py", line 186, in callfunc
+    return self.func(**vars(namespace))
+  File "/apps/openquake/2.1.1/src/oq-hazardlib/openquake/baselib/sap.py", line 245, in main
+    return func(**kw)
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commands/engine.py", line 169, in engine
+    exports, hazard_calculation_id=hc_id)
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commands/engine.py", line 67, in run_job
+    hazard_calculation_id=hazard_calculation_id)
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/engine/engine.py", line 179, in run_calc
+    _do_run_calc(calc, exports, hazard_calculation_id)
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/engine/engine.py", line 212, in _do_run_calc
+    close=False)  # don't close the datastore too soon
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/calculators/base.py", line 192, in run
+    self.result = self.execute()
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/calculators/classical.py", line 488, in execute
+    nbytes = reduce(self.save_hcurves, res, AccumDict())
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commonlib/parallel.py", line 250, in __iter__
+    for fut in self.futures:
+  File "/apps/openquake/2.1.1/src/oq-engine/openquake/commonlib/parallel.py", line 434, in _iterfutures
+    for task_id, result_dict in rset.iter_native():
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/celery/backends/amqp.py", line 275, in get_many
+    wait(timeout=timeout)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/kombu/connection.py", line 288, in drain_events
+    return self.transport.drain_events(self.connection, **kwargs)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/kombu/transport/pyamqp.py", line 95, in drain_events
+    return connection.drain_events(**kwargs)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 303, in drain_events
+    chanmap, None, timeout=timeout,
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 366, in _wait_multiple
+    channel, method_sig, args, content = read_timeout(timeout)
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/connection.py", line 330, in read_timeout
+    return self.method_reader.read_method()
+  File "/apps/openquake/2.1.1/lib/python2.7/site-packages/amqp/method_framing.py", line 189, in read_method
+    raise m
+IOError: Socket closed
