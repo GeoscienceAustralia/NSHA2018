@@ -140,26 +140,26 @@ if __name__ == "__main__":
     domains_shp = '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
     # Best b values
-    filedict_bestb = {'Cratonic': 'source_model_Australia_Adaptive_K3_b0.819.xml',
-                'Non_cratonic': 'source_model_Australia_Adaptive_K3_b1.208.xml',
-                'Extended': 'source_model_Australia_Adaptive_K3_b0.835.xml'}
-    outfile_bestb = 'source_model_Australia_Adaptive_K3_merged_bestb.xml'
+    filedict_bestb = {'Cratonic': 'smoothed_frankel_50_3_mmin_3.0_b0.819_0.1.xml',
+                'Non_cratonic': 'smoothed_frankel_50_3_mmin_3.0_b1.208_0.1.xml',
+                'Extended': 'smoothed_frankel_50_3_mmin_3.0_b0.835_0.1.xml'}
+    outfile_bestb = 'smoothed_frankel_50_3_mmin_3.0_merged_bestb.xml'
     combine_ss_models(filedict_bestb, domains_shp, lt, outfile_bestb, nrml_version = '04', weight=0.5)#, idbase='ASS')
     # Upper b_values
-    filedict_upperb = {'Cratonic': 'source_model_Australia_Adaptive_K3_b0.747.xml',
-                'Non_cratonic': 'source_model_Australia_Adaptive_K3_b1.062.xml',
-                'Extended': 'source_model_Australia_Adaptive_K3_b0.727.xml'}
-    outfile_upperb = 'source_model_Australia_Adaptive_K3_merged_upperb.xml'
+    filedict_upperb = {'Cratonic': 'smoothed_frankel_50_3_mmin_3.0_b0.747_0.1.xml',
+                'Non_cratonic': 'smoothed_frankel_50_3_mmin_3.0_b1.062_0.1.xml',
+                'Extended': 'smoothed_frankel_50_3_mmin_3.0_b0.727_0.1.xml'}
+    outfile_upperb = 'smoothed_frankel_50_3_mmin_3.0_merged_upperb.xml'
     combine_ss_models(filedict_upperb, domains_shp, lt, outfile_upperb, nrml_version = '04', weight=0.2)
     # Lower b_values                                                                                                     
-    filedict_lowerb = {'Cratonic': 'source_model_Australia_Adaptive_K3_b0.892.xml',
-                       'Non_cratonic': 'source_model_Australia_Adaptive_K3_b1.355.xml',
-                       'Extended': 'source_model_Australia_Adaptive_K3_b0.944.xml'}
-    outfile_lowerb = 'source_model_Australia_Adaptive_K3_merged_lowerb.xml'
+    filedict_lowerb = {'Cratonic': 'smoothed_frankel_50_3_mmin_3.0_b0.892_0.1.xml',
+                       'Non_cratonic': 'smoothed_frankel_50_3_mmin_3.0_b1.355_0.1.xml',
+                       'Extended': 'smoothed_frankel_50_3_mmin_3.0_b0.944_0.1.xml'}
+    outfile_lowerb = 'smoothed_frankel_50_3_mmin_3.0_merged_lowerb.xml'
     combine_ss_models(filedict_lowerb, domains_shp, lt, outfile_lowerb, nrml_version = '04', weight=0.3)
     # combine all pt source models
     point_source_list = [outfile_bestb, outfile_upperb, outfile_lowerb]
-    filename = 'source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert.xml'
+    filename = 'source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert.xml'
     name = filename.rstrip('.xml')
 
     # read list of files
@@ -170,4 +170,3 @@ if __name__ == "__main__":
         pt_source_model_list.append(pt_model)
     combine_pt_sources(pt_source_model_list, filename, name , nrml_version='04',
                        id_location_flag = 'location')
-
