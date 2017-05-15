@@ -48,8 +48,8 @@ try:
 except:
     single_src = False
 
-print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
-bestcurve = True
+#print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
+#bestcurve = True
 ###############################################################################
 # get parameter values
 ###############################################################################
