@@ -18,7 +18,7 @@ from NSHA2018.source_models.utils.utils import largest_remainder
 from NSHA2018.source_models.utils.area_sources import nrml2sourcelist, \
     area2pt_source, weighted_pt_source
 from NSHA2018.source_models.utils.pt2fault_distance import read_simplefault_source, \
-    pt2fault_distance, write_combined_faults_points, combine_pt_sources
+    pt2fault_distance, write_combined_faults_points, combine_pt_sources, read_pt_source
 #from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser
 from openquake.hazardlib.sourcewriter import write_source_model
 from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
@@ -33,10 +33,10 @@ shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
 shapefile_uplift_attribute = 'UP_RT_LT'
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6'
 simple_fault_tectonic_region = None # Define based on neotectonic domains
 magnitude_scaling_relation = 'Leonard2014_SCR'
-rupture_aspect_ratio = 1
+rupture_aspect_ratio = 2
 upper_depth = 0.001
 lower_depth = 20.0
 a_value = None
@@ -47,11 +47,13 @@ min_mag = 5.5 #4.8
 #max_mag = 7.5 #None # Get from scaling
 rake = 90
 output_dir = source_model_name
-combined_output_dir = 'National_Seismotectonic_Source_Model_2018'
+combined_output_dir = 'National_Seismotectonic_Source_Model_2018_ASU6'
 bin_width = 0.1 # Width of MFD bins in magnitude units
 domains_shapefile = '../zones/shapefiles/NSHA13_Background/NSHA13_BACKGROUND_NSHA18.shp'
 
-area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+#area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+#area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
+area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 area_source_model_name = area_source_model.split('/')[0].rstrip('.xml')
 investigation_time = 50
 fault_mesh_spacing = 2 #2 Fault source mesh
@@ -304,16 +306,21 @@ print 'Writing %s' % model_name
 geom_pt_sources = weighted_pt_source(pt_source_list, total_geom_weight,
                                      model_name, geom_pt_sources_filename, 
                                      nrml_version='04')
-
+print 'Exiting here'
+sys.exit()
 # Apply geometrical filtering
-print 'Applying geometrical filtering'
+print 'Applying geometrical filtering - this should be pre-calculated using run_geom_filter.sh!'
 fsm =  os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
-geom_filtered_pt_sources = area_source_model[:-4] + '_pts_geom_filtered.xml'
-pt2fault_distance(geom_pt_sources, fault_sources, min_distance=5.0,
-                  filename=geom_filtered_pt_sources,
-                  buffer_distance = 100.,
-                  name=source_model_name)
+geom_filtered_pt_source_file = area_source_model[:-4] + '_pts_geom_filtered.xml'
+geom_filtered_pt_sources = read_pt_source(geom_filtered_pt_source_file)
+#pt2fault_distance(geom_pt_sources, fault_sources, min_distance=5.0,
+#                  filename=geom_filtered_pt_source_file,
+#                  buffer_distance = 100.,
+#                  name=source_model_name)
+outfile = os.path.join(source_model_name, source_model_name + '_geom_filtered_zone.xml')
+write_combined_faults_points(geom_filtered_pt_sources, fault_sources,
+                             outfile, model_name, nrml_version = '04')
 
 # Apply additive approach                                                                                     
 print 'Writing full additive model'
@@ -328,7 +335,8 @@ write_combined_faults_points(additive_pt_sources, fault_sources,
 merged_filename = area_source_model[:-4] + '_pts_geom_add_merged_pts.xml'
 model_name = area_source_model.split('/')[-1].rstrip('.xml') + '_add_geom_merged'
 combined_pt_sources = combine_pt_sources([additive_pt_sources, geom_filtered_pt_sources],
-                                         merged_filename, model_name, nrml_version = '04')
+                                         merged_filename, model_name, nrml_version = '04',
+                                         id_location_flag='location')
 
 # Combine merged point sources with merged fault source model
 print 'Writing collapsed logic tree seismotectonic model'
