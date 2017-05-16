@@ -35,7 +35,7 @@ if __name__ == "__main__":
 #        pt_model = read_pt_source(point_source_model)
 ##        pt_source_model_list.append(pt_model)
 ##    combine_pt_sources(pt_source_model_list, filename, name , nrml_version='04',
-                       id_location_flag = 'id')
+##                       id_location_flag = 'id')
 
     outfile_bestb = 'smoothed_frankel_50_3_mmin_3.0_merged_bestb.xml'
     outfile_upperb = 'smoothed_frankel_50_3_mmin_3.0_merged_upperb.xml'
