@@ -39,6 +39,10 @@ def read_pt_source(pt_source_file):
 #        print pt.mfd.max_mag
     return sources
 
+#def merge_pt_sources(point_source_list, filename, name, nrml_version='04'):
+#    """Method for merging multiple point source file into one
+#    """
+
 def merge_rates(pt, added_pt, method='Add'):
     """Merge the rates of multiple mfds
     """
@@ -66,29 +70,31 @@ def combine_pt_sources(point_source_list, filename, name, nrml_version='04',
     """Method for combining lists of point sources that are received
     and summing rates for co-located points
     Sources are joined based on id_location_flag, which can be 'id'
-    or 'location'
+    or 'location' or None. Setting to None will mean at pts are 
+    simply added together and no checking for co-located pts is undertake
     """
     # Get ids
     combined_pt_sources = []
-    for pt in point_source_list[0]:
-        for source_model in point_source_list[1:]:
-   #         print source_model
-            for pt_source in source_model:
-                if id_location_flag == 'id':
-                    if pt_source.source_id == pt.source_id:
-                        new_rates = merge_rates(pt, pt_source)
-                        pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
-                                              list(new_rates))
-                        source_model.remove(pt_source)
-                elif id_location_flag == 'location':
-                    # Check if location and nodal planes are the same
-                    if pt_source.location.x == pt.location.x and \
-                            pt_source.location.y == pt.location.y:
-                        if pt_source.nodal_plane_distribution.data == pt.nodal_plane_distribution.data:
+    if id_location_flag is not None:
+        for pt in point_source_list[0]:
+            for source_model in point_source_list[1:]:
+                #         print source_model
+                for pt_source in source_model:
+                    if id_location_flag == 'id':
+                        if pt_source.source_id == pt.source_id:
                             new_rates = merge_rates(pt, pt_source)
                             pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
                                                   list(new_rates))
                             source_model.remove(pt_source)
+                    elif id_location_flag == 'location':
+                        # Check if location and nodal planes are the same
+                        if pt_source.location.x == pt.location.x and \
+                                pt_source.location.y == pt.location.y:
+                            if pt_source.nodal_plane_distribution.data == pt.nodal_plane_distribution.data:
+                                new_rates = merge_rates(pt, pt_source)
+                                pt.mfd.modify_set_mfd(pt.mfd.min_mag, pt.mfd.bin_width,
+                                                      list(new_rates))
+                                source_model.remove(pt_source)
                         
     # once all overlapping point sources have been merged, add all to list
     # This should work as we have added rates to the first source model as

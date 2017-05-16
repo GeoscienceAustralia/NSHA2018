@@ -8,7 +8,7 @@ import string
 import numpy as np
 import pypar
 from NSHA2018.source_models.utils.pt2fault_distance import read_pt_source, \
-    read_simplefault_source, pt2fault_distance
+    read_simplefault_source, pt2fault_distance, combine_pt_sources
 
 # Set up paralell
 proc = pypar.size()                # Number of processors as specified by mpirun                     
@@ -21,9 +21,9 @@ t0 = pypar.time()
 fault_mesh_spacing = 2 #2 Fault source mesh                     
 rupture_mesh_spacing = 2 #10 # Area source mesh                                                         
 area_source_discretisation = 10 #20 
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6'
-#area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
-area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed'
+area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+#area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 geom_pt_sources_filename =  area_source_model[:-4] + '_pts_geom_weighted.xml'
 geom_pt_sources = read_pt_source(geom_pt_sources_filename)
 
@@ -33,7 +33,7 @@ def chunks(l, n):
         yield l[i:i + n]
 
 # Split sources
-list_length = len(geom_pt_sources) / (proc+16)
+list_length = len(geom_pt_sources) / (proc*10)
 print list_length
 if (len(geom_pt_sources) % proc) > 0:
     list_length +=1
@@ -45,7 +45,7 @@ fsm =  os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
 
 #pt_filename_list = []
-for i in range(0, list_length, 1):
+for i in range(0, len(pt_list), 1):
     if i % proc == myid:
         run = "%03d" % i
         # Apply geometrical filtering                                                                        
@@ -66,7 +66,7 @@ if myid == 0:
     tmp_pt_source_filename_list = []
     tmp_pt_source_list = []
     # Now combine into one file
-    for j in range(0, list_length, 1):
+    for j in range(0, len(pt_list), 1):
         tmp_pt_filename = geom_filtered_pt_sources_sublist = geom_pt_sources_filename.rstrip('.xml') + \
             '_%03d.xml' % j 
         tmp_pt_source_filename_list.append(tmp_pt_filename)
@@ -75,7 +75,8 @@ if myid == 0:
         tmp_pt_source_list.append(tmp_pt_source)
     merged_filename = geom_pt_sources_filename.rstrip('.xml') + '_merged_parallel.xml'
     model_name = geom_pt_sources_filename.rstrip('.xml')
-    combine_pt_sources(tmp_pt_source_list, merged_filename, model_name, nrml_version = '04')
+    combine_pt_sources(tmp_pt_source_list, merged_filename, model_name, nrml_version = '04',
+                       id_location_flag=None)
 #
 #if myid == 0:
     ss = int(pypar.time() - t0)
