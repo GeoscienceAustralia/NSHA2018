@@ -1,4 +1,4 @@
-ncpus = 1020
+ncpus = 1008
 mem = 512GB
 walltime = 10:00:00
 jobfs = 300GB
