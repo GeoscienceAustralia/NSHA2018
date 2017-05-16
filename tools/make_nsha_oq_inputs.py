@@ -533,6 +533,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
             logictreepath = path.split(srcxml)[-1]
         else:
             logictreepath = srcxml
+        print i, logictreepath
             
         newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
         newxml += '                    <uncertaintyModel>'+logictreepath+'</uncertaintyModel>\n'
