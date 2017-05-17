@@ -16,11 +16,11 @@ set outputType:
     3 = multiple beta, best Mmax
     4 = best beta, multiple Mmax
 
-best: best b-value and Mmax (is the same as the highest weighted file in multimod
+best: best b-value and Mmax (is the same as the highest weighted file in multimod)
 
 collapsed: All variations of b-value and Mmax collapsed into one file
 
-multimod: ach combination of b-value and Mmax has its own source file - 15 files in total (should give the same results as above)
+multimod: each combination of b-value and Mmax has its own source file - 15 files in total (should give the same results as above)
 
 mmax_var: collapsed rate file for testing hazard sensitivity by just varying Mmax
 

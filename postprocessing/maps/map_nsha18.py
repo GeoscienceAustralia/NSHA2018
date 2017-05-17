@@ -279,6 +279,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     x, y = m(xs, ys)
     if probability == '10%':
         levels = arange(0.02, 0.3, 0.02)
+        levels = arange(0.05, 0.3, 0.05)
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
     
@@ -494,8 +495,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         
         # now loop through multiple paths within level
         for cnt in contours:
-            lons = cnt.vertices[:,0]
-            lats = cnt.vertices[:,0]
+            #lons = cnt.vertices[:,0]
+            #lats = cnt.vertices[:,0]
             
             # add polyline to shapefile
             w.line(parts=[cnt.vertices], shapeType=shapefile.POLYLINE)
