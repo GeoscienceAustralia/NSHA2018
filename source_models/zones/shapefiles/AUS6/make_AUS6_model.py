@@ -12,7 +12,8 @@ except:
 # parse AUS6 shp exported from MIF
 ###############################################################################
 
-ausshp = 'AUS6_Zones_no_inset.shp'
+#ausshp = 'AUS6_Zones_no_inset.shp'
+ausshp = 'AUS6_NSHA18_FIXEDSHAPES.shp'
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(ausshp)
@@ -27,7 +28,7 @@ for poly in shapes:
 
     
 # get src name
-src_name = get_field_data(sf, 'Name', 'str')
+src_name = get_field_data(sf, 'SRC_NAME', 'str')
 
 ###############################################################################
 # parse AUS6 lookup csv
