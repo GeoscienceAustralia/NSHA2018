@@ -39,9 +39,11 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
     
     # set time window
     if method == 'Leonard08':
-        max_time = 10**((catalogue.data['magnitude']-1.85)*0.69)
+        max_time_foreshock = 10**((catalogue.data['magnitude']-1.85)*0.69)
+        max_time_aftershock = 10**((catalogue.data['magnitude']-2.70)*1.1) + 4.0
     elif method == 'Stien08':
-        max_time = 10**((catalogue.data['magnitude']-2.70)*1.1) + 4.0
+        max_time_foreshock = 10**((catalogue.data['magnitude']-2.70)*1.1) + 4.0
+        max_time_aftershock = 10**((catalogue.data['magnitude']-2.70)*1.1) + 4.0
         
     # get event time datevector
     evdate = []
@@ -76,7 +78,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
         #########################################################################
         
         if doAftershocks == True:
-        
+            
             # for subsequent earthquakes, check distance from current event
             inter_evdist = haversine(catalogue.data['longitude'][i+1:],
                                      catalogue.data['latitude'][i+1:],
@@ -97,7 +99,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
                           - catalogue.data['magnitude'][i+1:]
                                
             # now find aftershocks to flag
-            idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
+            idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time_aftershock[i]) \
                             & (inter_evmag > 0.0))[0]
                             
             # set aftershock flag
@@ -129,7 +131,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
                           - catalogue.data['magnitude'][0:i]
                                
             # now find aftershocks to flag
-            idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time[i]) \
+            idx = np.where((inter_evdist < max_dist) & (inter_evdays < max_time_foreshock[i]) \
                             & (inter_evmag > 0.0))[0]
                             
             # set foreshock flag
