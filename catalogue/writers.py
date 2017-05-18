@@ -75,7 +75,9 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
         # make datstr - strftime does not work for dats < 1900!
         datestr = '{0.year:4d}{0.month:02d}{0.day:02d}{0.hour:02d}{0.minute:02d}'.format(ggc['datetime'])
         
-        if ggc['dependence'] == 'Aftershock' or ggc['dependence'] == 'Foreshock':
+        # flag dependent or man-made events
+        if ggc['dependence'] == 'Aftershock' or ggc['dependence'] == 'Foreshock' \
+           or ggc['ev_type'] == 'blast' or ggc['ev_type'] == 'coal':
             flag = '1'
         else:
             flag = '0'

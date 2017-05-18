@@ -280,6 +280,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     if probability == '10%':
         levels = arange(0.02, 0.3, 0.02)
         levels = arange(0.05, 0.3, 0.05)
+        levels = array([0.01, 0.02, 0.04, 0.08, 0.12, 0.2])
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
     
@@ -437,7 +438,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     #linticks = array([0.01, 0.03, 0.1, 0.3 ])
     logticks = arange(vmin, vmax+0.25, 0.25)
     cb.set_ticks(logticks)
-    labels = [str('%0.2f' % 10**x) for x in logticks]
+    labels = [str('%0.3f' % 10**x) for x in logticks]
     cb.set_ticklabels(labels)
     
     # set title
@@ -459,9 +460,10 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
+    '''
     plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
                 dpi=300, format='pdf', bbox_inches='tight')
-    
+    '''
     plt.show()
     
     ##########################################################################################
@@ -471,47 +473,58 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # check to see if shapefile contours exists
     if path.isdir('contours') == False:
         mkdir('contours')
-    
-    # setup shapefile
-    outshp = path.join('contours', '_'.join((modelName.replace(' ','_'), key, \
-                       'contours.shp')))
-
-    # set shapefile to write to
-    w = shapefile.Writer(shapefile.POLYLINE)
-    w.field('LEVELS','F', 5, 2)
         
-    # have to re-contour using un-transformed lat/lons
-    # differences in the way different machines deal with grids - weird!
-    if cwd.startswith('/nas'):
-        cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
-    else:
-        cs = plt.contour(xs, ys, 10**resampled, levels, colors='k')
-
-    plt.close(figure)
+    # make list of levels
+    allLevels = [array([0.01, 0.02, 0.04, 0.08, 0.12, 0.2]),
+                 arange(0.01, 0.15, 0.01),
+                 arange(0.02, 0.3, 0.02), 
+                 arange(0.05, 0.6, 0.05)]
+                 
+    levelNames = ['lev_custom', 'lev_0_01', 'lev_0_02', 'lev_0_05']                 
     
-    # loop through contour levels
-    for l, lev in enumerate(cs.levels):
-        contours = cs.collections[l].get_paths()
+    # loop thru levels
+    for levels, levelName in zip(allLevels, levelNames):
         
-        # now loop through multiple paths within level
-        for cnt in contours:
-            #lons = cnt.vertices[:,0]
-            #lats = cnt.vertices[:,0]
-            
-            # add polyline to shapefile
-            w.line(parts=[cnt.vertices], shapeType=shapefile.POLYLINE)
-            
-            # add level attribute
-            w.record(lev)
-
-    # now save area shapefile
-    w.save(outshp)
+        # setup shapefile
+        outshp = path.join('contours', '_'.join((modelName.replace(' ','_'), key, \
+                           levelName, 'contours.shp')))
     
-    # write projection file
-    prjfile = outshp.strip().split('.shp')[0]+'.prj'
-    f = open(prjfile, 'wb')
-    f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
-    f.close()
+        # set shapefile to write to
+        w = shapefile.Writer(shapefile.POLYLINE)
+        w.field('LEVELS','F', 5, 2)
+            
+        # have to re-contour using un-transformed lat/lons
+        # differences in the way different machines deal with grids - weird!
+        if cwd.startswith('/nas'):
+            cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
+        else:
+            cs = plt.contour(xs, ys, 10**resampled, levels, colors='k')
+    
+        plt.close(figure)
+        
+        # loop through contour levels
+        for l, lev in enumerate(cs.levels):
+            contours = cs.collections[l].get_paths()
+            
+            # now loop through multiple paths within level
+            for cnt in contours:
+                #lons = cnt.vertices[:,0]
+                #lats = cnt.vertices[:,0]
+                
+                # add polyline to shapefile
+                w.line(parts=[cnt.vertices], shapeType=shapefile.POLYLINE)
+                
+                # add level attribute
+                w.record(lev)
+    
+        # now save area shapefile
+        w.save(outshp)
+        
+        # write projection file
+        prjfile = outshp.strip().split('.shp')[0]+'.prj'
+        f = open(prjfile, 'wb')
+        f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
+        f.close()
 
     
 

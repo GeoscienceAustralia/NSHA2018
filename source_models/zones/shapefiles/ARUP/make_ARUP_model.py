@@ -12,7 +12,8 @@ except:
 # parse ARUP shp
 ###############################################################################
 
-arupshp = 'ARUP_source_model.shp'
+#arupshp = 'ARUP_source_model.shp'
+arupshp = 'ARUP_NSHA18_FIXEDSHAPES.shp'
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(arupshp)
