@@ -316,7 +316,7 @@ else:
 #########################################################################
 print 'Merging stripped columns...\n'
 
-prefmag2 = 'orig' # replaces orig mag with preferred MW in declustered catalogue
+prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
 
 from misc_tools import dict2array, checkfloat
 
