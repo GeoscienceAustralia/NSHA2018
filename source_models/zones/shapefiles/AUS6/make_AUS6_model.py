@@ -128,7 +128,12 @@ for code, poly in zip(codes, shapes):
         mmax.append(neo_mmax[matchidx])
         trt.append(neo_trt[matchidx])
         dep_b.append(neo_dep[matchidx])
-        ycomp.append(neo_ycomp[matchidx])
+        
+        if code == 'YGE':
+            ycomp.append('1975;1965;1940')
+        else:
+            ycomp.append(neo_ycomp[matchidx])
+            
         mcomp.append(neo_mcomp[matchidx])
         bval_fix.append(neo_bval[matchidx])
         bval_sig_fix.append(bval_sig[matchidx])
