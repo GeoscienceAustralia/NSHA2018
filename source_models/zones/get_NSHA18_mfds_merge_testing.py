@@ -668,19 +668,19 @@ for i in srcidx:
             # get legend text
             ###############################################################################
             
-            up173_txt = '\t'.join(('Upper 1.73x', str('%0.1f' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
+            up173_txt = '\t'.join(('Upper 1.73x', str('%0.3e' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
                                    str('%0.3f' % beta2bval(beta-sigbeta173)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
                                    
-            up100_txt = '\t'.join(('Upper 1.00x', str('%0.1f' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
+            up100_txt = '\t'.join(('Upper 1.00x', str('%0.3e' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
                                    str('%0.3f' % beta2bval(beta-sigbeta)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
                                    
-            best_txt  = '\t'.join(('Best Estimate', str('%0.1f' % fn0), str('%0.2f' % beta), \
+            best_txt  = '\t'.join(('Best Estimate', str('%0.3e' % fn0), str('%0.2f' % beta), \
                                    str('%0.3f' % bval), str('%0.1f' % src_mmax[i]))).expandtabs()
             
-            lo100_txt = '\t'.join(('Lower 1.00x', str('%0.1f' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
+            lo100_txt = '\t'.join(('Lower 1.00x', str('%0.3e' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
                                    str('%0.3f' % beta2bval(beta+sigbeta)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
                                    
-            lo173_txt = '\t'.join(('Lower 1.73x', str('%0.1f' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
+            lo173_txt = '\t'.join(('Lower 1.73x', str('%0.3e' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
                                    str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
             
             # set legend title

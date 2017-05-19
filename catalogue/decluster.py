@@ -141,7 +141,7 @@ def flag_dependent_events(catalogue, flagvector, doAftershocks, method):
     return flagvector
 
 # methods to call Leonard 2008 & Stein 2008 declustering algorthms 
-def decluster_SCR(method, cat):
+def decluster_SCR(method, cat, deblastOnly):
 
     # set flag for dependent events
     flagvector = np.zeros(len(cat.data['magnitude']), dtype=int)
@@ -149,19 +149,26 @@ def decluster_SCR(method, cat):
     #########################################################################
     # call declustering
     #########################################################################
+    # use "method" to decluster
+    if deblastOnly == False:
+        # flag aftershocks
+        doAftershocks = True
+        flagvector_as = flag_dependent_events(cat, flagvector, doAftershocks, method)
+        
+        # flag foreshocks
+        doAftershocks = False
+        flagvector_asfs = flag_dependent_events(cat, flagvector_as, doAftershocks, method)
+        
+        # now find mannually picked foreshocks/aftershocks (1 = fore/aftershock; 2 = blast/coal)
+        idx = np.where(cat.data['flag'] >= 1)[0]
+        flagvector_asfsman = flagvector_asfs
+        flagvector_asfsman[idx] = 1
     
-    # flag aftershocks
-    doAftershocks = True
-    flagvector_as = flag_dependent_events(cat, flagvector, doAftershocks, method)
-    
-    # flag foreshocks
-    doAftershocks = False
-    flagvector_asfs = flag_dependent_events(cat, flagvector_as, doAftershocks, method)
-    
-    # now find mannually picked foreshocks/aftershocks
-    idx = np.where(cat.data['flag'] == 1)[0]
-    flagvector_asfsman = flagvector_asfs
-    flagvector_asfsman[idx] = 1
+    # else remove coal & blast events only
+    else:
+        idx = np.where(cat.data['flag'] == 2)[0]
+        flagvector_asfsman = flagvector
+        flagvector_asfsman[idx] = 1
             
     
     #########################################################################
@@ -174,7 +181,7 @@ def decluster_SCR(method, cat):
     # create a copy from the catalogue object to preserve it
     catalogue_l08 = deepcopy(cat)
     
-    catalogue_l08.purge_catalogue(flagvector_asfs == 0) # cluster_flags == 0: mainshocks
+    catalogue_l08.purge_catalogue(flagvector_asfsman == 0) # cluster_flags == 0: mainshocks
     
     print 'Leonard 2008\tbefore: ', cat.get_number_events(), " after: ", catalogue_l08.get_number_events()
     
@@ -265,6 +272,8 @@ def decluster_GK74(catalogue):
 #########################################################################
 
 leonard = True
+deblastOnly = False # remove blasts and coal events - if True, does not decluster
+
 #########################################################################
 # parse calalogue & convert to HMTK
 #########################################################################
@@ -305,7 +314,7 @@ if leonard == True:
     if method == 'Stein08':
         print  'Using Stein 2008 method...'
         
-    declustered_catalog_filename = decluster_SCR(method, cat)
+    declustered_catalog_filename = decluster_SCR(method, cat, deblastOnly)
 
 # do GK74    
 else: 
@@ -363,24 +372,31 @@ for line in lines[1:]:
         print 'Possible duplicate:', datestr[eqidx[0]], eqidx
     
     # replace orig mag in "magnitude" column
-    # prefmag = MW
-    if prefmag2 == 'mw':
-        newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',,MW,' \
-                  + ','.join((str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
-                              str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
-                            
-    # keep orig mag in "magnitude" column
+    if len(eqidx) > 0:
+        # prefmag = MW
+        if prefmag2 == 'mw':
+            newline = ','.join(dat[0:16]) + ',' + str('%0.2f' % prefmag[eqidx][0]) + ',,MW,' \
+                      + ','.join((str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
+                                  str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
+                                
+        # keep orig mag in "magnitude" column
+        else:
+            newline = ','.join((line.strip(), str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
+                                str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
+        
+        newtxt += newline
     else:
-        newline = ','.join((line.strip(), str('%0.2f' % mx_orig[eqidx][0]), mx_origType[eqidx][0], \
-                            str('%0.2f' % mx_rev_ml[eqidx][0]), str('%0.2f' % prefmag[eqidx][0]))) + '\n'
-    
-    newtxt += newline
+        print 'No match:', line
 
 # re-write declustered catalogue
-if prefmag2 == 'mw':
-    declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
+if deblastOnly == False:
+    if prefmag2 == 'mw':
+        declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
+    else:
+        declustered_csv = declustered_catalog_filename
 else:
-    declustered_csv = declustered_catalog_filename 
+    if prefmag2 == 'mw':
+        declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_deblast.csv'
 
 f = open(declustered_csv, 'wb')
 f.write(newtxt)
