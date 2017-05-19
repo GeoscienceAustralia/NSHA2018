@@ -43,6 +43,10 @@ S3Q1,Source_model,Smoothed_seismicity,Hall,0.224
 S3Q2,Source_model,Smoothed_seismicity,GA_fixed,0.155
 S3Q3,Source_model,Smoothed_seismicity,GA_adaptive,0.427
 S3Q4,Source_model,Smoothed_seismicity,Cuthbertson,0.194
+S3Q1,Source_model,Smoothed_faults,Hall_NFSM,0.224
+S3Q2,Source_model,Smoothed_faults,GA_NFSM_fixed,0.155
+S3Q3,Source_model,Smoothed_faults,GA_NFSM_adaptive,0.427
+S3Q4,Source_model,Smoothed_faults,Cuthbertson_NFSM,0.194
 S4Q1,Source_model,Background,NSHA13_Background,0.119
 S4Q2,Source_model,Background,SinMcC2016,0.064
 S4Q3,Source_model,Background,Leonard08,0.174

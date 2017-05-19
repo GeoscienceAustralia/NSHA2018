@@ -105,8 +105,6 @@ xmllist.append(path.split(targetXML)[-1])
 # copy smoothed seismicity source models
 ###############################################################################
 
-relpath = path.join('..', 'faults')
-
 # copy GA fixed
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_fixed_smoothing_collapsed/source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml'
 targetXML = path.join('..', 'complete_model', 'GA_fixed_smoothing_full_uncert.xml')
@@ -133,6 +131,29 @@ xmllist.append(path.split(targetXML)[-1])
 # copy smoothed seismicity source models with faults
 ###############################################################################
 
+# copy GA fixed
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_fixed_smoothing_collapsed/source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml'
+targetXML = path.join('..', 'complete_model', 'GA_NFSM_fixed_smoothing_full_uncert.xml')
+try:
+    copyfile(sourceXML, targetXML)
+# FOR TESTING ONLY
+except:
+    sourceXML = path.join('..', 'testing', 'NFSM_source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
+    copyfile(sourceXML, targetXML)
+xmllist.append(path.split(targetXML)[-1])
+
+# copy GA adaptive
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed/source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml'
+targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
+try:
+    copyfile(sourceXML, targetXML)
+# FOR TESTING ONLY
+except:
+    sourceXML = path.join('..', 'testing', 'NFSM_source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml')
+    copyfile(sourceXML, targetXML)
+xmllist.append(path.split(targetXML)[-1])
+
+
 ###############################################################################
 # parse weights file
 ###############################################################################
@@ -141,7 +162,7 @@ lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv'
 
 # set up metadata dictionary
 modelPath = getcwd() # path where source logit tree is to be saved
-meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml', 
+meta = {'modelPath': modelPath, 'modelFile':'TEST_nsha18_source_model_logic_tree.xml', 
         'splitXMLPath': True} # assume source files in job dir 
 
 # get set weights
@@ -149,7 +170,7 @@ src_type, src_wts = lt.get_weights('Source_model', 'Source_type')
 
 # temporarily set smoothed seis weights to smoothed+faults
 print '\!!!!REMEMBER TO DELETE SETTING REGIONAL WEIGHT TO SEISMOTECTONIC WEIGHT!!!!\n'
-src_wts[0] += src_wts[1]
+#src_wts[0] += src_wts[1]
 
 # set branch weights
 branch_wts = array([])
@@ -163,10 +184,11 @@ for st, sw in zip(src_type, src_wts):
     orig_st = st
     
     # assume intra-smoothed fault models have same weight as smoothed seis
+    '''
     if st == 'Smoothed_faults':
         st = 'Smoothed_seismicity'
         #sw = 0.0 # set to zero for now!
-        
+    '''    
     # get weights within source type
     models, mod_wts = lt.get_weights('Source_model', st)
     
@@ -212,7 +234,7 @@ for st, sw in zip(src_type, src_wts):
                     # append branch file
                     branch_xml.append(xl)
                      
-                    #print xl, mod, st, mw
+                    print xl, mod, st, mw
                     
     # re-normalise source type weights if within type neq 1.0
     src_type_wts = array(src_type_wts) / sum(src_type_wts)

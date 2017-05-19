@@ -30,7 +30,7 @@ mpl.rcParams['pdf.fonttype'] = 42
 
 drawshape = False # decides whether to overlay seismic sources
 
-bbox = '108/153/-44/-8' # map boundary - lon1/lon2/lat1/lat2
+bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
 
 # set map resolution
 res = 'i' 
@@ -280,7 +280,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     if probability == '10%':
         levels = arange(0.02, 0.3, 0.02)
         levels = arange(0.05, 0.3, 0.05)
-        levels = array([0.01, 0.02, 0.04, 0.08, 0.12, 0.2])
+        levels = array([0.01, 0.02, 0.04, 0.08, 0.12, 0.18, 0.24])
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
     
@@ -289,7 +289,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     else:
         csm = plt.contour(x, y, 10**resampled, levels, colors='k')        
     
-    plt.clabel(csm, inline=1, fontsize=10)
+    plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
     
     ##########################################################################################
     # get land & lake polygons for masking
@@ -353,7 +353,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # set bbox for logo
     imoff = 0.02
     logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
-    logo_bbox = [0.74,map_bbox[1]-0.03,0.1,0.1]
+    logo_bbox = [0.73,map_bbox[1]-0.03,0.1,0.1]
     newax = figure.add_axes(logo_bbox) #, zorder=-1)
     newax.imshow(im)
     newax.axis('off')
@@ -475,7 +475,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         mkdir('contours')
         
     # make list of levels
-    allLevels = [array([0.01, 0.02, 0.04, 0.08, 0.12, 0.2]),
+    allLevels = [array([0.01, 0.02, 0.04, 0.08, 0.12, 0.18, 0.24]),
                  arange(0.01, 0.15, 0.01),
                  arange(0.02, 0.3, 0.02), 
                  arange(0.05, 0.6, 0.05)]
