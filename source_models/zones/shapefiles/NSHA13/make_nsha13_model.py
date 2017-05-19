@@ -11,7 +11,7 @@ except:
 # parse neo domains
 ###############################################################################
 
-nshashp = 'NSHA13_regional_source_model.shp'
+#nshashp = 'NSHA13_regional_source_model.shp'
 nshashp = 'NSHA13_regional_source_model_simplified.shp' # alternate model removing fill zones
 
 print 'Reading source shapefile...'
@@ -190,7 +190,7 @@ bval_u = -99
 
 #ycomp = '1980;1970;1965;1962;1958;1910;1880'
 #mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
-ymax  = 2016
+ymax  = 2011
 #dom   = -99
 cat   = 'AUSTCAT_V0.12_hmtk_declustered.csv'
 

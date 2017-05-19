@@ -17,6 +17,14 @@ ausshp = 'AUS6_NSHA18_FIXEDSHAPES.shp'
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(ausshp)
+
+shapes = sf.shapes()
+polygons = []
+for poly in shapes:
+    polygons.append(Polygon(poly.points))
+
+'''
+# this was used when parseing original AUS6 shapes
 shapes = sf.shapes()
 polygons = []
 newpoints = []
@@ -25,7 +33,7 @@ for poly in shapes:
     newpoints.append(array(around(poly.points, decimals=2)))
     
     polygons.append(Polygon(poly.points))
-
+'''
     
 # get src name
 src_name = get_field_data(sf, 'SRC_NAME', 'str')
@@ -205,8 +213,8 @@ cat   = 'AUSTCAT_V0.12_hmtk_declustered.csv'
 for i, shape in enumerate(shapes):
 
     # set shape polygon
-    #w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
-    w.line(parts=[newpoints[i].tolist()], shapeType=shapefile.POLYGON)
+    w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+    #w.line(parts=[newpoints[i].tolist()], shapeType=shapefile.POLYGON) # used for original AUS poly that needed adjustment
         
     # write new records
     if i >= 0:
