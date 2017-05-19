@@ -1,6 +1,6 @@
 #PBS -P w84
 #PBS -q express
-#PBS -l walltime=16:00:00
+#PBS -l walltime=01:00:00
 #PBS -l ncpus=9
 #PBS -l mem=32GB
 #PBS -l wd
@@ -31,7 +31,7 @@ one=1
 bvals=(0.779 0.835 1.198 0.708 0.727 1.043 0.850 0.944 1.352) # declustered
 #bvals=(1.016 0.872 1.221 0.963 0.763 1.066 1.068 0.981 1.375) # full catalogue
 for bval in ${bvals[*]}; do
-    python fixed_smoothing.py $bval > frankel_b$bval.log &
+    python adaptive_smoothing.py $bval > adaptive_b$bval.log &
     counter=$(($counter+$one));
     # Once we have submitted jobs for all 9 bvalues, break from this loop.
     if [ $counter = 9 ];

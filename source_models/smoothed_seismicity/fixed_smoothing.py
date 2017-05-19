@@ -59,6 +59,13 @@ from hmtk.seismicity.smoothing.kernels.isotropic_gaussian import IsotropicGaussi
 # To build source model
 from hmtk.sources.source_model import mtkSourceModel
 from hmtk.sources.point_source import mtkPointSource
+from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
+from openquake.hazardlib.source.point import PointSource
+from openquake.hazardlib.tom import PoissonTOM
+from openquake.hazardlib.sourcewriter import obj_to_node
+from openquake.baselib.node import Node
+from openquake.hazardlib import nrml
+from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
 from openquake.hazardlib.geo.point import Point
 from openquake.hazardlib.mfd import TruncatedGRMFD
 from openquake.hazardlib.geo.nodalplane import NodalPlane
@@ -74,6 +81,7 @@ print 'b value', bvalue
 
 #Importing catalogue
 catalogue_filename = "../../catalogue/data/AUSTCAT_V0.12_hmtk_declustered.csv"
+#catalogue_filename = "../../catalogue/data/AUSTCAT_V0.12_hmtk_mx_orig.csv"
 parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 
 # Read and process the catalogue content in a variable called "catalogue"
@@ -260,8 +268,8 @@ smoother = SmoothedSeismicity([100.,160.,0.1,-45.,-5,0.1,0.,20., 20.], bvalue = 
 #smoothed_grid = smoother.run_analysis(source_model.sources[0].catalogue, smoothing_config, completeness_table=completeness_table_a)
 print 'Running smoothing'
 smoothed_grid = smoother.run_analysis(source.catalogue, smoothing_config, completeness_table=completeness_table_a)
-smoother_filename = 'smoothed_%i_%i_mmin_%.1f_%.3f_0.1.csv' %                         (smoothing_config["BandWidth"], smoothing_config["Length_Limit"],
-                        completeness_table_a[0][-1], bvalue)
+smoother_filename = 'smoothed_%i_%i_mmin_%.1f_%.3f_0.1.csv' % (smoothing_config["BandWidth"], smoothing_config["Length_Limit"],
+                                                               completeness_table_a[0][-1], bvalue)
 smoother.write_to_csv(smoother_filename)
 
 
@@ -288,42 +296,48 @@ bval = bvalue # just define as 1 for time being
 # Read in data again to solve number fomatting issue in smoother.data
 # For some reason it just returns 0 for all a values
 data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
-print max(data[:,4])
-print data[:,4]
-print len(data[:,4])
+#print max(data[:,4])
+#print data[:,4]
+#print len(data[:,4])
+tom = PoissonTOM(50) # Dummy temporal occurence model for building pt sources
+msr = Leonard2014_SCR()
 for j in range(len(data[:,4])):
 #    print smoother.data[j,:]
-    identifier = 'FSS_' + str(j)
-    name = 'Frankel_' + str(j)
+    identifier = 'FSS' + str(j)
+    name = 'Frankel' + str(j)
     point = Point(data[j,0],data[j,1],
                 data[j,2])
-    rate = data[j,4]
-    aval = np.log10(rate) #+ bval*completeness_table_a[0][1]
+    aval = data[j,4]
+   # aval = rate # trying this based on some testing
+#    aval = np.log10(rate) #+ bval*completeness_table_a[0][1]
    # print aval
     mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bval)
-    hypo_depth_dist = PMF([(1.0, 10.0)])
-    nodal_plane_dist = PMF([(0.25, NodalPlane(0, 30, 90)),
-                            (0.25, NodalPlane(90, 30, 90)),
-                            (0.25, NodalPlane(180, 30, 90)),
-                            (0.25, NodalPlane(270, 30, 90))])
-    point_source = mtkPointSource(identifier, name, geometry=point, mfd=mfd,
-                           mag_scale_rel = 'Leonard2014_SCR', rupt_aspect_ratio=2.0,
-                           upper_depth = 0.1, lower_depth = 20.0,
-                           trt = 'Non_cratonic', nodal_plane_dist = nodal_plane_dist,
-                           hypo_depth_dist = hypo_depth_dist)
+    hypo_depth_dist = PMF([(0.5, 10.0),
+                          (0.25, 5.0),
+                          (0.25, 15.0)])
+    nodal_plane_dist = PMF([(0.3, NodalPlane(0, 30, 90)),
+                            (0.2, NodalPlane(90, 30, 90)),
+                            (0.3, NodalPlane(180, 30, 90)),
+                            (0.2, NodalPlane(270, 30, 90))])
+    point_source = PointSource(identifier, name, 'Non_cratonic',
+                               mfd, 2, msr,
+                               2.0, tom, 0.1, 20.0, point,
+                               nodal_plane_dist, hypo_depth_dist)
     source_list.append(point_source)
 #    i+=1
 #    if j==1000:
 #        break
- 
-mod_name = 'smoothed_frankel_50_3_mmin_%.1f_b%.3f_0.1.xml' %                                   (completeness_table_a[0][-1], bvalue)    
-#nodes = list(map(obj_to_node, sorted(source_list)))
-#source_model = Node("sourceModel", {"name": name}, nodes=nodes)
-#with open(filename, 'wb') as f:
-#    nrml.write([source_model], f, '%s', xmlns = NAMESPACE)    
-source_model = mtkSourceModel(identifier=0, name='Frankel_50_3',
-                              sources = source_list)
-source_model.serialise_to_nrml('smoothed_frankel_50_3_mmin_%.1f_b%.3f_0.1.xml' %                               (completeness_table_a[0][-1], bvalue))
+
+filename = "smoothed_frankel_50_3_mmin_%.1f_b%.3f_0.1.xml" % (completeness_table_a[0][-1], bvalue)
+mod_name = 'smoothed_frankel_50_3_mmin_%.1f_b%.3f_0.1' % (completeness_table_a[0][-1], bvalue)    
+nodes = list(map(obj_to_node, sorted(source_list)))
+source_model = Node("sourceModel", {"name": name}, nodes=nodes)
+with open(filename, 'wb') as f:
+    nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
+
+#source_model = mtkSourceModel(identifier=0, name='Frankel_50_3',
+#                              sources = source_list)
+#source_model.serialise_to_nrml('smoothed_frankel_50_3_mmin_%.1f_b%.3f_0.1_full.xml' % (completeness_table_a[0][-1], bvalue))
 
 
 # In[ ]:

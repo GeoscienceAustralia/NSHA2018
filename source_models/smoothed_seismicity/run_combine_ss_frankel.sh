@@ -1,8 +1,8 @@
 #PBS -P w84
 #PBS -q express
-#PBS -l walltime=03:00:00
+#PBS -l walltime=10:00:00
 #PBS -l ncpus=1
-#PBS -l mem=32GB
+#PBS -l mem=16GB
 #PBS -l wd
 
 module load intel-cc/12.1.9.293

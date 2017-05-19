@@ -6,7 +6,7 @@ from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity
 #from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 
 # Python dependences
-import os
+import os, sys
 import h5py
 import numpy as np   # Numpy - Python's numerical library
 import matplotlib.pyplot as plt  # Matplotlib - Python's plotting library
@@ -61,9 +61,11 @@ import helmstetter_werner_2012 as h_w
 # To build source model
 from hmtk.sources.source_model import mtkSourceModel
 from hmtk.sources.point_source import mtkPointSource
+from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
 from openquake.hazardlib.source.point import PointSource
 from openquake.hazardlib.tom import PoissonTOM
 from openquake.hazardlib.sourcewriter import obj_to_node
+from openquake.baselib.node import Node
 from openquake.hazardlib import nrml
 from openquake.hazardlib.geo.point import Point
 from openquake.hazardlib.mfd import TruncatedGRMFD
@@ -76,6 +78,7 @@ bvalue = float(sys.argv[1])
 print 'b value', bvalue
 
 ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_declustered.csv"
+#ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_mx_orig.csv"
 parser = CsvCatalogueParser(ifile)
 catalogue = parser.read_file(start_year=1965, end_year=2010)
 # How many events in the catalogue?
@@ -93,7 +96,6 @@ catalogue.get_number_events()
 
 # Copying the catalogue and saving it under a new name "catalogue_clean"
 catalogue_clean = deepcopy(catalogue)
-
 # remove nan magnitudes
 catalogue_clean.sort_catalogue_chronologically()
 catalogue_clean.data['magnitude']
@@ -139,7 +141,8 @@ for source in source_model.sources:
     # Add on the catalogue
  #   src_basemap.add_catalogue(source.catalogue, overlay=False)
 
-completeness_table_a = np.array([[1980., 3.5],
+completeness_table_a = np.array([[1990., 3.0],
+                                 [1980., 3.5],
                                  [1965., 4.0]])
 ###plot_magnitude_time_density(source.catalogue, 0.1, 1.0,
 #                            completeness=completeness_table_a)
@@ -168,16 +171,16 @@ config = {"bandwidth": 50,
  #         )
 
 try:
-    os.remove("Aus1_tmp2.hdf5")
+    os.remove(("Aus1_tmp2%.3f.hdf5" % bvalue))
 except OSError:
     pass
-config = {"k": 5,
+config = {"k": 4,
           "r_min": 1.0E-6, 
           "bvalue": bvalue, "mmin": 3.0,
           "learning_start": 1965, "learning_end": 2009,
           "target_start": 2009, "target_end": 2010}
 
-smoother = h_w.HelmstetterEtAl2007(grid_lims, config, source.catalogue, storage_file="Aus1_tmp2.hdf5")
+smoother = h_w.HelmstetterEtAl2007(grid_lims, config, source.catalogue, storage_file=("Aus1_tmp2%.3f.hdf5" % bvalue))
 
 smoother._get_catalogue_completeness_weights(completeness_table_a)
 smoother.build_distance_arrays()
@@ -191,7 +194,8 @@ if exhaustive == True:
     smoother.config["r_min"] = params[1]
 d_i = smoother.optimise_bandwidths()
 smoother.run_smoothing(config["r_min"], d_i)
-np.savetxt("Australia_Adaptive_K3.csv",
+smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f.csv" % (smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'])
+np.savetxt(smoother_filename,
            np.column_stack([smoother.grid, smoother.rates]),
            delimiter=",",
            fmt=["%.4f", "%.4f", "%.8e"],
@@ -222,12 +226,12 @@ np.savetxt("Australia_Adaptive_K3.csv",
 #            smoother.config["target_end"],smoother.config["r_min"]))
 
 # Build nrml input file of point sources
-#smoother_filename = "Australia_Adaptive_K3.csv"
+
 source_list = []
 #i=0
 min_mag = 4.5
 max_mag = 7.2
-bval = 1.0 # just define as 1 for time being
+#bval = 1.0 # just define as 1 for time being
 # Read in data again to solve number fomatting issue in smoother.data
 # For some reason it just returns 0 for all a values
 data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
@@ -235,18 +239,19 @@ data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
 #print data[:,4]
 #print len(data[:,4])
 tom = PoissonTOM(50) # Dummy temporal occurence model for building pt sources
+msr = Leonard2014_SCR()
 for j in range(len(data[:,2])):
 #    print smoother.data[j,:]
-    identifier = 'ASS_' + str(j)
-    name = 'Helmstetter_' + str(j)
+    identifier = 'ASS' + str(j)
+    name = 'Helmstetter' + str(j)
     point = Point(data[j,0],data[j,1],
                 10)
     rate = data[j,2]
     # Convert rate to a value??
     #aval = rate
-    aval = np.log10(rate) + bval*config["mmin"]
+    aval = np.log10(rate) + bvalue*config["mmin"]
     #print rate, aval
-    mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bval)
+    mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bvalue)
     hypo_depth_dist = PMF([(0.5, 10.0),
                           (0.25, 5.0),
                           (0.25, 15.0)])
@@ -255,7 +260,7 @@ for j in range(len(data[:,2])):
                             (0.3, NodalPlane(180, 30, 90)),
                             (0.2, NodalPlane(270, 30, 90))])
     point_source = PointSource(identifier, name, 'Non_cratonic',
-                               mfd, 2, 'Leonard2014_SCR',
+                               mfd, 2, msr,
                                2.0, tom, 0.1, 20.0, point,
                                nodal_plane_dist, hypo_depth_dist)
 #                           upper_depth = 0.1, lower_depth = 20.0,
@@ -265,6 +270,7 @@ for j in range(len(data[:,2])):
 #    i+=1
 #    if j==1000:
 #        break
+filename = "Australia_Adaptive_K%i_b%.3f.xml" % (smoother.config['k'], smoother.config['bvalue'])
 mod_name = "Australia_Adaptive_K%i_b%.3f" % (smoother.config['k'], smoother.config['bvalue'])   
 nodes = list(map(obj_to_node, sorted(source_list)))
 source_model = Node("sourceModel", {"name": name}, nodes=nodes)
