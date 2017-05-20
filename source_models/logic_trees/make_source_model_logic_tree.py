@@ -104,7 +104,7 @@ xmllist.append(path.split(targetXML)[-1])
 ###############################################################################
 # copy smoothed seismicity source models
 ###############################################################################
-
+'''
 # copy GA fixed
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_fixed_smoothing_collapsed/source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml'
 targetXML = path.join('..', 'complete_model', 'GA_fixed_smoothing_full_uncert.xml')
@@ -115,9 +115,9 @@ except:
     sourceXML = path.join('..', 'testing', 'source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
-
+'''
 # copy GA adaptive
-sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed/source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml'
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
 targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
 try:
     copyfile(sourceXML, targetXML)
@@ -130,7 +130,7 @@ xmllist.append(path.split(targetXML)[-1])
 ###############################################################################
 # copy smoothed seismicity source models with faults
 ###############################################################################
-
+'''
 # copy GA fixed
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_fixed_smoothing_collapsed/source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml'
 targetXML = path.join('..', 'complete_model', 'GA_NFSM_fixed_smoothing_full_uncert.xml')
@@ -141,9 +141,9 @@ except:
     sourceXML = path.join('..', 'testing', 'NFSM_source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
-
+'''
 # copy GA adaptive
-sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed/source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml'
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_faults_additive.xml'
 targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
 try:
     copyfile(sourceXML, targetXML)
@@ -162,7 +162,7 @@ lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv'
 
 # set up metadata dictionary
 modelPath = getcwd() # path where source logit tree is to be saved
-meta = {'modelPath': modelPath, 'modelFile':'TEST_nsha18_source_model_logic_tree.xml', 
+meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml', 
         'splitXMLPath': True} # assume source files in job dir 
 
 # get set weights
@@ -242,7 +242,6 @@ for st, sw in zip(src_type, src_wts):
     # now append source-type weights to branch wts
     branch_wts = hstack((branch_wts, sw * array(src_type_wts)))
                 
-# do Jono's rounding thingy here...
 print branch_wts
 
 # check weights sum to one!
@@ -251,12 +250,12 @@ if not sum(branch_wts) == 1.0:
     
     # assume testing, so rescale weights
     if sum(branch_wts) < 0.95:
-        print '\nAre you testing?  Rescaling weights!!!'
+        print '\nAre you testing?  Rescaling weights!!!\n'
         branch_wts = branch_wts / sum(branch_wts)
         
        
 # do largest remainder method to make sure numbers 
-updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=4)
+updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=3)
 #updated_weights = branch_wts
 
 # write source model logic tree
