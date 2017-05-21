@@ -115,7 +115,7 @@ except:
     sourceXML = path.join('..', 'testing', 'source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
-'''
+
 # copy GA adaptive
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
 targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
@@ -126,7 +126,7 @@ except:
     sourceXML = path.join('..', 'testing', 'source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
-
+'''
 ###############################################################################
 # copy smoothed seismicity source models with faults
 ###############################################################################
@@ -141,7 +141,7 @@ except:
     sourceXML = path.join('..', 'testing', 'NFSM_source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
-'''
+
 # copy GA adaptive
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_faults_additive.xml'
 targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
@@ -153,7 +153,7 @@ except:
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
-
+'''
 ###############################################################################
 # parse weights file
 ###############################################################################
@@ -171,6 +171,20 @@ src_type, src_wts = lt.get_weights('Source_model', 'Source_type')
 # temporarily set smoothed seis weights to smoothed+faults
 print '\!!!!REMEMBER TO DELETE SETTING REGIONAL WEIGHT TO SEISMOTECTONIC WEIGHT!!!!\n'
 #src_wts[0] += src_wts[1]
+
+###############################################################################
+# recalibrate source type weights
+###############################################################################
+
+src_wts[0] = 0. # smoothed
+src_wts[1] = 0. # smoothed faults
+
+# rescale source types
+src_wts = array(src_wts)/sum(array(src_wts))
+
+###############################################################################
+# get weights
+###############################################################################
 
 # set branch weights
 branch_wts = array([])
