@@ -165,7 +165,7 @@ xmllist.append(path.split(targetXML)[-1])
 
 # M3
 # copy GA adaptive
-if if weighted_smoothing == True:
+if weighted_smoothing == True:
     sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.0_faults_additive.xml'
     targetXML = path.join('..', 'complete_model', 'GA_NFSM_M3_adaptive_smoothing_full_uncert.xml')
     try:
@@ -188,7 +188,7 @@ if if weighted_smoothing == True:
     xmllist.append(path.split(targetXML)[-1])
 
 else:
-    sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p5_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.0_faults_additive.xml'
+    sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p5_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.5_faults_additive.xml'
     targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
     copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
@@ -198,7 +198,7 @@ else:
 # parse weights file
 ###############################################################################
 
-if if weighted_smoothing == True:
+if weighted_smoothing == True:
     lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.ss_split.csv')
 else:
     lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
