@@ -188,7 +188,7 @@ if weighted_smoothing == True:
     xmllist.append(path.split(targetXML)[-1])
 
 else:
-    sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p5_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.5_faults_additive.xml'
+    sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p5_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.5_additive_faults.xml'
     targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
     copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
