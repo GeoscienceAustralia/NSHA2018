@@ -166,7 +166,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     #m.fillcontinents(color='white',lake_color='lightgray',zorder=0)
     m.drawcoastlines(linewidth=0.5,color='k')
     m.drawcountries(color='0.2')
-    m.drawstates(color='0.5')
+    m.drawstates(color='0.2')
     
     # draw parallels and meridians.
     if maxlon-minlon > 40:
