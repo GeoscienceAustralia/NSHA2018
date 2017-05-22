@@ -134,7 +134,7 @@ xmllist.append(path.split(targetXML)[-1])
 #sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
 #targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin4p0_bestb/Australia_Adaptive_K4_merged_bestb_mmin4.0_w1.xml' # best b
-targetXML = path.join('..', 'complete_model', 'GA_M3_adaptive_smoothing_best_b.xml')
+targetXML = path.join('..', 'complete_model', 'GA_M4_adaptive_smoothing_best_b.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -209,8 +209,8 @@ print '\!!!!REMEMBER TO DELETE SETTING REGIONAL WEIGHT TO SEISMOTECTONIC WEIGHT!
 # recalibrate source type weights
 ###############################################################################
 
-src_wts[0] = 0. # smoothed
-src_wts[1] = 0. # smoothed faults
+#src_wts[0] = 0. # smoothed
+#src_wts[1] = 0. # smoothed faults
 
 # rescale source types
 src_wts = array(src_wts)/sum(array(src_wts))
