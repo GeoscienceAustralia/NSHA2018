@@ -8,22 +8,22 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>GA_M4_adaptive_smoothing_best_b.xml</uncertaintyModel>
+                    <uncertaintyModel>GA_M4_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
                     <uncertaintyWeight>0.053</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b2">
-                    <uncertaintyModel>GA_M3_adaptive_smoothing_best_b.xml</uncertaintyModel>
+                    <uncertaintyModel>GA_M3_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
                     <uncertaintyWeight>0.035</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b3">
-                    <uncertaintyModel>GA_NFSM_M3_adaptive_smoothing_best_b.xml</uncertaintyModel>
+                    <uncertaintyModel>GA_NFSM_M3_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
                     <uncertaintyWeight>0.1</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b4">
-                    <uncertaintyModel>GA_NFSM_M4_adaptive_smoothing_best_b.xml</uncertaintyModel>
+                    <uncertaintyModel>GA_NFSM_M4_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
                     <uncertaintyWeight>0.149</uncertaintyWeight>
                 </logicTreeBranch>
 
