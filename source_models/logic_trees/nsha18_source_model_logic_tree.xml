@@ -8,73 +8,83 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>GA_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.2472</uncertaintyWeight>
+                    <uncertaintyModel>GA_M4_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.053</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b2">
-                    <uncertaintyModel>GA_fixed_smoothing_full_uncert.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0898</uncertaintyWeight>
+                    <uncertaintyModel>GA_M3_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.035</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b3">
-                    <uncertaintyModel>AUS6_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0181</uncertaintyWeight>
+                    <uncertaintyModel>GA_NFSM_M3_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.1</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b4">
-                    <uncertaintyModel>NSHA13_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0252</uncertaintyWeight>
+                    <uncertaintyModel>GA_NFSM_M4_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.149</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b5">
-                    <uncertaintyModel>DIMAUS_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0186</uncertaintyWeight>
+                    <uncertaintyModel>AUS6_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.018</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b6">
-                    <uncertaintyModel>NFSM_NSHA13_collapsed_additve_w1.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.2048</uncertaintyWeight>
+                    <uncertaintyModel>NSHA13_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.025</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b7">
-                    <uncertaintyModel>NFSM_DIMAUS_collapsed_additive_w1.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.1092</uncertaintyWeight>
+                    <uncertaintyModel>DIMAUS_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.019</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b8">
+                    <uncertaintyModel>NFSM_NSHA13_collapsed_additve_w1.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.205</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b9">
+                    <uncertaintyModel>NFSM_DIMAUS_collapsed_additive_w1.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.109</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b10">
                     <uncertaintyModel>NFSM_AUS6_collapsed_additive_w1.xml</uncertaintyModel>
                     <uncertaintyWeight>0.086</uncertaintyWeight>
                 </logicTreeBranch>
 
-                <logicTreeBranch branchID="b9">
+                <logicTreeBranch branchID="b11">
                     <uncertaintyModel>Leonard08_collapsed.xml</uncertaintyModel>
                     <uncertaintyWeight>0.035</uncertaintyWeight>
                 </logicTreeBranch>
 
-                <logicTreeBranch branchID="b10">
-                    <uncertaintyModel>Domains_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0609</uncertaintyWeight>
-                </logicTreeBranch>
-
-                <logicTreeBranch branchID="b11">
-                    <uncertaintyModel>SinMcC2016_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0129</uncertaintyWeight>
-                </logicTreeBranch>
-
                 <logicTreeBranch branchID="b12">
-                    <uncertaintyModel>ARUP_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0342</uncertaintyWeight>
+                    <uncertaintyModel>Domains_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.061</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b13">
-                    <uncertaintyModel>ARUP_Background_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0342</uncertaintyWeight>
+                    <uncertaintyModel>SinMcC2016_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.013</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b14">
+                    <uncertaintyModel>ARUP_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.034</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b15">
+                    <uncertaintyModel>ARUP_Background_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.034</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b16">
                     <uncertaintyModel>NSHA13_BACKGROUND_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.0239</uncertaintyWeight>
+                    <uncertaintyWeight>0.024</uncertaintyWeight>
                 </logicTreeBranch>
 
             </logicTreeBranchSet>
