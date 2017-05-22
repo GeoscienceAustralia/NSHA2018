@@ -34,11 +34,13 @@ def gr2inc_mmax(mfd, mmaxs, weights, model_weight=1.):
     mag_bins, rates = zip(*mfd.get_annual_occurrence_rates())
     mag_bins = np.array(mag_bins)
     rates = np.array(rates)
+   # print 'mag_bins'
+   # print 'rates'
     new_rates = np.zeros(len(mag_bins))
     for mmax, weight in zip(mmaxs, weights):
         idx = np.where(np.isclose(mag_bins,(mmax-0.05), rtol=1e-2))[0][-1]+1
         new_rates[:idx] += rates[:idx]*weight
-    new_rate = new_rates*model_weight
+    new_rates = new_rates*model_weight
     new_mfd = EvenlyDiscretizedMFD(mfd.min_mag, mfd.bin_width, list(new_rates))
     return new_mfd
         
@@ -143,26 +145,27 @@ if __name__ == "__main__":
     domains_shp = '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
     # Best b values
-    filedict_bestb = {'Cratonic': 'Australia_Adaptive_K4_b0.779.xml',
-                'Non_cratonic': 'Australia_Adaptive_K4_b1.198.xml',
-                'Extended': 'Australia_Adaptive_K4_b0.835.xml'}
-    outfile_bestb = 'Australia_Adaptive_K4_merged_bestb.xml'
+    filedict_bestb = {'Cratonic': 'Australia_Adaptive_K4_b0.779_mmin3.0.xml',
+                'Non_cratonic': 'Australia_Adaptive_K4_b1.198_mmin3.0.xml',
+                'Extended': 'Australia_Adaptive_K4_b0.835_mmin3.0.xml'}
+    outfile_bestb = 'Australia_Adaptive_K4_merged_bestb_mmin3.0.xml'
     combine_ss_models(filedict_bestb, domains_shp, lt, outfile_bestb, nrml_version = '04', weight=0.5)#, idbase='ASS')
+
     # Upper b_values
-    filedict_upperb = {'Cratonic': 'Australia_Adaptive_K4_b0.708.xml',
-                'Non_cratonic': 'Australia_Adaptive_K4_b1.043.xml',
-                'Extended': 'Australia_Adaptive_K4_b0.727.xml'}
-    outfile_upperb = 'Australia_Adaptive_K4_merged_upperb.xml'
+    filedict_upperb = {'Cratonic': 'Australia_Adaptive_K4_b0.708_mmin3.0.xml',
+                'Non_cratonic': 'Australia_Adaptive_K4_b1.043_mmin3.0.xml',
+                'Extended': 'Australia_Adaptive_K4_b0.727_mmin3.0.xml'}
+    outfile_upperb = 'Australia_Adaptive_K4_merged_upperb_mmin3.0.xml'
     combine_ss_models(filedict_upperb, domains_shp, lt, outfile_upperb, nrml_version = '04', weight=0.3)
     # Lower b_values                                                                                                     
-    filedict_lowerb = {'Cratonic': 'Australia_Adaptive_K4_b0.850.xml',
-                       'Non_cratonic': 'Australia_Adaptive_K4_b1.352.xml',
-                       'Extended': 'Australia_Adaptive_K4_b0.944.xml'}
-    outfile_lowerb = 'Australia_Adaptive_K4_merged_lowerb.xml'
+    filedict_lowerb = {'Cratonic': 'Australia_Adaptive_K4_b0.850_mmin3.0.xml',
+                       'Non_cratonic': 'Australia_Adaptive_K4_b1.352_mmin3.0.xml',
+                       'Extended': 'Australia_Adaptive_K4_b0.944_mmin3.0.xml'}
+    outfile_lowerb = 'Australia_Adaptive_K4_merged_lowerb_mmin3.0.xml'
     combine_ss_models(filedict_lowerb, domains_shp, lt, outfile_lowerb, nrml_version = '04', weight=0.2)
     # combine all pt source models
     point_source_list = [outfile_bestb, outfile_upperb, outfile_lowerb]
-    filename = 'Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
+    filename = 'Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.0.xml'
     filepath = os.path.join(output_dir, filename)
     name = filename.rstrip('.xml')
 

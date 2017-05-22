@@ -140,7 +140,9 @@ for source in source_model.sources:
  #                                                                    source.catalogue.get_number_events())
     # Add on the catalogue
  #   src_basemap.add_catalogue(source.catalogue, overlay=False)
-
+#completeness_table_a = np.array([[1965., 4.0]])
+#completeness_table_a = np.array([[1980., 3.5],
+#                                 [1965., 4.0]])
 completeness_table_a = np.array([[1990., 3.0],
                                  [1980., 3.5],
                                  [1965., 4.0]])
@@ -270,7 +272,7 @@ for j in range(len(data[:,2])):
 #    i+=1
 #    if j==1000:
 #        break
-filename = "Australia_Adaptive_K%i_b%.3f.xml" % (smoother.config['k'], smoother.config['bvalue'])
+filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f.xml" % (smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'])
 mod_name = "Australia_Adaptive_K%i_b%.3f" % (smoother.config['k'], smoother.config['bvalue'])   
 nodes = list(map(obj_to_node, sorted(source_list)))
 source_model = Node("sourceModel", {"name": name}, nodes=nodes)
