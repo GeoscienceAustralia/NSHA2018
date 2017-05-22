@@ -17,7 +17,7 @@ xmllist = []
 # copy regional source models
 ###############################################################################
 
-relpath = path.join('..', 'zones', '2012_mw_ge_4.0')
+relpath = path.join('..', '..', 'zones', '2012_mw_ge_4.0')
 
 # copy NSHA13
 sourceXML = path.join(relpath, 'NSHA13', 'input', 'collapsed', 'NSHA13_collapsed.xml')
@@ -81,7 +81,7 @@ xmllist.append(path.split(targetXML)[-1])
 # copy seismotectonic source models
 ###############################################################################
 
-relpath = path.join('..', 'faults')
+relpath = path.join('..', '..', 'faults')
 
 # copy NSHA13
 sourceXML = path.join(relpath, 'NFSM_NSHA13_collapsed_additive_w1', 'NFSM_NSHA13_collapsed_additve_w1.xml')
@@ -115,10 +115,13 @@ except:
     sourceXML = path.join('..', 'testing', 'source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
+'''
 
 # copy GA adaptive
-sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
-targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
+#sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
+#targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/Australia_Adaptive_K4_merged_bestb_mmin3.0_w1.xml' # best b
+targetXML = path.join('..', 'complete_model', 'GA_M3_adaptive_smoothing_best_b.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -126,7 +129,21 @@ except:
     sourceXML = path.join('..', 'testing', 'source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
-'''
+
+# copy GA adaptive
+#sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
+#targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin4p0_bestb/Australia_Adaptive_K4_merged_bestb_mmin4.0_w1.xml' # best b
+targetXML = path.join('..', 'complete_model', 'GA_M3_adaptive_smoothing_best_b.xml')
+try:
+    copyfile(sourceXML, targetXML)
+# FOR TESTING ONLY
+except:
+    sourceXML = path.join('..', 'testing', 'source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml')
+    copyfile(sourceXML, targetXML)
+xmllist.append(path.split(targetXML)[-1])
+
+
 ###############################################################################
 # copy smoothed seismicity source models with faults
 ###############################################################################
@@ -141,10 +158,14 @@ except:
     sourceXML = path.join('..', 'testing', 'NFSM_source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml')
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
+'''
 
+# M3
 # copy GA adaptive
-sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_faults_additive.xml'
-targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
+#sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_faults_additive.xml'
+#targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
+sourceXML = '/short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/smoothed/GA_adaptive_smoothing_best/Adaptive_best_b_Joined_K4_faults/maps_k4_joined_20170522_225102_Adaptive_best_b_Joined_K4_faults_tia547/Australia_Adaptive_K4_merged_bestb_mmin3.0_w1_faults.xml'
+targetXML = path.join('..', 'complete_model', 'GA_NFSM_M3_adaptive_smoothing_best_b.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -153,12 +174,24 @@ except:
     copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
-'''
+# M4
+sourceXML = '/short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/smoothed/GA_adaptive_smoothing_best/Adaptive_best_b_Joined_K4_faults/maps_k4_joined_20170522_225102_Adaptive_best_b_Joined_K4_faults_tia547/Australia_Adaptive_K4_merged_bestb_mmin4.0_w1_faults.xml'
+targetXML = path.join('..', 'complete_model', 'GA_NFSM_M4_adaptive_smoothing_best_b.xml')
+try:
+    copyfile(sourceXML, targetXML)
+# FOR TESTING ONLY
+except:
+    sourceXML = path.join('..', 'testing', 'NFSM_source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml')
+    copyfile(sourceXML, targetXML)
+xmllist.append(path.split(targetXML)[-1])
+
+
 ###############################################################################
 # parse weights file
 ###############################################################################
 
-lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
+#lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
+lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.ss_split.csv')
 
 # set up metadata dictionary
 modelPath = getcwd() # path where source logit tree is to be saved
