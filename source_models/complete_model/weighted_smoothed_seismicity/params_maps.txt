@@ -8,4 +8,4 @@ shared_rel_path = NSHA2018/shared
 gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4.xml
 model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/complete_model
 job_file = job_maps.ini
-job_type = maps_best_b_m3w04_m4_w06
+job_type = maps_full_uncert_m3w04_m4_w06

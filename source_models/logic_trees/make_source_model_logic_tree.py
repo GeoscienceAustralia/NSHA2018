@@ -120,8 +120,8 @@ xmllist.append(path.split(targetXML)[-1])
 # copy GA adaptive
 #sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
 #targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
-sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/Australia_Adaptive_K4_merged_bestb_mmin3.0_w1.xml' # best b
-targetXML = path.join('..', 'complete_model', 'GA_M3_adaptive_smoothing_best_b.xml')
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.0.xml'
+targetXML = path.join('..', 'complete_model', 'GA_M3_adaptive_smoothing_full_uncert.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -133,8 +133,8 @@ xmllist.append(path.split(targetXML)[-1])
 # copy GA adaptive
 #sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert.xml'
 #targetXML = path.join('..', 'complete_model', 'GA_adaptive_smoothing_full_uncert.xml')
-sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin4p0_bestb/Australia_Adaptive_K4_merged_bestb_mmin4.0_w1.xml' # best b
-targetXML = path.join('..', 'complete_model', 'GA_M4_adaptive_smoothing_best_b.xml')
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin4p0/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin4.0.xml'
+targetXML = path.join('..', 'complete_model', 'GA_M4_adaptive_smoothing_full_uncert.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -164,8 +164,8 @@ xmllist.append(path.split(targetXML)[-1])
 # copy GA adaptive
 #sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_faults_additive.xml'
 #targetXML = path.join('..', 'complete_model', 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
-sourceXML = '/short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/smoothed/GA_adaptive_smoothing_best/Adaptive_best_b_Joined_K4_faults/maps_k4_joined_20170522_225102_Adaptive_best_b_Joined_K4_faults_tia547/Australia_Adaptive_K4_merged_bestb_mmin3.0_w1_faults.xml'
-targetXML = path.join('..', 'complete_model', 'GA_NFSM_M3_adaptive_smoothing_best_b.xml')
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.0_faults_additive.xml'
+targetXML = path.join('..', 'complete_model', 'GA_NFSM_M3_adaptive_smoothing_full_uncert.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -175,8 +175,8 @@ except:
 xmllist.append(path.split(targetXML)[-1])
 
 # M4
-sourceXML = '/short/w84/NSHA18/PSHA_modelling/NSHA_Production_May17/smoothed/GA_adaptive_smoothing_best/Adaptive_best_b_Joined_K4_faults/maps_k4_joined_20170522_225102_Adaptive_best_b_Joined_K4_faults_tia547/Australia_Adaptive_K4_merged_bestb_mmin4.0_w1_faults.xml'
-targetXML = path.join('..', 'complete_model', 'GA_NFSM_M4_adaptive_smoothing_best_b.xml')
+sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin4p0_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin4.0_additive_faults.xml'
+targetXML = path.join('..', 'complete_model', 'GA_NFSM_M4_adaptive_smoothing_full_uncert.xml')
 try:
     copyfile(sourceXML, targetXML)
 # FOR TESTING ONLY
@@ -194,7 +194,7 @@ xmllist.append(path.split(targetXML)[-1])
 lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.ss_split.csv')
 
 # set up metadata dictionary
-modelPath = getcwd() # path where source logit tree is to be saved
+modelPath = getcwd() # path where source logic tree is to be saved
 meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml', 
         'splitXMLPath': True} # assume source files in job dir 
 
