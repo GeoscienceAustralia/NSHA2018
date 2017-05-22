@@ -17,7 +17,7 @@ xmllist = []
 # copy regional source models
 ###############################################################################
 
-relpath = path.join('..', '..', 'zones', '2012_mw_ge_4.0')
+relpath = path.join('..', 'zones', '2012_mw_ge_4.0')
 
 # copy NSHA13
 sourceXML = path.join(relpath, 'NSHA13', 'input', 'collapsed', 'NSHA13_collapsed.xml')
@@ -81,7 +81,7 @@ xmllist.append(path.split(targetXML)[-1])
 # copy seismotectonic source models
 ###############################################################################
 
-relpath = path.join('..', '..', 'faults')
+relpath = path.join('..', 'faults')
 
 # copy NSHA13
 sourceXML = path.join(relpath, 'NFSM_NSHA13_collapsed_additive_w1', 'NFSM_NSHA13_collapsed_additve_w1.xml')
