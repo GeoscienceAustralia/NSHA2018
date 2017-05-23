@@ -8,11 +8,11 @@ from os import path, getcwd, walk
 from tools.make_nsha_oq_inputs import make_logic_tree
 from logic_tree import LogicTree
 from source_models.utils.utils import largest_remainder
-from numpy import array, hstack
+from numpy import array, hstack, unique
 from shutil import copyfile
 
 xmllist = []
-weighted_smoothing = False
+weighted_smoothing = True
 
 ###############################################################################
 # copy regional source models
@@ -232,6 +232,7 @@ src_wts = array(src_wts)/sum(array(src_wts))
 # set branch weights
 branch_wts = array([])
 branch_xml = []
+mod_dict = []
 
 # loop throgh source model types
 for st, sw in zip(src_type, src_wts):
@@ -239,6 +240,7 @@ for st, sw in zip(src_type, src_wts):
     src_type_wts = []
     
     orig_st = st
+    
     
     # assume intra-smoothed fault models have same weight as smoothed seis
     '''
@@ -291,7 +293,10 @@ for st, sw in zip(src_type, src_wts):
                     # append branch file
                     branch_xml.append(xl)
                      
-                    print xl, mod, st, mw
+                    #print xl, mod, st, mw
+                    
+                    # get models actually added
+                    mod_dict.append({'xml':xl, 'model':mod, 'model_wt':mw, 'src_type':st, 'src_wt':sw})
                     
     # re-normalise source type weights if within type neq 1.0
     src_type_wts = array(src_type_wts) / sum(src_type_wts)
@@ -316,5 +321,65 @@ updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=3)
 #updated_weights = branch_wts
 
 # write source model logic tree
-make_logic_tree(branch_xml, updated_weights, meta)
+#make_logic_tree(branch_xml, updated_weights, meta)
 
+############################################################################################
+# plot logic tree
+############################################################################################
+
+import matplotlib.pyplot as plt
+from misc_tools import dict2array
+from matplotlib.offsetbox import TextArea, VPacker, AnnotationBbox
+import matplotlib.patheffects as PathEffects
+#pe = [PathEffects.withStroke(linewidth=2, foreground="w")]
+fig = plt.figure(1, figsize=(10, 10))
+
+fig_src_ty = dict2array(mod_dict, 'src_type')
+unq_src_ty = unique(fig_src_ty)
+
+def xypts(x, y):
+	ypad = 0.05
+	xpad = 0.1
+	xd = [x-xpad, x+xpad, x+xpad, x-xpad, x-xpad]
+	yd = [y+ypad, y+ypad, y-ypad, y-ypad, y+ypad]
+	
+	return xd, yd, xpad, ypad
+	
+def isodd(num):
+   return num % 2 != 0
+
+# first plot source model
+x, y = (0, 0.5)
+xd, yd, xpad, ypad = xypts(x, y)
+plt.plot(xd, yd, c='k', lw=0.5)
+plt.text(x, y, 'Source Model', va='center', ha='center', size=14)
+
+#plt.xlim([-0.2, 1])
+#plt.ylim([0, 1])
+
+# draw nwxt level
+xc = 0.5
+if isodd(len(unq_src_ty)) == False:
+	yc = 1. - 1/(2*len(unq_src_ty))
+	yinc = 1./(len(unq_src_ty))
+else:
+	yc = 1. - 1/(len(unq_src_ty)+1)
+	yinc = 1./(len(unq_src_ty)-1)
+	
+y1 = 0.5
+for st in unq_src_ty:
+	xd, yd, xpad, ypad = xypts(xc, yc)
+	plt.plot(xd, yd, c='k', lw=0.5)
+	plt.text(xc, yc, st, va='center', ha='center', size=14)	
+	
+	# draw connecting lines
+	x_connect = [xpad, xc/2., xc-xpad]
+	y_connect = [0.5, yc, yc]
+	
+	# draw connection line
+	plt.plot(x_connect, y_connect, 'k', lw=0.5)
+	
+	yc -= yinc
+	
+plt.show()
+	
