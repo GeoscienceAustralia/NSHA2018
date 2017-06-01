@@ -54,7 +54,7 @@ delind = find(strcmp({mdat_pref.MDAT_prefMLSrc},'IDC'));
 mdat_pref(delind) = [];
 
 %%
-% load mcorr coefs
+% load mcorr coefs for converting old events based on average correction
 mcorr = textread('mcorr.dat','%f','delimiter',',');
 
 %% read station info
