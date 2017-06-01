@@ -12,7 +12,7 @@ from matplotlib import colors, colorbar
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
-from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value
+from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat
 
 # import non-standard functions
 try:
@@ -25,7 +25,7 @@ try:
     
     
     #from misc_tools import listdir_extension
-    from make_nsha_oq_inputs import write_oq_sourcefile
+    #from make_nsha_oq_inputs import write_oq_sourcefile
 except:
     cwd = getcwd().split(sep)
     pythonpath = sep.join(pt[0:-3])+sep+'tools'
@@ -48,8 +48,8 @@ try:
 except:
     single_src = False
 
-print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
-bestcurve = True
+#print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
+#bestcurve = True
 ###############################################################################
 # get parameter values
 ###############################################################################
@@ -124,11 +124,17 @@ new_n0_l = src_n0_l
 new_n0_u = src_n0_u
 
 # reset Mmin to 4.8
-print '!!!Temporary fix - setting Mmin = 4.8!!!'
-src_mmin = 4.8 * ones_like(src_mmin)
+print '!!!Setting Mmin = 4.5!!!'
+src_mmin = 4.5 * ones_like(src_mmin)
+#src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
-depmin = -99
-depmax = 99
+# set all plausible depths
+depmin = -99.
+depmax = 99. # only get events GE 10 km
+
+# set shallow depth range
+#depmin = -99.
+#depmax = 99. # only get events GE 10 km
 
 # set arrays for testing
 bval_vect = []
@@ -141,52 +147,10 @@ if single_src == True:
 
 else:
     srcidx = range(len(src_code))
-    
-    
+
 ###############################################################################
-# parse GGCat
+# parse catalogue
 ###############################################################################
-'''Used to parse GGCat csv - now parse HMTK csv'''
-print 'parsing catalogue...'
-#ggcat = parse_ggcat(ggcatfile)
-"""
-# parse HMTK csv
-parser = CsvCatalogueParser(hmtk_csv)
-cat = parser.read_file()
-
-# get number of earthquakes
-neq = len(cat.data['magnitude'])
-
-# reformat HMTK dict to one expected for code below
-ggcat = []
-for i in range(0, neq):
-    # first make datestr
-    try:
-        if not isnan(cat.data['second'][i]):
-            datestr = str(cat.data['eventID'][i]) \
-                      + str('%2.2f' % cat.data['second'][i])
-        else:
-            datestr = str(cat.data['eventID'][i]) + '00.00'
-            
-        evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
-    
-    # if ID not date form, do it the hard way!
-    except:
-        datestr = ''.join((str(cat.data['year'][i]), str('%02d' % cat.data['month'][i]), 
-                           str('%02d' % cat.data['day'][i]), str('%02d' % cat.data['hour'][i]),
-                           str('%02d' % cat.data['minute'][i]), str('%0.2f' % cat.data['second'][i])))
-    
-        evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
-        
-    tdict = {'datetime':evdt, 'prefmag':cat.data['magnitude'][i], \
-             'lon':cat.data['longitude'][i], 'lat':cat.data['latitude'][i], \
-             'dep':cat.data['depth'][i], 'year':cat.data['year'][i], \
-             'month':cat.data['month'][i], 'fixdep':0, 'prefmagtype':'MW', \
-             'auth':cat.data['Agency'][i]}
-             	
-    ggcat.append(tdict)
-"""
-
 '''Used to parse GGCat csv - now parse HMTK csv'''
 
 ggcat, neq = parse_hmtk_cat(hmtk_csv)
@@ -195,6 +159,21 @@ ggcat, neq = parse_hmtk_cat(hmtk_csv)
 lastRec = ggcat[-1]
 year_max = lastRec['year'] + lastRec['month']/12.
 
+# apply Hadi's ML-MW conversion to mcomps
+def convert_mcomps(mcomps):
+    '''
+    a1 = 0.66199378
+    a2 = 1.2156352
+    a3 = 1.2156352
+    mx = 4.5
+    my = a1 * mx + a2
+    
+    idx = where(mcomps <= mx)[0]
+    mcomps[idx] = a1 * mcomps[idx] + a2
+    idx = where(mcomps > mx)[0]
+    mcomps[idx] = a3 * (mcomps[idx] - mx) + my
+    '''
+    return mcomps
 
 ###############################################################################
 # get unique zone classes and loop through to merge zones of similar class 
@@ -218,6 +197,7 @@ class_area = []
 for uclass in unique_classes:
     
     total_mvect = []
+    total_mxvect = []
     total_tvect = []
     total_dec_tvect = []
     total_ev_dict = []
@@ -231,6 +211,8 @@ for uclass in unique_classes:
     Weichert = False
     mcomps = [-9999]
     cum_area = 0
+    class_mmin_reg = 9.0
+    class_mmax = nan
     
     print '\nCalculating b-value for class:', uclass
             
@@ -254,7 +236,7 @@ for uclass in unique_classes:
             
             print '    Compiling data from:', src_code[i]
             
-             # definitions of arrays extracted from catalogue
+            # definitions of arrays extracted from catalogue
             '''
             mvect: preferred MW
             mxvect: preferred original magnitudes
@@ -269,6 +251,7 @@ for uclass in unique_classes:
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
+            total_mxvect = hstack((total_mxvect, mxvect))
             total_tvect = hstack((total_tvect, tvect))
             total_dec_tvect = hstack((total_dec_tvect, dec_tvect))
             total_ev_dict = hstack((total_ev_dict, ev_dict))
@@ -276,20 +259,27 @@ for uclass in unique_classes:
             ###############################################################################
             # get earthquakes that pass completeness in merged zones
             ###############################################################################
-                
+            
             # get most conservative completeness for given geologic class
             temp_mcomp = array([float(x) for x in src_mcomp[i].split(';')])
             if temp_mcomp[-1] > mcomps[0]:
                 ycomps = array([int(x) for x in src_ycomp[i].split(';')])
                 mcomps = array([float(x) for x in src_mcomp[i].split(';')])
-                
-            # set mag bins
-            mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
+            
+            # get mag range for mfd
+            mcompmin = min(mcomps)
+            
+            # convert min Mx to MW
+            #mcompminmw = aus_ml2mw(mcompmin) - not needed now that mcomps in MW
+            
+            mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
+            mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
             
             # remove events with NaN mags
             didx = where(isnan(total_mvect))[0]
             total_tvect = delete(total_tvect, didx)
             total_mvect = delete(total_mvect, didx)
+            total_mxvect = delete(total_mxvect, didx)
             total_dec_tvect = delete(total_dec_tvect, didx)
             total_ev_dict = delete(total_ev_dict, didx)
             
@@ -297,8 +287,21 @@ for uclass in unique_classes:
             didx = where(total_mvect < min(mcomps)-bin_width/2)[0]
             total_tvect = delete(total_tvect, didx)
             total_mvect = delete(total_mvect, didx)
+            total_mxvect = delete(total_mxvect, didx)
             total_dec_tvect = delete(total_dec_tvect, didx)
             total_ev_dict = delete(total_ev_dict, didx)
+            
+            # set min regression magnitude
+            if src_mmin_reg[i] < class_mmin_reg:
+                class_mmin_reg = src_mmin_reg[i]
+                
+            # set class mmax
+            class_mmax = src_mmax[i]
+            
+            # set class b-values
+            fixed_bval = src_bval_fix[i]
+            fixed_bval_sig = src_bval_fix_sd[i]
+            
        
     ###############################################################################
     # get b-values from joined zones
@@ -306,15 +309,45 @@ for uclass in unique_classes:
     
     # keep original vectors for plotting
     class_orig_mvect = total_mvect
+    class_orig_mxvect = total_mxvect
     class_orig_tvect = total_tvect
     class_orig_dec_tvect = dec_tvect
     
-    # get bval for combined zones data - assumes call Leonard 2008 won't be invoked!
+    # get bval for combined zones data - uses new MW estimates ("total_mvect") to do cleaning
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
           get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
-                   mcomps, ycomps, year_max, mrng, src_mmax[i], src_mmin_reg[i], \
-                   src_bval_fix[i], src_bval_fix_sd[i], bin_width, poly)
+                   mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
+                   fixed_bval, fixed_bval_sig, bin_width, poly)
     
+    # get a-value using fixed region class b-value if assigned - need to do this to fit the class rates!
+    if not fixed_bval == -99.0:
+        # get annualised rates based on preferred MW (mvect)
+        cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
+            get_annualised_rates(mcomps, ycomps, total_mvect, mrng, bin_width, year_max)
+            
+        # get index of min reg mag and valid mag bins
+        diff_cum = abs(hstack((diff(cum_rates), 0.)))
+        midx = where((mrng >= class_mmin_reg-bin_width/2) & (diff_cum > 0.))[0]
+
+        # check if length of midx = 0 and get highest non-zero mag
+        if len(midx) == 0:
+            midx = [where(isfinite(diff_cum))[0][-1]]
+        
+        # make sure there is at least 4 observations for a-value calculations
+        if len(midx) < 5:
+            idxstart = midx[0] - 1
+            
+            while idxstart >= 0 and len(midx) < 5:
+                # if num observations greater than zero, add to midx
+                if n_obs[idxstart] > 0:
+                    midx = hstack((idxstart, midx))
+                    print '    get lower mag M', midx
+                    
+                idxstart -= 1
+        
+        # reset fn0 based on fixed b-value        
+        fn0 = fit_a_value(fixed_bval, mrng, cum_rates, class_mmax, bin_width, midx)
+        
     # add to class arrays
     class_bval.append(bval)
     class_bval_sig.append(sigb)
@@ -328,7 +361,7 @@ for uclass in unique_classes:
     class_fn0.append(fn0)
     class_area.append(cum_area)
     
-    # get event coords
+    # get event coords for plotting
     for e in total_ev_dict:
         lavect.append(e['lat'])
         lovect.append(e['lon'])
@@ -350,8 +383,13 @@ for i in srcidx:
     mcomps = array([float(x) for x in src_mcomp[i].split(';')])
     
     # get mag range for zonea
-    mrng = arange(min(mcomps)-bin_width/2, src_mmax[i], bin_width)
-        
+    mcompmin = min(mcomps)
+            
+    # convert min Mx to MW
+    #mcompminmw = aus_ml2mw(mcompmin) # now defining Mc in terms of MW
+    mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
+    mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
+            
     for uc in range(0, len(unique_classes)):
         
         # set b-value and class data
@@ -363,18 +401,19 @@ for i in srcidx:
             class_idx = uc
             
             bval_vect.append(bval)
-            bsig_vect.append(sigb)
+            bsig_vect.append(bval_sig)
             
-    # set values to avoid plotting issues later
+    # set null values to avoid plotting issues later
     try:
         new_bval_b[i] = bval
     except:
         new_bval_b[i] = 1.0
-    new_n0_b[i]   = 1E-30
+    
+    new_n0_b[i] = 1E-30
     
     # set beta params       
     beta = bval2beta(bval)
-    sigbeta = bval2beta(sigb)
+    sigbeta = bval2beta(bval_sig)
             
     # get polygon of interest
     poly = polygons[i]
@@ -383,8 +422,9 @@ for i in srcidx:
     src_area.append(get_WGS84_area(poly))
     
     # now get events within zone of interest
-    mvect, tvect, dec_tvect, ev_dict = get_events_in_poly(ggcat, polygons[i], depmin, depmax)
-    
+    mvect, mxvect, tvect, dec_tvect, ev_dict \
+        = get_events_in_poly(ggcat, polygons[i], depmin, depmax)
+        
     # skip zone if no events pass completeness
     if len(mvect) != 0:
         # assume Banda Sea sources
@@ -395,39 +435,58 @@ for i in srcidx:
     
         # preserve original arrays for plotting
         orig_mvect = mvect
+        orig_mxvect = mxvect
         orig_tvect = tvect
         orig_dec_tvect = dec_tvect
         
-        # remove incomplete events
-        mvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
-             remove_incomplete_events(mvect, tvect, dec_tvect, ev_dict, mcomps, ycomps)
+        # remove incomplete events based on new MW estimates (mvect)
+        mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
+             remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
         
     # check to see if mvect still non-zero length after removing incomplete events
     if len(mvect) != 0:
         
-        # get annualised rates
+        # get annualised rates based on preferred MW (mvect)
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
             get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, year_max)
             
         # get index of min reg mag and valid mag bins
         diff_cum = abs(hstack((diff(cum_rates), 0.)))
-        midx = where((mrng >= src_mmin_reg[i]) & (diff_cum > 0.))[0]
+        midx = where((mrng >= src_mmin_reg[i]-bin_width/2) & (diff_cum > 0.))[0]
+        
+        # check if length of midx = 0 and get highest non-zero mag
+        if len(midx) == 0:
+            midx = [where(isfinite(diff_cum))[0][-1]]
+        
+        # make sure there is at least 4 observations for a-value calculations
+        if len(midx) < 5:
+            idxstart = midx[0] - 1
+            
+            while idxstart >= 0 and len(midx) < 5:
+                # if num observations greater than zero, add to midx
+                if n_obs[idxstart] > 0:
+                    midx = hstack((idxstart, midx))
+                    print '    get lower mag M2', midx
+                    
+                idxstart -= 1
         
         # get a-value using region class b-value
         fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
         
         # get zone confidence limits
-        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)            
-                
+        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
+        
         ###############################################################################
         # get upper and lower MFD bounds
         ###############################################################################
         sigbeta173 = 1.73 * sigbeta
-        sigb173 = 1.73 * sigb
+        sigb173 = 1.73 * bval_sig
     
         # preallocate data
         N0_lo173 = nan
         N0_up173 = nan
+        N0_lo100 = nan
+        N0_up100 = nan
     
         if not isnan(bval):
             
@@ -468,11 +527,16 @@ for i in srcidx:
     
         print 'Filling new values for', src_code[i]
         new_bval_b[i] = bval
-        new_bval_l[i] = bval-sigb173
-        new_bval_u[i] = bval+sigb173
+        #new_bval_l[i] = bval-sigb173
+        #new_bval_u[i] = bval+sigb173
+        
+        # Use +/- 1 sigma
+        new_bval_l[i] = bval+bval_sig # lower curve, so higher b
+        new_bval_u[i] = bval-bval_sig # upper curve, so lower b
+        
         new_n0_b[i]   = fn0
-        new_n0_l[i]   = N0_lo173
-        new_n0_u[i]   = N0_up173
+        new_n0_l[i]   = N0_lo100
+        new_n0_u[i]   = N0_up100
         
         ###############################################################################
         # plot earthquakes that pass completeness
@@ -484,9 +548,18 @@ for i in srcidx:
         ax = plt.subplot(231)
     
         # cannot plot datetime prior to 1900 - not sure why!
+        # plot all events
         dcut = datetime(1900,1,1,0,0)
         didx = where(orig_tvect > dcut)[0]
         h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
+        
+        # replot those that pass completeness
+        didx = where(tvect > dcut)[0]
+        h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
+        plt.ylabel('Moment Magnitude (MW)')
+        plt.xlabel('Date')
+        #plt.title(src_code[i] + ' Catalogue Completeness')
+        
         
         # now loop thru completeness years and mags
         for yi in range(0, len(ycomps)-1):
@@ -519,12 +592,6 @@ for i in srcidx:
         ymax = ax.get_ylim()[-1]
         plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
                  [mcomps[-1], ymax], 'g-', lw=1.5)
-        
-        didx = where(tvect > dcut)[0]        
-        h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
-        plt.ylabel('Magnitude (MW)')
-        plt.xlabel('Date')
-        #plt.title(src_code[i] + ' Catalogue Completeness')
         
         Npass = str(len(mvect))
         Nfail = str(len(orig_mvect) - len(mvect))
@@ -594,25 +661,26 @@ for i in srcidx:
             plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
             yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
             yexpmax = ceil(log10(max(class_cum_rates[class_idx])))
-            plt.ylim([10**yexpmin, 10**yexpmax])
+            #plt.ylim([10**yexpmin, 10**yexpmax])
+            plt.ylim([1E-6, 100]) # for comparison across zones
             
             ###############################################################################
             # get legend text
             ###############################################################################
             
-            up173_txt = '\t'.join(('Upper 1.73x', str('%0.1f' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
+            up173_txt = '\t'.join(('Upper 1.73x', str('%0.3e' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
                                    str('%0.3f' % beta2bval(beta-sigbeta173)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
                                    
-            up100_txt = '\t'.join(('Upper 1.00x', str('%0.1f' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
+            up100_txt = '\t'.join(('Upper 1.00x', str('%0.3e' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
                                    str('%0.3f' % beta2bval(beta-sigbeta)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
                                    
-            best_txt  = '\t'.join(('Best Estimate', str('%0.1f' % fn0), str('%0.2f' % beta), \
+            best_txt  = '\t'.join(('Best Estimate', str('%0.3e' % fn0), str('%0.2f' % beta), \
                                    str('%0.3f' % bval), str('%0.1f' % src_mmax[i]))).expandtabs()
             
-            lo100_txt = '\t'.join(('Lower 1.00x', str('%0.1f' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
+            lo100_txt = '\t'.join(('Lower 1.00x', str('%0.3e' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
                                    str('%0.3f' % beta2bval(beta+sigbeta)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
                                    
-            lo173_txt = '\t'.join(('Lower 1.73x', str('%0.1f' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
+            lo173_txt = '\t'.join(('Lower 1.73x', str('%0.3e' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
                                    str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
             
             # set legend title
@@ -643,7 +711,7 @@ for i in srcidx:
                        
             # replot first legend
             plt.gca().add_artist(leg)
-                       
+            
             plt.grid(which='both', axis='both')
         
         ###############################################################################
@@ -770,23 +838,26 @@ for i in srcidx:
         plt.legend()        
         
         ###############################################################################
-        # make cummulative M >= 3 plot
+        # make cummulative M >= 3 plot of non filtered events
         ###############################################################################
         
         ax = plt.subplot(234)
         
         # get ndays
-        td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
+        #td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
+        td = orig_tvect[-1] - orig_tvect[0]
         
         ndays = timedelta2days_hours_minutes(td)[0]
         
         # get events M >= 3
         dates_ge_3 = []
         dcut = 1900
-        for ev in ev_dict:
-            if ev['prefmag'] >= 3.0 and ev['datetime'].year >= dcut:
+        for omag, otime in zip(orig_mvect, orig_tvect):
+            #if ev['prefmag'] >= 3.5 and ev['datetime'].year >= dcut:
+            if omag >= 3.5 and otime.year >= dcut:
                 # get decimal years
-                dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
+                #dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
+                dates_ge_3.append(otime.year + float(otime.strftime('%j'))/365.) # ignore leap years for now
         
         dates_ge_3 = array(dates_ge_3)        
         
@@ -795,7 +866,7 @@ for i in srcidx:
         if ndays > 0 and len(didx) > 0:
             plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
             plt.xlabel('Event Year')
-            plt.ylabel('Count | MW >= 3.0')
+            plt.ylabel('Count | MW >= 3.5')
         
             # set xlims
             tlim = [int(round(x)) for x in tlim] # converting to ints
@@ -940,11 +1011,11 @@ w.field('MMAX_UPPER','F', 8, 2)
 w.field('N0_BEST','F', 8, 5)
 w.field('N0_LOWER','F', 8, 5)
 w.field('N0_UPPER','F', 8, 5)
-w.field('BVAL_BEST','F', 8, 5)
-w.field('BVAL_LOWER','F', 8, 5)
-w.field('BVAL_UPPER','F', 8, 5)
-w.field('BVAL_FIX','F', 8, 2)
-w.field('BVAL_FIX_S','F', 8, 2)
+w.field('BVAL_BEST','F', 8, 3)
+w.field('BVAL_LOWER','F', 8, 3)
+w.field('BVAL_UPPER','F', 8, 3)
+w.field('BVAL_FIX','F', 8, 3)
+w.field('BVAL_FIX_S','F', 8, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','30')
 w.field('YMAX','F', 8, 0)
@@ -1180,7 +1251,7 @@ m2.drawstates()
 m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 
-# get M5 rates
+# get M6 rates
 new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
 
@@ -1190,9 +1261,8 @@ m6_rates = array(new_n0_b) * exp(-new_beta  * 6.0) * (1 - exp(-new_beta * (src_m
 # get area (in km**2) of sources for normalisation
 src_area= array(src_area)
     
-# normalise M5 rates by area
+# normalise M6 rates by area
 lognorm_m6_rates = log10(100**2 * m6_rates / src_area)
-#norm_m5_rates = m5_rates
     
 # get colour index
 ncolours=20
@@ -1239,7 +1309,7 @@ plt.close()
 # merge all pdfs to single file
 ###############################################################################
 
-from PyPDF2 import PdfFileMerger, PdfFileReader 
+from PyPDF2 import PdfFileMerger, PdfFileReader
 
 # get input files
 pdffiles = []
@@ -1287,21 +1357,16 @@ for rec in records:
     newline = ','.join(rec) + '\n'
     csvtxt += newline
 
-csvbase = path.split(newshp)[-1].strip('shp')+'pdf'
+csvbase = path.split(newshp)[-1].strip('shp')+'csv'
 combined_csv = path.join(rootfolder, csvbase)
    
 f = open(combined_csv, 'wb')
 f.write(csvtxt)
 f.close()
-
+"""
 ###############################################################################
 # make source dict for OQ input writer
 ###############################################################################
-
-# read new shapefile
-sf = shapefile.Reader(newshp)
-records = sf.records()
-shapes  = sf.shapes()
 
 # set model list
 model = []
@@ -1309,9 +1374,10 @@ model = []
 # loop thru recs and make dict
 for rec, shape in zip(records, shapes):
     if not float(rec[15]) == -99:
+        min_mag = src_mmin[0]
         m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'trt':rec[23], 'src_shape':array(shape.points), 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])],
              'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+             'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 'min_mag':min_mag, 'src_weight':float(rec[3]), 'src_reg_wt':1}
         model.append(m)
 
 # assume single source model for now
@@ -1320,3 +1386,4 @@ multimods = 'False'
 # now write OQ file
 oqpath = path.join(rootfolder)
 write_oq_sourcefile(model, oqpath, oqpath, multimods, bestcurve)
+"""

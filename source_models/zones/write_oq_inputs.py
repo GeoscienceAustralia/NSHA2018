@@ -199,7 +199,7 @@ elif outputType == '2':
             srcxmls.append(outxml)
             
             # get branch weight
-            branch_wts.append(beta_wts[i] * mx_wts[j])
+            #branch_wts.append(beta_wts[i] * mx_wts[j])
 
 ##############################################################################
 # vary beta only, mmax = constant
