@@ -473,7 +473,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     plt.show()
     
     ##########################################################################################
-    # make shapfile of countour lines
+    # make shapefile of contour lines
     ##########################################################################################
     
     # check to see if shapefile contours exists
