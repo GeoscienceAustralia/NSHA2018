@@ -1,5 +1,4 @@
 eventID,Agency,year,month,day,hour,minute,second,timeError,longitude,latitude,SemiMajor90,SemiMinor90,ErrorStrike,depth,depthError,magnitude,sigmaMagnitude,magnitudeType,mx_origML,mx_origType,mx_revML,pref_mw
-178806220620,GG,1788,6,22,6,20,0,,150.4,-34.3,,,,10,,nan,,nan,nan,nan,nan,nan
 183703140000,Garran,1837,3,14,0,0,0,,145,-38.1,,,,10,,3.5,,ML,3.5,ML,3.27,3.38
 183707231855,ADE,1837,7,23,18,55,0,,138.6,-34.9,,,,7,,3.9,,ML,3.9,ML,3.64,3.63
 184003310630,ADE,1840,3,31,6,30,0,,138.6,-34.9,,,,7,,2.7,,ML,2.7,ML,2.53,2.89

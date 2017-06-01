@@ -8,13 +8,8 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>Australia_Adaptive_K4_merged_bestb_mmin3.0_w1_faults.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.4</uncertaintyWeight>
-                </logicTreeBranch>
-                
-                <logicTreeBranch branchID="b2">
-                    <uncertaintyModel>Australia_Adaptive_K4_merged_bestb_mmin4.0_w1_faults.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.6</uncertaintyWeight>
+                    <uncertaintyModel>Leonard08_best.xml</uncertaintyModel>
+                    <uncertaintyWeight>1.0</uncertaintyWeight>
                 </logicTreeBranch>
 
             </logicTreeBranchSet>

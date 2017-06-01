@@ -152,6 +152,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     llcrnrlon = minlon
     urcrnrlon = maxlon
     lon_0 = mean([llcrnrlon, urcrnrlon])
+    lon_0 = 134.
     lat_1 = percentile([llcrnrlat, urcrnrlat], 25)
     lat_2 = percentile([llcrnrlat, urcrnrlat], 75)
     
@@ -280,16 +281,21 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     if probability == '10%':
         levels = arange(0.02, 0.3, 0.02)
         levels = arange(0.05, 0.3, 0.05)
-        levels = array([0.01, 0.02, 0.04, 0.08, 0.12, 0.18, 0.24])
+        levels = array([0.01, 0.02, 0.04, 0.06, 0.08, 0.12, 0.18, 0.24])
+        levels_lo = array([0.005])
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
     
     if cwd.startswith('/nas'):
         csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
+        csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
+        
     else:
-        csm = plt.contour(x, y, 10**resampled, levels, colors='k')        
+        csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
+        csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
     
     plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
+    plt.clabel(csm_lo, inline=1, fontsize=10, fmt='%0.3f')
     
     ##########################################################################################
     # get land & lake polygons for masking
@@ -475,12 +481,17 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         mkdir('contours')
         
     # make list of levels
-    allLevels = [array([0.01, 0.02, 0.04, 0.08, 0.12, 0.18, 0.24]),
-                 arange(0.01, 0.15, 0.01),
+    allLevels = [array([0.005, 0.01, 0.02, 0.04, 0.06, 0.08, 0.12, 0.18, 0.24]),
+                 array([0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.25, 0.30]),
+                 array([0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10]),
+                 array([0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.15]),
+                 array([0.003, 0.004, 0.006, 0.008, 0.01, 0.012, 0.015, 0.02])]
+    '''
+                 arange(0.01, 0.2, 0.01),
                  arange(0.02, 0.3, 0.02), 
                  arange(0.05, 0.6, 0.05)]
-                 
-    levelNames = ['lev_custom', 'lev_0_01', 'lev_0_02', 'lev_0_05']                 
+    '''
+    levelNames = ['lev_nat', 'lev_swsz','lev_ntsa', 'lev_nswtas', 'lev_qld'] #, 'lev_0_01', 'lev_0_02', 'lev_0_05']                 
     
     # loop thru levels
     for levels, levelName in zip(allLevels, levelNames):

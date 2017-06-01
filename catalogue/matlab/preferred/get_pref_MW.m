@@ -149,7 +149,7 @@ disp('Converting ML to MW using Ghasemi...');
 % set HG fixed mx reg coefs
 a1 = 0.66199378;
 a2 = 1.2156352;
-a3 = 1.2156352;
+a3 = 1.07488336;
 mx = 4.5;
 my = a1 * mx + a2;
 
