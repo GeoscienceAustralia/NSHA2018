@@ -36,7 +36,7 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
         
         <logicTreeBranchingLevel branchingLevelID="bl3">
 
-            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"
                     applyToTectonicRegionType="Extended">
 
                 <logicTreeBranch branchID="GaullEtAL1990PGAfromPGVSoutheasternAustralia">
