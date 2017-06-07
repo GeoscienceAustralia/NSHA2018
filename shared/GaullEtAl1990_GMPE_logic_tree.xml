@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+    <logicTree logicTreeID="lt1">
+
+<!-- GMM selection and weights defined through expert elicitation process, using calibration
+power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
+
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs1"
+                    applyToTectonicRegionType="Non_cratonic">
+
+                <logicTreeBranch branchID="GaullEtAL1990PGAfromPGVSoutheasternAustralia">
+                    <uncertaintyModel>GaullEtAL1990PGAfromPGVSoutheasternAustralia</uncertaintyModel>
+                    <uncertaintyWeight>1.0</uncertaintyWeight>
+                </logicTreeBranch>
+
+           </logicTreeBranchSet>
+
+        </logicTreeBranchingLevel>
+
+        <logicTreeBranchingLevel branchingLevelID="bl2">
+
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"
+                    applyToTectonicRegionType="Cratonic">
+
+                <logicTreeBranch branchID="GaullEtAL1990PGAfromPGVWesternAustralia">
+                    <uncertaintyModel>GaullEtAL1990PGAfromPGVWesternAustralia</uncertaintyModel>
+                    <uncertaintyWeight>1.0</uncertaintyWeight>
+                </logicTreeBranch>
+
+           </logicTreeBranchSet>
+
+        </logicTreeBranchingLevel>
+
+    </logicTree>
+</nrml>
