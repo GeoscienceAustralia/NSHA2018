@@ -54,6 +54,9 @@ for line in lines:
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
 
+print '\nNOTE: Getting Domains info for original magnitudes\n'
+shapepath = open('..//reference_shp_mx.txt').read()
+
 # load domains shp
 dsf = shapefile.Reader(shapepath)
 
@@ -123,6 +126,9 @@ for code, poly in zip(codes, shapes):
         mcomp.append(neo_mcomp[matchidx])
         bval_fix.append(neo_bval[matchidx])
         bval_sig_fix.append(bval_sig[matchidx])
+        #print '\nNOTE: Setting b-value params to -99\n'
+        #bval_fix.append(-99)
+        #bval_sig_fix.append(-99)
 
 dep_b = array(dep_b)
 

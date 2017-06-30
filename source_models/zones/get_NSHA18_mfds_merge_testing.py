@@ -433,16 +433,16 @@ for i in srcidx:
             src_mmax_l[i] = 7.8
             src_mmax_u[i] = 8.2
     
+        # remove incomplete events based on new MW estimates (mvect)
+        mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
+             remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
+             
         # preserve original arrays for plotting
         orig_mvect = mvect
         orig_mxvect = mxvect
         orig_tvect = tvect
         orig_dec_tvect = dec_tvect
-        
-        # remove incomplete events based on new MW estimates (mvect)
-        mvect, mxvect, tvect, dec_tvect, ev_dict, out_idx, ev_out = \
-             remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
-        
+                
     # check to see if mvect still non-zero length after removing incomplete events
     if len(mvect) != 0:
         

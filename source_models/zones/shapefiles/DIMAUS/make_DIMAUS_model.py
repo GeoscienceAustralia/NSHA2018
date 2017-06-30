@@ -56,6 +56,9 @@ for line in lines:
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
 
+print '\nNOTE: Getting Domains info for original magnitudes\n'
+shapepath = open('..//reference_shp_mx.txt').read()
+
 # load domains shp
 dsf = shapefile.Reader(shapepath)
 
@@ -102,8 +105,8 @@ for code, poly in zip(codes, shapes):
     if code == 'WLBY' or code == 'PAPU' or code == 'BLHB' or code == 'EPPL' \
        or code == 'SCOT':
         matchidx = -1
-    elif code == 'TRNS' or code == 'GAWL' or code == 'EYPN':
-        matchidx = 2
+    elif code == 'TRNS' or code == 'SPCG' or code == 'EYPN':
+        matchidx = 0
             
     # set dummy values
     if matchidx == -99:
@@ -198,7 +201,7 @@ dep_b = array(dep_b)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'DIMAUS_NSHA18.shp'
+outshp = 'DIMAUS_NSHA18_MX.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)

@@ -336,7 +336,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     imoff = 0.02
     logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
     logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
-    logo_bbox = [map_bbox[0]+0.07,map_bbox[1]-0.07,0.25,0.25]
+    logo_bbox = [map_bbox[0]+0.09,map_bbox[1]-0.075,0.25,0.25]
     newax = figure.add_axes(logo_bbox) #, zorder=-1)
     newax.imshow(im)
     newax.axis('off')
@@ -359,7 +359,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # set bbox for logo
     imoff = 0.02
     logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
-    logo_bbox = [0.73,map_bbox[1]-0.03,0.1,0.1]
+    logo_bbox = [0.71,map_bbox[1]-0.03,0.1,0.1]
     newax = figure.add_axes(logo_bbox) #, zorder=-1)
     newax.imshow(im)
     newax.axis('off')

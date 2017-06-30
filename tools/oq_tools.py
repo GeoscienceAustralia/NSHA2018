@@ -30,7 +30,7 @@ def return_annualised_haz_curves(hazcurvefile):
         investigation_time = float(hcm.metadata['investigation_time'])
         metadata = hcm.metadata
         
-    # from OQ V2.2, returns csv files only
+    # from OQ V2.2 or higher, returns csv files only
     elif hazcurvefile.endswith('csv'):
 
         csvlines = open(hazcurvefile).readlines()
@@ -63,26 +63,52 @@ def return_annualised_haz_curves(hazcurvefile):
         
     return annual_hazcurves, curvelon, curvelat, metadata
     
-# return curves for given time interval
+# return curves for given time interval (e.g. 50-years)
 def return_haz_curves(hazcurvefile):
-    from openquake.nrmllib.hazard.parsers import HazardCurveXMLParser
-    hcm = HazardCurveXMLParser(hazcurvefile).parse()
-    from numpy import array
+    from numpy import array, log
     
-    #extract curve lat/lons from POES
+    # set lists to fill
     curvelat = []
     curvelon = []
     hazcurves = []
-    for loc, poes in hcm:
-        curvelon.append(loc.x)
-        curvelat.append(loc.y)
-        hazcurves.append((poes))
     
-    curvelon = array(curvelon)  
-    curvelat = array(curvelat)
-    hazcurves = array(hazcurves)
+    # try parsing old xml first
+    if hazcurvefile.endswith('xml'):
+        from openquake.nrmllib.hazard.parsers import HazardCurveXMLParser
+        #from oq_output.hazard_curve_converter import read_hazard_curves
+        from oq_output.hazard_curve_converter import HazardCurveXMLParser
         
-    return hazcurves, curvelon, curvelat, hcm.metadata    
+        hcm = HazardCurveXMLParser(hazcurvefile).parse()
+        
+        #extract curve lat/lons from POES
+        for loc, poes in hcm:
+            curvelon.append(loc.x)
+            curvelat.append(loc.y)
+            hazcurves.append((poes))
+        
+        metadata = hcm.metadata
+        
+    # from OQ V2.2 or higher, returns csv files only
+    elif hazcurvefile.endswith('csv'):
+
+        csvlines = open(hazcurvefile).readlines()
+                
+        # get intesity measures
+        header = csvlines[1].strip().split(',')[2:]
+        try:
+            imls = array([float(x.split(':')[0]) for x in header])
+        except:
+            imls = array([float(x.split('-')[-1]) for x in header])
+        metadata = {'imls': imls}
+        	
+        # get site data
+        for line in csvlines[2:]:
+            dat = line.split(',')
+            curvelon.append(float(dat[0]))
+            curvelat.append(float(dat[1]))
+            hazcurves.append(array([float(x) for x in dat[2:]]))
+            
+    return hazcurves, curvelon, curvelat, metadata    
 
 # script to interpolate across nearby sites to derive hazard curve for site of interest
 # also return hazard type (e.g. mean, median, quantile)

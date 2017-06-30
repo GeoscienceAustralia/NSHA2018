@@ -285,11 +285,13 @@ prefmag1 = 'orig' # declusters based on original catalogue magnitude
 
 # Use 2012 NSHA catalogue
 nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
+nsha2012csv = path.join('data', 'AUSTCAT.MP.V0.12.csv') # temp fix for testing original mags
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 
 # set HMTK file name
 if prefmag1 == 'orig':
     hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig.csv'
+    hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mp_orig.csv'
 elif prefmag1 == 'mw':
     hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk.csv'
 
@@ -326,6 +328,7 @@ else:
 print 'Merging stripped columns...\n'
 
 prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
+prefmag2 = 'orig' # keeps orig mag in declustered catalogue
 
 from misc_tools import dict2array, checkfloat
 

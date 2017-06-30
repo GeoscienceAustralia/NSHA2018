@@ -63,6 +63,9 @@ for line in lines:
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
 
+print '\nNOTE: Getting Domains info for original magnitudes\n'
+shapepath = open('..//reference_shp_mx.txt').read()
+
 # load domains shp
 dsf = shapefile.Reader(shapepath)
 
@@ -144,7 +147,7 @@ dep_b = array(dep_b)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'AUS6_NSHA18.shp'
+outshp = 'AUS6_NSHA18_MX.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)

@@ -178,6 +178,7 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
     for m in mrng:
         midx = where( array(mrng) >= m )[0]
         cum_rates.append(sum(bin_rates[midx]))
+    
     #print cum_rates
     return array(cum_rates), array(cum_num), bin_rates, n_obs, n_yrs
 

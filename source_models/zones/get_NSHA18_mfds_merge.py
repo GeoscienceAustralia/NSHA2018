@@ -321,6 +321,11 @@ for uclass in unique_classes:
     
     # get a-value using fixed region class b-value if assigned - need to do this to fit the class rates!
     if not fixed_bval == -99.0:
+        
+        # remove incomplete events based on original preferred magnitudes (mxvect)
+        total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, out_idx, ev_out = \
+             remove_incomplete_events(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, bin_width)        
+        
         # get annualised rates based on preferred MW (mvect)
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
             get_annualised_rates(mcomps, ycomps, total_mvect, mrng, bin_width, year_max)
@@ -348,7 +353,7 @@ for uclass in unique_classes:
         # reset fn0 based on fixed b-value        
         fn0 = fit_a_value(fixed_bval, mrng, cum_rates, class_mmax, bin_width, midx)
         
-    # add to class arrays
+    # add to class arrays - used for plotting later
     class_bval.append(bval)
     class_bval_sig.append(sigb)
     class_cum_rates.append(cum_rates)

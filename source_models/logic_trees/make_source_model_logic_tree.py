@@ -20,6 +20,9 @@ weighted_smoothing = True
 
 relpath = path.join('..', 'zones', '2012_mw_ge_4.0')
 
+#print '\n!!! Using Original Magnitudes !!!\n'
+#relpath = path.join('..', 'zones', '2012_mx_ge_4.0')
+
 # copy NSHA13
 sourceXML = path.join(relpath, 'NSHA13', 'input', 'collapsed', 'NSHA13_collapsed.xml')
 targetXML = path.join('..', 'complete_model', path.split(sourceXML)[-1])
@@ -83,6 +86,7 @@ xmllist.append(path.split(targetXML)[-1])
 ###############################################################################
 
 relpath = path.join('..', 'faults')
+relpath = path.join('..', 'faults', 'mx') # for testing catalogue with original magnitudes
 
 # copy NSHA13
 sourceXML = path.join(relpath, 'NFSM_NSHA13_collapsed_additive_w1', 'NFSM_NSHA13_collapsed_additve_w1.xml')
@@ -105,6 +109,7 @@ xmllist.append(path.split(targetXML)[-1])
 ###############################################################################
 # copy smoothed seismicity source models
 ###############################################################################
+
 '''
 # copy GA fixed
 sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_fixed_smoothing_collapsed/source_model_smoothed_frankel_50_3_mmin_3.0_merged_inc_b_mmax_uncert_v1.xml'
@@ -205,7 +210,7 @@ else:
 
 # set up metadata dictionary
 modelPath = getcwd() # path where source logic tree is to be saved
-meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree.xml', 
+meta = {'modelPath': modelPath, 'modelFile':'nsha18_source_model_logic_tree_mx.xml', 
         'splitXMLPath': True} # assume source files in job dir 
 
 # get set weights
@@ -321,12 +326,12 @@ updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=3)
 #updated_weights = branch_wts
 
 # write source model logic tree
-#make_logic_tree(branch_xml, updated_weights, meta)
+make_logic_tree(branch_xml, updated_weights, meta)
 
 ############################################################################################
 # plot logic tree
 ############################################################################################
-
+"""
 import matplotlib.pyplot as plt
 from misc_tools import dict2array
 from matplotlib.offsetbox import TextArea, VPacker, AnnotationBbox
@@ -383,3 +388,4 @@ for st in unq_src_ty:
 	
 plt.show()
 	
+"""

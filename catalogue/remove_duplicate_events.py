@@ -9,6 +9,7 @@ from os import path
 
 # Parse 2012 NSHA catalogue as dict
 nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
+nsha2012csv = path.join('data', 'AUSTCAT.MP.V0.12.csv') # for use with preferred magnitudes
 
 # Parse 2012 NSHA catalogue as dict
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
