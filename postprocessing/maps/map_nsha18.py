@@ -20,6 +20,7 @@ from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
+from scipy.constants import g
 #from gmt_tools import cpt2colormap
 #from shapely.geometry import Point, Polygon
 
@@ -50,7 +51,7 @@ modelName = argv[2]
 
 
 # get model name from input file
-model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
+#model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
 
 # parse hazard grid file 
 lines = open(gridfile).readlines()
@@ -66,16 +67,25 @@ keys = line.strip().split(',')[2:]
 
 # make grid dictionary
 grddict = []
-
+gshap = False
 print '\nReading', modelName
 for line in lines[2:]:
     dat = line.strip().split(',')
+    # check if GSHAP    
+    if len(dat) == 1:
+        dat = line.strip().split('\t')
+        gshap = True
+        keys = ['PGA-0.1']
+
     tmpdict = {'lon':float(dat[0]), 'lat':float(dat[1])}
     
     # fill keys
     idx = 2
     for key in keys:
-        tmpdict[key] = float(dat[idx])
+        if gshap == True:
+            tmpdict[key] = float(dat[idx]) / g
+        else:
+            tmpdict[key] = float(dat[idx])
         idx += 1
     
     # add to grid list
@@ -281,7 +291,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     if probability == '10%':
         levels = arange(0.02, 0.3, 0.02)
         levels = arange(0.05, 0.3, 0.05)
-        levels = array([0.01, 0.02, 0.04, 0.06, 0.08, 0.12, 0.18, 0.24])
+        levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
         levels_lo = array([0.005])
     elif probability == '2%':
         levels = arange(0.05, 0.3, 0.05)
@@ -321,48 +331,48 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     ##########################################################################################
     # add GA logo
     ##########################################################################################
-    
-    # load logo
-    try:
-        im = plt.imread('../GAlogo.png')
-    except:
-        # cover all bases
+    if modelName.startswith('GSHAP') == False:
+        # load logo
         try:
-            im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
+            im = plt.imread('../GAlogo.png')
         except:
-            im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/GAlogo.png')
-    
-    # set bbox for logo
-    imoff = 0.02
-    logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
-    logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
-    logo_bbox = [map_bbox[0]+0.09,map_bbox[1]-0.075,0.25,0.25]
-    newax = figure.add_axes(logo_bbox) #, zorder=-1)
-    newax.imshow(im)
-    newax.axis('off')
-    
-    ##########################################################################################
-    # add CC-by
-    ##########################################################################################
-    
-    # load logo
-    try:
-        im = plt.imread('../ccby_narrow.png')
-    except:
-        # covering all bases again
+            # cover all bases
+            try:
+                im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
+            except:
+                im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/GAlogo.png')
+        
+        # set bbox for logo
+        imoff = 0.02
+        logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
+        logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
+        logo_bbox = [map_bbox[0]+0.09,map_bbox[1]-0.075,0.25,0.25]
+        newax = figure.add_axes(logo_bbox) #, zorder=-1)
+        newax.imshow(im)
+        newax.axis('off')
+        
+        ##########################################################################################
+        # add CC-by
+        ##########################################################################################
+        
+        # load logo
         try:
-            im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
+            im = plt.imread('../ccby_narrow.png')
         except:
-            im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
-
+            # covering all bases again
+            try:
+                im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
+            except:
+                im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
     
-    # set bbox for logo
-    imoff = 0.02
-    logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
-    logo_bbox = [0.71,map_bbox[1]-0.03,0.1,0.1]
-    newax = figure.add_axes(logo_bbox) #, zorder=-1)
-    newax.imshow(im)
-    newax.axis('off')
+        
+        # set bbox for logo
+        imoff = 0.02
+        logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
+        logo_bbox = [0.71,map_bbox[1]-0.03,0.1,0.1]
+        newax = figure.add_axes(logo_bbox) #, zorder=-1)
+        newax.imshow(im)
+        newax.axis('off')
      
     ##########################################################################################
     # superimpose area source shapefile
