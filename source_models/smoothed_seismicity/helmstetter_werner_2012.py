@@ -7,7 +7,9 @@ by Jonathan Griffin, Geoscience Australia
 import os
 import h5py
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
+from  matplotlib import pyplot as plt
 import collections
 from matplotlib.path import Path
 from copy import deepcopy
@@ -22,10 +24,6 @@ from math import fabs, floor, log10, sqrt, atan2, pi, degrees, radians
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from smoothed_seismicity_utils import (ProgressCounter, Grid, 
                                        get_catalogue_bounding_polygon)
-#from openopt import GLP
-
-SECONDS_PER_DAY = 3600.0 * 24.0
-SECONDS_PER_YEAR = SECONDS_PER_DAY * 365.25
 
 SAM_COMP_TABLE = np.array([[1995.0, 3.5],
                            [1985.0, 4.5],
@@ -593,7 +591,7 @@ class HelmstetterNearestNeighbour(HelmstetterWerner2012):
         kagan_i1 = probs.get_i1()
         print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
             poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1)
-        return -poiss_llh
+        return -poiss_llh#, kagan_i0, kagan_i1
 
 class HelmstetterEtAl2007(HelmstetterNearestNeighbour):
     """
@@ -723,11 +721,19 @@ class HelmstetterEtAl2007(HelmstetterNearestNeighbour):
         probs.count_events()
         # Get Poisson Log-Likelihood
         poiss_llh = probs.poisson_loglikelihood()
+        uniform_llh = probs.uniform_spatial_poisson_loglikelihood()
+        prob_gain = probs.probability_gain()
         kagan_i0 = probs.get_i0()
         kagan_i1 = probs.get_i1()
-        print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
-            poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1)
-        return -poiss_llh
+        print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f " \
+            "Uniform LLH = %.6f, Probability gain = %.6f"%(
+            poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1, uniform_llh, prob_gain)
+        filename = 'error_diagram_b%.2f_%i_%i_%i_%i.png' %(
+            self.config["bvalue"], self.learning_catalogue.start_year,
+            self.learning_catalogue.end_year, self.target_catalogue.start_year,
+            self.target_catalogue.end_year)
+        probs.error_diagram(title='test',filename=filename)
+        return -poiss_llh, kagan_i0, kagan_i1, uniform_llh, prob_gain
 
     def exhaustive_smoothing(self, krange, r_min_range):
         """
@@ -824,6 +830,8 @@ class FixedWidthSmoothing(HelmstetterEtAl2007):
         probs.count_events()
         # Get Poisson Log-Likelihood
         poiss_llh = probs.poisson_loglikelihood()
+        uniform_llh = probs.uniform_spatial_poisson_loglikelihood()
+        prob_gain = probs.probability(gain)
         kagan_i0 = probs.get_i0()
         kagan_i1 = probs.get_i1()
         print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
@@ -941,6 +949,20 @@ class GridProbabilities(object):
         # Get area for each cell
         return annual_rate * self.area / np.sum(self.area)
 
+    def uniform_spatial_poisson_loglikelihood(self):
+        """Returns loglikelood function for uniform 
+        spatial distribution based on number of
+        events in learning catalogue
+        """
+        nevents = self.grid.learning_catalogue.get_number_events()
+        nyrs = float(self.grid.learning_catalogue.end_year - \
+                         self.grid.learning_catalogue.start_year + 1)
+        uniform_rates = self.uniform_rate_density(nevents,nyrs)
+        # now calculate log likelihood of model
+        #log_llh = np.sum(self.obs_rates*np.log(uniform_rates))
+        log_llh = np.sum(np.log(((uniform_rates**self.obs_rates)* \
+                                     np.exp(-uniform_rates))/factorial(self.obs_rates)))
+        return log_llh
 
     def poisson_loglikelihood(self):
         """
@@ -950,7 +972,19 @@ class GridProbabilities(object):
         return np.sum(np.log(
             (self.rates[idx] ** self.obs_rates[idx]) *\
                 np.exp(-self.rates[idx]) / factorial(self.obs_rates[idx])))
-    
+
+    def probability_gain(self):
+        """Probability gain as defined in equation 9 
+        of Helmstetter et al. 2007.
+        """
+        poiss_llh = self.poisson_loglikelihood()
+        uniform_llh = self.uniform_spatial_poisson_loglikelihood()
+        print poiss_llh
+        print uniform_llh
+        prob_gain = np.exp((poiss_llh - uniform_llh)/ \
+                               self.catalogue.get_number_events())
+        return prob_gain
+
     def get_i1(self):
         """
         Returns the Kagan (2009) I1 metric
@@ -962,6 +996,9 @@ class GridProbabilities(object):
         idx = self.obs_rates > 0.
         forecast_rate = self.rates[idx] / self.area[idx]
         rate_per_km2 = total_rate / np.sum(self.area)
+        print 'total rate', total_rate
+        print 'rate_per_km2', rate_per_km2
+        print 'forecast rate', forecast_rate
         return (1. / total_rate) * np.sum(np.log2(forecast_rate /
                                                   rate_per_km2))
 
