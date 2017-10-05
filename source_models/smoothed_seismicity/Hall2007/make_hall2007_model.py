@@ -25,7 +25,7 @@ from openquake.hazardlib.pmf import PMF
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
 except:
-    print 'Add PYTHONPATH to NSHA18 root directory'
+    print 'Point PYTHONPATH to NSHA18 root directory'
 
 # Default values - real values should be based on neotectonic domains
 min_mag = 4.5
