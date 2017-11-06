@@ -3,7 +3,7 @@ Removes duplicate events from
 
 '''
 from parsers import parse_NSHA2012_catalogue
-#from misc_tools import dict2array, checkfloat
+from misc_tools import dictlist2array, checkfloat
 from numpy import array, isnan, where, hstack, delete
 from os import path
 
@@ -18,7 +18,7 @@ nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 # get data arrays from original catalogue
 print array(nsha_dict[0].keys()), '\n'
 for key in nsha_dict[0].keys():
-    exec(key + ' = dict2array(nsha_dict, key)')
+    exec(key + ' = dictlist2array(nsha_dict, key)')
 
 # make datestr array
 datestr = []
