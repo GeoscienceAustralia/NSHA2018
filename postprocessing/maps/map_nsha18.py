@@ -83,7 +83,7 @@ for line in lines[2:]:
     idx = 2
     for key in keys:
         if gshap == True:
-            tmpdict[key] = float(dat[idx]) / g
+            tmpdict[key] = float(dat[idx]) #/ g
         else:
             tmpdict[key] = float(dat[idx])
         idx += 1
@@ -271,7 +271,11 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
         try:
-            nascptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+            if gshap == True:
+                nascptfile = '/nas/gemd/ehp/georisk_earthquake/hazard/DATA/cpt/gshap.cpt'
+            else:
+                nascptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+            
             #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
             cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
         except:
@@ -328,6 +332,19 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     # get map bbox
     map_bbox = ax.get_position().extents
     
+     ##########################################################################################
+    # add DRAFT text!
+    ##########################################################################################
+    import matplotlib.patheffects as path_effects
+    #import matplotlib.patheffects as PathEffects
+    drafttext = figure.text(0.5, 0.5, 'DRAFT', color='w', rotation=45,
+                          ha='center', va='center', size=160, alpha=0.1)
+    #drafttext = ax.annotate("DRAFT", xy=(.5, .5), xytext=(.5, .5),
+    #                        ha='center', va='center', size=160, rotation=45)                         
+    drafttext.set_path_effects([path_effects.Stroke(linewidth=4, foreground='maroon'),
+                       path_effects.Normal()])
+    drafttext.set_alpha(0.5)
+    
     ##########################################################################################
     # add GA logo
     ##########################################################################################
@@ -373,7 +390,9 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
-     
+    
+        
+    
     ##########################################################################################
     # superimpose area source shapefile
     ##########################################################################################
@@ -476,10 +495,10 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
-    '''
+    
     plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
                 dpi=300, format='pdf', bbox_inches='tight')
-    '''
+    
     plt.show()
     
     ##########################################################################################
