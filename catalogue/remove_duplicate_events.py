@@ -3,13 +3,14 @@ Removes duplicate events from
 
 '''
 from parsers import parse_NSHA2012_catalogue
-from misc_tools import dict2array, checkfloat
+from misc_tools import dictlist2array, checkfloat
 from numpy import array, isnan, where, hstack, delete
 from os import path
 
 # Parse 2012 NSHA catalogue as dict
 nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
 nsha2012csv = path.join('data', 'AUSTCAT.MP.V0.12.csv') # for use with preferred magnitudes
+nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.11.csv') # for use with 2012 catalogue
 
 # Parse 2012 NSHA catalogue as dict
 nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
@@ -17,7 +18,7 @@ nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
 # get data arrays from original catalogue
 print array(nsha_dict[0].keys()), '\n'
 for key in nsha_dict[0].keys():
-    exec(key + ' = dict2array(nsha_dict, key)')
+    exec(key + ' = dictlist2array(nsha_dict, key)')
 
 # make datestr array
 datestr = []
