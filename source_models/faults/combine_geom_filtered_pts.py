@@ -8,9 +8,9 @@ from NSHA2018.source_models.utils.pt2fault_distance import read_pt_source, \
     read_simplefault_source, combine_pt_sources
 from glob import glob
 
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6'
-#area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
-area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_NSHA13'
+area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+#area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 geom_pt_sources_filename =  area_source_model[:-4] + '_pts_geom_weighted.xml'
 
 tmp_pt_source_filenames = glob(geom_pt_sources_filename.rstrip('.xml') + '_*.xml')
