@@ -52,10 +52,7 @@ def parse_line_shapefile(shapefile, shapefile_depth_attribute):
 
 
 def append_xml_header(output_xml,
-                      source_model_name,
-                      complex_fault_id,
-                      complex_fault_name,
-                      complex_fault_tectonic_region):
+                      source_model_name):
     """Add information to the nrml which goes above the fault contours
 
     """
@@ -71,6 +68,12 @@ def append_xml_header(output_xml,
 
     # Source model information
     output_xml.append('  <sourceModel name="' + str(source_model_name) + '">')
+    return
+
+def append_fault_source_header(output_xml,
+                               complex_fault_id,
+                               complex_fault_name,
+                               complex_fault_tectonic_region):
     output_xml.append('  <complexFaultSource id="' + str(complex_fault_id) +
                       '"' + ' name="' + str(complex_fault_name) + '"' +
                       ' tectonicRegion="' +
@@ -191,7 +194,9 @@ def nrml_from_shapefile(shapefile,
     # Output is written line-by-line to this list
     output_xml = []
 
-    append_xml_header(output_xml, source_model_name, complex_fault_id,
+    append_xml_header(output_xml, source_model_name)
+
+    append_fault_source_header(output_xml, complex_fault_id,
                       complex_fault_name, complex_fault_tectonic_region)
 
     append_rupture_geometry(output_xml, fault_contours)
