@@ -1,8 +1,8 @@
 #PBS -P w84
-#PBS -q express
-#PBS -l walltime=01:00:00
-#PBS -l ncpus=8
-#PBS -l mem=32GB
+#PBS -q hugemem
+#PBS -l walltime=24:00:00
+#PBS -l ncpus=28
+#PBS -l mem=800GB
 #PBS -l wd
 
 module load intel-cc/12.1.9.293
@@ -23,8 +23,6 @@ export PYTHONPATH=.:/short/n74/src/lib/python:${PYTHONPATH}
 export PYTHONPATH=.:/home/547/jdg547/.local/lib/python2.7/site-packages:${PYTHONPATH}
 export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/oq-hazardlib:${PYTHONPATH}
 export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/oq-engine:${PYTHONPATH}
-#export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/NSHA2018/:${PYTHONPATH}
 export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/:${PYTHONPATH}
 
-mpirun -np 8 -x PYTHONPATH python geom_filter_parallel.py
-#python build_national_fsm_collapsed_rates.py >&build_fsm.log 
+mpirun -np 28 -x PYTHONPATH python geom_filter_parallel.py
