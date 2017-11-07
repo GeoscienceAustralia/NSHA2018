@@ -87,6 +87,8 @@ def combine_pt_sources(point_source_list, filename, name, nrml_version='04',
                                                   list(new_rates))
                             source_model.remove(pt_source)
                     elif id_location_flag == 'location':
+                        #print type(pt_source)
+                        #print type(pt)
                         # Check if location and nodal planes are the same
                         if pt_source.location.x == pt.location.x and \
                                 pt_source.location.y == pt.location.y:
@@ -134,10 +136,10 @@ def write_combined_faults_points(point_sources, fault_sources,
                     ps_id_index += 1
 #                    id_index = max(id_index, source.source_id)
         elif type(point_sources) == list:
-            source_list = point_sources
+            source_list = copy.deepcopy(point_sources)
             for source in source_list:
                 source.source_id = 'PS_%i' % ps_id_index
-                source_list.append(source)
+#                source_list.append(source)
                 ps_id_index += 1
 #                id_index = max(id_index, source.source_id)
         for fault_source in fault_sources:
