@@ -15,15 +15,16 @@ proc = pypar.size()                # Number of processors as specified by mpirun
 myid = pypar.rank()                # Id of of this process (myid in [0, proc-1])                     
 node = pypar.get_processor_name()  # Host name on which current process is running                   
 print 'I am proc %d of %d on node %s' % (myid, proc, node)
-nruns = 320 # currently hard coded - need to improve this                                            
+#nruns = 320 # currently hard coded - need to improve this                                            
 t0 = pypar.time()
 
 fault_mesh_spacing = 2 #2 Fault source mesh                     
 rupture_mesh_spacing = 2 #10 # Area source mesh                                                         
 area_source_discretisation = 10 #20 
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed'
-area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
-#area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6'
+#area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
+#area_source_model = '../zones/2012_mw_ge_4.0/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
 geom_pt_sources_filename =  area_source_model[:-4] + '_pts_geom_weighted.xml'
 geom_pt_sources = read_pt_source(geom_pt_sources_filename)
 
