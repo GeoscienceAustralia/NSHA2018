@@ -10,7 +10,6 @@ from NSHA2018.source_models.faults.shapefile2nrml import shapefile_2_simplefault
 from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser
 from subprocess import call
 shapefile = 'FSM/FSD_simple_faults.shp'
-
 shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
