@@ -1,6 +1,6 @@
 #PBS -P w84
-#PBS -q express
-#PBS -l walltime=02:00:00
+#PBS -q normal
+#PBS -l walltime=10:00:00
 #PBS -l ncpus=1
 #PBS -l mem=32GB
 #PBS -l wd
@@ -25,4 +25,4 @@ export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/oq-engine:${PYTHONPATH}
 #export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/NSHA2018/:${PYTHONPATH}
 export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/:${PYTHONPATH}
 
-python build_national_fsm_collapsed_rates.py >& build_fsm.log
+python build_national_fsm_collapsed_rates.py >&build_fsm.log 
