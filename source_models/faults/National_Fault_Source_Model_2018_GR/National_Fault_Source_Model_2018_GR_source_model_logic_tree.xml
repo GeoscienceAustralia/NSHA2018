@@ -8,7 +8,12 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>National_Fault_Source_Model_2018_GR_source_model.xml</uncertaintyModel>
+                    <uncertaintyModel>National_Fault_Source_Model_2018_GR_source_model_GR.xml</uncertaintyModel>
+                    <uncertaintyWeight>1</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b2">
+                    <uncertaintyModel>National_Fault_Source_Model_2018_GR_source_model_CE.xml</uncertaintyModel>
                     <uncertaintyWeight>1</uncertaintyWeight>
                 </logicTreeBranch>
 
