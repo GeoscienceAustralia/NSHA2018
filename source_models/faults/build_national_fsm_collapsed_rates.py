@@ -33,7 +33,7 @@ shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
 shapefile_uplift_attribute = 'UP_RT_LT'
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_NSHA13'
 simple_fault_tectonic_region = None # Define based on neotectonic domains
 magnitude_scaling_relation = 'Leonard2014_SCR'
 rupture_aspect_ratio = 2
@@ -47,13 +47,13 @@ min_mag = 5.5 #4.8
 #max_mag = 7.5 #None # Get from scaling
 rake = 90
 output_dir = source_model_name
-combined_output_dir = 'National_Seismotectonic_Source_Model_2018_ASU6'
+combined_output_dir = 'National_Seismotectonic_Source_Model_2018_Collapsed_NSHA13'
 bin_width = 0.1 # Width of MFD bins in magnitude units
 domains_shapefile = '../zones/shapefiles/NSHA13_Background/NSHA13_BACKGROUND_NSHA18.shp'
 
-#area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
-area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
+#area_source_model = '../zones/2012_mw_ge_4.0/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
 area_source_model_name = area_source_model.split('/')[0].rstrip('.xml')
 investigation_time = 50
 fault_mesh_spacing = 2 #2 Fault source mesh
@@ -85,12 +85,24 @@ output_xml_add = []
 output_xml_mb = []
 output_xml_geom = []
 output_xml_all_methods = []
-output_xmls = [output_xml_add, output_xml_mb, output_xml_geom, output_xml_all_methods]
+output_xml_all_methods_inc_cluster = []
+output_xmls = [output_xml_add, output_xml_mb, output_xml_geom, output_xml_all_methods, output_xml_all_methods_inc_cluster]
 # Append nrml headers
 shp2nrml.append_xml_header(output_xml_add, ('%s_additive' % source_model_name))
 shp2nrml.append_xml_header(output_xml_mb, ('%s_moment_balanced' % source_model_name))
 shp2nrml.append_xml_header(output_xml_geom, ('%s_geom_filtered' % source_model_name))
 shp2nrml.append_xml_header(output_xml_all_methods, ('%s_all_methods_collapsed' % source_model_name))
+shp2nrml.append_xml_header(output_xml_all_methods_inc_cluster, ('%s_all_methods_collapsed_inc_cluster' % source_model_name))
+
+# Dict of faults where we can apply clustering model based on palaeo-earthquake data
+# Rate is present-day ~Mmax rate based on timing of most recent palaeo-earthquake
+# Most conservative (i.e. most recent possible) data of palaeoearthqake is used
+clustered_fault_rate_dict = {'Cadell Fault':1.399683e-05,
+                             'Lake George Scarp': 1.413462e-06,
+                             'Hyden Scarp': 1.167942e-05, 
+                             'Lake Edgar Fault': 1.40078e-05}
+
+
 
 for i, fault_trace in enumerate(fault_traces):
      # Get basic parameters
@@ -156,12 +168,36 @@ for i, fault_trace in enumerate(fault_traces):
      mm_add_weight = mm_add_weight[0]
      mm_mb_weight = mm_mb_weight[0]
      mm_geom_weight = mm_geom_weight[0]
-     
+ 
+     # Get clustered weights for faults with palaeo-earthquake data
+     if faultname in clustered_fault_rate_dict:
+          cl_value, cl_weight = lt.get_weights('FSM_clustering', trt, branch_value = 'Clustered')
+          pois_value, pois_weight = lt.get_weights('FSM_clustering', trt, branch_value = 'Poisson')
+          td_value, td_weight = lt.get_weights('FSM_cluster_type', 'Cluster_type', branch_value = 'Time-dependent')
+          bimod_value, bimod_weight = lt.get_weights('FSM_cluster_type', 'Cluster_type', branch_value = 'Bimodal')
+          # Because we are just calculating mean hazard, bimodal branch collapses to the Poisson branch
+          # so weights are combined
+          td_weight = td_weight[0]
+          pois_weight = pois_weight[0]
+          cl_weight = cl_weight[0]
+          bimod_weight = bimod_weight[0]
+          print td_weight
+          print cl_weight
+          td_weight = td_weight*cl_weight
+          pois_weight = pois_weight + cl_weight*bimod_weight
+          print 'td_weight', td_weight
+          print 'pois_weight', pois_weight
+          cl_mags = mm_mags
+          cl_rates = np.ones(len(cl_mags))*(clustered_fault_rate_dict[faultname]/len(cl_mags))
+          print cl_rates
+          #cl_rates = cl_rates * td_weight
+    
      # Calculate collapsed weights
      additive_rates = []
      mb_rates = []
      geom_rates = []
      all_method_rates = []
+     all_method_inc_cluster_rates = []
      for mag_bin in gr_mags:
           additive_rate = np.sum(gr_add_weight*gr_rates[np.where(gr_mags == mag_bin)]) + \
               np.sum(ce_add_weight*ce_rates[np.where(ce_mags == mag_bin)]) + \
@@ -185,6 +221,14 @@ for i, fault_trace in enumerate(fault_traces):
               np.sum(ce_geom_weight*ce_rates[np.where(ce_mags == mag_bin)]) + \
               np.sum(mm_geom_weight*mm_rates[np.where(mm_mags == mag_bin)])
           all_method_rates.append(all_method_rate)
+          # Apply clustered rates if we can
+          if faultname in clustered_fault_rate_dict:
+               all_method_inc_cluster_rate = pois_weight*all_method_rate + \
+                   np.sum(td_weight*cl_rates[np.where(cl_mags == mag_bin)])
+               all_method_inc_cluster_rates.append(all_method_inc_cluster_rate)
+          else:
+               all_method_inc_cluster_rates.append(all_method_rate)
+               
      # Append collapsed weights to xml
      shp2nrml.append_incremental_mfd(output_xml_add, magnitude_scaling_relation,
                                      rupture_aspect_ratio, rake,
@@ -198,7 +242,9 @@ for i, fault_trace in enumerate(fault_traces):
      shp2nrml.append_incremental_mfd(output_xml_all_methods, magnitude_scaling_relation,
                                      rupture_aspect_ratio, rake,
                                      min(gr_mags), bin_width, all_method_rates)
-
+     shp2nrml.append_incremental_mfd(output_xml_all_methods_inc_cluster, magnitude_scaling_relation,
+                                     rupture_aspect_ratio, rake,
+                                     min(gr_mags), bin_width, all_method_inc_cluster_rates)
 # Close xml
 for output_xml in output_xmls:
      output_xml.append('  </sourceModel>')
@@ -208,6 +254,7 @@ output_xml_add = [oxml + '\n' for oxml in output_xml_add]
 output_xml_mb = [oxml + '\n' for oxml in output_xml_mb]
 output_xml_geom = [oxml + '\n' for oxml in output_xml_geom]
 output_xml_all_methods = [oxml + '\n' for oxml in output_xml_all_methods]
+output_xml_all_methods_inc_cluster = [oxml + '\n' for oxml in output_xml_all_methods_inc_cluster]
 # Write to file fault models on their own
 try:
      os.mkdir(source_model_name)
@@ -230,12 +277,16 @@ f = open(os.path.join(source_model_name, source_model_name + '_all_methods_colla
          'w')
 f.writelines(output_xml_all_methods)
 f.close()
+f = open(os.path.join(source_model_name, source_model_name + '_all_methods_collapsed_inc_cluster.xml'),
+         'w')
+f.writelines(output_xml_all_methods_inc_cluster)
+f.close()
 #Free memory
 del output_xml_add
 del output_xml_mb
 del output_xml_geom
 del output_xml_all_methods
-
+del output_xml_all_methods_inc_cluster
 
 # Now read in the area source model
 print 'Reading area source model %s' % area_source_model
@@ -306,18 +357,24 @@ print 'Writing %s' % model_name
 geom_pt_sources = weighted_pt_source(pt_source_list, total_geom_weight,
                                      model_name, geom_pt_sources_filename, 
                                      nrml_version='04')
-print 'Exiting here'
-sys.exit()
+#print 'Exiting here'
+#sys.exit()
 # Apply geometrical filtering
 print 'Applying geometrical filtering - this should be pre-calculated using run_geom_filter.sh!'
-fsm =  os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')
-fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
-geom_filtered_pt_source_file = area_source_model[:-4] + '_pts_geom_filtered.xml'
-geom_filtered_pt_sources = read_pt_source(geom_filtered_pt_source_file)
 #pt2fault_distance(geom_pt_sources, fault_sources, min_distance=5.0,
 #                  filename=geom_filtered_pt_source_file,
 #                  buffer_distance = 100.,
 #                  name=source_model_name)
+fsm =  os.path.join(source_model_name, source_model_name + '_geom_filtered.xml')
+fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
+geom_filtered_pt_source_file = area_source_model[:-4] + '_pts_geom_weighted_merged_parallel_new_ids.xml'
+try:
+     geom_filtered_pt_sources = read_pt_source(geom_filtered_pt_source_file)
+except IOError:
+     msg = 'File % does not exist, need to run run_geom_filter.sh separately to ' \
+         'apply geometrical filter first!' % geom_filtered_pt_source_file
+     raise IOError(msg)
+
 outfile = os.path.join(source_model_name, source_model_name + '_geom_filtered_zone.xml')
 write_combined_faults_points(geom_filtered_pt_sources, fault_sources,
                              outfile, model_name, nrml_version = '04')
@@ -340,10 +397,10 @@ combined_pt_sources = combine_pt_sources([additive_pt_sources, geom_filtered_pt_
 
 # Combine merged point sources with merged fault source model
 print 'Writing collapsed logic tree seismotectonic model'
-fsm = os.path.join(source_model_name, source_model_name + '_all_methods_collapsed.xml')
-model_name = source_model_name + '_' + area_source_model_name + '_collapsed'
+fsm = os.path.join(source_model_name, source_model_name + '_all_methods_collapsed_inc_cluster.xml')
+model_name = source_model_name + '_' + area_source_model_name + '_collapsed_inc_cluster'
 outfile = os.path.join(source_model_name, source_model_name + '_' + \
-                            area_source_model_name +'_all_methods_collapsed.xml')
+                            area_source_model_name +'_all_methods_collapsed_inc_cluster.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
 write_combined_faults_points(combined_pt_sources, fault_sources,
                              outfile, model_name, nrml_version = '04')
