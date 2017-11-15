@@ -17,11 +17,6 @@
                     <uncertaintyWeight>0.135</uncertaintyWeight>
                 </logicTreeBranch>
 
-                <logicTreeBranch branchID="b3">
-                    <uncertaintyModel>GA_NFSM_M4_adaptive_smoothing_full_uncert.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.149</uncertaintyWeight>
-                </logicTreeBranch>
-
                 <logicTreeBranch branchID="b4">
                     <uncertaintyModel>AUS6_collapsed.xml</uncertaintyModel>
                     <uncertaintyWeight>0.104</uncertaintyWeight>
