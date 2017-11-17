@@ -43,8 +43,8 @@ def parse_line_shapefile(shapefile, shapefile_depth_attribute,
             depths.append(pt[2])
         if boundary is not None:
             new_line = [ (i,j,k) for (i,j,k) in zip(lons,lats,depths) if i >= boundary[0] if i <= boundary[1] if j >= boundary[2] if j <= boundary[3]]
-        print new_line
-        fault_contours.append(new_line)
+            line = new_line
+        fault_contours.append(line)
 
     msg = 'Line shapefile must contain at least 2 fault source contour lines'
     assert len(fault_contours) > 1, msg
