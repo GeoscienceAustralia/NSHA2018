@@ -96,12 +96,12 @@ def append_fault_source_header(output_xml,
     return
 
 
-def append_gml_Linestring(output_xml, fc):
+def append_gml_Linestring(output_xml, fc, dps=10):
     """Convenience function to append the xyz coordinates as a gml Linestring
 
         @param output_xml List holding lines of the output xml being built
         @param fc List of lists of the form [x,y,z], defining the contour
-
+        @param nps Number of decimal points to limit output coordinates to
         @return nothing, but the gml linestring is appended to the output_xml
 
     """
@@ -111,8 +111,9 @@ def append_gml_Linestring(output_xml, fc):
     # Add the geometry
     for i in range(len(fc)):
         output_xml.append(
-            '               ' + str(fc[i][0]) + ' ' + str(fc[i][1]) + ' ' +
-            str(fc[i][2]))
+            '               ' + '{:.{prec}f}'.format(fc[i][0], prec=dps) + ' ' +\
+                '{:.{prec}f}'.format(fc[i][1], prec=dps) + ' ' +\
+                str(fc[i][2]))
 
     # Footer
     output_xml.append('            </gml:posList>')
@@ -121,9 +122,9 @@ def append_gml_Linestring(output_xml, fc):
     return
 
 
-def append_rupture_geometry(output_xml, fault_contours):
+def append_rupture_geometry(output_xml, fault_contours, dps=10):
     """Append the fault contours to the nrml
-
+    dps = number of decimal places for coordinates 
     """
 
     # Top edge
@@ -131,7 +132,7 @@ def append_rupture_geometry(output_xml, fault_contours):
     # Header
     output_xml.append('      <complexFaultGeometry>')
     output_xml.append('        <faultTopEdge>')
-    append_gml_Linestring(output_xml, fault_contours[0])
+    append_gml_Linestring(output_xml, fault_contours[0], dps)
     output_xml.append('        </faultTopEdge>')
     output_xml.append('')
 
@@ -139,13 +140,13 @@ def append_rupture_geometry(output_xml, fault_contours):
     if len(fault_contours) > 2:
         for i in range(1, len(fault_contours) - 1):
             output_xml.append('        <intermediateEdge>')
-            append_gml_Linestring(output_xml, fault_contours[i])
+            append_gml_Linestring(output_xml, fault_contours[i], dps)
             output_xml.append('        </intermediateEdge>')
             output_xml.append('')
 
     # Bottom edge
     output_xml.append('        <faultBottomEdge>')
-    append_gml_Linestring(output_xml, fault_contours[-1])
+    append_gml_Linestring(output_xml, fault_contours[-1], dps)
     output_xml.append('        </faultBottomEdge>')
     output_xml.append('      </complexFaultGeometry>')
     output_xml.append('')
