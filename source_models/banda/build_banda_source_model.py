@@ -19,7 +19,7 @@ contour_shapefiles = glob(os.path.join(contour_dir, '*.shp'))
 rate_dir = './source_rates'
 source_model_name = 'Banda_Sources_NSHA_2018'
 tectonic_region = 'banda'
-magnitude_scale_rel = 'Leonard2014_Interplate'
+magnitude_scale_rel = 'StrasserInterface'
 rupture_aspect_ratio = 1.5
 rake = 90 # Fix for normal sources!
 #min_mag = 6.0 # currently 7.2 based on PTHA curves
@@ -70,7 +70,7 @@ for shapefile in contour_shapefiles:
                                                         sourcename,
                                                         tectonic_region)
     shapefile_2_complexfault.append_rupture_geometry(output_xml, 
-                                                     contours)
+                                                     contours, dps=4)
 
     # Now we want to read and sum the rates from the PTHA data
     if sourcename == 'sunda': # only want rates for java segment
