@@ -34,11 +34,11 @@ java_limit=104.8 # longitude; western limit of java segment, to clip contours by
 source_mmin_dict = {'arutrough':6.5,
                 'banda_detachment':7.0,
                 'flores':7.0,
-                'hjort':6.5,
-                'macquarienorth':5.5,
+#                'hjort':6.5,
+#                'macquarienorth':5.5,
                 'moresby_trough':5.5,
                 'newguinea':7.0,
-                'puysegur':6.7,
+#                'puysegur':6.7,
                 'seram_thrust':7.0,
                 'solomon':7.5,
                 'sunda':8.0,
@@ -53,6 +53,9 @@ id_base = 'banda_'
 i = 0
 for shapefile in contour_shapefiles:
     sourcename = shapefile.split('/')[-1][:-4]
+    if sourcename not in source_mmin_dict.keys():
+        print 'Skipping %s source zone' % sourcename
+        continue
     print 'Adding source %s' % sourcename
     if sourcename == 'sunda': 
         boundary = [java_limit, 360, -90, 90]
