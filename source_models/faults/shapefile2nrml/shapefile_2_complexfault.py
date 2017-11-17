@@ -15,9 +15,11 @@ import os
 import ogr
 import argparse
 
-def parse_line_shapefile(shapefile, shapefile_depth_attribute):
+def parse_line_shapefile(shapefile, shapefile_depth_attribute,
+                         boundary=[-360, 360, -90, 90]):
     """Read the line shapefile with contours on the fault plain
-
+    Bounday: [min_lon, max_lon, min_lat, max_lat] Boundary to clip fault
+    segment by 
         Return a list of lists of [x,y,z] points defining each line
     """
 
@@ -32,7 +34,17 @@ def parse_line_shapefile(shapefile, shapefile_depth_attribute):
         line = feature.GetGeometryRef().GetPoints()
         depth = float(feature.GetField(shapefile_depth_attribute))
         line = [list(pts) + [depth] for pts in line]
-        fault_contours.append(line)
+        lons = []
+        lats = []
+        depths = []
+        for pt in line:
+            lons.append(pt[0])
+            lats.append(pt[1])
+            depths.append(pt[2])
+        if boundary is not None:
+            new_line = [ (i,j,k) for (i,j,k) in zip(lons,lats,depths) if i >= boundary[0] if i <= boundary[1] if j >= boundary[2] if j <= boundary[3]]
+        print new_line
+        fault_contours.append(new_line)
 
     msg = 'Line shapefile must contain at least 2 fault source contour lines'
     assert len(fault_contours) > 1, msg
