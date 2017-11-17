@@ -1,0 +1,1094 @@
+International Registry of Seismograph Stations
+maintained jointly by
+International Seismological Centre & World Data Center for Seismology, Denver
+
+Code   Station name/Region                                 Latitude  Longitude Elevation   Depth Prime  Status
+==============================================================================================================
+
+ABEM   Aberfeldy                                          -37.71936  146.38900     548.8                      
+       Victoria,Australia
+
+ADE    Adelaide                                           -34.96690  138.70900     655.0                Open  
+       South Australia,Australia
+
+ARKL   Arkaroola                                          -30.27600  139.33900     520.0                      
+       South Australia,Australia
+
+ARMA   Armidale                                           -30.41831  151.62931    1112.0                      
+       New South Wales,Australia
+
+ARPS   Mount Arapiles                                     -36.76989  141.83831     213.0                      
+       Victoria,Australia
+
+AS01   Alice Springs Array Site 1                         -23.66470  133.95100     605.0                Open  
+       Northern Territory,Australia
+
+AS02   Alice Springs Array Site 2                         -23.67920  133.93700     619.0                Open  
+       Northern Territory,Australia
+
+AS03   Alice Springs Array Site 3                         -23.67440  133.92000     643.0                Open  
+       Northern Territory,Australia
+
+AS04   Alice Springs Array Site 4                         -23.65970  133.92900     666.0                Open  
+       Northern Territory,Australia
+
+AS05   Alice Springs Array Site 5                         -23.64920  133.94700     683.0                Open  
+       Northern Territory,Australia
+
+AS06   Alice Springs Array Site 6                         -23.64750  133.97100     663.0                Open  
+       Northern Territory,Australia
+
+AS07   Alice Springs Array Site 7                         -23.66560  133.97000     614.0                Open  
+       Northern Territory,Australia
+
+AS08   Alice Springs Array Site 8                         -23.68140  133.96000     594.0                Open  
+       Northern Territory,Australia
+
+AS09   Alice Springs Array Site 9                         -23.69940  133.94100     591.0                Open  
+       Northern Territory,Australia
+
+AS10   Alice Springs Array Site 10                        -23.69690  133.91400     607.0                Open  
+       Northern Territory,Australia
+
+AS11   Alice Springs Array Site 11                        -23.67830  133.89800     608.0                Open  
+       Northern Territory,Australia
+
+AS12   Alice Springs Array Site 12                        -23.66640  133.90400     607.0         ASAR   Open  
+       Northern Territory,Australia
+
+AS13   Alice Springs Array Site 13                        -23.65190  133.89400     604.0                Open  
+       Northern Territory,Australia
+
+AS14   Alice Springs Array Site 14                        -23.65170  133.91000     620.0                Open  
+       Northern Territory,Australia
+
+AS15   Alice Springs Array Site 15                        -23.63560  133.91200     669.0                Open  
+       Northern Territory,Australia
+
+AS16   Alice Springs Array Site 16                        -23.63690  133.93000     676.0                Open  
+       Northern Territory,Australia
+
+AS17   Alice Springs Array Site 17                        -23.66440  133.99200     615.0                Open  
+       Northern Territory,Australia
+
+AS18   Alice Springs Array Site 18                        -23.69000  133.98100     592.0                Open  
+       Northern Territory,Australia
+
+AS19   Alice Springs Array Site 19                        -23.70440  133.96300     577.0                Open  
+       Northern Territory,Australia
+
+AS31   Alice Springs Site                                 -23.66511  133.90531     627.3                      
+       Northern Territory,Australia
+
+ASAR   Alice Springs Array Beam Reference Point           -23.66640  133.90400     607.0                      
+       Northern Territory,Australia
+
+ASP    Alice Springs                                      -23.68330  133.89700     600.0                Closed
+       Northern Territory,Australia
+
+ASPA   Alice Springs                                      -23.66690  133.90100     555.0                Closed
+       Northern Territory,Australia
+
+AVO    Avon                                               -34.37640  150.61500     532.0                Open  
+       New South Wales,Australia
+
+AWDQ   Awoonga Dam 3                                      -24.04781  151.31569     110.0                Open  
+       Queensland,Australia
+
+AWOON  Awoonga Dam                                        -24.07733  151.31467     553.0                      
+       Queensland,Australia
+
+BAL    Ballidu                                            -30.60650  116.70717     300.0                Open  
+       Western Australia,Australia
+
+BANM   Bannockburn                                        -38.05150  144.24981     200.0                      
+       Victoria,Australia
+
+BBOO   Buckleboo                                          -32.81020  136.05880     321.0                      
+       South Australia,Australia
+
+BDMQ   Boondooma Dam                                      -26.11230  151.44400     320.0                      
+       Queensland,Australia
+
+BEEN   Beenleigh                                          -27.72761  153.19800     130.0                      
+       Queensland,Australia
+
+BFD    Bellfield                                          -37.17610  142.54400     235.0                Closed
+       Victoria,Australia
+
+BGRQ   Glenroy                                            -20.54920  147.10500     160.0                Open  
+       Queensland,Australia
+
+BJDM   Burrinjuck Dam                                     -35.00411  148.58189     380.0                      
+       Australian Capital Territory,Australia
+
+BJEM   Burrinjuck                                         -34.95050  148.64600     400.0                      
+       Australian Capital Territory,Australia
+
+BLDU   Ballidu                                            -30.61469  116.70911     280.0                      
+       Western Australia,Australia
+
+BN2S   Brisbane 2 Soft                                    -27.32930  153.04770       8.0                Open  
+       Queensland,Australia
+
+BNE    Burnie High School                                 -41.06250  145.86528      70.0                      
+       Tasmania,Australia
+
+BOON   Boondooma                                          -26.09508  151.45211     370.0                      
+       Queensland,Australia
+
+BOV    Bogong Mts                                         -36.80780  147.22700     700.0                Closed
+       Victoria,Australia
+
+BR1    Brisbane hardrock                                  -27.43061  153.02369     100.0                      
+       Queensland,Australia
+
+BR2    Brisbane softrock                                  -27.43139  153.06931     100.0                      
+       Queensland,Australia
+
+BRAT   Ballarat                                           -37.55000  143.93100       9.0                      
+       Victoria,Australia
+
+BRS    Brisbane                                           -27.39170  152.77500     525.0                Open  
+       Queensland,Australia
+
+BRSB   Brisbane                                           -27.47806  153.03111      15.0                Closed
+       Australia
+
+BSLQ   Bruslee                                            -20.86700  146.56400     185.0                Open  
+       Queensland,Australia
+
+BUCM   Buckrabanyule                                      -36.23842  143.49811     200.0                      
+       Victoria,Australia
+
+BUCN   Buchan                                             -37.52867  148.09764     250.0                      
+       Victoria,Australia
+
+BUDM   Budderoo                                           -34.67625  150.67067     604.0                      
+       New South Wales,Australia
+
+BURD   Burdekin Lookout                                   -20.62322  147.12183     291.0                      
+       Queensland,Australia
+
+BUV    Buchan                                             -37.49830  148.16800     100.0                Closed
+       Victoria,Australia
+
+BWA    Boorowa                                            -34.42500  148.41800     656.0                Open  
+       New South Wales,Australia
+
+CAB    Cabramurra                                         -35.92670  148.43300    1610.0                Closed
+       New South Wales,Australia
+
+CAH    Castle Hill                                        -34.64330  149.24200     700.0                Open  
+       New South Wales,Australia
+
+CAN    Canberra                                           -35.32080  148.99900     700.0                      
+       Australian Capital Territory,Australia
+
+CANN   Canning Dam                                        -32.15219  116.12769     135.0                Closed
+       Western Australia,Australia
+
+CARL   Carlisle                                           -31.98350  115.92670       2.0                Open  
+       Western Australia,Australia
+
+CAVM   Cavillon                                           -29.64783  151.62375     982.0                      
+       New South Wales,Australia
+
+CBR    Cabramurra                                         -35.94330  148.39300    1537.0                Open  
+       New South Wales,Australia
+
+CCRM   Cairn Curran                                       -36.99064  143.97217     230.0                      
+       Victoria,Australia
+
+CDNM   Cardinia                                           -37.94617  145.42517     252.0                      
+       Victoria,Australia
+
+CHAM   Chaffey Accelerograph                              -31.34969  151.13789     553.0                      
+       New South Wales,Australia
+
+CHFM   Chaffey Dam                                        -31.32650  151.11639     580.0                      
+       New South Wales,Australia
+
+CHIL   Chillagoe                                          -17.15047  144.53061     423.0                      
+       Queensland,Australia
+
+CLAW   Mount Claude                                       -41.49200  146.18300     900.0                      
+       Tasmania,Australia
+
+CLV    Cleve                                              -33.69110  136.49600     238.0                Open  
+       South Australia,Australia
+
+CMS    Cobar Meteorology Station                          -31.48667  145.82833     255.0                Closed
+       New South Wales,Australia
+
+CMSA   Cobar Meteorology Station                          -31.53750  145.69161     220.0                      
+       New South Wales,Australia
+
+CNB    Canberra Magnetic Observatory                      -35.31500  149.36300     850.0                      
+       Australian Capital Territory,Australia
+
+CNS1   Cairns-h seis/acc                                  -16.95411  145.73589     129.0                      
+       Queensland,Australia
+
+CNS2   Cairns-h acc only                                  -16.91100  145.71050      50.0                      
+       Queensland,Australia
+
+COEN   Coen                                               -13.95740  143.17490     285.4                      
+       Queensland,Australia
+
+COO    Cooney Tunnel                                      -30.57778  151.89167     653.0                Closed
+       New South Wales,Australia
+
+COOL   Coolgardie                                         -30.88380  121.14500     500.0                Closed
+       Western Australia,Australia
+
+COPM   Copeton                                            -29.91775  150.93469     571.0                      
+       New South Wales,Australia
+
+CORO   Coronation Park                                    -41.45222  147.14500                                
+       Tasmania,Australia
+
+CPXM   Mount Cotopaxi                                     -34.47647  150.62475     622.0                      
+       New South Wales,Australia
+
+CTA    Charters Towers                                    -20.08830  146.25400     357.0                Open  
+       Queensland,Australia
+
+CTAO   Charters Towers                                    -20.08830  146.25400     357.0         CTA    Open  
+       Queensland,Australia
+
+CTBM   Cataract Bedrock                                   -34.26481  150.81072     322.0                      
+       New South Wales,Australia
+
+CTDM   Cataract Dam                                       -34.26719  150.80228     294.0                      
+       New South Wales,Australia
+
+CVLQ   Collinsville                                       -20.59000  147.60900     102.0                Open  
+       Queensland,Australia
+
+DAM    Dampier                                            -20.66670  116.66700                          Closed
+       Western Australia,Australia
+
+DAR    Darwin                                             -12.40830  130.81800       6.0                Closed
+       Northern Territory,Australia
+
+DDBM   Dartmouth Bedrock                                  -36.55778  147.51147     329.0                      
+       Victoria,Australia
+
+DDCM   Dartmouth Crest                                    -36.56086  147.52411     494.0                      
+       Victoria,Australia
+
+DLBQ   Dalbeg                                             -20.14911  147.26703     116.0                Open  
+       Queensland,Australia
+
+DLN    Dalton (NSW)                                       -34.72330  149.18200     550.0                Closed
+       New South Wales,Australia
+
+DNGQ   Doongara                                           -20.55500  146.47500     280.0                Open  
+       Queensland,Australia
+
+DOCK   Docker River                                       -24.83803  129.03339     650.0                Closed
+       Western Australia,Australia
+
+DPH    Darwin Parliament House                            -12.46670  130.84230      45.0                Open  
+       Northern Territory,Australia
+
+DRAM   Dora Dora                                          -35.96542  147.37542     230.0                      
+       Victoria,Australia
+
+DROM   Dromana                                            -38.34822  144.95978     138.0                      
+       Victoria,Australia
+
+DRS    Darwin Rock Store                                  -12.43130  130.89930      44.0                Open  
+       Northern Territory,Australia
+
+DRT    Dartmouth                                          -36.58330  147.49200     950.0                Open  
+       Victoria,Australia
+
+DTMM   Dartmouth Digital                                  -36.52931  147.46861     436.0                      
+       Victoria,Australia
+
+DVBM   Devilbend                                          -38.28739  145.09769      75.0                Closed
+       Victoria,Australia
+
+EASTN  East End Reserv.                                   -23.86408  150.96467     139.0                      
+       Queensland,Australia
+
+EDO    Endilloe                                           -32.32167  138.04833     300.0                Open  
+       South Australia,Australia
+
+EIDS   Eidsvold                                           -25.36911  151.08169     216.0                Open  
+       Queensland,Australia
+
+EUGM   Eugowra                                            -33.41819  148.34181     290.0                      
+       New South Wales,Australia
+
+FAIR   Fairbairn                                          -23.65647  148.07725     290.0                      
+       Queensland,Australia
+
+FGTQ   Fig Tree                                           -20.97010  147.77600     220.0                Open  
+       Queensland,Australia
+
+FITX   Fitzroy Crossing                                   -18.10919  125.64281     110.0                Closed
+       Western Australia,Australia
+
+FITZ   Fitzroy Crossing                                   -18.10200  125.63900     110.0                Open  
+       Western Australia,Australia
+
+FNT    Hobart                                             -42.92650  147.35400     184.0                Closed
+       Tasmania,Australia
+
+FORR   Forrest                                            -30.85000  128.10000                          Closed
+       Western Australia,Australia
+
+FORT   Forrest                                            -30.77900  128.05900     165.0                Open  
+       Western Australia,Australia
+
+FR27   Wilpena Pound                                      -31.52300  138.62300     534.0     0.0        Open  
+       South Australia
+
+FRED   Fred Haigh                                         -24.89847  151.89697     120.0                      
+       Queensland,Australia
+
+FRTM   Forrest                                            -38.53375  143.71597     230.0                      
+       Victoria,Australia
+
+FS03   Four Seasons                                       -25.10680  151.86670     180.0                Open  
+       Queensland,Australia
+
+FSHM   Fish Creek                                         -38.75650  145.99961     420.0                      
+       Victoria,Australia
+
+FTZM   Fitzroy Falls                                      -34.64214  150.48383     711.0                      
+       New South Wales,Australia
+
+GBAM   Glenbawn Dam                                       -32.11139  150.99931     293.0                      
+       New South Wales,Australia
+
+GBBM   Glenbawn Bedrock                                   -32.09250  150.97250     275.0                      
+       New South Wales,Australia
+
+GC1    Gold Cst Hrdrock                                   -27.94869  153.36175      60.0                      
+       Queensland,Australia
+
+GC1S   Gold Coast 1 Soft                                  -28.16170  153.51150      11.0                Open  
+       Queensland,Australia
+
+GC2    Gold Coast Softrock                                -28.13639  153.45389      60.0                      
+       Queensland,Australia
+
+GC2F   Gold Coast 2 Fill                                  -27.91220  153.39580      12.0                Open  
+       Queensland,Australia
+
+GEAM   CSIRO Animal Health Laboratory                     -38.15300  144.38900     100.0                      
+       Victoria,Australia
+
+GEE    Geehi                                              -36.41970  148.18300     480.0                Closed
+       New South Wales,Australia
+
+GEES   Gees Lookout                                       -41.44528  147.12361                                
+       Tasmania,Australia
+
+GIRL   Giralia                                            -22.64300  114.23400     111.0                      
+       Western Australia,Australia
+
+GLAD   Gladstone                                          -40.98444  148.00861     146.0                      
+       Tasmania,Australia
+
+GLADS  Gladstone Plant                                    -23.86972  151.26811     117.0                      
+       Queensland,Australia
+
+GLEN   Glenside                                           -34.94350  138.63100      70.0     0.0        Open  
+       South Australia
+
+GLMM   Glenmaggie                                         -37.90200  146.79900     160.0                      
+       Victoria,Australia
+
+GLNM   Glennies Creek Dam                                 -32.36619  151.24639     160.0                      
+       New South Wales,Australia
+
+GLS    Giles                                              -25.03530  128.29600     600.0                Closed
+       Western Australia,Australia
+
+GOGM   North Grampians                                    -36.88822  142.39958     265.0                      
+       Victoria,Australia
+
+GRVM   Greaves Creek                                      -33.66183  150.30914     980.0                      
+       New South Wales,Australia
+
+GVL    Greenvale                                          -37.61861  144.90061     187.8                Closed
+       Victoria,Australia
+
+HEXM   Hexham                                             -37.92800  142.77800     220.0                      
+       Victoria,Australia
+
+HINZ   Hinze Dam                                          -28.05111  153.28069     140.0                      
+       Queensland,Australia
+
+HKER   Hawker                                             -31.76419  138.55239     440.0                      
+       South Australia,Australia
+
+HKN    Hawks Nest                                         -30.01167  135.18667     171.0                      
+       South Australia,Australia
+
+HLA    Hall's Lagoon                                      -33.52260  150.91600      27.0                Closed
+       New South Wales,Australia
+
+HML1   Hamley Bridge                                      -34.40340  138.58890      73.0     0.0        Open  
+       South Australia
+
+HMV1   Hindmarsh Valley                                   -35.49030  138.63690      96.0                Open  
+       South Australia,Australia
+
+HOPM   Mount Hope                                         -35.99639  144.20458     140.0                      
+       Victoria,Australia
+
+HTT    Hallett                                            -33.43060  138.92200     708.0                Open  
+       South Australia,Australia
+
+HUMM   Hume Dam                                           -36.11100  147.02900     190.0                      
+       Victoria,Australia
+
+HWKN   Hawk's Nest                                        -29.95780  135.20350     180.0     0.0        Open  
+       South Australia
+
+ILN    Island Lagoon                                      -31.39310  136.87000     137.0                      
+       South Australia,Australia
+
+INV    Inveralochy                                        -34.96500  149.66700     650.0                Closed
+       New South Wales,Australia
+
+ISQ    Mount Isa                                          -20.71500  139.55300     500.0                Closed
+       Queensland,Australia
+
+IVN    Inveralochy                                        -34.96670  149.66700     650.0                Closed
+       New South Wales,Australia
+
+IVSM   Inverness                                          -36.13378  147.06814     330.0                      
+       Victoria,Australia
+
+IVY    Inveralochy                                        -34.97220  149.71800     650.0                Open  
+       New South Wales,Australia
+
+JBRM   Jenolan Black                                      -33.76183  150.04861    1235.0                      
+       New South Wales,Australia
+
+JENM   Jeeralang Junction                                 -38.35069  146.41975     330.0                      
+       Victoria,Australia
+
+JIN    Jindabyne                                          -36.43940  148.59300     960.0                Closed
+       New South Wales,Australia
+
+JNL    Jenolan Caves                                      -33.82569  150.02186     829.0                Open  
+       New South Wales,Australia
+
+KAA    Karratha                                           -20.77720  116.85900      15.0                Closed
+       Western Australia,Australia
+
+KAKA   Kakadu                                             -12.71150  132.43961     100.0                Closed
+       Northern Territory,Australia
+
+KANM   Kanangra Walls                                     -33.99661  150.06681    1206.0                      
+       New South Wales,Australia
+
+KDA    Kuranda                                            -16.82500  145.63000     365.0                Closed
+       Queensland,Australia
+
+KDU    Kakadu                                             -12.68690  132.47270      46.0                Open  
+       Northern Territory,Australia
+
+KELC   Kelly Hill Caves                                   -35.98250  136.91111     100.0                      
+       South Australia,Australia
+
+KHA    Khancoban                                          -36.21360  148.12900     435.0                Open  
+       New South Wales,Australia
+
+KLB    Kellerberrin                                       -31.59230  117.76000     300.0                Closed
+       Western Australia,Australia
+
+KLBR   Kellerberrin                                       -31.59147  117.75461     320.0                      
+       Western Australia,Australia
+
+KLG    Kalgoorlie                                         -30.78367  121.45800     360.0                Closed
+       Western Australia,Australia
+
+KLGA   Kalgoorlie                                         -30.71750  121.43800     390.0                Closed
+       Western Australia,Australia
+
+KMBL   Kambalda                                           -31.36689  121.88211     370.0                      
+       Western Australia,Australia
+
+KNA    Kununurra                                          -15.75000  128.76667     150.0                Closed
+       Western Australia,Australia
+
+KNRA   Kununurra                                          -15.67690  128.76280     126.0                Open  
+       Western Australia,Australia
+
+KOW    Kowen Forest                                       -35.28830  149.29800     792.0                Closed
+       Australian Capital Territory,Australia
+
+KOWM   Kowarra                                            -35.78850  144.52011     102.0                      
+       Victoria,Australia
+
+KPAM   Keepit Dam                                         -30.87911  150.49019     264.0                      
+       New South Wales,Australia
+
+KPTM   Keepit Bedrock                                     -30.88511  150.48189     295.0                      
+       New South Wales,Australia
+
+KTLM   Kings Tableland                                    -33.86211  150.40425     720.0                Closed
+       New South Wales,Australia
+
+LBXM   Letterbox                                          -34.27211  150.87356     400.0                      
+       New South Wales,Australia
+
+LEAH   Tarraleah                                          -42.30272  146.45158     590.0                      
+       Tasmania,Australia
+
+LER    Lerida                                             -34.93440  149.36400     700.0                Closed
+       New South Wales,Australia
+
+LGTM   Lightning Creek                                    -36.76325  147.46358    1105.0                      
+       Victoria,Australia
+
+LHBM   Lucas Heights                                      -34.05367  150.97864     168.0                      
+       New South Wales,Australia
+
+LHI    Lord Howe Island                                   -31.52000  159.06311      73.7                Open  
+       New South Wales,Australia
+
+LMT    Lemonthyme                                         -41.61000  146.15200     349.0                Closed
+       Tasmania,Australia
+
+LOSM   Lostock Dam                                        -32.33039  151.45561     109.0                      
+       New South Wales,Australia
+
+LYNN   Rosslynne Res.                                     -37.47550  144.57414     447.0                      
+       Victoria,Australia
+
+MACM   Macedon                                            -37.43028  144.69103     576.0                Closed
+       Victoria,Australia
+
+MARG   Lake Margaret                                      -41.99953  145.55161     700.0                      
+       Tasmania,Australia
+
+MBA    Mount Bingar                                       -34.12500  146.23700                          Closed
+       New South Wales,Australia
+
+MBL    Marble Bar                                         -21.16000  119.83300     200.0                Closed
+       Western Australia,Australia
+
+MBT    Marble Bar                                         -21.17000  119.74200     200.0                Closed
+       Western Australia,Australia
+
+MBWA   Marble Bar                                         -21.15900  119.73119     194.0                      
+       Western Australia,Australia
+
+MCPQ   Mount Cooper                                       -20.54997  146.80653     300.0                Open  
+       Queensland,Australia
+
+MCQ    Macquarie Island                                   -54.49860  158.95600      14.0                Open  
+       Macquarie Islands,Australia
+
+MDRM   Moondarra Dam                                      -38.09900  146.37900     250.0                      
+       Victoria,Australia
+
+MEA    Monteagle                                          -34.20830  148.39300                          Closed
+       New South Wales,Australia
+
+MEEK   Meekatharra                                        -26.63760  118.61350     529.0                Open  
+       Western Australia,Australia
+
+MEG    Meangora                                           -35.10060  150.03700     712.0                Closed
+       New South Wales,Australia
+
+MEK    Meekatharra                                        -26.61280  118.54500     515.0                Closed
+       Western Australia,Australia
+
+MEKA   Meekatharra                                        -26.61420  118.53600     390.0                Closed
+       Western Australia,Australia
+
+MEL    Melbourne                                          -37.83139  144.97333      28.0                Open  
+       Victoria,Australia
+
+MGBR   Mount Gambier                                      -37.72831  140.57100     190.0                      
+       South Australia,Australia
+
+MGCD   Mangrove Creek Dam                                 -33.20961  151.10919     219.0                      
+       New South Wales,Australia
+
+MHPQ   Mount Hope                                         -21.39600  146.80200     200.0                Open  
+       Queensland,Australia
+
+MIKA   Lake Mikany                                        -40.87806  145.18114      40.0                      
+       Tasmania,Australia
+
+MILA   Mila                                               -37.05467  149.15503     785.0                      
+       New South Wales,Australia
+
+MITM   Mitta Mitta                                        -36.73172  147.65872     470.0                      
+       Victoria,Australia
+
+MLWM   Molesworth                                         -37.13681  145.51050     280.0                      
+       Victoria,Australia
+
+MOO    Moorlands                                          -42.44170  147.19000     325.0                Open  
+       Tasmania,Australia
+
+MORG   Mount Morgan                                       -23.76264  150.39014     170.0                      
+       Queensland,Australia
+
+MORW   Morawa                                             -29.06790  116.04030     296.0                      
+       Western Australia,Australia
+
+MPDM   Moonee Ponds                                       -37.76889  144.90639      30.0                      
+       Victoria,Australia
+
+MQI    Macquarie Island                                   -54.52000  158.93000     250.0                      
+       Macquarie Islands,Australia
+
+MRAT   Mt Rat                                             -34.63000  137.62540     120.0     0.0        Open  
+       South Australia
+
+MRWA   Morawa                                             -29.21800  115.99600     300.0                Open  
+       Western Australia,Australia
+
+MTKN   Mount Kenneth                                      -31.93330  115.77360      61.0                Open  
+       Western Australia,Australia
+
+MTLM   Mount Tassie Tower                                 -38.40150  146.56419     755.0                Closed
+       Victoria,Australia
+
+MTN    Manton Dam                                         -12.84361  131.13269     137.4                Open  
+       Northern Territory,Australia
+
+MTRD   Mount Read                                         -41.84639  145.54361    1080.0                Closed
+       Tasmania,Australia
+
+MTSU   Mount Surprise                                     -18.13419  144.31681     460.0                Open  
+       Queensland,Australia
+
+MTV    Mount Tassie                                       -38.40170  146.56600     740.0                Closed
+       Victoria,Australia
+
+MUN    Mundaring                                          -31.97830  116.20800     253.0                Closed
+       Western Australia,Australia
+
+MYP    Myponga                                            -35.44360  138.41620     150.0     0.0        Open  
+       South Australia
+
+NANU   Nanutarra                                          -22.56190  115.52900      80.0                Closed
+       Western Australia,Australia
+
+NAPP   Napperby                                           -33.18280  138.14780     181.0                Open  
+       South Australia,Australia
+
+NARM   Nariel                                             -36.43022  147.84481     550.0                      
+       New South Wales,Australia
+
+NATM   Nattai                                             -34.20608  150.42669     632.0                      
+       New South Wales,Australia
+
+NAU    Nanutarra                                          -22.54420  115.50000      80.0                Closed
+       Western Australia,Australia
+
+NBK    Nectar Brook                                       -32.70100  137.98300     180.0                      
+       South Australia,Australia
+
+NDA    Nedlands                                           -31.97500  115.81700       8.0                      
+       Western Australia,Australia
+
+NELS   Mount Nelson                                       -42.92708  147.33264     348.0                      
+       Tasmania,Australia
+
+NFK                                                       -29.04325  167.93881     203.0                Open  
+       Norfolk Island,Australia
+
+NIA    Norfolk Island                                     -29.04170  167.96000     130.0                Closed
+       Norfolk Island,Australia
+
+NRFK   Norfolk                                            -29.04000  167.96300     196.0                Closed
+       Norfolk Island,Australia
+
+NWA    Narrogin                                           -32.92700  117.23400     365.0         NWAO   Closed
+       Western Australia,Australia
+
+NWAO   Narrogin (SRO)                                     -32.92700  117.23400     265.0                Open  
+       Western Australia,Australia
+
+PARN   Parndana                                           -35.80589  137.23889     140.0                      
+       South Australia,Australia
+
+PDDM   Pindari Dam                                        -29.38011  151.24289     499.0                      
+       Queensland,Australia
+
+PER    Perth                                              -31.95270  115.83900      55.0                      
+       Western Australia,Australia
+
+PETE   Peter Faust Dam                                    -20.43878  148.42336     140.0                      
+       Queensland,Australia
+
+PHDM   Pipehead                                           -33.84700  150.96900      90.0                      
+       New South Wales,Australia
+
+PLMR   Palmer                                             -34.87280  139.15080     138.0     0.0        Open  
+       South Australia
+
+PNA    Partacoona                                         -32.00610  138.16500     180.0                Closed
+       South Australia,Australia
+
+POAT   Poatina                                            -41.81733  146.90325     834.0                      
+       Tasmania,Australia
+
+PTPS   Port Pirie                                         -33.17250  137.99430       9.0                Open  
+       South Australia,Australia
+
+QIS    Mount Isa                                          -20.55769  139.60519     450.0                Open  
+       Queensland,Australia
+
+QLP    Quilpie                                            -26.58219  144.23450     210.0                Open  
+       Queensland,Australia
+
+QTN    Queenstown                                         -43.10000  145.60000                                
+       Tasmania,Australia
+
+RDSS   Rosedale State School                              -24.62380  151.91680     117.0                Open  
+       Queensland,Australia
+
+RIV    Riverview                                          -33.82940  151.15800      25.0                      
+       New South Wales,Australia
+
+RK1    Rhampton Hrock                                     -23.38861  150.49381      87.0                      
+       Queensland,Australia
+
+RK2    Rhampton Srock                                     -23.38250  150.52481      40.0                      
+       Queensland,Australia
+
+RK2S   Rockhampton 2 Soft                                 -23.31020  150.52160      36.0                Open  
+       Queensland,Australia
+
+RKG    Rocky Gully                                        -34.56980  117.01000     300.0                Closed
+       Western Australia,Australia
+
+RKGY   Rocky Gully                                        -34.60939  116.97728     220.0                      
+       Western Australia,Australia
+
+RMQ    Roma                                               -26.48569  148.75819     375.0                Open  
+       Queensland,Australia
+
+RNDA   Aranda                                             -35.25800  149.08200     666.0                Open  
+       Australian Capital Territory
+
+ROKM   Rocklands Reservoir                                -37.24200  141.95500     200.0                Closed
+       Victoria,Australia
+
+ROWM   Rowsley                                            -37.80575  144.29150     380.0                      
+       Victoria,Australia
+
+ROYM   Rob Roy                                            -37.63986  145.28853     180.0                      
+       Victoria,Australia
+
+RPA    Roopena                                            -32.72500  137.40300                                
+       South Australia,Australia
+
+RTQ    Roma                                               -26.56778  148.85139     350.0                Closed
+       Queensland,Australia
+
+RUSM   Rushworth                                          -36.66422  144.94725     127.0                      
+       Victoria,Australia
+
+SAV    Savannah                                           -41.72080  147.18900     180.0                Open  
+       Tasmania,Australia
+
+SBR    S Black Range                                      -35.42500  149.53300    1265.0                Open  
+       New South Wales,Australia
+
+SDAN   Sedan                                              -34.50931  139.33739     125.0                      
+       South Australia,Australia
+
+SFF    Sheffield                                          -41.33750  146.30800     213.0                Closed
+       Tasmania,Australia
+
+SHYM   Surrey Hills                                       -37.82600  145.11000     100.0                Closed
+       Victoria,Australia
+
+SNL    Sevenhill                                          -33.88720  138.63900     480.0                Closed
+       South Australia,Australia
+
+SPK    Scotts Peak                                        -43.03830  146.27500     425.0                Closed
+       Tasmania,Australia
+
+SPRM   Split Rock                                         -30.57481  150.68769     456.0                      
+       New South Wales,Australia
+
+STG    Strathgordon                                       -42.84830  146.20700     350.0                Closed
+       Tasmania,Australia
+
+STGV   Strathgordon Vge                                   -42.76817  146.04758       0.0                      
+       Tasmania,Australia
+
+STK    Stephens Creek                                     -31.88170  141.59200     213.0                Closed
+       New South Wales,Australia
+
+STKA   Stephens Creek                                     -31.87689  141.59519     272.3                Open  
+       New South Wales,Australia
+
+STR2   Strathalbyn                                        -35.28710  138.84790     155.0     0.0        Open  
+       South Australia
+
+SVR    Savage River                                       -41.46670  145.21700                          Closed
+       Tasmania,Australia
+
+SWV    Swan View                                          -31.88330  116.06500      80.0                Closed
+       Western Australia,Australia
+
+SYD    Sydney                                             -33.86670  151.20000      43.0                Closed
+       New South Wales,Australia
+
+TALL   Tallowa Pump Stn                                   -34.73342  150.46147      68.0                      
+       New South Wales,Australia
+
+TALM   Tallowa                                            -34.77094  150.38092     290.0                      
+       New South Wales,Australia
+
+TAO    Talbingo                                           -35.61090  148.28900     570.0                Open  
+       New South Wales,Australia
+
+TATM   Tatong                                             -36.77469  146.10611     342.0                      
+       Victoria,Australia
+
+TAU    Tasmania University                                -42.90990  147.32000     132.0                Open  
+       Tasmania,Australia
+
+TECM   TEC LaTrobe                                        -37.72450  145.05550     156.0                Closed
+       Victoria,Australia
+
+THS    The Heights School                                 -34.74169  138.77331     340.0                      
+       South Australia,Australia
+
+TINA   Tinaroo                                            -17.17606  145.53036     767.0                      
+       Queensland,Australia
+
+TOMM   Thomson                                            -37.80853  146.34969     932.0                      
+       Victoria,Australia
+
+TOO    Toolangi                                           -37.57140  145.49100     604.0                Open  
+       Victoria,Australia
+
+TPND   Tumut Pond Dam                                     -35.96300  148.39000    1205.0                      
+       New South Wales,Australia
+
+TRR    Tarraleah                                          -42.30420  146.45000     579.0                Closed
+       Tasmania,Australia
+
+TV1    Townsville Hrock                                   -19.26139  146.79531     123.0                      
+       Queensland,Australia
+
+TV2    Townsville Softrock                                -19.29211  146.78331      20.0                      
+       Queensland,Australia
+
+TVL    Townsville                                         -19.26170  146.76800       5.0                      
+       Queensland,Australia
+
+TW1H   Toowoomba 1 Hard                                   -27.54420  151.97200     730.0                Open  
+       Queensland,Australia
+
+TWOA   Tennyson Woods                                     -35.03250  138.57806     165.0                      
+       South Australia,Australia
+
+UKAQ   Ukalunda                                           -20.89761  147.12736     250.0                Open  
+       Queensland,Australia
+
+UMB    Umberatana                                         -30.24000  139.12806     610.0                Open  
+       South Australia,Australia
+
+UTT    Tea Tree Gully                                     -34.82150  138.73669     300.0                      
+       South Australia,Australia
+
+WA1    Wongan Hills                                       -30.90980  116.72800     260.0                Closed
+       Western Australia,Australia
+
+WA2    Wagin                                              -33.27670  117.33700     300.0                Open  
+       Western Australia,Australia
+
+WA3    Talbot Brook                                       -32.05170  116.64300     276.0                Open  
+       Western Australia,Australia
+
+WA4    Burakin                                            -30.60190  117.22500     320.0                Open  
+       Western Australia,Australia
+
+WAM    Wambrook                                           -36.19280  148.88300     200.0                Open  
+       New South Wales,Australia
+
+WARB   Warburton                                          -26.18381  126.64300     460.0                Closed
+       Western Australia,Australia
+
+WAT    Watheroo                                           -30.31670  115.88300                          Closed
+       Western Australia,Australia
+
+WB0    Warramunga Array Site B0                           -19.76710  134.39300     392.0                      
+       Northern Territory,Australia
+
+WB1    Warramunga Ar.                                     -19.95950  134.34600     422.0                      
+       Northern Territory,Australia
+
+WB2    Warramunga Array Site B2                           -19.94275  134.35111     388.0                Open  
+       Northern Territory,Australia
+
+WB3    Warramunga Array Site B3                           -19.92303  134.35547     384.2                Open  
+       Northern Territory,Australia
+
+WB4    Warramunga Array Site B4                           -19.90364  134.35894     380.6                Open  
+       Northern Territory,Australia
+
+WB5    Warramunga Array Site B5                           -19.87822  134.36619     370.9                Open  
+       Northern Territory,Australia
+
+WB6    Warramunga Array Site B6                           -19.85500  134.36700     396.0                Open  
+       Northern Territory,Australia
+
+WB7    Warramunga Array Site B7                           -19.84080  134.37944     353.2                Open  
+       Northern Territory,Australia
+
+WB8    Warramunga Array Site B8                           -19.81394  134.38081     356.1                Open  
+       Northern Territory,Australia
+
+WB9    Warramunga Array Site B9                           -19.79140  134.38400     391.0                Open  
+       Northern Territory,Australia
+
+WBAQ   Buaraba 3                                          -27.35269  152.30819                          Open  
+       Queensland,Australia
+
+WBN    Warburton                                          -26.14000  126.57800     457.0                Closed
+       Western Australia,Australia
+
+WC1    Warramunga Array Site C1                           -19.92433  134.33906     392.0                      
+       Northern Territory,Australia
+
+WC2    Warramunga Array Site C2                           -19.92539  134.36544     375.0                      
+       Northern Territory,Australia
+
+WC3    Warramunga Array Site C3                           -19.95875  134.37194     382.1                      
+       Northern Territory,Australia
+
+WC4    Warramunga Array Site C4                           -19.96192  134.33972     387.5                      
+       Northern Territory,Australia
+
+WCB    Warramunga Array                                   -19.93470  134.35700     366.0                Open  
+       Northern Territory,Australia
+
+WDBM   Warragamba Dam                                     -33.88500  150.59400      30.0                      
+       New South Wales,Australia
+
+WER    Werombi                                            -33.95031  150.58031     226.0                Open  
+       New South Wales,Australia
+
+WGBM   Warragamba                                         -33.86606  150.57506     254.0                      
+       New South Wales,Australia
+
+WHYH   Whyalla                                            -33.03300  137.57440      43.0                Open  
+       South Australia,Australia
+
+WILL   Willung South                                      -38.33933  146.73669     425.0                      
+       Victoria,Australia
+
+WKA    Willalooka                                         -36.41700  140.32100      40.0                Open  
+       South Australia,Australia
+
+WMBQ   Mount Brisbane                                     -27.11550  152.55000     160.0                Open  
+       Queensland,Australia
+
+WOOD   Lake Woodford                                      -33.69786  150.48547     420.0                      
+       New South Wales,Australia
+
+WOOL   Woolibar                                           -31.07300  121.67800     325.0                Open  
+       Western Australia,Australia
+
+WOOM   Toowoomba                                          -27.54411  151.97200     759.0                      
+       Queensland,Australia
+
+WPA    Woody Point                                        -27.26030  153.25600      10.0                      
+       Queensland,Australia
+
+WPMQ   Pine Mountain                                      -27.53570  152.73600      35.0                Open  
+       Queensland,Australia
+
+WR0    Warramunga Array Site R0                           -19.95967  134.54053     353.0                      
+       Northern Territory,Australia
+
+WR1    Warramunga Array Site R1                           -19.94258  134.33950     388.8                      
+       Northern Territory,Australia
+
+WR2    Warramunga Array Site R2                           -19.94686  134.36239     385.4                Open  
+       Northern Territory,Australia
+
+WR3    Warramunga Array Site R3                           -19.94850  134.38692     376.5                Open  
+       Northern Territory,Australia
+
+WR4    Warramunga Array Site R4                           -19.95030  134.40661     374.4                Open  
+       Northern Territory,Australia
+
+WR5    Warramunga Array Site R5                           -19.95217  134.43036     364.2                Open  
+       Northern Territory,Australia
+
+WR6    Warramunga Array Site R6                           -19.95430  134.45400     382.0                Open  
+       Northern Territory,Australia
+
+WR7    Warramunga Array Site R7                           -19.95520  134.47600     382.0                Open  
+       Northern Territory,Australia
+
+WR8    Warramunga Array Site R8                           -19.95570  134.50000     400.0                Open  
+       Northern Territory,Australia
+
+WR9    Warramunga Array Site R9                           -19.95770  134.51500     383.0                Open  
+       Northern Territory,Australia
+
+WRA    Warramunga Array Beam Reference Point              -19.94260  134.33900     419.0                Open  
+       Northern Territory,Australia
+
+WRAB   Tennant Creek                                      -19.93330  134.35000     366.0                Open  
+       Northern Territory,Australia
+
+WRAI   Warramunga Infrasound Array Beam Reference Point   -19.94019  134.22600     401.0                      
+       Northern Territory,Australia
+
+WRB    Warramunga Array                                   -19.95944  134.34642     393.5                Open  
+       Northern Territory,Australia
+
+WRCQ   Reedy Creek 5                                      -27.18739  152.66311                          Open  
+       Queensland,Australia
+
+WRKA   Warakurna                                          -25.03710  128.29618       0.0                      
+       Western Australia,Australia
+
+WRNM   Woronora                                           -34.14139  150.95158     259.0                      
+       New South Wales,Australia
+
+WSA    Woomera                                            -31.14500  136.80500                                
+       South Australia,Australia
+
+WTGQ   Toogoolawah                                        -27.14580  152.33300     130.0                Open  
+       Queensland,Australia
+
+WTRQ   Thallon Road                                       -27.52860  152.46400                          Open  
+       Queensland,Australia
+
+WWHQ   Wivenhoe Hill 3                                    -27.37019  152.58719                          Open  
+       Queensland,Australia
+
+WYA    Wyangala                                           -33.92690  148.92400                                
+       New South Wales,Australia
+
+YE6    Yeelanna, site6                                    -34.15890  135.83230     180.0     0.0        Open  
+       South Australia
+
+YERM   Yerranderie                                        -34.14247  150.23206     554.0                      
+       New South Wales,Australia
+
+YNG    Young                                              -34.29800  148.39631     460.0                Open  
+       New South Wales,Australia
+
+YOU    Young                                              -34.27833  148.38167     503.0                Closed
+       New South Wales,Australia
+
+STOP
