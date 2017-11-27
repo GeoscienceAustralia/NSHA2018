@@ -102,7 +102,8 @@ outlines += '#PBS -N oq512c512ht\n'
 outlines += '#PBS -l jobfs=%s\n' % params['jobfs']
 outlines += '#PBS -l other=hyperthread\n\n'
 
-outlines += 'module load openquake/2.1.1\n'
+#outlines += 'module load openquake/2.1.1\n'
+outlines += 'module load openquake/2.4\n'
 outlines += 'oq-ini.all.sh\n'
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
 outlines += 'oq-end.sh'
