@@ -1,28 +1,36 @@
-% script to merge ANSN_'s earthquake catalogue to mdat
+% script to merge ANSN's earthquake catalogue to mdat
 
 %% parse ANSN_ catalogue
 disp('Parsing ANSN_ Catalogue...');
 ANSN_catfile = '..\data\ANSN_cat_m_ge_35.csv';
-ANSN_catfile = '..\data\eq_348_1513226334947.csv';
-[prefmag, utcdate, utctime, localdate, localtime, lat, lon, magtype, place, ...
+ANSN_catfile = '../data/eq_349_1513311506173.csv';
+% [prefmag, utcdate, utctime, localdate, localtime, lat, lon, magtype, place, ...
+%  dep, soln, mb, ml, ms, mwp, mw, evid, oid] = ...
+%  textread(ANSN_catfile, '%f%s%s%s%s %f%f%s%s %f%s%f%f%f%f%f%f%f', ...
+%           'headerlines',1,'delimiter',',','emptyvalue',NaN);
+      
+[prefmag, utcdate, utctime, localdate, localtime, lat, lon, place, ...
  dep, soln, mb, ml, ms, mwp, mw, evid, oid] = ...
- textread(ANSN_catfile, '%f%s%s%s%s%f%f%s%s%f%s%f%f%f%f%f%f%f', ...
+ textread(ANSN_catfile, '%f%s%s%s%s%f%f%s%f%s%f%f%f%f%f%f%f', ...
           'headerlines',1,'delimiter',',','emptyvalue',NaN);
+
 
 for i = 1:length(prefmag)
     % get datetime
     dateSplit = str2double(strsplit(utcdate{i},'/'));
     timeSplit = str2double(strsplit(utctime{i},':'));
+    dateSplit = str2double(strsplit('/',utcdate{i})); % for mac
+    timeSplit = str2double(strsplit(':',utctime{i})); % for mac
     ANSN_dat(i).dateNum = datenum(dateSplit(3), dateSplit(2), dateSplit(1), ...
                                   timeSplit(1), timeSplit(2), timeSplit(3));
-    ANSN_dat(i).lat = lat(i);
+    ANSN_dat(i).lat = -1*lat(i);
     ANSN_dat(i).lon = lon(i);
     ANSN_dat(i).dep = dep(i);
     ANSN_dat(i).prefmag = prefmag(i);
     ANSN_dat(i).evid = evid(i);
     ANSN_dat(i).oid = oid(i);
     ANSN_dat(i).mag = prefmag(i);
-    ANSN_dat(i).magtype = magtype(i);
+    %ANSN_dat(i).magtype = magtype(i);
     ANSN_dat(i).mb = mb(i);
     ANSN_dat(i).ml = ml(i);
     ANSN_dat(i).ms = ms(i);
@@ -43,9 +51,10 @@ disp('Merging ANSN Catalogue...');
 
 t20 = 1/(60*24); % 1 minute threshold
 j = 0;
+mmin = 3.75;
 for i = 1:length(mdat)
     % only consider larger events
-    if mdat(i).GG_Mval > 3.5
+    if mdat(i).GG_Mval > mmin
          ind = find([ANSN_dat.dateNum] > mdat(i).MDAT_dateNum - t20 ...
                    & [ANSN_dat.dateNum] < mdat(i).MDAT_dateNum + t20 ...
                    & [ANSN_dat.lat] > mdat(i).MDAT_lat - 1 ...
@@ -58,12 +67,11 @@ for i = 1:length(mdat)
             mdat(i).ANSN_evid = ANSN_dat(ind).evid;
             mdat(i).ANSN_oid = ANSN_dat(ind).oid;
             mdat(i).ANSN_datenum = ANSN_dat(ind).dateNum;
-            mdat(i).ANSN_datestr = ANSN_dat(ind).dateStr;
             mdat(i).ANSN_lat = ANSN_dat(ind).lat;
             mdat(i).ANSN_lon = ANSN_dat(ind).lon;
+            mdat(i).ANSN_dep = ANSN_dat(ind).dep;
             mdat(i).ANSN_prefmag = ANSN_dat(ind).prefmag;
-            mdat(i).ANSN_magType = ANSN_dat(ind).magType;
-            mdat(i).ANSN_magSrc = ANSN_dat(ind).magSrc;
+            %mdat(i).ANSN_magType = ANSN_dat(ind).magType;
             mdat(i).ANSN_ml = ANSN_dat(ind).ml;
             mdat(i).ANSN_mw = ANSN_dat(ind).mw;
             mdat(i).ANSN_mb = ANSN_dat(ind).mb;
@@ -93,12 +101,11 @@ for i = 1:length(mdat)
                 mdat(i).ANSN_evid = ANSN_dat(ind(k)).evid;
                 mdat(i).ANSN_oid = ANSN_dat(ind(k)).oid;
                 mdat(i).ANSN_datenum = ANSN_dat(ind(k)).dateNum;
-                mdat(i).ANSN_datestr = ANSN_dat(ind(k)).dateStr;
                 mdat(i).ANSN_lat = ANSN_dat(ind(k)).lat;
                 mdat(i).ANSN_lon = ANSN_dat(ind(k)).lon;
+                mdat(i).ANSN_dep = ANSN_dat(ind(k)).dep;
                 mdat(i).ANSN_prefmag = ANSN_dat(ind(k)).prefmag;
-                mdat(i).ANSN_magType = ANSN_dat(ind(k)).magType;
-                mdat(i).ANSN_magSrc = ANSN_dat(ind(k)).magSrc;
+                %mdat(i).ANSN_magType = ANSN_dat(ind(k)).magType;
                 mdat(i).ANSN_ml = ANSN_dat(ind(k)).ml;
                 mdat(i).ANSN_mw = ANSN_dat(ind(k)).mw;
                 mdat(i).ANSN_mb = ANSN_dat(ind(k)).mb;
@@ -109,12 +116,11 @@ for i = 1:length(mdat)
                 mdat(i).ANSN_evid = NaN;
                 mdat(i).ANSN_oid = NaN;
                 mdat(i).ANSN_datenum = NaN;
-                mdat(i).ANSN_datestr = '';
                 mdat(i).ANSN_lat = NaN;
                 mdat(i).ANSN_lon = NaN;
+                mdat(i).ANSN_dep = NaN;
                 mdat(i).ANSN_prefmag = NaN;
-                mdat(i).ANSN_magType = '';
-                mdat(i).ANSN_magSrc = ''
+                %mdat(i).ANSN_magType = '';
                 mdat(i).ANSN_ml = NaN;
                 mdat(i).ANSN_mw = NaN;
                 mdat(i).ANSN_mb = NaN;
@@ -123,29 +129,35 @@ for i = 1:length(mdat)
                 
             end
         else % no events
-            mdat(i).ANSN_id = NaN;
-            mdat(i).ANSN_name = [];
+            mdat(i).ANSN_evid = NaN;
+            mdat(i).ANSN_oid = NaN;
             mdat(i).ANSN_datenum = NaN;
-            mdat(i).ANSN_datestr = [];
             mdat(i).ANSN_lat = NaN;
             mdat(i).ANSN_lon = NaN;
-            mdat(i).ANSN_mag = NaN;
-            mdat(i).ANSN_magType = [];
-            mdat(i).ANSN_magSrc = [];
-            mdat(i).ANSN_stn = [];
-            mdat(i).AUST_ML = NaN;    
+            mdat(i).ANSN_dep = NaN;
+            mdat(i).ANSN_prefmag = NaN;
+            %mdat(i).ANSN_magType = '';
+            mdat(i).ANSN_ml = NaN;
+            mdat(i).ANSN_mw = NaN;
+            mdat(i).ANSN_mb = NaN;
+            mdat(i).ANSN_ms = NaN;
+            mdat(i).ANSN_mwp = NaN;    
         end
-    else % prior to 1967
-        mdat(i).ANSN_id = NaN;
-        mdat(i).ANSN_name = [];
+    else % events < mmin
+        mdat(i).ANSN_evid = NaN;
+        mdat(i).ANSN_oid = NaN;
         mdat(i).ANSN_datenum = NaN;
-        mdat(i).ANSN_datestr = [];
         mdat(i).ANSN_lat = NaN;
         mdat(i).ANSN_lon = NaN;
-        mdat(i).ANSN_mag = NaN;
-        mdat(i).ANSN_magType = [];
-        mdat(i).ANSN_magSrc = [];
-        mdat(i).ANSN_stn = [];
-        mdat(i).AUST_ML = NaN;
+        mdat(i).ANSN_dep = NaN;
+        mdat(i).ANSN_prefmag = NaN;
+        %mdat(i).ANSN_magType = '';
+        mdat(i).ANSN_ml = NaN;
+        mdat(i).ANSN_mw = NaN;
+        mdat(i).ANSN_mb = NaN;
+        mdat(i).ANSN_ms = NaN;
+        mdat(i).ANSN_mwp = NaN;
     end
 end
+
+save mdat mdat;

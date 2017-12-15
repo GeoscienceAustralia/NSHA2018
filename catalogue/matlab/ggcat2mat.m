@@ -2,6 +2,7 @@
 
 % read csv
 ggcatFile = '..\data\GGcat-170802_Aust_Local_EQ_M2.5.csv';
+ggcatFile = '../data/GGcat-170802_Aust_Local_EQ_M2.5.csv'; % for mac/linux
 [auth, type, dependence, ass, year, month, day, hour, min, sec, ...
  timezone, timecor, lon, lat, dep, zcode, mx, mval, place, mtxt] ... 
  = textread(ggcatFile,'%s%s%f%s%f%f%f%f%f%f%s%f%f%f%f%s%s%f%s%s', ...
@@ -15,9 +16,9 @@ for i = 1:length(auth)
     if isnan(sec(i)); sec(i)=0.0; end
     
     % fix time
-    tmpdatetime = datenum(year(i), month(i), day(i), hour(i), min(i), sec(i));
+    tmpdatetime = datenum(year(i), month(i), day(i), hour(i), min(i), sec(i)); % local time
     deltaT = timecor(i)/24;
-    mdat(i).MDAT_dateNum = tmpdatetime + deltaT;
+    mdat(i).MDAT_dateNum = tmpdatetime; % already in UTC! - deltaT; % convert to UTC
     mdat(i).MDAT_dateStr = datestr(mdat(i).MDAT_dateNum, 31);
     
     mdat(i).MDAT_lat = -1*lat(i);
