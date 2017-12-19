@@ -186,7 +186,6 @@ disp('Looping thru events...')
 %         mdat_pref(i).MDAT_prefMLSrc = 'From mb';
 %     end
     
-%     if strcmp(mdat_pref(i).MDAT_prefMLSrc,'MEL') % change to zone!!!!!
     if zone < 4
         [rng az] = distance(srclat,srclon,lat,lon);
         ind = find(srcstart <= evdate & srcstop >= evdate & deg2km(rng') < 1500);
