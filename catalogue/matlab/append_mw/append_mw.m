@@ -7,9 +7,9 @@
 % *************************************************************************
 
 % load data
-if exist('mdat_pref','var') ~= 1
-    disp('Loading mdat_pref12');
-    load ..\preferred\mdat_pref12.mat;
+if exist('mdat','var') ~= 1
+    disp('Loading mdat');
+    load ..\mdat.mat;
 end
 
 %% pre-define polygons modified from shown in Allen 2010 AEES manuscript
@@ -42,29 +42,29 @@ end
 
 unqML = ones(size(meanMw)) * NaN;
 
-% find ML's in mdat_pref
-t60 = 1.2 / (24 * 60);
-for i = 1:length(mdat_pref)
-    if mdat_pref(i).MDAT_dateNum > datenum(1968,10,13)
-        ind = find(meanMw > mdat_pref(i).MDAT_prefML - 1 & meanMw < mdat_pref(i).MDAT_prefML + 1.2 ...
-              & unqLon > mdat_pref(i).MDAT_lon - 1 & unqLon < mdat_pref(i).MDAT_lon + 1 ...
-              & unqLat > mdat_pref(i).MDAT_lat - 1 & unqLat < mdat_pref(i).MDAT_lat + 1 ...
-              & unqDateNum > mdat_pref(i).MDAT_dateNum - t60 ...
-              & unqDateNum < mdat_pref(i).MDAT_dateNum + t60);
+% find ML's in mdat
+t60 = 1 / (24 * 60);
+for i = 1:length(mdat)
+    if mdat(i).MDAT_dateNum > datenum(1968,10,13)
+        ind = find(meanMw > mdat(i).GG_Mval - 1 & meanMw < mdat(i).GG_Mval + 1.2 ...
+              & unqLon > mdat(i).MDAT_lon - 1 & unqLon < mdat(i).MDAT_lon + 1 ...
+              & unqLat > mdat(i).MDAT_lat - 1 & unqLat < mdat(i).MDAT_lat + 1 ...
+              & unqDateNum > mdat(i).MDAT_dateNum - t60 ...
+              & unqDateNum < mdat(i).MDAT_dateNum + t60);
           if ~isempty(ind) & length(ind) == 1
-              disp(['match: ',datestr(mdat_pref(i).MDAT_dateNum)])
+              disp(['match: ',datestr(mdat(i).MDAT_dateNum, 31), ' ', num2str(i)])
 
               % fill mw value
-              %if isnan(mdat_pref(i).MDAT_prefMW)
+              %if isnan(mdat(i).mdatMW)
                   mwind = find(dateNum == unqDateNum(ind));
-                  mdat_pref(i).MDAT_prefMW = mw(mwind(1));
+                  mdat(i).altMW = mw(mwind(1));
                   tsrc = src(mwind(1));
-                  mdat_pref(i).MDAT_prefMWSrc = tsrc{1};
-                  disp(mdat_pref(i).MDAT_prefMWSrc)
+                  mdat(i).altMWsrc = tsrc{1};
+                  disp(mdat(i).altMWsrc)
               %end
           end
     end
 end
 
-save mdat_mw_pref12 mdat_pref;
+save ..\mdat_mw mdat;
 

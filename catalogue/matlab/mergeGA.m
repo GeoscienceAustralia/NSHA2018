@@ -44,10 +44,10 @@ disp('Merging ANSN Catalogue...');
 
 t20 = 1/(60*24); % 1 minute threshold
 j = 0;
-mmin = 3.75;
+mmin = 3.25;
 for i = 1:length(mdat)
     % only consider larger events
-    if mdat(i).GG_Mval > mmin
+    if mdat(i).GG_Mval >= mmin
          ind = find([ANSN_dat.dateNum] > mdat(i).MDAT_dateNum - t20 ...
                    & [ANSN_dat.dateNum] < mdat(i).MDAT_dateNum + t20 ...
                    & [ANSN_dat.lat] > mdat(i).MDAT_lat - 1 ...
