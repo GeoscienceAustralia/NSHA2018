@@ -1,4 +1,4 @@
-function [MLM92,WGW94,WGW96,BJ84,HB87,GS86,GG91,R35,A10] = getMLestimates(rhyp,dep,maxh,maxv)
+function [MLM92,WGW94,WGW96,BJ84,HB87,GS86,GG91,R35] = getMLestimates(rhyp,dep,maxh,maxv)
 
 % Calculates local (Richter) magnitude from hypocentral distance, earthquake 
 % depth, and maximum horizontal and vertical Wood-Anderson amplitudes using 
@@ -43,22 +43,22 @@ GS86 = log10(maxh) + logA0;
 GG91 = log10(maxh) + 1.137 * log10(rhyp) + 0.000657 * rhyp + 0.66;
 
 
-% Allen (2010)
-c = textread('A10.GR_coeff.dat','%f');
-c1 = c(1);
-c2 = c(2);
-c3 = c(3);
-r1 = c(4);
-r2 = c(5);
-if rhyp <= r1
-    logASEA = c1*log10(rhyp/30);
-elseif rhyp > r1 & rhyp <= r2
-    logASEA = c1*log10(r1/30) + c2*log10(rhyp/r1);
-elseif rhyp > r2
-    logASEA = c1*log10(r1/30) + c2*log10(r2/r1) + c3*log10(rhyp/r2);
-end
-
-A10 = log10(maxv) - logASEA + 2.29 + 0.18;
+% % Allen (2010)
+% c = textread('A10.GR_coeff.dat','%f');
+% c1 = c(1);
+% c2 = c(2);
+% c3 = c(3);
+% r1 = c(4);
+% r2 = c(5);
+% if rhyp <= r1
+%     logASEA = c1*log10(rhyp/30);
+% elseif rhyp > r1 & rhyp <= r2
+%     logASEA = c1*log10(r1/30) + c2*log10(rhyp/r1);
+% elseif rhyp > r2
+%     logASEA = c1*log10(r1/30) + c2*log10(r2/r1) + c3*log10(rhyp/r2);
+% end
+% 
+% A10 = log10(maxv) - logASEA + 2.29 + 0.18;
 
 % Richter (1935)
 logA0 = NaN;

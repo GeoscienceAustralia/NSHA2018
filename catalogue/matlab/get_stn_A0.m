@@ -1,4 +1,4 @@
-function [rhyp,repi,MLM92,WGW94,WGW96,GS86,GG91,R35,BJ84,A10,stns] ...
+function [rhyp,repi,MLM92,WGW94,WGW96,GS86,GG91,R35,BJ84,stns] ...
          = get_stn_A0(siteDat,lat,lon,dep,evdate,stns,zone,essrng)
 
 % function gets A0 correction factors for recording stations or those that
@@ -69,7 +69,7 @@ else % get corrections
             rhyp(j) = sqrt(deg2km(rng)^2 + dep^2);
             % get ML A0 correction
             if ~isnan(dep)
-                [MLM92(j),WGW94(j),WGW96(j),BJ84(j),HB87(j),GS86(j),GG91(j),R35(j),A10(j)] ...
+                [MLM92(j),WGW94(j),WGW96(j),BJ84(j),HB87(j),GS86(j),GG91(j),R35(j)] ...
                  = getMLestimates(rhyp(j),dep,1,1);
             end
         % use es&s stns
@@ -78,7 +78,7 @@ else % get corrections
             rhyp(j) = sqrt(essrng(j)^2 + dep^2);
             % get ML A0 correction
             if ~isnan(dep)
-                [MLM92(j),WGW94(j),WGW96(j),BJ84(j),HB87(j),GS86(j),GG91(j),R35(j),A10(j)] ...
+                [MLM92(j),WGW94(j),WGW96(j),BJ84(j),HB87(j),GS86(j),GG91(j),R35(j)] ...
                  = getMLestimates(rhyp(j),dep,1,1);
             end            
         else

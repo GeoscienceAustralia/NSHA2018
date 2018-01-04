@@ -7,5 +7,7 @@ Steps to generate matlab mat file, to be used in magnitude revision and conversi
 4) Append update MW values using "append_mw.m"
 	- exports "mdat_mw.mat"
 5) Get preferred ML and MW magnitudes by running "get_pref_mags.m"
+	- assumes equivalence between ML and MD, MP and M?
 	- exports "mdat_pref_mag_types.mat"
 6) Make consistent magnitudes across all time periods using 'reviseMLs_2018.m"
+	- exports "mdat_ml_rev.mat"

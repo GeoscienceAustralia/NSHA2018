@@ -1,4 +1,4 @@
-% scropt to find preferred magnitude of each magnitude type
+% script to find preferred value of each magnitude type
 
 if exist('mdat','var') ~= 1
     disp('Loading mdat');
@@ -15,6 +15,14 @@ for i = 1:length(mdat)
         mdat(i).MDAT_prefML = mdat(i).ANSN_ml;
         mdat(i).MDAT_prefMLSrc = 'AUST';
     elseif strcmp(mdat(i).GG_Mtype, 'ML')
+        mdat(i).MDAT_prefML = mdat(i).GG_Mval;
+        mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
+    elseif strcmp(mdat(i).GG_Mtype, 'MLdz')
+        mdat(i).MDAT_prefML = mdat(i).GG_Mval;
+        mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
+    elseif strcmp(mdat(i).GG_Mtype, 'MP') || strcmp(mdat(i).GG_Mtype, 'MD') ...
+           || strcmp(mdat(i).GG_Mtype, 'M?') 
+        % assume equivalence with ML
         mdat(i).MDAT_prefML = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
     else
