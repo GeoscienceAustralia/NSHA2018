@@ -127,26 +127,40 @@ for i = 1:length(srcstarty)
     srcstart = [srcstart, datenum([srcstarty{i}, sprintf('%02d',srcstartm{i}), '01'],'yyyymmdd')];
     srcstop  = [srcstop,  datenum([srcstopy{i}, sprintf('%02d',srcstopm{i}), '01'],'yyyymmdd')];
 end
-%     
-% srcstns = txt(:,1);
-% for i = 1:length(mdat)
-%     if isempty(mdat(i).ISC_stn) & strcmp(mdat(i).MDAT_prefMLSrc,'MEL')
-%         [rng az] = distance(srclat,srclon,lat,lon);
-%         ind = find(srcstart <= evdate & srcstop >= evdate & deg2km(rng) < 1500);
-%         if ~isempty(ind)
-%             srcstns = srcstns(ind);
-%         end
-%     end
-% end
+
+siteDat.startdate = srcstart;
+siteDat.stopdate = srcstart;
+siteDat.stnlat = srclat;
+siteDat.stnlon = srclon;
+siteDat.stncode = srcstns;
 
 %% pre-define polygons as shown in Allen 2010 AEES manuscript
 
-walon = [129  110. 110.  135.0  135.0  138.3  138.3  129];
-walat = [-10 -18.5  -45   -45   -29   -29   -10   -10];
-ealon = [138.3  138.3  141.0  141.0  155.5  155.5 145.5 138.3];
-ealat = [-10   -29   -29   -45   -45  -18 -10   -10];
-salon = [135   135   141   141   135];
-salat = [-29   -45   -45   -29   -29];
+% walon = [129  110. 110.  135.0  135.0  138.3  138.3  129];
+% walat = [-10 -18.5  -45   -45   -29   -29   -10   -10];
+% ealon = [138.3  138.3  141.0  141.0  155.5  155.5 145.5 138.3];
+% ealat = [-10   -29   -29   -45   -45  -18 -10   -10];
+% salon = [135   135   141   141   135];
+% salat = [-29   -45   -45   -29   -29];
+
+%% parse ML polygons as used by the ANSN
+mlRegFile = '..\magnitude\ml\australia_ml_regions.txt';
+[mlreg, ln, mlla, mllo] = textread(mlRegFile, '%s%f%f%f','delimiter',' ');
+
+% get WA polygons
+idx = find(strcmp(mlreg, 'SWAustralia'));
+walon = mllo(idx);
+walat = mlla(idx);
+
+% get SEA polygons
+idx = find(strcmp(mlreg, 'SEAustralia'));
+ealon = mllo(idx);
+ealat = mlla(idx);
+
+% get SA polygons
+idx = find(strcmp(mlreg, 'SAustralia'));
+salon = mllo(idx);
+salat = mlla(idx);
 
 %% loop through events to see if in EA or WA polygons for post-1960 events
 disp('Looping thru events...')
@@ -191,6 +205,8 @@ disp('Looping thru events...')
         if ~isempty(ind)
             stns = srcstns(ind);
             srcrng = deg2km(rng(ind));
+            stla = srclat(ind);
+            stlo = srclon(ind);
         else
             srcrng = NaN;
         end
@@ -219,9 +235,15 @@ disp('Looping thru events...')
 %% get ML corrections assuming Western Australia Zone
     if zone == 1 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML)
         
+%         % keep AUST solutions for post-1990 events
+%         if strcmp(mdat(i).MDAT_prefMLSrc,'AUST') & mdat(i).MDAT_dateNum >= datenum(1990,1,1)
+%             mdat(i).MDAT_MLrev = mdat(i).MDAT_prefML;
+%             mdat(i).MDAT_MLrevdist = NaN;
+%             mdat(i).MDAT_MLminstn = [];
+%         end
+        
         % correct pre-1990 events to Gaull & Gregson assuming Richter (not ADE solutions)
-        if mdat(i).MDAT_dateNum < datenum(1988,1,1) ...
-           & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 0
+        if mdat(i).MDAT_dateNum < datenum(1990,1,1) & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 0
        
             % get station A
             R35_A = mdat(i).MDAT_prefML - R35_A0;
@@ -242,8 +264,7 @@ disp('Looping thru events...')
         end
         
         % correct pre-1968 ADE events to Gaull & Gregson assuming Richter
-        if mdat(i).MDAT_dateNum < datenum(1968,1,1) ...
-           & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
+        if mdat(i).MDAT_dateNum < datenum(1968,1,1) & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
        
             % get station A
             R35_A = mdat(i).MDAT_prefML - R35_A0;
@@ -267,15 +288,22 @@ disp('Looping thru events...')
 %% get ML corrections assuming Eastern Australia Zone
     elseif zone == 2 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML)
         
-        % keep Allen solutions as is
-        if strcmp(mdat(i).MDAT_prefMLSrc,'Allen (unpublished)')
-            mdat(i).MDAT_MLrev = mdat(i).MDAT_prefML;
-            mdat(i).MDAT_MLrevdist = NaN;
-            mdat(i).MDAT_MLminstn = [];
-        end
+%         % keep Allen solutions as is
+%         if strcmp(mdat(i).MDAT_prefMLSrc,'Allen (unpublished)')
+%             mdat(i).MDAT_MLrev = mdat(i).MDAT_prefML;
+%             mdat(i).MDAT_MLrevdist = NaN;
+%             mdat(i).MDAT_MLminstn = [];
+%         end
+%         
+%         % keep AUST solutions for post-1991 events
+%         if strcmp(mdat(i).MDAT_prefMLSrc,'AUST') & mdat(i).MDAT_dateNum >= datenum(1991,1,1)
+%             mdat(i).MDAT_MLrev = mdat(i).MDAT_prefML;
+%             mdat(i).MDAT_MLrevdist = NaN;
+%             mdat(i).MDAT_MLminstn = [];
+%         end
 
         % correct pre-1990 events to Michael-Leiba & Manafant assuming Richter (not MEL solutions)    
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1990,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1991,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 0
             % get station A
             R35_A = mdat(i).MDAT_prefML - R35_A0;
@@ -384,9 +412,31 @@ disp('Looping thru events...')
             end
         end
         
-        % correct post-2002 RC events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
+        % correct post-2002 MEL events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
         if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
-           & strcmp(mdat(i).MDAT_prefMLSrc,'RC') == 1
+           & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 1
+            % get station A
+            BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
+                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
+                mdat(i).MDAT_MLminstn = stns(dminind);
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                [dmindist dminind] = min(abs(rhyp-180));
+                mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                                          + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
+                mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+            end
+        end
+        
+        % correct post-2002 SRC events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+           & strcmp(mdat(i).MDAT_prefMLSrc,'SRC') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
@@ -432,7 +482,7 @@ disp('Looping thru events...')
         if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum >= datenum(1990,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 0 & strcmp(mdat(i).MDAT_prefMLSrc,'AUST') == 0 ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'RC') == 0 & strcmp(mdat(i).MDAT_prefMLSrc,'GG') == 0 ...
-           & strcmp(mdat(i).MDAT_prefMLSrc,'Allen (unpublished)') == 0
+           & strcmp(mdat(i).MDAT_prefMLSrc,'SRC') == 0 & strcmp(mdat(i).MDAT_prefMLSrc,'Allen (unpublished)') == 0
            disp(mdat(i).MDAT_prefMLSrc);
             % get station A
             R35_A = mdat(i).MDAT_prefML - R35_A0;
@@ -500,6 +550,13 @@ disp('Looping thru events...')
 %% get ML corrections assuming South Australia Zone
     elseif zone == 3 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML)
         
+%         % keep AUST solutions for post-2000 events
+%         if strcmp(mdat(i).MDAT_prefMLSrc,'AUST') & mdat(i).MDAT_dateNum >= datenum(1990,1,1)
+%             mdat(i).MDAT_MLrev = mdat(i).MDAT_prefML;
+%             mdat(i).MDAT_MLrevdist = NaN;
+%             mdat(i).MDAT_MLminstn = [];
+%         end
+        
         % correct pre-1968 ADE events to Greenhalgh 1986 assuming Richter
         if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1968,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
@@ -522,8 +579,8 @@ disp('Looping thru events...')
             end
         end
         
-        % correct pre-1986 non-ADE events to Greenhalgh 1986 assuming Richter
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1968,1,1) ...
+        % correct pre-1990 non-ADE events to Greenhalgh 1986 assuming Richter
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1990,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 0
             % get station A
             R35_A = mdat(i).MDAT_prefML - R35_A0;
@@ -651,7 +708,7 @@ disp('Looping thru events...')
         
 %% Not in WA, SA or EA        
     else zone > 3 & ~isnan(mdat(i).MDAT_prefML)
-        mdat(i).MDAT_MLrev = mdat(i).MDAT_prefML;
+        mdat(i).MDAT_MLrev = NaN;
         mdat(i).MDAT_MLrevdist = NaN;
         mdat(i).MDAT_MLminstn = [];
     end
@@ -661,9 +718,10 @@ disp('Looping thru events...')
     if isempty(stns) & zone ~= 4
         if isnan(mdat(i).MDAT_MLrevdist) & ~isnan(mdat(i).MDAT_prefML)
             mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML + mcorr(2);
+            mdat(i).MDAT_MLrevdist = NaN;
+            mdat(i).MDAT_MLminstn = [];
         end
-        mdat(i).MDAT_MLrevdist = NaN;
-        mdat(i).MDAT_MLminstn = [];
+        
     end
 end
 

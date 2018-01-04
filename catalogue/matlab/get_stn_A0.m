@@ -17,10 +17,10 @@ elseif zone == 3 & isnan(dep)
 end
  
 %% make proxy stationlist if ISC stns do not exist  
-if isempty(stns) & isempty(essrng)
+%if isempty(stns) & isempty(essrng)
     [rng az] = distance([siteDat.stnlat],[siteDat.stnlon],lat,lon);
     % find stations within date & distnce range
-    ind = find([siteDat.startdate] <= evdate & [siteDat.stopdate] >= evdate & deg2km(rng) < 1500);
+    ind = find([siteDat.startdate] <= evdate & [siteDat.stopdate] >= evdate & deg2km(rng') < 1500);
     if ~isempty(ind)
         stns = {siteDat(ind).stncode};
 %         disp (stns)
@@ -44,7 +44,7 @@ if isempty(stns) & isempty(essrng)
 %         repi = NaN;
 %         rhyp = NaN;
 %     end
-end
+%end
 
 %% get distance corrections
 if isempty(stns)
