@@ -7,7 +7,7 @@ Created on Fri Feb 10 13:30:27 2017
 
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
 from hmtk.seismicity.utils import haversine
-from parsers import parse_NSHA2012_catalogue
+from parsers import parse_NSHA2018_catalogue
 from writers import ggcat2hmtk_csv
 import numpy as np
 import datetime as dt
@@ -160,7 +160,10 @@ def decluster_SCR(method, cat, deblastOnly):
         flagvector_asfs = flag_dependent_events(cat, flagvector_as, doAftershocks, method)
         
         # now find mannually picked foreshocks/aftershocks (1 = fore/aftershock; 2 = blast/coal)
-        idx = np.where(cat.data['flag'] >= 1)[0]
+        # idx = np.where(cat.data['flag'] >= 1)[0] # for 2012 version
+        
+        # now find mannually picked foreshocks/aftershocks (0 = dependent events)
+        idx = np.where(cat.data['flag'] == 0)[0]
         flagvector_asfsman = flagvector_asfs
         flagvector_asfsman[idx] = 1
     
@@ -284,16 +287,15 @@ was based on these magnitudes
 prefmag1 = 'orig' # declusters based on original catalogue magnitude
 
 # Use 2012 NSHA catalogue
-nsha2012csv = path.join('data', 'AUSTCAT.MW.V0.12.csv')
-nsha2012csv = path.join('data', 'AUSTCAT.MP.V0.12.csv') # temp fix for testing original mags
-nsha_dict = parse_NSHA2012_catalogue(nsha2012csv)
+nsha2018csv = path.join('data', 'NSHA18CAT.MW.V0.1.csv')
+nsha_dict = parse_NSHA2018_catalogue(nsha2018csv)
 
 # set HMTK file name
 if prefmag1 == 'orig':
-    hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mx_orig.csv'
-    hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_mp_orig.csv'
+    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.1_hmtk_mx_orig.csv'
+    #hmtk_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk_mp_orig.csv'
 elif prefmag1 == 'mw':
-    hmtk_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk.csv'
+    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk.csv'
 
 # write HMTK csv
 ggcat2hmtk_csv(nsha_dict, hmtk_csv, prefmag1)
@@ -328,9 +330,9 @@ else:
 print 'Merging stripped columns...\n'
 
 prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
-prefmag2 = 'orig' # keeps orig mag in declustered catalogue
+#prefmag2 = 'orig' # keeps orig mag in declustered catalogue
 
-from misc_tools import dict2array, checkfloat
+from misc_tools import checkfloat
 
 # for testing
 #declustered_catalog_filename = 'data/AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
@@ -394,12 +396,12 @@ for line in lines[1:]:
 # re-write declustered catalogue
 if deblastOnly == False:
     if prefmag2 == 'mw':
-        declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
+        declustered_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
     else:
         declustered_csv = declustered_catalog_filename
 else:
     if prefmag2 == 'mw':
-        declustered_csv = nsha2012csv.split('.')[0] + '_V0.12_hmtk_deblast.csv'
+        declustered_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk_deblast.csv'
 
 f = open(declustered_csv, 'wb')
 f.write(newtxt)

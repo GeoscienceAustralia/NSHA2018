@@ -114,6 +114,52 @@ def parse_NSHA2012_catalogue(nsha2012cat):
         
     return austcat
     
+# parses catalogue of format used for the NSHA2018
+def parse_NSHA2018_catalogue(nsha2018cat):
+    '''
+    nsha2018cat: catalogue is csv format
+    '''
+    import csv
+    from numpy import nan
+    from datetime import datetime
+    #from os import path
+    
+    # for testing only
+    #nsha2018cat = path.join('data', 'NSHA18CAT.MW.V0.1.csv')
+    
+    # open file
+    raw = open(nsha2018cat).readlines()[1:] # exclude header    
+    
+    # parse csv    
+    lines = csv.reader(raw)
+    
+    # set array to append event dictionaries
+    austcat = []
+    
+    # loop through events
+    for line in lines:
+        # set null vals to nans
+        for i in range(len(line)):
+           if len(str(line[i]))<1:
+              line[i] = nan
+        
+        # get datetime
+        try:
+            evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M:%S')
+        except:
+            evdt = datetime.strptime(line[0], '%Y-%m-%d %H:%M')
+                    
+        # fill temp dict
+        tmpdict = {'auth':line[7], 'place':line[28],'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
+                   'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[4]), 'lat':float(line[5]), 'dep':float(line[6]), \
+                   'prefmag':float(line[26]), 'prefmagtype':line[27], 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
+                   'mw':float(line[8]), 'fixdep':0, 'datetime':evdt, 'dependence':int(line[3]), 'mx_orig':float(line[18]), \
+                   'mx_origType':str(line[19]), 'mx_rev_ml':float(line[20]), 'mx_rev_src':line[22], 'mw_src':line[27], 'ev_type':str(line[2])}
+    
+        austcat.append(tmpdict)
+            
+    return austcat
+    
         
         
         
