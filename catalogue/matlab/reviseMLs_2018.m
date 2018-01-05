@@ -165,6 +165,7 @@ salat = mlla(idx);
 %% loop through events to see if in EA or WA polygons for post-1960 events
 disp('Looping thru events...')
  % for i = 57649:length(mdat)
+ cnt = 0;
  for i = 1:length(mdat)
     disp(datestr(mdat(i).MDAT_dateNum, 31));
        
@@ -302,7 +303,7 @@ disp('Looping thru events...')
 %             mdat(i).MDAT_MLminstn = [];
 %         end
 
-        % correct pre-1990 events to Michael-Leiba & Manafant assuming Richter (not MEL solutions)    
+        % correct pre-1991 events to Michael-Leiba & Manafant assuming Richter (not MEL solutions)    
         if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1991,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 0
             % get station A
@@ -720,6 +721,7 @@ disp('Looping thru events...')
             mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML + mcorr(2);
             mdat(i).MDAT_MLrevdist = NaN;
             mdat(i).MDAT_MLminstn = [];
+            cnt = cnt + 1;
         end
         
     end

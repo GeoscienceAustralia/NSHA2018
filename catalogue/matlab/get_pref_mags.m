@@ -11,23 +11,29 @@ for i = 1:length(mdat)
     if ~isnan(mdat(i).Allen_ML)
         mdat(i).MDAT_prefML = mdat(i).Allen_ML;
         mdat(i).MDAT_prefMLSrc = 'Allen (unpublished)';
+        mdat(i).MDAT_origMLType = 'ML';
     elseif ~isnan(mdat(i).ANSN_ml)
         mdat(i).MDAT_prefML = mdat(i).ANSN_ml;
         mdat(i).MDAT_prefMLSrc = 'AUST';
+        mdat(i).MDAT_origMLType = 'ML';
     elseif strcmp(deblank(mdat(i).GG_Mtype), 'ML')
         mdat(i).MDAT_prefML = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
-    elseif strcmp(deblank(mdat(i).GG_Mtype), 'MLdz')
+       mdat(i).MDAT_origMLType = 'ML';
+    elseif strcmp(deblank(mdat(i).GG_Mtype), 'MLdz') || strcmp(deblank(mdat(i).GG_Mtype), 'MLzd')
         mdat(i).MDAT_prefML = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
+        mdat(i).MDAT_origMLType = 'ML';
     elseif strcmp(deblank(mdat(i).GG_Mtype), 'mL')
         mdat(i).MDAT_prefML = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
+        mdat(i).MDAT_origMLType = 'ML';
     elseif strcmp(deblank(mdat(i).GG_Mtype), 'MP') || strcmp(deblank(mdat(i).GG_Mtype), 'MD') ...
            || strcmp(deblank(mdat(i).GG_Mtype), 'M?') 
         % assume equivalence with ML
         mdat(i).MDAT_prefML = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
+        mdat(i).MDAT_origMLType = mdat(i).GG_Mtype;
     else
         mdat(i).MDAT_prefML = NaN;
         mdat(i).MDAT_prefMLSrc = '';

@@ -205,6 +205,7 @@ for i = 1:length(mdat)
     if ~isnan(mdat(i).MDAT_prefMW)
         mdat(i).prefFinalMW = mdat(i).MDAT_prefMW;
         mdat(i).prefFinalMWSrc = mdat(i).MDAT_prefMWSrc;
+        mdat(i).MDAT_origMagType = 'MW';
 
 % take larger of MS/mb >= 5.75
     elseif mdat(i).MS2MW > 5.75 | mdat(i).mb2MW > 5.75
@@ -212,15 +213,18 @@ for i = 1:length(mdat)
         if mdat(i).MDAT_prefMS == maxM
             mdat(i).prefFinalMW = mdat(i).MS2MW;
             mdat(i).prefFinalMWSrc = 'MS2MW';
+            mdat(i).MDAT_origMagType = 'MS';
         elseif mdat(i).MDAT_prefmb == maxM
             mdat(i).prefFinalMW = mdat(i).mb2MW;
             mdat(i).prefFinalMWSrc = 'mb2MW';
+            mdat(i).MDAT_origMagType = 'mb';
         end
         
 % take ML-MW
     elseif ~isnan(mdat(i).ML2MWG)
         mdat(i).prefFinalMW = mdat(i).ML2MWG;
         mdat(i).prefFinalMWSrc = 'ML2MW';
+        mdat(i).MDAT_origMagType = mdat(i).MDAT_origMLType;
 
 % take larger of MS/mb < 5.75        
     elseif ~isnan(mdat(i).MS2MW) | ~isnan(mdat(i).mb2MW)
@@ -228,14 +232,19 @@ for i = 1:length(mdat)
         if mdat(i).MDAT_prefMS == maxM
             mdat(i).prefFinalMW = mdat(i).MS2MW;
             mdat(i).prefFinalMWSrc = 'MS2MW';
+            mdat(i).MDAT_origMagType = 'MS';
         elseif mdat(i).MDAT_prefmb == maxM
             mdat(i).prefFinalMW = mdat(i).mb2MW;
             mdat(i).prefFinalMWSrc = 'mb2MW';
-        else
-            mdat(i).prefFinalMW = NaN;
-            mdat(i).prefFinalMWSrc = '';
+            mdat(i).MDAT_origMagType = 'mb';
         end
+% else, set as NaN    
+    else
+        mdat(i).prefFinalMW = NaN;
+        mdat(i).prefFinalMWSrc = '';
+        mdat(i).MDAT_origMagType = '';
     end
+ 
     
 % ADD GG DEPENDENCE
     if isempty(mdat(i).GG_sourceType)
@@ -360,7 +369,7 @@ save mdat_mw_pref mdat;
 
 %% write to file
 
-header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREG,REVML,MX_ORIGML,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,PREFMW,PREFMWSRC,COMM';
+header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREG,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,PREFMW,PREFMWSRC,COMM';
 disp('writing to file')
 dlmwrite(outfile,header,'delimiter','');
 txt = [];
@@ -388,6 +397,7 @@ for i = 1:length(mdat)
             num2str(mdat(i).MDAT_prefmb),',',mdat(i).MDAT_prefmbSrc,',', ...
             num2str(mdat(i).MDAT_prefML),',',mdat(i).MDAT_prefMLSrc,',', mlreg,',', ...
             num2str(mdat(i).MDAT_MLrev,'%0.2f'),',',num2str(mdat(i).Mx_OrigML,'%0.2f'),',', ...
+            mdat(i).MDAT_origMagType,',', ...
             num2str(mdat(i).Mx_RevML,'%0.2f'),',',mdat(i).Mx_RevMLtype,',', ...
             mdat(i).Mx_RevMLSrc,',', ...
             num2str(mdat(i).MS2MW,'%0.2f'),',',num2str(mdat(i).mb2MW,'%0.2f'),',', ...
