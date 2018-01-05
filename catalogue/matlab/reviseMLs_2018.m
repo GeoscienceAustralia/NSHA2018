@@ -129,7 +129,7 @@ for i = 1:length(srcstarty)
 end
 
 siteDat.startdate = srcstart;
-siteDat.stopdate = srcstart;
+siteDat.stopdate = srcstop;
 siteDat.stnlat = srclat;
 siteDat.stnlon = srclon;
 siteDat.stncode = srcstns;
@@ -200,25 +200,27 @@ disp('Looping thru events...')
 %         mdat(i).MDAT_prefMLSrc = 'From mb';
 %     end
     
-    if zone < 4
-        [rng az] = distance(srclat,srclon,lat,lon);
-        ind = find(srcstart <= evdate & srcstop >= evdate & deg2km(rng') < 1500);
-        if ~isempty(ind)
-            stns = srcstns(ind);
-            srcrng = deg2km(rng(ind));
-            stla = srclat(ind);
-            stlo = srclon(ind);
-        else
-            srcrng = NaN;
-        end
-    else
-        srcrng = NaN;
-    end
+%     if zone < 4
+%         [rng az] = distance(srclat,srclon,lat,lon);
+%         ind = find(srcstart <= evdate & srcstop >= evdate & deg2km(rng') < 1500);
+%         if ~isempty(ind)
+%             stns = srcstns(ind);
+%             srcrng = deg2km(rng(ind));
+%             stla = srclat(ind);
+%             stlo = srclon(ind);
+%         else
+%             srcrng = NaN;
+%         end
+%     else
+%         srcrng = NaN;
+%     end
     
     % get magnitude corrections
-    if zone ~= 4 && ~isempty(ind)
+    if zone ~= 4
         [rhyp,repi,MLM92_A0,WGW94_A0,WGW96_A0,GS86_A0,GG91_A0,R35_A0,BJ84_A0,stns] ...
-        = get_stn_A0(siteDat,lat,lon,dep,evdate,stns,zone,srcrng);
+            = get_stn_A0(siteDat,lat,lon,dep,evdate,zone);
+        rhyp = rhyp';
+        repi = repi';
     else
         % set corrections to be zero
         MLM92_A0 = 0.0;
@@ -250,17 +252,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.137 * log10(rhyp(dminind)) ...
-                                          + 0.000657 * rhyp(dminind) + 0.66;
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
+                                          + 0.000657 * rhyp(ge180(dminind)) + 0.66;
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.137 * log10(rhyp(gt50lt180)) ...
                                           + 0.000657 * rhyp(gt50lt180) + 0.66);
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -271,18 +274,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.137 * log10(rhyp(dminind)) ...
-                                          + 0.000657 * rhyp(dminind) + 0.66;
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
+                                          + 0.000657 * rhyp(ge180(dminind)) + 0.66;
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.137 * log10(rhyp(gt50lt180)) ...
                                           + 0.000657 * rhyp(gt50lt180) + 0.66);
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
                 
@@ -310,18 +313,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34.*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -332,18 +335,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -354,18 +357,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -376,18 +379,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -398,18 +401,18 @@ disp('Looping thru events...')
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -420,18 +423,18 @@ disp('Looping thru events...')
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -442,18 +445,18 @@ disp('Looping thru events...')
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -464,18 +467,18 @@ disp('Looping thru events...')
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = BJ84_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -489,18 +492,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -511,18 +514,18 @@ disp('Looping thru events...')
 %             WGW94_A = mdat(i).MDAT_prefML - WGW94_A0;
 %             % get revised mag
 %             gt50lt180 = find(rhyp >= 50 & rhyp < 110);
-%             if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-%                 [dmindist dminind] = min(abs(rhyp-180));
-%                 mdat(i).MDAT_MLrev = WGW94_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-%                                           + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-%                 mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-%                 mdat(i).MDAT_MLminstn = stns(dminind);
+%             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+%                 [dmindist, dminind] = min(rhyp(ge180));
+%                 mdat(i).MDAT_MLrev = WGW94_A(dminind) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+%                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+%                 mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+%                 mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
 %             elseif ~isempty(gt50lt180) % get between 50-180 km
-%                 [dmindist dminind] = min(abs(rhyp-180));
+%                 [dmindist, dminind] = min(rhyp(ge180));
 %                 mdat(i).MDAT_MLrev = mean(WGW94_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
 %                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
 %                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-%                 mdat(i).MDAT_MLminstn = stns(gt50lt180);
+%                 mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
 %             end
 %         end
         
@@ -533,18 +536,18 @@ disp('Looping thru events...')
             WGW96_A = mdat(i).MDAT_prefML - WGW96_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 110);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist, dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = WGW96_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-                                          + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = WGW96_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist, dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(WGW96_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
 
@@ -565,18 +568,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.10 * log10(repi(dminind)/100) ...
-                                          + 0.0013 * (repi(dminind) - 100) + 3.03;
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
+                                          + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.10 * log10(repi(gt50lt180)/100) ...
                                           + 0.0013 * (repi(gt50lt180) - 100) + 3.03);
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -587,18 +590,18 @@ disp('Looping thru events...')
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = R35_A(dminind) + 1.10 * log10(repi(dminind)/100) ...
-                                          + 0.0013 * (repi(dminind) - 100) + 3.03;
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
+                                          + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.10 * log10(repi(gt50lt180)/100) ...
                                           + 0.0013 * (repi(gt50lt180) - 100) + 3.03);
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -609,18 +612,18 @@ disp('Looping thru events...')
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-            if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-                [dmindist dminind] = min(abs(rhyp-180));
-                mdat(i).MDAT_MLrev = BJ84_A(dminind) + 1.10 * log10(repi(dminind)/100) ...
-                                          + 0.0013 * (repi(dminind) - 100) + 3.03;                                      
-                mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-                mdat(i).MDAT_MLminstn = stns(dminind);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
+                                          + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
             elseif ~isempty(gt50lt180) % get between 50-180 km
-                [dmindist dminind] = min(abs(rhyp-180));
                 mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.10 * log10(repi(gt50lt180)/100) ...
                                           + 0.0013 * (repi(gt50lt180) - 100) + 3.03); % changed from 3.13 as assumed used maxh
                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-                mdat(i).MDAT_MLminstn = stns(gt50lt180);
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
         
@@ -633,17 +636,17 @@ disp('Looping thru events...')
 %         % get revised mag
 %         if ~isempty(stns)
 %             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-%             if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-%                 [dmindist dminind] = min(abs(rhyp-180));
-%                 mdat(i).MDAT_MLrev = R35_A(dminind) + 1.137 * log10(rhyp(dminind)) ...
-%                                           + 0.000657 * rhyp(dminind) + 0.66;
-%                 mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-%                 mdat(i).MDAT_MLminstn = stns(dminind);
+%             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+%                 [dmindist, dminind] = min(rhyp(ge180));
+%                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
+%                                           + 0.000657 * rhyp(ge180(dminind)) + 0.66;
+%                 mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+%                 mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
 %             elseif ~isempty(gt50lt180) % get between 50-180 km
 %                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.137 * log10(rhyp(gt50lt180)) ...
 %                                           + 0.000657 * rhyp(gt50lt180) + 0.66);
 %                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-%                 mdat(i).MDAT_MLminstn = stns(gt50lt180);
+%                 mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
 %             end
 %         else
 %             mdat(i).MDAT_MLrev = mdat(i).MDAT_otherM;
@@ -660,18 +663,18 @@ disp('Looping thru events...')
 %         % get revised mag
 %         if ~isempty(stns)
 %             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-%             if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-%                 [dmindist dminind] = min(abs(rhyp-180));
-%                 mdat(i).MDAT_MLrev = R35_A(dminind) + 1.34*log10(rhyp(dminind)/100) ...
-%                                           + 0.00055*(rhyp(dminind)-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
-%                 mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-%                 mdat(i).MDAT_MLminstn = stns(dminind);
+%             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+%                 [dmindist, dminind] = min(rhyp(ge180));
+%                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+%                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+%                 mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+%                 mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
 %             elseif ~isempty(gt50lt180) % get between 50-180 km
-%                 [dmindist dminind] = min(abs(rhyp-180));
+%                 [dmindist, dminind] = min(rhyp(ge180));
 %                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
 %                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
 %                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-%                 mdat(i).MDAT_MLminstn = stns(gt50lt180);
+%                 mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
 %             end
 %         else
 %             mdat(i).MDAT_MLrev = mdat(i).MDAT_otherM;
@@ -688,18 +691,18 @@ disp('Looping thru events...')
 %         % get revised mag
 %         if ~isempty(stns)
 %             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
-%             if isempty(gt50lt180) % get minimum absolute Rhyp - 180 (try and avoid near-source data where possible)
-%                 [dmindist dminind] = min(abs(rhyp-180));
-%                 mdat(i).MDAT_MLrev = R35_A(dminind) + 1.10 * log10(repi(dminind)/100) ...
-%                                           + 0.0013 * (repi(dminind) - 100) + 3.03;
-%                 mdat(i).MDAT_MLrevdist = rhyp(dminind);                 
-%                 mdat(i).MDAT_MLminstn = stns(dminind);
+%             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+%                 [dmindist, dminind] = min(rhyp(ge180));
+%                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
+%                                           + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;
+%                 mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+%                 mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
 %             elseif ~isempty(gt50lt180) % get between 50-180 km
-%                 [dmindist dminind] = min(abs(rhyp-180));
+%                 [dmindist, dminind] = min(rhyp(ge180));
 %                 mdat(i).MDAT_MLrev = mean(R35_A(gt50lt180) + 1.10 * log10(repi(gt50lt180)/100) ...
 %                                           + 0.0013 * (repi(gt50lt180) - 100) + 3.03);
 %                 mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
-%                 mdat(i).MDAT_MLminstn = stns(gt50lt180);
+%                 mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
 %             end
 %         else
 %             mdat(i).MDAT_MLrev = mdat(i).MDAT_otherM;
@@ -719,10 +722,10 @@ disp('Looping thru events...')
     if isempty(stns) & zone ~= 4
         if isnan(mdat(i).MDAT_MLrevdist) & ~isnan(mdat(i).MDAT_prefML)
             mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML + mcorr(2);
-            mdat(i).MDAT_MLrevdist = NaN;
-            mdat(i).MDAT_MLminstn = [];
             cnt = cnt + 1;
         end
+        mdat(i).MDAT_MLrevdist = NaN;
+        mdat(i).MDAT_MLminstn = [];
         
     end
 end
@@ -733,6 +736,10 @@ for i=1:length(mdat)
         % do nothing
     else
         mdat(i).MDAT_MLrev = NaN;
+    end
+    
+    if isempty(mdat(i).MDAT_MLrevdist)
+        mdat(i).MDAT_MLrevdist = NaN;
     end
 end
 

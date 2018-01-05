@@ -207,19 +207,23 @@ for i = 1:length(mdat)
         mdat(i).prefFinalMWSrc = mdat(i).MDAT_prefMWSrc;
         mdat(i).MDAT_origMagType = 'MW';
 
-% take larger of MS/mb >= 5.75
-    elseif mdat(i).MS2MW > 5.75 | mdat(i).mb2MW > 5.75
-        maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]); % deliberately use orig mag here
-        if mdat(i).MDAT_prefMS == maxM
-            mdat(i).prefFinalMW = mdat(i).MS2MW;
-            mdat(i).prefFinalMWSrc = 'MS2MW';
-            mdat(i).MDAT_origMagType = 'MS';
-        elseif mdat(i).MDAT_prefmb == maxM
-            mdat(i).prefFinalMW = mdat(i).mb2MW;
-            mdat(i).prefFinalMWSrc = 'mb2MW';
-            mdat(i).MDAT_origMagType = 'mb';
-        end
+% take MS >= 5.75
+    elseif mdat(i).MS2MW > 5.75
+        mdat(i).prefFinalMW = mdat(i).MS2MW;
+        mdat(i).prefFinalMWSrc = 'MS2MW';
+        mdat(i).MDAT_origMagType = 'MS';
         
+        %maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]); % deliberately use orig mag here
+        %if mdat(i).MDAT_prefMS == maxM
+%             mdat(i).prefFinalMW = mdat(i).MS2MW;
+%             mdat(i).prefFinalMWSrc = 'MS2MW';
+%             mdat(i).MDAT_origMagType = 'MS';
+%         elseif mdat(i).MDAT_prefmb == maxM
+%             mdat(i).prefFinalMW = mdat(i).mb2MW;
+%             mdat(i).prefFinalMWSrc = 'mb2MW';
+%             mdat(i).MDAT_origMagType = 'mb';
+%         end
+%         
 % take ML-MW
     elseif ~isnan(mdat(i).ML2MWG)
         mdat(i).prefFinalMW = mdat(i).ML2MWG;
@@ -266,20 +270,25 @@ for i = 1:length(mdat)
         mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMWSrc;
         mdat(i).Mx_RevMLtype = 'MW';
          
-% take larger of MS/mb >= 5.75
-    elseif mdat(i).MDAT_prefMS >= 5.75 | mdat(i).MDAT_prefmb >= 5.75
-        maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]);
-        if mdat(i).MDAT_prefMS == maxM
-            mdat(i).Mx_OrigML = mdat(i).MDAT_prefMS;
-            mdat(i).Mx_RevML = mdat(i).MDAT_prefMS;
-            mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMSSrc;
-            mdat(i).Mx_RevMLtype = 'MS';
-        elseif mdat(i).MDAT_prefmb == maxM
-            mdat(i).Mx_OrigML = mdat(i).MDAT_prefmb;
-            mdat(i).Mx_RevML = mdat(i).MDAT_prefmb;
-            mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefmbSrc;
-            mdat(i).Mx_RevMLtype = 'mb';
-        end
+% take MS >= 5.75
+    elseif mdat(i).MDAT_prefMS >= 5.75
+        mdat(i).Mx_OrigML = mdat(i).MDAT_prefMS;
+        mdat(i).Mx_RevML = mdat(i).MDAT_prefMS;
+        mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMSSrc;
+        mdat(i).Mx_RevMLtype = 'MS';
+%         maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]);
+%         if mdat(i).MDAT_prefMS == maxM
+%             mdat(i).Mx_OrigML = mdat(i).MDAT_prefMS;
+%             mdat(i).Mx_RevML = mdat(i).MDAT_prefMS;
+%             mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMSSrc;
+%             mdat(i).Mx_RevMLtype = 'MS';
+%         elseif mdat(i).MDAT_prefmb == maxM
+%             mdat(i).Mx_OrigML = mdat(i).MDAT_prefmb;
+%             mdat(i).Mx_RevML = mdat(i).MDAT_prefmb;
+%             mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefmbSrc;
+%             mdat(i).Mx_RevMLtype = 'mb';
+%         end
+
 % take Revised ML   
     elseif ~isnan(mdat(i).MDAT_MLrev)
         mdat(i).Mx_OrigML = mdat(i).MDAT_prefML;
@@ -296,7 +305,8 @@ for i = 1:length(mdat)
         mdat(i).Mx_RevML = NaN;
         mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMLSrc;
         mdat(i).Mx_RevMLtype = 'ML';
-% take larger of MS/mb < 6.0        
+
+        % take larger of MS/mb < 5.75        
     elseif ~isnan(mdat(i).MDAT_prefMS) | ~isnan(mdat(i).MDAT_prefmb)
         maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]);
         if mdat(i).MDAT_prefMS == maxM
