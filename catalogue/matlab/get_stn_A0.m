@@ -1,5 +1,5 @@
 function [rhyp,repi,MLM92,WGW94,WGW96,GS86,GG91,R35,BJ84,stns] ...
-         = get_stn_A0(siteDat,lat,lon,dep,evdate,zone)
+         = get_stn_A0(siteDat,lat,lon,dep,mag,evdate,zone)
 
 % function gets A0 correction factors for recording stations or those that
 % may have recorded the event if no stations exist
@@ -15,6 +15,22 @@ elseif zone == 2 & isnan(dep)
 elseif zone == 3 & isnan(dep)
     dep = 10;
 end
+
+%% set distance ranges to to account for offscale measurements
+
+offScaleDist = 0;
+if mag >= 4.0 && mag < 4.5
+    offScaleDist = 100;
+elseif mag >= 4.5 && mag < 5.0
+    offScaleDist = 200;
+elseif mag >= 5.0
+    offScaleDist = 500;
+end
+
+% reset if modern digital recordings
+if evdate > datenum(1990,1,1)
+    offScaleDist = 0;
+end   
  
 %% make proxy stationlist if ISC stns do not exist  
 %if isempty(stns) & isempty(essrng)

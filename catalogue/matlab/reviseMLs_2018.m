@@ -218,7 +218,7 @@ disp('Looping thru events...')
     % get magnitude corrections
     if zone ~= 4
         [rhyp,repi,MLM92_A0,WGW94_A0,WGW96_A0,GS86_A0,GG91_A0,R35_A0,BJ84_A0,stns] ...
-            = get_stn_A0(siteDat,lat,lon,dep,evdate,zone);
+            = get_stn_A0(siteDat,lat,lon,dep,mdat(i).MDAT_prefML,evdate,zone);
         rhyp = rhyp';
         repi = repi';
     else
