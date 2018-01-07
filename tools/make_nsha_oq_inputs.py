@@ -584,5 +584,43 @@ def src_shape2dict(modelshp):
                  'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 
                  'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
             model.append(m)
+            
+        else:
+            # parse GSC version
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'src_type':rec[2]
+                  'src_weight':float(rec[3]), 'src_shape':array(shape.points), 
+                  'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])], 'min_mag':float(rec[7]), 
+                  'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], ,
+                  'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 
+                  'src_beta':[float(rec[15]), float(rec[16]), float(rec[17])], 
+                  'src_reg_wt':1, 'trt':rec[23], }
     
-    return model
+    return model 
+"""    
+w.field('SRC_NAME','C','100')  
+w.field('CODE','C','10')       
+w.field('SRC_TYPE','C','10')   
+w.field('SRC_WEIGHT','F', 8, 2)
+w.field('DEP_BEST','F', 8, 1)  
+w.field('DEP_UPPER','F', 8, 1) 
+w.field('DEP_LOWER','F', 8, 1) 
+w.field('MIN_MAG','F', 8, 2)   
+w.field('MIN_RMAG','F', 8, 2)  
+w.field('MMAX_BEST','F', 8, 2) 
+w.field('MMAX_LOWER','F', 8, 2)
+w.field('MMAX_UPPER','F', 8, 2)
+w.field('N0_BEST','F', 8, 5)   
+w.field('N0_LOWER','F', 8, 5)  
+w.field('N0_UPPER','F', 8, 5)  
+w.field('BETA_BEST','F', 8, 3) 
+w.field('BETA_LOWER','F', 8, 3)
+w.field('BETA_UPPER','F', 8, 3)
+w.field('BETA_FIX','F', 8, 3)  
+w.field('BETA_FIX_S','F', 8, 3)
+w.field('YCOMP','C','70')      
+w.field('MCOMP','C','30')      
+w.field('YMAX','F', 8, 0)      
+w.field('TRT','C','50')      
+#w.field('DOMAIN','F', 2, 0)   
+w.field('SHEEF_FILE','C','50') 
+"""

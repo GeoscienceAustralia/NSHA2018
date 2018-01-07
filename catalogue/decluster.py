@@ -332,14 +332,14 @@ print 'Merging stripped columns...\n'
 prefmag2 = 'mw' # replaces orig mag with preferred MW in declustered catalogue
 #prefmag2 = 'orig' # keeps orig mag in declustered catalogue
 
-from misc_tools import checkfloat
+from misc_tools import checkfloat, dictlist2array
 
 # for testing
 #declustered_catalog_filename = 'data/AUSTCAT_V0.12_hmtk_mx_orig_declustered_test.csv'
 
 # get data arrays from original catalogue
 for key in nsha_dict[0].keys():
-    exec(key + ' = dict2array(nsha_dict, key)')
+    exec(key + ' = dictlist2array(nsha_dict, key)')
 
 # make datestr list
 datestr = []

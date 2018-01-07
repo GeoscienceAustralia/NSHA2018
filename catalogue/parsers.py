@@ -160,17 +160,3 @@ def parse_NSHA2018_catalogue(nsha2018cat):
             
     return austcat
     
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
