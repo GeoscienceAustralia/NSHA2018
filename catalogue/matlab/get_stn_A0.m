@@ -37,7 +37,8 @@ end
 [rng az] = distance([siteDat.stnlat],[siteDat.stnlon],lat,lon);
 
 % find stations within date & distnce range
-ind = find([siteDat.startdate] <= evdate & [siteDat.stopdate] >= evdate & deg2km(rng') < 1500);
+ind = find([siteDat.startdate] <= evdate & [siteDat.stopdate] >= evdate ...
+      & deg2km(rng') < 1500 & deg2km(rng') >= offScaleDist);
 if ~isempty(ind)
     stns = {siteDat.stncode(ind)};
     repi = deg2km(rng(ind));
