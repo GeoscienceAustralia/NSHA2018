@@ -20,11 +20,11 @@ end
 
 offScaleDist = 0;
 if mag >= 4.0 && mag < 4.5
-    offScaleDist = 100;
+    offScaleDist = 75;
 elseif mag >= 4.5 && mag < 5.0
-    offScaleDist = 200;
+    offScaleDist = 150;
 elseif mag >= 5.0
-    offScaleDist = 500;
+    offScaleDist = 250;
 end
 
 % reset if modern digital recordings

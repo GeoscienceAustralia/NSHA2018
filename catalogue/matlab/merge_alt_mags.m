@@ -2,7 +2,7 @@
 
 %% parse Allen SEA catalogue
 disp('Parsing Allen ML Catalogue...');
-ANSN_catfile = '../data/sea_ev_mags.csv';
+ANSN_catfile = '..\data\2017_sea_updated_ev_ml.csv';
 % [prefmag, utcdate, utctime, localdate, localtime, lat, lon, magtype, place, ...
 %  dep, soln, mb, ml, ms, mwp, mw, evid, oid] = ...
 %  textread(ANSN_catfile, '%f%s%s%s%s %f%f%s%s %f%s%f%f%f%f%f%f%f', ...
@@ -18,8 +18,8 @@ for i = 1:length(prefmag)
     % get datetime
     dateSplit = str2double(strsplit(utcdate{i},'/'));
     timeSplit = str2double(strsplit(utctime{i},':'));
-    dateSplit = str2double(strsplit('/',utcdate{i})); % for mac
-    timeSplit = str2double(strsplit(':',utctime{i})); % for mac
+%     dateSplit = str2double(strsplit('/',utcdate{i})); % for mac
+%     timeSplit = str2double(strsplit(':',utctime{i})); % for mac
     ANSN_dat(i).dateNum = datenum(dateSplit(3), dateSplit(2), dateSplit(1), ...
                                   timeSplit(1), timeSplit(2), timeSplit(3));
     ANSN_dat(i).lat = -1*lat(i);
