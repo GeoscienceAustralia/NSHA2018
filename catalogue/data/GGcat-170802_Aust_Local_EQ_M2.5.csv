@@ -9999,7 +9999,6 @@ ADE,local,1,Preferred,2005,9,4,3,11,17.2,ACST,9.5,137.511,29.604,4.6,,ML,2.7,S o
 RC,local,1,Preferred,2005,9,4,11,27,25.4,AEST,10,148.456,29.003,10,N,ML,2.7,52 km W of Mungindi; NSW
 RC,local,1,Preferred,2005,9,5,11,8,1.7,AEST,10,151.147,28.84,2.5,,ML,2.9,Texas; Qld
 RC,local,1,Preferred,2005,9,6,15,1,37.8,AEST,10,154.551,24.636,0,,ML,2.6,Off Fraser Is; Qld
-AUST,local,1,Preferred,2005,9,8,14,57,6,UTC,0,117.144,30.76,0,,ML,2.9,Western Australia
 AUST,local,0,Preferred,2005,9,8,14,57,6.5,AWST,8,117.144,30.76,0,,ML,2.9,1 km NE of Cadoux; WA
 AUST,local,1,Preferred,2005,9,9,4,1,8.7,AEST,10,142.166,30.328,0,,ML,3.3,S of Tibooburra; NSW
 RC,local,2,Probable,2005,9,10,11,41,53.59,AEST,10,143.931,16.878,10,N,ML,2.7,Wrotham Park; Qld

@@ -162,14 +162,14 @@ def decluster_SCR(method, cat, deblastOnly):
         # now find mannually picked foreshocks/aftershocks (1 = fore/aftershock; 2 = blast/coal)
         # idx = np.where(cat.data['flag'] >= 1)[0] # for 2012 version
         
-        # now find mannually picked foreshocks/aftershocks (0 = dependent events)
-        idx = np.where(cat.data['flag'] == 0)[0]
+        # now find mannually picked foreshocks/aftershocks (1 = dependent events)
+        idx = np.where(cat.data['flag'] == 1)[0]
         flagvector_asfsman = flagvector_asfs
         flagvector_asfsman[idx] = 1
     
     # else remove coal & blast events only
     else:
-        idx = np.where(cat.data['flag'] == 2)[0]
+        idx = np.where(cat.data['flag'] == 0)[0]
         flagvector_asfsman = flagvector
         flagvector_asfsman[idx] = 1
             
@@ -295,7 +295,7 @@ if prefmag1 == 'orig':
     hmtk_csv = nsha2018csv.split('.')[0] + '_V0.1_hmtk_mx_orig.csv'
     #hmtk_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk_mp_orig.csv'
 elif prefmag1 == 'mw':
-    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk.csv'
+    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.1_hmtk.csv'
 
 # write HMTK csv
 ggcat2hmtk_csv(nsha_dict, hmtk_csv, prefmag1)

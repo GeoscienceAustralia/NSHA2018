@@ -18,11 +18,6 @@ if exist('mdat','var') ~= 1
     load mdat_ml_rev.mat;
 end
 
-% if exist('mdat','var') ~= 1
-%     disp('Loading mdat');
-%     load '..\Merge MC and QUAKES\mdat.mat';
-% end
-
 MS2MW = ones(size(mdat)) * NaN;
 mb2MW = ones(size(mdat)) * NaN;
 ML2MWA = ones(size(mdat)) * NaN;
@@ -417,6 +412,8 @@ for i = 1:length(mdat)
     txt = [txt line];
 end
 
+% remove last line
+txt = txt(1:end-1);
 dlmwrite(outfile,txt,'delimiter','','-append');
 
 %% Make GMT mag diff file for pre-1990 events
