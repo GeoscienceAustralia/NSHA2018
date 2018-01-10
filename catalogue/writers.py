@@ -118,3 +118,71 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
     f = open(hmtkfile, 'wb')
     f.write(oq_dat)
     f.close()
+    
+# writes htmk dict to shapefile
+def htmk2shp(cat, outshp):
+    '''
+    cat = htmk dictionory
+    outshp = output shapefile
+    '''
+    import shapefile
+    from numpy import isnan
+    
+    print 'Making shapefile...'
+    w = shapefile.Writer(shapefile.POINT)
+    w.field('EVID','C','15')
+    w.field('AGENCY','C','15')
+    w.field('YEAR','F', 4, 0)
+    w.field('MONTH','F', 2, 0)
+    w.field('DAY','F', 2, 0)
+    w.field('HOUR','F', 2, 0)
+    w.field('MIN','F', 2, 0)
+    w.field('SEC','F', 2, 0)
+    w.field('LON','F', 10, 4)
+    w.field('LAT','F', 10, 4)    
+    w.field('DEP','F', 10, 2)
+    w.field('PREF_MW','F', 13, 6)
+    w.field('PREF_MAG_TYPE','C','100')
+    w.field('ORIG_MAG','F', 13, 6)
+    w.field('ORIG_MAG_TYPE','C','100')
+    
+    # now loop thru records
+    for i in range(0, len(cat.data)):
+        if isnan(cat.data[i]['lon']) | isnan(cat.data[i]['lat']):
+            lon = 0.0
+            lat = 0.0
+        else:
+            lon = cat.data[i]['lonitude']
+            lat = cat.data[i]['latitude']
+    
+        w.point(lon, lat)
+        w.record(cat.data[i]['eventID'],cat.data[i]['Agency'], \
+                 cat.data[i]['year'],cat.data[i]['month'], \
+                 cat.data[i]['day'],cat.data[i]['hour'], \
+                 cat.data[i]['minute'],cat.data[i]['second'], \
+                 cat.data[i]['lonitude'],cat.data[i]['latitude'], \
+                 cat.data[i]['dep'],cat.data[i]['pref_mw'],\
+                 cat.data[i]['mx_origML'],cat.data[i]['mx_origType'])
+    
+    print 'Writing shapefile...'
+    w.save(outshp)
+    
+    # write projection file
+    prjfile = outshp.strip().split('.shp')[0]+'.prj'
+    f = open(prjfile, 'wb')
+    f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
+    f.close()
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

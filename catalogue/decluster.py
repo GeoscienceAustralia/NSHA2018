@@ -8,7 +8,7 @@ Created on Fri Feb 10 13:30:27 2017
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
 from hmtk.seismicity.utils import haversine
 from parsers import parse_NSHA2018_catalogue
-from writers import ggcat2hmtk_csv
+from writers import ggcat2hmtk_csv, htmk2shp
 import numpy as np
 import datetime as dt
 from os import path, remove
@@ -209,7 +209,7 @@ def decluster_SCR(method, cat, deblastOnly):
     
     print 'Declustered catalogue: ok\n'
     
-    return declustered_catalog_file
+    return declustered_catalog_file, catalogue_l08
 
 
 # do Gardner & Knopoff (1974 declustering)
@@ -318,7 +318,11 @@ if leonard == True:
     if method == 'Stein08':
         print  'Using Stein 2008 method...'
         
-    declustered_catalog_filename = decluster_SCR(method, cat, deblastOnly)
+    declustered_catalog_filename, declustered_cat = decluster_SCR(method, cat, deblastOnly)
+    
+    # write to shapefile
+    shpout = declustered_catalog_filename[:-34]+'.shp'
+    htmk2shp(declustered_cat, declustered_catalog_filename)
 
 # do GK74    
 else: 
@@ -354,7 +358,7 @@ datestr = np.array(datestr)
 lines = open(path.join(declustered_catalog_filename)).readlines()
 
 # set new header
-newheader = lines[0].strip() + ',mx_origML,mx_origType,mx_revML,pref_mw\n'
+newheader = lines[0].strip() #+ ',mx_origML,mx_origType,mx_revML,pref_mw\n'
 newtxt = newheader
 
 #  all new variables are invoked using the "exec" command above
@@ -396,7 +400,7 @@ for line in lines[1:]:
 # re-write declustered catalogue
 if deblastOnly == False:
     if prefmag2 == 'mw':
-        declustered_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk_declustered_test.csv'   
+        declustered_csv = nsha2018csv.split('.')[0] + '_V0.1_hmtk_declustered_test.csv'   
     else:
         declustered_csv = declustered_catalog_filename
 else:
