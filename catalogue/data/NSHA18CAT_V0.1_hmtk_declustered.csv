@@ -1,5 +1,4 @@
-eventID,Agency,year,month,day,hour,minute,second,timeError,longitude,latitude,SemiMajor90,SemiMinor90,ErrorStrike,depth,depthError,magnitude,sigmaMagnitude,magnitudeType,mx_origML,mx_origType,mx_revML,pref_mw,mx_origML,mx_origType,mx_revML,pref_mw
-184003310630,ADE,1840,3,31,6,30,0.0,,138.59999999999999,-34.899999999999999,,,,7.0,,2.94,,MW,2.70,MP,2.62,2.94
+eventID,Agency,year,month,day,hour,minute,second,timeError,longitude,latitude,SemiMajor90,SemiMinor90,ErrorStrike,depth,depthError,magnitude,sigmaMagnitude,magnitudeType,mx_origML,mx_origType,mx_revML,pref_mw184003310630,ADE,1840,3,31,6,30,0.0,,138.59999999999999,-34.899999999999999,,,,7.0,,2.94,,MW,2.70,MP,2.62,2.94
 184101272155,KMcC,1841,1,27,21,55,0.0,,151.59999999999999,-32.799999999999997,,,,10.0,,4.37,,MW,4.90,MP,4.47,4.37
 184104211500,GG,1841,4,21,15,0,0.0,,145.0,-38.0,,,,nan,,3.75,,MW,4.00,MP,3.71,3.75
 184110300000,GG,1841,10,30,0,0,0.0,,145.0,-38.0,,,,10.0,,3.75,,MW,4.00,MP,3.71,3.75
