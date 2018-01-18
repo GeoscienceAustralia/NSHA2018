@@ -305,7 +305,9 @@ parser = CsvCatalogueParser(hmtk_csv)
 nshacat = parser.read_file()
 
 cat = nshacat
-#htmk2shp(cat, 'test.shp') # for testing
+
+# make shapefile of full catalogue
+htmk2shp(cat, path.join('shapefiles', 'NSHA18CAT_full.shp')) # for testing
 
 #########################################################################
 # if Leonard == True
@@ -321,9 +323,8 @@ if leonard == True:
         
     declustered_catalog_filename, declustered_cat = decluster_SCR(method, cat, deblastOnly)
     
-    # write to shapefile
-    shpout = declustered_catalog_filename[:-34]+'.shp'
-    htmk2shp(declustered_cat, declustered_catalog_filename)
+    # make shapefile of declustered catalogue
+    htmk2shp(declustered_cat, path.join('shapefiles', 'NSHA18CAT_declustered.shp'))
 
 # do GK74    
 else: 
