@@ -141,28 +141,28 @@ def htmk2shp(cat, outshp):
     w.field('LON','F', 10, 4)
     w.field('LAT','F', 10, 4)    
     w.field('DEP','F', 10, 2)
-    w.field('PREF_MW','F', 13, 6)
-    w.field('PREF_MAG_TYPE','C','100')
-    w.field('ORIG_MAG','F', 13, 6)
-    w.field('ORIG_MAG_TYPE','C','100')
+    w.field('PREF_MW','F', 5, 2)
+    w.field('ORIG_MAG','F', 5, 2)
+    w.field('ORIG_MAG_TYPE','C','6')
     
     # now loop thru records
-    for i in range(0, len(cat.data)):
-        if isnan(cat.data[i]['lon']) | isnan(cat.data[i]['lat']):
+    for i in range(0, len(cat.data['eventID'])):
+        if isnan(cat.data['longitude'][i]) | isnan(cat.data['latitude'][i]):
             lon = 0.0
             lat = 0.0
         else:
-            lon = cat.data[i]['lonitude']
-            lat = cat.data[i]['latitude']
+            lon = round(cat.data['longitude'][i],4)
+            lat = round(cat.data['latitude'][i],4)
     
         w.point(lon, lat)
-        w.record(cat.data[i]['eventID'],cat.data[i]['Agency'], \
-                 cat.data[i]['year'],cat.data[i]['month'], \
-                 cat.data[i]['day'],cat.data[i]['hour'], \
-                 cat.data[i]['minute'],cat.data[i]['second'], \
-                 cat.data[i]['lonitude'],cat.data[i]['latitude'], \
-                 cat.data[i]['dep'],cat.data[i]['pref_mw'],\
-                 cat.data[i]['mx_origML'],cat.data[i]['mx_origType'])
+        w.record(cat.data['eventID'][i],cat.data['Agency'][i], \
+                 cat.data['year'][i],cat.data['month'][i], \
+                 cat.data['day'][i],cat.data['hour'][i], \
+                 cat.data['minute'][i],cat.data['second'][i], \
+                 round(cat.data['longitude'][i],4), \
+                 round(cat.data['latitude'][i],4), \
+                 cat.data['depth'][i],round(cat.data['pref_mw'][i],2),\
+                 cat.data['mx_origML'][i],cat.data['mx_origType'][i])
     
     print 'Writing shapefile...'
     w.save(outshp)

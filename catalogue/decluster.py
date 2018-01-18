@@ -305,6 +305,7 @@ parser = CsvCatalogueParser(hmtk_csv)
 nshacat = parser.read_file()
 
 cat = nshacat
+#htmk2shp(cat, 'test.shp') # for testing
 
 #########################################################################
 # if Leonard == True
