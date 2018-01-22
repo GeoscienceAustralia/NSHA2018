@@ -22,7 +22,7 @@ disp('writing to file')
 
 %% write ML-MW to file
 
-outfile = '..\data\NSHA18CAT.ML-MW.csv';
+outfile = fullfile('..','data','NSHA18CAT.ML-MW.csv');
 idx = find(~isnan([mdat.MDAT_prefML]) & ~isnan([mdat.MDAT_prefMW]));
 magdat = mdat(idx);
 
@@ -66,7 +66,7 @@ dlmwrite(outfile,txt,'delimiter','','-append');
 
 %% write MS-MW to file
 
-outfile = '..\data\NSHA18CAT.MS-MW.csv';
+outfile = fullfile('..','data','NSHA18CAT.MS-MW.csv');
 idx = find(~isnan([mdat.MDAT_prefMS]) & ~isnan([mdat.MDAT_prefMW]));
 magdat = mdat(idx);
 
@@ -110,7 +110,7 @@ dlmwrite(outfile,txt,'delimiter','','-append');
 
 %% write MS-MW to file
 
-outfile = '..\data\NSHA18CAT.mb-MW.csv';
+outfile = fullfile('..','data','NSHA18CAT.mb-MW.csv');
 idx = find(~isnan([mdat.MDAT_prefmb]) & ~isnan([mdat.MDAT_prefMW]));
 magdat = mdat(idx);
 

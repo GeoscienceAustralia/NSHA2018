@@ -9,7 +9,7 @@
 %
 % Author: T. Allen (2011-01-11)
 % *************************************************************************
-outfile = '..\data\NSHA18CAT.MW.V0.1.csv';
+outfile = fullfile('..','data','NSHA18CAT.MW.V0.1.csv');
 
 % load data
 
@@ -20,7 +20,7 @@ end
 
 MS2MW = ones(size(mdat)) * NaN;
 mb2MW = ones(size(mdat)) * NaN;
-ML2MWA = ones(size(mdat)) * NaN;
+%ML2MWA = ones(size(mdat)) * NaN;
 ML2MWG = ones(size(mdat)) * NaN;
 prefFinalMW = ones(size(mdat)) * NaN;
 
@@ -96,34 +96,34 @@ mb2MW(ind) = c1 * [mdat(ind).MDAT_prefmb] + c2;
 %% Convert ML to MW using Allen conversions - out-dated, but preserve in catalogue
 % mx = 4.2;
 
-disp('Converting ML to MW in CWA...');
-[a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\WA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
-% for ML rev
-ind = find([mdat.MDAT_MLrev] <= mx & [mdat.zone] == 1 & ~isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a3;
-ind = find([mdat.MDAT_MLrev] > mx & [mdat.zone] == 1 & ~isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2 * ([mdat(ind).MDAT_MLrev] - mx) + a3;
-
-% for pref ML
-ind = find([mdat.MDAT_prefML] <= mx & [mdat.zone] == 1 & isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a3;
-ind = find([mdat.MDAT_prefML] > mx & [mdat.zone] == 1 & isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a2 * ([mdat(ind).MDAT_prefML] - mx) + a3;
-
-% note, changed max zone number to use SEA conversion for offshore events
-disp('Converting ML to MW in eastern & south Australia...');
-[a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\EA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
-% for ML rev
-ind = find([mdat.MDAT_MLrev] <= mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & ~isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a3;
-ind = find([mdat.MDAT_MLrev] > mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & ~isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2 * ([mdat(ind).MDAT_MLrev] - mx) + a3;
-
-% for pref ML
-ind = find([mdat.MDAT_prefML] <= mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a3;
-ind = find([mdat.MDAT_prefML] > mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & isnan([mdat.MDAT_MLrev]));
-ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a2 * ([mdat(ind).MDAT_prefML] - mx) + a3;
+% disp('Converting ML to MW in CWA...');
+% [a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\WA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
+% % for ML rev
+% ind = find([mdat.MDAT_MLrev] <= mx & [mdat.zone] == 1 & ~isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a3;
+% ind = find([mdat.MDAT_MLrev] > mx & [mdat.zone] == 1 & ~isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2 * ([mdat(ind).MDAT_MLrev] - mx) + a3;
+% 
+% % for pref ML
+% ind = find([mdat.MDAT_prefML] <= mx & [mdat.zone] == 1 & isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a3;
+% ind = find([mdat.MDAT_prefML] > mx & [mdat.zone] == 1 & isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a2 * ([mdat(ind).MDAT_prefML] - mx) + a3;
+% 
+% % note, changed max zone number to use SEA conversion for offshore events
+% disp('Converting ML to MW in eastern & south Australia...');
+% [a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\EA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
+% % for ML rev
+% ind = find([mdat.MDAT_MLrev] <= mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & ~isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a3;
+% ind = find([mdat.MDAT_MLrev] > mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & ~isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2 * ([mdat(ind).MDAT_MLrev] - mx) + a3;
+% 
+% % for pref ML
+% ind = find([mdat.MDAT_prefML] <= mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a3;
+% ind = find([mdat.MDAT_prefML] > mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & isnan([mdat.MDAT_MLrev]));
+% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a2 * ([mdat(ind).MDAT_prefML] - mx) + a3;
 
 
 %% Convert using Grunthal - out-dated
@@ -188,7 +188,7 @@ end
 for i = 1:length(mdat)
     mdat(i).MS2MW = MS2MW(i);
     mdat(i).mb2MW = mb2MW(i);
-    mdat(i).ML2MWA = ML2MWA(i);
+    %mdat(i).ML2MWA = ML2MWA(i);
     mdat(i).ML2MWG = ML2MWG(i);
     mdat(i).prefFinalMW = prefFinalMW(i);
 end
@@ -428,15 +428,15 @@ dlmwrite('ML_diff.dat',dat,'delimiter','\t','precision','%0.3f');
 
 %% plot TA vs HG mags
 
-taml = [mdat.ML2MWA];
-hgml = [mdat.ML2MWG];
-
-figure(10);
-plot(taml, hgml, 'b+')
-hold on;
-plot([1, 7],[1, 7],'k--')
-xlabel('TA MW Conversion');
-ylabel('HG (Fixed hinge) MW Conversion');
+% taml = [mdat.ML2MWA];
+% hgml = [mdat.ML2MWG];
+% 
+% figure(10);
+% plot(taml, hgml, 'b+')
+% hold on;
+% plot([1, 7],[1, 7],'k--')
+% xlabel('TA MW Conversion');
+% ylabel('HG (Fixed hinge) MW Conversion');
 
 %% plot histograms of ML difference
 

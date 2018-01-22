@@ -118,8 +118,9 @@ fid = fopen('Aus.net');
 %[srcstns srclon srclat srcelv srcstarty,srcstartm,srcstopy,srcstopm] ...
 %    = textscan(fid,'%s%f%f%f%s%s%d%d','Delimiter','\t');
 
+stationListFile = fullfile('stationData','Aus.net');
 [srcstns, srclon, srclat, srcelv, srcstarty,srcstartm,srcstopy,srcstopm] ...
-    = textread('stationData\Aus.net','%s%f%f%f%s%s%s%s','delimiter','\t'); % file from RC
+    = textread(stationListFile,'%s%f%f%f%s%s%s%s','delimiter','\t'); % file from RC
 
 srcstart = [];
 srcstop  = [];
@@ -144,7 +145,7 @@ siteDat.stncode = srcstns;
 % salat = [-29   -45   -45   -29   -29];
 
 %% parse ML polygons as used by the ANSN
-mlRegFile = '..\magnitude\ml\australia_ml_regions.txt';
+mlRegFile = fullfile('..','magnitude','ml','australia_ml_regions.txt');
 [mlreg, ln, mlla, mllo] = textread(mlRegFile, '%s%f%f%f','delimiter',' ');
 
 % get WA polygons

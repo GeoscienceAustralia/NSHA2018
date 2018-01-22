@@ -2,8 +2,7 @@
 
 %% parse ANSN_ catalogue
 disp('Parsing ANSN Catalogue...');
-ANSN_catfile = '..\data\ANSN_cat_m_ge_32.csv'; % for PC
-%ANSN_catfile = '../data/eq_349_1513311506173.csv'; % for mac/linux
+ANSN_catfile = fullfile('..','data','ANSN_cat_m_ge_32.csv');
 [prefmag, utcdate, utctime, localdate, localtime, lat, lon, magtype, place, ...
  dep, soln, mb, ml, ms, mwp, mw, evid, oid] = ...
  textread(ANSN_catfile, '%f%s%s%s%s %f%f%s%s %f%s%f%f%f%f%f%f%f', ...

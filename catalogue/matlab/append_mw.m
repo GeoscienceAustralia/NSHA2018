@@ -24,7 +24,8 @@ end
 %% Get events with ML & ML in WA
 
 % read WA events with MW
-[Date,lon,lat,dep,mw,src] = textread('append_mw\combined_au_mw.dat','%s%f%f%f%f%s', ...
+mwFile = fullfile('append_mw','combined_au_mw.dat');
+[Date,lon,lat,dep,mw,src] = textread(mwFile,'%s%f%f%f%f%s', ...
                                'headerlines',1,'delimiter',',');
 dateNum = datenum(Date);
 unqdate = unique(dateNum);

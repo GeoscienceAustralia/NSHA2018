@@ -28,6 +28,9 @@ for i = 1:length(mdat)
         mdat(i).MDAT_prefML = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMLSrc = mdat(i).MDAT_locsrc;
         mdat(i).MDAT_origMLType = 'ML';
+    elseif ~isnan(mdat(i).ISC_ml)
+        mdat(i).MDAT_prefML = mdat(i).ISC_ml;
+        mdat(i).MDAT_prefMLSrc = mdat(i).ISC_mlSRC;
     elseif strcmp(deblank(mdat(i).GG_Mtype), 'MP') || strcmp(deblank(mdat(i).GG_Mtype), 'MD') ...
            || strcmp(deblank(mdat(i).GG_Mtype), 'M?') 
         % assume equivalence with ML
@@ -52,6 +55,9 @@ for i = 1:length(mdat)
     elseif strcmp(deblank(mdat(i).GG_Mtype), 'Mw')
         mdat(i).MDAT_prefMW = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMWSrc = mdat(i).MDAT_locsrc;
+    elseif ~isnan(mdat(i).ISC_mw)
+        mdat(i).MDAT_prefMW = mdat(i).ISC_mw;
+        mdat(i).MDAT_prefMWSrc = mdat(i).ISC_mwSRC;
 %     elseif ~isnan(mdat(i).ANSN_mwp)
 %         mdat(i).MDAT_prefMW = mdat(i).ANSN_mwp;
 %         mdat(i).MDAT_prefMWSrc = 'AUST';
@@ -64,10 +70,13 @@ for i = 1:length(mdat)
     if strcmp(deblank(mdat(i).GG_Mtype), 'MS') || strcmp(deblank(mdat(i).GG_Mtype), 'Ms')
         mdat(i).MDAT_prefMS = mdat(i).GG_Mval;
         mdat(i).MDAT_prefMSSrc = mdat(i).MDAT_locsrc;
+    elseif ~isnan(mdat(i).ISC_ms)
+        mdat(i).MDAT_prefMS = mdat(i).ISC_ms;
+        mdat(i).MDAT_prefMSSrc = mdat(i).ISC_msSRC;
     elseif ~isnan(mdat(i).ANSN_ms)
         mdat(i).MDAT_prefMS = mdat(i).ANSN_ms;
         mdat(i).MDAT_prefMSSrc = 'AUST';
-     else
+    else
         mdat(i).MDAT_prefMS = NaN;
         mdat(i).MDAT_prefMSSrc = '';
     end
@@ -79,7 +88,10 @@ for i = 1:length(mdat)
     elseif ~isnan(mdat(i).ANSN_mb)
         mdat(i).MDAT_prefmb = mdat(i).ANSN_mb;
         mdat(i).MDAT_prefmbSrc = 'AUST';
-     else
+    elseif ~isnan(mdat(i).ISC_mb)
+        mdat(i).MDAT_prefmb = mdat(i).ISC_mb;
+        mdat(i).MDAT_prefmbSrc = mdat(i).ISC_mbSRC;
+    else
         mdat(i).MDAT_prefmb = NaN;
         mdat(i).MDAT_prefmbSrc = '';
     end
