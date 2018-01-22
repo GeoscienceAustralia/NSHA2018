@@ -168,6 +168,7 @@ mw_s = np.concatenate((0.67 * xrng[xrng<=6.1]+2.07,
 # ################## Das etal 2010
 mw_das = np.concatenate((0.67 * xrng[xrng<=6.1]+2.12,
                         1.06 * xrng[xrng>6.1] - 0.38))
+#mw_das = 1.538*xrng - 2.538
 # ################## Youngs (2012)
 mw_yon = 2.654 + 0.334*xrng + 0.040*xrng**2
 
@@ -180,8 +181,8 @@ f, ax = plt.subplots(1, 1,figsize=(10,10))
 ax.plot([1.5,7.0],[1.5,7.0],'k--',lw=2, label='1:1')
 ax.set_xlim([3.5,7.0])
 ax.set_ylim([3.5,7.0])
-ax.scatter(ms[idx_src==1],mw[idx_src==1],s= 200, alpha=0.5, marker='o',c='b',label='Ghasemi et al. (2016)')
-ax.scatter(ms[idx_src==0],mw[idx_src==0],s= 200, alpha=0.5, marker='^',c='r',label='Other')
+#ax.scatter(ms[idx_src==1],mw[idx_src==1],s= 200, alpha=0.5, marker='o',c='b',label='Ghasemi et al. (2016)')
+ax.scatter(ms[idx_src==0],mw[idx_src==0],s= 200, alpha=0.5, marker='^',c='r',label='Data')
 # ax.scatter(Ml_pre[idx2],Mw[idx2],s= 70, alpha=0.5, marker=(5,1),c='y',label='TA-SEA')
 # ax.scatter(Ml_pre[idx3],Mw[idx3],s= 70, alpha=0.5, marker='^',c='r',label='TA-WA')
 # ax.scatter(Ml_pre[idx4],Mw[idx4],s= 70, alpha=0.5, marker='>',c='m',label='Other')
@@ -207,4 +208,5 @@ ax.tick_params(axis='both', labelsize=21)
 #
 #plt.savefig('MW_MS.png',dpi=300,bbox_inches='tight')
 plt.savefig('MW_MS.TA.png',dpi=300,bbox_inches='tight')
+plt.show()
 plt.close()

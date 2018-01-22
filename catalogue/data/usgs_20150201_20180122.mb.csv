@@ -1,0 +1,150 @@
+time,latitude,longitude,depth,mag,magType,nst,gap,dmin,rms,net,id,updated,place,type,horizontalError,depthError,magError,magNst,status,locationSource,magSource
+2017-12-21T18:08:25.780Z,-10.7883,113.6408,10,4.4,mb,,70,2.358,0.81,us,us1000c12y,2018-01-08T14:57:20.040Z,"248km SSW of Sidorukun, Indonesia",earthquake,10.3,1.9,0.13,17,reviewed,us,us
+2017-12-17T10:54:01.460Z,-11.3604,118.6853,24.67,4.3,mb,,101,5.309,1.17,us,us1000bv23,2018-01-05T07:55:05.040Z,"189km SSW of Kahale, Indonesia",earthquake,4.6,8.2,0.154,12,reviewed,us,us
+2017-11-23T14:02:22.930Z,-10.6303,120.346,35,4.1,mb,,79,2.721,1.6,us,us1000bjtn,2018-01-11T13:55:40.040Z,"49km SSE of Nggongi Satu, Indonesia",earthquake,9.2,2,0.146,13,reviewed,us,us
+2017-11-22T16:53:10.120Z,-10.4745,120.1982,35,4.5,mb,,83,2.717,1.12,us,us2000bsye,2017-12-06T02:23:15.040Z,"31km S of Nggongi, Indonesia",earthquake,7.3,2,0.103,28,reviewed,us,us
+2017-10-14T14:09:49.540Z,-10.8545,112.3622,10,4.5,mb,,93,2.954,1.38,us,us1000aun1,2018-01-09T02:15:00.040Z,"273km S of Krajan Tambakrejo, Indonesia",earthquake,7.5,1.9,0.128,18,reviewed,us,us
+2017-10-14T14:03:30.060Z,-10.796,112.3139,10,4.6,mb,,75,2.937,1.18,us,us1000aun9,2018-01-09T02:15:00.040Z,"268km S of Krajan Tambakrejo, Indonesia",earthquake,7.6,1.9,0.141,15,reviewed,us,us
+2017-10-14T06:06:57.440Z,-10.8307,112.2848,10,4.3,mb,,74,2.981,1.27,us,us1000as4w,2018-01-09T02:15:00.040Z,"272km S of Krajan Tambakrejo, Indonesia",earthquake,7.2,1.9,0.16,11,reviewed,us,us
+2017-10-14T05:35:36.660Z,-10.8642,112.2993,10,4.7,mb,,76,2.999,0.78,us,us1000as11,2018-01-09T02:15:00.040Z,"276km S of Krajan Tambakrejo, Indonesia",earthquake,7.9,1.9,0.112,24,reviewed,us,us
+2017-10-13T17:46:07.470Z,-11.5819,117.1579,10,4.2,mb,,103,4.28,0.94,us,us1000aukw,2018-01-09T02:14:59.040Z,"296km SW of Panenggoede, Indonesia",earthquake,7.1,1.9,0.146,13,reviewed,us,us
+2017-10-09T05:09:42.350Z,-10.4194,123.8525,31.1,4.5,mb,,64,0.281,1.04,us,us2000b2y8,2018-01-09T02:14:52.040Z,"40km SE of Kupang, Indonesia",earthquake,4.9,6.5,0.106,26,reviewed,us,us
+2017-09-28T08:12:59.680Z,-10.7449,117.2263,10,4.7,mb,,97,3.781,1.08,us,us2000avte,2017-12-22T21:56:26.040Z,"213km SSE of Besisora, Indonesia",earthquake,6,1.9,0.133,17,reviewed,us,us
+2017-09-25T22:59:44.190Z,-10.6682,115.85,39.69,4.3,mb,,110,2.752,1.11,us,us2000b0hj,2017-12-22T21:56:22.040Z,"201km SSW of Kute, Indonesia",earthquake,7.5,7.5,0.129,17,reviewed,us,us
+2017-09-17T00:41:32.330Z,-10.4335,123.9711,23.54,4.3,mb,,86,0.377,1.05,us,us2000at4v,2017-12-19T01:54:00.040Z,"51km SE of Kupang, Indonesia",earthquake,5.8,8.5,0.217,6,reviewed,us,us
+2017-09-16T09:57:47.920Z,-10.8831,122.1193,38.93,4,mb,,112,1.66,0.52,us,us2000at4a,2017-12-13T02:29:46.040Z,"173km ESE of Mburukullu, Indonesia",earthquake,4.7,10.7,0.196,7,reviewed,us,us
+2017-09-14T21:26:06.710Z,-12.9278,122.1651,10,4.4,mb,,75,3.766,1.33,us,us2000asl6,2017-12-13T02:29:44.040Z,"South of Timor",earthquake,5.2,1.9,0.155,12,reviewed,us,us
+2017-09-11T03:47:05.940Z,-10.4186,152.5803,10,4.1,mb,,177,5.434,0.79,us,us2000ar0i,2017-12-13T02:29:37.040Z,"152km S of Kulumadau, Papua New Guinea",earthquake,11.8,1.9,0.14,14,reviewed,us,us
+2017-09-01T03:47:34.730Z,-11.5035,112.7922,10,4.8,mb,,78,3.298,0.95,us,us2000adrc,2017-11-28T18:33:55.040Z,"South of Java, Indonesia",earthquake,7.4,1.8,0.075,56,reviewed,us,us
+2017-08-31T17:45:29.040Z,-25.7102,129.9133,10,4.3,mb,,53,4.161,0.86,us,us2000arkc,2017-11-28T18:33:55.040Z,"Northern Territory, Australia",earthquake,3.9,2,0.239,5,reviewed,us,us
+2017-08-27T00:02:22.440Z,-10.326,111.1036,10,5.5,mb,,23,2.465,1.14,us,us2000ac5g,2017-11-28T18:33:48.040Z,"228km S of Ngulung Wetan, Indonesia",earthquake,6.4,1.7,0.071,19,reviewed,us,us
+2017-08-06T04:21:50.710Z,-19.1146,128.0923,4.57,4.9,mb,,39,2.535,0.96,us,us2000a5b3,2017-10-25T00:37:59.040Z,"99km SSE of Halls Creek, Australia",earthquake,3.9,3.4,0.09,39,reviewed,us,us
+2017-07-17T00:59:03.730Z,-11.5408,118.24,35,4.1,mb,,107,4.881,1.05,us,us20009z1g,2017-10-11T01:03:50.040Z,"224km SSW of Kahale, Indonesia",earthquake,9.6,2,0.175,9,reviewed,us,us
+2017-07-15T21:27:26.350Z,-26.1405,131.9527,5.75,4.2,mb,,40,3.034,0.89,us,us20009yfa,2017-10-06T23:56:20.040Z,"South Australia",earthquake,6.3,6,0.216,6,reviewed,us,us
+2017-07-06T01:48:02.390Z,-11.5515,118.2712,48.16,4.1,mb,,108,4.862,0.95,us,us1000994w,2017-10-03T00:47:50.040Z,"224km SSW of Kahale, Indonesia",earthquake,4.5,11,0.234,5,reviewed,us,us
+2017-06-09T17:16:14.240Z,-22.2934,121.1969,10,4.5,mb,,81,1.444,1.05,us,us20009msa,2017-08-16T02:42:21.040Z,"191km NE of Newman, Australia",earthquake,6.8,2,0.204,7,reviewed,us,us
+2017-06-08T11:57:17.120Z,-11.4413,118.4324,38.28,4.4,mb,,94,4.67,1.16,us,us20009lb0,2017-08-16T02:42:20.040Z,"206km SSW of Kahale, Indonesia",earthquake,5.9,11.2,0.143,14,reviewed,us,us
+2017-05-28T16:50:23.860Z,-19.8692,133.9267,6.49,4.3,mb,,64,0.394,1.04,us,us20009j83,2017-08-15T02:26:44.040Z,"37km SW of Tennant Creek, Australia",earthquake,5.9,5.4,0.147,13,reviewed,us,us
+2017-05-19T19:17:27.950Z,-11.5641,118.2093,34.83,4.1,mb,,75,4.919,1.44,us,us10008tm0,2017-08-05T03:32:12.040Z,"228km SSW of Panenggoede, Indonesia",earthquake,6.9,3.6,0.14,17,reviewed,us,us
+2017-05-05T01:49:33.010Z,-10.3323,118.8513,10,4.6,mb,,116,3.741,1.09,us,us10008pjh,2017-07-29T03:16:22.040Z,"75km SSW of Kahale, Indonesia",earthquake,4.1,1.9,0.128,18,reviewed,us,us
+2017-04-24T07:37:25.290Z,-32.2936,138.3526,23.93,4,mb,,121,2.004,1.09,us,us10008n8q,2017-07-21T02:32:04.040Z,"30km ENE of Quorn, Australia",earthquake,6.8,10.8,0.232,5,reviewed,us,us
+2017-04-19T08:55:50.170Z,-32.3091,153.1619,10,3.9,mb,,119,2.296,0.9,us,us10008k3m,2017-07-11T01:48:37.040Z,"62km ESE of Forster, Australia",earthquake,5.1,2,0.295,3,reviewed,us,us
+2017-04-13T17:01:21.500Z,-25.6073,129.9183,10.8,4.5,mb,,119,4.109,0.77,us,us10008hbr,2017-07-05T18:09:58.040Z,"Northern Territory, Australia",earthquake,5.1,4.2,0.121,20,reviewed,us,us
+2017-04-13T16:31:06.360Z,-33.5328,148.9562,14.53,4.2,mb,,56,0.894,1.25,us,us10008hbg,2017-07-05T18:09:58.040Z,"23km WSW of Millthorpe, Australia",earthquake,5.5,5.7,0.14,14,reviewed,us,us
+2017-04-04T03:55:54.340Z,-25.9262,128.8547,13.86,4.4,mb,,45,4.885,0.97,us,us10008ghv,2017-06-23T07:26:29.040Z,"228km E of Warburton, Australia",earthquake,8.4,6.3,0.267,4,reviewed,us,us
+2017-03-26T20:00:04.110Z,-31.5062,122.8771,14.98,4.1,mb,,72,4.501,0.68,us,us10008dkr,2017-06-16T23:07:57.040Z,"127km SE of Stoneville, Australia",earthquake,4.9,6.6,0.165,10,reviewed,us,us
+2017-03-20T14:45:47.030Z,-10.653,123.5142,35,4.2,mb,,108,1.159,0.72,us,us20008vae,2017-06-12T19:46:51.040Z,"54km S of Kupang, Indonesia",earthquake,7.2,2,0.175,9,reviewed,us,us
+2017-03-18T01:15:35.260Z,-10.7723,115.1546,10,4.5,mb,,117,2.492,1.11,us,us20008sx7,2017-06-07T00:33:43.040Z,"214km S of Kangin, Indonesia",earthquake,8.1,1.9,0.102,28,reviewed,us,us
+2017-03-16T18:39:26.270Z,-11.539,114.5737,10,5.5,mb,,46,3.077,1.43,us,us20008siq,2017-11-08T22:48:07.620Z,"South of Bali, Indonesia",earthquake,8.6,1.7,0.068,21,reviewed,us,us
+2017-02-19T16:20:33.070Z,-10.6527,115.8822,41.07,4.7,mb,,109,2.759,0.86,us,us100085rm,2017-05-17T01:19:32.040Z,"199km SSW of Kute, Indonesia",earthquake,8.3,6.8,0.079,49,reviewed,us,us
+2017-02-09T17:47:51.960Z,-11.7622,117.6019,10,4.3,mb,,56,4.715,1.33,us,us20008l5f,2017-05-09T01:24:32.040Z,"280km SW of Panenggoede, Indonesia",earthquake,8.4,1.9,0.137,15,reviewed,us,us
+2017-02-03T20:26:18.720Z,-11.1391,116.2387,32.76,4.3,mb,,121,3.355,1.25,us,us20008k8y,2017-04-27T01:38:43.040Z,"248km S of Kute, Indonesia",earthquake,7.7,6.1,0.154,12,reviewed,us,us
+2017-02-01T13:37:54.820Z,-35.0581,139.1956,10,3.9,mb,,111,3.439,1.22,us,us10007wmj,2017-04-27T01:38:41.040Z,"9km NW of Murray Bridge, Australia",earthquake,6.6,2,0.209,6,reviewed,us,us
+2017-01-26T13:52:13.570Z,-10.9155,121.6397,47,4.3,mb,,77,2.34,1.11,us,us10007vig,2017-04-19T18:31:00.040Z,"133km SE of Mburukullu, Indonesia",earthquake,7.8,6.5,0.114,22,reviewed,us,us
+2017-01-05T18:49:00.640Z,-10.3564,119.3023,35,4.3,mb,,84,3.362,0.68,us,us10007rhd,2017-03-27T23:53:24.040Z,"67km S of Bogorawatu, Indonesia",earthquake,5.8,1.7,0.101,28,reviewed,us,us
+2017-01-04T02:39:40.690Z,-11.5752,113.4321,10,4.8,mb,,129,3.165,0.93,us,us10007pl1,2017-03-27T23:53:22.040Z,"South of Java, Indonesia",earthquake,8.8,1.9,0.095,34,reviewed,us,us
+2017-01-03T15:30:19.000Z,-30.609,118.455,10,4.5,mb,,,,0.74,us,us10007pgt,2017-03-27T23:53:20.040Z,"98km N of Merredin, Australia",earthquake,5.7,5.5,0.145,14,reviewed,aust,us
+2016-12-13T13:35:51.500Z,-11.6665,111.9291,26.46,4.2,mb,,160,3.857,0.77,us,us10007lr9,2017-03-09T02:14:30.040Z,"South of Java, Indonesia",earthquake,10.4,7.9,0.186,8,reviewed,us,us
+2016-11-22T19:51:30.420Z,-10.8442,123.3875,37.96,4.5,mb,,68,0.689,1.29,us,us10007du6,2017-02-15T23:21:37.040Z,"77km SSW of Kupang, Indonesia",earthquake,5.3,10.4,0.131,18,reviewed,us,us
+2016-11-22T18:56:17.740Z,-10.6533,123.3685,38.5,4.4,mb,,83,0.53,0.94,us,us10007dtz,2017-02-15T23:21:37.040Z,"58km SSW of Kupang, Indonesia",earthquake,5.4,9.3,0.124,21,reviewed,us,us
+2016-11-10T10:24:51.000Z,-19.853,133.866,5,4.2,mb,,,,1.26,us,us100076lx,2017-02-02T02:21:06.040Z,"41km WSW of Tennant Creek, Australia",earthquake,5,1.9,0.528,1,reviewed,aust,us
+2016-11-06T09:54:31.000Z,-19.106,127.987,10,4.8,mb,,,,1.14,us,us100075ug,2017-02-02T02:21:01.040Z,"95km SSE of Halls Creek, Australia",earthquake,7.2,4.7,0.113,24,reviewed,aust,us
+2016-11-03T16:25:13.000Z,-29.627,137.098,10,4.1,mb,,,,0.3,us,us100076nj,2017-01-24T02:02:16.040Z,"105km N of Roxby Downs, Australia",earthquake,7,3.1,0.212,6,reviewed,aust,us
+2016-09-30T19:33:42.560Z,-10.3794,149.4146,19.29,4,mb,,214,2.423,0.62,us,us20007dj5,2017-01-03T21:10:39.040Z,"109km W of Alotau, Papua New Guinea",earthquake,14.2,5,0.144,13,reviewed,us,us
+2016-09-12T10:38:20.900Z,-11.2609,113.8675,35.15,4.7,mb,,84,2.787,1.49,us,us10006p10,2016-12-07T02:56:12.040Z,"296km S of Sidorukun, Indonesia",earthquake,7.3,7.1,0.096,33,reviewed,us,us
+2016-09-04T12:35:30.800Z,-10.3298,119.2445,43.68,4.3,mb,,84,3.398,1.02,us,us10006kbr,2016-12-03T02:54:41.040Z,"64km S of Bogorawatu, Indonesia",earthquake,5.2,8.5,0.125,18,reviewed,us,us
+2016-08-19T14:39:22.000Z,-25.582,129.806,0,3.9,mb,,,,1.18,us,us10006ggk,2016-11-19T04:58:31.040Z,"Northern Territory, Australia",earthquake,7,2,0.296,3,reviewed,aust,us
+2016-08-18T18:27:35.010Z,-19.6628,148.8618,10,4.3,mb,,146,2.49,0.52,us,us10006gd4,2016-11-15T02:21:53.040Z,"76km ENE of Bowen, Australia",earthquake,5.5,1.9,0.217,6,reviewed,us,us
+2016-08-18T05:30:34.000Z,-19.73,148.92,2,4,ml,,,,0.34,us,us10006emu,2016-11-15T02:21:53.040Z,"78km ENE of Bowen, Australia",earthquake,10.7,6.8,,,reviewed,aust,aust
+2016-08-18T04:30:08.800Z,-19.8352,148.7233,10,5.7,mb,,30,2.335,0.82,us,us10006em9,2017-10-31T12:42:21.340Z,"55km ENE of Bowen, Australia",earthquake,7.1,1.8,,,reviewed,us,us
+2016-08-13T15:31:12.390Z,-23.8567,152.9265,10,4.6,mb,,115,2.255,1.07,us,us10006dl0,2016-11-15T02:21:47.040Z,"124km NNE of Bundaberg, Australia",earthquake,7.8,1.9,0.119,21,reviewed,us,us
+2016-08-06T21:16:33.000Z,-25.572,129.804,0,4.2,mb,,,,1.42,us,us10006cca,2016-10-26T03:10:21.040Z,"Northern Territory, Australia",earthquake,6.1,2,0.373,2,reviewed,aust,us
+2016-08-02T15:11:48.630Z,-11.5605,117.3842,27.35,4.1,mb,,101,4.422,1.03,us,us10006aeu,2016-10-19T04:52:13.040Z,"277km SW of Panenggoede, Indonesia",earthquake,7.2,7.4,0.165,10,reviewed,us,us
+2016-07-31T13:45:49.350Z,-19.1824,111.7783,10,4.1,mb,,166,4.138,0.68,us,us10006a4j,2016-10-19T04:51:57.040Z,"Northwest of Australia",earthquake,11,2,0.158,11,reviewed,us,us
+2016-07-18T17:55:37.700Z,-11.4649,116.2885,10,4.7,mb,,50,3.644,0.65,us,us20006fkk,2016-09-17T01:27:50.040Z,"284km S of Kute, Indonesia",earthquake,4.3,1.9,0.086,41,reviewed,us,us
+2016-07-16T11:44:49.000Z,-32.501,122.436,0,4,mb,,,,1.32,us,us20006gfc,2016-09-17T01:27:47.040Z,"159km NNE of Esperance, Australia",earthquake,10.2,6.2,0.164,10,reviewed,aust,us
+2016-07-14T10:08:55.000Z,-32.536,122.433,0,4,mb,,,,1.16,us,us20006g48,2016-09-08T01:50:31.040Z,"155km NNE of Esperance, Australia",earthquake,9,7,0.184,8,reviewed,aust,us
+2016-07-08T09:40:50.000Z,-32.458,122.511,0,5.2,mb,,,,1.2,us,us100061v2,2016-09-08T01:50:22.040Z,"166km NNE of Esperance, Australia",earthquake,7.7,3.4,0.072,64,reviewed,aust,us
+2016-07-03T11:56:05.300Z,-11.5547,116.0562,30.63,4,mb,,130,3.593,0.95,us,us100061yu,2016-09-02T21:36:35.040Z,"295km S of Kute, Indonesia",earthquake,11.3,5.4,0.139,14,reviewed,us,us
+2016-07-03T11:44:28.190Z,-11.5132,116.3732,29.91,4.3,mb,,59,3.732,1.15,us,us100061yt,2016-09-02T21:36:35.040Z,"290km S of Kute, Indonesia",earthquake,8.5,3,0.123,19,reviewed,us,us
+2016-07-03T11:40:51.930Z,-11.5983,116.1111,36.36,4.2,mb,,107,3.658,0.93,us,us100061zc,2016-09-02T21:36:35.040Z,"299km S of Kute, Indonesia",earthquake,9.9,4.1,0.152,12,reviewed,us,us
+2016-07-02T09:28:55.490Z,-10.3268,119.2173,49.24,5,mb,,70,3.42,0.67,us,us10005zfs,2016-09-02T21:36:34.040Z,"65km S of Bogorawatu, Indonesia",earthquake,8.1,7.4,0.068,68,reviewed,us,us
+2016-06-19T01:54:09.000Z,-35.916,136.45,10,4.5,mb,,,,1.07,us,us200066gl,2016-08-27T02:15:28.040Z,"110km WSW of Kingscote, Australia",earthquake,5.5,1.9,0.127,18,reviewed,aust,us
+2016-06-15T07:24:33.200Z,-11.4811,116.2994,24.18,4.2,mb,,105,6.707,0.94,us,us200065rb,2016-08-25T01:22:57.040Z,"286km S of Kute, Indonesia",earthquake,6.5,5.3,0.122,19,reviewed,us,us
+2016-06-15T02:10:54.320Z,-11.3901,116.2796,30.24,4.7,mb,,46,6.474,1.42,us,us200064gy,2016-08-25T01:22:57.040Z,"276km S of Kute, Indonesia",earthquake,7.9,4.1,0.083,44,reviewed,us,us
+2016-06-09T07:23:47.170Z,-10.5345,119.1232,37.56,4.9,mb,,86,3.604,0.94,us,us2000630w,2016-08-18T00:36:36.040Z,"89km SSW of Bogorawatu, Indonesia",earthquake,6.5,6.6,0.074,57,reviewed,us,us
+2016-06-09T06:50:01.100Z,-10.6083,119.1079,44.06,4.7,mb,,79,3.656,0.77,us,us2000630t,2016-08-18T00:36:36.040Z,"98km SSW of Bogorawatu, Indonesia",earthquake,7.8,7.3,0.079,49,reviewed,us,us
+2016-06-09T04:13:08.130Z,-11.2487,116.2669,19,6.0,mb,,27,3.459,0.76,us,us200062zs,2016-11-10T22:16:21.322Z,"260km S of Kute, Indonesia",earthquake,6.6,1.7,,,reviewed,us,us
+2016-06-08T02:01:09.000Z,-32.337,122.386,0,4.2,mb,,,,1.72,us,us200062pn,2016-08-18T00:36:34.040Z,"173km SSE of Stoneville, Australia",earthquake,8.7,1.9,0.158,11,reviewed,aust,us
+2016-06-01T13:00:47.000Z,-32.457,122.481,0,3.9,mb,,,,1.46,us,us200062k6,2016-08-10T22:30:31.040Z,"165km NNE of Esperance, Australia",earthquake,10.1,2,0.194,7,reviewed,aust,us
+2016-05-28T16:38:44.000Z,-32.285,122.396,15,4.9,mb,,,,1.5,us,us20005yv7,2016-08-10T22:30:25.040Z,"168km SSE of Stoneville, Australia",earthquake,5,4.9,0.108,27,reviewed,aust,us
+2016-05-28T15:30:27.000Z,-32.285,122.396,6,4.8,mb,,,,1.35,us,us20005yus,2016-08-10T22:30:25.040Z,"168km SSE of Stoneville, Australia",earthquake,8.1,5,0.111,25,reviewed,aust,us
+2016-05-21T11:08:31.000Z,-25.512,129.894,0,4.1,mb,,,,1.95,us,us20005yh7,2016-08-03T22:33:40.040Z,"Northern Territory, Australia",earthquake,6.1,1.9,0.185,8,reviewed,aust,us
+2016-05-21T09:08:34.000Z,-25.519,129.891,0,4.2,mb,,,,0.97,us,us10005j49,2016-08-03T22:33:40.040Z,"Northern Territory, Australia",earthquake,5.8,1.9,0.186,8,reviewed,aust,us
+2016-05-21T08:46:44.620Z,-25.5802,129.8082,10,4.4,mb,,95,4.186,0.64,us,us20005yh5,2016-08-03T22:33:40.040Z,"Northern Territory, Australia",earthquake,6.5,1.9,0.189,8,reviewed,us,us
+2016-05-21T08:46:18.000Z,-25.601,129.837,0,4.4,mb,,,,1.15,us,us10005j44,2016-08-03T22:33:40.040Z,"Northern Territory, Australia",earthquake,6.5,1.9,0.155,12,reviewed,aust,us
+2016-05-21T07:12:31.000Z,-25.532,129.838,0,4.2,mb,,,,1.05,us,us10005j3t,2016-08-03T22:33:40.040Z,"Northern Territory, Australia",earthquake,8.1,1.9,0.187,8,reviewed,aust,us
+2016-05-20T19:06:09.000Z,-25.574,129.812,0,4.2,mb,,,,2.12,us,us20005y4t,2016-08-03T22:33:39.040Z,"Northern Territory, Australia",earthquake,8.2,5.4,0.2,7,reviewed,aust,us
+2016-05-20T18:14:04.670Z,-25.5655,129.8841,10,6.2,mb,,24,1.53,1.33,us,us10005iyk,2017-10-11T21:29:07.729Z,"Northern Territory, Australia",earthquake,2.2,1.7,,,reviewed,us,us
+2016-05-16T20:13:20.000Z,-22.904,128.602,10,4.2,mb,,,,1.44,us,us10005hsh,2016-07-22T19:39:09.040Z,"Western Australia",earthquake,4.9,5.5,0.235,5,reviewed,aust,us
+2016-05-16T03:33:57.510Z,-10.5719,113.1893,11.67,4.1,mb,,84,2.294,1.08,us,us10005jkc,2016-07-22T19:39:08.040Z,"239km SSW of Sarongan, Indonesia",earthquake,8.4,5.6,0.145,13,reviewed,us,us
+2016-05-12T18:23:51.530Z,-11.2179,117.0314,10,4.9,mb,,42,3.937,1.02,us,us10005gva,2016-07-20T18:10:54.040Z,"261km S of Besisora, Indonesia",earthquake,6.5,1.6,0.074,57,reviewed,us,us
+2016-05-10T09:44:38.250Z,-16.3853,118.8669,10,5,mb,,83,4.818,0.81,us,us10005g9r,2016-07-20T18:10:51.040Z,"Northwest of Australia",earthquake,7.7,1.8,0.081,48,reviewed,us,us
+2016-05-04T22:17:54.920Z,-10.4346,123.989,10,4.4,mb,,150,0.392,0.52,us,us10005gt3,2016-07-19T20:03:13.040Z,"53km SE of Kupang, Indonesia",earthquake,7.8,1.7,0.179,9,reviewed,us,us
+2016-05-02T19:08:46.950Z,-10.5554,152.3694,10,4.1,mb,,98,5.257,0.72,us,us10005gin,2016-07-19T20:03:10.040Z,"170km SSW of Kulumadau, Papua New Guinea",earthquake,5.2,1.9,0.145,13,reviewed,us,us
+2016-05-02T07:13:48.790Z,-10.8578,112.0594,10,4.1,mb,,103,3.144,1.24,us,us10005ghw,2016-07-19T20:03:09.040Z,"280km SSW of Krajan Tambakrejo, Indonesia",earthquake,8.7,2,0.165,10,reviewed,us,us
+2016-04-28T16:52:44.000Z,-19.77,133.888,10,4.4,mb,,,,1.92,us,us10005c6s,2016-07-08T02:49:27.040Z,"35km WSW of Tennant Creek, Australia",earthquake,4.4,4.8,0.126,19,reviewed,aust,us
+2016-04-22T18:28:10.870Z,-11.8559,124.367,46.13,4.1,mb,,82,1.778,1.35,us,us20005kyb,2016-07-08T02:49:18.040Z,"205km SSE of Kupang, Indonesia",earthquake,6.9,6.7,0.14,15,reviewed,us,us
+2016-03-28T17:26:53.660Z,-10.6465,152.6415,28.11,4.3,mb,,99,5.538,0.8,us,us20005dy7,2016-06-10T23:32:55.040Z,"176km S of Kulumadau, Papua New Guinea",earthquake,11.8,5.8,0.238,5,reviewed,us,us
+2016-03-16T13:11:27.040Z,-11.9366,118.3702,10,4.9,mb,,69,5.024,0.8,us,us20005a5q,2016-05-21T00:05:33.040Z,"260km SSW of Kahale, Indonesia",earthquake,7.4,1.9,0.145,15,reviewed,us,us
+2016-02-16T21:29:38.800Z,-10.4684,111.3514,10,4.6,mb,,102,2.668,0.64,us,us200050n4,2016-04-26T23:28:24.040Z,"241km S of Ngulung Wetan, Indonesia",earthquake,7.8,1.9,0.107,26,reviewed,us,us
+2016-02-07T03:21:55.120Z,-11.655,116.7716,29.04,4.3,mb,,63,4.082,1.22,us,us20004zbj,2016-04-19T01:33:22.040Z,"South of Lombok, Indonesia",earthquake,9.1,5.5,0.178,9,reviewed,us,us
+2016-01-30T16:22:17.670Z,-11.4004,112.5354,35.47,4.4,mb,,97,3.318,1.29,us,us20004w1x,2016-04-14T22:51:36.040Z,"South of Java, Indonesia",earthquake,8.2,6.8,0.112,23,reviewed,us,us
+2016-01-26T21:59:56.260Z,-10.3314,119.4196,19.68,5.2,mb,,40,3.25,1.11,us,us20004uv8,2016-11-10T22:10:11.795Z,"64km S of Padedewatu, Indonesia",earthquake,6.4,3.3,0.061,88,reviewed,us,us
+2016-01-07T22:08:26.860Z,-10.762,124.7211,15.07,4.4,mb,,129,1.095,0.7,us,us10004e5n,2016-03-28T22:09:45.040Z,"110km SSE of Soe, Indonesia",earthquake,10.6,6.8,0.202,7,reviewed,us,us
+2015-12-29T11:29:25.960Z,-11.6276,118.8954,31.72,4.5,mb,,92,4.434,0.63,us,us10004brd,2016-03-18T01:13:06.040Z,"208km SW of Tawui, Indonesia",earthquake,8.5,6.4,0.135,16,reviewed,us,us
+2015-12-25T18:40:07.390Z,-25.5522,154.145,15.31,4.2,mb,,186,2.775,0.61,us,us10004baa,2016-03-18T01:13:01.040Z,"112km ENE of Rainbow Beach, Australia",earthquake,8.6,5.3,0.176,9,reviewed,us,us
+2015-12-17T05:11:45.030Z,-11.6136,121.3035,11.16,4.3,mb,,83,3.098,0.77,us,us100047uu,2016-03-12T02:29:14.040Z,"174km SSE of Umakadambung, Indonesia",earthquake,6.7,4.9,0.142,14,reviewed,us,us
+2015-12-10T05:20:51.820Z,-11.1395,119.0093,25.75,4.2,mb,,69,4.038,0.91,us,us20004g2k,2016-03-05T01:42:00.040Z,"157km SSW of Bogorawatu, Indonesia",earthquake,5.8,5.4,0.118,20,reviewed,us,us
+2015-12-06T20:54:39.970Z,-11.7008,117.4716,30.5,4.6,mb,,103,4.581,0.75,us,us100044hf,2016-03-02T03:36:35.040Z,"283km SW of Panenggoede, Indonesia",earthquake,8.5,6.7,0.106,27,reviewed,us,us
+2015-11-15T04:51:13.570Z,-10.3648,124.0569,28.53,4.5,mb,,84,0.64,0.61,us,us10003zbb,2016-02-13T02:08:22.040Z,"56km ESE of Kupang, Indonesia",earthquake,8,1.7,0.121,20,reviewed,us,us
+2015-11-03T01:07:44.000Z,-19.784,133.938,11,4.3,mb,,,,0.68,us,us200041hc,2016-01-30T02:11:04.040Z,"31km WSW of Tennant Creek, Australia",earthquake,3.5,5.1,0.16,11,reviewed,aust,us
+2015-10-29T19:42:15.990Z,-10.7451,111.9521,33.83,4,mb,,183,3.133,0.8,us,us200041c4,2016-01-30T02:10:55.040Z,"269km S of Sumbersih, Indonesia",earthquake,10.7,4.7,0.163,10,reviewed,us,us
+2015-10-22T20:45:15.480Z,-25.4034,154.203,10,4.2,mb,,194,2.823,0.91,us,us2000404r,2016-01-22T23:41:10.040Z,"124km ENE of Rainbow Beach, Australia",earthquake,6.6,1.9,0.167,10,reviewed,us,us
+2015-10-21T07:15:32.060Z,-11.4312,118.6005,20.03,4,mb,,93,4.532,1.43,us,us10003rx8,2016-01-15T20:51:32.040Z,"199km SSW of Kahale, Indonesia",earthquake,6.4,3.5,0.144,13,reviewed,us,us
+2015-10-16T09:03:19.740Z,-11.549,118.2217,35.01,4.5,mb,,96,4.9,0.97,us,us10003p46,2016-01-15T20:50:47.040Z,"226km SSW of Panenggoede, Indonesia",earthquake,6.7,9.5,0.124,19,reviewed,us,us
+2015-10-13T06:54:57.640Z,-22.5819,120.8975,11.25,4.3,mb,,55,1.4,1.05,us,us10003n84,2016-01-11T21:07:24.040Z,"147km NE of Newman, Australia",earthquake,6.1,5.6,0.168,10,reviewed,us,us
+2015-10-07T20:30:12.490Z,-17.1882,121.8921,10,4.5,mb,,71,3.686,0.87,us,us10003l09,2016-01-04T22:29:35.040Z,"93km NNW of Broome, Australia",earthquake,6.9,1.2,0.131,17,reviewed,us,us
+2015-09-22T03:50:17.670Z,-10.762,112.2797,33.24,4.2,mb,,101,2.931,0.92,us,us10003lc2,2015-12-21T23:16:31.040Z,"265km S of Krajan Tambakrejo, Indonesia",earthquake,6.9,3.8,0.187,8,reviewed,us,us
+2015-09-17T02:44:55.000Z,-39.839,142.419,10,4.8,mb,,,,1.09,us,us20003kdr,2015-12-21T23:16:12.040Z,"160km SW of Apollo Bay, Australia",earthquake,7.5,4.6,0.148,14,reviewed,aust,us
+2015-09-11T19:02:22.300Z,-11.5235,119.2019,27.59,4.4,mb,,89,5.28,1.48,us,us20003n0m,2015-12-12T00:42:46.040Z,"179km SSW of Tawui, Indonesia",earthquake,8.9,7.8,0.204,7,reviewed,us,us
+2015-09-04T17:48:48.360Z,-11.328,112.617,39.5,4.3,mb,,104,3.217,1.48,us,us20003k0p,2015-12-05T01:40:26.040Z,"South of Java, Indonesia",earthquake,9.6,9.5,0.265,4,reviewed,us,us
+2015-08-29T20:02:26.650Z,-10.8411,116.3414,34.44,5.1,mb,,46,3.195,1.14,us,us1000360t,2017-03-22T06:38:20.763Z,"215km S of Kute, Indonesia",earthquake,6.7,3.7,0.06,92,reviewed,us,us
+2015-08-14T01:06:55.340Z,-25.4498,154.3241,10,4.3,mb,,73,2.933,1.07,us,us100036b0,2015-11-17T00:13:26.040Z,"133km ENE of Rainbow Beach, Australia",earthquake,9.4,1.8,0.147,13,reviewed,us,us
+2015-08-01T04:46:24.830Z,-25.4093,154.1987,10,5.2,mb,,31,2.819,0.98,us,us10002x2n,2016-09-28T20:49:02.437Z,"123km ENE of Rainbow Beach, Australia",earthquake,7.3,1.7,0.08,60,reviewed,us,us
+2015-08-01T03:38:44.590Z,-25.343,154.3348,9,5.7,mb,,18,2.943,0.87,us,us10002x1x,2016-11-10T21:49:18.081Z,"139km ENE of Rainbow Beach, Australia",earthquake,7,1.7,,,reviewed,us,us
+2015-07-29T23:41:40.420Z,-25.3727,154.2281,9,5.7,mb,,21,2.846,0.71,us,us10002w8v,2016-11-10T21:49:14.710Z,"128km ENE of Rainbow Beach, Australia",earthquake,7.1,1.7,,,reviewed,us,us
+2015-07-25T18:12:28.470Z,-10.9286,114.7803,11.45,4.1,mb,,123,2.52,1.45,us,us100031yw,2015-10-22T20:04:59.040Z,"234km S of Kangin, Indonesia",earthquake,7.4,5.3,0.157,11,reviewed,us,us
+2015-07-14T13:20:50.840Z,-11.114,111.3014,26.82,4.8,mb,,52,3.272,0.75,us,us20002xdn,2015-10-09T20:19:17.040Z,"South of Java, Indonesia",earthquake,5.5,4.6,0.075,56,reviewed,us,us
+2015-07-03T17:59:35.120Z,-11.1162,119.4418,21.07,4.1,mb,,86,3.696,1.46,us,us20002yxz,2015-09-30T00:20:54.040Z,"127km SW of Lailunggi, Indonesia",earthquake,4.8,7.7,0.198,7,reviewed,us,us
+2015-07-03T17:46:40.860Z,-10.32,151.8992,35.25,4.3,mb,,67,4.758,0.96,us,us20002yxy,2015-09-30T00:20:54.040Z,"138km ENE of Samarai, Papua New Guinea",earthquake,9.7,6.5,0.169,12,reviewed,us,us
+2015-07-03T15:44:54.730Z,-10.4712,152.164,31.83,4.5,mb,,123,5.042,1.27,us,us20002yy0,2015-09-30T00:20:53.040Z,"164km E of Samarai, Papua New Guinea",earthquake,9.3,5.4,0.163,11,reviewed,us,us
+2015-06-26T04:37:43.810Z,-10.6372,152.372,29.75,4.1,mb,,156,5.277,1.33,us,us20002wkm,2015-09-02T22:37:19.040Z,"179km SSW of Kulumadau, Papua New Guinea",earthquake,10.6,5.6,0.151,12,reviewed,us,us
+2015-06-15T15:24:33.920Z,-10.3336,118.5943,40.06,4,mb,,149,3.97,0.88,us,us10002lyc,2015-08-20T00:43:58.040Z,"88km SW of Panenggoede, Indonesia",earthquake,6.2,10.2,0.196,10,reviewed,us,us
+2015-06-13T02:15:59.430Z,-10.3786,123.8659,25.41,4.3,mb,,141,0.262,1.05,us,us20002pkr,2015-08-20T00:43:55.040Z,"38km SE of Kupang, Indonesia",earthquake,5.5,6.8,0.161,11,reviewed,us,us
+2015-06-10T22:01:29.980Z,-10.5215,120.7255,35,5.1,mb,,35,2.394,1.14,us,us20002nts,2015-08-10T13:08:29.040Z,"37km SSE of Baing, Indonesia",earthquake,6.1,1.9,0.067,71,reviewed,us,us
+2015-05-16T13:22:38.270Z,-10.6324,115.8979,39.5,4.3,mb,,109,2.753,1.22,us,us100029s6,2015-07-23T01:04:03.040Z,"196km SSW of Kute, Indonesia",earthquake,8.8,6.6,0.142,14,reviewed,us,us
+2015-05-08T17:25:31.550Z,-10.5961,120.3326,33.18,4.1,mb,,83,2.706,0.82,us,us100029gv,2015-07-17T07:06:00.040Z,"45km SSE of Nggongi, Indonesia",earthquake,7.2,7.2,0.165,10,reviewed,us,us
+2015-04-27T23:48:14.690Z,-10.7583,120.3345,51.14,4.1,mb,,84,2.822,0.92,us,us20002bwc,2015-07-03T00:23:45.040Z,"63km S of Nggongi Satu, Indonesia",earthquake,4.9,10.9,0.233,5,reviewed,us,us
+2015-04-26T18:15:22.080Z,-10.5898,120.3623,51.18,4.1,mb,,118,2.681,1.35,us,us20002bth,2015-07-03T00:23:43.040Z,"44km SSW of Mbulung, Indonesia",earthquake,7.3,11,0.184,8,reviewed,us,us
+2015-04-26T10:55:33.080Z,-10.5788,120.3353,35,4.3,mb,,79,2.692,0.69,us,us200029cp,2015-07-03T00:23:42.040Z,"43km SSE of Nggongi Satu, Indonesia",earthquake,7.5,2,0.106,26,reviewed,us,us
+2015-04-26T10:44:42.490Z,-10.6553,120.4549,35,4.3,mb,,79,2.667,0.66,us,us20002bsw,2015-07-03T00:23:42.040Z,"48km S of Mbulung, Indonesia",earthquake,5.8,2,0.16,12,reviewed,us,us
+2015-04-26T10:38:00.130Z,-10.5892,120.4098,35,5.1,mb,,49,2.648,0.89,us,us200029ci,2015-07-03T00:23:42.040Z,"42km SSW of Mbulung, Indonesia",earthquake,3.5,1.8,0.059,98,reviewed,us,us
+2015-04-26T10:36:06.600Z,-10.6178,120.2969,35,4.6,mb,,80,2.746,0.51,us,us200029cj,2015-07-03T00:23:42.040Z,"47km S of Nggongi, Indonesia",earthquake,6.6,2,0.078,54,reviewed,us,us
+2015-04-26T10:31:25.820Z,-10.6171,120.4136,35,4.3,mb,,74,2.666,0.4,us,us200029cg,2015-07-03T00:23:42.040Z,"45km SSW of Mbulung, Indonesia",earthquake,2.2,1.9,0.099,36,reviewed,us,us
+2015-04-26T10:22:58.420Z,-10.6183,120.3704,53.28,4.2,mb,,79,2.696,0.48,us,us20002bsv,2015-07-03T00:23:42.040Z,"47km SSW of Mbulung, Indonesia",earthquake,8.5,8.1,0.128,20,reviewed,us,us
+2015-04-10T03:12:22.990Z,-10.4897,123.9385,44.01,4.5,mb,,65,0.798,0.75,us,us200025ir,2015-06-22T23:18:55.040Z,"52km SE of Kupang, Indonesia",earthquake,7.3,3.6,0.132,18,reviewed,us,us
+2015-03-06T03:06:52.420Z,-10.6425,121.0083,58.64,4,mb,,98,2.333,0.68,us,us10001l8d,2015-05-28T00:48:34.040Z,"67km SE of Baing, Indonesia",earthquake,9.7,3.4,0.173,10,reviewed,us,us
+2015-02-26T00:01:25.530Z,-11.6514,117.6536,10,4,mb,,101,4.677,0.68,us,usc000tulh,2015-05-19T00:28:37.040Z,"267km SW of Panenggoede, Indonesia",earthquake,7.1,1.9,0.183,10,reviewed,us,us
+2015-02-22T16:57:54.030Z,-11.4592,118.1508,40.97,4,mb,,54,4.905,1.23,us,usc000tt4y,2015-05-12T20:29:39.040Z,"221km SSW of Kahale, Indonesia",earthquake,4.6,9.1,0.134,16,reviewed,us,us
+2015-02-15T15:57:10.000Z,-25.219,151.374,15,4.9,mb,,,,1.1,us,usb000tpj7,2015-05-11T23:20:17.040Z,"51km NNW of Gayndah, Australia",earthquake,6.1,3.2,0.107,31,reviewed,aust,us
