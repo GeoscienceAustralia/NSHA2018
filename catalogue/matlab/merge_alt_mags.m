@@ -8,7 +8,7 @@ alt_catfile = fullfile('..','data','2017_sea_updated_ev_ml.csv');
  textread(alt_catfile, '%s%f%f%f%f%f%f%f%f%f%f', ...
           'headerlines',1,'delimiter',',','emptyvalue',NaN);
 
-for i = 1:length(prefmag)
+for i = 1:length(MLM92)
     % get datetime
     alt_dat(i).dateNum = datenum(DATETIME(i), 'yyyymmddHHMM');
     alt_dat(i).ml = MLM92(i);

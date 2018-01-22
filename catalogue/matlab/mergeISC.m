@@ -174,4 +174,65 @@ for i = 1:length(mdat)
     end
 end
 
+%% Append gaps in ISC with PDE
+
+disp('Appending PDE...');
+
+pdefile = fullfile('..','data','usgs_20150201_20180122.mb.csv');
+[time, latitude, longitude, depth, mag] = ...
+    textread(pdefile, '%s%f%f%f%f%*[^\n]', 'headerlines',1,'delimiter',',','emptyvalue',NaN);
+
+usgsDateNum = datenum(time, 'yyyy-mm-dd HH:MM:SS');
+
+for i = 1:length(mdat)
+    % only consider larger events
+    if mdat(i).GG_Mval >= mmin && mdat(i).MDAT_dateNum >= datenum(2015,2,1)
+         ind = find(usgsDateNum > mdat(i).MDAT_dateNum - t20 ...
+                   & usgsDateNum < mdat(i).MDAT_dateNum + t20 ...
+                   & latitude > mdat(i).MDAT_lat - 1 ...
+                   & latitude < mdat(i).MDAT_lat + 1 ...
+                   & longitude > mdat(i).MDAT_lon - 1 ...
+                   & longitude < mdat(i).MDAT_lon + 1);
+               
+        if length(ind) == 1
+            disp(['Merging PDE event ',datestr(usgsDateNum(ind), 31)]);
+            mdat(i).ISC_lat = latitude(ind);
+            mdat(i).ISC_lon = longitude(ind);
+            mdat(i).ISC_mb = mag(ind);
+            mdat(i).ISC_mbSRC = 'PDE';
+            
+        % manually select
+        elseif length(ind) > 1
+            disp(ind)
+            txt = ['Multiple events found',char(10), ...
+                   'Prev Event: ',datestr(mdat(i-1).MDAT_dateNum), ...
+                   ' M ',num2str(mdat(i-1).GG_Mval),char(10), ...
+                   'This Event: ',datestr(mdat(i).MDAT_dateNum), ...
+                   ' M ',num2str(mdat(i).GG_Mval),char(10), ...
+                   'Next Event: ',datestr(mdat(i+1).MDAT_dateNum), ...
+                   ' M ',num2str(mdat(i+1).GG_Mval),char(10),char(10)];
+            
+            % cycle through found events
+            for j = 1:length(ind)
+                txt = [txt [num2str(j),' ',datestr(usgsDateNum(ind(j)), 31), ...
+                       ' M ',num2str(mag(ind(j))),char(10)]];
+            end
+            txt = [txt [num2str(j+1),' None',char(10)]];
+            txt = [txt ['Select event:',char(10)]];
+            k = input(txt);
+            if k > 0 & k <= j
+                mdat(i).ISC_lat = latitude(ind(k));
+                mdat(i).ISC_lon = longitude(ind(k));
+                mdat(i).ISC_mb = mag(ind(k));
+                mdat(i).ISC_mbSRC = 'PDE';
+            end
+        
+        end
+    
+    end
+end
+
+%% save mat file
+
+disp('Saving mat file...');
 save mdat mdat;

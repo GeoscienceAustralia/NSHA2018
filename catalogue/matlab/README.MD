@@ -5,6 +5,7 @@ Steps to generate matlab mat file, to be used in magnitude revision and conversi
 	- semi-automated code, requires user input when multiple events found
 3)  Merge ISC magnitudes for larger (ML >= 3.25) earthquakes using "mergeISC.m"
 	- semi-automated code, requires user input when multiple events found
+	- appends USGS PDE post 2015-01-31
 4)  Append alternate ML values using "merge_alt_mags.m"
 5)  Append MW values using "append_mw.m"
 	- exports "mdat_mw.mat"
