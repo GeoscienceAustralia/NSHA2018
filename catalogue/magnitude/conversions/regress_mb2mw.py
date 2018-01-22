@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+from os import path
 
 import scipy.odr.odrpack as odrpack
 
@@ -83,24 +84,23 @@ def f(p, x):
     """Basic linear regression 'model' for use with ODR"""
     return (p[0] * x) + p[1]
 
+def linear_reg(c, x):
+    return c[0]*x + c[1]
 
-cat_file_TA = '../data/2012.mb_mw_events.csv'
-cat_file_KIWI = '../data/mw_kiwi_ml_ga_mb_isc_ms_isc_rm_LP.csv'
 
-cat_ta = np.genfromtxt(cat_file_TA,delimiter=',',skip_header=1,dtype=None)
-cat_kiwi = np.genfromtxt(cat_file_KIWI,delimiter=',',skip_header=1,dtype=None)
+# parse file
+nsha_file = path.join('..','..','data','NSHA18CAT.MB-MW.csv')
+
+cat_nsha = np.genfromtxt(nsha_file,delimiter=',',skip_header=1,dtype=None)
+
 mb = []
 mw = []
 idx = []
-for x in cat_ta:
+for x in cat_nsha:
     mb.append(x[12])
     mw.append(x[8])
     idx.append(0)
-for y in cat_kiwi:
-    if not(np.isnan(y[7])):
-        mb.append(y[7])
-        mw.append(y[3])
-        idx.append(1)
+
 mb = np.array(mb)
 mw = np.array(mw)
 idx_src = np.array(idx)
@@ -117,6 +117,10 @@ idx_src = np.array(idx)
 # idx4 = np.where(Mw_ref=='other')[0]
 ############### bilinear auto
 data = odrpack.RealData(mb[mb>=3.5], mw[mb>=3.5])
+sx = np.interp(mw, [min(mw), max(mw)],[0.3, 0.1])
+sy = sx
+data = odrpack.RealData(mb[mb>=3.5], mw[mb>=3.5], sx=sx[mb>=3.5], sy=sy[mb>=3.5])
+
 xrng = np.arange(3.5,6.0,step=0.01)
 
 bilin_reg = odrpack.Model(bilinear_reg_free)
@@ -157,9 +161,29 @@ yrngf[idx] = cf * (xrng[idx]-hxfix) + yhinge
 ####### linear
 C1 = orthoregress(mb[mb>=3.5], mw[mb>=3.5])
 y1 = C1[0]*xrng + C1[1]
-#
-#
-#
+
+# write linear coefs
+coeftxt = 'mw = c1 * mb + c2\n'
+coeftxt += str(C1[0]) + '\n'
+coeftxt += str(C1[1]) + '\n'
+f = open('mb2mw_coefs.txt', 'wb')
+f.write(coeftxt)
+f.close()
+
+####### linear - non-ODR
+
+lin_reg = odrpack.Model(linear_reg)
+odr = odrpack.ODR(data, lin_reg, beta0=[1.0, 1.0])
+
+odr.set_job(fit_type=2) #if set fit_type=2, returns the same as least squares
+out = odr.run()
+#out.pprint()
+
+a = out.beta[0]
+b = out.beta[1]
+
+y1_nonODR = a*xrng + b
+
 # ################## TA-model
 mw_ta = np.concatenate((0.686170473456368 * xrng[xrng<=5.2]+1.152064114214877,
                         0.686170473456368 * xrng[xrng>5.2] + 0.982366026214298 * (xrng[xrng>5.2] - 5.2) + 1.152064114214877))
@@ -182,19 +206,13 @@ mw_yon = xrng - 0.42
 # ################## Di Giacomo (2015)
 mw_dig = 1.38*xrng - 1.79
 
-
-#
 f, ax = plt.subplots(1, 1,figsize=(10,10))
 
 ax.plot([1.5,6.0],[1.5,6.0],'--', c='0.4',lw=2.0, label='1:1')
 ax.set_xlim([3.0,6.0])
 ax.set_ylim([3.0,6.0])
-ax.scatter(mb[idx_src==1],mw[idx_src==1],s= 200, alpha=0.5, marker='o',c='b',label='Ghasemi et al.')
-ax.scatter(mb[idx_src==0],mw[idx_src==0],s= 200, alpha=0.5, marker='^',c='r',label='Other')
-# ax.scatter(Ml_pre[idx2],Mw[idx2],s= 70, alpha=0.5, marker=(5,1),c='y',label='TA-SEA')
-# ax.scatter(Ml_pre[idx3],Mw[idx3],s= 70, alpha=0.5, marker='^',c='r',label='TA-WA')
-# ax.scatter(Ml_pre[idx4],Mw[idx4],s= 70, alpha=0.5, marker='>',c='m',label='Other')
-#
+ax.scatter(mb[idx_src==0],mw[idx_src==0],s= 150, alpha=0.5, marker='o',c='r',label='Data')
+
 ax.plot(xrng,mw_j,'m-',lw=2,label='Johnston (1996)')
 ax.plot(xrng,mw_sa,'b-',lw=2,label='Sonley & Atkinson (2005)')
 ax.plot(xrng,mw_s,'y-',lw=2,label='Scordilis (2006)')
@@ -203,18 +221,18 @@ ax.plot(xrng,mw_yon,'c-',lw=2,label='Youngs (2012)')
 ax.plot(xrng,mw_ta,'r-',lw=2,label='Allen (2012)')
 ax.plot(xrng,mw_dig,'g-',lw=2,label='Di Giacomo et al. (2015)')
 # ax.plot(xrng,yrng,'b-',lw=2,label='Automatic-fit')
-ax.plot(xrng,yrngf,'k-',lw=2,label='Fixed Hinge')
-ax.plot(xrng,y1,'k--',lw=3,label='Linear')
+#ax.plot(xrng,yrngf,'k-',lw=2,label='Fixed Hinge')
+ax.plot(xrng,y1,'k-',lw=2.5,label='Linear')
+#ax.plot(xrng,y1_nonODR,'k--',lw=2.5,label='Linear')
 
-#
-#
-#
-ax.set_xlabel('mb', fontsize=25)
-ax.set_ylabel('MW', fontsize=25)
-ax.legend(loc="upper left",ncol=1,scatterpoints=1,fontsize=15)
+# make pretty
+ax.set_xlabel(r'$\mathregular{m_{b}}$', fontsize=22)
+ax.set_ylabel(r'$\mathregular{M_{W}}$', fontsize=22)
+ax.legend(loc="upper left",ncol=1, scatterpoints=1,fontsize=16)
 ax.set_aspect('equal')
 ax.grid(which='major')
-ax.tick_params(axis='both', labelsize=21)
+ax.tick_params(axis='both', labelsize=17)
 #
-plt.savefig('MW_MB.TA.png',dpi=300,bbox_inches='tight')
+plt.savefig('mb2mw.png',dpi=300,bbox_inches='tight')
+plt.show()
 plt.close()

@@ -103,9 +103,7 @@ def f(p, x):
     """Basic linear regression 'model' for use with ODR"""
     return (p[0] * x) + p[1]
 
-
-#cat_file_TA = '../data/2012.mb_mw_events.csv'
-#cat_file_KIWI = '../data/mw_kiwi_ml_ga_mb_isc_ms_isc.csv'
+# parse file
 nsha_file = path.join('..','..','data','NSHA18CAT.MS-MW.csv')
 
 cat_nsha = np.genfromtxt(nsha_file,delimiter=',',skip_header=1,dtype=None)
@@ -272,7 +270,7 @@ ax.plot(xrng,mw_yon,'c-',lw=2,label='Youngs (2012)')
 ax.plot(xrng,mw_ta,'r-',lw=2,label='Allen (2012)')
 ax.plot(xrng,mw_dig,'g-',lw=2,label='Di Giacomo et al (2015)')
 #ax.plot(xrng,yrng,'b-',lw=2,label='Automatic-fit')
-ax.plot(xrng,quadfit,'k-',lw=2,label='Quadratic')
+ax.plot(xrng,quadfit,'k-',lw=2.5,label='Quadratic')
 #ax.plot(xrng,yrngf,'b-',lw=2,label='Manual-fit')
 #
 #
