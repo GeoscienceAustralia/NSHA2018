@@ -21,3 +21,7 @@ Steps to generate matlab mat file, to be used in magnitude revision and conversi
 	- uses polynomial ML2MW conversion from simulated data
 	- exports "mdat_mw_pref.mat"
 	- exports raw catalogue to "../data/NSHA18CAT.MW.VX.X.csv"
+11) Make catalogue files for magnitude conversions using "export_mag_comparisons.m":
+	- exports NSHA18CAT.mb-MW.csv
+	- exports NSHA18CAT.MS-MW.csv
+	- exports NSHA18CAT.ML-MW.csv

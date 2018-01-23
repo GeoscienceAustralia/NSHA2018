@@ -55,13 +55,20 @@ ind3 = find([mdat.MDAT_dep] > 70  & [mdat.MDAT_prefMS] > 6.47 ...
 ind = [ind1, ind2, ind3];       
 MS2MW(ind) = 1.10 * [mdat(ind).MDAT_prefMS] - 0.67;
 
-%% Convert MS to MW using Ghasemi (2017) for Aust events
-c1 = 0.84896727404297323;
-c2 = 1.0509630268292971;
+%% Convert MS to MW using Ghasemi & Allen (2018) for Aust events
+% old Ghasemi coeffs - outdated based on 2018 catalogue
+% c1 = 0.84896727404297323;
+% c2 = 1.0509630268292971;
+% 
+% % for 3.0 <= MS <= 7.0
+% ind = find(~isnan([mdat.MDAT_prefMS]) & [mdat.zone] ~= 4);
+% MS2MW(ind) = c1 * [mdat(ind).MDAT_prefMS] + c2;
 
-% for 3.0 <= MS <= 7.0
+% 2018 coeff
+c1 = 0.0755045389514;
+c2 = 3.33414891107;
 ind = find(~isnan([mdat.MDAT_prefMS]) & [mdat.zone] ~= 4);
-MS2MW(ind) = c1 * [mdat(ind).MDAT_prefMS] + c2;
+MS2MW(ind) = c1 * [mdat(ind).MDAT_prefMS].^2 + c2;
 
 %% Convert mb to MW using Di Giacomo et al (2015) for zone 4
 
@@ -85,9 +92,13 @@ mb2MW(ind) = 1.38 * [mdat(ind).MDAT_prefmb] - 1.79;
 % mb2MW(ind) = c1 * [mdat(ind).MDAT_prefmb] ...
 %              + c2 * ([mdat(ind).MDAT_prefmb] - mx) + c3;
          
-%% Convert mb to MW using Ghasemi (2017) for Aust events
-c1 = 1.1438907424442797;
-c2 = -0.87192285009579173;
+%% Convert mb to MW using Ghasemi (2017) for Aust events - outdated based on 2018 catalogue
+% c1 = 1.1438907424442797;
+% c2 = -0.87192285009579173;
+
+% 2018 coeffs
+c1 = 1.20025959882;
+c2 = -1.1760438127;
 
 % for 3.0 <= MS <= 7.0
 ind = find(~isnan([mdat.MDAT_prefmb]) & [mdat.zone] ~= 4);
