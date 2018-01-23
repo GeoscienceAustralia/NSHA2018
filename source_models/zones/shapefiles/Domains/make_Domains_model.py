@@ -22,6 +22,7 @@ for poly in shapes:
     
 # get src name
 src_name = get_field_data(sf, 'CODE', 'str')
+#src_domain = get_field_data(sf, 'Id', 'float')
 
 ###############################################################################
 # parse Domains lookup csv
@@ -54,8 +55,8 @@ for line in lines:
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
 
-print '\nNOTE: Getting Domains info for original magnitudes\n'
-shapepath = open('..//reference_shp_mx.txt').read()
+#print '\nNOTE: Getting Domains info for original magnitudes\n'
+#shapepath = open('..//reference_shp_mx.txt').read()
 
 # load domains shp
 dsf = shapefile.Reader(shapepath)
@@ -75,7 +76,7 @@ bval_sig = neo_bval_l - neo_bval
 
 # get domain polygons
 dom_shapes = dsf.shapes()
-dom = []
+#dom = []
 mmax = []
 trt = []
 dep_b = []
@@ -84,7 +85,7 @@ mcomp = []
 bval_fix = []
 bval_sig_fix = []
 
-# loop through ARUP zones
+# loop through Domains zones
 for code, poly in zip(codes, shapes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
@@ -118,17 +119,17 @@ for code, poly in zip(codes, shapes):
     # fill real values
     else:
         
-        dom.append(neo_doms[matchidx])
+        #dom.append(neo_doms[matchidx])
         mmax.append(neo_mmax[matchidx])
         trt.append(neo_trt[matchidx])
         dep_b.append(neo_dep[matchidx])
         ycomp.append(neo_ycomp[matchidx])
         mcomp.append(neo_mcomp[matchidx])
-        bval_fix.append(neo_bval[matchidx])
-        bval_sig_fix.append(bval_sig[matchidx])
-        #print '\nNOTE: Setting b-value params to -99\n'
-        #bval_fix.append(-99)
-        #bval_sig_fix.append(-99)
+        #bval_fix.append(neo_bval[matchidx])
+        #bval_sig_fix.append(bval_sig[matchidx])
+        print '\nNOTE: Setting b-value params to -99\n'
+        bval_fix.append(-99)
+        bval_sig_fix.append(-99)
 
 dep_b = array(dep_b)
 
@@ -184,7 +185,7 @@ idx = where(dep_b < 7.)[0]
 dep_l[idx] = 2 * array(dep_b[idx])
 
 min_mag = 4.5
-min_rmag = 4.0
+min_rmag = 3.0
 #mmax[i]
 #mmax_l = mmax[i]-0.2
 #mmax_u = mmax[i]+0.2

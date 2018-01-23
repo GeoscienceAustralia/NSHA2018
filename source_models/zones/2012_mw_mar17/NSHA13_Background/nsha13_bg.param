@@ -1,7 +1,0 @@
-ROOT FOLDER      = NSHA13_Background
-CATALOGUE        = ..//..//catalogue//data//AUSTCAT_hmtk_declustered.csv
-DECLUSTERED      = False
-SHAPEFILE INPUT  = NSHA13_Background//shapefiles//NSHA13_BACKGROUND_NSHA18.shp
-OUTPUT FOLDER    = mfd
-SHAPEFILE OUTPUT = NSHA13_BACKGROUND_NSHA18_MFD.shp
-MFD BIN WIDTH    = 0.1

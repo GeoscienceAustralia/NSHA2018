@@ -1,1 +1,0 @@
-MFDs calculated using preferred MW estimates from the 2012 NSHA catalogue

@@ -1,7 +1,0 @@
-ROOT FOLDER      = 2012_mw_deplim//Domains
-CATALOGUE        = ..//..//catalogue//data//AUSTCAT_V0.12_hmtk_declustered.csv
-DECLUSTERED      = True
-SHAPEFILE INPUT  = shapefiles//Domains//DOMAINS_NSHA18.shp
-OUTPUT FOLDER    = mfd
-SHAPEFILE OUTPUT = Domains_NSHA18_MFD.shp
-MFD BIN WIDTH    = 0.1
