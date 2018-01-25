@@ -11,7 +11,7 @@ import matplotlib.pyplot as plt
 depmin = -999
 depmax = 999
 mrng = arange(2.5, 6.6, 0.5)
-trng = logspace(-1,3,59)[0:-10] # remove non-germane ranges
+trng = logspace(-1,3,119)[0:-20] # remove non-germane ranges
 	
 # set figures
 ncolours = 10
