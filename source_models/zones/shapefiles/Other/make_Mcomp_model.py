@@ -3,7 +3,7 @@ from os import path
 from numpy import array, zeros_like, where
 from shapely.geometry import Point, Polygon
 try:
-    from tools.nsha_tools import get_field_data, get_shp_centroid
+    from tools.nsha_tools import get_field_data, get_shp_centroid, get_preferred_catalogue
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -14,6 +14,9 @@ except:
 
 #arupshp = 'ARUP_source_model.shp'
 mcshp = 'completeness_zones.shp'
+
+# get preferred catalogues
+prefCat = get_preferred_catalogue(mcshp)
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(mcshp)
@@ -262,7 +265,6 @@ mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
 ymax  = 2011
 #trt   = 'TBD'
 #dom   = -99
-cat   = 'GGcat-161025.csv'
 
 # loop through original records
 for i, shape in enumerate(shapes):
@@ -273,7 +275,7 @@ for i, shape in enumerate(shapes):
     # write new records
     if i >= 0:
         w.record(codes[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
+                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], prefCat[i])
         
 # now save area shapefile
 w.save(outshp)

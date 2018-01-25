@@ -6,7 +6,7 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Uses Ghasemi & Allen (2017) as preferred ML-MW conversions
 	- Uses updated mb-MW and MS-MW conversions as outlined in Allen et al (in prep)
 	- Preferred magnitude column is MX_REVML
-	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/data/2012_catalogue_readme.txt)
+	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/data/2012_catalogue_readme.txt) (to be updated)
 
 * NSHA18CAT_V0.1_hmtk_mx_orig.csv: full catalogue developed for the 2018 NSHA in [Hazard Modellers Toolkit (HMTK)](https://github.com/GEMScienceTools/hmtk) format:
 	- Based on NSHA18CAT.MW.V0.1.csv
