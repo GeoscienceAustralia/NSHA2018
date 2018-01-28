@@ -12,7 +12,7 @@ from matplotlib import colors, colorbar
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
-from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat
+from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat
 
 # import non-standard functions
 try:
@@ -555,6 +555,7 @@ for i in srcidx:
         # cannot plot datetime prior to 1900 - not sure why!
         # plot all events
         dcut = datetime(1900,1,1,0,0)
+        #dcut = datetime(1940,1,1,0,0) # temporary only!
         didx = where(orig_tvect > dcut)[0]
         h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
         
@@ -609,6 +610,7 @@ for i in srcidx:
         # sey ylim to one
         ylims = array(ax.get_ylim())
         ylims[0] = 2.5
+        #ylims = [2.5, 6.5] # temporary only!
         plt.ylim(ylims)
         
         ###############################################################################
@@ -864,7 +866,7 @@ for i in srcidx:
                 #dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
                 dates_ge_3.append(otime.year + float(otime.strftime('%j'))/365.) # ignore leap years for now
         
-        dates_ge_3 = array(dates_ge_3)        
+        dates_ge_3 = array(dates_ge_3)
         
         # make cummulative plot
         didx = where(dates_ge_3 > dcut)[0]
