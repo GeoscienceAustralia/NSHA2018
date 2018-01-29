@@ -231,12 +231,14 @@ xaxis = 'learning' # 'learning' or 'target'
 
 infiles_list = [infiles_K3_3_5_Y, infiles_K4_3_5_Y, infiles_K5_3_5_Y, infiles_K3_4_Y, infiles_K4_4_Y, infiles_K5_4_Y]
 labels = ['K=3, MMin=3.5', 'K=4, MMin=3.5', 'K=5, MMin=3.5','K=3, MMin=4.0', 'K=4, MMin=4.0', 'K=5, MMin=4.0']
+#infiles_list = [infiles_K3_3_5_Y, infiles_K3_4_Y]
+#labels = ['MMin=3.5','MMin=4.0']
 figure_comment='K3_4_Mmin_3p5_4_learning_1965_Y'
-#title = 'Probability gain for learning period 1965-X \n and target period 2005-2010'
+title = 'Probability gain for learning period 1965-X \n and target period 2005-2010'
 #title = 'Kagan I1 for learning period 1965-1974'
 loc=2
 #title = 'Log likelihood of uniform model for learning period 1965-1974'
-title = 'Log likelihood of smoothed model for learning \n period 1965-X and target period 2005-2010'
+#title = 'Log likelihood of smoothed model for learning \n period 1965-X and target period 2005-2010'
 xaxis='learning'
 #loc=1
 #loc=4
@@ -303,8 +305,8 @@ for i,infiles in enumerate(infiles_list):
     print xerr
 
     #plt.plot(xs, -1*data[:,0])
-    plt.scatter(xs, -1*data[:,0],marker=markers[i], c= colours[i], s=60)
-    plt.errorbar(xs, -1*data[:,0], xerr=xerr, linestyle='None', c=colours[i], capsize=0)
+   # plt.scatter(xs, -1*data[:,0],marker=markers[i], c= colours[i], s=60)
+   # plt.errorbar(xs, -1*data[:,0], xerr=xerr, linestyle='None', c=colours[i], capsize=0)
     #plt.savefig(join(folder,('model_log_likelihoods_%s.png' % figure_comment)))
 #    plt.clf()
     #plt.plot(xs, data[:,1])
@@ -323,12 +325,12 @@ for i,infiles in enumerate(infiles_list):
     #plt.savefig(join(folder,('uniform_log_likelihoods_%s.png' % figure_comment)))
     #plt.clf()
     # probability gains
-    #plt.scatter(xs, data[:,4],marker=markers[i], c= colours[i], s=60)
-    #plt.errorbar(xs, data[:,4], xerr=xerr, linestyle='None', c=colours[i], capsize=0)
+    plt.scatter(xs, data[:,4],marker=markers[i], c= colours[i], s=60)
+    plt.errorbar(xs, data[:,4], xerr=xerr, linestyle='None', c=colours[i], capsize=0)
    # plt.scatter(xs, data[:,4],marker=markers[i], c= colours[i])
-#plt.ylabel('Probability Gain')
+plt.ylabel('Probability Gain')
 #plt.ylabel('Information Score')
-plt.ylabel('Log Likelihood')
+#plt.ylabel('Log Likelihood')
 if xaxis=='learning':
     plt.xlabel('Learning Period')
 elif xaxis=='target':
@@ -339,7 +341,7 @@ if figure_comment=='K3_4_Mmin_3p5_4_learning_1965_Y':
     lgd = plt.legend(labels, loc=9, scatterpoints=1, bbox_to_anchor=(0.5,-0.1), ncol=3)
     #plt.savefig(join(folder,('probability_gains_%s.png' % figure_comment)), resolution=900,
     #        bbox_extra_artists=(lgd,), bbox_inches='tight' )
-    plt.savefig(join(folder,('model_log_likelihoods_%s.png' % figure_comment)), resolution=900,
+    plt.savefig(join(folder,('probability_gains_%s.png' % figure_comment)), resolution=900,
                 bbox_extra_artists=(lgd,), bbox_inches='tight' ) 
 else:
     lgd = plt.legend(labels, loc=loc, scatterpoints=1)#, ncol=2)

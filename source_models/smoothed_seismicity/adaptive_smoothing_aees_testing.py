@@ -8,6 +8,8 @@ from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity
 import os, sys
 import h5py
 import numpy as np   # Numpy - Python's numerical library
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt  # Matplotlib - Python's plotting library
 from copy import deepcopy   # Python module for copying objects
 
@@ -148,9 +150,7 @@ for source in source_model.sources:
 #completeness_table_a = np.array([[1990., 3.0],
 #                                 [1980., 3.5],
 #                                 [1965., 4.0]])
-completeness_table_a = np.array([[1965., 3.5]])
-###plot_magnitude_time_density(source.catalogue, 0.1, 1.0,
-#                            completeness=completeness_table_a)
+completeness_table_a = np.array([[1965., 3.0]])
 
 grid_lims = [110., 160.0, 0.1, -45.0, -5.0, 0.1, 0., 20., 20.]
 grid_res = grid_lims[2]
@@ -170,9 +170,10 @@ try:
     os.remove(hdf_filename)
 except OSError:
     pass
+ # target_mmins are the minimum magnitudes used for additional prob gain cals
 config = {"k": 3,
           "r_min": 1.0E-7, 
-          "bvalue": bvalue, "mmin": 4.0,
+          "bvalue": bvalue, "mmin": 4.0, "target_mmins":[4.0, 4.5],
           "learning_start": learning_start, "learning_end": learning_end,
           "target_start": target_end, "target_end": target_end}
 
@@ -205,8 +206,13 @@ np.savetxt(smoother_filename,
            )
 likelihood_filename = os.path.join('llh_results', smoother_filename[:-4] + '_llh.csv')
 f_out = open(likelihood_filename, 'w')
-line = '%.10f,%.10f,%.10f,%.10f,%.10f' %(
-    poiss_llh, kagan_i0, kagan_i1, uniform_llh, prob_gain)
+line = '%.10f,%.10f,%.10f,%.10f' %(
+    poiss_llh, kagan_i0, kagan_i1, uniform_llh)#, prob_gain)
+if type(prob_gain) == dict:
+    for key, value in prob_gain.iteritems():
+        line += ',%s,%.10f' % (key, value)
+else:
+    line += ',%.10f' % prob_gain
 f_out.write(line)
 f_out.close()
 

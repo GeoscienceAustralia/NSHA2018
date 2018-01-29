@@ -85,7 +85,7 @@ catalogue_filename = "../../catalogue/data/AUSTCAT_V0.12_hmtk_declustered.csv"
 parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 
 # Read and process the catalogue content in a variable called "catalogue"
-catalogue = parser.read_file(start_year=1788, end_year=2010)
+catalogue = parser.read_file(start_year=1965, end_year=2010)
 
 # How many events in the catalogue?
 print "The catalogue contains %g events" % catalogue.get_number_events()
@@ -214,9 +214,7 @@ time_bin_width = 1.0 # In years
 
 # In[37]:
 
-completeness_table_a = np.array([[1990., 3.0],
-                                 [1980., 3.5],
-                                 [1965., 4.0]])
+completeness_table_a = np.array([[1965., 4.0]])
 #completeness_table_a = np.array([[1978., 3.5],
 #                                 [1964., 4.0],
 #                                 [1900., 5.5]])
@@ -307,7 +305,8 @@ for j in range(len(data[:,4])):
     name = 'Frankel' + str(j)
     point = Point(data[j,0],data[j,1],
                 data[j,2])
-    aval = data[j,4]
+    rate = data[j,4]
+    aval = np.log10(rate)
    # aval = rate # trying this based on some testing
 #    aval = np.log10(rate) #+ bval*completeness_table_a[0][1]
    # print aval

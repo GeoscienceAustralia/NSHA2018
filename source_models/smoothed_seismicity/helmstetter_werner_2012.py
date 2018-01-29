@@ -722,12 +722,19 @@ class HelmstetterEtAl2007(HelmstetterNearestNeighbour):
         # Get Poisson Log-Likelihood
         poiss_llh = probs.poisson_loglikelihood()
         uniform_llh = probs.uniform_spatial_poisson_loglikelihood()
-        prob_gain = probs.probability_gain()
         kagan_i0 = probs.get_i0()
         kagan_i1 = probs.get_i1()
-        print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f " \
-            "Uniform LLH = %.6f, Probability gain = %.6f"%(
-            poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1, uniform_llh, prob_gain)
+        # Calculate probability gains last, as we mess with the catalogue
+        if type(self.config["target_mmins"]) == list:
+            prob_gain = probs.probability_gain()#self.config["target_mmins"],
+                                               #self.config["bvalue"])
+        else:
+            self.config["target_mmins"] = None
+            prob_gain = probs.probability_gain()#self.config["target_mmins"],
+                                               #self.config["bvalue"])
+#        print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f " \
+#            "Uniform LLH = %.6f, Probability gain = %.6f"%(
+#            poiss_llh, kagan_i0, kagan_i1, kagan_i0 - kagan_i1, uniform_llh, prob_gain)
         filename = 'error_diagram_b%.2f_%i_%i_%i_%i.png' %(
             self.config["bvalue"], self.learning_catalogue.start_year,
             self.learning_catalogue.end_year, self.target_catalogue.start_year,
@@ -831,7 +838,7 @@ class FixedWidthSmoothing(HelmstetterEtAl2007):
         # Get Poisson Log-Likelihood
         poiss_llh = probs.poisson_loglikelihood()
         uniform_llh = probs.uniform_spatial_poisson_loglikelihood()
-        prob_gain = probs.probability(gain)
+        prob_gain = probs.probability_gain()
         kagan_i0 = probs.get_i0()
         kagan_i1 = probs.get_i1()
         print "Poisson LLH = %.6f,  I0 = %.6f,   I1 = %.6f,   I' = %.6f" %(
@@ -903,7 +910,18 @@ class GridProbabilities(object):
         self.obs_rates = np.zeros_like(self.rates)
         self.weights = weights
         self._get_area()
-
+        
+    def _subset_catalogue(self, mmin):
+        """
+        Given the configuration subset the catalogue
+        """
+       
+        idx_m = np.greater_equal(
+            self.catalogue.data["magnitude"],mmin)
+        #print self.catalogue(
+        self.catalogue.purge_catalogue(idx_m)
+        self.weights = self.weights[idx_m] # fix here!!
+#        self.catalogue = self.config["target_end"]
         
     def _get_area(self):
         """
@@ -949,11 +967,15 @@ class GridProbabilities(object):
         # Get area for each cell
         return annual_rate * self.area / np.sum(self.area)
 
-    def uniform_spatial_poisson_loglikelihood(self):
+    def uniform_spatial_poisson_loglikelihood(self, mmin=0):
         """Returns loglikelood function for uniform 
         spatial distribution based on number of
         events in learning catalogue
         """
+        
+        idx_m = np.greater_equal(
+            self.grid.learning_catalogue.data["magnitude"],mmin)
+        self.grid.learning_catalogue.purge_catalogue(idx_m)
         nevents = self.grid.learning_catalogue.get_number_events()
         nyrs = float(self.grid.learning_catalogue.end_year - \
                          self.grid.learning_catalogue.start_year + 1)
@@ -964,25 +986,51 @@ class GridProbabilities(object):
                                      np.exp(-uniform_rates))/factorial(self.obs_rates)))
         return log_llh
 
-    def poisson_loglikelihood(self):
+    def poisson_loglikelihood(self, rates=None):
         """
         Returns Poisson loglikelihood function
         """
-        idx = self.rates > 0.0
+        if rates is None:
+            rates = self.rates
+        idx = rates > 0.0
         return np.sum(np.log(
-            (self.rates[idx] ** self.obs_rates[idx]) *\
-                np.exp(-self.rates[idx]) / factorial(self.obs_rates[idx])))
+            (rates[idx] ** self.obs_rates[idx]) *\
+                np.exp(-rates[idx]) / factorial(self.obs_rates[idx])))
 
     def probability_gain(self):
         """Probability gain as defined in equation 9 
         of Helmstetter et al. 2007.
         """
-        poiss_llh = self.poisson_loglikelihood()
-        uniform_llh = self.uniform_spatial_poisson_loglikelihood()
-        print poiss_llh
-        print uniform_llh
-        prob_gain = np.exp((poiss_llh - uniform_llh)/ \
-                               self.catalogue.get_number_events())
+        self.avals = np.log10(self.rates) + self.grid.config['bvalue']*self.grid.config["mmin"]
+        target_mmins = self.grid.config["target_mmins"]
+        if target_mmins == None:
+            poiss_llh = self.poisson_loglikelihood()
+            uniform_llh = self.uniform_spatial_poisson_loglikelihood()
+            print poiss_llh
+            print uniform_llh
+            prob_gain = np.exp((poiss_llh - uniform_llh)/ \
+                                   self.catalogue.get_number_events())
+        else:
+            prob_gain = {}
+            # sort to make purging the catalogue more straightforward
+            target_mmins = sorted(target_mmins)
+            for mmin in target_mmins:
+                # Remove events < mmin from target and learning catalogue
+                self._subset_catalogue(mmin)
+                self.count_events() # Update target rates based on subsetted catalogue
+                # Calculate gridded rates for M >= Mmin
+                self.new_rates = np.power(10, 
+                                          (self.avals - (self.grid.config["bvalue"]*mmin)))
+                poiss_llh = self.poisson_loglikelihood(self.new_rates)
+                uniform_llh = self.uniform_spatial_poisson_loglikelihood(mmin)
+                print 'Mmin', mmin
+                print 'poiss_llh', poiss_llh
+                print 'uniform_llh', uniform_llh
+                print 'number of events', self.catalogue.get_number_events()
+                probability_gain = np.exp((poiss_llh - uniform_llh)/ \
+                                              self.catalogue.get_number_events())
+                print 'probability_gain', probability_gain
+                prob_gain[str(mmin)]=probability_gain
         return prob_gain
 
     def get_i1(self):
