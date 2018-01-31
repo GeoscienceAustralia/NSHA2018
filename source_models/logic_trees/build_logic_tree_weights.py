@@ -301,16 +301,18 @@ cl_nc_labels = ['Poisson', 'Clustered']
 cl_nc_w = get_weights(cl_nc_qlist, weighted_sum)
 cl_nc_w = largest_remainder(cl_nc_w, expected_sum = 1, precision = 3)
 print cl_nc_w, sum(cl_nc_w)
-cl_ex_qlist = ['S1Q5', 'S1Q6']
-cl_ex_labels = ['Poisson', 'Clustered']
-cl_ex_w = get_weights(cl_ex_qlist, weighted_sum)
-cl_ex_w = largest_remainder(cl_ex_w, expected_sum = 1, precision = 3)
-print cl_ex_w, sum(cl_ex_w)
+# Put here to help plotting
 cl_type_qlist = ['S1Q7', 'S1Q8']
 cl_type_labels = ['Time\n independent', 'Time\n dependent']
 cl_type_w = get_weights(cl_type_qlist, weighted_sum)
 cl_type_w = largest_remainder(cl_type_w, expected_sum = 1, precision = 3)
 print cl_type_w, sum(cl_type_w)
+cl_ex_qlist = ['S1Q5', 'S1Q6']
+cl_ex_labels = ['Poisson', 'Clustered']
+cl_ex_w = get_weights(cl_ex_qlist, weighted_sum)
+cl_ex_w = largest_remainder(cl_ex_w, expected_sum = 1, precision = 3)
+print cl_ex_w, sum(cl_ex_w)
+
 
 cl_qlists = [cl_c_qlist, cl_nc_qlist, cl_ex_qlist, cl_type_qlist]
 cl_weight_lists = [cl_c_w, cl_nc_w, cl_ex_w, cl_type_w]
