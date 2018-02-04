@@ -128,7 +128,7 @@ def parse_NSHA2018_catalogue(nsha2018cat):
     #nsha2018cat = path.join('data', 'NSHA18CAT.MW.V0.1.csv')
     
     # open file
-    raw = open(nsha2018cat).readlines()[1:] # exclude header    
+    raw = open(nsha2018cat).readlines()[1:] # exclude header
     
     # parse csv    
     lines = csv.reader(raw)
