@@ -119,7 +119,7 @@ dep_b = array(dep_b)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'SIN_MCC_NSHA18_UPDATE_MX.shp'
+outshp = 'SIN_MCC_NSHA18_UPDATE.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)

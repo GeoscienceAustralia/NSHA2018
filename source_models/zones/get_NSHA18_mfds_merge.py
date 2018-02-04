@@ -158,6 +158,7 @@ ggcat, neq = parse_hmtk_cat(hmtk_csv)
 # get max decimal year and round up!
 lastRec = ggcat[-1]
 year_max = lastRec['year'] + lastRec['month']/12.
+print 'year_max', year_max
 
 # apply Hadi's ML-MW conversion to mcomps
 def convert_mcomps(mcomps):

@@ -201,7 +201,7 @@ dep_b = array(dep_b)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'DIMAUS_NSHA18_MX.shp'
+outshp = 'DIMAUS_NSHA18.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)

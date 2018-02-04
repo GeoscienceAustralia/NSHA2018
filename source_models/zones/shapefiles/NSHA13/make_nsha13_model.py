@@ -1,6 +1,6 @@
 import shapefile
 from os import path
-from numpy import array, zeros_like, where
+from numpy import array, zeros_like, where, median, std
 from shapely.geometry import Point, Polygon
 try:
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -31,7 +31,7 @@ dep_b = get_field_data(sf, 'hd1', 'float')
 ###############################################################################
 # parse NSHA lookup csv to get completeness info
 ###############################################################################
-nsha_lookup = 'NSHA13_source_model.csv'
+#nsha_lookup = 'NSHA13_source_model.csv'
 nsha_lookup = 'NSHA13_source_model_simplified.csv' # alternate model removing fill zones
 
 names = []
@@ -54,13 +54,27 @@ for line in lines:
         names.append(dat[1])
     
 ###############################################################################
+# load Rajabi SHMax vectors 
+###############################################################################
+
+shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
+
+print 'Reading SHmax shapefile...'
+sf = shapefile.Reader(shmaxshp)
+    
+# get src name
+shmax_lat = get_field_data(sf, 'LAT', 'float')
+shmax_lon = get_field_data(sf, 'LON', 'float')
+shmax     = get_field_data(sf, 'SHMAX', 'float')
+
+###############################################################################
 # get neotectonic superdomains number and Mmax from zone centroid
 ###############################################################################
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
 
-print '\nNOTE: Getting Domains info for original magnitudes\n'
-shapepath = open('..//reference_shp_mx.txt').read()
+#print '\nNOTE: Getting Domains info for original magnitudes\n'
+#shapepath = open('..//reference_shp_mx.txt').read()
 
 # load domains shp
 dsf = shapefile.Reader(shapepath)
@@ -133,10 +147,47 @@ for code, poly in zip(codes, shapes):
 dep_b = array(dep_b)
    
 ###############################################################################
+# get preferred strike
+###############################################################################
+shmax_pref = []
+shmax_sig  = []
+
+for code, poly in zip(codes, shapes):
+    # get shmax points in polygon
+    shm_in = []
+    
+    # now loop through earthquakes in cat
+    for shmlo, shmla, shm in zip(shmax_lon, shmax_lat, shmax):
+        
+        # check if pt in poly and compile mag and years
+        pt = Point(shmlo, shmla)
+        if pt.within(Polygon(poly.points)):
+            shm_in.append(shm)
+    
+    if len(shm_in) > 0: 
+        shmax_pref.append(median(array(shm_in)))
+        shmax_sig.append(std(array(shm_in)))
+        print 'Getting SHmax for', code
+    
+    # if no points in polygons, get nearest neighbour
+    else:
+        print 'Getting nearest neighbour for', code
+        min_dist = 9999.
+        for shmlo, shmla, shm in zip(shmax_lon, shmax_lat, shmax):
+            pt = Point(shmlo, shmla)
+            pt_dist = pt.distance(Polygon(poly.points))
+            if pt_dist < min_dist:
+                min_dist = pt_dist
+                shm_near = shm
+        
+        shmax_pref.append(shm_near) # set nearest neighbour
+        shmax_sig.append(15.) # set std manually
+
+###############################################################################
 # write initial shapefile
 ###############################################################################
 
-outshp = 'NSHA13_NSHA18_MX.shp'
+outshp = 'NSHA13_NSHA18.shp'
 
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
@@ -165,6 +216,8 @@ w.field('BVAL_FIX','F', 8, 3)
 w.field('BVAL_FIX_S','F', 8, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','50')
+w.field('SHMAX','F', 6, 2)
+w.field('SHMAX_SIG','F', 6, 2)
 w.field('YMAX','F', 8, 0)
 w.field('TRT','C','100')
 w.field('DOMAIN','F', 2, 0)
@@ -182,7 +235,7 @@ dep_l[idx] = 2 * array(dep_b[idx])
 
 
 min_mag = 4.5
-min_rmag = 4.0
+min_rmag = 3.0
 
 n0 = -99
 n0_l = -99
@@ -193,9 +246,9 @@ bval_u = -99
 
 #ycomp = '1980;1970;1965;1962;1958;1910;1880'
 #mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
-ymax  = 2011
+ymax  = 2016
 #dom   = -99
-cat   = 'AUSTCAT_V0.12_hmtk_declustered.csv'
+cat   = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 
 # loop through original records
 for i, shape in enumerate(shapes):
@@ -211,7 +264,7 @@ for i, shape in enumerate(shapes):
             w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
         
             w.record(names[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], ymax, trt[i], dom[i], cat)
+                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], shmax_pref[i], shmax_sig[i], ymax, trt[i], dom[i], cat)
 
 # now save area shapefile
 w.save(outshp)
