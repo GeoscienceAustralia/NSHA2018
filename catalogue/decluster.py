@@ -253,7 +253,7 @@ def decluster_GK74(catalogue):
     #####################################################
     
     # setup the writer
-    declustered_catalog_file = hmtk_csv.split('.')[0]+'_declustered_GK74.csv'
+    declustered_catalog_file = hmtk_csv.split('.')[0]+'_GK74_declustered.csv'
     
     # if it exists, delete previous file
     try:

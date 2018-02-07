@@ -65,7 +65,6 @@ def get_field_data(sf, field, datatype):
 # gets preferred catalogue - uses NSHA cat if all vertices inside GG_cat_polygon
 def get_preferred_catalogue(targetshpfile):
     import shapefile
-    from sys import argv
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data
     

@@ -289,6 +289,28 @@ disp('Looping thru events...')
                 mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end
+        
+        % correct post-2002 ADE events to Gaull & Gregson assuming Bakun & Joyner (1984)
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+           & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
+            % get station A
+            BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
+                                          + 0.000657 * rhyp(ge180(dminind)) + 0.66;
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.137 * log10(rhyp(gt50lt180)) ...
+                                          + 0.000657 * rhyp(gt50lt180) + 0.66);
+                mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
+            end
+        end
                 
 %% get ML corrections assuming Eastern Australia Zone
     elseif zone == 2 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML)
@@ -398,6 +420,28 @@ disp('Looping thru events...')
         % correct post-2002 MEL events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
         if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 1
+            % get station A
+            BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
+            % get revised mag
+            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
+                ge180 = find(rhyp >= 180);
+                [dmindist, dminind] = min(rhyp(ge180));
+                mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
+                                          + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
+                mdat(i).MDAT_MLrevdist = rhyp(ge180(dminind));                 
+                mdat(i).MDAT_MLminstn = stns{1}(ge180(dminind));
+            elseif ~isempty(gt50lt180) % get between 50-180 km
+                mdat(i).MDAT_MLrev = mean(BJ84_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
+                                          + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
+                mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
+            end
+        end
+        
+        % correct post-2002 ADE events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+           & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
@@ -547,7 +591,7 @@ disp('Looping thru events...')
             elseif ~isempty(gt50lt180) % get between 50-180 km
                 mdat(i).MDAT_MLrev = mean(WGW96_A(gt50lt180) + 1.34*log10(rhyp(gt50lt180)/100) ...
                                           + 0.00055*(rhyp(gt50lt180)-100)+ 3.0); % changed from 3.13 as assumed used maxh
-                mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);                 
+                mdat(i).MDAT_MLrevdist = rhyp(gt50lt180);             
                 mdat(i).MDAT_MLminstn = stns{1}(gt50lt180);
             end
         end

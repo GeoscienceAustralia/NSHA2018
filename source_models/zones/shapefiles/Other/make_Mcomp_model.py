@@ -30,24 +30,7 @@ src_name = get_field_data(sf, 'NAME', 'str')
 codes = src_name
 
 ###############################################################################
-# parse ARUP lookup csv
-###############################################################################
-## input file modified to classify Tasmainia as non-cratonic from super domains
-#arupcsv = 'ARUP_source_model.edit.csv'
-#
-#name = []
-#codes = []
-#neo_domains = []
-#
-#lines = open(arupcsv).readlines()[1:]
-#for line in lines:
-#    dat = line.strip().split(',')
-#    name.append(dat[1])
-#    codes.append('ZN'+dat[3]) # use "sub_zone" instead
-#    neo_domains.append(dat[2])
-#    
-###############################################################################
-# get neotectonic superdomains number and Mmax from zone centroid
+# get neotectonic domains class and Mmax from zone centroid
 ###############################################################################
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
@@ -83,7 +66,7 @@ mcomp = []
 bval_fix = []
 bval_sig_fix = []
 
-# loop through ARUP zones
+# loop through Mcomp zones
 for code, poly in zip(codes, shapes):
     # get centroid of leonard sources
     clon, clat = get_shp_centroid(poly.points)
@@ -99,12 +82,32 @@ for code, poly in zip(codes, shapes):
         if point.within(dom_poly): 
             matchidx = i
     
-    if code.startswith('SA'):
+    # set completeness based on Leonard 2018 Mcomp model
+    if code.startswith('SWA'):
+        ycomp.append('1960;1960')
+        mcomp.append('3.0;3.0')
+        
+    elif code.startswith('SA'):
         matchidx = 5
         print 'Fixing index: ', code
-    elif code.startswith('ZN1b'):
-        matchidx = 0
-        print 'Fixing index: ', code
+        ycomp.append('1966;1966')
+        mcomp.append('3.0;3.0')
+        
+    elif code.startswith('SEA'):
+        ycomp.append('1966;1966')
+        mcomp.append('2.9;2.9')
+
+    elif code.startswith('WA'):
+        ycomp.append('1980;1980')
+        mcomp.append('3.1;3.1')
+        
+    elif code.startswith('EA'):
+        ycomp.append('1975;1975')
+        mcomp.append('3.0;3.0')
+        
+    else:
+        ycomp.append('1980;1980')
+        mcomp.append('3.5;3.5')
             
     # set dummy values
     if matchidx == -99:
@@ -123,10 +126,10 @@ for code, poly in zip(codes, shapes):
         mmax.append(neo_mmax[matchidx])
         trt.append(neo_trt[matchidx])
         dep_b.append(neo_dep[matchidx])
-        ycomp.append(neo_ycomp[matchidx])
-        mcomp.append(neo_mcomp[matchidx])
-        bval_fix.append(neo_bval[matchidx])
-        bval_sig_fix.append(bval_sig[matchidx])
+        #bval_fix.append(neo_bval[matchidx])
+        #bval_sig_fix.append(bval_sig[matchidx])
+        bval_fix.append(-99)
+        bval_sig_fix.append(-99)
         #nclass.append(-99)
 
 dep_b = array(dep_b)
@@ -256,13 +259,7 @@ bval_l = -99
 bval_u = -99
 #bval_fix = -99
 #bval_fix_sig = -99
-'''
-ycomp = '1880;1910;1958;1962;1965;1970;1980'
-mcomp = '6.4;6.0;5.0;4.5;4.0;3.5;3.0'
-ycomp = '1980;1970;1965;1962;1958;1910;1880'
-mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
-'''
-ymax  = 2011
+ymax  = 2016
 #trt   = 'TBD'
 #dom   = -99
 

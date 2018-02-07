@@ -149,32 +149,16 @@ else:
     srcidx = range(len(src_code))
 
 ###############################################################################
-# parse catalogue
+# parse NSHA-Cat and ISC-GEM catalogues
 ###############################################################################
-'''Used to parse GGCat csv - now parse HMTK csv'''
 
-ggcat, neq = parse_hmtk_cat(hmtk_csv)
-    
-# get max decimal year and round up!
-lastRec = ggcat[-1]
-year_max = lastRec['year'] + lastRec['month']/12.
-print 'year_max', year_max
+# parse NSHA-Cat catalogue
+hmtk_csv = path.join('..','..','catalogue','data','NSHA18CAT_V0.1_hmtk_declustered.csv')
+nshaCat, full_neq = parse_orig_hmtk_cat(hmtk_csv)
 
-# apply Hadi's ML-MW conversion to mcomps
-def convert_mcomps(mcomps):
-    '''
-    a1 = 0.66199378
-    a2 = 1.2156352
-    a3 = 1.2156352
-    mx = 4.5
-    my = a1 * mx + a2
-    
-    idx = where(mcomps <= mx)[0]
-    mcomps[idx] = a1 * mcomps[idx] + a2
-    idx = where(mcomps > mx)[0]
-    mcomps[idx] = a3 * (mcomps[idx] - mx) + my
-    '''
-    return mcomps
+# parse ISC-GEM catalogue
+hmtk_csv = path.join('..','..','catalogue','data','GEM-ISC_hmtk_GK74_declustered.csv')
+iscCat, crust_neq = parse_orig_hmtk_cat(hmtk_csv)
 
 ###############################################################################
 # get unique zone classes and loop through to merge zones of similar class 
@@ -605,6 +589,7 @@ for i in srcidx:
         plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
                 
         tlim = ax.get_xlim()
+        #tlim[0] = 1900
         #dttlim = [floor(tlim[0]), ceil(tlim[1])]
         plt.xlim(tlim)
         
@@ -872,7 +857,8 @@ for i in srcidx:
         # make cummulative plot
         didx = where(dates_ge_3 > dcut)[0]
         if ndays > 0 and len(didx) > 0:
-            plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
+            #plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
+            plt.step(dates_ge_3[didx], range(0, len(didx)), color='k', lw=1.5)
             plt.xlabel('Event Year')
             plt.ylabel('Count | MW >= 3.5')
         

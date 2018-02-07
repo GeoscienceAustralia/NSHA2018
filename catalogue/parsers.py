@@ -160,3 +160,44 @@ def parse_NSHA2018_catalogue(nsha2018cat):
             
     return austcat
     
+def parse_iscgem(iscgemcsv):
+    """
+    function to parse the ISC-GEM earthquake catalogue in csv format
+    
+    returns a list of dictionaries, each dictionary relating to a single event
+    """
+    
+    import csv
+    from numpy import nan, isnan, floor
+    from catalogue.parsers import checkint
+    from datetime import datetime
+    
+    # open file
+    raw = open(iscgemcsv).readlines()[60:] # exclude header    
+    
+    # parse csv    
+    lines = csv.reader(raw)
+    
+    # set array to append event dictionaries
+    iscgemCat = []
+    
+    for line in lines:
+        evdt = datetime.strptime(line[0].strip(), '%Y-%m-%d %H:%M:%S.%f')
+        tmpdict = {'eventid':line[-1].strip(), 'datetime':evdt, 'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
+                   'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[2].strip()), 'lat':float(line[1].strip()), \
+                   'dep':float(line[7].strip()), 'mw':float(line[10].strip()), 'mo_auth':line[16].strip()}
+                   
+        iscgemCat.append(tmpdict)
+            
+    return iscgemCat
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    

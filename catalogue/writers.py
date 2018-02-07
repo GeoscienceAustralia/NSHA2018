@@ -34,7 +34,7 @@ def ggcat2ascii(ggcat_dict, outfile):
         
         # make line        
         line = ' '.join((datestr, str("%0.3f" % ev['lon']), str("%0.3f" % ev['lat']), \
-                         str("%0.1f" % ev['dep']), str("%0.1f" % ev['prefmag']), \
+                         str("%0.1f" % ev['dep']), str("%0.2f" % ev['prefmag']), \
                          ev['prefmagtype'], ev['auth']))
                        
         cattxt = cattxt + line + '\n'
@@ -119,6 +119,34 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
     f.write(oq_dat)
     f.close()
     
+def iscgem2hmtk_csv(iscgem_dict, hmtkfile):
+    
+    '''
+    takes catalogue dictionary format as parsed by catalogues.parsers.parse_iscgem
+    
+    returns OQ compliant catalogue in csv fmt
+    '''
+    
+    # make oq cat dict
+    header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', \
+                       'longitude', 'latitude','depth','magnitude','magnitudeType', \
+                       'Agency', 'flag'))
+
+    oq_dat = header + '\n'
+                       
+    for ev in iscgem_dict:
+        line = ','.join((ev['eventid'], str(ev['datetime'].year), str(ev['datetime'].month), str(ev['datetime'].day), \
+                         str(ev['datetime'].hour), str(ev['datetime'].minute), str(ev['datetime'].second), str(ev['lon']), \
+                         str(ev['lat']), str(ev['dep']), str(ev['mw']), 'MW', ev['mo_auth'], '0'))
+                         
+        oq_dat += line + '\n'
+        
+    #write to OQ out
+    print 'Writing HMTK csv...'
+    f = open(hmtkfile, 'wb')
+    f.write(oq_dat)
+    f.close()   
+
 # writes htmk dict to shapefile
 def htmk2shp(cat, outshp):
     '''

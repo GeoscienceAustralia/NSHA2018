@@ -3,7 +3,7 @@ from os import path
 from shapely.geometry import Point, Polygon
 from numpy import array, zeros_like, where, median, std
 try:
-    from tools.nsha_tools import get_field_data, get_shp_centroid
+    from tools.nsha_tools import get_field_data, get_shp_centroid, get_preferred_catalogue
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -49,6 +49,13 @@ for line in lines:
     ycomp.append(dat[5])
     #trt.append(dat[6])
     '''
+
+###############################################################################
+# get preferred catalogues 
+###############################################################################
+
+# get preferred catalogues
+prefCat = get_preferred_catalogue(domshp)
     
 ###############################################################################
 # load Rajabi SHMax vectors 
@@ -65,7 +72,54 @@ shmax_lon = get_field_data(sf, 'LON', 'float')
 shmax     = get_field_data(sf, 'SHMAX', 'float')
 
 ###############################################################################
-# get neotectonic superdomains number and Mmax from zone centroid
+# load 2018 completeness models
+###############################################################################
+
+# load domains shp
+compshp = path.join('..','Other','Mcomp_NSHA18.shp')
+mcsf = shapefile.Reader(compshp)
+
+# get completeness data
+mc_ycomp = get_field_data(mcsf, 'YCOMP', 'str')
+mc_mcomp = get_field_data(mcsf, 'MCOMP', 'str')
+
+# get completeness polygons
+mc_shapes = mcsf.shapes()
+
+# set empty completeness values
+ycomp = []
+mcomp = []
+min_rmag = []
+
+# loop through Mcomp zones
+for code, poly in zip(codes, shapes):
+    # get centroid of leonard sources
+    clon, clat = get_shp_centroid(poly.points)
+    point = Point(clon, clat)
+    print clon, clat
+    
+    # loop through domains and find point in poly    
+    matchidx = -99
+    mccompFound = False
+    for i in range(0, len(mc_shapes)):
+        dom_poly = Polygon(mc_shapes[i].points)
+        
+        # check if Domains centroid in completeness poly
+        if point.within(dom_poly): 
+            ycomp.append(mc_ycomp[i])
+            mcomp.append(mc_mcomp[i])
+            mccompFound = True
+    
+    # if no Mcomp model assigned, use conservative model
+    if mccompFound == False:
+        ycomp.append('1980;1980')
+        mcomp.append('3.5;3.5')
+        
+    # set rmin range
+    min_rmag.append(float(mcomp[-1].split(';')[0]))
+
+###############################################################################
+# get neotectonic domains number and Mmax from zone centroid
 ###############################################################################
 # get path to reference shapefile
 shapepath = open('..//reference_shp.txt').read()
@@ -83,8 +137,6 @@ neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
 neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float')
 neo_trt  = get_field_data(dsf, 'TRT', 'str')
 neo_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
-neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
-neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
 
 # get bval sigma
 bval_sig = neo_bval_l - neo_bval
@@ -95,8 +147,6 @@ dom_shapes = dsf.shapes()
 mmax = []
 trt = []
 dep_b = []
-ycomp = []
-mcomp = []
 bval_fix = []
 bval_sig_fix = []
 
@@ -127,19 +177,17 @@ for code, poly in zip(codes, shapes):
         mmax.append(-99)
         trt.append(-99)
         dep_b.append(-99)
-        ycomp.append(-99)
-        mcomp.append(-99)
         bval_fix.append(-99)
         bval_sig_fix.append(-99)
+    
     # fill real values
-    else:
-        
+    else:        
         #dom.append(neo_doms[matchidx])
         mmax.append(neo_mmax[matchidx])
         trt.append(neo_trt[matchidx])
         dep_b.append(neo_dep[matchidx])
-        ycomp.append(neo_ycomp[matchidx])
-        mcomp.append(neo_mcomp[matchidx])
+        #ycomp.append(neo_ycomp[matchidx])
+        #mcomp.append(neo_mcomp[matchidx])
         #bval_fix.append(neo_bval[matchidx])
         #bval_sig_fix.append(bval_sig[matchidx])
         print '\nNOTE: Setting b-value params to -99\n'
@@ -184,8 +232,7 @@ for code, poly in zip(codes, shapes):
         
         shmax_pref.append(shm_near) # set nearest neighbour
         shmax_sig.append(15.) # set std manually
-                
- 
+                 
 ###############################################################################
 # write initial shapefile
 ###############################################################################
@@ -239,7 +286,7 @@ idx = where(dep_b < 7.)[0]
 dep_l[idx] = 2 * array(dep_b[idx])
 
 min_mag = 4.5
-min_rmag = 3.0
+#min_rmag = 3.0
 #mmax[i]
 #mmax_l = mmax[i]-0.2
 #mmax_u = mmax[i]+0.2
@@ -251,15 +298,8 @@ bval_l = -99
 bval_u = -99
 #bval_fix = -99
 #bval_fix_sig = -99
-'''
-ycomp = '1880;1910;1958;1962;1965;1970;1980'
-mcomp = '6.4;6.0;5.0;4.5;4.0;3.5;3.0'
-ycomp = '1980;1970;1965;1962;1958;1910;1880'
-mcomp = '3.0;3.5;4.0;4.5;5.0;6.0;6.4'
-'''
 ymax  = 2016
-#trt   = 'TBD'
-#dom   = -99
+
 cat   = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 
 # loop through original records
@@ -270,8 +310,8 @@ for i, shape in enumerate(shapes):
         
     # write new records
     if i >= 0:
-        w.record(src_name[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag, mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], shmax_pref[i], shmax_sig[i], ymax, trt[i], dom[i], cat)
+        w.record(src_name[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
+                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], shmax_pref[i], shmax_sig[i], ymax, trt[i], dom[i], prefCat[i])
         
 # now save area shapefile
 w.save(outshp)

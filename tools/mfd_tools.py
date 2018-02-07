@@ -332,7 +332,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         beta = bval2beta(bval)
         sigbeta = bval2beta(sigb)
     
-        print '    Weichert b-value = ', bval, sigb
+        print '    Weichert b-value =', str('%0.3f' % bval), str('%0.3f' % sigb)
                     
     ###############################################################################
     # calculate MFDs using NSHA13_Background if fewer than 50 events
