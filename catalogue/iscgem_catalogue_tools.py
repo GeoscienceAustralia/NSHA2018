@@ -49,7 +49,8 @@ def decluster_GK74(catalogue, filename):
     #####################################################
     
     # setup the writer
-    declustered_catalog_file = filename.split('.')[0]+'_GK74_declustered.csv'
+    #declustered_catalog_file = filename.split('.')[0]+'_GK74_declustered.csv'
+    declustered_catalog_file = filename[0:-9] + '_GK74_declustered.csv'
     
     # if it exists, delete previous file
     try:
@@ -76,7 +77,7 @@ def decluster_iscgem_gk74(hmtk_csv):
     parser = CsvCatalogueParser(hmtk_csv)
     cat = parser.read_file()
     
-    decluster_GK74(cat)
+    decluster_GK74(cat, hmtk_csv)
 
 # Convert native ISC-GEM catalogue download to HMTK
 def convert_iscgem2hmtk(iscgemcsv):   
@@ -95,6 +96,8 @@ def convert_iscgem2hmtk(iscgemcsv):
 def clip_declustered_iscgem_hmtk(hmtkcsv):
     from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
     from copy import deepcopy
+    
+    print '\nNOTE: this code is incomplete\n'
     
     minlat = -55.
     maxlat = 5.
@@ -115,7 +118,3 @@ def clip_declustered_iscgem_hmtk(hmtkcsv):
     
     # write
     writer.write_file(catalogue_gk)
-    
-    
-    
-    
