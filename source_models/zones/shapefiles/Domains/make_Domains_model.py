@@ -53,6 +53,10 @@ for line in lines:
 # reset Gawler Craton to Flinders due to b-value similarities
 dom[4] = 2
 
+# reset W Tasmania to Flinders due to b-value similarities (Delamerian Orogen)
+dom[1] = 2
+
+
 ###############################################################################
 # get preferred catalogues 
 ###############################################################################
