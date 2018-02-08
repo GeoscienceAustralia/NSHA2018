@@ -75,6 +75,8 @@ def get_events_in_poly(cat, poly, depmin, depmax):
     ev_dict = event dictionary
     '''
     
+    from numpy import isnan
+    
     # set arrays
     mvect = []
     mxvect = []
@@ -84,6 +86,10 @@ def get_events_in_poly(cat, poly, depmin, depmax):
     
     # now loop through earthquakes in cat
     for ev in cat:
+        
+        # first check that depths are real numbers - set to zero
+        if isnan(ev['dep']):
+            ev['dep'] = 0.
         
         # check if pt in poly and compile mag and years
         pt = Point(ev['lon'], ev['lat'])

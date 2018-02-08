@@ -12,7 +12,7 @@ from matplotlib import colors, colorbar
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
-from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat
+from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
 
 # import non-standard functions
 try:
@@ -154,11 +154,14 @@ else:
 
 # parse NSHA-Cat catalogue
 hmtk_csv = path.join('..','..','catalogue','data','NSHA18CAT_V0.1_hmtk_declustered.csv')
-nshaCat, full_neq = parse_orig_hmtk_cat(hmtk_csv)
+nshaCat, full_neq = parse_hmtk_cat(hmtk_csv)
+nshaMaxYear = toYearFraction(nshaCat[-1]['datetime'])
 
 # parse ISC-GEM catalogue
-hmtk_csv = path.join('..','..','catalogue','data','GEM-ISC_hmtk_GK74_declustered.csv')
-iscCat, crust_neq = parse_orig_hmtk_cat(hmtk_csv)
+hmtk_csv = path.join('..','..','catalogue','data','ISC-GEM_V4_hmtk_GK74_declustered.csv')
+iscCat, crust_neq = parse_hmtk_cat(hmtk_csv)
+iscMaxYear = toYearFraction(iscCat[-1]['datetime'])
+
 
 ###############################################################################
 # get unique zone classes and loop through to merge zones of similar class 
@@ -230,9 +233,20 @@ for uclass in unique_classes:
             ev_dict: event dictionary
             '''
             
+            # set preferred catalogue for each source
+            if src_cat[i].startswith('NSHA'):
+                # use NSHA catalogue
+                sourcecat = nshaCat
+                year_max = nshaMaxYear
+                
+            elif src_cat[i].startswith('GEM-ISC'):
+                # use ISC-GEM catalogue
+                sourcecat = iscCat
+                year_max = iscMaxYear
+            
             # get earthquakes within source zones
             mvect, mxvect, tvect, dec_tvect, ev_dict \
-                   = get_events_in_poly(ggcat, poly, depmin, depmax)
+                   = get_events_in_poly(sourcecat, poly, depmin, depmax)
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
@@ -411,9 +425,20 @@ for i in srcidx:
     # get area (in km**2) of sources for normalisation
     src_area.append(get_WGS84_area(poly))
     
+    # set preferred catalogue for each source
+    if src_cat[i].startswith('NSHA'):
+        # use NSHA catalogue
+        sourcecat = nshaCat
+        year_max = nshaMaxYear
+        
+    elif src_cat[i].startswith('GEM-ISC'):
+        # use ISC-GEM catalogue
+        sourcecat = iscCat
+        year_max = iscMaxYear
+    
     # now get events within zone of interest
     mvect, mxvect, tvect, dec_tvect, ev_dict \
-        = get_events_in_poly(ggcat, polygons[i], depmin, depmax)
+        = get_events_in_poly(sourcecat, polygons[i], depmin, depmax)
         
     # skip zone if no events pass completeness
     if len(mvect) != 0:
@@ -910,7 +935,7 @@ for i in srcidx:
         f.close()
                                  
         ###############################################################################
-        # export ggcat for source zone
+        # export sourcecat for source zone
         ###############################################################################
         catfile = path.join(srcfolder, '_'.join((src_code[i], 'passed.dat')))
         ggcat2ascii(ev_dict, catfile)
