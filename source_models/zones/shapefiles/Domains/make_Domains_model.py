@@ -50,27 +50,16 @@ for line in lines:
     #trt.append(dat[6])
     '''
 
+# reset Gawler Craton to Flinders due to b-value similarities
+dom[4] = 2
+
 ###############################################################################
 # get preferred catalogues 
 ###############################################################################
 
-# get preferred catalogues
+# get preferred catalogues for each zone
 prefCat = get_preferred_catalogue(domshp)
     
-###############################################################################
-# load Rajabi SHMax vectors 
-###############################################################################
-
-shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
-
-print 'Reading SHmax shapefile...'
-sf = shapefile.Reader(shmaxshp)
-    
-# get src name
-shmax_lat = get_field_data(sf, 'LAT', 'float')
-shmax_lon = get_field_data(sf, 'LON', 'float')
-shmax     = get_field_data(sf, 'SHMAX', 'float')
-
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
@@ -116,13 +105,14 @@ for code, poly in zip(codes, shapes):
         mcomp.append('3.5;3.5')
         
     # set rmin range
-    min_rmag.append(float(mcomp[-1].split(';')[0]))
+    min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
 
 ###############################################################################
 # get neotectonic domains number and Mmax from zone centroid
 ###############################################################################
 # get path to reference shapefile
-shapepath = open('..//reference_shp.txt').read()
+#shapepath = open('..//reference_shp.txt').read() # this is used for other sources!
+shapepath = 'Domains_NSHA18.shp'
 
 #print '\nNOTE: Getting Domains info for original magnitudes\n'
 #shapepath = open('..//reference_shp_mx.txt').read()
@@ -157,19 +147,19 @@ for code, poly in zip(codes, shapes):
     point = Point(clon, clat)
     print clon, clat
         
-    # loop through domains and find point in poly    
+    # loop through domains and find point in poly
     matchidx = -99
     for i in range(0, len(dom_shapes)):
         dom_poly = Polygon(dom_shapes[i].points)
         
-        # check if AUS6 centroid in domains poly
+        # check if Domain centroid in domains poly
         if point.within(dom_poly):
             matchidx = i
     
     if code == 'OSGB' or code == 'EAPM' or code == 'WARM':
         matchidx = -1
-    elif code == 'GAWL':
-        matchidx = 0
+    #elif code == 'GAWL':
+    #    matchidx = 0
             
     # set dummy values
     if matchidx == -99:
@@ -191,10 +181,27 @@ for code, poly in zip(codes, shapes):
         #bval_fix.append(neo_bval[matchidx])
         #bval_sig_fix.append(bval_sig[matchidx])
         print '\nNOTE: Setting b-value params to -99\n'
+        print code, matchidx
         bval_fix.append(-99)
         bval_sig_fix.append(-99)
+        
+    
 
 dep_b = array(dep_b)
+
+###############################################################################
+# load Rajabi SHMax vectors 
+###############################################################################
+
+shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
+
+print 'Reading SHmax shapefile...'
+sf = shapefile.Reader(shmaxshp)
+    
+# get src name
+shmax_lat = get_field_data(sf, 'LAT', 'float')
+shmax_lon = get_field_data(sf, 'LON', 'float')
+shmax     = get_field_data(sf, 'SHMAX', 'float')
 
 ###############################################################################
 # get preferred strike
