@@ -199,7 +199,7 @@ for uclass in unique_classes:
     Weichert = False
     mcomps = [-9999]
     cum_area = 0
-    class_mmin_reg = 9.0
+    class_mmin_reg = 0.0
     class_mmax = nan
     
     print '\nCalculating b-value for class:', uclass
@@ -291,7 +291,7 @@ for uclass in unique_classes:
             total_ev_dict = delete(total_ev_dict, didx)
             
             # set min regression magnitude
-            if src_mmin_reg[i] < class_mmin_reg:
+            if src_mmin_reg[i] > class_mmin_reg:
                 class_mmin_reg = src_mmin_reg[i]
                 
             # set class mmax
@@ -1125,8 +1125,8 @@ m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, da
 m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
 
 # get colour index
-ncolours=12
-b_min = 0.7
+ncolours=10
+b_min = 0.8
 b_max = 1.3
 
 cindex = []
