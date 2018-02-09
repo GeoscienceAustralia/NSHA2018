@@ -86,7 +86,6 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
             flag = '0'
         '''
         # for 2018 catalogue
-        
         if ggc['dependence'] == 0:
             flag = '1'
         else:

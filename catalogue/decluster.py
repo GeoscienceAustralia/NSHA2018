@@ -163,6 +163,7 @@ def decluster_SCR(method, cat, deblastOnly):
         # idx = np.where(cat.data['flag'] >= 1)[0] # for 2012 version
         
         # now find mannually picked foreshocks/aftershocks (1 = dependent events)
+        # !!! REMEMBER - "writers.ggcat2hmtk_csv" sets dependent events flag to 1 !!!
         idx = np.where(cat.data['flag'] == 1)[0]
         flagvector_asfsman = flagvector_asfs
         flagvector_asfsman[idx] = 1
