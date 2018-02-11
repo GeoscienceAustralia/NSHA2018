@@ -142,8 +142,6 @@ dom = []
 mmax = []
 trt = []
 dep_b = []
-ycomp = []
-mcomp = []
 bval_fix = []
 bval_sig_fix = []
 
@@ -166,7 +164,7 @@ for code, poly in zip(codes, shapes):
     if code == 'SEA' or code == 'MBG':
         matchidx = 3
     elif code == 'GAW':
-        matchidx = 6
+       matchidx = 6
             
     # set dummy values
     if matchidx == -99:
@@ -174,8 +172,6 @@ for code, poly in zip(codes, shapes):
         mmax.append(-99)
         trt.append(-99)
         dep_b.append(-99)
-        ycomp.append(-99)
-        mcomp.append(-99)
         bval_fix.append(-99)
         bval_sig_fix.append(-99)
     # fill real values
@@ -186,12 +182,6 @@ for code, poly in zip(codes, shapes):
         trt.append(neo_trt[matchidx])
         dep_b.append(neo_dep[matchidx])
         
-        if code == 'YGE':
-            ycomp.append('1975;1965;1940')
-        else:
-            ycomp.append(neo_ycomp[matchidx])
-            
-        mcomp.append(neo_mcomp[matchidx])
         bval_fix.append(neo_bval[matchidx])
         bval_sig_fix.append(bval_sig[matchidx])
 
