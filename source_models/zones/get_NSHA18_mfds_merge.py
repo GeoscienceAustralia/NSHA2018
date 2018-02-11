@@ -111,6 +111,8 @@ src_bval_fix = get_field_data(sf, 'BVAL_FIX', 'float')
 src_bval_fix_sd = get_field_data(sf, 'BVAL_FIX_S', 'float') # too many chars - does not recognise "D"
 src_mcomp = get_field_data(sf, 'MCOMP', 'str')
 src_ycomp = get_field_data(sf, 'YCOMP', 'str')
+src_shmax = get_field_data(sf, 'SHMAX', 'float')
+src_shm_sig = get_field_data(sf, 'SHMAX_SIG', 'float')
 src_ymax = get_field_data(sf, 'YMAX', 'float')
 src_cat = get_field_data(sf, 'CAT_FILE', 'str')
 sortind = argsort(src_code)
@@ -1037,6 +1039,8 @@ w.field('BVAL_FIX','F', 8, 3)
 w.field('BVAL_FIX_S','F', 8, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','30')
+w.field('SHMAX','F', 6, 2)
+w.field('SHMAX_SIG','F', 6, 2)
 w.field('YMAX','F', 8, 0)
 w.field('TRT','C','100')
 w.field('DOMAIN','F', 2, 0)
@@ -1070,14 +1074,16 @@ for record, shape in zip(records, shapes):
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
                  new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
-                 newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], newrec[25])
+                 newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
+                 newrec[25], newrec[26], newrec[27])
     
     # don't edit values
     else:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
                  newrec[12], newrec[13], newrec[14], newrec[15], newrec[16], newrec[17], \
-                 newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], newrec[25])
+                 newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
+                 newrec[25], newrec[26], newrec[27])
 
     i += 1  
     

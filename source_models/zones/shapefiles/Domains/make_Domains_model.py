@@ -8,7 +8,7 @@ except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
 ###############################################################################
-# parse AUS6 shp exported from MIF
+# parse Domains shp
 ###############################################################################
 
 domshp = 'Domains_Sep2011_edit.shp'
@@ -309,9 +309,7 @@ bval_l = -99
 bval_u = -99
 #bval_fix = -99
 #bval_fix_sig = -99
-ymax  = 2016
-
-cat   = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+ymax  = 2017
 
 # loop through original records
 for i, shape in enumerate(shapes):

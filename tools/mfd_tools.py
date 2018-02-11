@@ -20,6 +20,7 @@ from os import path
 ###############################################################################
 
 def parse_hmtk_cat(hmtk_csv):
+    from numpy import nan
     
     print 'parsing HMTK catalogue...'
 
@@ -50,13 +51,29 @@ def parse_hmtk_cat(hmtk_csv):
                                str('%02d' % hmtkcat.data['minute'][i]), str('%0.2f' % hmtkcat.data['second'][i])))
         
             evdt = datetime.strptime(datestr, '%Y%m%d%H%M%S.%f')
+        
+        # testing
+        evdt = datetime(hmtkcat.data['year'][i], hmtkcat.data['month'][i], hmtkcat.data['day'][i], \
+                        hmtkcat.data['hour'][i], hmtkcat.data['minute'][i], int(round(hmtkcat.data['second'][i])))
+                                 
             
-        tdict = {'datetime':evdt, 'prefmag':hmtkcat.data['magnitude'][i], \
-                 'lon':hmtkcat.data['longitude'][i], 'lat':hmtkcat.data['latitude'][i], \
-                 'dep':hmtkcat.data['depth'][i], 'year':hmtkcat.data['year'][i], \
-                 'month':hmtkcat.data['month'][i], 'fixdep':0, 'prefmagtype':'MW', \
-                 'auth':hmtkcat.data['Agency'][i], 'mx_revML':hmtkcat.data['mx_revML'][i], \
-                 'mx_origML':hmtkcat.data['mx_origML'][i], 'mx_origType':hmtkcat.data['mx_origType'][i],}
+        # if modified catalogue
+        try:
+            tdict = {'datetime':evdt, 'prefmag':hmtkcat.data['pref_mw'][i], \
+                     'lon':hmtkcat.data['longitude'][i], 'lat':hmtkcat.data['latitude'][i], \
+                     'dep':hmtkcat.data['depth'][i], 'year':hmtkcat.data['year'][i], \
+                     'month':hmtkcat.data['month'][i], 'fixdep':0, 'prefmagtype':'MW', \
+                     'auth':hmtkcat.data['Agency'][i], 'mx_revML':hmtkcat.data['mx_revML'][i], \
+                     'mx_origML':hmtkcat.data['mx_origML'][i], 'mx_origType':hmtkcat.data['mx_origType'][i]}
+                     	
+        # if traditional HMTK catalogue
+        except:
+            tdict = {'datetime':evdt, 'prefmag':hmtkcat.data['magnitude'][i], \
+                     'lon':hmtkcat.data['longitude'][i], 'lat':hmtkcat.data['latitude'][i], \
+                     'dep':hmtkcat.data['depth'][i], 'year':hmtkcat.data['year'][i], \
+                     'month':hmtkcat.data['month'][i], 'fixdep':0, 'prefmagtype':'MW', \
+                     'auth':hmtkcat.data['Agency'][i], 'mx_revML':nan, \
+                     'mx_origML':nan, 'mx_origType':''}
                  	
         cat.append(tdict)
     
