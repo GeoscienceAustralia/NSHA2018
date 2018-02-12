@@ -17,10 +17,18 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 * NSHA18CAT_V0.1_hmtk_declustered.csv: declustered catalogue developed for the 2018 NSHA in HMTK format:
 	- Based on NSHA18CAT.MW.V0.1.csv
 	- Preferred magnitude is in MW as per 2018 conversions
-	- Declustered using Leonard (2008) algorithm
+	- Declustered using Leonard ([2008](https://pubs.geoscienceworld.org/ssa/bssa/article/98/3/1458/341978)) algorithm
 	- Catalogue adds several additional magnitude columns to standard HMTK format.
 	
 * Catalogues used to generate magnitude conversion equations (Allen et al, in prep):
 	- NSHA18CAT.ML-MW.csv
 	- NSHA18CAT.mb-MW.csv
 	- NSHA18CAT.MS-MW.csv
+	
+* ISC-GEM_V4_hmtk_full.csv: full International Seismological Centre-Global Earthquake Model (ISC-GEM) earthquake catalogue in HMTK format:
+	- Catalogue to be used for adjacent offshore sources
+	- Refomated from original catalogue format as described in Storchak et al. ([2015](https://www.sciencedirect.com/science/article/pii/S003192011400154X))
+	- Version 4 released on 2017-01-26 for the period of 1900-2013
+	
+* ISC-GEM_V4_hmtk_GK74_declustered.csv: declustered ISC-GEM earthquake catalogue in HMTK format:
+	- Catalogue as described above, decustered using the Gardner and Knopoff ([1974](https://pubs.geoscienceworld.org/ssa/bssa/article/64/5/1363/117341/is-the-sequence-of-earthquakes-in-southern)) algorithm
