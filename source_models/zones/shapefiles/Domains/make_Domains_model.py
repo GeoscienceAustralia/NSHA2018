@@ -69,7 +69,7 @@ prefCat = get_preferred_catalogue(domshp)
 ###############################################################################
 
 # load domains shp
-compshp = path.join('..','Other','Mcomp_NSHA18.shp')
+compshp = path.join('..','Other','Mcomp_NSHA18_smoothed.shp')
 mcsf = shapefile.Reader(compshp)
 
 # get completeness data
@@ -105,11 +105,14 @@ for code, poly in zip(codes, shapes):
     
     # if no Mcomp model assigned, use conservative model
     if mccompFound == False:
-        ycomp.append('1980;1980')
-        mcomp.append('3.5;3.5')
+        ycomp.append('1980;1964;1900')
+        mcomp.append('3.5;5.0;6.0')
         
     # set rmin range
     min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
+    
+# use manual modification
+min_rmag = [3.0, 3.0, 3.0, 3.5, 3.0, 3.0, 3.2, 3.5, 3.3, 3.3, 3.0, 3.3, 3.5, 3.5, 3.5, 3.3]
 
 ###############################################################################
 # get neotectonic domains number and Mmax from zone centroid
