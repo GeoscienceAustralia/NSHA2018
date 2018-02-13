@@ -202,6 +202,56 @@ def htmk2shp(cat, outshp):
     f = open(prjfile, 'wb')
     f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
     f.close()
+    
+# writes htmk dict to shapefile
+def htmk2shp_isc(cat, outshp):
+    '''
+    cat = htmk dictionory
+    outshp = output shapefile
+    '''
+    import shapefile
+    from numpy import isnan
+    
+    print 'Making shapefile...'
+    w = shapefile.Writer(shapefile.POINT)
+    w.field('EVID','C','15')
+    w.field('AGENCY','C','15')
+    w.field('YEAR','F', 4, 0)
+    w.field('MONTH','F', 2, 0)
+    w.field('DAY','F', 2, 0)
+    w.field('HOUR','F', 2, 0)
+    w.field('MIN','F', 2, 0)
+    w.field('SEC','F', 2, 0)
+    w.field('LON','F', 10, 4)
+    w.field('LAT','F', 10, 4)    
+    w.field('DEP','F', 10, 2)
+    
+    # now loop thru records
+    for i in range(0, len(cat.data['eventID'])):
+        if isnan(cat.data['longitude'][i]) | isnan(cat.data['latitude'][i]):
+            lon = 0.0
+            lat = 0.0
+        else:
+            lon = round(cat.data['longitude'][i],4)
+            lat = round(cat.data['latitude'][i],4)
+    
+        w.point(lon, lat)
+        w.record(cat.data['eventID'][i],cat.data['Agency'][i], \
+                 cat.data['year'][i],cat.data['month'][i], \
+                 cat.data['day'][i],cat.data['hour'][i], \
+                 cat.data['minute'][i],cat.data['second'][i], \
+                 round(cat.data['longitude'][i],4), \
+                 round(cat.data['latitude'][i],4), \
+                 cat.data['depth'][i])
+    
+    print 'Writing shapefile...'
+    w.save(outshp)
+    
+    # write projection file
+    prjfile = outshp.strip().split('.shp')[0]+'.prj'
+    f = open(prjfile, 'wb')
+    f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
+    f.close()
 
     
     
