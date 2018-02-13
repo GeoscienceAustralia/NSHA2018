@@ -225,6 +225,7 @@ def htmk2shp_isc(cat, outshp):
     w.field('LON','F', 10, 4)
     w.field('LAT','F', 10, 4)    
     w.field('DEP','F', 10, 2)
+    w.field('MAGNITUDE','F', 6, 2)
     
     # now loop thru records
     for i in range(0, len(cat.data['eventID'])):
@@ -242,7 +243,7 @@ def htmk2shp_isc(cat, outshp):
                  cat.data['minute'][i],cat.data['second'][i], \
                  round(cat.data['longitude'][i],4), \
                  round(cat.data['latitude'][i],4), \
-                 cat.data['depth'][i])
+                 cat.data['depth'][i], cat.data['magnitude'][i])
     
     print 'Writing shapefile...'
     w.save(outshp)
