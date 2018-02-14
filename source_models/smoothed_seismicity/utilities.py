@@ -9,9 +9,9 @@ import numpy as npy
 def params_from_shp(shapefile):
     """Get parameters from shapefile attribute table
     """
-    print 'Getting completeness and b-values from %s' % domains_shp
+    print 'Getting completeness and b-values from %s' % shapefile
     driver = ogr.GetDriverByName("ESRI Shapefile")
-    data_source = driver.Open(domains_shp, 0)
+    data_source = driver.Open(shapefile, 0)
     dsf = data_source.GetLayer()
     param_list = []
     for feature in dsf:
