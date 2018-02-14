@@ -2,7 +2,7 @@
 #PBS -q express
 #PBS -l walltime=04:00:00
 #PBS -l ncpus=16
-#PBS -l mem=32GB
+#PBS -l mem=64GB
 #PBS -l wd
 
 module load intel-cc/12.1.9.293
@@ -27,4 +27,4 @@ export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/hmtk:${PYTHONPATH}
 #export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/NSHA2018/:${PYTHONPATH}
 export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/:${PYTHONPATH}
 
-mpirun -np 16 python adaptive_smoothing_parallel.py
+mpirun -np 16 python adaptive_smoothing_parallel.py > adaptive_smoothing_parallel.log
