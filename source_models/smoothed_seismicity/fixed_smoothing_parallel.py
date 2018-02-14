@@ -1,9 +1,13 @@
+
 # coding: utf-8
-from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity
+
+# In[24]:
+
+#get_ipython().magic(u'matplotlib inline')
 
 # Python dependences
-import os, sys
-import h5py
+import os
+import sys
 import numpy as np   # Numpy - Python's numerical library
 import matplotlib
 matplotlib.use('Agg')
@@ -12,7 +16,6 @@ from copy import deepcopy   # Python module for copying objects
 import ogr
 import shapefile
 from shapely.geometry import Point, Polygon
-from utilities import params_from_shp
 
 # For running in parallel
 import time
@@ -20,14 +23,20 @@ from time import localtime, strftime, gmtime
 import string
 import pypar
 
+# Other smoothed seismicity functions
+from utilities import params_from_shp
+
 # Input and Output Tools
 # Catalogue and sources 
 from hmtk.parsers.catalogue import CsvCatalogueParser   # Reads an earthquake catalogue from CSV
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueWriter  # Writes an earthquake catalogue to CSV
 from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser  # Imports a source model from XML
-
+from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
+from openquake.baselib.node import Node
+from openquake.hazardlib import nrml
+from openquake.hazardlib.sourcewriter import obj_to_node
 # Plotting tools
-from hmtk.plotting.mapping import HMTKBaseMap
+#from hmtk.plotting.mapping import HMTKBaseMap
 from hmtk.plotting.seismicity.completeness import plot_stepp_1972
 from hmtk.plotting.seismicity.catalogue_plots import plot_magnitude_time_scatter
 from hmtk.plotting.seismicity.catalogue_plots import plot_depth_histogram
@@ -64,8 +73,6 @@ from hmtk.seismicity.max_magnitude.cumulative_moment_release import CumulativeMo
 from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity 
 from hmtk.seismicity.smoothing.kernels.isotropic_gaussian import IsotropicGaussian 
 
-#from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueWriter
-import helmstetter_werner_2012 as h_w
 # To build source model
 from hmtk.sources.source_model import mtkSourceModel
 from hmtk.sources.point_source import mtkPointSource
@@ -75,112 +82,66 @@ from openquake.hazardlib.tom import PoissonTOM
 from openquake.hazardlib.sourcewriter import obj_to_node
 from openquake.baselib.node import Node
 from openquake.hazardlib import nrml
+from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
 from openquake.hazardlib.geo.point import Point
 from openquake.hazardlib.mfd import TruncatedGRMFD
 from openquake.hazardlib.geo.nodalplane import NodalPlane
-from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
 from openquake.hazardlib.pmf import PMF
 print "Everything Imported OK!"
 
-#bvalue = float(sys.argv[1])
-#print 'b value', bvalue
-#domains_shp = '../zones/2018_mw/Domains_mc_ext/shapefiles/Domains_NSHA18_MFD.shp'
 domains_shp = '../zones/2018_mw/Domains/shapefiles/Domains_NSHA18_MFD.shp'
-ifile = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
-#ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_mx_orig.csv"
+#Importing catalogue
+catalogue_filename = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
 
 #####################################
 # Shouldn't need input below here
 #####################################
 
-def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, run):
+
+def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, map_config, run):
     """Run all the smoothing
-    :params config:
-        Dictionary of configuration parameters.
-        For more info see helmstetter_werner_2012 code 
-        and docs.
     """
-    smoother = h_w.HelmstetterEtAl2007(grid_lims, config, catalogue, 
-                                       storage_file=("Aus1_tmp2%.3f_%s.hdf5" % (config['bvalue'],run)))
-    smoother._get_catalogue_completeness_weights(completeness_table)
-    smoother.build_distance_arrays()
-    smoother.build_catalogue_2_grid_array()
-    # Exhaustive smoothing
-    exhaustive = False
-    if exhaustive == True:
-        params, poiss_llh = smoother.exhaustive_smoothing(np.arange(2,10,1), np.arange(1.0e-6,1.0e-5,2.0e-6))
-        print params, poiss_llh
-        smoother.config["k"] = params[0]
-        smoother.config["r_min"] = params[1]
-    #print 'Exiting now, re-run using optimised parameters'
-    #sys.exit()
-    d_i = smoother.optimise_bandwidths()
-    smoother.run_smoothing(config["r_min"], d_i)
-    completeness_string = 'comp'
+
+    smoother = SmoothedSeismicity([100.,160.,0.1,-45.,-5,0.1,0.,20., 20.], bvalue = smoothing_config['bvalue'])
+    print 'Running smoothing'
+    smoothed_grid = smoother.run_analysis(catalogue, smoothing_config, completeness_table=completeness_table)
     for ym in completeness_table:
         completeness_string += '_%i_%.1f' % (ym[0], ym[1])
-    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f_%s.csv" % (
-        smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'],
-        completeness_string)
-    np.savetxt(smoother_filename,
-               np.column_stack([smoother.grid, smoother.rates]),
-               delimiter=",",
-               fmt=["%.4f", "%.4f", "%.8e"],
-               header="longitude,latitude,rate" 
-               )
-                                       
-    # Creating a basemap - input a cconfiguration and (if desired) a title
-    title = 'Smoothed seismicity rate for learning \nperiod %i %i, K=%i, Mmin=%.1f' % (
-        config['learning_start'], config['learning_end'], smoother.config['k'], smoother.config['mmin'])
-    basemap1 = HMTKBaseMap(map_config, title)
-    basemap1.m.drawmeridians(np.arange(map_config['min_lat'],
-                                       map_config['max_lat'], 5))
-    basemap1.m.drawparallels(np.arange(map_config['min_lon'],
-                                        map_config['max_lon'], 5))
-    # Adding the smoothed grip to the basemap
-    sym = (2., 3.,'cx')
-    x,y = basemap1.m(smoother.grid[:,0], smoother.grid[:,1])
-    if smoother.config['mmin'] == 3.5:
-        vmax=-1.0
-    elif smoother.config['mmin'] == 4.0:
-        vmax=-2.5
-    else:
-        vmax=-1.0
-    basemap1.m.scatter(x, y, marker = 's', c = np.log10(smoother.rates), cmap = plt.cm.coolwarm, zorder=10, lw=0, vmin=-7.0, vmax=vmax)
-    basemap1.m.drawcoastlines(linewidth=1, zorder=50) # Add coastline on top
-    #basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
-    #basemap1.m.drawparallels(np.arange(llon, ulon, 5))
-    plt.colorbar(label='Log10(Smoothed rate per cell)')
-    #plt.colorbar()#label='log10(Smoothed rate per cell)')
-    plt.legend()
-    #basemap1.m.scatter(x, y, marker = 's', c = smoother.data[:,4], cmap = plt.cm.coolwarm, zorder=10)
-    #basemap1.m.scatter([150],[22], marker='o')
-    #basemap1.fig.show()
+    smoother_filename = 'Australia_Fixed_%i_%i_b%.3f_mmin_%.1f_0.1%s.csv' % (smoothing_config["BandWidth"], smoothing_config["Length_Limit"],
+                                                                    bvalue, completeness_table[0][1], completeness_string)
+    smoother.write_to_csv(smoother_filename)
 
-    #(smoother.data[0], smoother.data[1])
-    #basemap1.add_catalogue(catalogue_depth_clean, erlay=False)
-    figname = smoother_filename[:-4] + '_smoothed_rates_map.png'
-    plt.savefig(figname)
-                                       
+
+    from openquake.hazardlib.nrml import SourceModelParser, write, NAMESPACE
+    from openquake.baselib.node import Node
+    from openquake.hazardlib import nrml
+    from openquake.hazardlib.sourcewriter import obj_to_node
+    # Build nrml input file of point sources
     source_list = []
     #i=0
     min_mag = 4.5
-    max_mag = 7.2
+    max_mag = 7.8
+    bval = bvalue # just define as 1 for time being
     # Read in data again to solve number fomatting issue in smoother.data
     # For some reason it just returns 0 for all a values
     data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
+    #print max(data[:,4])
+    #print data[:,4]
+    #print len(data[:,4])
     tom = PoissonTOM(50) # Dummy temporal occurence model for building pt sources
     msr = Leonard2014_SCR()
-    for j in range(len(data[:,2])):
-        identifier = 'ASS' + str(j)
-        name = 'Helmstetter' + str(j)
+    for j in range(len(data[:,4])):
+    #    print smoother.data[j,:]
+        identifier = 'FSS' + str(j)
+        name = 'Frankel' + str(j)
         point = Point(data[j,0],data[j,1],
-                    10)
-        rate = data[j,2]
-        # Convert rate to a value
-        aval = np.log10(rate) + config['bvalue']*config["mmin"]
-
-        mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, config['bvalue'])
+                    data[j,2])
+        rate = data[j,4]
+        aval = np.log10(rate)
+       # aval = rate # trying this based on some testing
+    #    aval = np.log10(rate) #+ bval*completeness_table_a[0][1]
+       # print aval
+        mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bval)
         hypo_depth_dist = PMF([(0.5, 10.0),
                               (0.25, 5.0),
                               (0.25, 15.0)])
@@ -193,71 +154,77 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
                                    2.0, tom, 0.1, 20.0, point,
                                    nodal_plane_dist, hypo_depth_dist)
         source_list.append(point_source)
+    #    i+=1
+    #    if j==1000:
+    #        break
 
     filename = smoother_filename[:-4] + '.xml'
-    mod_name = "Australia_Adaptive_K%i_b%.3f" % (smoother.config['k'], smoother.config['bvalue'])   
     nodes = list(map(obj_to_node, sorted(source_list)))
     source_model = Node("sourceModel", {"name": name}, nodes=nodes)
     with open(filename, 'wb') as f:
         nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
-                                       
 
+    # Creating a basemap - input a cconfiguration and (if desired) a title
+    title = 'Smoothed seismicity rate for learning \nperiod %i 2017, Mmin = %.1f' %(
+         completeness_table[0][0], completeness_table[0][1])
+    basemap1 = HMTKBaseMap(map_config, 'Smoothed seismicity rate')
+    basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
+    basemap1.m.drawparallels(np.arange(llon, ulon, 5))
+    # Adding the smoothed grip to the basemap
+    sym = (2., 3.,'cx')
+    x,y = basemap1.m(smoother.data[:,0], smoother.data[:,1])
+    basemap1.m.scatter(x, y, marker = 's', c = np.log10(smoother.data[:,4]), cmap = plt.cm.coolwarm, zorder=10, lw=0,
+                       vmin=-6.5, vmax = 1.5 )
+    #basemap1.m.scatter(x, y, marker = 's', c = np.arange(-7.5, -0.5, 0.1), cmap = plt.cm.coolwarm, zorder=10, lw=0)
+    basemap1.m.drawcoastlines(linewidth=1, zorder=50) # Add coastline on top
+    basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
+    basemap1.m.drawparallels(np.arange(llon, ulon, 5))
+    plt.colorbar(label='log10(Smoothed rate per cell)')
+    plt.legend()
+    figname = smoother_filename[:-4] + '_smoothed_rates_map.png'
+    plt.savefig(figname)
 
-# Set up paralell
-proc = pypar.size()                # Number of processors as specified by mpirun                     
-myid = pypar.rank()                # Id of of this process (myid in [0, proc-1])                     
-node = pypar.get_processor_name()  # Host name on which current process is running                   
-print 'I am proc %d of %d on node %s' % (myid, proc, node)
-t0 = pypar.time()
+parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 
-config_params = params_from_shp(domains_shp)
-for config in config_params:
-    print config
+# Read and process the catalogue content in a variable called "catalogue"
+catalogue = parser.read_file(start_year=1900, end_year=2010)
 
-#sys.exit()
-# Read and clean the catalogue
-parser = CsvCatalogueParser(ifile)
-catalogue = parser.read_file(start_year=1900, end_year=2017)
 # How many events in the catalogue?
 print "The catalogue contains %g events" % catalogue.get_number_events()
-neq = len(catalogue.data['magnitude'])
-print "The catalogue contains %g events" % neq
+
 # What is the geographical extent of the catalogue?
 bbox = catalogue.get_bounding_box()
 print "Catalogue ranges from %.4f E to %.4f E Longitude and %.4f N to %.4f N Latitude\n" % bbox
+
 catalogue.sort_catalogue_chronologically()
-index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["depth"] >= 0.0) 
-catalogue.purge_catalogue(index)
-catalogue.get_number_events()
+catalogue.data['magnitude']
+index = catalogue.data['magnitude']>1.5
+
 # Copying the catalogue and saving it under a new name "catalogue_clean"
 catalogue_clean = deepcopy(catalogue)
+
 # remove nan magnitudes
+catalogue_clean.purge_catalogue(index)
 catalogue_clean.sort_catalogue_chronologically()
 catalogue_clean.data['magnitude']
 catalogue_clean.data['year']
 catalogue_clean.get_decimal_time()
 catalogue_clean.data['longitude']
+
 catalogue_depth_clean = deepcopy(catalogue_clean)
 index = catalogue_depth_clean.data['depth']>=0.
 catalogue_depth_clean.purge_catalogue(index)
-catalogue_depth_clean.get_number_events()
-
-# Map configuration
-map_config = {'min_lon': np.floor(100), 'max_lon': np.ceil(160),
-              'min_lat': np.floor(-46), 'max_lat': np.ceil(-4), 'resolution':'c'}
 
 grid_lims = [105., 160.0, 0.1, -47.0, -5.0, 0.1, 0., 20., 20.]
 
-#try:
-#    os.remove("Aus1_tmp.hdf5")
-#except OSError:
-#    pass
-#config = {"bandwidth": 50,
-#          "r_min": 1.0E-7, 
-#          "bvalue": bvalue, "mmin": 3.0,
-#          "learning_start": 1965, "learning_end": 2003,
-#          "target_start": 2007, "target_end": 2017}
+# Map configuration
+map_config = {'min_lon': np.floor(105), 'max_lon': np.ceil(155),
+              'min_lat': np.floor(-45), 'max_lat': np.ceil(-9), 'resolution':'c'}
 
+magnitude_bin_width = 0.1  # In magnitude units
+time_bin_width = 1.0 # In years
+
+config_params = params_from_shp(domains_shp)
 for i in range(0, len(config_params)*3, 1):
     if i % proc == myid:
         run = "%03d" % i
@@ -269,21 +236,14 @@ for i in range(0, len(config_params)*3, 1):
             bvalue = config_params[i/3]['BVAL_UPPER']
         if i % 3 == 2:
             bvalue = config_params[i/3]['BVAL_LOWER']
-        try:
-            os.remove(("Aus1_tmp2%.3f_%s.hdf5" % (bvalue, run)))
-        except OSError:
-            pass
         mmin = completeness_table[0][1]
         print 'mmin', mmin
-        config = {"k": 3,
-                  "r_min": 1.0E-6, 
-                  "bvalue": bvalue, "mmin": mmin,
-                  "learning_start": 1900, "learning_end": 2017,
-                  "target_start": 2018, "target_end": 2019} # using already optimised parameters
+        config = {"BandWidth": 50.,
+                  "Length_Limit": 3.,
+                  "increment": 0.1,
+                  "bvalue":bvalue}
         ystart = completeness_table[0][0]
-        # Ensure we aren't training outside completeness model
-        if ystart > config['learning_start']:
-            config['learning_start'] = ystart
+
 
         run_smoothing(grid_lims, config, catalogue_depth_clean, completeness_table, map_config, run)
 
@@ -301,3 +261,9 @@ if myid == 0:
                                                                 string.zfill(s,2))
     print "--------------------------------------------------------"
 pypar.finalize()
+
+
+
+
+
+
