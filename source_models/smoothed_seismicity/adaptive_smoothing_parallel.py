@@ -298,8 +298,6 @@ for i in range(0, len(config_params)*3, 1):
         except OSError:
             pass
         mmin = completeness_table[0][1]
-        ystart = completeness_table[0][0]
-        if ystart > 
         print 'mmin', mmin
         config = {"k": 3,
                   "r_min": 1.0E-6, 
@@ -309,7 +307,7 @@ for i in range(0, len(config_params)*3, 1):
         ystart = completeness_table[0][0]
         # Ensure we aren't training outside completeness model
         if ystart > config['learning_start']:
-             config['learning_start'] = ystart
+            config['learning_start'] = ystart
 
         run_smoothing(grid_lims, config, catalogue_depth_clean, completeness_table, map_config, run)
 
