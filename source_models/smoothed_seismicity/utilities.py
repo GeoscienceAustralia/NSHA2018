@@ -4,7 +4,7 @@
 import ogr
 import shapefile
 from shapely.geometry import Point, Polygon
-import numpy as npy
+import numpy as np
 
 def params_from_shp(shapefile):
     """Get parameters from shapefile attribute table
