@@ -5,6 +5,8 @@ from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity
 import os, sys
 import h5py
 import numpy as np   # Numpy - Python's numerical library
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt  # Matplotlib - Python's plotting library
 from copy import deepcopy   # Python module for copying objects
 import ogr
@@ -113,7 +115,7 @@ def params_from_shp(shapefile):
         params['COMPLETENESS'] = np.array(params['COMPLETENESS'])
     return param_list
 
-def run_smoothing(grid_lims, config, catalogue, map_config):
+def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, run):
     """Run all the smoothing
     :params config:
         Dictionary of configuration parameters.
@@ -121,7 +123,7 @@ def run_smoothing(grid_lims, config, catalogue, map_config):
         and docs.
     """
     smoother = h_w.HelmstetterEtAl2007(grid_lims, config, catalogue, 
-                                       storage_file=("Aus1_tmp2%.3f.hdf5" % config['bvalue']))
+                                       storage_file=("Aus1_tmp2%.3f_%s.hdf5" % (config['bvalue'],run)))
     smoother._get_catalogue_completeness_weights(completeness_table)
     smoother.build_distance_arrays()
     smoother.build_catalogue_2_grid_array()
@@ -136,7 +138,13 @@ def run_smoothing(grid_lims, config, catalogue, map_config):
     #sys.exit()
     d_i = smoother.optimise_bandwidths()
     smoother.run_smoothing(config["r_min"], d_i)
-    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f.csv" % (smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'])
+    completeness_string = 'comp'
+    for ym in completeness_table:
+        completeness_string += '_%i_%.1f' % (ym[0], ym[1])
+    print completeness_string
+    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f_%s.csv" % (
+        smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'],
+        completeness_string)
     np.savetxt(smoother_filename,
                np.column_stack([smoother.grid, smoother.rates]),
                delimiter=",",
@@ -146,10 +154,12 @@ def run_smoothing(grid_lims, config, catalogue, map_config):
                                        
     # Creating a basemap - input a cconfiguration and (if desired) a title
     title = 'Smoothed seismicity rate for learning \nperiod %i %i, K=%i, Mmin=%.1f' % (
-        learning_start, learning_end, smoother.config['k'], smoother.config['mmin'])
+        config['learning_start'], config['learning_end'], smoother.config['k'], smoother.config['mmin'])
     basemap1 = HMTKBaseMap(map_config, title)
-    basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
-    basemap1.m.drawparallels(np.arange(llon, ulon, 5))
+    basemap1.m.drawmeridians(np.arange(map_config['min_lat'],
+                                       map_config['max_lat'], 5))
+    basemap1.m.drawparallels(np.arange(map_config['min_lon'],
+                                        map_config['max_lon'], 5))
     # Adding the smoothed grip to the basemap
     sym = (2., 3.,'cx')
     x,y = basemap1.m(smoother.grid[:,0], smoother.grid[:,1])
@@ -191,9 +201,9 @@ def run_smoothing(grid_lims, config, catalogue, map_config):
                     10)
         rate = data[j,2]
         # Convert rate to a value
-        aval = np.log10(rate) + bvalue*config["mmin"]
+        aval = np.log10(rate) + config['bvalue']*config["mmin"]
 
-        mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bvalue)
+        mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, config['bvalue'])
         hypo_depth_dist = PMF([(0.5, 10.0),
                               (0.25, 5.0),
                               (0.25, 15.0)])
@@ -207,7 +217,7 @@ def run_smoothing(grid_lims, config, catalogue, map_config):
                                    nodal_plane_dist, hypo_depth_dist)
         source_list.append(point_source)
 
-    filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f.xml" % (smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'])
+    filename = smoother_filename[:-4] + '.xml'
     mod_name = "Australia_Adaptive_K%i_b%.3f" % (smoother.config['k'], smoother.config['bvalue'])   
     nodes = list(map(obj_to_node, sorted(source_list)))
     source_model = Node("sourceModel", {"name": name}, nodes=nodes)
@@ -282,10 +292,8 @@ for i in range(0, len(config_params)*3, 1):
             bvalue = config_params[i/3]['BVAL_UPPER']
         if i % 3 == 2:
             bvalue = config_params[i/3]['BVAL_LOWER']
-        
-
         try:
-            os.remove(("Aus1_tmp2%.3f_%i.hdf5" % (bvalue, completeness_table[0][0])))
+            os.remove(("Aus1_tmp2%.3f_%s.hdf5" % (bvalue, run)))
         except OSError:
             pass
         mmin = completeness_table[0][1]
@@ -296,7 +304,7 @@ for i in range(0, len(config_params)*3, 1):
                   "learning_start": 1900, "learning_end": 2017,
                   "target_start": 2018, "target_end": 2019} # using already optimised parameters
 
-        run_smoothing(grid_lims, config, catalogue_depth_clean, map_config)
+        run_smoothing(grid_lims, config, catalogue_depth_clean, completeness_table, map_config, run)
 
 pypar.barrier()
 
