@@ -12,6 +12,8 @@ def decluster_GK74(catalogue, filename):
     from hmtk.seismicity.declusterer.dec_gardner_knopoff import GardnerKnopoffType1
     from hmtk.seismicity.declusterer.distance_time_windows import GardnerKnopoffWindow
     from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueWriter
+    from writers import htmk2shp_isc
+    from os import path
     
     decluster_config = {'time_distance_window': GardnerKnopoffWindow(),
                         'fs_time_prop': 1.0}
@@ -63,19 +65,24 @@ def decluster_GK74(catalogue, filename):
     
     # write
     writer.write_file(catalogue_gk)
-    #writer.write_file(catalogue_af)
+    
+    # write shapefile
+    htmk2shp_isc(catalogue_gk, path.join('shapefiles', 'ISC-GEM_V4_hmtk_GK74_declustered.shp'))
+    
     print 'Declustered catalogue: ok\n'
 
 # decluster ISC-GEM catalogue using Gardner & Knopoff method
 def decluster_iscgem_gk74(hmtk_csv):
     from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
-    
-    # parse isc-gem hmtk
-    #hmtk_csv = path.join('data', 'ISC-GEM_V4_hmtk_full.csv')
+    from writers import htmk2shp_isc
+    from os import path
     
     # parse HMTK csv
     parser = CsvCatalogueParser(hmtk_csv)
     cat = parser.read_file()
+    
+    # write shapefile
+    htmk2shp_isc(cat, path.join('shapefiles', 'ISC-GEM_V4_hmtk_full.shp'))
     
     decluster_GK74(cat, hmtk_csv)
 
