@@ -5,7 +5,7 @@ Created on Thu Feb 15 13:37:07 2018
 @author: u56903
 """
 
-def get_completeness_model(src_codes, src_shapes):
+def get_completeness_model(src_codes, src_shapes, domains):
     from os import path
     import shapefile
     from shapely.geometry import Point, Polygon
@@ -28,7 +28,7 @@ def get_completeness_model(src_codes, src_shapes):
     min_rmag = []
     
     # loop through Mcomp zones
-    for code, poly in zip(src_codes, src_shapes):
+    for code, poly, dom in zip(src_codes, src_shapes, domains):
         # get centroid of leonard sources
         clon, clat = get_shp_centroid(poly.points)
         point = Point(clon, clat)
@@ -47,8 +47,14 @@ def get_completeness_model(src_codes, src_shapes):
         
         # if no Mcomp model assigned, use conservative model
         if mccompFound == False:
-            ycomp.append('1980;1964;1900')
-            mcomp.append('3.5;5.0;6.0')
+            if dom <= 8:
+                ycomp.append('1980;1964;1900')
+                mcomp.append('3.5;5.0;6.0')
+            
+            # use ISC-GEM completeness
+            else:
+                ycomp.append('1980;1920;1900')
+                mcomp.append('5.75;6.25;7.5')
             
         # set rmin range
         min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))

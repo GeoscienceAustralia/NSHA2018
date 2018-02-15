@@ -29,7 +29,7 @@ for poly in shapes:
 # get field data
 src_codes = get_field_data(sf, 'code', 'str')
 src_names = get_field_data(sf, 'Name', 'str')
-dom = get_field_data(sf, 'DOMAIN', 'float')
+domains = get_field_data(sf, 'DOMAIN', 'float')
 mmax = get_field_data(sf, 'max_mag', 'float')
 trt = get_field_data(sf, 'trt', 'str')
 usd = get_field_data(sf, 'usd', 'float')
@@ -42,15 +42,15 @@ rke = get_field_data(sf, 'rake1', 'float')
 # set domain for unset domains
 for i in range(0,len(trt)):
     if trt[i] == 'Active':
-        dom[i] = 9
-    elif trt[i] == 'Extended' and dom[i] == 0.:
-        dom[i] = 7
+        domains[i] = 9
+    elif trt[i] == 'Extended' and domains[i] == 0.:
+        domains[i] = 7
     elif trt[i] == 'Interface':
-        dom[i] = 10
+        domains[i] = 10
     elif trt[i] == 'Intraslab':
-        dom[i] = 11
+        domains[i] = 11
 
-zone_class = list(dom)[:]
+zone_class = list(domains)[:]
 # reset Gawler Craton to Flinders due to b-value similarities
 zone_class[62] = 2.
 
@@ -62,7 +62,7 @@ pref_stk = []
 pref_dip = []
 pref_rke = []
 for i in range(0,len(stk)):
-    if stk[i] != 0.0 and dom[i] <= 7:
+    if stk[i] != 0.0 and domains[i] <= 7:
         pref_stk.append(-999)
         pref_dip.append(-999)
         pref_rke.append(-999)
@@ -109,7 +109,7 @@ prefCat[56] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 # load 2018 completeness models
 ###############################################################################
 
-ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes)
+ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains)
     
 # use manual modification
 #min_rmag = [3.0, 3.0, 3.0, 3.5, 3.0, 3.0, 3.2, 3.5, 3.3, 3.3, 3.0, 3.3, 3.5, 3.5, 3.5, 3.3]
@@ -141,6 +141,6 @@ build_source_shape(outshp, shapes, src_names, src_codes, zone_class, \
                    rte_adj_fact, dep_b, dep_u, dep_l, usd, lsd, \
                    min_rmag, mmax, bval_fix, bval_sig_fix, \
                    ycomp, mcomp, pref_stk, pref_dip, pref_rke, \
-                   shmax_pref, shmax_sig, trt, dom, prefCat)
+                   shmax_pref, shmax_sig, trt, domains, prefCat)
 
 
