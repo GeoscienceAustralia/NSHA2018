@@ -184,6 +184,13 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     figname = smoother_filename[:-4] + '_smoothed_rates_map.png'
     plt.savefig(figname)
 
+# Set up paralell
+proc = pypar.size()                # Number of processors as specified by mpirun                     
+myid = pypar.rank()                # Id of of this process (myid in [0, proc-1])                     
+node = pypar.get_processor_name()  # Host name on which current process is running                   
+print 'I am proc %d of %d on node %s' % (myid, proc, node)
+t0 = pypar.time()
+
 parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 
 # Read and process the catalogue content in a variable called "catalogue"
