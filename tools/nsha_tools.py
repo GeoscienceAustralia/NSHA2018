@@ -61,49 +61,6 @@ def get_field_data(sf, field, datatype):
             
     return array(data)
 
-
-# gets preferred catalogue - uses NSHA cat if all vertices inside GG_cat_polygon
-def get_preferred_catalogue(targetshpfile):
-    import shapefile
-    from shapely.geometry import Point, Polygon
-    from tools.nsha_tools import get_field_data
-    
-    ###############################################################################
-    # parse shapefile
-    ###############################################################################
-    
-    catshpfile = '..//Other//ggcat_extent.shp'
-    
-    csf = shapefile.Reader(catshpfile)
-    catshape = csf.shapes()[0] # only one shape
-        
-    tsf = shapefile.Reader(targetshpfile)
-    targetshapes = tsf.shapes()
-    
-    ###############################################################################
-    # find poly points within other polygons
-    ###############################################################################
-    
-    # loop through target zones
-    cat = []
-    for poly in targetshapes:
-        
-        # set default catalogue
-        tmpcat = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-        
-        # now loop through all points in target shape
-        for tlon, tlat in poly.points:
-            point = Point(tlon, tlat)
-            
-            # check if point in catshape
-            if point.within(Polygon(catshape.points)) == False:
-                tmpcat = 'ISC-GEM_hmtk_declustered.csv'
-                
-        # now append catalogue
-        cat.append(tmpcat)
-        
-    return cat
-
 # converts datetime object to decmial years
 # Slightly edited from: http://stackoverflow.com/questions/6451655/python-how-to-convert-datetime-dates-to-decimal-years    
 def toYearFraction(date):

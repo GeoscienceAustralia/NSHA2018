@@ -14,4 +14,4 @@ Id,CODE,NAME,MMAX,MCOMP,YCOMP,TRT
 7,WAPM,West Australia Passive Margin,7.7,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880,Extended
 3,NAOR,North Australia Orogens,7.5,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880,Cratonic
 1,NACR,North Australian Craton,7.3,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880,Cratonic
-6,WARM,Western Australian Rifted Margin,7.7,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880,Extended
+6,WAEP,Western Australian Rifted Margin,7.7,3.0;3.5;4.0;4.5;5.0;6.0;6.4,1980;1970;1965;1962;1958;1910;1880,Extended

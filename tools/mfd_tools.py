@@ -110,7 +110,7 @@ def get_events_in_poly(cat, poly, depmin, depmax):
         
         # check if pt in poly and compile mag and years
         pt = Point(ev['lon'], ev['lat'])
-        if pt.within(poly) and ev['dep'] >= depmin and ev['dep'] <= depmax:
+        if pt.within(poly) and ev['dep'] >= depmin and ev['dep'] < depmax:
             mvect.append(ev['prefmag'])
             mxvect.append(ev['mx_origML']) # original catalogue mag for Mc model
             tvect.append(ev['datetime'])
@@ -347,6 +347,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
                         
     # do Weichert for zones with more events
     elif len(mvect) >= 80:
+        print 'mvect length', len(mvect)          
         # calculate weichert
         bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
                                                mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
@@ -362,34 +363,10 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     ###############################################################################
     
     else:
-        print 'Getting b-value from NSHA Background...'            
-        # set B-value to nan
-        bval = nan            
+        print 'Setting b-value to 1.0...'   
+        print 'mvect length', len(mvect)         
         
-        # load Leonard zones
-        lsf = shapefile.Reader(path.join('shapefiles','NSHA13_Background','NSHA13_Background_NSHA18_MFD.shp'))
-        
-        # get Leonard polygons
-        l08_shapes = lsf.shapes()
-        
-        # get Leonard b-values
-        lbval  = get_field_data(lsf, 'BVAL_BEST', 'str')
-        
-        # get centroid of current poly
-        clon, clat = get_shapely_centroid(poly)
-        point = Point(clon, clat)            
-        
-        # loop through zones and find point in poly
-        for zone_bval, l_shape in zip(lbval, l08_shapes):
-            l_poly = Polygon(l_shape.points)
-            
-            # check if leonard centroid in domains poly
-            if point.within(l_poly):
-                bval = float(zone_bval)
-                
-        # for those odd sites outside of L08 bounds, assign b-vale
-        if isnan(bval):
-            bval = 0.85
+        bval = 1.0            
         
         beta = bval2beta(bval)
         sigb = 0.1
@@ -398,7 +375,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         # solve for N0
         fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax, bin_width, midx)
         
-        print '    Leonard2008 b-value =', bval, sigb
+        print '    Automatic b-value =', bval, sigb
         
     # get confidence intervals        
     err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)

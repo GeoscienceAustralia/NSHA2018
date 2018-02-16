@@ -96,6 +96,8 @@ for poly in shapes:
 src_code = get_field_data(sf, 'CODE', 'str')
 src_name = get_field_data(sf, 'SRC_NAME', 'str')
 src_class = get_field_data(sf, 'CLASS', 'str')
+src_usd = get_field_data(sf, 'USD', 'float')
+src_lsd = get_field_data(sf, 'LSD', 'float')
 src_mmin = get_field_data(sf, 'MIN_MAG', 'float')
 src_mmin_reg = get_field_data(sf, 'MIN_RMAG', 'float')
 src_mmax = get_field_data(sf, 'MMAX_BEST', 'float')
@@ -129,14 +131,6 @@ new_n0_u = src_n0_u
 print '!!!Setting Mmin = 4.5!!!'
 src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
-
-# set all plausible depths
-depmin = -99.
-depmax = 99. # only get events GE 10 km
-
-# set shallow depth range
-#depmin = -99.
-#depmax = 99. # only get events GE 10 km
 
 # set arrays for testing
 bval_vect = []
@@ -241,14 +235,14 @@ for uclass in unique_classes:
                 sourcecat = nshaCat
                 year_max = nshaMaxYear
                 
-            elif src_cat[i].startswith('GEM-ISC'):
+            elif src_cat[i].startswith('ISC-GEM'):
                 # use ISC-GEM catalogue
                 sourcecat = iscCat
                 year_max = iscMaxYear
             
             # get earthquakes within source zones
             mvect, mxvect, tvect, dec_tvect, ev_dict \
-                   = get_events_in_poly(sourcecat, poly, depmin, depmax)
+                   = get_events_in_poly(sourcecat, poly, src_usd[i], src_lsd[i])
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
@@ -440,7 +434,7 @@ for i in srcidx:
     
     # now get events within zone of interest
     mvect, mxvect, tvect, dec_tvect, ev_dict \
-        = get_events_in_poly(sourcecat, polygons[i], depmin, depmax)
+        = get_events_in_poly(sourcecat, polygons[i], src_usd[i], src_lsd[i])
         
     # skip zone if no events pass completeness
     if len(mvect) != 0:
