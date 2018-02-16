@@ -36,7 +36,7 @@ from openquake.baselib.node import Node
 from openquake.hazardlib import nrml
 from openquake.hazardlib.sourcewriter import obj_to_node
 # Plotting tools
-#from hmtk.plotting.mapping import HMTKBaseMap
+from hmtk.plotting.mapping import HMTKBaseMap
 from hmtk.plotting.seismicity.completeness import plot_stepp_1972
 from hmtk.plotting.seismicity.catalogue_plots import plot_magnitude_time_scatter
 from hmtk.plotting.seismicity.catalogue_plots import plot_depth_histogram
@@ -105,6 +105,7 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     smoother = SmoothedSeismicity([100.,160.,0.1,-45.,-5,0.1,0.,20., 20.], bvalue = smoothing_config['bvalue'])
     print 'Running smoothing'
     smoothed_grid = smoother.run_analysis(catalogue, smoothing_config, completeness_table=completeness_table)
+    completeness_string = 'comp'
     for ym in completeness_table:
         completeness_string += '_%i_%.1f' % (ym[0], ym[1])
     smoother_filename = 'Australia_Fixed_%i_%i_b%.3f_mmin_%.1f_0.1%s.csv' % (smoothing_config["BandWidth"], smoothing_config["Length_Limit"],
@@ -168,8 +169,8 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     title = 'Smoothed seismicity rate for learning \nperiod %i 2017, Mmin = %.1f' %(
          completeness_table[0][0], completeness_table[0][1])
     basemap1 = HMTKBaseMap(map_config, 'Smoothed seismicity rate')
-    basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
-    basemap1.m.drawparallels(np.arange(llon, ulon, 5))
+    #basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
+    #basemap1.m.drawparallels(np.arange(llon, ulon, 5))
     # Adding the smoothed grip to the basemap
     sym = (2., 3.,'cx')
     x,y = basemap1.m(smoother.data[:,0], smoother.data[:,1])
@@ -177,12 +178,19 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
                        vmin=-6.5, vmax = 1.5 )
     #basemap1.m.scatter(x, y, marker = 's', c = np.arange(-7.5, -0.5, 0.1), cmap = plt.cm.coolwarm, zorder=10, lw=0)
     basemap1.m.drawcoastlines(linewidth=1, zorder=50) # Add coastline on top
-    basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
-    basemap1.m.drawparallels(np.arange(llon, ulon, 5))
+    basemap1.m.drawmeridians(np.arange(map_config['min_lat'], map_config['max_lat'], 5))
+    basemap1.m.drawparallels(np.arange(map_config['min_lon'], map_config['max_lon'], 5))
     plt.colorbar(label='log10(Smoothed rate per cell)')
     plt.legend()
     figname = smoother_filename[:-4] + '_smoothed_rates_map.png'
     plt.savefig(figname)
+
+# Set up paralell
+proc = pypar.size()                # Number of processors as specified by mpirun                     
+myid = pypar.rank()                # Id of of this process (myid in [0, proc-1])                     
+node = pypar.get_processor_name()  # Host name on which current process is running                   
+print 'I am proc %d of %d on node %s' % (myid, proc, node)
+t0 = pypar.time()
 
 parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 

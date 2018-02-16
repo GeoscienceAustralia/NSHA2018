@@ -119,7 +119,7 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     completeness_string = 'comp'
     for ym in completeness_table:
         completeness_string += '_%i_%.1f' % (ym[0], ym[1])
-    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f_%s.csv" % (
+    smoother_filename = "Australia_Adaptive_Mmax4.0_K%i_b%.3f_mmin%.1f_%s.csv" % (
         smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'],
         completeness_string)
     np.savetxt(smoother_filename,
@@ -200,9 +200,7 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     source_model = Node("sourceModel", {"name": name}, nodes=nodes)
     with open(filename, 'wb') as f:
         nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
-                                       
-
-
+                                      
 # Set up paralell
 proc = pypar.size()                # Number of processors as specified by mpirun                     
 myid = pypar.rank()                # Id of of this process (myid in [0, proc-1])                     
@@ -226,7 +224,8 @@ print "The catalogue contains %g events" % neq
 bbox = catalogue.get_bounding_box()
 print "Catalogue ranges from %.4f E to %.4f E Longitude and %.4f N to %.4f N Latitude\n" % bbox
 catalogue.sort_catalogue_chronologically()
-index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["depth"] >= 0.0) 
+#index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["depth"] >= 0.0) 
+index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["magnitude"] < 4.0)
 catalogue.purge_catalogue(index)
 catalogue.get_number_events()
 # Copying the catalogue and saving it under a new name "catalogue_clean"
@@ -256,8 +255,7 @@ grid_lims = [105., 160.0, 0.1, -47.0, -5.0, 0.1, 0., 20., 20.]
 #          "r_min": 1.0E-7, 
 #          "bvalue": bvalue, "mmin": 3.0,
 #          "learning_start": 1965, "learning_end": 2003,
-#          "target_start": 2007, "target_end": 2017}
-
+#          "target_start": 2007, "target_end": 201
 for i in range(0, len(config_params)*3, 1):
     if i % proc == myid:
         run = "%03d" % i

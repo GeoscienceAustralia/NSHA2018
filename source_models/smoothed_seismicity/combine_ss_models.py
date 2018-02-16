@@ -18,6 +18,8 @@ from openquake.hazardlib.geo.nodalplane import NodalPlane
 from openquake.hazardlib.pmf import PMF
 from openquake.hazardlib.mfd.evenly_discretized import EvenlyDiscretizedMFD
 
+from utilities import params_from_shp
+
 def gr2inc_mmax(mfd, mmaxs, weights, model_weight=1.):
     """Function to convert a GR distribution to incremental MFD and 
     collapse Mmax logic tree branches
@@ -45,27 +47,34 @@ def gr2inc_mmax(mfd, mmaxs, weights, model_weight=1.):
     return new_mfd
         
 
-def combine_ss_models(filedict, domains_shp, lt, outfile,
+def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_dir='./',
                       nrml_version = '04', weight=1.):#, id_base = 'ASS'):
     """ Combine smoothed seismicity models based on tectonic region types
-    :params filedict:
-        dict of form filedict[trt] = filename specifying input file for that region
+    :params filename_stem:
+        String for the start of the xml filename for the source model,
+        assuming generic components (non generic are inferred, 
+        e.g. bvalue and completeness model)
     :params domains_shp:
         shapefile defining tectonic domain regions
+    :params params:
+        list of dicts containing parameters derivded from the shapefile
+     :bval_key
+         key for the dicts in params  as we are merging by 
+         bvalues  (best, lower, upper)
     :params lt:
         LogicTree object containing relevant values and weights for Mmax
     :params outfile:
         output nrml formatted file
     """
-    print 'Getting tectonic region type from %s' % domains_shp
-    driver = ogr.GetDriverByName("ESRI Shapefile")
-    data_source = driver.Open(domains_shp, 0)
-    dsf = data_source.GetLayer()
-    trt_types = []
-    for feature in dsf:
-        trt_types.append(feature.GetField('TRT'))
+
     dsf = shapefile.Reader(domains_shp)
-    dom_shapes = dsf.shapes()
+    dom_shapes = dsf.shapes()    
+    # Get indicies of relevant fields
+    for i, f in enumerate(dsf.fields):
+        if f[0]=='CODE':
+            code_index = i
+        if f[0]=='TRT':
+            trt_index = i
 
     hypo_depth_dist_nc = PMF([(0.5, 10.0),
                               (0.25, 5.0),
@@ -77,50 +86,110 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
     hypo_depth_dict = {'Cratonic': hypo_depth_dist_c,
                        'Non_cratonic': hypo_depth_dist_nc,
                        'Extended': hypo_depth_dist_ex}
+    # FIXME! - Temporary solution until nodal plan logic tree
+    # info can be read directly from shapefile attributes
     nodal_plane_dist = PMF([(0.3, NodalPlane(0, 30, 90)),
                             (0.2, NodalPlane(90, 30, 90)),
                             (0.3, NodalPlane(180, 30, 90)),
                             (0.2, NodalPlane(270, 30, 90))])
 
     merged_pts = []
-    
+ 
     # Get mmax values and weights
     mmaxs = {}
     mmaxs_w = {}
-    for trt, filename in filedict.iteritems():
-        if trt == 'Cratonic':
-            mmax_values, mmax_weights = lt.get_weights('Mmax', 'Proterozoic')
+    for dom in params:
+        print 'Processing source %s' % dom['CODE']
+        print dom['TRT']
+        # For the moment, only consider regions within AUstralia
+        if dom['TRT'] == 'Active' or dom['TRT'] == 'Interface' or \
+                dom['TRT'] == 'Intraslab' or dom['CODE'] == 'NECS' or \
+                dom['CODE'] == 'NWO': 
+            print 'Source %s not on continental Australia, skipping' % dom['CODE']
+            continue
+        elif dom['TRT'] == 'Cratonic':
+            if dom['DOMAIN'] == 1:
+                mmax_values, mmax_weights = lt.get_weights('Mmax', 'Archean')
+            else:
+                mmax_values, mmax_weights = lt.get_weights('Mmax', 'Proterozoic')
+#        elif dom['TRT'] == 'Active':
+#            print 'MMax logic tree not yet defined for active crust, using extended crust'
+#            mmax_values, mmax_weights = lt.get_weights('Mmax', 'Extended')
         else:
-            mmax_values, mmax_weights = lt.get_weights('Mmax', trt)
+            mmax_values, mmax_weights = lt.get_weights('Mmax', dom['TRT'])
         mmax_values = [float(i) for i in mmax_values]
         mmax_weights = [float(i) for i in mmax_weights]
         print mmax_values
         print mmax_weights
-        mmaxs[trt] = mmax_values
-        mmaxs_w[trt] = mmax_weights
+        mmaxs[dom['CODE']] = mmax_values
+        mmaxs_w[dom['CODE']] = mmax_weights
 
-    pt_ids = []
-    for trt, filename in filedict.iteritems():
-        print trt
+        pt_ids = []
+    #for trt, filename in filedict.iteritems():
+    #    print trt
+        completeness_string = 'comp'
+        for ym in dom['COMPLETENESS']:
+            completeness_string += '_%i_%.1f' % (ym[0], ym[1])
+        mmin = dom['COMPLETENESS'][0][1]
+        filename = "%s_b%.3f_mmin%.1f_%s.xml" % (
+            filename_stem, dom[bval_key], mmin,
+            completeness_string)
         print 'Parsing %s' % filename
         # Only keep points within domain
         pts = read_pt_source(filename)
 #        shapes = np.where(trt_types
-        for zone_trt, dom_shape in zip(trt_types, dom_shapes):
-            print zone_trt
-            print dom_shape
-            if zone_trt == trt:
-                print 'TRT %s, procesing shape %s' % (zone_trt, dom_shape)
-                dom_poly = Polygon(dom_shape.points)
+        for shape in dsf.shapeRecords():
+            print shape.record[code_index]
+            if shape.record[code_index] == dom['CODE']:
+                hypo_depth_dist = PMF([(0.5, dom['DEP_BEST']),
+                             (0.25, dom['DEP_LOWER']),
+                             (0.25, dom['DEP_UPPER'])])
+                # Define nodal planes as thrusts except for special cases
+                str1 = dom['SHMAX'] + 90.
+                str1 = dom['SHMAX'] + 270.
+                str3 = dom['SHMAX'] + dom['SHMAX_SIG'] + 90.
+                str4 = dom['SHMAX']+ dom['SHMAX_SIG'] + 270.
+                str5 = dom['SHMAX'] - dom['SHMAX_SIG'] + 90.
+                str6 = dom['SHMAX'] - dom['SHMAX_SIG'] + 270.
+                strikes = [str1,str2,str3,str4,str5,str6]
+                for i,strike in enumerate(strikes):
+                    if strike >=360:
+                        strikes[i]=strike-360
+                nodal_plan_dist = PMF([(0.34, NodalPlane(str1, 30, 90)),
+                                       (0.34, NodalPlane(str2, 30, 90)),
+                                       (0.08, NodalPlane(str3, 30, 90)),
+                                       (0.08, NodalPlane(str4, 30, 90)),
+                                       (0.08, NodalPlane(str5, 30, 90)),
+                                       (0.08, NodalPlane(str6, 30, 90))])
+                if dom['CODE'] == 'WARM' or dom['CODE'] == 'WAPM':
+                    print 'Define special case for WARM'
+                    nodal_plan_dist = PMF([(0.75, NodalPlane(45, 90, 0)),
+                                           (0.125, NodalPlane(str1, 30, 90)),
+                                           (0.125, NodalPlane(str2, 30, 90))])
+                if dom['CODE'] == 'FMLR':
+                    print 'Define special case for FMLR, 0.5 thrust, 0.5 SS'
+                    nodal_plan_dist = PMF([(0.17, NodalPlane(str1, 30, 90)),
+                                           (0.17, NodalPlane(str2, 30, 90)),
+                                           (0.04, NodalPlane(str3, 30, 90)),
+                                           (0.04, NodalPlane(str4, 30, 90)),
+                                           (0.04, NodalPlane(str5, 30, 90)),
+                                           (0.04, NodalPlane(str6, 30, 90)),
+                                           (0.17, NodalPlane(str1, 90, 0)),
+                                           (0.17, NodalPlane(str2, 90, 0)),
+                                           (0.04, NodalPlane(str3, 90, 0)),
+                                           (0.04, NodalPlane(str4, 90, 0)),
+                                           (0.04, NodalPlane(str5, 90, 0)),
+                                           (0.04, NodalPlane(str6, 90, 0))])
+                dom_poly = Polygon(shape.shape.points)
                 for pt in pts:
                     pt_loc = Point(pt.location.x, pt.location.y)
                     if pt_loc.within(dom_poly):
-                        pt.tectonic_region_type = zone_trt
-                        pt.nodal_plane_distribution = nodal_plane_dist
-                        pt.hypocenter_distribution = hypo_depth_dict[zone_trt]
+                        pt.tectonic_region_type = dom['TRT']
+                        pt.nodal_plane_distribution = nodal_plane_dist # FIXME! update based on data extracted from shapefile
+                        pt.hypocenter_distribution = hypo_depth_dist
                         pt.rupture_aspect_ratio=2
                         mfd = pt.mfd
-                        new_mfd = gr2inc_mmax(mfd, mmaxs[trt], mmaxs_w[trt], weight)
+                        new_mfd = gr2inc_mmax(mfd, mmaxs[dom['CODE']], mmaxs_w[dom['CODE']], weight)
                         pt.mfd = new_mfd
                         if pt.source_id in pt_ids:
                             print 'Point source %s already exists!' % pt.source_id
@@ -128,46 +197,40 @@ def combine_ss_models(filedict, domains_shp, lt, outfile,
                         else:
                             merged_pts.append(pt)
                             pt_ids.append(pt.source_id)
-    
+    outfile = "%s_%s.xml" % (
+            filename_stem, bval_key)
+    outfile = os.path.join(output_dir, outfile)
     name = outfile.rstrip('.xml')
     if nrml_version == '04':
         nodes = list(map(obj_to_node, sorted(merged_pts)))
         source_model = Node("sourceModel", {"name": name}, nodes=nodes)
         with open(outfile, 'wb') as f:
             nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
-
-
+    return outfile
+            
 if __name__ == "__main__":
 #    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}
-    output_dir = 'GA_adaptive_smoothing_collapsed_K4_mmin3p0'
+    output_dir = 'GA_adaptive_smoothing_collapsed_K3_single_corner_completeness'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    domains_shp = '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
+    domains_shp = '../zones/2018_mw/Domains/shapefiles/Domains_NSHA18_MFD.shp'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    # Best b values
-    filedict_bestb = {'Cratonic': 'Australia_Adaptive_K4_b0.779_mmin3.0.xml',
-                'Non_cratonic': 'Australia_Adaptive_K4_b1.198_mmin3.0.xml',
-                'Extended': 'Australia_Adaptive_K4_b0.835_mmin3.0.xml'}
-    outfile_bestb = 'Australia_Adaptive_K4_merged_bestb_mmin3.0.xml'
-    combine_ss_models(filedict_bestb, domains_shp, lt, outfile_bestb, nrml_version = '04', weight=0.5)#, idbase='ASS')
+    params = params_from_shp(domains_shp)
+    filename_stem = 'Australia_Adaptive_K3'
+    bestb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_BEST',
+                                  output_dir=output_dir, nrml_version = '04', 
+                                  weight=0.5)
+    upperb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_UPPER',
+                                   output_dir=output_dir, nrml_version = '04',
+                                   weight=0.3)
+    lowerb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_LOWER',
+                                   output_dir=output_dir, nrml_version = '04',
+                                   weight=0.2)
 
-    # Upper b_values
-    filedict_upperb = {'Cratonic': 'Australia_Adaptive_K4_b0.708_mmin3.0.xml',
-                'Non_cratonic': 'Australia_Adaptive_K4_b1.043_mmin3.0.xml',
-                'Extended': 'Australia_Adaptive_K4_b0.727_mmin3.0.xml'}
-    outfile_upperb = 'Australia_Adaptive_K4_merged_upperb_mmin3.0.xml'
-    combine_ss_models(filedict_upperb, domains_shp, lt, outfile_upperb, nrml_version = '04', weight=0.3)
-    # Lower b_values                                                                                                     
-    filedict_lowerb = {'Cratonic': 'Australia_Adaptive_K4_b0.850_mmin3.0.xml',
-                       'Non_cratonic': 'Australia_Adaptive_K4_b1.352_mmin3.0.xml',
-                       'Extended': 'Australia_Adaptive_K4_b0.944_mmin3.0.xml'}
-    outfile_lowerb = 'Australia_Adaptive_K4_merged_lowerb_mmin3.0.xml'
-    combine_ss_models(filedict_lowerb, domains_shp, lt, outfile_lowerb, nrml_version = '04', weight=0.2)
     # combine all pt source models
-    point_source_list = [outfile_bestb, outfile_upperb, outfile_lowerb]
-    filename = 'Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.0.xml'
-    filepath = os.path.join(output_dir, filename)
-    name = filename.rstrip('.xml')
+    point_source_list = [bestb_xml, upperb_xml, lowerb_xml]
+    filename = os.path.join(output_dir, output_dir+'.xml')
+    name = output_dir
 
     # read list of files
     pt_source_model_list =[]
