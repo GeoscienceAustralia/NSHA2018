@@ -100,28 +100,39 @@ def convert_iscgem2hmtk(iscgemcsv):
     iscgem2hmtk_csv(iscgemDict, path.join('data', 'ISC-GEM_V4_hmtk_full.csv'))
     
 # clip declustered global GEM-ISC catalogue to local region
-def clip_declustered_iscgem_hmtk(hmtkcsv):
-    from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser, CsvCatalogueWriter
-    from copy import deepcopy
+def clip_iscgem_hmtk(hmtkcsv):
+    from os import getcwd, path
     
-    print '\nNOTE: this code is incomplete\n'
-    
+    # set bounding box
     minlat = -55.
     maxlat = 5.
     minlon = 95.
     maxlon = 166.
     
-    # parse HMTK csv
-    parser = CsvCatalogueParser(hmtk_csv)
-    cat = parser.read_file()
+    # do it the manual way
+    lines = open(hmtkcsv).readlines()
     
-    # create a copy from the catalogue object to preserve it
-    catalogue_gk = deepcopy(cat)
+    # set header    
+    newtxt = lines[0]
     
-    catalogue_gk.purge_catalogue(cluster_flags_gk == 0) # cluster_flags == 0: mainshocks
+    # now loop through lines and ckeck if events inside
+    for line in lines[1:]:
+        evlo = float(line.strip().split(',')[9])
+        evla = float(line.strip().split(',')[10])
+        
+        if evlo >= minlon and evlo <= maxlon \
+           and evla >= minlat and evla <= maxlat:
+            newtxt += line
+            
+    # write output file
+    f = open(path.join(getcwd(),hmtkcsv[:-4]+'_clip.csv'), 'wb')
+    f.write(newtxt)
+    f.close()
     
-    # set-up writer
-    writer = CsvCatalogueWriter(declustered_catalog_file) 
     
-    # write
-    writer.write_file(catalogue_gk)
+    
+    
+    
+    
+    
+    

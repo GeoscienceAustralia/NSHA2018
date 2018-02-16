@@ -275,6 +275,8 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     # get annualised rates using preferred MW (mvect)
     cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
         get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax)
+        
+    print '    Number of events:', len(mvect) 
             
     ###############################################################################
     # calculate MFDs if at least 50 events
@@ -347,7 +349,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
                         
     # do Weichert for zones with more events
     elif len(mvect) >= 80:
-        print 'mvect length', len(mvect)          
+                  
         # calculate weichert
         bval, sigb, a_m, siga_m, fn0, stdfn0 = weichert_algorithm(array(n_yrs[midx]), \
                                                mrng[midx]+bin_width/2, n_obs[midx], mrate=0.0, \
@@ -364,7 +366,6 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     
     else:
         print 'Setting b-value to 1.0...'   
-        print 'mvect length', len(mvect)         
         
         bval = 1.0            
         
@@ -377,7 +378,10 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         
         print '    Automatic b-value =', bval, sigb
         
-    # get confidence intervals        
+    ###############################################################################
+    # get confidence intervals
+    ###############################################################################
+    
     err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
         
     return bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo

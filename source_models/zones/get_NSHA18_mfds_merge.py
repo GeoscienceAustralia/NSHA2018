@@ -60,9 +60,10 @@ rootfolder  = lines[0].split('=')[-1].strip()
 hmtk_csv    = lines[1].split('=')[-1].strip()
 dec_flag    = lines[2].split('=')[-1].strip() # decluster flag
 shpfile     = lines[3].split('=')[-1].strip()
-outfolder   = path.join(rootfolder, lines[4].split('=')[-1].strip())
-outsrcshp   = lines[5].split('=')[-1].strip()
-bin_width   = float(lines[6].split('=')[-1].strip())
+origshpfile = lines[4].split('=')[-1].strip()
+outfolder   = path.join(rootfolder, lines[5].split('=')[-1].strip())
+outsrcshp   = lines[6].split('=')[-1].strip()
+bin_width   = float(lines[7].split('=')[-1].strip())
 #bval_shp    = lines[7].split('=')[-1].strip()
 
 # get export folder
@@ -96,8 +97,10 @@ for poly in shapes:
 src_code = get_field_data(sf, 'CODE', 'str')
 src_name = get_field_data(sf, 'SRC_NAME', 'str')
 src_class = get_field_data(sf, 'CLASS', 'str')
+src_rte_adj = get_field_data(sf, 'RTE_ADJ_F', 'float')
 src_usd = get_field_data(sf, 'USD', 'float')
 src_lsd = get_field_data(sf, 'LSD', 'float')
+src_overwrite_lsd = get_field_data(sf, 'OR_LSD', 'float')
 src_mmin = get_field_data(sf, 'MIN_MAG', 'float')
 src_mmin_reg = get_field_data(sf, 'MIN_RMAG', 'float')
 src_mmax = get_field_data(sf, 'MMAX_BEST', 'float')
@@ -119,7 +122,21 @@ src_ymax = get_field_data(sf, 'YMAX', 'float')
 src_cat = get_field_data(sf, 'CAT_FILE', 'str')
 sortind = argsort(src_code)
 
+###############################################################################
+# parse original shapefile before zone adjustments
+###############################################################################
+
+osf = shapefile.Reader(origshpfile)
+origShapes = osf.shapes()
+origPolygons = []
+for poly in origShapes:
+    origPolygons.append(Polygon(poly.points))
+
+origCodes = get_field_data(osf, 'CODE', 'str')
+
+###############################################################################
 # initiate new arrays for writing new shpfile
+###############################################################################
 new_bval_b = src_bval  
 new_bval_l = src_bval_l
 new_bval_u = src_bval_u
@@ -154,7 +171,7 @@ nshaCat, full_neq = parse_hmtk_cat(hmtk_csv)
 nshaMaxYear = toYearFraction(nshaCat[-1]['datetime'])
 
 # parse ISC-GEM catalogue
-hmtk_csv = path.join('..','..','catalogue','data','ISC-GEM_V4_hmtk_GK74_declustered.csv')
+hmtk_csv = path.join('..','..','catalogue','data','ISC-GEM_V4_hmtk_GK74_declustered_clip.csv')
 iscCat, crust_neq = parse_hmtk_cat(hmtk_csv)
 iscMaxYear = toYearFraction(iscCat[-1]['datetime'])
 
@@ -199,8 +216,7 @@ for uclass in unique_classes:
     class_mmax = nan
     
     print '\nCalculating b-value for class:', uclass
-            
-    
+                
     ###############################################################################
     # loop thru zones 
     ###############################################################################
@@ -212,8 +228,20 @@ for uclass in unique_classes:
             class_idx.append(i)
             class_code.append(src_code[i])
         
-            # get polygon of interest
-            poly = polygons[i]
+            # first check rate adjustment factor
+            if not src_rte_adj[i] == 1.0:
+                print '    Getting alternative source boundary for', src_code[i]
+                
+                # loop through original shapes
+                for oPoly, oCode in zip(origPolygons, origCodes):
+                    # assign original polygon                    
+                    if oCode == src_code[i]:
+                        print '        Matched', oCode
+                        poly = oPoly
+            
+            # if rate adjust == 1., use default shapes
+            else:
+                poly = polygons[i]
             
             # get cumulative class area
             cum_area += get_WGS84_area(poly)
@@ -241,8 +269,14 @@ for uclass in unique_classes:
                 year_max = iscMaxYear
             
             # get earthquakes within source zones
-            mvect, mxvect, tvect, dec_tvect, ev_dict \
-                   = get_events_in_poly(sourcecat, poly, src_usd[i], src_lsd[i])
+            if src_overwrite_lsd[i] == 1.0:
+                # make sure all events of any depth caught
+                mvect, mxvect, tvect, dec_tvect, ev_dict \
+                       = get_events_in_poly(sourcecat, poly, -9999., 9999.)
+            else:
+                # restrict to upper & lower seismogenic zone
+                mvect, mxvect, tvect, dec_tvect, ev_dict \
+                       = get_events_in_poly(sourcecat, poly, src_usd[i], src_lsd[i])
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
@@ -263,9 +297,6 @@ for uclass in unique_classes:
             
             # get mag range for mfd
             mcompmin = min(mcomps)
-            
-            # convert min Mx to MW
-            #mcompminmw = aus_ml2mw(mcompmin) - not needed now that mcomps in MW
             
             mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
             mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
@@ -296,8 +327,7 @@ for uclass in unique_classes:
             # set class b-values
             fixed_bval = src_bval_fix[i]
             fixed_bval_sig = src_bval_fix_sd[i]
-            
-       
+                  
     ###############################################################################
     # get b-values from joined zones
     ###############################################################################
@@ -345,8 +375,8 @@ for uclass in unique_classes:
                     
                 idxstart -= 1
         
-        # reset fn0 based on fixed b-value        
-        fn0 = fit_a_value(fixed_bval, mrng, cum_rates, class_mmax, bin_width, midx)
+        # reset fn0 based on fixed b-value
+        fn0 = fit_a_value(bval, mrng, cum_rates, class_mmax, bin_width, midx)
         
     # add to class arrays - used for plotting later
     class_bval.append(bval)
@@ -414,14 +444,33 @@ for i in srcidx:
     # set beta params       
     beta = bval2beta(bval)
     sigbeta = bval2beta(bval_sig)
-            
-    # get polygon of interest
-    poly = polygons[i]
+    
+       
+    ###############################################################################
+    # set appropriate source polygon
+    ###############################################################################
+    # first check rate adjustment factor
+    if not src_rte_adj[i] == 1.0:
+        print '    Getting original source boundary for', src_code[i]
+        
+        # loop through original shapes
+        for oPoly, oCode in zip(origPolygons, origCodes):
+            # assign original polygon                    
+            if oCode == src_code[i]:
+                print '        Matched', oCode
+                poly = oPoly
+    
+    # if rate adjust == 1., use default shapes
+    else:
+        poly = polygons[i]
     
     # get area (in km**2) of sources for normalisation
     src_area.append(get_WGS84_area(poly))
     
+    ###############################################################################
     # set preferred catalogue for each source
+    ###############################################################################
+    
     if src_cat[i].startswith('NSHA'):
         # use NSHA catalogue
         sourcecat = nshaCat
@@ -433,17 +482,19 @@ for i in srcidx:
         year_max = iscMaxYear
     
     # now get events within zone of interest
-    mvect, mxvect, tvect, dec_tvect, ev_dict \
-        = get_events_in_poly(sourcecat, polygons[i], src_usd[i], src_lsd[i])
+    if src_overwrite_lsd[i] == 1.0:
+        # make sure all events of any depth caught
+        mvect, mxvect, tvect, dec_tvect, ev_dict \
+               = get_events_in_poly(sourcecat, poly, -9999., 9999.)
+    else:
+        # restrict to upper & lower seismogenic zone
+        mvect, mxvect, tvect, dec_tvect, ev_dict \
+               = get_events_in_poly(sourcecat, poly, src_usd[i], src_lsd[i])
         
     # skip zone if no events pass completeness
+    print 'NEQ Before =', len(mvect)
     if len(mvect) != 0:
-        # assume Banda Sea sources
-        if src_mmax[i] == -99:
-            src_mmax[i] = 8.0
-            src_mmax_l[i] = 7.8
-            src_mmax_u[i] = 8.2
-    
+        
         # preserve original arrays for plotting
         orig_mvect = mvect
         orig_mxvect = mxvect
@@ -455,6 +506,7 @@ for i in srcidx:
              remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
         
     # check to see if mvect still non-zero length after removing incomplete events
+    print 'NEQ After =', len(mvect)
     if len(mvect) != 0:
         
         # get annualised rates based on preferred MW (mvect)
@@ -545,7 +597,7 @@ for i in srcidx:
         new_bval_l[i] = bval+bval_sig # lower curve, so higher b
         new_bval_u[i] = bval-bval_sig # upper curve, so lower b
         
-        new_n0_b[i]   = fn0
+        new_n0_b[i]   = fn0 
         new_n0_l[i]   = N0_lo100
         new_n0_u[i]   = N0_up100
         
@@ -571,8 +623,7 @@ for i in srcidx:
         plt.ylabel('Moment Magnitude (MW)')
         plt.xlabel('Date')
         #plt.title(src_code[i] + ' Catalogue Completeness')
-        
-        
+                
         # now loop thru completeness years and mags
         for yi in range(0, len(ycomps)-1):
             # convert y to datetime
@@ -648,6 +699,7 @@ for i in srcidx:
             #################################################################################
             # get area normalised rates
             areanormcurve = classbetacurve * src_area[-1] / class_area[class_idx]
+            
             h40 = plt.semilogy(mfd_mrng, areanormcurve, '--', c='r')
             
             #################################################################################
@@ -699,7 +751,7 @@ for i in srcidx:
             
             # set legend title
             title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
-                      + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                      + '\t'.join(('Regression Mmin: '+str(src_mmin_reg[i]),'N0 factor:',str('%0.3f' % src_rte_adj[i]))).expandtabs() + '\n\n' \
                       + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
             '''
             if L08_b == True:
@@ -1063,7 +1115,6 @@ for record, shape in zip(records, shapes):
             newrec.append(record[idx])
     
     # write new records
-    # update values   
     if src_n0[i] != new_n0_b[i]:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
@@ -1216,6 +1267,10 @@ cindex = []
 # loop thru rates and get c-index
 for r in lognorm_m5_rates:
     idx = interp(r, [r_min, r_max], [0, ncolours-1])
+    
+    if isnan(idx):
+        idx = 0
+        
     cindex.append(int(round(idx)))
     
 # get cmap
@@ -1293,6 +1348,10 @@ cindex = []
 # loop thru rates and get c-index
 for r in lognorm_m6_rates:
     idx = interp(r, [r_min, r_max], [0, ncolours-1])
+    
+    if isnan(idx):
+        idx = 0
+        
     cindex.append(int(round(idx)))
     
 # get cmap

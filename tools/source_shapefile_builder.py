@@ -54,13 +54,14 @@ def get_completeness_model(src_codes, src_shapes, domains):
             # use ISC-GEM completeness
             else:
                 ycomp.append('1980;1920;1900')
-                mcomp.append('5.75;6.25;7.5')
+                mcomp.append('6.0;6.25;7.5')
             
         # set rmin range
         min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
         
     return ycomp, mcomp, min_rmag
-    
+
+# use Rajabi_2016 shmax vectors - gets median & std within a source zone    
 def get_aus_shmax_vectors(src_codes, src_shapes):
     from os import path
     import shapefile
@@ -98,7 +99,10 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
         
         if len(shm_in) > 0: 
             shmax_pref.append(median(array(shm_in)))
-            shmax_sig.append(std(array(shm_in)))
+            
+            # check sigma and make sure it is at least +/- 10 degrees
+            shmax_sig.append(max([std(array(shm_in)), 10.]))        
+            
             print 'Getting SHmax for', code
         
         # if no points in polygons, get nearest neighbour
@@ -189,7 +193,7 @@ def get_preferred_catalogue(targetshpfile):
             
             # check if point in catshape
             if point.within(Polygon(catshape.points)) == False:
-                tmpcat = 'ISC-GEM_hmtk_declustered.csv'
+                tmpcat = 'ISC-GEM_V4_hmtk_GK74_declustered_clip.csv'
                 
         # now append catalogue
         cat.append(tmpcat)
@@ -203,6 +207,12 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
                        shmax_pref, shmax_sig, trt, dom, prefCat):
                            
     import shapefile
+    from numpy import array, zeros_like
+    
+    # many eqs within Aust get left out if LSD too conservative    
+    overright_lsd = zeros_like(lsd)
+    idx = array(dom) <= 8
+    overright_lsd[idx] = 1
     
     # set shapefile to write to
     w = shapefile.Writer(shapefile.POLYGON)
@@ -217,6 +227,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.field('DEP_LOWER','F', 6, 1)
     w.field('USD','F', 6, 1)
     w.field('LSD','F', 6, 1)
+    w.field('OR_LSD','F', 3, 0)
     w.field('MIN_MAG','F', 4, 2)
     w.field('MIN_RMAG','F', 4, 2)
     w.field('MMAX_BEST','F', 4, 2)
@@ -261,7 +272,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
         # write new records
         if i >= 0:
             w.record(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i], \
-                     min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
+                     overright_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
                      ycomp[i], mcomp[i], pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], dom[i], prefCat[i])
             
     # now save area shapefile

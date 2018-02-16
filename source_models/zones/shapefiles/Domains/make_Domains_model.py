@@ -62,7 +62,7 @@ pref_stk = []
 pref_dip = []
 pref_rke = []
 for i in range(0,len(stk)):
-    if stk[i] != 0.0 and domains[i] <= 7:
+    if stk[i] == 0.0 and domains[i] <= 8:
         pref_stk.append(-999)
         pref_dip.append(-999)
         pref_rke.append(-999)
@@ -112,7 +112,28 @@ prefCat[56] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains)
     
 # use manual modification
-#min_rmag = [3.0, 3.0, 3.0, 3.5, 3.0, 3.0, 3.2, 3.5, 3.3, 3.3, 3.0, 3.3, 3.5, 3.5, 3.5, 3.3]
+for i in range(0,len(trt)):
+    if trt[i] == 'Active':
+        min_rmag[i] = 6.0
+
+
+min_rmag[12] = 6.1 # NBT
+min_rmag[16] = 6.0 # TAFS
+min_rmag[26] = 3.8 # NWO
+min_rmag[50] = 3.2 # CARP
+min_rmag[51] = 3.5 # EAPM
+min_rmag[52] = 3.3 # KMBY
+min_rmag[55] = 3.3 # NACR
+min_rmag[54] = 3.3 # NAOR
+min_rmag[49] = 3.3 # PLBR
+min_rmag[53] = 3.5 # WAPM
+min_rmag[48] = 3.2 # YLGN
+min_rmag[56] = 3.2 # WAEP
+#min_rmag[62] = 3.1 # GAWL
+
+# SEOB
+ycomp[59] = '1980;1964;1900'
+mcomp[59] = '3.5;5.0;6.0'
 
 ###############################################################################
 # load Rajabi SHMax vectors 
