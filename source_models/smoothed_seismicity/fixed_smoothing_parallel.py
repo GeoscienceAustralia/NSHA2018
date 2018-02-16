@@ -169,8 +169,8 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     title = 'Smoothed seismicity rate for learning \nperiod %i 2017, Mmin = %.1f' %(
          completeness_table[0][0], completeness_table[0][1])
     basemap1 = HMTKBaseMap(map_config, 'Smoothed seismicity rate')
-    basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
-    basemap1.m.drawparallels(np.arange(llon, ulon, 5))
+    #basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
+    #basemap1.m.drawparallels(np.arange(llon, ulon, 5))
     # Adding the smoothed grip to the basemap
     sym = (2., 3.,'cx')
     x,y = basemap1.m(smoother.data[:,0], smoother.data[:,1])

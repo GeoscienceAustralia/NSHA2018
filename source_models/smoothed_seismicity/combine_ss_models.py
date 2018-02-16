@@ -100,11 +100,21 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
     mmaxs_w = {}
     for dom in params:
         print 'Processing source %s' % dom['CODE']
-        if dom['TRT'] == 'Cratonic':
+        print dom['TRT']
+        # For the moment, only consider regions within AUstralia
+        if dom['TRT'] == 'Active' or dom['TRT'] == 'Interface' or \
+                dom['TRT'] == 'Intraslab' or dom['CODE'] == 'NECS' or \
+                dom['CODE'] == 'NWO': 
+            print 'Source %s not on continental Australia, skipping' % dom['CODE']
+            continue
+        elif dom['TRT'] == 'Cratonic':
             if dom['DOMAIN'] == 1:
                 mmax_values, mmax_weights = lt.get_weights('Mmax', 'Archean')
             else:
                 mmax_values, mmax_weights = lt.get_weights('Mmax', 'Proterozoic')
+#        elif dom['TRT'] == 'Active':
+#            print 'MMax logic tree not yet defined for active crust, using extended crust'
+#            mmax_values, mmax_weights = lt.get_weights('Mmax', 'Extended')
         else:
             mmax_values, mmax_weights = lt.get_weights('Mmax', dom['TRT'])
         mmax_values = [float(i) for i in mmax_values]
@@ -179,7 +189,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         pt.hypocenter_distribution = hypo_depth_dist
                         pt.rupture_aspect_ratio=2
                         mfd = pt.mfd
-                        new_mfd = gr2inc_mmax(mfd, mmaxs[dom['TRT']], mmaxs_w[dom['TRT']], weight)
+                        new_mfd = gr2inc_mmax(mfd, mmaxs[dom['CODE']], mmaxs_w[dom['CODE']], weight)
                         pt.mfd = new_mfd
                         if pt.source_id in pt_ids:
                             print 'Point source %s already exists!' % pt.source_id
