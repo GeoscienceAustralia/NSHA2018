@@ -232,7 +232,7 @@ map_config = {'min_lon': np.floor(105), 'max_lon': np.ceil(155),
 magnitude_bin_width = 0.1  # In magnitude units
 time_bin_width = 1.0 # In years
 
-config_params = params_from_shp(domains_shp)
+config_params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
 for i in range(0, len(config_params)*3, 1):
     if i % proc == myid:
         run = "%03d" % i

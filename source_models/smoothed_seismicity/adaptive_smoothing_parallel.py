@@ -208,7 +208,7 @@ node = pypar.get_processor_name()  # Host name on which current process is runni
 print 'I am proc %d of %d on node %s' % (myid, proc, node)
 t0 = pypar.time()
 
-config_params = params_from_shp(domains_shp)
+config_params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
 for config in config_params:
     print config
 
