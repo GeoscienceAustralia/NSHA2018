@@ -6,7 +6,7 @@ import shapefile
 from shapely.geometry import Point, Polygon
 import numpy as np
 
-def params_from_shp(shapefile):
+def params_from_shp(shapefile, trt_ignore=[]):
     """Get parameters from shapefile attribute table
     """
     print 'Getting completeness and b-values from %s' % shapefile
@@ -15,6 +15,10 @@ def params_from_shp(shapefile):
     dsf = data_source.GetLayer()
     param_list = []
     for feature in dsf:
+        if feature.GetField('TRT') in trt_ignore or \
+                feature.GetField('BVAL_BEST') == -99 or \
+                feature.GetField('BVAL_UPPER') == -99:
+            continue    
         mcomp = feature.GetField('MCOMP').split(';')
         ycomp = feature.GetField('YCOMP').split(';')
         completeness_table = []

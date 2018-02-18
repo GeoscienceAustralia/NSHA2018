@@ -215,7 +215,7 @@ if __name__ == "__main__":
         os.makedirs(output_dir)
     domains_shp = '../zones/2018_mw/Domains/shapefiles/Domains_NSHA18_MFD.shp'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    params = params_from_shp(domains_shp)
+    params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
     filename_stem = 'Australia_Adaptive_K3'
     bestb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_BEST',
                                   output_dir=output_dir, nrml_version = '04', 
