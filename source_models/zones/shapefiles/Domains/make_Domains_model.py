@@ -116,7 +116,6 @@ for i in range(0,len(trt)):
     if trt[i] == 'Active':
         min_rmag[i] = 6.0
 
-
 min_rmag[12] = 6.1 # NBT
 min_rmag[16] = 6.0 # TAFS
 min_rmag[26] = 3.8 # NWO
@@ -131,9 +130,13 @@ min_rmag[48] = 3.2 # YLGN
 min_rmag[56] = 3.2 # WAEP
 #min_rmag[62] = 3.1 # GAWL
 
-# SEOB
+# SEOB - multi-corner
 ycomp[59] = '1980;1964;1900'
 mcomp[59] = '3.5;5.0;6.0'
+
+# SEOB - single-corner
+ycomp[59] = '1980;1980'
+mcomp[59] = '3.5;3.5'
 
 ###############################################################################
 # load Rajabi SHMax vectors 
@@ -154,7 +157,7 @@ rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'Domains_NSHA18.shp'
+outshp = 'Domains_NSHA18_single_Mc.shp'
 bval_fix = -99 * ones_like(rte_adj_fact)
 bval_sig_fix = -99 * ones_like(rte_adj_fact)
 
