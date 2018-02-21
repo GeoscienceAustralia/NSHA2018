@@ -88,7 +88,10 @@ print "Everything Imported OK!"
 domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
 ifile = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
 #ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_mx_orig.csv"
-
+# Flag for whether to overwrite exiting .xml source model 
+# files with the same b value and completeness combination.
+# Shoudld normally set to True unless you are being really careful.
+overwrite = False
 #####################################
 # Shouldn't need input below here
 #####################################
@@ -100,6 +103,19 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
         For more info see helmstetter_werner_2012 code 
         and docs.
     """
+
+    completeness_string = 'comp'
+    for ym in completeness_table:
+        completeness_string += '_%i_%.1f' % (ym[0], ym[1])
+    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f_%s.csv" % (
+        config['k'], config['bvalue'], config['mmin'],
+        completeness_string)
+
+    filename = smoother_filename[:-4] + '.xml'
+    if os.path.exists(filename) and not overwrite:
+        print '%s already created, not overwriting!' % filename
+        return
+
     smoother = h_w.HelmstetterEtAl2007(grid_lims, config, catalogue, 
                                        storage_file=("Aus1_tmp2%.3f_%s.hdf5" % (config['bvalue'],run)))
     smoother._get_catalogue_completeness_weights(completeness_table)
@@ -116,12 +132,7 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     #sys.exit()
     d_i = smoother.optimise_bandwidths()
     smoother.run_smoothing(config["r_min"], d_i)
-    completeness_string = 'comp'
-    for ym in completeness_table:
-        completeness_string += '_%i_%.1f' % (ym[0], ym[1])
-    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f_%s.csv" % (
-        smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'],
-        completeness_string)
+
     np.savetxt(smoother_filename,
                np.column_stack([smoother.grid, smoother.rates]),
                delimiter=",",
@@ -194,7 +205,6 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
                                    nodal_plane_dist, hypo_depth_dist)
         source_list.append(point_source)
 
-    filename = smoother_filename[:-4] + '.xml'
     mod_name = "Australia_Adaptive_K%i_b%.3f" % (smoother.config['k'], smoother.config['bvalue'])   
     nodes = list(map(obj_to_node, sorted(source_list)))
     source_model = Node("sourceModel", {"name": name}, nodes=nodes)

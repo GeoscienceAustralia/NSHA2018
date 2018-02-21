@@ -92,24 +92,33 @@ print "Everything Imported OK!"
 domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
 #Importing catalogue
 catalogue_filename = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
-
+# Flag for whether to overwrite exiting .xml source model 
+# files with the same b value and completeness combination.
+# Shoudld normally set to True unless you are being really careful.
+overwrite = False
 #####################################
 # Shouldn't need input below here
 #####################################
 
 
-def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, map_config, run):
+def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, map_config, 
+                  run, overwrite=True):
     """Run all the smoothing
     """
 
-    smoother = SmoothedSeismicity([100.,160.,0.1,-45.,-5,0.1,0.,20., 20.], bvalue = smoothing_config['bvalue'])
-    print 'Running smoothing'
-    smoothed_grid = smoother.run_analysis(catalogue, smoothing_config, completeness_table=completeness_table)
     completeness_string = 'comp'
     for ym in completeness_table:
         completeness_string += '_%i_%.1f' % (ym[0], ym[1])
     smoother_filename = 'Australia_Fixed_%i_%i_b%.3f_mmin_%.1f_0.1%s.csv' % (smoothing_config["BandWidth"], smoothing_config["Length_Limit"],
                                                                     bvalue, completeness_table[0][1], completeness_string)
+    filename = smoother_filename[:-4] + '.xml'
+    if os.path.exists(filename) and not overwrite:
+        print '%s already created, not overwriting!' % filename
+        return
+    smoother = SmoothedSeismicity([100.,160.,0.1,-45.,-5,0.1,0.,20., 20.], bvalue = smoothing_config['bvalue'])
+    print 'Running smoothing'
+    smoothed_grid = smoother.run_analysis(catalogue, smoothing_config, completeness_table=completeness_table)
+
     smoother.write_to_csv(smoother_filename)
 
 
@@ -130,9 +139,6 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     except ValueError:
         print 'Something wrong with file %s' % smoother_filename
         sys.exit()
-    #print max(data[:,4])
-    #print data[:,4]
-    #print len(data[:,4])
     tom = PoissonTOM(50) # Dummy temporal occurence model for building pt sources
     msr = Leonard2014_SCR()
     for j in range(len(data[:,4])):
@@ -159,11 +165,7 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
                                    2.0, tom, 0.1, 20.0, point,
                                    nodal_plane_dist, hypo_depth_dist)
         source_list.append(point_source)
-    #    i+=1
-    #    if j==1000:
-    #        break
 
-    filename = smoother_filename[:-4] + '.xml'
     nodes = list(map(obj_to_node, sorted(source_list)))
     source_model = Node("sourceModel", {"name": name}, nodes=nodes)
     with open(filename, 'wb') as f:
@@ -173,14 +175,11 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     title = 'Smoothed seismicity rate for learning \nperiod %i 2017, Mmin = %.1f' %(
          completeness_table[0][0], completeness_table[0][1])
     basemap1 = HMTKBaseMap(map_config, 'Smoothed seismicity rate')
-    #basemap1.m.drawmeridians(np.arange(llat, ulat, 5))
-    #basemap1.m.drawparallels(np.arange(llon, ulon, 5))
     # Adding the smoothed grip to the basemap
     sym = (2., 3.,'cx')
     x,y = basemap1.m(smoother.data[:,0], smoother.data[:,1])
     basemap1.m.scatter(x, y, marker = 's', c = np.log10(smoother.data[:,4]), cmap = plt.cm.coolwarm, zorder=10, lw=0,
                        vmin=-6.5, vmax = 1.5 )
-    #basemap1.m.scatter(x, y, marker = 's', c = np.arange(-7.5, -0.5, 0.1), cmap = plt.cm.coolwarm, zorder=10, lw=0)
     basemap1.m.drawcoastlines(linewidth=1, zorder=50) # Add coastline on top
     basemap1.m.drawmeridians(np.arange(map_config['min_lat'], map_config['max_lat'], 5))
     basemap1.m.drawparallels(np.arange(map_config['min_lon'], map_config['max_lon'], 5))
@@ -277,7 +276,7 @@ for i in range(0, len(config_combinations), 1):
                   "bvalue":bvalue}
         ystart = completeness_table[-1][0]
         # Call the smoothing module
-        run_smoothing(grid_lims, config, catalogue_depth_clean, completeness_table, map_config, run)
+        run_smoothing(grid_lims, config, catalogue_depth_clean, completeness_table, map_config, run, overwrite)
             
 
 pypar.barrier()
