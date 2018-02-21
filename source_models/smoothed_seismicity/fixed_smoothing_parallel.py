@@ -95,7 +95,7 @@ catalogue_filename = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
 # Flag for whether to overwrite exiting .xml source model 
 # files with the same b value and completeness combination.
 # Shoudld normally set to True unless you are being really careful.
-overwrite = False
+overwrite = True
 #####################################
 # Shouldn't need input below here
 #####################################
