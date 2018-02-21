@@ -89,7 +89,7 @@ from openquake.hazardlib.geo.nodalplane import NodalPlane
 from openquake.hazardlib.pmf import PMF
 print "Everything Imported OK!"
 
-domains_shp = '../zones/2018_mw/Domains/shapefiles/Domains_NSHA18_MFD.shp'
+domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
 #Importing catalogue
 catalogue_filename = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
 
@@ -125,7 +125,11 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     bval = bvalue # just define as 1 for time being
     # Read in data again to solve number fomatting issue in smoother.data
     # For some reason it just returns 0 for all a values
-    data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
+    try:
+        data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
+    except ValueError:
+        print 'Something wrong with file %s' % smoother_filename
+        sys.exit()
     #print max(data[:,4])
     #print data[:,4]
     #print len(data[:,4])
@@ -233,27 +237,48 @@ magnitude_bin_width = 0.1  # In magnitude units
 time_bin_width = 1.0 # In years
 
 config_params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
-for i in range(0, len(config_params)*3, 1):
+# Get unique combinations of config parameters to avoid
+# running the same models multiple times (and running into file access issues)
+config_combinations = []
+for i in range(0, len(config_params), 1):
+    completeness_table = config_params[i]['COMPLETENESS']
+#    print completeness_table
+    config_combo = [completeness_table, config_params[i]['BVAL_BEST']]
+    print config_combo
+    if not any(np.array_equal(l[0], config_combo[0]) and l[1]==config_combo[1] for l in config_combinations):
+        config_combinations.append(config_combo)
+    config_combo = [completeness_table, config_params[i]['BVAL_UPPER']]
+    if not any(np.array_equal(l[0], config_combo[0]) and l[1]==config_combo[1] for l in config_combinations):
+        config_combinations.append(config_combo)
+    config_combo = [completeness_table, config_params[i]['BVAL_LOWER']]
+    if not any(np.array_equal(l[0], config_combo[0]) and l[1]==config_combo[1] for l in config_combinations):
+        config_combinations.append(config_combo)
+print 'config_combinations'
+print config_combinations
+print len(config_combinations)
+
+for i in range(0, len(config_combinations), 1):
     if i % proc == myid:
         run = "%03d" % i
         print 'Run %s' % run
-        completeness_table = config_params[i/3]['COMPLETENESS']
-        if i % 3 == 0:
-            bvalue = config_params[i/3]['BVAL_BEST']
-        if i % 3 == 1:
-            bvalue = config_params[i/3]['BVAL_UPPER']
-        if i % 3 == 2:
-            bvalue = config_params[i/3]['BVAL_LOWER']
+        completeness_table = np.array(config_combinations[i][0])
+        bvalue = config_combinations[i][1]
+#        if i % 3 == 0:
+#            bvalue = config_params[i/3]['BVAL_BEST']
+#        if i % 3 == 1:
+#            bvalue = config_params[i/3]['BVAL_UPPER']
+#        if i % 3 == 2:
+#            bvalue = config_params[i/3]['BVAL_LOWER']
         mmin = completeness_table[0][1]
         print 'mmin', mmin
         config = {"BandWidth": 50.,
                   "Length_Limit": 3.,
                   "increment": 0.1,
                   "bvalue":bvalue}
-        ystart = completeness_table[0][0]
-
-
+        ystart = completeness_table[-1][0]
+        # Call the smoothing module
         run_smoothing(grid_lims, config, catalogue_depth_clean, completeness_table, map_config, run)
+            
 
 pypar.barrier()
 

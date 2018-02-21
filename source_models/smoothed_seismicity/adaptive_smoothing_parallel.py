@@ -85,7 +85,7 @@ print "Everything Imported OK!"
 #bvalue = float(sys.argv[1])
 #print 'b value', bvalue
 #domains_shp = '../zones/2018_mw/Domains_mc_ext/shapefiles/Domains_NSHA18_MFD.shp'
-domains_shp = '../zones/2018_mw/Domains/shapefiles/Domains_NSHA18_MFD.shp'
+domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
 ifile = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
 #ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_mx_orig.csv"
 
@@ -119,7 +119,7 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     completeness_string = 'comp'
     for ym in completeness_table:
         completeness_string += '_%i_%.1f' % (ym[0], ym[1])
-    smoother_filename = "Australia_Adaptive_Mmax4.0_K%i_b%.3f_mmin%.1f_%s.csv" % (
+    smoother_filename = "Australia_Adaptive_K%i_b%.3f_mmin%.1f_%s.csv" % (
         smoother.config['k'], smoother.config['bvalue'], smoother.config['mmin'],
         completeness_string)
     np.savetxt(smoother_filename,
@@ -224,8 +224,8 @@ print "The catalogue contains %g events" % neq
 bbox = catalogue.get_bounding_box()
 print "Catalogue ranges from %.4f E to %.4f E Longitude and %.4f N to %.4f N Latitude\n" % bbox
 catalogue.sort_catalogue_chronologically()
-#index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["depth"] >= 0.0) 
-index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["magnitude"] < 4.0)
+index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["depth"] >= 0.0) 
+#index = np.logical_and(catalogue.data["magnitude"] > 1.5, catalogue.data["magnitude"] < 4.0)
 catalogue.purge_catalogue(index)
 catalogue.get_number_events()
 # Copying the catalogue and saving it under a new name "catalogue_clean"
@@ -278,7 +278,7 @@ for i in range(0, len(config_params)*3, 1):
                   "bvalue": bvalue, "mmin": mmin,
                   "learning_start": 1900, "learning_end": 2017,
                   "target_start": 2018, "target_end": 2019} # using already optimised parameters
-        ystart = completeness_table[0][0]
+        ystart = completeness_table[-1][0]
         # Ensure we aren't training outside completeness model
         if ystart > config['learning_start']:
             config['learning_start'] = ystart
