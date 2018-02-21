@@ -90,8 +90,10 @@ print 'Reading source shapefile...'
 sf = shapefile.Reader(shpfile)
 shapes = sf.shapes()
 polygons = []
+polygonsCopy = []
 for poly in shapes:
     polygons.append(Polygon(poly.points))
+    polygonsCopy.append(Polygon(poly.points))
     
 # get input arrays from shapefile
 src_code = get_field_data(sf, 'CODE', 'str')
@@ -100,7 +102,7 @@ src_class = get_field_data(sf, 'CLASS', 'str')
 src_rte_adj = get_field_data(sf, 'RTE_ADJ_F', 'float')
 src_usd = get_field_data(sf, 'USD', 'float')
 src_lsd = get_field_data(sf, 'LSD', 'float')
-src_overwrite_lsd = get_field_data(sf, 'OR_LSD', 'float')
+src_overwrite_lsd = get_field_data(sf, 'OW_LSD', 'float')
 src_mmin = get_field_data(sf, 'MIN_MAG', 'float')
 src_mmin_reg = get_field_data(sf, 'MIN_RMAG', 'float')
 src_mmax = get_field_data(sf, 'MMAX_BEST', 'float')
@@ -118,7 +120,7 @@ src_mcomp = get_field_data(sf, 'MCOMP', 'str')
 src_ycomp = get_field_data(sf, 'YCOMP', 'str')
 src_shmax = get_field_data(sf, 'SHMAX', 'float')
 src_shm_sig = get_field_data(sf, 'SHMAX_SIG', 'float')
-src_ymax = get_field_data(sf, 'YMAX', 'float')
+src_ymax = get_field_data(sf, 'CAT_YMAX', 'float')
 src_cat = get_field_data(sf, 'CAT_FILE', 'str')
 sortind = argsort(src_code)
 
@@ -238,7 +240,7 @@ for uclass in unique_classes:
                     if oCode == src_code[i]:
                         print '        Matched', oCode
                         poly = oPoly
-            
+                        
             # if rate adjust == 1., use default shapes
             else:
                 poly = polygons[i]
@@ -267,16 +269,12 @@ for uclass in unique_classes:
                 # use ISC-GEM catalogue
                 sourcecat = iscCat
                 year_max = iscMaxYear
+                
+            src_ymax[i] = year_max
             
             # get earthquakes within source zones
-            if src_overwrite_lsd[i] == 1.0:
-                # make sure all events of any depth caught
-                mvect, mxvect, tvect, dec_tvect, ev_dict \
-                       = get_events_in_poly(sourcecat, poly, -9999., 9999.)
-            else:
-                # restrict to upper & lower seismogenic zone
-                mvect, mxvect, tvect, dec_tvect, ev_dict \
-                       = get_events_in_poly(sourcecat, poly, src_usd[i], src_lsd[i])
+            mvect, mxvect, tvect, dec_tvect, ev_dict \
+                = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
             
             # stack records into total arrays
             total_mvect = hstack((total_mvect, mvect))
@@ -349,7 +347,7 @@ for uclass in unique_classes:
         
         # remove incomplete events based on original preferred magnitudes (mxvect)
         total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, out_idx, ev_out = \
-             remove_incomplete_events(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, bin_width)        
+             remove_incomplete_events(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, mcomps, ycomps, bin_width)  
         
         # get annualised rates based on preferred MW (mvect)
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
@@ -378,6 +376,49 @@ for uclass in unique_classes:
         # reset fn0 based on fixed b-value
         fn0 = fit_a_value(bval, mrng, cum_rates, class_mmax, bin_width, midx)
         
+        ##################################################################################################
+        # get folder to write outputs 
+        classfolder = path.join(path.split(outfolder)[0],'class')
+        
+        # check to see if exists
+        if path.isdir(classfolder) == False:
+            mkdir(classfolder)        
+        
+        # write list of complete events for event class
+        # reorder concatonated dates        
+        inDates = []
+        for ei in total_ev_dict:
+            inDates.append(ei['datetime'])
+        inDates = array(inDates)
+        
+        ordidx = argsort(argsort(inDates))
+        new_dict = []
+        for o in range(0, len(ordidx)):
+            idx = where(ordidx == o)[0][0]
+            new_dict.append(total_ev_dict[idx])
+        
+        # write to file
+        ggcat2ascii(new_dict, path.join(classfolder, 'class_'+uclass+'_passed.dat'))
+        
+        # write list of events that fail completeness
+        # reorder out dict
+        outDates = []
+        for eo in ev_out:
+            outDates.append(eo['datetime'])
+        
+        outDates = array(outDates)
+        
+        ordidx = argsort(argsort(outDates))
+        new_dict = []
+        for o in range(0, len(ordidx)):
+            idx = where(ordidx == o)[0][0]
+            new_dict.append(ev_out[idx])
+        
+        outfile = path.join(classfolder, 'class_'+uclass+'_failed.dat')
+        ggcat2ascii(new_dict, outfile)
+    
+    ##################################################################################################
+    
     # add to class arrays - used for plotting later
     class_bval.append(bval)
     class_bval_sig.append(sigb)
@@ -482,14 +523,8 @@ for i in srcidx:
         year_max = iscMaxYear
     
     # now get events within zone of interest
-    if src_overwrite_lsd[i] == 1.0:
-        # make sure all events of any depth caught
-        mvect, mxvect, tvect, dec_tvect, ev_dict \
-               = get_events_in_poly(sourcecat, poly, -9999., 9999.)
-    else:
-        # restrict to upper & lower seismogenic zone
-        mvect, mxvect, tvect, dec_tvect, ev_dict \
-               = get_events_in_poly(sourcecat, poly, src_usd[i], src_lsd[i])
+    mvect, mxvect, tvect, dec_tvect, ev_dict \
+        = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
         
     # skip zone if no events pass completeness
     print 'NEQ Before =', len(mvect)
@@ -793,10 +828,18 @@ for i in srcidx:
         '''
         
         # set national-scale basemap
-        llcrnrlat = -44
-        urcrnrlat = -6
-        llcrnrlon = 107
-        urcrnrlon = 152
+        if src_class[i] <= 8:
+            llcrnrlat = -44
+            urcrnrlat = -6
+            llcrnrlon = 107
+            urcrnrlon = 152
+        
+        # assume off northern Aus
+        else:
+            llcrnrlat = -25
+            urcrnrlat = -0
+            llcrnrlon = 107
+            urcrnrlon = 162
     
         lon_0 = mean([llcrnrlon, urcrnrlon])
         lat_1 = percentile([llcrnrlat, urcrnrlat], 25)
@@ -1089,6 +1132,7 @@ w.field('BVAL_FIX','F', 6, 3)
 w.field('BVAL_FIX_S','F', 6, 3)
 w.field('YCOMP','C','70')
 w.field('MCOMP','C','50')
+w.field('CAT_YMAX', 'F', 8, 3)
 w.field('PREF_STK','F', 6, 2)
 w.field('PREF_DIP','F', 6, 2)
 w.field('PREF_RKE','F', 6, 2)
@@ -1123,10 +1167,10 @@ for record, shape in zip(records, shapes):
     # write new records
     if src_n0[i] != new_n0_b[i]:
         w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
-                 newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
+                 newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], newrec[12], newrec[13], newrec[14], newrec[15], newrec[16],\
                  new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
-                 newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
-                 newrec[25], newrec[26], newrec[27])
+                 newrec[23], newrec[24], newrec[25], newrec[26], src_ymax[i], newrec[28], newrec[29], \
+                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35])
     
     # don't edit values
     else:
@@ -1134,7 +1178,8 @@ for record, shape in zip(records, shapes):
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
                  newrec[12], newrec[13], newrec[14], newrec[15], newrec[16], newrec[17], \
                  newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
-                 newrec[25], newrec[26], newrec[27])
+                 newrec[25], newrec[26], newrec[27], newrec[28], newrec[29], \
+                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35])
 
     i += 1  
     
