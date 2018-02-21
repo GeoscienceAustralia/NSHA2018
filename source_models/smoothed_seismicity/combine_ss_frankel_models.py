@@ -72,9 +72,9 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
     # Get indicies of relevant fields
     for i, f in enumerate(dsf.fields):
         if f[0]=='CODE':
-            code_index = i
+            code_index = i-1
         if f[0]=='TRT':
-            trt_index = i
+            trt_index = i-1
 
     hypo_depth_dist_nc = PMF([(0.5, 10.0),
                               (0.25, 5.0),
@@ -103,6 +103,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         print dom['TRT']
         # For the moment, only consider regions within AUstralia
         if dom['TRT'] == 'Active' or dom['TRT'] == 'Interface' or \
+                dom['TRT'] == 'Oceanic' or \
                 dom['TRT'] == 'Intraslab' or dom['CODE'] == 'NECS' or \
                 dom['CODE'] == 'NWO': 
             print 'Source %s not on continental Australia, skipping' % dom['CODE']
@@ -131,7 +132,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         for ym in dom['COMPLETENESS']:
             completeness_string += '_%i_%.1f' % (ym[0], ym[1])
         mmin = dom['COMPLETENESS'][0][1]
-        filename = "%s_b%.3f_mmin%.1f_%s.xml" % (
+        filename = "%s_b%.3f_mmin_%.1f_0.1%s.xml" % (
             filename_stem, dom[bval_key], mmin,
             completeness_string)
         print 'Parsing %s' % filename
@@ -146,7 +147,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                              (0.25, dom['DEP_UPPER'])])
                 # Define nodal planes as thrusts except for special cases
                 str1 = dom['SHMAX'] + 90.
-                str1 = dom['SHMAX'] + 270.
+                str2 = dom['SHMAX'] + 270.
                 str3 = dom['SHMAX'] + dom['SHMAX_SIG'] + 90.
                 str4 = dom['SHMAX']+ dom['SHMAX_SIG'] + 270.
                 str5 = dom['SHMAX'] - dom['SHMAX_SIG'] + 90.
@@ -155,31 +156,31 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                 for i,strike in enumerate(strikes):
                     if strike >=360:
                         strikes[i]=strike-360
-                nodal_plan_dist = PMF([(0.34, NodalPlane(str1, 30, 90)),
-                                       (0.34, NodalPlane(str2, 30, 90)),
-                                       (0.08, NodalPlane(str3, 30, 90)),
-                                       (0.08, NodalPlane(str4, 30, 90)),
-                                       (0.08, NodalPlane(str5, 30, 90)),
-                                       (0.08, NodalPlane(str6, 30, 90))])
+                nodal_plan_dist = PMF([(0.34, NodalPlane(strikes[0], 30, 90)),
+                                       (0.34, NodalPlane(strikes[1], 30, 90)),
+                                       (0.08, NodalPlane(strikes[2], 30, 90)),
+                                       (0.08, NodalPlane(strikes[3], 30, 90)),
+                                       (0.08, NodalPlane(strikes[4], 30, 90)),
+                                       (0.08, NodalPlane(strikes[5], 30, 90))])
                 if dom['CODE'] == 'WARM' or dom['CODE'] == 'WAPM':
                     print 'Define special case for WARM'
                     nodal_plan_dist = PMF([(0.75, NodalPlane(45, 90, 0)),
-                                           (0.125, NodalPlane(str1, 30, 90)),
-                                           (0.125, NodalPlane(str2, 30, 90))])
+                                           (0.125, NodalPlane(strikes[0], 30, 90)),
+                                           (0.125, NodalPlane(strikes[1], 30, 90))])
                 if dom['CODE'] == 'FMLR':
                     print 'Define special case for FMLR, 0.5 thrust, 0.5 SS'
-                    nodal_plan_dist = PMF([(0.17, NodalPlane(str1, 30, 90)),
-                                           (0.17, NodalPlane(str2, 30, 90)),
-                                           (0.04, NodalPlane(str3, 30, 90)),
-                                           (0.04, NodalPlane(str4, 30, 90)),
-                                           (0.04, NodalPlane(str5, 30, 90)),
-                                           (0.04, NodalPlane(str6, 30, 90)),
-                                           (0.17, NodalPlane(str1, 90, 0)),
-                                           (0.17, NodalPlane(str2, 90, 0)),
-                                           (0.04, NodalPlane(str3, 90, 0)),
-                                           (0.04, NodalPlane(str4, 90, 0)),
-                                           (0.04, NodalPlane(str5, 90, 0)),
-                                           (0.04, NodalPlane(str6, 90, 0))])
+                    nodal_plan_dist = PMF([(0.17, NodalPlane(strikes[0], 30, 90)),
+                                           (0.17, NodalPlane(strikes[1], 30, 90)),
+                                           (0.04, NodalPlane(strikes[2], 30, 90)),
+                                           (0.04, NodalPlane(strikes[3], 30, 90)),
+                                           (0.04, NodalPlane(strikes[4], 30, 90)),
+                                           (0.04, NodalPlane(strikes[5], 30, 90)),
+                                           (0.17, NodalPlane(strikes[0], 90, 0)),
+                                           (0.17, NodalPlane(strikes[1], 90, 0)),
+                                           (0.04, NodalPlane(strikes[2], 90, 0)),
+                                           (0.04, NodalPlane(strikes[3], 90, 0)),
+                                           (0.04, NodalPlane(strikes[4], 90, 0)),
+                                           (0.04, NodalPlane(strikes[5], 90, 0))])
                 dom_poly = Polygon(shape.shape.points)
                 for pt in pts:
                     pt_loc = Point(pt.location.x, pt.location.y)
@@ -213,9 +214,9 @@ if __name__ == "__main__":
     output_dir = 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    domains_shp = '../zones/2018_mw/Domains/shapefiles/Domains_NSHA18_MFD.shp'
+    domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
-    params = params_from_shp(domains_shp)
+    params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
     filename_stem = 'Australia_Fixed_50_3'
     bestb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_BEST',
                                   output_dir=output_dir, nrml_version = '04', 
