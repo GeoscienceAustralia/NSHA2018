@@ -144,14 +144,14 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         for shape in dsf.shapeRecords():
             print shape.record[code_index]
             if shape.record[code_index] == dom['CODE']:
-                # Check for undefined depths                                                                                                      
-                if dom['DEP_BEST'] > 0:
+                # Check for undefined depths  (-999 values)
+                if dom['DEP_BEST'] < 0:
                     print 'Setting best depth to 10 km'
                     dom['DEP_BEST']=10
-                if dom['DEP_UPPER'] > 0:
+                if dom['DEP_UPPER'] < 0:
                     print 'Setting upper depth to 5 km'
                     dom['DEP_UPPER']=5
-                if dom['DEP_LOWER'] > 0:
+                if dom['DEP_LOWER'] < 0:
                     print 'Setting lower depth to 15 km'
                     dom['DEP_LOWER']=15
                 hypo_depth_dist = PMF([(0.5, dom['DEP_BEST']),
