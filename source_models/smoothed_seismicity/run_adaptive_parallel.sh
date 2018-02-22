@@ -1,6 +1,6 @@
 #PBS -P w84
 #PBS -q express
-#PBS -l walltime=04:00:00
+#PBS -l walltime=03:00:00
 #PBS -l ncpus=16
 #PBS -l mem=64GB
 #PBS -l wd
