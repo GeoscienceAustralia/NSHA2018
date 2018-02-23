@@ -517,7 +517,7 @@ for i in srcidx:
         sourcecat = nshaCat
         year_max = nshaMaxYear
         
-    elif src_cat[i].startswith('GEM-ISC'):
+    elif src_cat[i].startswith('ISC-GEM'):
         # use ISC-GEM catalogue
         sourcecat = iscCat
         year_max = iscMaxYear
@@ -691,6 +691,9 @@ for i in srcidx:
         plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
                  [mcomps[-1], ymax], 'g-', lw=1.5)
         
+        # add grids
+        plt.grid(which='major')    
+        
         Npass = str(len(mvect))
         Nfail = str(len(orig_mvect) - len(mvect))
         plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
@@ -828,7 +831,7 @@ for i in srcidx:
         '''
         
         # set national-scale basemap
-        if src_class[i] <= 8:
+        if float(src_class[i]) <= 8:
             llcrnrlat = -44
             urcrnrlat = -6
             llcrnrlon = 107

@@ -12,7 +12,8 @@ def get_completeness_model(src_codes, src_shapes, domains):
     from tools.nsha_tools import get_field_data, get_shp_centroid
     
     # load domains shp
-    compshp = path.join('..','Other','Mcomp_NSHA18_smoothed.shp')
+    #compshp = path.join('..','Other','Mcomp_NSHA18_smoothed.shp') # multi-corner
+    compshp = path.join('..','Other','Mcomp_NSHA18.shp') # single corner 
     mcsf = shapefile.Reader(compshp)
     
     # get completeness data
@@ -48,13 +49,18 @@ def get_completeness_model(src_codes, src_shapes, domains):
         # if no Mcomp model assigned, use conservative model
         if mccompFound == False:
             if dom <= 8:
-                ycomp.append('1980;1964;1900')
-                mcomp.append('3.5;5.0;6.0')
+                # for mult-corner
+                #ycomp.append('1980;1964;1900')
+                #mcomp.append('3.5;5.0;6.0')
+                
+                # for single-corner
+                ycomp.append('1980;1980')
+                mcomp.append('3.5;3.5')
             
-            # use ISC-GEM completeness
+            # use approx ISC-GEM completeness
             else:
-                ycomp.append('1980;1920;1900')
-                mcomp.append('6.0;6.25;7.5')
+                ycomp.append('1990;1964;1900')
+                mcomp.append('5.5;6.25;7.5')
             
         # set rmin range
         min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
@@ -162,7 +168,7 @@ def get_rate_adjust_factor(newshp, newField, origshp, origField):
 def get_preferred_catalogue(targetshpfile):
     import shapefile
     from shapely.geometry import Point, Polygon
-    from tools.nsha_tools import get_field_data
+    #from tools.nsha_tools import get_field_data
     
     ###############################################################################
     # parse shapefile
@@ -207,12 +213,17 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
                        shmax_pref, shmax_sig, trt, dom, prefCat):
                            
     import shapefile
-    from numpy import array, zeros_like
+    from numpy import array, ones_like, where
     
     # many eqs within Aust get left out if LSD too conservative    
-    overright_lsd = zeros_like(lsd)
-    idx = array(dom) <= 8
-    overright_lsd[idx] = 1
+    overwright_lsd = 999 * ones_like(lsd)
+    
+    #idx = array(dom) <= 8 # hardwire for continental sources
+    #overwright_lsd[idx] = 999 # in km
+    
+    # set overwright_lsd for insalb sources
+    idx = where(array(dom) == 11)[0]
+    overwright_lsd[idx] = lsd[idx] + 200 # in km
     
     # set shapefile to write to
     w = shapefile.Writer(shapefile.POLYGON)
@@ -225,9 +236,9 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.field('DEP_BEST','F', 6, 1)
     w.field('DEP_UPPER','F', 6, 1)
     w.field('DEP_LOWER','F', 6, 1)
-    w.field('USD','F', 6, 1)
-    w.field('LSD','F', 6, 1)
-    w.field('OR_LSD','F', 3, 0)
+    w.field('USD','F', 4, 1)
+    w.field('LSD','F', 4, 1)
+    w.field('OW_LSD','F', 4, 1)
     w.field('MIN_MAG','F', 4, 2)
     w.field('MIN_RMAG','F', 4, 2)
     w.field('MMAX_BEST','F', 4, 2)
@@ -243,6 +254,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.field('BVAL_FIX_S','F', 6, 3)
     w.field('YCOMP','C','70')
     w.field('MCOMP','C','50')
+    w.field('CAT_YMAX', 'F', 8, 3)
     w.field('PREF_STK','F', 6, 2)
     w.field('PREF_DIP','F', 6, 2)
     w.field('PREF_RKE','F', 6, 2)
@@ -251,6 +263,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.field('TRT','C','100')
     w.field('DOMAIN','F', 2, 0)
     w.field('CAT_FILE','C','50')
+    
     
     src_wt = 1.0
     src_ty = 'area'
@@ -262,6 +275,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     bval = -99
     bval_l = -99
     bval_u = -99
+    cat_ymax = -99
     
     # loop through original records
     for i, shape in enumerate(src_shapes):
@@ -272,8 +286,8 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
         # write new records
         if i >= 0:
             w.record(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i], \
-                     overright_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
-                     ycomp[i], mcomp[i], pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], dom[i], prefCat[i])
+                     overwright_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
+                     ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], dom[i], prefCat[i])
             
     # now save area shapefile
     w.save(outshp)

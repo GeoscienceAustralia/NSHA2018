@@ -40,6 +40,7 @@ dip = get_field_data(sf, 'dip1', 'float')
 rke = get_field_data(sf, 'rake1', 'float')
 
 # set domain for unset domains
+trt_new = []
 for i in range(0,len(trt)):
     if trt[i] == 'Active':
         domains[i] = 9
@@ -49,6 +50,11 @@ for i in range(0,len(trt)):
         domains[i] = 10
     elif trt[i] == 'Intraslab':
         domains[i] = 11
+    
+    if trt[i] == 'NCratonic':
+        trt_new.append('Non_cratonic')
+    else:
+        trt_new.append(trt[i])
 
 zone_class = list(domains)[:]
 # reset Gawler Craton to Flinders due to b-value similarities
@@ -165,6 +171,6 @@ build_source_shape(outshp, shapes, src_names, src_codes, zone_class, \
                    rte_adj_fact, dep_b, dep_u, dep_l, usd, lsd, \
                    min_rmag, mmax, bval_fix, bval_sig_fix, \
                    ycomp, mcomp, pref_stk, pref_dip, pref_rke, \
-                   shmax_pref, shmax_sig, trt, domains, prefCat)
+                   shmax_pref, shmax_sig, trt_new, domains, prefCat)
 
 
