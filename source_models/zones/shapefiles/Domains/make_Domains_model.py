@@ -120,10 +120,10 @@ ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains)
 # use manual modification
 for i in range(0,len(trt)):
     if trt[i] == 'Active':
-        min_rmag[i] = 6.0
+        min_rmag[i] = 5.8
 
 min_rmag[12] = 6.1 # NBT
-min_rmag[16] = 6.0 # TAFS
+min_rmag[16] = 5.6 # BNBD
 min_rmag[26] = 3.8 # NWO
 min_rmag[50] = 3.2 # CARP
 min_rmag[51] = 3.5 # EAPM
@@ -134,7 +134,7 @@ min_rmag[49] = 3.3 # PLBR
 min_rmag[53] = 3.5 # WAPM
 min_rmag[48] = 3.2 # YLGN
 min_rmag[56] = 3.2 # WAEP
-#min_rmag[62] = 3.1 # GAWL
+min_rmag[66] = 3.5 # NWB1
 
 # SEOB - multi-corner
 ycomp[59] = '1980;1964;1900'

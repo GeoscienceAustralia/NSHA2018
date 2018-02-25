@@ -542,6 +542,27 @@ for i in srcidx:
         
     # check to see if mvect still non-zero length after removing incomplete events
     print 'NEQ After =', len(mvect)
+    
+    ###############################################################################
+    # pad N0 for sources without any events based on nornalised class area
+    ###############################################################################
+    if len(mvect) == 0:
+    
+        N0areanorm = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
+        new_n0_b[i] = N0areanorm 
+        new_n0_l[i] = N0areanorm
+        new_n0_u[i] = N0areanorm
+        
+        new_bval_b[i] = bval
+        
+        # Use +/- 1 sigma
+        new_bval_l[i] = bval+bval_sig # lower curve, so higher b
+        new_bval_u[i] = bval-bval_sig # upper curve, so lower b
+    
+    ###############################################################################
+    # start making outputs
+    ###############################################################################
+        
     if len(mvect) != 0:
         
         # get annualised rates based on preferred MW (mvect)
@@ -926,7 +947,12 @@ for i in srcidx:
         
         ax = plt.subplot(233)
         
-        deprng = arange(0, 73, 4)
+        if src_usd <= 20:
+            deprng = arange(0, 81, 4)
+        elif src_usd > 20 and src_usd <= 120:
+            deprng = arange(60, 221, 10)
+        elif src_usd > 120:
+            deprng = arange(160, 601, 20)
         
         # get depth data
         all_dep = []
@@ -1206,7 +1232,7 @@ fig = plt.figure(221, figsize=(13, 9))
 
 # set national-scale basemap
 llcrnrlat = -45
-urcrnrlat = -5
+urcrnrlat = 0
 llcrnrlon = 105
 urcrnrlon = 155
 lon_0 = mean([llcrnrlon, urcrnrlon])
