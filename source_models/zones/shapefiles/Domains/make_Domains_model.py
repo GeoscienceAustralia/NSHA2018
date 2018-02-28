@@ -120,7 +120,7 @@ ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains)
 # use manual modification
 for i in range(0,len(trt)):
     if trt[i] == 'Active':
-        min_rmag[i] = 5.8
+        min_rmag[i] = 5.7
 
 min_rmag[12] = 6.1 # NBT
 min_rmag[16] = 5.6 # BNBD

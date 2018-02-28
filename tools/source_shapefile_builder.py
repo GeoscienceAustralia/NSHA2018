@@ -59,7 +59,7 @@ def get_completeness_model(src_codes, src_shapes, domains):
             
             # use approx ISC-GEM completeness
             else:
-                ycomp.append('1990;1964;1900')
+                ycomp.append('1990;1964;1904')
                 mcomp.append('5.5;6.25;7.5')
             
         # set rmin range
@@ -199,7 +199,7 @@ def get_preferred_catalogue(targetshpfile):
             
             # check if point in catshape
             if point.within(Polygon(catshape.points)) == False:
-                tmpcat = 'ISC-GEM_V4_hmtk_GK74_declustered_clip.csv'
+                tmpcat = 'ISC-GEM_V5_hmtk_GK74_declustered_clip.csv'
                 
         # now append catalogue
         cat.append(tmpcat)

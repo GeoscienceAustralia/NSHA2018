@@ -67,7 +67,7 @@ def decluster_GK74(catalogue, filename):
     writer.write_file(catalogue_gk)
     
     # write shapefile
-    htmk2shp_isc(catalogue_gk, path.join('shapefiles', 'ISC-GEM_V4_hmtk_GK74_declustered.shp'))
+    htmk2shp_isc(catalogue_gk, path.join('shapefiles', 'ISC-GEM_V5_hmtk_GK74_declustered.shp'))
     
     print 'Declustered catalogue: ok\n'
 
@@ -97,7 +97,7 @@ def convert_iscgem2hmtk(iscgemcsv):
     iscgemDict = parse_iscgem(iscgemcsv)
     
     # convert to hmtk
-    iscgem2hmtk_csv(iscgemDict, path.join('data', 'ISC-GEM_V4_hmtk_full.csv'))
+    iscgem2hmtk_csv(iscgemDict, path.join('data', 'ISC-GEM_V5_hmtk_full.csv'))
     
 # clip declustered global GEM-ISC catalogue to local region
 def clip_iscgem_hmtk(hmtkcsv):

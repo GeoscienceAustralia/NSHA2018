@@ -173,7 +173,7 @@ nshaCat, full_neq = parse_hmtk_cat(hmtk_csv)
 nshaMaxYear = toYearFraction(nshaCat[-1]['datetime'])
 
 # parse ISC-GEM catalogue
-hmtk_csv = path.join('..','..','catalogue','data','ISC-GEM_V4_hmtk_GK74_declustered_clip.csv')
+hmtk_csv = path.join('..','..','catalogue','data','ISC-GEM_V5_hmtk_GK74_declustered_clip.csv')
 iscCat, crust_neq = parse_hmtk_cat(hmtk_csv)
 iscMaxYear = toYearFraction(iscCat[-1]['datetime'])
 
@@ -558,6 +558,8 @@ for i in srcidx:
         # Use +/- 1 sigma
         new_bval_l[i] = bval+bval_sig # lower curve, so higher b
         new_bval_u[i] = bval-bval_sig # upper curve, so lower b
+        
+        print 'Setting N0 based on area-normalised class rates:', src_code[i], src_cat[i]
     
     ###############################################################################
     # start making outputs
@@ -947,11 +949,11 @@ for i in srcidx:
         
         ax = plt.subplot(233)
         
-        if src_usd <= 20:
+        if src_usd[i] <= 20:
             deprng = arange(0, 81, 4)
-        elif src_usd > 20 and src_usd <= 120:
+        elif src_usd[i] > 20 and src_usd[i] <= 120:
             deprng = arange(60, 221, 10)
-        elif src_usd > 120:
+        elif src_usd[i] > 120:
             deprng = arange(160, 601, 20)
         
         # get depth data
