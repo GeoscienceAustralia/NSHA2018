@@ -546,7 +546,7 @@ for i in srcidx:
     ###############################################################################
     # pad N0 for sources without any events based on nornalised class area
     ###############################################################################
-    if len(mvect) == 0:
+    if len(mvect) <= 1:
     
         N0areanorm = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
         new_n0_b[i] = N0areanorm 
@@ -565,7 +565,7 @@ for i in srcidx:
     # start making outputs
     ###############################################################################
         
-    if len(mvect) != 0:
+    else:
         
         # get annualised rates based on preferred MW (mvect)
         cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
