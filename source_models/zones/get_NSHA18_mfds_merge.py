@@ -528,7 +528,7 @@ for i in srcidx:
         
     # skip zone if no events pass completeness
     print 'NEQ Before =', len(mvect)
-    if len(mvect) != 0:
+    if len(mvect) > 1 :
         
         # preserve original arrays for plotting
         orig_mvect = mvect

@@ -59,8 +59,8 @@ def get_completeness_model(src_codes, src_shapes, domains):
             
             # use approx ISC-GEM completeness
             else:
-                ycomp.append('1990;1964;1904')
-                mcomp.append('5.5;6.25;7.5')
+                ycomp.append('1975;1964;1904')
+                mcomp.append('5.75;6.25;7.5')
             
         # set rmin range
         min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))

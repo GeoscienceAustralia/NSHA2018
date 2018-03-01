@@ -190,7 +190,7 @@ elif outputType == '2':
             
             #set metadata dict
             meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-                    'multiMods':False, 'one_mx':True, 'mx_idx':j, 'splitXMLPath': True}
+                    'multiMods':True, 'one_mx':False, 'mx_idx':j, 'splitXMLPath': True}
             	
             # check to see if exists
             if path.isdir(meta['modelPath']) == False:

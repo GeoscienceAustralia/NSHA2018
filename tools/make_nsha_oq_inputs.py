@@ -16,8 +16,15 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     '''
     
     # set mx arrays from mx dictionary using zone trt
-    mx_vals = mx_dict[m['trt']]['mx_vals']
-    mx_wts  = mx_dict[m['trt']]['mx_wts']
+    # first try EE mags
+    try:
+        mx_vals = mx_dict[m['trt']]['mx_vals']
+        mx_wts  = mx_dict[m['trt']]['mx_wts']
+    # else use Mmax from model and theoretical weights
+    except:
+        mx = m['max_mag'][0]
+        mx_vals = [mx-0.2, mx-0.1, mx, mx+0.1, mx+0.2]
+        mx_wts  = [0.02, 0.14, 0.68, 0.14, 0.02]
     
     # REMOVE ME WHEN FINISHED TESTING
     #mx_wts = [0.1, 0.2, 0.4, 0.2, 0.1]
@@ -576,51 +583,64 @@ def src_shape2dict(modelshp):
     # loop thru recs and make dict
     for rec, shape in zip(records, shapes):
         if not float(rec[15]) == -99:
-            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 
-                 'trt':rec[23], 'src_shape':array(shape.points), 
-                 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])], 
-                 'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 
-                 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-                 'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 
-                 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2],
+                 'class':rec[3], 'trt':rec[33], 'src_shape':array(shape.points),
+                 'src_dep':[float(rec[6]), float(rec[7]), float(rec[8])],
+                 'src_usd':float(rec[9]), 'src_lsd':float(rec[10]),
+                 'max_mag':[float(rec[14]), float(rec[15]), float(rec[16])],
+                 'src_N0':[float(rec[17]), float(rec[18]), float(rec[19])],
+                 'src_beta':[bval2beta(float(rec[20])), bval2beta(float(rec[21])), bval2beta(float(rec[22]))],
+                 'min_mag':float(rec[12]), 'src_weight':float(rec[4]), 'src_reg_wt':1.,
+                 'rate_adj_fact':float(rec[5]), 'pref_stk':float(rec[28]), 'pref_dip':float(rec[29]),
+                 'pref_rke':float(rec[30]), 'shmax':float(rec[31]), 'shmax_sig':float(rec[32])}
             model.append(m)
             
         else:
             # parse GSC version
-            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'src_type':rec[2]
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'src_type':rec[2],
                   'src_weight':float(rec[3]), 'src_shape':array(shape.points), 
                   'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])], 'min_mag':float(rec[7]), 
-                  'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], ,
-                  'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 
-                  'src_beta':[float(rec[15]), float(rec[16]), float(rec[17])], 
-                  'src_reg_wt':1, 'trt':rec[23], }
+                  'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])],
+                  'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])],
+                  'src_beta':[float(rec[15]), float(rec[16]), float(rec[17])],
+                  'src_reg_wt':1, 'trt':rec[23]}
     
     return model 
 """    
-w.field('SRC_NAME','C','100')  
-w.field('CODE','C','10')       
-w.field('SRC_TYPE','C','10')   
-w.field('SRC_WEIGHT','F', 8, 2)
-w.field('DEP_BEST','F', 8, 1)  
-w.field('DEP_UPPER','F', 8, 1) 
-w.field('DEP_LOWER','F', 8, 1) 
-w.field('MIN_MAG','F', 8, 2)   
-w.field('MIN_RMAG','F', 8, 2)  
-w.field('MMAX_BEST','F', 8, 2) 
-w.field('MMAX_LOWER','F', 8, 2)
-w.field('MMAX_UPPER','F', 8, 2)
-w.field('N0_BEST','F', 8, 5)   
-w.field('N0_LOWER','F', 8, 5)  
-w.field('N0_UPPER','F', 8, 5)  
-w.field('BETA_BEST','F', 8, 3) 
-w.field('BETA_LOWER','F', 8, 3)
-w.field('BETA_UPPER','F', 8, 3)
-w.field('BETA_FIX','F', 8, 3)  
-w.field('BETA_FIX_S','F', 8, 3)
-w.field('YCOMP','C','70')      
-w.field('MCOMP','C','30')      
-w.field('YMAX','F', 8, 0)      
-w.field('TRT','C','50')      
-#w.field('DOMAIN','F', 2, 0)   
-w.field('SHEEF_FILE','C','50') 
+0     w.field('SRC_NAME','C','100')
+1     w.field('CODE','C','10')
+2     w.field('SRC_TYPE','C','10')
+3     w.field('CLASS','C','10')
+4     w.field('SRC_WEIGHT','F', 8, 2)
+5     w.field('RTE_ADJ_F','F', 6, 4)
+6     w.field('DEP_BEST','F', 6, 1)
+7     w.field('DEP_UPPER','F', 6, 1)
+8     w.field('DEP_LOWER','F', 6, 1)
+9     w.field('USD','F', 4, 1)
+10    w.field('LSD','F', 4, 1)
+11    w.field('OW_LSD','F', 4, 1)
+12    w.field('MIN_MAG','F', 4, 2)
+13    w.field('MIN_RMAG','F', 4, 2)
+14    w.field('MMAX_BEST','F', 4, 2)
+15    w.field('MMAX_LOWER','F', 4, 2)
+16    w.field('MMAX_UPPER','F', 4, 2)
+17    w.field('N0_BEST','F', 8, 5)
+18    w.field('N0_LOWER','F', 8, 5)
+19    w.field('N0_UPPER','F', 8, 5)
+20    w.field('BVAL_BEST','F', 6, 3)
+21    w.field('BVAL_LOWER','F', 6, 3)
+22    w.field('BVAL_UPPER','F', 6, 3)
+23    w.field('BVAL_FIX','F', 6, 3)
+24    w.field('BVAL_FIX_S','F', 6, 3)
+25    w.field('YCOMP','C','70')
+26    w.field('MCOMP','C','50')
+27    w.field('CAT_YMAX', 'F', 8, 3)
+28    w.field('PREF_STK','F', 6, 2)
+29    w.field('PREF_DIP','F', 6, 2)
+30    w.field('PREF_RKE','F', 6, 2)
+31    w.field('SHMAX','F', 6, 2)
+32    w.field('SHMAX_SIG','F', 6, 2)
+33    w.field('TRT','C','100')
+34    w.field('DOMAIN','F', 2, 0)
+35    w.field('CAT_FILE','C','50')
 """
