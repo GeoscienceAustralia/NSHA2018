@@ -6,7 +6,7 @@
 #            e.g. python make_openquake_source_file.py SWCan_T3EclC1.pkl swcan
 #####################################################################################
 
-def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
+def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
     from numpy import array, zeros, argmax, zeros_like
     from tools.oq_tools import get_oq_incrementalMFD
     '''
@@ -52,12 +52,12 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     
     for beta_val, beta_wt, N0 in zip(m['src_beta'], meta['beta_wts'], m['src_N0']):
         # get effective rate
-        effN0 = N0 * m['src_weight']
+        effN0 = N0 * m['src_weight'] * m['rate_adj_fact']
         
         for mx, mxwt in zip(mx_vals, mx_wts):
             
             betacurve, mrange = get_oq_incrementalMFD(beta_val, effN0, \
-                                                      m['min_mag'], mx, \
+                                                      min_mag, mx, \
                                                       binwid)
             
             #print m['src_weight'], betacurve[0], beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
@@ -89,6 +89,53 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
         octxt += ' ' + str('%0.5e' % bc)
     #print octxt.split()[0]
     return octxt
+
+def check_stk_angle(strike):
+    
+    strike = round(strike)
+    if strike >= 360.:
+        strike -= 360.
+    elif strike < 0.:
+        strike += 360
+        
+    return abs(strike)
+
+
+def get_nodal_plane_text(m):
+    nptxt = ''
+    
+    # use shmax info assuming shallow dipping reverse faults
+    if m['pref_stk'] == -999.0:
+        
+        # get preferred strikes from shmax for reverse faulting
+        pref_stk1 = check_stk_angle(m['shmax']+90)
+        pref_stk2 = check_stk_angle(m['shmax']+270)
+        
+        nptxt += '                <nodalPlane probability="0.34" strike="'+str(pref_stk1)+'" dip="35.0" rake="90.0" />\n'
+        nptxt += '                <nodalPlane probability="0.34" strike="'+str(pref_stk2)+'" dip="35.0" rake="90.0" />\n'
+        
+        # check strike values
+        stk_pos1 = check_stk_angle(round(pref_stk1 + m['shmax_sig']))
+        stk_neg1 = check_stk_angle(round(pref_stk1 - m['shmax_sig']))
+         
+        # set shmax +/- sigma
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_pos1)+'" dip="35.0" rake="90.0" />\n'
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_neg1)+'" dip="35.0" rake="90.0" />\n'
+        
+        # check strike values
+        stk_pos2 = check_stk_angle(round(pref_stk2 + m['shmax_sig']))
+        stk_neg2 = check_stk_angle(round(pref_stk2 - m['shmax_sig']))
+         
+        # set shmax +/- sigma
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_pos2)+'" dip="35.0" rake="90.0" />\n'
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_neg2)+'" dip="35.0" rake="90.0" />\n'
+            
+    # if stk/dip/rke set mostly for offshore regions
+    else:
+        nptxt += '                <nodalPlane probability="1.0" strike="'+str(m['pref_stk']) \
+                                   +'" dip="'+str(m['pref_dip'])+'" rake="'+str(m['pref_rke'])+'" />\n'
+
+    return nptxt
 
 def test_beta_curves(m, binwid, meta, mx_dict):
     from tools.oq_tools import get_oq_incrementalMFD
@@ -161,6 +208,25 @@ def write_oq_sourcefile(model, meta, mx_dict):
     
     # start loop thru area sources
     for m in model:
+        
+        # set magScaleRel
+        if float(m['class']) <= 7.:
+            magScaleRel = 'Leonard2014_SCR'
+            ruptAspectRatio = 1.5
+            min_mag = 4.5
+        elif float(m['class']) == 8 or float(m['class']) == 9:
+            magScaleRel = 'WC1994'
+            ruptAspectRatio = 1.0
+            min_mag = 5.5
+        elif float(m['class']) == 10:
+            magScaleRel = 'StrasserInterface'
+            ruptAspectRatio = 1.3
+            min_mag = 6.5
+        elif float(m['class']) == 11:
+            magScaleRel = 'StrasserIntraslab'
+            ruptAspectRatio = 1.25
+            min_mag = 5.5
+        
         # comment out sources with null activitiy rates
         if m['src_N0'][-1] == -99.0:
             newxml += '        <!--\n'
@@ -216,26 +282,19 @@ def write_oq_sourcefile(model, meta, mx_dict):
             ###################################################################
     
             # set depth distribution
-            if min(m['src_dep']) != max(m['src_dep']):
-                #newxml += '                <upperSeismoDepth>'+str("%0.1f" % min(m['src_dep']))+'</upperSeismoDepth>\n'
-                #newxml += '                <lowerSeismoDepth>'+str("%0.1f" % max(m['src_dep']))+'</lowerSeismoDepth>\n'
-                newxml += '                <upperSeismoDepth>0.0</upperSeismoDepth>\n'
-                newxml += '                <lowerSeismoDepth>20.0</lowerSeismoDepth>\n'
-            else:
-                newxml += '                <upperSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])-10))+'</upperSeismoDepth>\n'
-                newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
-                
+            newxml += '                <upperSeismoDepth>'+str(m['src_usd'])+'</upperSeismoDepth>\n'
+            newxml += '                <lowerSeismoDepth>'+str(m['src_lsd'])+'</lowerSeismoDepth>\n'
+            
+            # set source geometry
             newxml += '            </areaGeometry>\n'
-            newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-            #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
-            #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
-            newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
+            newxml += '            <magScaleRel>'+magScaleRel+'</magScaleRel>\n'
+            newxml += '            <ruptAspectRatio>'+str(ruptAspectRatio)+'</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
-            octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
+            octxt = make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict)
                                  
-            newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
+            newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (min_mag+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
             newxml += '                <occurRates>'+octxt+'</occurRates>\n'
             newxml += '            </incrementalMFD>\n'
             
@@ -254,25 +313,20 @@ def write_oq_sourcefile(model, meta, mx_dict):
             """
             # set nodal planes
             newxml += '            <nodalPlaneDist>\n'
-            
-            newxml += '                <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="45.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.2" strike="90.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="135.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.3" strike="180.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="225.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="315.0" dip="30.0" rake="90.0" />\n'
-    
+            newxml += get_nodal_plane_text(m)
             newxml += '            </nodalPlaneDist>\n'
             
-    
             # set hypo depth
             newxml += '            <hypoDepthDist>\n'
-            newxml += '                <hypoDepth probability="0.50" depth="'+str("%0.1f" % m['src_dep'][0])+'"/>\n' \
-                     +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][1])+'"/>\n' \
-                     +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][2])+'"/>\n'
+            if m['src_dep'][1] != -999.0:
+                newxml += '                <hypoDepth probability="0.50" depth="'+str("%0.1f" % m['src_dep'][0])+'"/>\n' \
+                         +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][1])+'"/>\n' \
+                         +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][2])+'"/>\n'
+            else:
+                newxml += '                <hypoDepth probability="1.0" depth="'+str("%0.1f" % m['src_dep'][0])+'"/>\n'
+            
             newxml += '            </hypoDepthDist>\n'
+            
             if m['src_N0'][-1] == -99.0:
                 newxml += '        </areaSource>\n'
             else:
@@ -377,10 +431,10 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        newxml += '            <magScaleRel>'+magScaleRel+'</magScaleRel>\n'
                         #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
-                    newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
+                    newxml += '            <ruptAspectRatio>'+str(ruptAspectRatio)+'</ruptAspectRatio>\n'
                 
                     '''
                     # now get appropriate MFD
@@ -389,7 +443,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     if m['src_beta'][0] > -99:
                         # adjust N0 value to account for weighting of fault sources
                     
-                        octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
+                        octxt = make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -459,18 +513,17 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-                        #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+                        newxml += '            <magScaleRel>'+magScaleRel+'</magScaleRel>\n'
+                        
+                    newxml += '            <ruptAspectRatio>'+str(ruptAspectRatio)+'</ruptAspectRatio>\n'
                     
-                    newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
-                    #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
                     '''
                     # now get appropriate MFD
                     '''
                     # do incremental MFD
                     if m['src_beta'][0] > -99:
                         
-                        octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
+                        octxt = make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -515,6 +568,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
 def make_logic_tree(srcxmls, branch_wts, meta):    
     from os import path
     
+    print branch_wts
     # if multimodel - adjust weights
     '''
     if meta['multiMods'] == 'True':
@@ -535,6 +589,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
     
     # make branches
     for i, srcxml in enumerate(srcxmls):
+        print i, srcxml
         #logictreepath = logicpath + sep + path.split(branch)[-1]
         if meta['splitXMLPath'] == True:
             logictreepath = path.split(srcxml)[-1]

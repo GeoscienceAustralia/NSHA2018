@@ -147,8 +147,8 @@ new_n0_l = src_n0_l
 new_n0_u = src_n0_u
 
 # reset Mmin to 4.8
-print '!!!Setting Mmin = 4.5!!!'
-src_mmin = 4.5 * ones_like(src_mmin)
+#print '!!!Setting Mmin = 4.5!!!'
+#src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
 # set arrays for testing

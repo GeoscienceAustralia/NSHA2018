@@ -42,7 +42,7 @@ beta_wts   = [0.5, 0.2, 0.3] # best, lower (hi b), upper (lo b)
 
 # set Mmax array and weights
 #print '\n!!!! temporary override to compare rate collapse method !!!!\n'
-#mx_wts  = [0.1, 0.2, 0.4, 0.2, 0.1] # for testing
+mx_wts  = [0.1, 0.2, 0.4, 0.2, 0.1] # using this for default as Mmax probably not major contributor to hazard
 
 # check that input folder
 splitpath.append('input')
@@ -190,7 +190,7 @@ elif outputType == '2':
             
             #set metadata dict
             meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-                    'multiMods':True, 'one_mx':False, 'mx_idx':j, 'splitXMLPath': True}
+                    'multiMods':False, 'one_mx':True, 'mx_idx':j, 'splitXMLPath': True}
             	
             # check to see if exists
             if path.isdir(meta['modelPath']) == False:
@@ -201,7 +201,7 @@ elif outputType == '2':
             srcxmls.append(outxml)
             
             # get branch weight
-            #branch_wts.append(beta_wts[i] * mx_wts[j])
+            branch_wts.append(beta_wts[i] * mx_wts[j])
 
 ##############################################################################
 # vary beta only, mmax = constant
@@ -272,6 +272,7 @@ elif outputType == '4':
 ##############################################################################
 # make logic tree file
 ##############################################################################
+print branch_wts
 make_logic_tree(srcxmls, branch_wts, meta)
 
 ##############################################################################
