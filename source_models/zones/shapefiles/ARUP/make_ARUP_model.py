@@ -5,7 +5,8 @@ try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
                                                get_completeness_model, get_aus_shmax_vectors, \
-                                               get_rate_adjust_factor, build_source_shape
+                                               get_rate_adjust_factor, build_source_shape, \
+                                               get_ul_seismo_depths
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -27,11 +28,12 @@ for poly in shapes:
     polygons.append(Polygon(poly.points))
     
 # get field data
-src_codes = get_field_data(sf, 'code', 'str')
-src_names = get_field_data(sf, 'Name', 'str')
+src_codes = get_field_data(sf, 'CODE', 'str')
+src_names1 = get_field_data(sf, 'Name', 'str')
+src_names2 = get_field_data(sf, 'SRC_NAME', 'str')
 domains = get_field_data(sf, 'DOMAIN', 'float')
 mmax = get_field_data(sf, 'max_mag', 'float')
-trt = get_field_data(sf, 'trt', 'str')
+trt = get_field_data(sf, 'TRT', 'str')
 usd = get_field_data(sf, 'usd', 'float')
 lsd = get_field_data(sf, 'lsd', 'float')
 hd = get_field_data(sf, 'hd1', 'float')
@@ -39,10 +41,22 @@ stk = get_field_data(sf, 'strike1', 'float')
 dip = get_field_data(sf, 'dip1', 'float')
 rke = get_field_data(sf, 'rake1', 'float')
 
+# merge source names
+src_names = []
+for sn1, sn2 in zip(src_names1, src_names2):
+    if sn1.strip() != '':
+        src_names.append(sn1)
+    elif sn2.strip() != '':
+        src_names.append(sn2)
+    else:
+        src_names.append('null')
+        
 # set domain for unset domains
 trt_new = []
 for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+    if trt[i] == 'Oceanic':
+        domains[i] = 8
+    elif trt[i] == 'Active':
         domains[i] = 9
     elif trt[i] == 'Extended' and domains[i] == 0.:
         domains[i] = 7
@@ -84,7 +98,7 @@ dep_l = []
 for i in range(0,len(lsd)):
     if domains[i] < 8:
         lsd[i] = 20.
-        if trt[i] == 'Cratonic':        
+        if trt[i] == 'Cratonic':
             dep_b.append(5.0)
             dep_u.append(2.5)
             dep_l.append(10.)
@@ -99,6 +113,8 @@ for i in range(0,len(lsd)):
         dep_u.append(-999)
         dep_l.append(-999)
 
+# fix preferred upper/lower seismo depths from Domains
+usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 
 ###############################################################################
 # get preferred catalogues 
@@ -155,7 +171,7 @@ shmax_pref, shmax_sig = get_aus_shmax_vectors(src_codes, shapes)
 ###############################################################################
 
 origshp = 'ARUP_NSHA18_FIXEDSHAPES.shp'
-newField = 'code'
+newField = 'CODE'
 origField = 'CODE'
 rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
               

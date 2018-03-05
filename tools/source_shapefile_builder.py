@@ -67,6 +67,38 @@ def get_completeness_model(src_codes, src_shapes, domains):
         
     return ycomp, mcomp, min_rmag
 
+# need to ensure upper/lower seismo depths consistent with Domains edits
+def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
+    from os import path
+    import shapefile
+    from numpy import array, median, std
+    from tools.nsha_tools import get_field_data
+    
+    shmaxshp = path.join('..','Domains','Domains_NSHA18_single_Mc.shp')
+
+    print 'Reading SHmax shapefile...'
+    sf = shapefile.Reader(shmaxshp)
+        
+    # get shmax attributes
+    source_codes = get_field_data(sf, 'CODE', 'str')
+    source_usd = get_field_data(sf, 'USD', 'float')
+    source_lsd = get_field_data(sf, 'LSD', 'float')
+    
+    for j, tc in enumerate(target_codes):
+        matchCodes = False
+        for i, sc in enumerate(source_codes):
+            if tc == sc:
+                target_usd[j] = source_usd[i]
+                target_lsd[j] = source_lsd[i]
+                matchCodes = True
+        
+        # no match
+        if matchCodes == False:
+           print '  Cannot match seis depths:', tc
+           
+    return target_usd, target_lsd
+
+
 # use Rajabi_2016 shmax vectors - gets median & std within a source zone    
 def get_aus_shmax_vectors(src_codes, src_shapes):
     from os import path
@@ -216,14 +248,14 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     from numpy import array, ones_like, where
     
     # many eqs within Aust get left out if LSD too conservative    
-    overwright_lsd = 999 * ones_like(lsd)
+    overwrite_lsd = 999 * ones_like(lsd)
     
     #idx = array(dom) <= 8 # hardwire for continental sources
-    #overwright_lsd[idx] = 999 # in km
+    #overwrite_lsd[idx] = 999 # in km
     
     # set overwright_lsd for insalb sources
     idx = where(array(dom) == 11)[0]
-    overwright_lsd[idx] = lsd[idx] + 200 # in km
+    overwrite_lsd[idx] = lsd[idx] + 200 # in km
     
     # set shapefile to write to
     w = shapefile.Writer(shapefile.POLYGON)
@@ -286,7 +318,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
         # write new records
         if i >= 0:
             w.record(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i], \
-                     overwright_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
+                     overwrite_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
                      ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], dom[i], prefCat[i])
             
     # now save area shapefile
