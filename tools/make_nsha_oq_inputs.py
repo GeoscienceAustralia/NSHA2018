@@ -90,6 +90,7 @@ def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
     #print octxt.split()[0]
     return octxt
 
+# makes sure strike angle is within acceptable range
 def check_stk_angle(strike):
     
     strike = round(strike)
@@ -100,7 +101,7 @@ def check_stk_angle(strike):
         
     return abs(strike)
 
-
+# gets nodal plane text for rupture logic tree
 def get_nodal_plane_text(m):
     nptxt = ''
     
@@ -192,9 +193,6 @@ def write_oq_sourcefile(model, meta, mx_dict):
     max_mag_wt = [0.60, 0.30, 0.10]
     '''
     
-    # set rupture aspect ratio
-    aspectratio = '1.5' # balance between L14 and Cea14 surface rupture lengths
-
     outbase = path.split(meta['modelPath'])[-1]
     
     # start xml text
@@ -212,7 +210,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
         # set magScaleRel
         if float(m['class']) <= 7.:
             magScaleRel = 'Leonard2014_SCR'
-            ruptAspectRatio = 1.5
+            ruptAspectRatio = 1.5 # balance between L14 and Cea14 surface rupture lengths
             min_mag = 4.5
         elif float(m['class']) == 8 or float(m['class']) == 9:
             magScaleRel = 'WC1994'
@@ -543,7 +541,15 @@ def write_oq_sourcefile(model, meta, mx_dict):
         # comment sources with null activity rates
         if m['src_N0'][-1] == -99.0:
             newxml += '        -->\n\n'
-    
+            
+    ######################################################################
+    # add indoneasia-png fault-source model
+    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
+    lines = open(indo_png_fault_file).readlines()[3:-2]
+    for line in lines:
+        newxml += '    ' + line
+        
+    ######################################################################
     # finish nrml
     newxml += '    </sourceModel>\n'
     newxml += '</nrml>'
