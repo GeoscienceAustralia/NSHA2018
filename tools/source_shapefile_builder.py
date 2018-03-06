@@ -11,7 +11,7 @@ def get_completeness_model(src_codes, src_shapes, domains):
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
     
-    # load domains shp
+    # load completeness shp
     #compshp = path.join('..','Other','Mcomp_NSHA18_smoothed.shp') # multi-corner
     compshp = path.join('..','Other','Mcomp_NSHA18.shp') # single corner 
     mcsf = shapefile.Reader(compshp)
@@ -30,17 +30,17 @@ def get_completeness_model(src_codes, src_shapes, domains):
     
     # loop through Mcomp zones
     for code, poly, dom in zip(src_codes, src_shapes, domains):
-        # get centroid of leonard sources
+        # get centroid of completeness sources
         clon, clat = get_shp_centroid(poly.points)
         point = Point(clon, clat)
         print clon, clat
         
-        # loop through domains and find point in poly    
+        # loop through target and find point in poly    
         mccompFound = False
         for i in range(0, len(mc_shapes)):
             dom_poly = Polygon(mc_shapes[i].points)
             
-            # check if Domains centroid in completeness poly
+            # check if target centroid in completeness poly
             if point.within(dom_poly): 
                 ycomp.append(mc_ycomp[i])
                 mcomp.append(mc_mcomp[i])
@@ -66,6 +66,7 @@ def get_completeness_model(src_codes, src_shapes, domains):
         min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
         
     return ycomp, mcomp, min_rmag
+    
 
 # need to ensure upper/lower seismo depths consistent with Domains edits
 def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
@@ -97,7 +98,73 @@ def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
            print '  Cannot match seis depths:', tc
            
     return target_usd, target_lsd
-
+    
+    
+# get neotectonic domain number and Mmax from zone centroid
+def get_neotectonic_domain_params(target_sf):
+    from os import path
+    import shapefile
+    from shapely.geometry import Point, Polygon
+    from numpy import array, median, std
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+    
+    # load target shapefile
+    polygons = target_sf.shapes()
+    
+    # load domains shp
+    domshp = open('..//reference_shp.txt').read()
+    dsf = shapefile.Reader(domshp)
+    
+    # get domains
+    neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
+    neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
+    neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
+    neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float')
+    neo_trt  = get_field_data(dsf, 'TRT', 'str')
+    
+    # get bval sigma
+    bval_sig = neo_bval_l - neo_bval
+    
+    # get domain polygons
+    dom_shapes = dsf.shapes()
+    domain = []
+    mmax = []
+    trt = []
+    bval_fix = []
+    bval_sig_fix = []
+    
+    # loop through target zones
+    for poly in polygons:
+        # get centroid of target sources
+        clon, clat = get_shp_centroid(poly.points)
+        point = Point(clon, clat)
+        
+        # loop through domains and find point in poly
+        matchidx = -99
+        for i in range(0, len(dom_shapes)):
+            dom_poly = Polygon(dom_shapes[i].points)
+            
+            # check if target centroid in domains poly
+            if point.within(dom_poly):
+                matchidx = i
+                
+        # set dummy values
+        if matchidx == -99:
+            domain.append(-99)
+            mmax.append(-99)
+            trt.append('')
+            bval_fix.append(-99)
+            bval_sig_fix.append(-99)
+        # fill real values
+        else:
+            domain.append(neo_doms[matchidx])
+            mmax.append(neo_mmax[matchidx])
+            trt.append(neo_trt[matchidx])
+            bval_fix.append(neo_bval[matchidx])
+            bval_sig_fix.append(bval_sig[matchidx])
+        
+    return domain, mmax, trt, bval_fix, bval_sig_fix
+    
 
 # use Rajabi_2016 shmax vectors - gets median & std within a source zone    
 def get_aus_shmax_vectors(src_codes, src_shapes):

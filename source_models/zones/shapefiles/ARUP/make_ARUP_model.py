@@ -6,7 +6,7 @@ try:
     from tools.source_shapefile_builder import get_preferred_catalogue, \
                                                get_completeness_model, get_aus_shmax_vectors, \
                                                get_rate_adjust_factor, build_source_shape, \
-                                               get_ul_seismo_depths
+                                               get_ul_seismo_depths, get_neotectonic_domain_params
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -70,14 +70,41 @@ for i in range(0,len(trt)):
     else:
         trt_new.append(trt[i])
 
+###############################################################################
+# load neotectonic domains parameters
+###############################################################################
+
+# set domestic domain numbers based on neotectonic domains
+neo_domains, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+for i in range(0, len(domains)):
+    if neo_domains[i] > 0 and neo_domains[i] < 8:
+        domains[i] = neo_domains[i]
+
 zone_class = list(domains)[:]
+
 # reset Gawler Craton to Flinders due to b-value similarities
-#zone_class[62] = 2.
+zone_class[4] = 2.
 
-# reset W Tasmania to Flinders due to b-value similarities (Delamerian Orogen)
-#zone_class[61] = 2.
+# reset West Coast to extended
+zone_class[14] = 6.
+domains[14] = 6.
 
-# set pref strike/dip/rake
+# reset West Coast Passive Margin to extended
+zone_class[15] = 7.
+domains[15] = 7.
+
+# reset Ottway/Gippsland to extended
+zone_class[0] = 5.
+domains[0] = 5.
+
+# reset Southern Oceanic buffer
+zone_class[19] = 8.
+domains[19] = 8.
+
+###############################################################################
+#  set pref strike/dip/rake
+###############################################################################
+
 pref_stk = []
 pref_dip = []
 pref_rke = []
