@@ -6,13 +6,19 @@ Created on Thu Feb 15 13:37:07 2018
 """
 
 def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
+    '''
+    singleCorner
+        1 = do singleCorner (True)
+        0 = do not do singleCorner (False)
+    '''
+    
     from os import path
     import shapefile
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
     
     # load completeness shp
-    if singleCorner == True:
+    if singleCorner == 1:
         compshp = path.join('..','Other','Mcomp_NSHA18_single.shp') # single corner 
     else:
         compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
