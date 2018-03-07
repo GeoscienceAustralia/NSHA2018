@@ -5,15 +5,18 @@ Created on Thu Feb 15 13:37:07 2018
 @author: u56903
 """
 
-def get_completeness_model(src_codes, src_shapes, domains):
+def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
     from os import path
     import shapefile
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
     
     # load completeness shp
-    #compshp = path.join('..','Other','Mcomp_NSHA18_smoothed.shp') # multi-corner
-    compshp = path.join('..','Other','Mcomp_NSHA18.shp') # single corner 
+    if singleCorner == True:
+        compshp = path.join('..','Other','Mcomp_NSHA18_single.shp') # single corner 
+    else:
+        compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
+    
     mcsf = shapefile.Reader(compshp)
     
     # get completeness data
@@ -324,10 +327,20 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     idx = where(array(dom) == 11)[0]
     overwrite_lsd[idx] = lsd[idx] + 200 # in km
     
+    # get effective trt for GMM assignment
+    gmm_trt = []
+    for t in trt:
+        if t == 'Cratonic':
+            gmm_trt.append(t)
+        elif t == 'Active' or t == 'Extended' or t == 'Non_cratonic' or t == 'Oceanic':
+            gmm_trt.append('Non_cratonic')
+        elif t == 'Intraslab' or t == 'Interface':
+            gmm_trt.append('Subduction')
+    
     # set shapefile to write to
     w = shapefile.Writer(shapefile.POLYGON)
     w.field('SRC_NAME','C','100')
-    w.field('CODE','C','10')
+    w.field('CODE','C','12')
     w.field('SRC_TYPE','C','10')
     w.field('CLASS','C','10')
     w.field('SRC_WEIGHT','F', 8, 2)
@@ -360,6 +373,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.field('SHMAX','F', 6, 2)
     w.field('SHMAX_SIG','F', 6, 2)
     w.field('TRT','C','100')
+    w.field('GMM_TRT','C','100')
     w.field('DOMAIN','F', 2, 0)
     w.field('CAT_FILE','C','50')
     
@@ -386,7 +400,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
         if i >= 0:
             w.record(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i], \
                      overwrite_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
-                     ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], dom[i], prefCat[i])
+                     ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], gmm_trt[i], dom[i], prefCat[i])
             
     # now save area shapefile
     w.save(outshp)

@@ -1137,7 +1137,7 @@ records = sf.records()
 # set shapefile to write to
 w = shapefile.Writer(shapefile.POLYGON)
 w.field('SRC_NAME','C','100')
-w.field('CODE','C','10')
+w.field('CODE','C','12')
 w.field('SRC_TYPE','C','10')
 w.field('CLASS','C','10')
 w.field('SRC_WEIGHT','F', 8, 2)
@@ -1170,6 +1170,7 @@ w.field('PREF_RKE','F', 6, 2)
 w.field('SHMAX','F', 6, 2)
 w.field('SHMAX_SIG','F', 6, 2)
 w.field('TRT','C','100')
+w.field('GMM_TRT','C','100')
 w.field('DOMAIN','F', 2, 0)
 w.field('CAT_FILE','C','50')
 
@@ -1201,7 +1202,7 @@ for record, shape in zip(records, shapes):
                  newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], newrec[12], newrec[13], newrec[14], newrec[15], newrec[16],\
                  new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
                  newrec[23], newrec[24], newrec[25], newrec[26], src_ymax[i], newrec[28], newrec[29], \
-                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35])
+                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35], newrec[36])
     
     # don't edit values
     else:
@@ -1210,7 +1211,7 @@ for record, shape in zip(records, shapes):
                  newrec[12], newrec[13], newrec[14], newrec[15], newrec[16], newrec[17], \
                  newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
                  newrec[25], newrec[26], newrec[27], newrec[28], newrec[29], \
-                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35])
+                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35], newrec[36])
 
     i += 1  
     
