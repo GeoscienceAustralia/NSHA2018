@@ -1,0 +1,1 @@
+This folder contains scripts to generate shapefiles that are consistent for all models from disparate source files.  These shapefiles are subsequently used as a basis for earthquake recurrence calculations.

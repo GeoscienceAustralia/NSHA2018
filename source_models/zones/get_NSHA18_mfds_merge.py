@@ -40,13 +40,20 @@ def timedelta2days_hours_minutes(td):
 
 #try:
 # parse param file
-paramfile = argv[1]
+paramfile = argv[1] # parameter file
+skipPlotting = argv[2] # True or False
+if skipPlotting == 'True':
+    skipPlotting = True
+elif skipPlotting == 'False':
+    skipPlotting = False
 
+'''
 try:
     single_zone = array([argv[2].upper()])
     single_src = True
 except:
     single_src = False
+'''
 
 #print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
 #bestcurve = True
@@ -156,6 +163,7 @@ bval_vect = []
 bsig_vect = []
 
 # if single source remove unnecessary data
+single_src = False # hardwiring to plot all
 if single_src == True:
     srcidx = where(array(src_code) == single_zone)[0]
     ssi = where(sortind == srcidx)[0]
@@ -660,378 +668,424 @@ for i in srcidx:
         new_n0_u[i]   = N0_up100
         
         ###############################################################################
-        # plot earthquakes that pass completeness
+        # skip plotting offshore events
         ###############################################################################
-        plt.clf()
-        fig = plt.figure(i+2, figsize=(20, 9)) # not sure why, but 2nd plot always a dud, so do i+2
         
-        # plot original data
-        ax = plt.subplot(231)
-    
-        # cannot plot datetime prior to 1900 - not sure why!
-        # plot all events
-        dcut = datetime(1900,1,1,0,0)
-        #dcut = datetime(1940,1,1,0,0) # temporary only!
-        didx = where(orig_tvect > dcut)[0]
-        h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
+        if skipPlotting == True and float(src_class[i]) <= 7.0:
         
-        # replot those that pass completeness
-        didx = where(tvect > dcut)[0]
-        h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
-        plt.ylabel('Moment Magnitude (MW)')
-        plt.xlabel('Date')
-        #plt.title(src_code[i] + ' Catalogue Completeness')
-                
-        # now loop thru completeness years and mags
-        for yi in range(0, len(ycomps)-1):
-            # convert y to datetime
-            ydt = datetime(ycomps[yi], 1, 1)
+            ###############################################################################
+            # plot earthquakes that pass completeness
+            ###############################################################################
+            plt.clf()
+            fig = plt.figure(i+2, figsize=(20, 9)) # not sure why, but 2nd plot always a dud, so do i+2
             
-            # plt H completeness ranges
-            if yi == 0:
-                plt.plot([toYearFraction(ydt), 2020], \
-                         [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
-            else:
-                ydtp = datetime(ycomps[yi-1], 1, 1)
-                plt.plot([toYearFraction(ydtp), toYearFraction(ydt)], \
-                         [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
-            
-            # plt V completeness ranges
-            plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
-                     [mcomps[yi], mcomps[yi+1]], 'g-', lw=1.5)
-        
-        # plt last H completeness range
-        ydt = datetime(ycomps[-1], 1, 1)
-        if ydt < dcut:
-            ydt = dcut
-        ydtp = datetime(ycomps[-2], 1, 1)
-        plt.plot([toYearFraction(ydtp), toYearFraction(ydt)], \
-                 [mcomps[-1], mcomps[-1]], 'g-', lw=1.5)
-        
-        # plt last V completeness
-        #dcut = 1900
-        ymax = ax.get_ylim()[-1]
-        plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
-                 [mcomps[-1], ymax], 'g-', lw=1.5)
-        
-        # add grids
-        plt.grid(which='major')    
-        
-        Npass = str(len(mvect))
-        Nfail = str(len(orig_mvect) - len(mvect))
-        plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
-                
-        tlim = ax.get_xlim()
-        #tlim[0] = 1900
-        #dttlim = [floor(tlim[0]), ceil(tlim[1])]
-        plt.xlim(tlim)
-        
-        # sey ylim to one
-        ylims = array(ax.get_ylim())
-        ylims[0] = 2.5
-        #ylims = [2.5, 6.5] # temporary only!
-        plt.ylim(ylims)
-        
-        ###############################################################################
-        # plot MFD
-        ###############################################################################
-        if not isnan(bval):
             # plot original data
-            ax = plt.subplot(132)
+            ax = plt.subplot(231)
             
-            # plt class cum rates first        
-            uidx = unique(class_cum_rates[class_idx][::-1], return_index=True, return_inverse=True)[1]
-            #plt.errorbar(class_mrng[class_idx][::-1][uidx], class_cum_rates[class_idx][::-1][uidx], \
-            #             yerr=[class_err_lo[class_idx][::-1][uidx], class_err_up[class_idx][::-1][uidx]], fmt='k.')
-            h10 = plt.semilogy(class_mrng[class_idx][::-1][uidx], class_cum_rates[class_idx][::-1][uidx], \
-                               'o', mec='b', mfc='none', ms=7)
+            # cannot plot datetime prior to 1900 - not sure why!
+            # plot all events
+            dcut = datetime(1900,1,1,0,0)
+            #dcut = datetime(1940,1,1,0,0) # temporary only!
+            didx = where(orig_tvect > dcut)[0]
+            h1 = plt.plot(orig_dec_tvect[didx], orig_mvect[didx], 'bo')
             
-            # plot best fit
-            mpltmin_best = 2.0# + bin_width/2.
-            plt_width = 0.1
-            
-            # get class betacurve
-            classbetacurve, mfd_mrng = get_oq_incrementalMFD(beta, class_fn0[class_idx], \
-                                                             mpltmin_best, class_mrng[class_idx][-1], \
-                                                             plt_width)
-            # plt class beta
-            h30 = plt.semilogy(mfd_mrng, classbetacurve, '--', c='0.2')
-            
-            #################################################################################
-            # get area normalised rates
-            areanormcurve = classbetacurve * src_area[-1] / class_area[class_idx]
-            
-            h40 = plt.semilogy(mfd_mrng, areanormcurve, '--', c='r')
-            
-            #################################################################################
-            # now plt unique values for current source
-            uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
-            plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
-                         yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
-            h0 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=7)
-            
-            # get betacurve for source
-            betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
-            
-            h3 = plt.semilogy(mfd_mrng, betacurve, 'k-')
-            
-            # plot upper and lower curves
-            h1 = plt.semilogy(bc_mrng_up, bc_up173, '-', c='limegreen')
-            h2 = plt.semilogy(bc_mrng_up, bc_up100, 'b-')
-            h4 = plt.semilogy(bc_mrng_lo, bc_lo100, 'b-')
-            h5 = plt.semilogy(bc_mrng_lo, bc_lo173, '-', c='limegreen')
-            
-            plt.ylabel('Cumulative Rate (/yr)')
-            plt.xlabel('Magnitude (MW)')
-            
-            # get plotting limits
-            plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
-            yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
-            yexpmax = ceil(log10(max(class_cum_rates[class_idx])))
-            #plt.ylim([10**yexpmin, 10**yexpmax])
-            plt.ylim([1E-6, 100]) # for comparison across zones
-            
-            ###############################################################################
-            # get legend text
-            ###############################################################################
-            
-            up173_txt = '\t'.join(('Upper 1.73x', str('%0.3e' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
-                                   str('%0.3f' % beta2bval(beta-sigbeta173)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
-                                   
-            up100_txt = '\t'.join(('Upper 1.00x', str('%0.3e' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
-                                   str('%0.3f' % beta2bval(beta-sigbeta)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
-                                   
-            best_txt  = '\t'.join(('Best Estimate', str('%0.3e' % fn0), str('%0.2f' % beta), \
-                                   str('%0.3f' % bval), str('%0.1f' % src_mmax[i]))).expandtabs()
-            
-            lo100_txt = '\t'.join(('Lower 1.00x', str('%0.3e' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
-                                   str('%0.3f' % beta2bval(beta+sigbeta)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
-                                   
-            lo173_txt = '\t'.join(('Lower 1.73x', str('%0.3e' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
-                                   str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
-            
-            # set legend title
-            title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
-                      + '\t'.join(('Regression Mmin: '+str(src_mmin_reg[i]),'N0 factor:',str('%0.3f' % src_rte_adj[i]))).expandtabs() + '\n\n' \
-                      + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
-            '''
-            if L08_b == True:
-                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
-                          + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
-                          + '\t'.join(('','','','N0','Beta','bval (L08)','Mx')).expandtabs()
-            elif Aki_ML == True:
-                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
-                          + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
-                          + '\t'.join(('','','','N0','Beta','bval (Aki)','Mx')).expandtabs()
-            else:
-                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
-                          + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
-                          + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
-            '''      
-            leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
-                       fontsize=9, loc=3, title=title)
-            plt.setp(leg.get_title(),fontsize=9)
-            
-            # plt second legend
-            plt.legend([h0[0], h10[0], h30[0], h40[0]], ['Zone Rates', 'Class Rates', 'Class Fit', 'Area Norm'], \
-                       fontsize=10, loc=1, numpoints=1)
-                       
-            # replot first legend
-            plt.gca().add_artist(leg)
-            
-            plt.grid(which='both', axis='both')
-        
-        ###############################################################################
-        # make map
-        ###############################################################################
-        print 'Making map for:', src_code[i]
-        ax = plt.subplot(236)
-        res = 'l'
-        
-        '''    
-        # get map bounds- for single zone
-        bnds = poly.bounds
-        '''
-        
-        # set national-scale basemap
-        if float(src_class[i]) <= 8:
-            llcrnrlat = -44
-            urcrnrlat = -6
-            llcrnrlon = 107
-            urcrnrlon = 152
-        
-        # assume off northern Aus
-        else:
-            llcrnrlat = -25
-            urcrnrlat = -0
-            llcrnrlon = 107
-            urcrnrlon = 162
-    
-        lon_0 = mean([llcrnrlon, urcrnrlon])
-        lat_1 = percentile([llcrnrlat, urcrnrlat], 25)
-        lat_2 = percentile([llcrnrlat, urcrnrlat], 75)
-        
-        if urcrnrlat > 90.0:
-            urcrnrlat = 90.0
-        '''
-        # get parallel/meridian spacing
-        if bnds[2] - bnds[0] < 0.5:
-            ll_space = 0.25
-        elif bnds[2] - bnds[0] < 1.0:
-            ll_space = 0.5
-        elif bnds[2] - bnds[0] < 4.0:
-            ll_space = 1.0
-        elif bnds[2] - bnds[0] < 10.0:
-            ll_space = 4.0
-        else:
-            ll_space = 6.0
-        '''
-        # draw parallels and meridians.
-        ll_space = 10
-        
-        # set map projection
-        m = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
-                    urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
-                    projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
-                    resolution=res,area_thresh=10000.)
-        
-        # annotate
-        m.drawcoastlines(linewidth=0.5,color='k')
-        m.drawcountries()
-        m.drawstates()
-        m.fillcontinents(color='0.8', lake_color='1.0')
-            
-        # draw parallels and meridians.
-        m.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
-        m.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
-        
-        # plt earthquakes boundaries for all zones in class
-        for code in class_codes[class_idx]:
-            drawoneshapepoly(m, plt, sf, 'CODE', code, lw=1.5, col='b')
-        
-        # plt current source zone boundary
-        drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=1.5, col='r')
-        
-        # map all earthquakes
-        #x, y = m(eqlo, eqla)
-        #size = 2.5 * eqmw
-        #m.scatter(x, y, marker='o', s=size, edgecolors='0.3', mfc='none', lw=0.5)
-        
-        '''
-        # map earthquakes that pass completeness
-        for e in ev_dict:
-            ms = 2.0 * e['prefmag']
-            x, y = m(e['lon'], e['lat'])
-            m.plot(x, y, 'o', mec='k', mfc='none', mew=1.0, ms=ms)
-        '''
-        # map all earthquakes in class    
-        for la, lo, mag in zip(class_lavect[class_idx], class_lovect[class_idx], class_mvect[class_idx]):
-            if mag >= 3.0:
-                ms = 1.75 * mag
-                x, y = m(lo, la)
-                m.plot(x, y, 'o', mec='k', mfc='none', mew=0.5, ms=ms)
-            
-        # make legend - set dummy x, y params
-        x, y= -100000, -100000
-        
-        # get marker sizes
-        ms = 1.75 * 3.0
-        l1 = m.plot(x, y, 'ko', ms=ms)
-        ms = 1.75 * 5.0
-        l2 = m.plot(x, y, 'ko', ms=ms)
-        ms = 1.75 * 7.0
-        l3 = m.plot(x, y, 'ko', ms=ms)
-        plt.legend([l1[0], l2[0], l3[0]],['3.0', '5.0', '7.0'], fontsize=10, numpoints=1)
-        
-        ###############################################################################
-        # make depth histogram
-        ###############################################################################
-        
-        ax = plt.subplot(233)
-        
-        if src_usd[i] <= 20:
-            deprng = arange(0, 81, 4)
-        elif src_usd[i] > 20 and src_usd[i] <= 120:
-            deprng = arange(60, 221, 10)
-        elif src_usd[i] > 120:
-            deprng = arange(160, 601, 20)
-        
-        # get depth data
-        all_dep = []
-        free_dep = []
-        for ev in ev_dict:
-            if isnan(ev['dep']) == False:
-                all_dep.append(ev['dep'])
+            # replot those that pass completeness
+            didx = where(tvect > dcut)[0]
+            h2 = plt.plot(dec_tvect[didx], mvect[didx], 'ro')
+            plt.ylabel('Moment Magnitude (MW)')
+            plt.xlabel('Date')
+            #plt.title(src_code[i] + ' Catalogue Completeness')
+                    
+            # now loop thru completeness years and mags
+            for yi in range(0, len(ycomps)-1):
+                # convert y to datetime
+                ydt = datetime(ycomps[yi], 1, 1)
                 
-                if ev['fixdep'] != 1:
-                    free_dep.append(ev['dep'])
-        
-        # first plt all data
-        plt.hist(array(all_dep), bins=deprng, facecolor='w', label='Fixed Depths')
-        
-        # plt data with free depths
-        plt.hist(array(free_dep), bins=deprng, facecolor='seagreen', label='Free Depths')
-        
-        # make pretty
-        plt.xlabel('Hypocentral Depth (km)')
-        plt.ylabel('Count')
-        plt.legend()        
-        
-        ###############################################################################
-        # make cummulative M >= 3 plot of non filtered events
-        ###############################################################################
-        
-        ax = plt.subplot(234)
-        
-        # get ndays
-        #td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
-        td = orig_tvect[-1] - orig_tvect[0]
-        
-        ndays = timedelta2days_hours_minutes(td)[0]
-        
-        # get events M >= 3
-        dates_ge_3 = []
-        dcut = 1900
-        for omag, otime in zip(orig_mvect, orig_tvect):
-            #if ev['prefmag'] >= 3.5 and ev['datetime'].year >= dcut:
-            if omag >= 3.5 and otime.year >= dcut:
-                # get decimal years
-                #dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
-                dates_ge_3.append(otime.year + float(otime.strftime('%j'))/365.) # ignore leap years for now
-        
-        dates_ge_3 = array(dates_ge_3)
-        
-        # make cummulative plot
-        didx = where(dates_ge_3 > dcut)[0]
-        if ndays > 0 and len(didx) > 0:
-            #plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
-            plt.step(dates_ge_3[didx], range(0, len(didx)), color='k', lw=1.5)
-            plt.xlabel('Event Year')
-            plt.ylabel('Count | MW >= 3.5')
-        
-            # set xlims
-            tlim = [int(round(x)) for x in tlim] # converting to ints
+                # plt H completeness ranges
+                if yi == 0:
+                    plt.plot([toYearFraction(ydt), 2020], \
+                             [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
+                else:
+                    ydtp = datetime(ycomps[yi-1], 1, 1)
+                    plt.plot([toYearFraction(ydtp), toYearFraction(ydt)], \
+                             [mcomps[yi], mcomps[yi]], 'g-', lw=1.5)
+                
+                # plt V completeness ranges
+                plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
+                         [mcomps[yi], mcomps[yi+1]], 'g-', lw=1.5)
             
+            # plt last H completeness range
+            ydt = datetime(ycomps[-1], 1, 1)
+            if ydt < dcut:
+                ydt = dcut
+            ydtp = datetime(ycomps[-2], 1, 1)
+            plt.plot([toYearFraction(ydtp), toYearFraction(ydt)], \
+                     [mcomps[-1], mcomps[-1]], 'g-', lw=1.5)
+            
+            # plt last V completeness
+            #dcut = 1900
+            ymax = ax.get_ylim()[-1]
+            plt.plot([toYearFraction(ydt), toYearFraction(ydt)], \
+                     [mcomps[-1], ymax], 'g-', lw=1.5)
+            
+            # add grids
+            plt.grid(which='major')    
+            
+            Npass = str(len(mvect))
+            Nfail = str(len(orig_mvect) - len(mvect))
+            plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
+                    
+            tlim = ax.get_xlim()
+            #tlim[0] = 1900
+            #dttlim = [floor(tlim[0]), ceil(tlim[1])]
             plt.xlim(tlim)
             
-            # sey ylim to zero
+            # sey ylim to one
             ylims = array(ax.get_ylim())
-            ylims[0] = 0
+            ylims[0] = 2.5
+            #ylims = [2.5, 6.5] # temporary only!
             plt.ylim(ylims)
-        
-        ###############################################################################
-        # make src folder
-        ###############################################################################
-        
-        srcfolder = path.join(outfolder, src_code[i])
-        
-        # check to see if exists
-        if path.isdir(srcfolder) == False:
-            mkdir(srcfolder)
-        
+            
+            ###############################################################################
+            # plot MFD
+            ###############################################################################
+            if not isnan(bval):
+                # plot original data
+                ax = plt.subplot(132)
+                
+                # plt class cum rates first        
+                uidx = unique(class_cum_rates[class_idx][::-1], return_index=True, return_inverse=True)[1]
+                #plt.errorbar(class_mrng[class_idx][::-1][uidx], class_cum_rates[class_idx][::-1][uidx], \
+                #             yerr=[class_err_lo[class_idx][::-1][uidx], class_err_up[class_idx][::-1][uidx]], fmt='k.')
+                h10 = plt.semilogy(class_mrng[class_idx][::-1][uidx], class_cum_rates[class_idx][::-1][uidx], \
+                                   'o', mec='b', mfc='none', ms=7)
+                
+                # plot best fit
+                mpltmin_best = 2.0# + bin_width/2.
+                plt_width = 0.1
+                
+                # get class betacurve
+                classbetacurve, mfd_mrng = get_oq_incrementalMFD(beta, class_fn0[class_idx], \
+                                                                 mpltmin_best, class_mrng[class_idx][-1], \
+                                                                 plt_width)
+                # plt class beta
+                h30 = plt.semilogy(mfd_mrng, classbetacurve, '--', c='0.2')
+                
+                #################################################################################
+                # get area normalised rates
+                areanormcurve = classbetacurve * src_area[-1] / class_area[class_idx]
+                
+                h40 = plt.semilogy(mfd_mrng, areanormcurve, '--', c='r')
+                
+                #################################################################################
+                # now plt unique values for current source
+                uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
+                plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
+                             yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
+                h0 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=7)
+                
+                # get betacurve for source
+                betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
+                
+                h3 = plt.semilogy(mfd_mrng, betacurve, 'k-')
+                
+                # plot upper and lower curves
+                h1 = plt.semilogy(bc_mrng_up, bc_up173, '-', c='limegreen')
+                h2 = plt.semilogy(bc_mrng_up, bc_up100, 'b-')
+                h4 = plt.semilogy(bc_mrng_lo, bc_lo100, 'b-')
+                h5 = plt.semilogy(bc_mrng_lo, bc_lo173, '-', c='limegreen')
+                
+                plt.ylabel('Cumulative Rate (/yr)')
+                plt.xlabel('Magnitude (MW)')
+                
+                # get plotting limits
+                plt.xlim([2.0, bc_mrng_up[-1]+bin_width])
+                yexpmin = min(floor(log10(hstack((bc_up173, bc_up100, betacurve, bc_lo100, bc_lo173)))))
+                yexpmax = ceil(log10(max(class_cum_rates[class_idx])))
+                #plt.ylim([10**yexpmin, 10**yexpmax])
+                plt.ylim([1E-6, 100]) # for comparison across zones
+                
+                ###############################################################################
+                # get legend text
+                ###############################################################################
+                
+                up173_txt = '\t'.join(('Upper 1.73x', str('%0.3e' % N0_up173), str('%0.2f' % (beta-sigbeta173)), \
+                                       str('%0.3f' % beta2bval(beta-sigbeta173)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
+                                       
+                up100_txt = '\t'.join(('Upper 1.00x', str('%0.3e' % N0_up100), str('%0.2f' % (beta-sigbeta)), \
+                                       str('%0.3f' % beta2bval(beta-sigbeta)), str('%0.1f' % src_mmax_u[i]))).expandtabs()
+                                       
+                best_txt  = '\t'.join(('Best Estimate', str('%0.3e' % fn0), str('%0.2f' % beta), \
+                                       str('%0.3f' % bval), str('%0.1f' % src_mmax[i]))).expandtabs()
+                
+                lo100_txt = '\t'.join(('Lower 1.00x', str('%0.3e' % N0_lo100), str('%0.2f' % (beta+sigbeta)), \
+                                       str('%0.3f' % beta2bval(beta+sigbeta)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
+                                       
+                lo173_txt = '\t'.join(('Lower 1.73x', str('%0.3e' % N0_lo173), str('%0.2f' % (beta+sigbeta173)), \
+                                       str('%0.3f' % beta2bval(beta+sigbeta173)), str('%0.1f' % src_mmax_l[i]))).expandtabs()
+                
+                # set legend title
+                title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                          + '\t'.join(('Regression Mmin: '+str(src_mmin_reg[i]),'N0 factor:',str('%0.3f' % src_rte_adj[i]))).expandtabs() + '\n\n' \
+                          + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
+                '''
+                if L08_b == True:
+                    title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                              + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                              + '\t'.join(('','','','N0','Beta','bval (L08)','Mx')).expandtabs()
+                elif Aki_ML == True:
+                    title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                              + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                              + '\t'.join(('','','','N0','Beta','bval (Aki)','Mx')).expandtabs()
+                else:
+                    title = '\t'.join(('','','N Earthquakes: '+str(sum(n_obs)))).expandtabs() + '\n' \
+                              + '\t'.join(('','','Regression Mmin: '+str(str(src_mmin_reg[i])))).expandtabs() + '\n\n' \
+                              + '\t'.join(('','','','N0','Beta','bval','Mx')).expandtabs()
+                '''      
+                leg = plt.legend([h1[0], h2[0], h3[0], h4[0], h5[0]], [up173_txt, up100_txt, best_txt, lo100_txt, lo173_txt], \
+                           fontsize=9, loc=3, title=title)
+                plt.setp(leg.get_title(),fontsize=9)
+                
+                # plt second legend
+                plt.legend([h0[0], h10[0], h30[0], h40[0]], ['Zone Rates', 'Class Rates', 'Class Fit', 'Area Norm'], \
+                           fontsize=10, loc=1, numpoints=1)
+                           
+                # replot first legend
+                plt.gca().add_artist(leg)
+                
+                plt.grid(which='both', axis='both')
+            
+            ###############################################################################
+            # make map
+            ###############################################################################
+            print 'Making map for:', src_code[i]
+            ax = plt.subplot(236)
+            res = 'l'
+            
+            '''    
+            # get map bounds- for single zone
+            bnds = poly.bounds
+            '''
+            
+            # set national-scale basemap
+            if float(src_class[i]) <= 8:
+                llcrnrlat = -44
+                urcrnrlat = -6
+                llcrnrlon = 107
+                urcrnrlon = 152
+            
+            # assume off northern Aus
+            else:
+                llcrnrlat = -25
+                urcrnrlat = -0
+                llcrnrlon = 107
+                urcrnrlon = 162
+            
+            lon_0 = mean([llcrnrlon, urcrnrlon])
+            lat_1 = percentile([llcrnrlat, urcrnrlat], 25)
+            lat_2 = percentile([llcrnrlat, urcrnrlat], 75)
+            
+            if urcrnrlat > 90.0:
+                urcrnrlat = 90.0
+            '''
+            # get parallel/meridian spacing
+            if bnds[2] - bnds[0] < 0.5:
+                ll_space = 0.25
+            elif bnds[2] - bnds[0] < 1.0:
+                ll_space = 0.5
+            elif bnds[2] - bnds[0] < 4.0:
+                ll_space = 1.0
+            elif bnds[2] - bnds[0] < 10.0:
+                ll_space = 4.0
+            else:
+                ll_space = 6.0
+            '''
+            # draw parallels and meridians.
+            ll_space = 10
+            
+            # set map projection
+            m = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
+                        urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
+                        projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
+                        resolution=res,area_thresh=10000.)
+            
+            # annotate
+            m.drawcoastlines(linewidth=0.5,color='k')
+            m.drawcountries()
+            m.drawstates()
+            m.fillcontinents(color='0.8', lake_color='1.0')
+                
+            # draw parallels and meridians.
+            m.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+            m.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+            
+            # plt earthquakes boundaries for all zones in class
+            for code in class_codes[class_idx]:
+                drawoneshapepoly(m, plt, sf, 'CODE', code, lw=1.5, col='b')
+            
+            # plt current source zone boundary
+            drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=1.5, col='r')
+            
+            # map all earthquakes
+            #x, y = m(eqlo, eqla)
+            #size = 2.5 * eqmw
+            #m.scatter(x, y, marker='o', s=size, edgecolors='0.3', mfc='none', lw=0.5)
+            
+            '''
+            # map earthquakes that pass completeness
+            for e in ev_dict:
+                ms = 2.0 * e['prefmag']
+                x, y = m(e['lon'], e['lat'])
+                m.plot(x, y, 'o', mec='k', mfc='none', mew=1.0, ms=ms)
+            '''
+            # map all earthquakes in class    
+            for la, lo, mag in zip(class_lavect[class_idx], class_lovect[class_idx], class_mvect[class_idx]):
+                if mag >= 3.0:
+                    ms = 1.75 * mag
+                    x, y = m(lo, la)
+                    m.plot(x, y, 'o', mec='k', mfc='none', mew=0.5, ms=ms)
+                
+            # make legend - set dummy x, y params
+            x, y= -100000, -100000
+            
+            # get marker sizes
+            ms = 1.75 * 3.0
+            l1 = m.plot(x, y, 'ko', ms=ms)
+            ms = 1.75 * 5.0
+            l2 = m.plot(x, y, 'ko', ms=ms)
+            ms = 1.75 * 7.0
+            l3 = m.plot(x, y, 'ko', ms=ms)
+            plt.legend([l1[0], l2[0], l3[0]],['3.0', '5.0', '7.0'], fontsize=10, numpoints=1)
+            
+            ###############################################################################
+            # make depth histogram
+            ###############################################################################
+            
+            ax = plt.subplot(233)
+            
+            if src_usd[i] <= 20:
+                deprng = arange(0, 81, 4)
+            elif src_usd[i] > 20 and src_usd[i] <= 120:
+                deprng = arange(60, 221, 10)
+            elif src_usd[i] > 120:
+                deprng = arange(160, 601, 20)
+            
+            # get depth data
+            all_dep = []
+            free_dep = []
+            for ev in ev_dict:
+                if isnan(ev['dep']) == False:
+                    all_dep.append(ev['dep'])
+                    
+                    if ev['fixdep'] != 1:
+                        free_dep.append(ev['dep'])
+            
+            # first plt all data
+            plt.hist(array(all_dep), bins=deprng, facecolor='w', label='Fixed Depths')
+            
+            # plt data with free depths
+            plt.hist(array(free_dep), bins=deprng, facecolor='seagreen', label='Free Depths')
+            
+            # make pretty
+            plt.xlabel('Hypocentral Depth (km)')
+            plt.ylabel('Count')
+            plt.legend()        
+            
+            ###############################################################################
+            # make cummulative M >= 3 plot of non filtered events
+            ###############################################################################
+            
+            ax = plt.subplot(234)
+            
+            # get ndays
+            #td = ev_dict[-1]['datetime'] - ev_dict[0]['datetime']
+            td = orig_tvect[-1] - orig_tvect[0]
+            
+            ndays = timedelta2days_hours_minutes(td)[0]
+            
+            # get events M >= 3
+            dates_ge_3 = []
+            dcut = 1900
+            for omag, otime in zip(orig_mvect, orig_tvect):
+                #if ev['prefmag'] >= 3.5 and ev['datetime'].year >= dcut:
+                if omag >= 3.5 and otime.year >= dcut:
+                    # get decimal years
+                    #dates_ge_3.append(ev['datetime'].year + float(ev['datetime'].strftime('%j'))/365.) # ignore leap years for now
+                    dates_ge_3.append(otime.year + float(otime.strftime('%j'))/365.) # ignore leap years for now
+            
+            dates_ge_3 = array(dates_ge_3)
+            
+            # make cummulative plot
+            didx = where(dates_ge_3 > dcut)[0]
+            if ndays > 0 and len(didx) > 0:
+                #plt.hist(dates_ge_3[didx], ndays, histtype='step', cumulative=True, color='k', lw=1.5)
+                plt.step(dates_ge_3[didx], range(0, len(didx)), color='k', lw=1.5)
+                plt.xlabel('Event Year')
+                plt.ylabel('Count | MW >= 3.5')
+            
+                # set xlims
+                tlim = [int(round(x)) for x in tlim] # converting to ints
+                
+                plt.xlim(tlim)
+                
+                # sey ylim to zero
+                ylims = array(ax.get_ylim())
+                ylims[0] = 0
+                plt.ylim(ylims)
+            
+            ###############################################################################
+            # make src folder
+            ###############################################################################
+            
+            srcfolder = path.join(outfolder, src_code[i])
+            
+            # check to see if exists
+            if path.isdir(srcfolder) == False:
+                mkdir(srcfolder)
+                
+            ###############################################################################
+            # save figures
+            ###############################################################################
+            
+            # add plot sup title
+            suptitle = src_name[i] + ' (' + src_code[i] + ')'
+            if L08_b == True:
+                suptitle += ' - L08 b-values'
+            elif Aki_ML == True:
+                suptitle += ' - Aki ML'
+            elif Weichert == True:
+                suptitle += ' - Weichert'
+            else:
+                suptitle += ' - Class: '+source_class
+                    
+            plt.suptitle(suptitle, fontsize=18)
+            
+            pngfile = '.'.join((src_code[i], 'mfd', 'png'))
+            pngpath = path.join(srcfolder, pngfile)
+            plt.savefig(pngpath, format='png', bbox_inches='tight')
+            
+            pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
+            pdfpath = path.join(srcfolder, pdffile)
+            print 'Saving file:', pdfpath
+            plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash (sometimes) on rhe-compute for unknown reason
+            
+            if single_src == True:
+                plt.show()
+            else:
+                #plt.gcf().clear()
+                plt.clf()
+                plt.close()
+            
         ###############################################################################
         # export rates file
         ###############################################################################
+        
+        # check (again) to see if folder exists
+        srcfolder = path.join(outfolder, src_code[i])
+            
+        if path.isdir(srcfolder) == False:
+            mkdir(srcfolder)
+            
         # get beta curve again at consistent mags
         mpltmin_best = 2.0 + bin_width/2.
         plt_width = 0.1
@@ -1090,39 +1144,7 @@ for i in srcidx:
         shppath = path.join(srcfolder, outshp)
         #cat2shp(catfile, shppath)
         
-        ###############################################################################
-        # save figures
-        ###############################################################################
-        
-        # add plot sup title
-        suptitle = src_name[i] + ' (' + src_code[i] + ')'
-        if L08_b == True:
-            suptitle += ' - L08 b-values'
-        elif Aki_ML == True:
-            suptitle += ' - Aki ML'
-        elif Weichert == True:
-            suptitle += ' - Weichert'
-        else:
-            suptitle += ' - Class: '+source_class
-                
-        plt.suptitle(suptitle, fontsize=18)
-        
-        pngfile = '.'.join((src_code[i], 'mfd', 'png'))
-        pngpath = path.join(srcfolder, pngfile)
-        plt.savefig(pngpath, format='png', bbox_inches='tight')
-        
-        pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
-        pdfpath = path.join(srcfolder, pdffile)
-        print 'Saving file:', pdfpath
-        plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash (sometimes) on rhe-compute for unknown reason
-        
-        if single_src == True:
-            plt.show()
-        else:
-            #plt.gcf().clear()
-            plt.clf()
-            plt.close()
-    
+            
 ###############################################################################
 # write shapes to new shapefile
 ###############################################################################

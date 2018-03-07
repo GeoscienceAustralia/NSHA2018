@@ -84,7 +84,7 @@ dep_l = []
 for i in range(0,len(lsd)):
     if domains[i] <= 8:
         lsd[i] = 20.
-        if trt[i] == 'Cratonic':        
+        if trt[i] == 'Cratonic':
             dep_b.append(5.0)
             dep_u.append(2.5)
             dep_l.append(10.)
@@ -114,8 +114,8 @@ prefCat[56] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
-
-ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains)
+single_mc = 0
+ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains, single_mc)
     
 # use manual modification
 for i in range(0,len(trt)):
@@ -162,8 +162,11 @@ rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
 ###############################################################################
 # write initial shapefile
 ###############################################################################
-
-outshp = 'Domains_NSHA18_single_Mc.shp'
+if single_mc == 1:
+    outshp = 'Domains_NSHA18_single_Mc.shp'
+elif single_mc == 0:
+    outshp = 'Domains_NSHA18_multi_Mc.shp'
+    
 bval_fix = -99 * ones_like(rte_adj_fact)
 bval_sig_fix = -99 * ones_like(rte_adj_fact)
 
