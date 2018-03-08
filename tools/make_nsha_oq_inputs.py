@@ -239,7 +239,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
             m['src_code'].replace('.', '')
             
             newxml += '        <areaSource id="'+m['src_code']+'" name="'+\
-                       m['src_name']+'" tectonicRegion="'+m['trt']+'">\n'
+                       m['src_name']+'" tectonicRegion="'+m['gmm_trt']+'">\n'
             
             newxml += '            <areaGeometry>\n'
             newxml += '                <gml:Polygon>\n'
@@ -351,7 +351,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     idsub = idsub.replace(".", "")
                     
                     newxml += '        <complexFaultSource id="'+src_code+idsub+'" name="'+\
-                               m['src_name']+'" tectonicRegion="'+m['trt']+'">\n'
+                               m['src_name']+'" tectonicRegion="'+m['gmm_trt']+'">\n'
                     newxml += '            <complexFaultGeometry>\n'
                     newxml += '                <faultTopEdge>\n'
                     newxml += '                    <gml:LineString>\n'
@@ -466,7 +466,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     idsub = idsub.replace(".", "")
                     
                     newxml += '        <simpleFaultSource id="'+m['src_code']+idsub+'" name="'+\
-                                         m['src_name']+'" tectonicRegion="'+m['trt']+'">\n'
+                                         m['src_name']+'" tectonicRegion="'+m['gmm_trt']+'">\n'
                     newxml += '            <simpleFaultGeometry>\n'
                     newxml += '                <gml:LineString>\n'
                     newxml += '                    <gml:posList>\n'
@@ -653,7 +653,7 @@ def src_shape2dict(modelshp):
                  'src_beta':[bval2beta(float(rec[20])), bval2beta(float(rec[21])), bval2beta(float(rec[22]))],
                  'min_mag':float(rec[12]), 'src_weight':float(rec[4]), 'src_reg_wt':1.,
                  'rate_adj_fact':float(rec[5]), 'pref_stk':float(rec[28]), 'pref_dip':float(rec[29]),
-                 'pref_rke':float(rec[30]), 'shmax':float(rec[31]), 'shmax_sig':float(rec[32])}
+                 'pref_rke':float(rec[30]), 'shmax':float(rec[31]), 'shmax_sig':float(rec[32]), 'gmm_trt':rec[34]}
             model.append(m)
             
         else:
@@ -702,6 +702,7 @@ def src_shape2dict(modelshp):
 31    w.field('SHMAX','F', 6, 2)
 32    w.field('SHMAX_SIG','F', 6, 2)
 33    w.field('TRT','C','100')
-34    w.field('DOMAIN','F', 2, 0)
-35    w.field('CAT_FILE','C','50')
+34    w.field('GMM_TRT','C','100')
+35    w.field('DOMAIN','F', 2, 0)
+36    w.field('CAT_FILE','C','50')
 """
