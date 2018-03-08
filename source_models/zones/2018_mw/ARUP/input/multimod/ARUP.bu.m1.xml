@@ -34,7 +34,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.89344e-02 1.45557e-02 1.11895e-02 8.60186e-03 6.61260e-03 5.08338e-03 3.90780e-03 3.00409e-03 2.30936e-03 1.77530e-03 1.36475e-03 1.04914e-03 8.06515e-04 6.20001e-04 4.76620e-04 3.66397e-04 2.81665e-04 2.16527e-04 1.66453e-04 1.27959e-04 9.83676e-05 7.56192e-05 5.81316e-05 4.46881e-05 3.43536e-05 2.64090e-05 2.03017e-05 1.56067e-05 1.19975e-05 9.22300e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.89708e-02 1.45843e-02 1.12121e-02 8.61957e-03 6.62652e-03 5.09431e-03 3.91639e-03 3.01083e-03 2.31465e-03 1.77945e-03 1.36800e-03 1.05169e-03 8.08511e-04 6.21564e-04 4.77844e-04 3.67355e-04 2.82414e-04 2.17113e-04 1.66911e-04 1.28317e-04 9.86474e-05 7.58378e-05 5.83023e-05 4.48214e-05 3.44577e-05 2.64902e-05 2.03651e-05 1.56562e-05 1.20361e-05 9.25307e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="225.0" dip="35.0" rake="90.0" />
@@ -1166,7 +1166,7 @@
                     </gml:exterior>
                 </gml:Polygon>
                 <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>0.0</lowerSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>1.0</ruptAspectRatio>

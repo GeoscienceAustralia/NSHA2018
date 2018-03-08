@@ -1166,7 +1166,7 @@
                     </gml:exterior>
                 </gml:Polygon>
                 <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>0.0</lowerSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>1.0</ruptAspectRatio>
