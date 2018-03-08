@@ -188,12 +188,12 @@ min_rmag[32] = 6.1 # NBT
 
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
-min_rmag[50] = 3.2 # CARP
-min_rmag[11] = 3.5 # ZN7d
-min_rmag[18] = 3.5 # SEOB
-min_rmag[19] = 3.5 # SWOB
+#min_rmag[50] = 3.2 # CARP
+min_rmag[15] = 3.5 # ZN7d
+min_rmag[19] = 3.5 # SEOB
+min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
-min_rmag[14] = 3.2 # TP
+min_rmag[14] = 3.5 # TP
 
 '''
 min_rmag[52] = 3.3 # KMBY
