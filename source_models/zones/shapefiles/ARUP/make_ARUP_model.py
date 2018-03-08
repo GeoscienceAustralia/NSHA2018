@@ -193,7 +193,8 @@ min_rmag[15] = 3.5 # ZN7d
 min_rmag[19] = 3.5 # SEOB
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
-min_rmag[14] = 3.5 # TP
+min_rmag[44] = 3.5 # TP
+#min_rmag[4]  = 3.1 # ZN1b - Gawler, cases b to skyrocket!
 
 '''
 min_rmag[52] = 3.3 # KMBY
