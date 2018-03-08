@@ -34,7 +34,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>2.45253e-02 1.91668e-02 1.49805e-02 1.17095e-02 9.15353e-03 7.15610e-03 5.59502e-03 4.37486e-03 3.42109e-03 2.67547e-03 2.09254e-03 1.63676e-03 1.28036e-03 1.00165e-03 7.83672e-04 6.13183e-04 4.79824e-04 3.75500e-04 2.93882e-04 2.30024e-04 1.80056e-04 1.40954e-04 1.10353e-04 8.64018e-05 6.76547e-05 5.29795e-05 4.14908e-05 3.24960e-05 2.54532e-05 1.99384e-05 1.34485e-05 7.61158e-06 2.45455e-06 6.61144e-07</occurRates>
+                <occurRates>2.45432e-02 1.91816e-02 1.49925e-02 1.17193e-02 9.16154e-03 7.16263e-03 5.60034e-03 4.37919e-03 3.42460e-03 2.67833e-03 2.09486e-03 1.63864e-03 1.28188e-03 1.00288e-03 7.84675e-04 6.13995e-04 4.80481e-04 3.76031e-04 2.94312e-04 2.30371e-04 1.80336e-04 1.41180e-04 1.10535e-04 8.65490e-05 6.77734e-05 5.30751e-05 4.15679e-05 3.25581e-05 2.55032e-05 1.99786e-05 1.34763e-05 7.62776e-06 2.45990e-06 6.62622e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="225.0" dip="35.0" rake="90.0" />
@@ -1182,7 +1182,9 @@
                 <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -1608,7 +1610,9 @@
                 <nodalPlane probability="0.08" strike="356.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -2879,7 +2883,9 @@
                 <nodalPlane probability="0.08" strike="359.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 

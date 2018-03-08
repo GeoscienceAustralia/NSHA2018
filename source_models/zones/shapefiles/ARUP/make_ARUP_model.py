@@ -138,7 +138,7 @@ dep_b = []
 dep_u = []
 dep_l = []
 for i in range(0,len(lsd)):
-    if domains[i] < 8:
+    if domains[i] <= 8:
         lsd[i] = 20.
         if trt[i] == 'Cratonic':
             dep_b.append(5.0)
