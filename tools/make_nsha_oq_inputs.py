@@ -249,9 +249,22 @@ def write_oq_sourcefile(model, meta, mx_dict):
                             
             # get polygon text
             polytxt = ''
+            pp = 0
             for xy in m['src_shape'][:-1]: # no need to close poly
-                polytxt = polytxt + '                                ' + str("%0.4f" % xy[0]) \
-                                  + ' ' + str("%0.4f" % xy[1]) + '\n'
+                addPoint = True
+                # check if duplicating points
+                if pp > 0:
+                   if xy[0] == xy0[0] and xy[1] == xy0[1]:
+                      addPoint = False
+                      
+                if addPoint == True:
+                    polytxt = polytxt + '                                ' + str("%0.4f" % xy[0]) \
+                                      + ' ' + str("%0.4f" % xy[1]) + '\n'
+                
+                xy0 = xy
+                pp += 1
+                
+            # add poly text
             newxml += polytxt
             
             newxml += '                            </gml:posList>\n'
@@ -544,11 +557,14 @@ def write_oq_sourcefile(model, meta, mx_dict):
             
     ######################################################################
     # add indoneasia-png fault-source model
+    '''
     indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
     lines = open(indo_png_fault_file).readlines()[3:-2]
     for line in lines:
         newxml += '    ' + line
-        
+    '''
+    print '\nSkipping Banda Faults\n'
+       
     ######################################################################
     # finish nrml
     newxml += '    </sourceModel>\n'

@@ -8,77 +8,77 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>Domains_NSHA.bb.m1.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bb.m1.xml</uncertaintyModel>
                     <uncertaintyWeight>0.05</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b2">
-                    <uncertaintyModel>Domains_NSHA.bb.m2.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bb.m2.xml</uncertaintyModel>
                     <uncertaintyWeight>0.1</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b3">
-                    <uncertaintyModel>Domains_NSHA.bb.m3.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bb.m3.xml</uncertaintyModel>
                     <uncertaintyWeight>0.2</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b4">
-                    <uncertaintyModel>Domains_NSHA.bb.m4.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bb.m4.xml</uncertaintyModel>
                     <uncertaintyWeight>0.1</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b5">
-                    <uncertaintyModel>Domains_NSHA.bb.m5.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bb.m5.xml</uncertaintyModel>
                     <uncertaintyWeight>0.05</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b6">
-                    <uncertaintyModel>Domains_NSHA.bu.m1.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bu.m1.xml</uncertaintyModel>
                     <uncertaintyWeight>0.02</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b7">
-                    <uncertaintyModel>Domains_NSHA.bu.m2.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bu.m2.xml</uncertaintyModel>
                     <uncertaintyWeight>0.04</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b8">
-                    <uncertaintyModel>Domains_NSHA.bu.m3.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bu.m3.xml</uncertaintyModel>
                     <uncertaintyWeight>0.08</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b9">
-                    <uncertaintyModel>Domains_NSHA.bu.m4.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bu.m4.xml</uncertaintyModel>
                     <uncertaintyWeight>0.04</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b10">
-                    <uncertaintyModel>Domains_NSHA.bu.m5.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bu.m5.xml</uncertaintyModel>
                     <uncertaintyWeight>0.02</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b11">
-                    <uncertaintyModel>Domains_NSHA.bl.m1.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bl.m1.xml</uncertaintyModel>
                     <uncertaintyWeight>0.03</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b12">
-                    <uncertaintyModel>Domains_NSHA.bl.m2.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bl.m2.xml</uncertaintyModel>
                     <uncertaintyWeight>0.06</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b13">
-                    <uncertaintyModel>Domains_NSHA.bl.m3.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bl.m3.xml</uncertaintyModel>
                     <uncertaintyWeight>0.12</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b14">
-                    <uncertaintyModel>Domains_NSHA.bl.m4.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bl.m4.xml</uncertaintyModel>
                     <uncertaintyWeight>0.06</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="b15">
-                    <uncertaintyModel>Domains_NSHA.bl.m5.xml</uncertaintyModel>
+                    <uncertaintyModel>Domains.bl.m5.xml</uncertaintyModel>
                     <uncertaintyWeight>0.03</uncertaintyWeight>
                 </logicTreeBranch>
 
