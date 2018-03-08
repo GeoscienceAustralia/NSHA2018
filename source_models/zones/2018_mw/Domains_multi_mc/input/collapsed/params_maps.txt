@@ -1,6 +1,6 @@
-ncpus = 128 
+ncpus = 512 
 mem = 2048GB
-walltime = 5:00:00
+walltime = 8:00:00
 jobfs = 300GB
 sandpit_path = /short/w84/NSHA18/sandpit/
 model_rel_path = NSHA2018/source_models/zones/2018_mw/Domains_multi_mc/input/collapsed
