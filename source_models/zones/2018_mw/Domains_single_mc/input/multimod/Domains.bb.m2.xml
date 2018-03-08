@@ -4,7 +4,7 @@
 
     <sourceModel name="multimod_collapsed">
 
-        <areaSource id="NTS" name="Nusa Tenggara Shallow" tectonicRegion="Active">
+        <areaSource id="NTS" name="Nusa Tenggara Shallow" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -53,7 +53,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TB" name="Tanimbar" tectonicRegion="Active">
+        <areaSource id="TB" name="Tanimbar" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -105,7 +105,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WBS" name="West Banda Sea" tectonicRegion="Active">
+        <areaSource id="WBS" name="West Banda Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -142,7 +142,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TAFS" name="Taira Adiuna Fault System" tectonicRegion="Active">
+        <areaSource id="TAFS" name="Taira Adiuna Fault System" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -177,7 +177,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WPG" name="Wapengo" tectonicRegion="Active">
+        <areaSource id="WPG" name="Wapengo" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -213,7 +213,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Active">
+        <areaSource id="PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -324,7 +324,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MTB" name="Memberamo Thrust Belt" tectonicRegion="Active">
+        <areaSource id="MTB" name="Memberamo Thrust Belt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -364,7 +364,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Active">
+        <areaSource id="BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -403,7 +403,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ADB" name="Adelbert Block" tectonicRegion="Active">
+        <areaSource id="ADB" name="Adelbert Block" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -441,7 +441,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="HP" name="Huon Peninsula" tectonicRegion="Active">
+        <areaSource id="HP" name="Huon Peninsula" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -476,7 +476,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SBS" name="South Bismark Plate" tectonicRegion="Active">
+        <areaSource id="SBS" name="South Bismark Plate" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -528,7 +528,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBOT" name="New Britain Outer Trench" tectonicRegion="Active">
+        <areaSource id="NBOT" name="New Britain Outer Trench" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -583,7 +583,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBT" name="New Britain Trench" tectonicRegion="Interface">
+        <areaSource id="NBT" name="New Britain Trench" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -623,7 +623,7 @@
             <magScaleRel>StrasserInterface</magScaleRel>
             <ruptAspectRatio>1.3</ruptAspectRatio>
             <incrementalMFD minMag="6.55" binWidth="0.1">
-                <occurRates>5.92270e-02 5.03407e-02 4.27878e-02 3.63680e-02 3.09115e-02 2.62736e-02 2.23316e-02 1.89810e-02 1.61332e-02 1.37126e-02 1.16552e-02 9.90649e-03 8.42015e-03 7.15681e-03 6.08303e-03 5.17035e-03 4.39460e-03 3.73525e-03 3.17482e-03 2.69848e-03 2.29361e-03 1.94948e-03 1.59395e-16 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>6.63164e-02 5.61178e-02 4.74877e-02 4.01847e-02 3.40048e-02 2.87754e-02 2.43501e-02 2.06054e-02 1.74366e-02 1.47551e-02 1.24859e-02 1.05658e-02 8.94089e-03 7.56590e-03 6.40237e-03 5.41777e-03 4.58459e-03 3.87955e-03 3.28292e-03 2.77805e-03 2.35083e-03 1.98930e-03 1.62846e-16 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
@@ -633,7 +633,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WM" name="Woodlark Microplate" tectonicRegion="Active">
+        <areaSource id="WM" name="Woodlark Microplate" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -724,7 +724,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WB" name="Woodlark Basin" tectonicRegion="Active">
+        <areaSource id="WB" name="Woodlark Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -766,7 +766,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PFTB-FPB" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Active">
+        <areaSource id="PFTB-FPB" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -831,7 +831,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="RNBD" name="Region of New Britain Deep" tectonicRegion="Intraslab">
+        <areaSource id="RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -874,7 +874,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBTD" name="New Britain Trench Deep" tectonicRegion="Intraslab">
+        <areaSource id="NBTD" name="New Britain Trench Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -922,7 +922,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Intraslab">
+        <areaSource id="BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -960,7 +960,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Intraslab">
+        <areaSource id="OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -994,7 +994,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Intraslab">
+        <areaSource id="MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1030,7 +1030,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Active">
+        <areaSource id="BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1078,7 +1078,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Active">
+        <areaSource id="WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1118,7 +1118,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CDW" name="Cendrawasih" tectonicRegion="Active">
+        <areaSource id="CDW" name="Cendrawasih" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1152,7 +1152,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WRP" name="Waropen" tectonicRegion="Active">
+        <areaSource id="WRP" name="Waropen" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1194,7 +1194,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="NE Coral Sea" tectonicRegion="Extended">
+        <areaSource id="NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1314,7 +1314,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwest Oceanic" tectonicRegion="Oceanic">
+        <areaSource id="NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1378,11 +1378,13 @@
                 <nodalPlane probability="0.08" strike="359.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="LGR" name="Lengguru" tectonicRegion="Active">
+        <areaSource id="LGR" name="Lengguru" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1427,7 +1429,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_40_100" name="Banda 40-100km" tectonicRegion="Intraslab">
+        <areaSource id="BS_40_100" name="Banda 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1475,7 +1477,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_40_100" name="Seram 40-100km" tectonicRegion="Intraslab">
+        <areaSource id="SRM_40_100" name="Seram 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1510,7 +1512,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_100_200" name="Banda 100-200km" tectonicRegion="Intraslab">
+        <areaSource id="BS_100_200" name="Banda 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1562,7 +1564,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_200_300" name="Banda 200-300km" tectonicRegion="Intraslab">
+        <areaSource id="BS_200_300" name="Banda 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1607,7 +1609,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_100_20" name="Seram 100-200km" tectonicRegion="Intraslab">
+        <areaSource id="SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1645,7 +1647,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_200_30" name="Seram 200-300km" tectonicRegion="Intraslab">
+        <areaSource id="SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1682,7 +1684,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_40_100" name="Timor 40-100km" tectonicRegion="Intraslab">
+        <areaSource id="TMR_40_100" name="Timor 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1719,7 +1721,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Intraslab">
+        <areaSource id="NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1766,7 +1768,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_100_20" name="Timor 100-200km" tectonicRegion="Intraslab">
+        <areaSource id="TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1801,7 +1803,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Intraslab">
+        <areaSource id="NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1845,7 +1847,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_300_400" name="Banda 300-400km" tectonicRegion="Intraslab">
+        <areaSource id="BS_300_400" name="Banda 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1892,7 +1894,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_200_30" name="Timor 200-300km" tectonicRegion="Intraslab">
+        <areaSource id="TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1928,7 +1930,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Intraslab">
+        <areaSource id="NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1967,7 +1969,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_300_40" name="Timor 300-400km" tectonicRegion="Intraslab">
+        <areaSource id="TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2000,7 +2002,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Intraslab">
+        <areaSource id="NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2033,7 +2035,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_400_500" name="Banda 400-500km" tectonicRegion="Intraslab">
+        <areaSource id="BS_400_500" name="Banda 400-500km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2083,7 +2085,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_500_600" name="Banda_500_600km" tectonicRegion="Intraslab">
+        <areaSource id="BS_500_600" name="Banda_500_600km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2133,7 +2135,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS" name="Banda Sea" tectonicRegion="Active">
+        <areaSource id="BS" name="Banda Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2189,7 +2191,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OSGB" name="Otway-Sorell-Gippsland Basins" tectonicRegion="Extended">
+        <areaSource id="OSGB" name="Otway-Sorell-Gippsland Basins" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2546,7 +2548,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SAPM" name="South Australian Passive Margin" tectonicRegion="Extended">
+        <areaSource id="SAPM" name="South Australian Passive Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2976,7 +2978,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>4.44660e-02 3.49195e-02 2.74226e-02 2.15352e-02 1.69117e-02 1.32809e-02 1.04296e-02 8.19046e-03 6.43204e-03 5.05113e-03 3.96669e-03 3.11507e-03 2.44629e-03 1.92109e-03 1.50865e-03 1.18475e-03 9.30397e-04 7.30648e-04 5.73784e-04 4.50597e-04 3.53858e-04 2.77887e-04 2.18227e-04 1.71375e-04 1.34582e-04 1.05689e-04 8.29982e-05 6.51791e-05 5.11857e-05 4.82248e-18 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>4.60505e-02 3.63350e-02 2.86691e-02 2.26206e-02 1.78482e-02 1.40827e-02 1.11116e-02 8.76728e-03 6.91759e-03 5.45814e-03 4.30660e-03 3.39801e-03 2.68111e-03 2.11546e-03 1.66915e-03 1.31700e-03 1.03914e-03 8.19907e-04 6.46926e-04 5.10440e-04 4.02749e-04 3.17779e-04 2.50735e-04 1.97836e-04 1.56097e-04 1.23164e-04 9.71795e-05 7.66769e-05 6.04999e-05 5.70226e-18 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="178.0" dip="35.0" rake="90.0" />
@@ -3052,7 +3054,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.45044e-02 1.13904e-02 8.94500e-03 7.02458e-03 5.51646e-03 4.33212e-03 3.40205e-03 2.67165e-03 2.09807e-03 1.64763e-03 1.29390e-03 1.01611e-03 7.97958e-04 6.26643e-04 4.92108e-04 3.86456e-04 3.03487e-04 2.38331e-04 1.87163e-04 1.46981e-04 1.15425e-04 9.06443e-05 7.11837e-05 5.59011e-05 4.38996e-05 3.44747e-05 2.70732e-05 2.12608e-05 1.66963e-05 1.57305e-18 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.52996e-02 1.20718e-02 9.52490e-03 7.51537e-03 5.92981e-03 4.67876e-03 3.69165e-03 2.91280e-03 2.29827e-03 1.81339e-03 1.43081e-03 1.12894e-03 8.90760e-04 7.02830e-04 5.54550e-04 4.37553e-04 3.45240e-04 2.72402e-04 2.14932e-04 1.69586e-04 1.33808e-04 1.05577e-04 8.33030e-05 6.57280e-05 5.18610e-05 4.09195e-05 3.22865e-05 2.54748e-05 2.01002e-05 1.89449e-18 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="196.0" dip="35.0" rake="90.0" />
@@ -3456,7 +3458,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>8.45417e-02 6.66056e-02 5.24748e-02 4.13419e-02 3.25710e-02 2.56608e-02 2.02167e-02 1.59276e-02 1.25485e-02 9.88623e-03 7.78880e-03 6.13636e-03 4.83449e-03 3.80882e-03 3.00076e-03 2.36413e-03 1.86256e-03 1.46741e-03 1.15609e-03 9.10816e-04 7.17581e-04 5.65341e-04 4.45401e-04 3.50906e-04 2.76459e-04 2.17806e-04 1.71597e-04 1.35192e-04 1.06510e-04 1.00559e-17 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>8.44453e-02 6.66278e-02 5.25697e-02 4.14778e-02 3.27262e-02 2.58211e-02 2.03730e-02 1.60744e-02 1.26828e-02 1.00068e-02 7.89542e-03 6.22953e-03 4.91513e-03 3.87807e-03 3.05982e-03 2.41421e-03 1.90483e-03 1.50292e-03 1.18581e-03 9.35611e-04 7.38202e-04 5.82446e-04 4.59553e-04 3.62590e-04 2.86085e-04 2.25723e-04 1.78096e-04 1.40519e-04 1.10870e-04 1.04947e-17 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="171.0" dip="35.0" rake="90.0" />
@@ -3473,7 +3475,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EAPM" name="Eastern Australia Passive Margin" tectonicRegion="Extended">
+        <areaSource id="EAPM" name="Eastern Australia Passive Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3752,7 +3754,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>6.39343e-03 5.02081e-03 3.94288e-03 3.09638e-03 2.43161e-03 1.90956e-03 1.49959e-03 1.17764e-03 9.24813e-04 7.26263e-04 5.70340e-04 4.47892e-04 3.51734e-04 2.76219e-04 2.16917e-04 1.70347e-04 1.33775e-04 1.05054e-04 8.25000e-05 6.47879e-05 5.08784e-05 3.99552e-05 3.13772e-05 2.46407e-05 1.93506e-05 1.51962e-05 1.19337e-05 9.37160e-06 7.35959e-06 6.93388e-19 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>7.18185e-03 5.66665e-03 4.47112e-03 3.52782e-03 2.78353e-03 2.19627e-03 1.73291e-03 1.36731e-03 1.07884e-03 8.51228e-04 6.71639e-04 5.29939e-04 4.18135e-04 3.29918e-04 2.60313e-04 2.05393e-04 1.62060e-04 1.27869e-04 1.00892e-04 7.96061e-05 6.28111e-05 4.95594e-05 3.91035e-05 3.08536e-05 2.43442e-05 1.92082e-05 1.51557e-05 1.19582e-05 9.43531e-06 8.89300e-19 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="148.0" dip="35.0" rake="90.0" />
@@ -3769,7 +3771,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WAPM" name="Western Australia Passive Margin" tectonicRegion="Extended">
+        <areaSource id="WAPM" name="Western Australia Passive Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4033,7 +4035,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.94800e-02 1.54482e-02 1.22509e-02 9.71536e-03 7.70458e-03 6.10997e-03 4.84539e-03 3.84255e-03 3.04726e-03 2.41657e-03 1.91641e-03 1.51977e-03 1.20523e-03 9.55782e-04 7.57965e-04 6.01089e-04 4.76682e-04 3.78024e-04 2.99784e-04 2.37738e-04 1.88534e-04 1.49513e-04 1.18568e-04 9.40284e-05 7.45674e-05 5.91342e-05 4.68953e-05 3.71894e-05 2.94923e-05 2.33883e-05 1.85477e-05 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.99232e-02 1.57997e-02 1.25297e-02 9.93642e-03 7.87989e-03 6.24899e-03 4.95564e-03 3.92998e-03 3.11659e-03 2.47155e-03 1.96002e-03 1.55435e-03 1.23265e-03 9.77530e-04 7.75211e-04 6.14766e-04 4.87528e-04 3.86625e-04 3.06606e-04 2.43148e-04 1.92823e-04 1.52915e-04 1.21266e-04 9.61679e-05 7.62641e-05 6.04797e-05 4.79623e-05 3.80356e-05 3.01634e-05 2.39205e-05 1.89697e-05 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="197.0" dip="35.0" rake="90.0" />
@@ -4259,7 +4261,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.34852e-02 1.06243e-02 8.37026e-03 6.59446e-03 5.19540e-03 4.09316e-03 3.22477e-03 2.54062e-03 2.00161e-03 1.57695e-03 1.24239e-03 9.78811e-04 7.71150e-04 6.07546e-04 4.78651e-04 3.77102e-04 2.97097e-04 2.34066e-04 1.84408e-04 1.45284e-04 1.14461e-04 9.01777e-05 7.10459e-05 5.59730e-05 4.40980e-05 3.47423e-05 2.73715e-05 2.15645e-05 1.69894e-05 1.60402e-18 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.38740e-02 1.09467e-02 8.63701e-03 6.81464e-03 5.37679e-03 4.24232e-03 3.34721e-03 2.64097e-03 2.08374e-03 1.64408e-03 1.29719e-03 1.02349e-03 8.07538e-04 6.37152e-04 5.02717e-04 3.96646e-04 3.12956e-04 2.46924e-04 1.94824e-04 1.53717e-04 1.21284e-04 9.56937e-05 7.55028e-05 5.95721e-05 4.70027e-05 3.70854e-05 2.92606e-05 2.30868e-05 1.82156e-05 1.72424e-18 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="141.0" dip="35.0" rake="90.0" />
@@ -4479,7 +4481,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>2.39660e-02 1.88207e-02 1.47801e-02 1.16069e-02 9.11499e-03 7.15808e-03 5.62129e-03 4.41445e-03 3.46670e-03 2.72243e-03 2.13794e-03 1.67894e-03 1.31849e-03 1.03542e-03 8.13123e-04 6.38552e-04 5.01460e-04 3.93801e-04 3.09255e-04 2.42860e-04 1.90720e-04 1.49774e-04 1.17619e-04 9.23669e-05 7.25365e-05 5.69635e-05 4.47339e-05 3.51299e-05 2.75878e-05 2.59919e-18 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.43437e-02 1.92077e-02 1.51554e-02 1.19579e-02 9.43509e-03 7.44451e-03 5.87389e-03 4.63464e-03 3.65684e-03 2.88533e-03 2.27660e-03 1.79629e-03 1.41731e-03 1.11829e-03 8.82361e-04 6.96203e-04 5.49321e-04 4.33427e-04 3.41984e-04 2.69834e-04 2.12905e-04 1.67987e-04 1.32546e-04 1.04582e-04 8.25175e-05 6.51083e-05 5.13720e-05 4.05337e-05 3.19820e-05 3.01438e-18 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="119.0" dip="35.0" rake="90.0" />
@@ -4496,7 +4498,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WAEP" name="Western Australian Extended Proterozoic" tectonicRegion="Extended">
+        <areaSource id="WAEP" name="Western Australian Extended Proterozoic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5047,7 +5049,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>7.90854e-02 6.30691e-02 5.02963e-02 4.01104e-02 3.19872e-02 2.55092e-02 2.03431e-02 1.62232e-02 1.29377e-02 1.03175e-02 8.22804e-03 6.56170e-03 5.23283e-03 4.17308e-03 3.32795e-03 2.65397e-03 2.11649e-03 1.68786e-03 1.34604e-03 1.07344e-03 8.56045e-04 6.82679e-04 5.44423e-04 4.34167e-04 3.46239e-04 2.76119e-04 2.20200e-04 1.75605e-04 1.40041e-04 1.11680e-04 8.90628e-05 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>8.03715e-02 6.43135e-02 5.14638e-02 4.11815e-02 3.29536e-02 2.63695e-02 2.11010e-02 1.68850e-02 1.35115e-02 1.08119e-02 8.65172e-03 6.92313e-03 5.53990e-03 4.43305e-03 3.54734e-03 2.83859e-03 2.27144e-03 1.81762e-03 1.45446e-03 1.16386e-03 9.31327e-04 7.45250e-04 5.96351e-04 4.77202e-04 3.81858e-04 3.05564e-04 2.44513e-04 1.95660e-04 1.56568e-04 1.25286e-04 1.00254e-04 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="179.0" dip="35.0" rake="90.0" />
@@ -5064,7 +5066,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SOB" name="Southern Oceanic Buffer" tectonicRegion="Oceanic">
+        <areaSource id="SOB" name="Southern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5317,11 +5319,13 @@
                 <nodalPlane probability="0.08" strike="10.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Oceanic">
+        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5547,11 +5551,13 @@
                 <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Oceanic">
+        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6068,7 +6074,9 @@
                 <nodalPlane probability="0.08" strike="329.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -7006,7 +7014,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Extended">
+        <areaSource id="NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7079,7 +7087,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Extended">
+        <areaSource id="NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7125,7 +7133,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>5.38045e-03 4.26687e-03 3.38376e-03 2.68342e-03 2.12804e-03 1.68760e-03 1.33832e-03 1.06133e-03 8.41664e-04 6.67466e-04 5.29321e-04 4.19768e-04 3.32889e-04 2.63991e-04 2.09353e-04 1.66023e-04 1.31662e-04 1.04412e-04 8.28016e-05 6.56642e-05 5.20738e-05 4.12961e-05 3.27491e-05 2.59710e-05 2.05958e-05 1.63331e-05 1.29527e-05 1.02719e-05 8.14590e-06 6.45995e-06 5.12294e-06 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>5.24084e-03 4.15614e-03 3.29595e-03 2.61379e-03 2.07281e-03 1.64381e-03 1.30359e-03 1.03379e-03 8.19824e-04 6.50145e-04 5.15585e-04 4.08875e-04 3.24250e-04 2.57141e-04 2.03920e-04 1.61715e-04 1.28245e-04 1.01702e-04 8.06530e-05 6.39603e-05 5.07225e-05 4.02245e-05 3.18993e-05 2.52971e-05 2.00614e-05 1.59093e-05 1.26165e-05 1.00053e-05 7.93452e-06 6.29232e-06 4.99000e-06 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="175.0" dip="35.0" rake="90.0" />
