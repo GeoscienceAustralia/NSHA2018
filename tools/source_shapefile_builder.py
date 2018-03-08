@@ -126,6 +126,7 @@ def get_neotectonic_domain_params(target_sf):
     
     # get domains
     neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
+    neo_min_reg = get_field_data(dsf, 'MIN_RMAG', 'float')
     neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
     neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
     neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float')
@@ -137,6 +138,7 @@ def get_neotectonic_domain_params(target_sf):
     # get domain polygons
     dom_shapes = dsf.shapes()
     domain = []
+    min_rmag = []
     mmax = []
     trt = []
     bval_fix = []
@@ -160,6 +162,7 @@ def get_neotectonic_domain_params(target_sf):
         # set dummy values
         if matchidx == -99:
             domain.append(-99)
+            min_rmag.append(-99)
             mmax.append(-99)
             trt.append('')
             bval_fix.append(-99)
@@ -167,12 +170,13 @@ def get_neotectonic_domain_params(target_sf):
         # fill real values
         else:
             domain.append(neo_doms[matchidx])
+            min_rmag.append(neo_min_reg[matchidx])
             mmax.append(neo_mmax[matchidx])
             trt.append(neo_trt[matchidx])
             bval_fix.append(neo_bval[matchidx])
             bval_sig_fix.append(bval_sig[matchidx])
         
-    return domain, mmax, trt, bval_fix, bval_sig_fix
+    return domain, min_rmag, mmax, trt, bval_fix, bval_sig_fix
     
 
 # use Rajabi_2016 shmax vectors - gets median & std within a source zone    

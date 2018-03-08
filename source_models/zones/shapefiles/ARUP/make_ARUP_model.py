@@ -32,7 +32,8 @@ src_codes = get_field_data(sf, 'CODE', 'str')
 src_names1 = get_field_data(sf, 'Name', 'str')
 src_names2 = get_field_data(sf, 'SRC_NAME', 'str')
 domains = get_field_data(sf, 'DOMAIN', 'float')
-mmax = get_field_data(sf, 'max_mag', 'float')
+mmax1 = get_field_data(sf, 'max_mag', 'float')
+mmax2 = get_field_data(sf, 'MMAX_BEST', 'float')
 trt = get_field_data(sf, 'TRT', 'str')
 usd = get_field_data(sf, 'usd', 'float')
 lsd = get_field_data(sf, 'lsd', 'float')
@@ -43,6 +44,7 @@ rke = get_field_data(sf, 'rake1', 'float')
 
 # merge source names
 src_names = []
+mmax = []
 for sn1, sn2 in zip(src_names1, src_names2):
     if sn1.strip() != '':
         src_names.append(sn1)
@@ -50,6 +52,15 @@ for sn1, sn2 in zip(src_names1, src_names2):
         src_names.append(sn2)
     else:
         src_names.append('null')
+        
+# merge Mmax
+for mm1, mm2 in zip(mmax1, mmax2):
+    if mm1 == 0.0:
+        mmax.append(mm2)
+    elif mm2 == 0.0:
+        mmax.append(mm1)
+    else:
+        mmax.append(nan)
         
 # set domain for unset domains
 trt_new = []
@@ -75,7 +86,7 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -100,6 +111,10 @@ domains[0] = 5.
 # reset Southern Oceanic buffer
 zone_class[19] = 8.
 domains[19] = 8.
+
+# reset Tasmania buffer
+zone_class[11] = 2.
+domains[11] = 2.
 
 ###############################################################################
 #  set pref strike/dip/rake
@@ -151,42 +166,50 @@ usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
-#prefCat[55] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-#prefCat[56] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[44] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[2] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
     
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
+single_mc = 0
+ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, domains, single_mc)
 
-ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains)
-    
+min_rmag = neo_min_rmag
+
 # use manual modification
 for i in range(0,len(trt)):
     if trt[i] == 'Active':
-        min_rmag[i] = 5.7
-'''
-min_rmag[12] = 6.1 # NBT
-min_rmag[16] = 5.6 # BNBD
-min_rmag[26] = 3.8 # NWO
+        min_rmag[i] = 5.75
+    elif trt[i] == 'Intraslab':
+        min_rmag[i] = 5.75
+
+min_rmag[32] = 6.1 # NBT
+
+min_rmag[46] = 3.8 # NWO
+min_rmag[45] = 3.5 # NECS
 min_rmag[50] = 3.2 # CARP
-min_rmag[51] = 3.5 # EAPM
+min_rmag[11] = 3.5 # ZN7d
+min_rmag[18] = 3.5 # SEOB
+min_rmag[19] = 3.5 # SWOB
+min_rmag[14] = 3.2 # ZN6b
+min_rmag[14] = 3.2 # TP
+
+'''
 min_rmag[52] = 3.3 # KMBY
 min_rmag[55] = 3.3 # NACR
 min_rmag[54] = 3.3 # NAOR
 min_rmag[49] = 3.3 # PLBR
 min_rmag[53] = 3.5 # WAPM
 min_rmag[48] = 3.2 # YLGN
-min_rmag[56] = 3.2 # WAEP
 min_rmag[66] = 3.5 # NWB1
+'''
 
 # SEOB - multi-corner
-ycomp[59] = '1980;1964;1900'
-mcomp[59] = '3.5;5.0;6.0'
+ycomp[19] = '1980;1964;1900'
+mcomp[19] = '3.5;5.0;6.0'
 
-# SEOB - single-corner
-ycomp[59] = '1980;1980'
-mcomp[59] = '3.5;3.5'
-'''
+
 ###############################################################################
 # load Rajabi SHMax vectors 
 ###############################################################################

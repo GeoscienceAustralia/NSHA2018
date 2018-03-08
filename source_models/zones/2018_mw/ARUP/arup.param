@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mw//ARUP
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//ARUP//ARUP_NSHA18.shp
+ORIGINAL SHAPES  = shapefiles//ARUP//ARUP_NSHA18_FIXEDSHAPES.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = ARUP_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1
