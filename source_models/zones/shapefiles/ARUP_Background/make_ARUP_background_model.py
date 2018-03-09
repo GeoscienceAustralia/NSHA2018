@@ -112,9 +112,13 @@ domains[6] = 5.
 zone_class[13] = 8.
 domains[13] = 8.
 
-# reset Tasmania buffer
+# reset Tasmania 
 zone_class[3] = 2.
 domains[3] = 2.
+
+# reset Eastern passive margin extended
+zone_class[9] = 7.
+domains[9] = 7.
 
 ###############################################################################
 #  set pref strike/dip/rake
@@ -183,13 +187,15 @@ for i in range(0,len(trt)):
         min_rmag[i] = 5.75
     elif trt[i] == 'Intraslab':
         min_rmag[i] = 5.75
-''
+
+min_rmag[10] = 3.5 # ZN7c
+
+'''
 min_rmag[32] = 6.1 # NBT
 
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
 #min_rmag[50] = 3.2 # CARP
-min_rmag[15] = 3.5 # ZN7d
 min_rmag[19] = 3.5 # SEOB
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
@@ -207,9 +213,9 @@ min_rmag[66] = 3.5 # NWB1
 '''
 
 # SEOB - multi-corner
-ycomp[19] = '1980;1964;1900'
-mcomp[19] = '3.5;5.0;6.0'
-
+ycomp[13] = '1980;1964;1900'
+mcomp[13] = '3.5;5.0;6.0'
+min_rmag[13] = 3.5
 
 ###############################################################################
 # load Rajabi SHMax vectors 
@@ -221,7 +227,7 @@ shmax_pref, shmax_sig = get_aus_shmax_vectors(src_codes, shapes)
 # get rate adjustment factors 
 ###############################################################################
 
-origshp = 'ARUP_NSHA18_FIXEDSHAPES.shp'
+origshp = 'ARUP_Background_NSHA18_Submitted.shp'
 newField = 'CODE'
 origField = 'CODE'
 rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
@@ -230,7 +236,7 @@ rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'ARUP_NSHA18.shp'
+outshp = 'ARUP_Background_NSHA18.shp'
 bval_fix = -99 * ones_like(rte_adj_fact)
 bval_sig_fix = -99 * ones_like(rte_adj_fact)
 

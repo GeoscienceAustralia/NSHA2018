@@ -1,7 +1,7 @@
-ncpus = 128 
-mem = 256GB
-walltime = 6:00:00
-jobfs = 300GB
+ncpus = 256 
+mem = 2048GB
+walltime = 16:00:00
+jobfs = 500GB
 sandpit_path = /short/w84/NSHA18/sandpit/
 model_rel_path = NSHA2018/source_models/zones/2018_mw/ARUP/input/collapsed
 shared_rel_path = NSHA2018/shared
