@@ -2128,7 +2128,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="RNB Deep" name="Region of New Britain Deep" tectonicRegion="Subduction">
+        <areaSource id="RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2171,7 +2171,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBT Deep" name="New Britain Trench Deep" tectonicRegion="Subduction">
+        <areaSource id="NBTD" name="New Britain Trench Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2219,7 +2219,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BTFZ Deep" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
+        <areaSource id="BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2257,7 +2257,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OSFZ Deep" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
+        <areaSource id="OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2290,7 +2290,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MTB Deep" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
+        <areaSource id="MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
