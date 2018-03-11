@@ -17,7 +17,7 @@ from os import path, mkdir, getcwd
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from mpl_toolkits.basemap import Basemap
-from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan
+from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan, where, delete
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
 from scipy.constants import g
@@ -32,6 +32,7 @@ mpl.rcParams['pdf.fonttype'] = 42
 drawshape = False # decides whether to overlay seismic sources
 
 bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
+bbox = '107.0/153.0/-45.0/-7.0'
 
 # set map resolution
 res = 'i' 
@@ -71,12 +72,14 @@ gshap = False
 print '\nReading', modelName
 for line in lines[2:]:
     dat = line.strip().split(',')
+    '''
     # check if GSHAP    
     if len(dat) == 1:
         dat = line.strip().split('\t')
         gshap = True
         keys = ['PGA-0.1']
-
+    '''
+    
     tmpdict = {'lon':float(dat[0]), 'lat':float(dat[1])}
     
     # fill keys
@@ -156,6 +159,16 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     latlist = array(latlist)[idx]
     hazvals = array(hazvals)[idx]
     
+    
+    # delete zero hazvals
+    idx =where(hazvals==0)[0]
+    '''
+    lonlist = delete(lonlist, idx)
+    latlist = delete(latlist, idx)
+    hazvals = delete(hazvals, idx)
+    '''
+    hazvals[idx] = 1E-20
+    
     # get map bounds
     llcrnrlat = minlat
     urcrnrlat = maxlat
@@ -206,7 +219,9 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     N = 500j
     extent = (minlon-mbuff, maxlon+mbuff, minlat-mbuff, maxlat+mbuff)
     xs,ys = mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
+    	
     resampled = griddata(lonlist, latlist, log10(hazvals), xs, ys, interp='linear')
+    #resampled = griddata(lonlist, latlist, log10(hazvals), lonlist, latlist, interp='linear') # if this suddenly works, I have no idea why!
     
     
     # get 1D lats and lons for map transform
