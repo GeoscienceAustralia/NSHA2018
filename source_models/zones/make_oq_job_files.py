@@ -9,7 +9,7 @@ sourceModelSimple = sourceModel.split('_')[0]
 
 imts = ['PGA', 'SA(0.1)', 'SA(0.2)', 'SA(0.3)', 'SA(0.5)', 'SA(0.7)', 'SA(1.0)', 'SA(2.0)', 'SA(4.0)']
 
-
+print '\nMAKE OPTION FOR mean_hazard_curves= TRUE OR FALSE\n'
 
 # loop thru imts
 jobList = []
