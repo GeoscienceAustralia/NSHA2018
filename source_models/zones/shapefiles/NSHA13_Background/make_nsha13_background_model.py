@@ -176,10 +176,9 @@ usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
-'''
-prefCat[44] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-prefCat[2] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-'''    
+prefCat[38] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[39] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
