@@ -90,6 +90,7 @@ neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = g
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
+        mmax[i] = neo_mmax[i]
 
 zone_class = list(domains)[:]
 '''

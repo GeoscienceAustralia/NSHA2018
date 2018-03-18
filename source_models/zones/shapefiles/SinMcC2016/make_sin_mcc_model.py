@@ -90,6 +90,7 @@ neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = g
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
+        mmax[i] = neo_mmax[i]
 
 zone_class = list(domains)[:]
 '''
@@ -174,10 +175,10 @@ usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
-'''
-prefCat[38] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-prefCat[39] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-''' 
+
+prefCat[51] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[25] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+ 
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
@@ -195,13 +196,14 @@ for i in range(0,len(trt)):
 
 #min_rmag[10] = 3.5 # ZN7c
 
-'''
-min_rmag[32] = 6.1 # NBT
 
+min_rmag[12] = 6.1 # NBT
+min_rmag[53] = 3.5 # SEOB
+min_rmag[55] = 3.5 # SEM
+'''
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
 #min_rmag[50] = 3.2 # CARP
-min_rmag[19] = 3.5 # SEOB
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
 min_rmag[44] = 3.5 # TP
@@ -233,7 +235,7 @@ shmax_pref, shmax_sig = get_aus_shmax_vectors(src_codes, shapes)
 # get rate adjustment factors 
 ###############################################################################
 
-origshp = 'SIN_MCC_NSHA18_UPDATE.shp'
+origshp = 'SIN_MCC_NSHA18_CROP.shp'
 newField = 'code'
 origField = 'CODE'
 rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
