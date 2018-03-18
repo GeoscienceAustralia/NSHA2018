@@ -93,13 +93,15 @@ for i in range(0, len(domains)):
         mmax[i] = neo_mmax[i]
 
 zone_class = list(domains)[:]
+	
+# reset West Coast to extended
+zone_class[48] = 6.
+domains[48] = 6.
+
 '''
 # reset Gawler Craton to Flinders due to b-value similarities
 zone_class[0] = 2.
 
-# reset West Coast to extended
-zone_class[7] = 6.
-domains[7] = 6.
 
 # reset West Coast Passive Margin to extended
 zone_class[10] = 7.
