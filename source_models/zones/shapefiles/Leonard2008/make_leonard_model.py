@@ -94,12 +94,25 @@ for i in range(0, len(domains)):
 
 zone_class = list(domains)[:]
 
-# reset Gawler Craton to Flinders due to b-value similarities
-zone_class[58] = 2.
+# reset Flinders from craton
+zone_class[57] = 2.
+mmax[57] = 7.5
+domains[57] = 2
 
 # reset West Coast to extended
-zone_class[48] = 7.
-domains[48] = 7.
+zone_class[47] = 6.
+domains[47] = 6.
+
+# reset East Coast to extended
+zone_class[56] = 7.
+domains[56] = 7.
+mmax[57] = 7.7
+
+# reset Southern Oceanic buffer
+zone_class[49] = 8.
+domains[49] = 8.
+mmax[49] = 7.5
+
 '''
 # reset West Coast Passive Margin to extended
 zone_class[10] = 7.
@@ -175,10 +188,10 @@ usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
-'''
-prefCat[51] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-prefCat[25] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-''' 
+
+prefCat[53] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+#prefCat[25] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################

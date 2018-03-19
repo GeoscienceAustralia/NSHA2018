@@ -416,6 +416,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.save(outshp)
     
     # write projection file
+    print outshp
     prjfile = outshp.strip().split('.shp')[0]+'.prj'
     f = open(prjfile, 'wb')
     f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')

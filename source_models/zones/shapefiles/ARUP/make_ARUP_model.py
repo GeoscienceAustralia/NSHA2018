@@ -100,6 +100,7 @@ zone_class[4] = 2.
 # reset West Coast to extended
 zone_class[14] = 6.
 domains[14] = 6.
+mmax[14] = 7.7
 
 # reset West Coast Passive Margin to extended
 zone_class[15] = 7.
@@ -194,7 +195,7 @@ min_rmag[15] = 3.5 # ZN7d
 min_rmag[19] = 3.5 # SEOB
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
-min_rmag[44] = 3.5 # TP
+min_rmag[44] = 3.8 # TP
 #min_rmag[4]  = 3.1 # ZN1b - Gawler, cases b to skyrocket!
 
 '''

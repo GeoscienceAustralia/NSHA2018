@@ -112,20 +112,26 @@ domains[6] = 5.
 
 '''
 # reset Southern Oceanic buffer
-zone_class[52] = 8.
-domains[52] = 8.
+zone_class[51] = 8.
+domains[51] = 8.
+zone_class[39] = 8.
+domains[39] = 8.
 
-# reset Tasmania 
-zone_class[42] = 4.
-domains[42] = 4.
+# reset EBGZ margin extended
+zone_class[54] = 7.
+domains[54] = 7.
 
-# reset passive margin extended
-zone_class[39] = 7.
-domains[39] = 7.
+# reset Northwest buffer
+zone_class[52] = 7.
+domains[52] = 7.
 
 # reset NWO to Oceanic
 zone_class[26] = 8.
 domains[26] = 8.
+
+# reset Tasmania to Non-cratonic
+zone_class[41] = 4.
+domains[41] = 4.
 
 ###############################################################################
 #  set pref strike/dip/rake
@@ -179,6 +185,7 @@ prefCat = get_preferred_catalogue(domshp)
 # fix catalogue for source zones
 prefCat[38] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 prefCat[39] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[54] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 
 ###############################################################################
 # load 2018 completeness models

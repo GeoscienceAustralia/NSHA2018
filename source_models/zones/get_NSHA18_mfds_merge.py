@@ -670,8 +670,15 @@ for i in srcidx:
         ###############################################################################
         # skip plotting offshore events
         ###############################################################################
-        
+        # logic for making zone-specific plots        
         if skipPlotting == True and float(src_class[i]) <= 7.0:
+            doPlots = True
+        elif skipPlotting == False:
+            doPlots = True
+        else:
+            doPlots = False
+        
+        if doPlots == True:
         
             ###############################################################################
             # plot earthquakes that pass completeness

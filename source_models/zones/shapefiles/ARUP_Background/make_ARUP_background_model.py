@@ -100,6 +100,7 @@ zone_class[0] = 2.
 # reset West Coast to extended
 zone_class[7] = 6.
 domains[7] = 6.
+mmax[7] = 7.7
 
 # reset West Coast Passive Margin to extended
 zone_class[10] = 7.
@@ -171,8 +172,8 @@ usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
-prefCat[44] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-prefCat[2] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[38] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[1] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
     
 ###############################################################################
 # load 2018 completeness models
@@ -190,17 +191,17 @@ for i in range(0,len(trt)):
         min_rmag[i] = 5.75
 
 min_rmag[10] = 3.5 # ZN7c
+min_rmag[38] = 3.8 # TP
 
 '''
 min_rmag[32] = 6.1 # NBT
-
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
 #min_rmag[50] = 3.2 # CARP
 min_rmag[19] = 3.5 # SEOB
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
-min_rmag[44] = 3.5 # TP
+
 #min_rmag[4]  = 3.1 # ZN1b - Gawler, cases b to skyrocket!
 '''
 '''
