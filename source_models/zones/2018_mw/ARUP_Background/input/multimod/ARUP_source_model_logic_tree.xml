@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+
+    <logicTree logicTreeID="lt1">
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+            <logicTreeBranchSet uncertaintyType="sourceModel"
+                                branchSetID="bs1">
+
+                <logicTreeBranch branchID="b1">
+                    <uncertaintyModel>ARUP_Background.bb.m1.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.05</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b2">
+                    <uncertaintyModel>ARUP_Background.bb.m2.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.1</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b3">
+                    <uncertaintyModel>ARUP_Background.bb.m3.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.2</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b4">
+                    <uncertaintyModel>ARUP_Background.bb.m4.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.1</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b5">
+                    <uncertaintyModel>ARUP_Background.bb.m5.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.05</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b6">
+                    <uncertaintyModel>ARUP_Background.bu.m1.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.02</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b7">
+                    <uncertaintyModel>ARUP_Background.bu.m2.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.04</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b8">
+                    <uncertaintyModel>ARUP_Background.bu.m3.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.08</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b9">
+                    <uncertaintyModel>ARUP_Background.bu.m4.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.04</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b10">
+                    <uncertaintyModel>ARUP_Background.bu.m5.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.02</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b11">
+                    <uncertaintyModel>ARUP_Background.bl.m1.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.03</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b12">
+                    <uncertaintyModel>ARUP_Background.bl.m2.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.06</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b13">
+                    <uncertaintyModel>ARUP_Background.bl.m3.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.12</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b14">
+                    <uncertaintyModel>ARUP_Background.bl.m4.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.06</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b15">
+                    <uncertaintyModel>ARUP_Background.bl.m5.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.03</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+    </logicTree>
+</nrml>
