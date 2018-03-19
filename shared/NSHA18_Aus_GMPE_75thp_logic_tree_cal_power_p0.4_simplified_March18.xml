@@ -153,12 +153,12 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
 
         </logicTreeBranchingLevel>
         
+        <!--
         <logicTreeBranchingLevel branchingLevelID="bl4">
 
             <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs4"
                     applyToTectonicRegionType="Interface">
 
-                <!-- GMM selection includeds Interface and Intraslab source zones -->
                 
                 <logicTreeBranch branchID="Allen2012">
                     <uncertaintyModel>Allen2012</uncertaintyModel>
@@ -200,18 +200,9 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
                     <uncertaintyWeight>0.127</uncertaintyWeight>
                 </logicTreeBranch>
                 
-                <!-- Megawatti & Pan min Period = 0.5 s; weights redistributed
-                
-                <logicTreeBranch branchID="MegawatiPan2010">
-                    <uncertaintyModel>MegawatiPan2010</uncertaintyModel>
-                    <uncertaintyWeight>0.094</uncertaintyWeight>
-                </logicTreeBranch>
-                
-                -->
-
            </logicTreeBranchSet>
 
         </logicTreeBranchingLevel>
-        
+        -->
     </logicTree>
 </nrml>
