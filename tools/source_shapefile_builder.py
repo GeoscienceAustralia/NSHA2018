@@ -110,7 +110,7 @@ def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
     
     
 # get neotectonic domain number and Mmax from zone centroid
-def get_neotectonic_domain_params(target_sf):
+def get_neotectonic_domain_params(target_sf, target_trt):
     from os import path
     import shapefile
     from shapely.geometry import Point, Polygon
@@ -119,6 +119,7 @@ def get_neotectonic_domain_params(target_sf):
     
     # load target shapefile
     polygons = target_sf.shapes()
+    target_trt
     
     # load domains shp
     domshp = open('..//reference_shp.txt').read()
@@ -145,7 +146,7 @@ def get_neotectonic_domain_params(target_sf):
     bval_sig_fix = []
     
     # loop through target zones
-    for poly in polygons:
+    for poly, ttrt in zip(polygons, target_trt):
         # get centroid of target sources
         clon, clat = get_shp_centroid(poly.points)
         point = Point(clon, clat)
@@ -153,11 +154,13 @@ def get_neotectonic_domain_params(target_sf):
         # loop through domains and find point in poly
         matchidx = -99
         for i in range(0, len(dom_shapes)):
-            dom_poly = Polygon(dom_shapes[i].points)
-            
-            # check if target centroid in domains poly
-            if point.within(dom_poly):
-                matchidx = i
+            # make sure trts match
+            if neo_trt[i] == ttrt:
+                dom_poly = Polygon(dom_shapes[i].points)
+                
+                # check if target centroid in domains poly
+                if point.within(dom_poly):
+                    matchidx = i
                 
         # set dummy values
         if matchidx == -99:
@@ -399,7 +402,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     bval_l = -99
     bval_u = -99
     cat_ymax = -99
-    
+        
     # loop through original records
     for i, shape in enumerate(src_shapes):
     
@@ -409,7 +412,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
         # write new records
         if i >= 0:
             w.record(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i], \
-                     overwrite_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix, bval_sig_fix, \
+                     overwrite_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], \
                      ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], gmm_trt[i], dom[i], prefCat[i])
             
     # now save area shapefile

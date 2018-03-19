@@ -393,7 +393,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
 
     # do Aki ML first if N events less than 50
-    elif len(mvect) >= 50 and len(mvect) < 80:
+    elif len(mvect) >= 30 and len(mvect) < 80:
             
         # do Aki max likelihood
         bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
