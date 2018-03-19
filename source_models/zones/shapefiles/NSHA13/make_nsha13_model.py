@@ -116,6 +116,7 @@ zone_class[70] = 2.
 trt_new[70] = 'Cratonic'
 zone_class[72] = 2.
 zone_class[69] = 2.
+mmax[72] = mmax[71]
 
 # reset Southern Oceanic buffer
 zone_class[84] = 8.
@@ -214,7 +215,10 @@ for i in range(0,len(trt)):
     elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
-#min_rmag[10] = 3.5 # ZN7c
+min_rmag[70] = 3. 
+min_rmag[72] = 3. 
+min_rmag[84] = 3.5 # SEOB
+
 
 '''
 min_rmag[32] = 6.1 # NBT
@@ -222,7 +226,6 @@ min_rmag[32] = 6.1 # NBT
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
 #min_rmag[50] = 3.2 # CARP
-min_rmag[19] = 3.5 # SEOB
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
 min_rmag[44] = 3.5 # TP
