@@ -18,7 +18,7 @@ except:
 # parse AUS shp and prep data
 ###############################################################################
 
-domshp = 'NSHA13_NSHA18_Merged.shp'
+domshp = 'AUS6_NSHA18_Merged.shp'
 
 print 'Reading source shapefile...'
 sf = shapefile.Reader(domshp)
@@ -28,13 +28,13 @@ for poly in shapes:
     polygons.append(Polygon(poly.points))
     
 # get field data
-src_codes = get_field_data(sf, 'code', 'str')
+src_codes = get_field_data(sf, 'CODE', 'str')
 src_names1 = get_field_data(sf, 'Name', 'str')
 src_names2 = get_field_data(sf, 'SRC_NAME', 'str')
 domains = get_field_data(sf, 'DOMAIN', 'float')
 mmax1 = get_field_data(sf, 'max_mag', 'float')
 mmax2 = get_field_data(sf, 'MMAX_BEST', 'float')
-trt = get_field_data(sf, 'trt', 'str')
+trt = get_field_data(sf, 'TRT', 'str')
 usd = get_field_data(sf, 'usd', 'float')
 lsd = get_field_data(sf, 'lsd', 'float')
 hd = get_field_data(sf, 'hd1', 'float')
@@ -81,6 +81,7 @@ for i in range(0,len(trt)):
     else:
         trt_new.append(trt[i])
 
+trt_new[119] = 'Oceanic'
 ###############################################################################
 # load neotectonic domains parameters
 ###############################################################################
@@ -93,16 +94,24 @@ bval_fix = neo_bval_fix
 bval_sig_fix = neo_bval_sig_fix
 
 # set b-values for zones with weird centroids
-bval_fix[43] = bval_fix[16]
-bval_fix[44] = bval_fix[16]
-bval_fix[70] = bval_fix[71]
-bval_fix[72] = bval_fix[71]
-bval_fix[84] = bval_fix[26]
 
-bval_sig_fix[43] = bval_sig_fix[16]
-bval_sig_fix[44] = bval_sig_fix[16]
-bval_sig_fix[70] = bval_sig_fix[71]
-bval_sig_fix[72] = bval_sig_fix[71]
+bval_fix[107] = bval_fix[51]
+bval_fix[170] = bval_fix[146]
+bval_fix[169] = bval_fix[146]
+bval_fix[127] = bval_fix[86]
+bval_fix[118] = bval_fix[86]
+bval_fix[125] = bval_fix[128]
+bval_fix[63] = bval_fix[31]
+bval_fix[27] = bval_fix[123]
+
+bval_sig_fix[107] = bval_sig_fix[51]
+bval_sig_fix[170] = bval_sig_fix[146]
+bval_sig_fix[169] = bval_sig_fix[146]
+bval_sig_fix[127] = bval_sig_fix[86]
+bval_sig_fix[118] = bval_sig_fix[86]
+bval_sig_fix[125] = bval_sig_fix[128]
+bval_sig_fix[63] = bval_sig_fix[31]
+bval_sig_fix[27] = bval_sig_fix[123]
 
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
@@ -111,42 +120,30 @@ for i in range(0, len(domains)):
         
 zone_class = list(domains)[:]
 
-# reset Gawler Craton to Flinders due to b-value similarities
-zone_class[70] = 2.
-trt_new[70] = 'Cratonic'
-zone_class[72] = 2.
-zone_class[69] = 2.
-mmax[72] = mmax[71]
+# reset zone classes
+zone_class[107] = 2.
+zone_class[108] = 2.
+zone_class[109] = 2.
+zone_class[110] = 2.
+zone_class[94] = 2.
+zone_class[27] = 4.
+zone_class[86] = 4.
+domains[27] = 4
+zone_class[63] = 7.
+domains[63] = 7
+zone_class[119] = 8.
+domains[119] = 8
+
+#trt_new[107] = 'Cratonic'
+#mmax[72] = mmax[71]
+
 
 # reset Southern Oceanic buffer
+'''
 zone_class[84] = 8.
 domains[84] = 8.
-
-
-
 '''
-# reset Southern Oceanic buffer
-zone_class[51] = 8.
-domains[51] = 8.
-zone_class[39] = 8.
-domains[39] = 8.
 
-# reset EBGZ margin extended
-zone_class[54] = 7.
-domains[54] = 7.
-
-# reset Northwest buffer
-zone_class[52] = 7.
-domains[52] = 7.
-
-# reset NWO to Oceanic
-zone_class[26] = 8.
-domains[26] = 8.
-
-# reset Tasmania to Non-cratonic
-zone_class[41] = 4.
-domains[41] = 4.
-'''
 ###############################################################################
 #  set pref strike/dip/rake
 ###############################################################################
@@ -169,7 +166,7 @@ dep_b = []
 dep_u = []
 dep_l = []
 for i in range(0,len(lsd)):
-    if domains[i] < 8:
+    if domains[i] <= 8:
         lsd[i] = 20.
         if trt_new[i] == 'Cratonic':
             dep_b.append(5.0)
@@ -198,8 +195,9 @@ prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
 
-prefCat[60] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-prefCat[64] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[156] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[90] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[155] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
@@ -215,16 +213,25 @@ for i in range(0,len(trt)):
     elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
-min_rmag[70] = 3. 
-min_rmag[72] = 3. 
-min_rmag[84] = 3.5 # SEOB
-min_rmag[63] = 3.8 # Zone38
+min_rmag[90] = 3.8
+min_rmag[54] = 3.2 
+min_rmag[101] = 3.2 
+min_rmag[85] = 3.2 
+min_rmag[52] = 3.3 
+min_rmag[86] = 3.0
+min_rmag[117] = 3.0
+min_rmag[118] = 3.0 
+min_rmag[107] = 3.0 
 
 
+# SEEM - multi-corner
+ycomp[127] = '1980;1964;1900'
+mcomp[127] = '3.5;5.0;6.0'
 
-# SEOB - multi-corner
-ycomp[84] = '1980;1964;1900'
-mcomp[84] = '3.5;5.0;6.0'
+# NLP - multi-corner
+ycomp[71] = ycomp[81]
+mcomp[71] = mcomp[81]
+
 
 ###############################################################################
 # load Rajabi SHMax vectors 
@@ -237,7 +244,7 @@ shmax_pref, shmax_sig = get_aus_shmax_vectors(src_codes, shapes)
 ###############################################################################
 
 origshp = 'AUS6_NSHA18_FIXEDSHAPES.shp'
-newField = 'code'
+newField = 'CODE'
 origField = 'CODE'
 rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
               

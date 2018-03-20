@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mw//AUS6
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//AUS6//AUS6_NSHA18.shp
+ORIGINAL SHAPES  = shapefiles//AUS6//AUS6_NSHA18_FIXEDSHAPES.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = AUS6_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1
