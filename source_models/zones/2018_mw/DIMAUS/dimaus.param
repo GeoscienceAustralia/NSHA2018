@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mw//DIMAUS
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//DIMAUS//DIMAUS_NSHA18.shp
+ORIGINAL SHAPES  = shapefiles//DIMAUS//DIMAUS_NSHA18_FIXEDSHAPES.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = DIMAUS_NSHA18_MFD.shp
+MFD BIN WIDTH    = 0.1

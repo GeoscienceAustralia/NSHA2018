@@ -204,9 +204,10 @@ usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
 prefCat = get_preferred_catalogue(domshp)
 
 # fix catalogue for source zones
+
+prefCat[53] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[55] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 '''
-prefCat[156] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
-prefCat[90] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 prefCat[155] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 '''
 ###############################################################################
@@ -223,8 +224,9 @@ for i in range(0,len(trt)):
         min_rmag[i] = 5.75
     elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
+
+min_rmag[71] = 3.8
 '''
-min_rmag[90] = 3.8
 min_rmag[54] = 3.2 
 min_rmag[86] = 3.0
 min_rmag[117] = 3.0
