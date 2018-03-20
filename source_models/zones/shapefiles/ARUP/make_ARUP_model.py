@@ -1,6 +1,6 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, array
+from numpy import ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
@@ -86,7 +86,7 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -177,40 +177,46 @@ prefCat[2] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 single_mc = 0
 ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, domains, single_mc)
 
+# use values from Domains model instead
 min_rmag = neo_min_rmag
 
 # use manual modification
-for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+for i in range(0,len(trt_new)):
+    if trt_new[i] == 'Active':
         min_rmag[i] = 5.75
-    elif trt[i] == 'Intraslab':
+    elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
+min_rmag[23] = 6.1 # TAFS
+min_rmag[31] = 6.0 # NBOT
 min_rmag[32] = 6.1 # NBT
-
-min_rmag[46] = 3.8 # NWO
-min_rmag[45] = 3.5 # NECS
-#min_rmag[50] = 3.2 # CARP
-min_rmag[15] = 3.5 # ZN7d
-min_rmag[19] = 3.5 # SEOB
-min_rmag[18] = 3.5 # SWOB
-min_rmag[14] = 3.2 # ZN6b
 min_rmag[44] = 3.8 # TP
-#min_rmag[4]  = 3.1 # ZN1b - Gawler, cases b to skyrocket!
+min_rmag[15] = 3.5 # ZN7d
+min_rmag[0] = 3.0 # ZN7d
+min_rmag[14] = 3.2 # ZN6b
 
 '''
-min_rmag[52] = 3.3 # KMBY
-min_rmag[55] = 3.3 # NACR
-min_rmag[54] = 3.3 # NAOR
-min_rmag[49] = 3.3 # PLBR
-min_rmag[53] = 3.5 # WAPM
-min_rmag[48] = 3.2 # YLGN
-min_rmag[66] = 3.5 # NWB1
+#min_rmag[46] = 3.8 # NWO
+min_rmag[45] = 3.5 # NECS
+#min_rmag[50] = 3.2 # CARP
+min_rmag[19] = 3.5 # SEOB
+min_rmag[18] = 3.5 # SWOB
+
 '''
 
 # SEOB - multi-corner
 ycomp[19] = '1980;1964;1900'
 mcomp[19] = '3.5;5.0;6.0'
+
+ycomp[18] = '1980;1964;1900'
+mcomp[18] = '3.5;5.0;6.0'
+
+ycomp[46] = '1980;1964;1900'
+mcomp[46] = '3.5;5.0;6.0'
+
+ycomp[13] = '1980;1964;1900'
+mcomp[13] = '3.5;5.0;6.0'
+
 
 
 ###############################################################################

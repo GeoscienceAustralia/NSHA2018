@@ -86,7 +86,7 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -196,18 +196,19 @@ ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, domain
 min_rmag = neo_min_rmag
 
 # use manual modification
-for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+for i in range(0,len(trt_new)):
+    if trt_new[i] == 'Active':
         min_rmag[i] = 5.75
-    elif trt[i] == 'Intraslab':
+    elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
-#min_rmag[10] = 3.5 # ZN7c
+min_rmag[26] = 3.5 # NWO
+min_rmag[3] = 6.1 # TAFS
+min_rmag[11] = 6.0 # NBOT
+min_rmag[12] = 6.1 # NBT
+
 
 '''
-min_rmag[32] = 6.1 # NBT
-
-min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
 #min_rmag[50] = 3.2 # CARP
 min_rmag[19] = 3.5 # SEOB
@@ -227,11 +228,10 @@ min_rmag[66] = 3.5 # NWB1
 '''
 
 # SEOB - multi-corner
-'''
-ycomp[13] = '1980;1964;1900'
-mcomp[13] = '3.5;5.0;6.0'
-min_rmag[13] = 3.5
-'''
+ycomp[51] = '1980;1964;1900'
+mcomp[51] = '3.5;5.0;6.0'
+min_rmag[51] = 3.5
+
 ###############################################################################
 # load Rajabi SHMax vectors 
 ###############################################################################

@@ -1,6 +1,6 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, array
+from numpy import ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
@@ -86,7 +86,7 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -101,6 +101,7 @@ zone_class[0] = 2.
 zone_class[7] = 6.
 domains[7] = 6.
 mmax[7] = 7.7
+trt_new[7] = 'Extended'
 
 # reset West Coast Passive Margin to extended
 zone_class[10] = 7.
@@ -146,7 +147,7 @@ dep_l = []
 for i in range(0,len(lsd)):
     if domains[i] < 8:
         lsd[i] = 20.
-        if trt[i] == 'Cratonic':
+        if trt_new[i] == 'Cratonic':
             dep_b.append(5.0)
             dep_u.append(2.5)
             dep_l.append(10.)
@@ -184,14 +185,18 @@ ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, domain
 min_rmag = neo_min_rmag
 
 # use manual modification
-for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+for i in range(0,len(trt_new)):
+    if trt_new[i] == 'Active':
         min_rmag[i] = 5.75
-    elif trt[i] == 'Intraslab':
+    elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
+min_rmag[6] = 3.0 # ZN5
 min_rmag[10] = 3.5 # ZN7c
 min_rmag[38] = 3.8 # TP
+min_rmag[17] = 6.1 # TAFS
+min_rmag[25] = 6.0 # NBOT
+
 
 '''
 min_rmag[32] = 6.1 # NBT

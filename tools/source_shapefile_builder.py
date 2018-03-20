@@ -47,10 +47,10 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
         # loop through target and find point in poly    
         mccompFound = False
         for i in range(0, len(mc_shapes)):
-            dom_poly = Polygon(mc_shapes[i].points)
+            mc_poly = Polygon(mc_shapes[i].points)
             
             # check if target centroid in completeness poly
-            if point.within(dom_poly): 
+            if point.within(mc_poly): 
                 ycomp.append(mc_ycomp[i])
                 mcomp.append(mc_mcomp[i])
                 mccompFound = True
@@ -58,14 +58,16 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
         # if no Mcomp model assigned, use conservative model
         if mccompFound == False:
             if dom <= 8:
-                # for mult-corner
-                #ycomp.append('1980;1964;1900')
-                #mcomp.append('3.5;5.0;6.0')
-                
                 # for single-corner
-                ycomp.append('1980;1980')
-                mcomp.append('3.5;3.5')
+                if singleCorner == 1:
+                    ycomp.append('1980;1980')
+                    mcomp.append('3.5;3.5')
             
+                # for mult-corner
+                else:
+                    ycomp.append('1980;1964;1900')
+                    mcomp.append('3.5;5.0;6.0')
+                                
             # use approx ISC-GEM completeness
             else:
                 ycomp.append('1975;1964;1904')
@@ -111,15 +113,12 @@ def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
     
 # get neotectonic domain number and Mmax from zone centroid
 def get_neotectonic_domain_params(target_sf, target_trt):
-    from os import path
     import shapefile
     from shapely.geometry import Point, Polygon
-    from numpy import array, median, std
     from tools.nsha_tools import get_field_data, get_shp_centroid
     
     # load target shapefile
     polygons = target_sf.shapes()
-    target_trt
     
     # load domains shp
     domshp = open('..//reference_shp.txt').read()
@@ -165,7 +164,7 @@ def get_neotectonic_domain_params(target_sf, target_trt):
         # set dummy values
         if matchidx == -99:
             domain.append(-99)
-            min_rmag.append(-99)
+            min_rmag.append(3.5)
             mmax.append(-99)
             trt.append('')
             bval_fix.append(-99)

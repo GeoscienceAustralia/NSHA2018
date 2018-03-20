@@ -1,6 +1,6 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, array
+from numpy import ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
@@ -86,7 +86,7 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -202,17 +202,23 @@ min_rmag = neo_min_rmag
 
 # use manual modification
 for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+    if trt_new[i] == 'Active':
         min_rmag[i] = 5.75
-    elif trt[i] == 'Intraslab':
+    elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
-
-#min_rmag[10] = 3.5 # ZN7c
 
 
 min_rmag[12] = 6.1 # NBT
-min_rmag[53] = 3.5 # SEOB
-min_rmag[55] = 3.5 # SEM
+min_rmag[3] = 6.1 # TAFS
+min_rmag[11] = 6.0 # NBOT
+min_rmag[47] = 3.2 # NWA
+min_rmag[48] = 3.0 # SWA
+min_rmag[50] = 3.5 # SEOB
+min_rmag[51] = 3.5 # EOB
+min_rmag[53] = 3.2 # NA_2
+min_rmag[54] = 3.3 # SEM
+min_rmag[57] = 3.0 # SA
+
 '''
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
@@ -233,11 +239,9 @@ min_rmag[66] = 3.5 # NWB1
 '''
 
 # SEOB - multi-corner
-'''
-ycomp[13] = '1980;1964;1900'
-mcomp[13] = '3.5;5.0;6.0'
-min_rmag[13] = 3.5
-'''
+ycomp[50] = '1980;1964;1900'
+mcomp[50] = '3.5;5.0;6.0'
+
 ###############################################################################
 # load Rajabi SHMax vectors 
 ###############################################################################
@@ -248,9 +252,9 @@ shmax_pref, shmax_sig = get_aus_shmax_vectors(src_codes, shapes)
 # get rate adjustment factors 
 ###############################################################################
 
-origshp = 'source_model_leonard_2008.shp'
+origshp = 'LEONARD08_NSHA18_ALT_MC.shp'
 newField = 'code'
-origField = 'name'
+origField = 'CODE'
 rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
               
 ###############################################################################

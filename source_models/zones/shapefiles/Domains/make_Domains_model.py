@@ -1,6 +1,6 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, array
+from numpy import ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
@@ -84,7 +84,7 @@ dep_l = []
 for i in range(0,len(lsd)):
     if domains[i] <= 8:
         lsd[i] = 20.
-        if trt[i] == 'Cratonic':
+        if trt_new[i] == 'Cratonic':
             dep_b.append(5.0)
             dep_u.append(2.5)
             dep_l.append(10.)
@@ -118,13 +118,15 @@ single_mc = 0
 ycomp, mcomp, min_rmag = get_completeness_model(src_codes, shapes, domains, single_mc)
     
 # use manual modification
-for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+for i in range(0,len(trt_new)):
+    if trt_new[i] == 'Active':
         min_rmag[i] = 5.7
 
+min_rmag[3] = 6.1 # TAFS
 min_rmag[12] = 6.1 # NBT
+min_rmag[11] = 6.0 # NBOT
 min_rmag[16] = 5.6 # BNBD
-min_rmag[26] = 3.8 # NWO
+min_rmag[26] = 3.5 # NWO
 min_rmag[50] = 3.2 # CARP
 min_rmag[51] = 3.5 # EAPM
 min_rmag[52] = 3.3 # KMBY
@@ -139,10 +141,7 @@ min_rmag[66] = 3.5 # NWB1
 # SEOB - multi-corner
 ycomp[59] = '1980;1964;1900'
 mcomp[59] = '3.5;5.0;6.0'
-
-# SEOB - single-corner
-ycomp[59] = '1980;1980'
-mcomp[59] = '3.5;3.5'
+min_rmag[59] = 3.5
 
 ###############################################################################
 # load Rajabi SHMax vectors 

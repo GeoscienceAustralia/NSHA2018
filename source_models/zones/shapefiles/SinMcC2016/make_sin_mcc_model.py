@@ -1,6 +1,6 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, array
+from numpy import ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
@@ -86,7 +86,7 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -190,25 +190,27 @@ ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, domain
 min_rmag = neo_min_rmag
 
 # use manual modification
-for i in range(0,len(trt)):
-    if trt[i] == 'Active':
+for i in range(0,len(trt_new)):
+    if trt_new[i] == 'Active':
         min_rmag[i] = 5.75
-    elif trt[i] == 'Intraslab':
+    elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
 #min_rmag[10] = 3.5 # ZN7c
-
-
+min_rmag[3] = 6.1 # TAFS
+min_rmag[11] = 6.0 # NBOT
 min_rmag[12] = 6.1 # NBT
-min_rmag[53] = 3.5 # SEOB
-min_rmag[55] = 3.5 # SEM
+min_rmag[25] = 3.8 # TP
+
+#min_rmag[53] = 3.5 # SEOB
+#min_rmag[55] = 3.5 # SEM
 '''
 min_rmag[46] = 3.8 # NWO
 min_rmag[45] = 3.5 # NECS
 #min_rmag[50] = 3.2 # CARP
 min_rmag[18] = 3.5 # SWOB
 min_rmag[14] = 3.2 # ZN6b
-min_rmag[44] = 3.5 # TP
+
 #min_rmag[4]  = 3.1 # ZN1b - Gawler, cases b to skyrocket!
 '''
 '''
