@@ -103,6 +103,7 @@ bval_sig_fix[43] = bval_sig_fix[16]
 bval_sig_fix[44] = bval_sig_fix[16]
 bval_sig_fix[70] = bval_sig_fix[71]
 bval_sig_fix[72] = bval_sig_fix[71]
+bval_sig_fix[84] = bval_sig_fix[26]
 
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
@@ -200,6 +201,7 @@ prefCat = get_preferred_catalogue(domshp)
 
 prefCat[60] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 prefCat[64] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[59] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
@@ -218,35 +220,22 @@ for i in range(0,len(trt)):
 min_rmag[70] = 3. 
 min_rmag[72] = 3. 
 min_rmag[84] = 3.5 # SEOB
+min_rmag[63] = 3.8 # Zone38
+min_rmag[66] = 3.2 # Z001
+min_rmag[73] = 3.2 # Z002
+min_rmag[51] = 3.0 # Z022
+min_rmag[54] = 3.3 # Z025
+
+min_rmag[3] = 6.1 # TAFS
+min_rmag[11] = 6.0 # NBOT
+min_rmag[12] = 6.1 # NBT
 
 
-'''
-min_rmag[32] = 6.1 # NBT
-
-min_rmag[46] = 3.8 # NWO
-min_rmag[45] = 3.5 # NECS
-#min_rmag[50] = 3.2 # CARP
-min_rmag[18] = 3.5 # SWOB
-min_rmag[14] = 3.2 # ZN6b
-min_rmag[44] = 3.5 # TP
-#min_rmag[4]  = 3.1 # ZN1b - Gawler, cases b to skyrocket!
-'''
-'''
-min_rmag[52] = 3.3 # KMBY
-min_rmag[55] = 3.3 # NACR
-min_rmag[54] = 3.3 # NAOR
-min_rmag[49] = 3.3 # PLBR
-min_rmag[53] = 3.5 # WAPM
-min_rmag[48] = 3.2 # YLGN
-min_rmag[66] = 3.5 # NWB1
-'''
 
 # SEOB - multi-corner
-'''
-ycomp[13] = '1980;1964;1900'
-mcomp[13] = '3.5;5.0;6.0'
-min_rmag[13] = 3.5
-'''
+ycomp[84] = '1980;1964;1900'
+mcomp[84] = '3.5;5.0;6.0'
+
 ###############################################################################
 # load Rajabi SHMax vectors 
 ###############################################################################
