@@ -261,7 +261,7 @@ rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
 # write initial shapefile
 ###############################################################################
 
-outshp = 'Leonard08_NSHA18.shp'
+outshp = 'Leonard2008_NSHA18.shp'
 bval_fix = -99 * ones_like(rte_adj_fact)
 bval_sig_fix = -99 * ones_like(rte_adj_fact)
 
