@@ -2627,7 +2627,12 @@
                 <occurRates>2.83402e-04 2.37226e-04 1.98574e-04 1.66220e-04 1.39137e-04 1.16467e-04 9.74906e-05 8.16061e-05 6.83098e-05 5.71798e-05 4.78633e-05 4.00648e-05 3.35369e-05 2.80726e-05 2.34986e-05 1.96699e-05 1.64650e-05 1.37823e-05 1.15367e-05 9.65701e-06 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="7.5" dip="0.0" rake="0.0" />
+                <nodalPlane probability="0.34" strike="207.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="27.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="224.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="190.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="44.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="10.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="0.0"/>
@@ -3732,7 +3737,12 @@
                 <occurRates>2.34836e-04 1.96573e-04 1.64545e-04 1.37735e-04 1.15293e-04 9.65083e-05 8.07839e-05 6.76215e-05 5.66037e-05 4.73811e-05 3.96611e-05 3.31990e-05 2.77898e-05 2.32619e-05 1.94717e-05 1.62991e-05 1.36435e-05 1.14205e-05 9.55971e-06 8.00211e-06 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="7.5" dip="0.0" rake="0.0" />
+                <nodalPlane probability="0.34" strike="179.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="359.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="189.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="169.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="9.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="0.0"/>
@@ -4248,7 +4258,12 @@
                 <occurRates>1.60719e-03 1.34533e-03 1.12613e-03 9.42646e-04 7.89057e-04 6.60493e-04 5.52877e-04 4.62795e-04 3.87390e-04 3.24271e-04 2.71437e-04 2.27211e-04 1.90190e-04 1.59202e-04 1.33263e-04 1.11550e-04 9.33745e-05 7.81607e-05 6.54257e-05 5.47657e-05 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="7.5" dip="0.0" rake="0.0" />
+                <nodalPlane probability="0.34" strike="206.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="26.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="249.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="163.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="69.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="343.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="0.0"/>
