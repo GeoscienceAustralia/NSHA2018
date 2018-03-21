@@ -2,6 +2,7 @@ from os import path, sep
 from sys import argv
 
 sourcePath = argv[1] # path to model input files
+doBackground = argv[2] # True=Background or False=Regional
 
 # get model from path
 sourceModel = sourcePath.split(sep)[1]
@@ -13,7 +14,7 @@ print '\nMAKE OPTION FOR mean_hazard_curves= TRUE OR FALSE\n'
 
 # loop thru imts
 jobList = []
-for imt in imts:
+for i, imt in enumerate(imts):
     # make simple period str
     imtstrp = imt.replace('(', '')
     imtstrp = imtstrp.replace(')', '')
@@ -21,6 +22,7 @@ for imt in imts:
     
     # first, parse job file
     jobfile = path.join('templates','job_maps_templates.ini')
+    
     jobtxt = open(jobfile).read()
 
     # first replace source model
@@ -48,7 +50,11 @@ for imt in imts:
     ##########################################################################
     
     # first, parse param file
-    paramfile = path.join('templates','params_maps_template.txt')
+    if doBackground == 'True':
+        paramfile = path.join('templates','params_maps_template_background.txt')
+    else:
+        paramfile = path.join('templates','params_maps_template_regional.txt')
+    
     paramtxt = open(paramfile).read()
 
     # first replace source model

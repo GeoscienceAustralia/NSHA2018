@@ -234,7 +234,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     
     # differences in the way different machines deal with grids - weird!
     if cwd.startswith('/nas'):
-        transhaz = m.transform_scalar(resampled,lons,lats,nx,ny)
+        transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
     else:
         transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
     
@@ -316,8 +316,10 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         levels = arange(0.05, 0.3, 0.05)
     
     if cwd.startswith('/nas'):
-        csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
-        csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
+        #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
+        #csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
+        csm = plt.contour(x, y, 10**resampled, levels, colors='k')
+        csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
         
     else:
         csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
@@ -350,6 +352,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
      ##########################################################################################
     # add DRAFT text!
     ##########################################################################################
+    '''
     import matplotlib.patheffects as path_effects
     #import matplotlib.patheffects as PathEffects
     drafttext = figure.text(0.5, 0.5, 'DRAFT', color='w', rotation=45,
@@ -359,7 +362,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     drafttext.set_path_effects([path_effects.Stroke(linewidth=4, foreground='maroon'),
                        path_effects.Normal()])
     drafttext.set_alpha(0.5)
-    
+    '''    
     ##########################################################################################
     # add GA logo
     ##########################################################################################
@@ -378,7 +381,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         imoff = 0.02
         logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
         logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
-        logo_bbox = [map_bbox[0]+0.09,map_bbox[1]-0.075,0.25,0.25]
+        logo_bbox = [map_bbox[0]+0.10,map_bbox[1]-0.075,0.25,0.25]
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
@@ -401,7 +404,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         # set bbox for logo
         imoff = 0.02
         logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
-        logo_bbox = [0.71,map_bbox[1]-0.03,0.1,0.1]
+        logo_bbox = [0.70,map_bbox[1]-0.03,0.1,0.1]
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
@@ -510,10 +513,10 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
-    
+    '''
     plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
                 dpi=300, format='pdf', bbox_inches='tight')
-    
+    '''
     plt.show()
     
     ##########################################################################################
