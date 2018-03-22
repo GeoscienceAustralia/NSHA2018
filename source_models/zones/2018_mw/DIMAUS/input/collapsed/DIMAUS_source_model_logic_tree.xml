@@ -8,7 +8,7 @@
                                 branchSetID="bs1">
 
                 <logicTreeBranch branchID="b1">
-                    <uncertaintyModel>DIMAUS_collapsed.xml</uncertaintyModel>
+                    <uncertaintyModel>DIMAUS_NSHA1collapsed.xml</uncertaintyModel>
                     <uncertaintyWeight>1.0</uncertaintyWeight>
                 </logicTreeBranch>
 
