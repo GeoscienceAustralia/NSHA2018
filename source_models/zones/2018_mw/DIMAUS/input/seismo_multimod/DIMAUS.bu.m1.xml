@@ -881,7 +881,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.89884e-01 1.51073e-01 1.20195e-01 9.56285e-02 7.60830e-02 6.05324e-02 4.81601e-02 3.83167e-02 3.04851e-02 2.42542e-02 1.92969e-02 1.53528e-02 1.22148e-02 9.71824e-03 7.73192e-03 6.15159e-03 4.89427e-03 3.89392e-03 3.09804e-03 2.46483e-03 1.96104e-03 1.56023e-03 1.24133e-03 9.87615e-04 7.85756e-04 6.25155e-04 5.94374e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.80099e-01 1.44464e-01 1.15881e-01 9.29524e-02 7.45608e-02 5.98082e-02 4.79745e-02 3.84823e-02 3.08682e-02 2.47606e-02 1.98614e-02 1.59317e-02 1.27794e-02 1.02509e-02 8.22263e-03 6.59570e-03 5.29067e-03 4.24386e-03 3.40417e-03 2.73062e-03 2.19034e-03 1.75696e-03 1.40932e-03 1.13047e-03 9.06798e-04 7.27379e-04 6.94062e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
@@ -929,7 +929,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.34891e-02 3.46004e-02 2.75284e-02 2.19018e-02 1.74253e-02 1.38638e-02 1.10301e-02 8.77568e-03 6.98201e-03 5.55496e-03 4.41958e-03 3.51626e-03 2.79757e-03 2.22577e-03 1.77085e-03 1.40890e-03 1.12094e-03 8.91827e-04 7.09546e-04 5.64522e-04 4.49139e-04 3.57339e-04 2.84303e-04 2.26194e-04 1.79962e-04 1.43179e-04 1.36130e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>6.59977e-02 5.29394e-02 4.24648e-02 3.40627e-02 2.73230e-02 2.19169e-02 1.75804e-02 1.41019e-02 1.13117e-02 9.07359e-03 7.27828e-03 5.83820e-03 4.68305e-03 3.75646e-03 3.01321e-03 2.41701e-03 1.93878e-03 1.55517e-03 1.24747e-03 1.00064e-03 8.02655e-04 6.43841e-04 5.16451e-04 4.14266e-04 3.32299e-04 2.66550e-04 2.54341e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="270.0" dip="45.0" rake="90.0" />
@@ -967,7 +967,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.45489e-01 1.95314e-01 1.55393e-01 1.23632e-01 9.83632e-02 7.82587e-02 6.22634e-02 4.95373e-02 3.94124e-02 3.13569e-02 2.49478e-02 1.98487e-02 1.57918e-02 1.25641e-02 9.99615e-03 7.95303e-03 6.32751e-03 5.03422e-03 4.00528e-03 3.18664e-03 2.53532e-03 2.01712e-03 1.60484e-03 1.27683e-03 1.01586e-03 8.08226e-04 7.68431e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.32839e-01 1.86769e-01 1.49815e-01 1.20173e-01 9.63953e-02 7.73225e-02 6.20234e-02 4.97514e-02 3.99076e-02 3.20115e-02 2.56777e-02 2.05971e-02 1.65217e-02 1.32527e-02 1.06305e-02 8.52719e-03 6.83999e-03 5.48663e-03 4.40104e-03 3.53025e-03 2.83176e-03 2.27146e-03 1.82203e-03 1.46152e-03 1.17235e-03 9.40385e-04 8.97311e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -1000,7 +1000,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.04076e-02 2.41926e-02 1.92478e-02 1.53138e-02 1.21838e-02 9.69353e-03 7.71227e-03 6.13595e-03 4.88182e-03 3.88403e-03 3.09017e-03 2.45857e-03 1.95606e-03 1.55626e-03 1.23817e-03 9.85104e-04 7.83758e-04 6.23565e-04 4.96115e-04 3.94714e-04 3.14038e-04 2.49852e-04 1.98784e-04 1.58155e-04 1.25829e-04 1.00111e-04 9.51819e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.88407e-02 2.31342e-02 1.85569e-02 1.48852e-02 1.19400e-02 9.57757e-03 7.68255e-03 6.16247e-03 4.94317e-03 3.96511e-03 3.18057e-03 2.55126e-03 2.04647e-03 1.64155e-03 1.31676e-03 1.05622e-03 8.47237e-04 6.79603e-04 5.45136e-04 4.37276e-04 3.50756e-04 2.81355e-04 2.25686e-04 1.81032e-04 1.45213e-04 1.16481e-04 1.11146e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -1036,7 +1036,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>6.27214e-02 4.99017e-02 3.97023e-02 3.15875e-02 2.51313e-02 1.99947e-02 1.59080e-02 1.26566e-02 1.00697e-02 8.01153e-03 6.37405e-03 5.07126e-03 4.03474e-03 3.21008e-03 2.55397e-03 2.03196e-03 1.61665e-03 1.28622e-03 1.02333e-03 8.14171e-04 6.47762e-04 5.15366e-04 4.10030e-04 3.26224e-04 2.59547e-04 2.06498e-04 1.96331e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>5.94893e-02 4.77187e-02 3.82771e-02 3.07036e-02 2.46285e-02 1.97555e-02 1.58467e-02 1.27113e-02 1.01962e-02 8.17878e-03 6.56053e-03 5.26246e-03 4.22123e-03 3.38601e-03 2.71606e-03 2.17866e-03 1.74759e-03 1.40181e-03 1.12445e-03 9.01963e-04 7.23500e-04 5.80348e-04 4.65520e-04 3.73412e-04 2.99529e-04 2.40264e-04 2.29259e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -1210,42 +1210,6 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PP" name="Papuan Platform" tectonicRegion="Cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                134.6900 -5.5800
-                                134.3217 -5.6128
-                                135.0200 -5.5500
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>20.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>6.22815e-08 4.89462e-08 3.84662e-08 3.02300e-08 2.37574e-08 1.86706e-08 1.46730e-08 1.15313e-08 9.06231e-09 7.12195e-09 5.59704e-09 4.39864e-09 3.45684e-09 2.71668e-09 2.13500e-09 1.67787e-09 1.31862e-09 1.03628e-09 8.14402e-10 6.40028e-10 5.02989e-10 3.95293e-10 3.10655e-10 2.44140e-10 1.91866e-10 1.50785e-10 1.18500e-10 9.31277e-11 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="0.34" strike="109.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.34" strike="289.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="119.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="99.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="299.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="279.0" dip="35.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="2.5"/>
-                <hypoDepth probability="0.25" depth="10.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
         <areaSource id="NECS" name="Northeastern Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
@@ -1368,7 +1332,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>3.65538e-03 2.85801e-03 2.23457e-03 1.74712e-03 1.36601e-03 1.06803e-03 8.35051e-04 6.52895e-04 5.10473e-04 3.99120e-04 3.12056e-04 2.43985e-04 1.90763e-04 1.49150e-04 1.16615e-04 9.11765e-05 7.12874e-05 5.57369e-05 4.35786e-05 3.40724e-05 2.66399e-05 2.08287e-05 1.62852e-05 1.27328e-05 9.95527e-06 7.78365e-06 6.08574e-06 4.75820e-06 3.72026e-06 2.90873e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.97657e-03 2.32727e-03 1.81960e-03 1.42268e-03 1.11234e-03 8.69694e-04 6.79980e-04 5.31651e-04 4.15677e-04 3.25002e-04 2.54107e-04 1.98676e-04 1.55338e-04 1.21452e-04 9.49590e-05 7.42448e-05 5.80492e-05 4.53865e-05 3.54859e-05 2.77451e-05 2.16928e-05 1.69608e-05 1.32610e-05 1.03683e-05 8.10655e-06 6.33821e-06 4.95560e-06 3.87460e-06 3.02940e-06 2.36857e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="134.0" dip="35.0" rake="90.0" />
@@ -1431,7 +1395,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.10556e-02 8.64395e-03 6.75837e-03 5.28411e-03 4.13145e-03 3.23022e-03 2.52559e-03 1.97466e-03 1.54391e-03 1.20712e-03 9.43805e-04 7.37925e-04 5.76955e-04 4.51099e-04 3.52697e-04 2.75761e-04 2.15607e-04 1.68575e-04 1.31802e-04 1.03051e-04 8.05716e-05 6.29959e-05 4.92541e-05 3.85099e-05 3.01094e-05 2.35414e-05 1.84061e-05 1.43910e-05 1.12518e-05 8.79735e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>5.79935e-03 4.53429e-03 3.54519e-03 2.77185e-03 2.16720e-03 1.69445e-03 1.32483e-03 1.03583e-03 8.09878e-04 6.33213e-04 4.95085e-04 3.87088e-04 3.02649e-04 2.36630e-04 1.85012e-04 1.44654e-04 1.13099e-04 8.84279e-05 6.91384e-05 5.40567e-05 4.22649e-05 3.30453e-05 2.58368e-05 2.02008e-05 1.57943e-05 1.23489e-05 9.65516e-06 7.54900e-06 5.90228e-06 4.61476e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="176.0" dip="35.0" rake="90.0" />
@@ -1513,7 +1477,7 @@
             <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>1.0</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>9.04514e-04 7.57139e-04 6.33776e-04 5.30512e-04 4.44074e-04 3.71720e-04 3.11154e-04 2.60457e-04 2.18020e-04 1.82497e-04 1.52762e-04 1.27872e-04 1.07037e-04 8.95974e-05 7.49990e-05 6.27792e-05 5.25503e-05 4.39881e-05 3.68210e-05 3.08216e-05 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.16161e-03 9.72345e-04 8.13917e-04 6.81303e-04 5.70296e-04 4.77376e-04 3.99595e-04 3.34488e-04 2.79988e-04 2.34369e-04 1.96182e-04 1.64218e-04 1.37461e-04 1.15064e-04 9.63164e-05 8.06232e-05 6.74870e-05 5.64911e-05 4.72868e-05 3.95822e-05 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="189.0" dip="35.0" rake="90.0" />
@@ -1613,7 +1577,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.17585e-01 1.73113e-01 1.37730e-01 1.09579e-01 8.71824e-02 6.93632e-02 5.51860e-02 4.39065e-02 3.49324e-02 2.77926e-02 2.21120e-02 1.75926e-02 1.39968e-02 1.11360e-02 8.85990e-03 7.04902e-03 5.60827e-03 4.46199e-03 3.55001e-03 2.82442e-03 2.24713e-03 1.78784e-03 1.42242e-03 1.13169e-03 9.00387e-04 7.16356e-04 6.81085e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.06373e-01 1.65540e-01 1.32786e-01 1.06513e-01 8.54382e-02 6.85334e-02 5.49733e-02 4.40963e-02 3.53714e-02 2.83728e-02 2.27589e-02 1.82558e-02 1.46437e-02 1.17463e-02 9.42219e-03 7.55792e-03 6.06250e-03 4.86297e-03 3.90078e-03 3.12897e-03 2.50987e-03 2.01327e-03 1.61492e-03 1.29539e-03 1.03909e-03 8.33493e-04 7.95315e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1648,7 +1612,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.89158e-02 1.50496e-02 1.19736e-02 9.52630e-03 7.57922e-03 6.03010e-03 4.79760e-03 3.81702e-03 3.03686e-03 2.41615e-03 1.92231e-03 1.52941e-03 1.21681e-03 9.68109e-04 7.70237e-04 6.12808e-04 4.87556e-04 3.87904e-04 3.08620e-04 2.45541e-04 1.95355e-04 1.55426e-04 1.23659e-04 9.83840e-05 7.82753e-05 6.22765e-05 5.92102e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.79410e-02 1.43912e-02 1.15438e-02 9.25971e-03 7.42758e-03 5.95796e-03 4.77912e-03 3.83352e-03 3.07502e-03 2.46659e-03 1.97855e-03 1.58708e-03 1.27306e-03 1.02117e-03 8.19120e-04 6.57049e-04 5.27045e-04 4.22764e-04 3.39115e-04 2.72018e-04 2.18196e-04 1.75024e-04 1.40394e-04 1.12615e-04 9.03332e-05 7.24599e-05 6.91409e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -1700,7 +1664,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.51178e-01 1.20278e-01 9.56947e-02 7.61356e-02 6.05742e-02 4.81934e-02 3.83432e-02 3.05062e-02 2.42710e-02 1.93103e-02 1.53634e-02 1.22233e-02 9.72496e-03 7.73727e-03 6.15585e-03 4.89765e-03 3.89662e-03 3.10019e-03 2.46654e-03 1.96240e-03 1.56131e-03 1.24219e-03 9.88298e-04 7.86299e-04 6.25587e-04 4.97723e-04 4.73217e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.43387e-01 1.15017e-01 9.22595e-02 7.40050e-02 5.93623e-02 4.76169e-02 3.81954e-02 3.06380e-02 2.45760e-02 1.97134e-02 1.58129e-02 1.26841e-02 1.01745e-02 8.16133e-03 6.54653e-03 5.25123e-03 4.21222e-03 3.37879e-03 2.71026e-03 2.17401e-03 1.74386e-03 1.39882e-03 1.12205e-03 9.00038e-04 7.21956e-04 5.79110e-04 5.52584e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1745,7 +1709,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.55847e-02 1.23993e-02 9.86504e-03 7.84872e-03 6.24452e-03 4.96820e-03 3.95274e-03 3.14484e-03 2.50207e-03 1.99067e-03 1.58379e-03 1.26008e-03 1.00253e-03 7.97625e-04 6.34598e-04 5.04892e-04 4.01697e-04 3.19594e-04 2.54272e-04 2.02301e-04 1.60953e-04 1.28056e-04 1.01882e-04 8.10585e-05 6.44909e-05 5.13096e-05 4.87833e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.46613e-02 1.17604e-02 9.43348e-03 7.56697e-03 6.06977e-03 4.86880e-03 3.90546e-03 3.13272e-03 2.51288e-03 2.01568e-03 1.61686e-03 1.29695e-03 1.04033e-03 8.34492e-04 6.69379e-04 5.36935e-04 4.30697e-04 3.45479e-04 2.77123e-04 2.22291e-04 1.78308e-04 1.43028e-04 1.14729e-04 9.20284e-05 7.38196e-05 5.92137e-05 5.65014e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1783,7 +1747,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>8.05399e-03 6.40783e-03 5.09813e-03 4.05612e-03 3.22709e-03 2.56750e-03 2.04273e-03 1.62522e-03 1.29304e-03 1.02875e-03 8.18486e-04 6.51195e-04 5.18097e-04 4.12203e-04 3.27953e-04 2.60922e-04 2.07592e-04 1.65162e-04 1.31405e-04 1.04547e-04 8.31785e-05 6.61776e-05 5.26516e-05 4.18901e-05 3.33282e-05 2.65162e-05 2.52106e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>7.57678e-03 6.07764e-03 4.87511e-03 3.91052e-03 3.13678e-03 2.51614e-03 2.01830e-03 1.61895e-03 1.29863e-03 1.04168e-03 8.35574e-04 6.70247e-04 5.37631e-04 4.31256e-04 3.45927e-04 2.77482e-04 2.22579e-04 1.78540e-04 1.43214e-04 1.14877e-04 9.21477e-05 7.39154e-05 5.92904e-05 4.75592e-05 3.81491e-05 3.06009e-05 2.91993e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -1820,7 +1784,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>5.99083e-03 4.76636e-03 3.79216e-03 3.01708e-03 2.40042e-03 1.90980e-03 1.51945e-03 1.20889e-03 9.61805e-04 7.65221e-04 6.08818e-04 4.84381e-04 3.85378e-04 3.06611e-04 2.43942e-04 1.94083e-04 1.54414e-04 1.22853e-04 9.77433e-05 7.77655e-05 6.18710e-05 4.92252e-05 3.91640e-05 3.11593e-05 2.47906e-05 1.97236e-05 1.87525e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>9.09149e-03 7.29265e-03 5.84972e-03 4.69229e-03 3.76388e-03 3.01915e-03 2.42178e-03 1.94261e-03 1.55824e-03 1.24993e-03 1.00262e-03 8.04239e-04 6.45112e-04 5.17470e-04 4.15083e-04 3.32955e-04 2.67076e-04 2.14232e-04 1.71844e-04 1.37843e-04 1.10569e-04 8.86922e-05 7.11435e-05 5.70670e-05 4.57757e-05 3.67185e-05 3.50367e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -1857,7 +1821,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.92298e-02 2.32555e-02 1.85023e-02 1.47206e-02 1.17118e-02 9.31806e-03 7.41354e-03 5.89828e-03 4.69273e-03 3.73358e-03 2.97047e-03 2.36334e-03 1.88029e-03 1.49598e-03 1.19022e-03 9.46947e-04 7.53400e-04 5.99412e-04 4.76898e-04 3.79425e-04 3.01874e-04 2.40174e-04 1.91084e-04 1.52029e-04 1.20955e-04 9.62333e-05 9.14951e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.77235e-02 2.22381e-02 1.78381e-02 1.43086e-02 1.14775e-02 9.20659e-03 7.38497e-03 5.92378e-03 4.75170e-03 3.81152e-03 3.05737e-03 2.45244e-03 1.96720e-03 1.57797e-03 1.26575e-03 1.01531e-03 8.14420e-04 6.53279e-04 5.24021e-04 4.20338e-04 3.37170e-04 2.70457e-04 2.16944e-04 1.74020e-04 1.39588e-04 1.11969e-04 1.06841e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -1904,7 +1868,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>8.07933e-02 6.42799e-02 5.11417e-02 4.06888e-02 3.23724e-02 2.57558e-02 2.04916e-02 1.63033e-02 1.29711e-02 1.03199e-02 8.21061e-03 6.53244e-03 5.19727e-03 4.13500e-03 3.28984e-03 2.61743e-03 2.08245e-03 1.65682e-03 1.31818e-03 1.04876e-03 8.34402e-04 6.63858e-04 5.28172e-04 4.20219e-04 3.34330e-04 2.65996e-04 2.52899e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>7.66300e-02 6.14679e-02 4.93059e-02 3.95502e-02 3.17248e-02 2.54477e-02 2.04126e-02 1.63738e-02 1.31340e-02 1.05353e-02 8.45082e-03 6.77873e-03 5.43749e-03 4.36163e-03 3.49863e-03 2.80639e-03 2.25112e-03 1.80571e-03 1.44843e-03 1.16185e-03 9.31963e-04 7.47564e-04 5.99651e-04 4.81004e-04 3.85832e-04 3.09491e-04 2.95315e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -1939,7 +1903,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>6.40784e-03 5.09814e-03 4.05613e-03 3.22709e-03 2.56751e-03 2.04273e-03 1.62522e-03 1.29304e-03 1.02875e-03 8.18486e-04 6.51196e-04 5.18098e-04 4.12203e-04 3.27953e-04 2.60922e-04 2.07592e-04 1.65163e-04 1.31405e-04 1.04547e-04 8.31786e-05 6.61777e-05 5.26516e-05 4.18901e-05 3.33282e-05 2.65162e-05 2.10966e-05 2.00578e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>6.07764e-03 4.87511e-03 3.91052e-03 3.13678e-03 2.51614e-03 2.01830e-03 1.61895e-03 1.29863e-03 1.04168e-03 8.35574e-04 6.70247e-04 5.37631e-04 4.31256e-04 3.45927e-04 2.77482e-04 2.22579e-04 1.78540e-04 1.43214e-04 1.14877e-04 9.21477e-05 7.39154e-05 5.92904e-05 4.75592e-05 3.81491e-05 3.06009e-05 2.45462e-05 2.34219e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -1983,7 +1947,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>5.71676e-03 4.54831e-03 3.61868e-03 2.87906e-03 2.29060e-03 1.82243e-03 1.44994e-03 1.15359e-03 9.17804e-04 7.30214e-04 5.80965e-04 4.62221e-04 3.67748e-04 2.92584e-04 2.32782e-04 1.85204e-04 1.47350e-04 1.17233e-04 9.32717e-05 7.42079e-05 5.90405e-05 4.69732e-05 3.73723e-05 2.97338e-05 2.36565e-05 1.88213e-05 1.78946e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>5.42217e-03 4.34934e-03 3.48878e-03 2.79849e-03 2.24478e-03 1.80062e-03 1.44435e-03 1.15857e-03 9.29337e-04 7.45458e-04 5.97962e-04 4.79649e-04 3.84745e-04 3.08619e-04 2.47556e-04 1.98574e-04 1.59284e-04 1.27768e-04 1.02488e-04 8.22097e-05 6.59437e-05 5.28960e-05 4.24300e-05 3.40348e-05 2.73007e-05 2.18989e-05 2.08959e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -2030,7 +1994,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.26502e-02 2.59768e-02 2.06674e-02 1.64432e-02 1.30824e-02 1.04084e-02 8.28106e-03 6.58849e-03 5.24187e-03 4.17048e-03 3.31807e-03 2.63989e-03 2.10032e-03 1.67104e-03 1.32949e-03 1.05776e-03 8.41562e-04 6.69555e-04 5.32704e-04 4.23824e-04 3.37199e-04 2.68279e-04 2.13445e-04 1.69819e-04 1.35110e-04 1.07494e-04 1.02202e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>3.09677e-02 2.48404e-02 1.99255e-02 1.59830e-02 1.28206e-02 1.02839e-02 8.24915e-03 6.61697e-03 5.30773e-03 4.25754e-03 3.41515e-03 2.73942e-03 2.19740e-03 1.76262e-03 1.41387e-03 1.13412e-03 9.09723e-04 7.29725e-04 5.85341e-04 4.69525e-04 3.76625e-04 3.02106e-04 2.42331e-04 1.94383e-04 1.55923e-04 1.25072e-04 1.19343e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -2066,7 +2030,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>8.05399e-03 6.40783e-03 5.09813e-03 4.05612e-03 3.22709e-03 2.56750e-03 2.04273e-03 1.62522e-03 1.29304e-03 1.02875e-03 8.18486e-04 6.51195e-04 5.18097e-04 4.12203e-04 3.27953e-04 2.60922e-04 2.07592e-04 1.65162e-04 1.31405e-04 1.04547e-04 8.31785e-05 6.61776e-05 5.26516e-05 4.18901e-05 3.33282e-05 2.65162e-05 2.52106e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>7.57678e-03 6.07764e-03 4.87511e-03 3.91052e-03 3.13678e-03 2.51614e-03 2.01830e-03 1.61895e-03 1.29863e-03 1.04168e-03 8.35574e-04 6.70247e-04 5.37631e-04 4.31256e-04 3.45927e-04 2.77482e-04 2.22579e-04 1.78540e-04 1.43214e-04 1.14877e-04 9.21477e-05 7.39154e-05 5.92904e-05 4.75592e-05 3.81491e-05 3.06009e-05 2.91993e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -2105,7 +2069,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>6.40784e-03 5.09814e-03 4.05613e-03 3.22709e-03 2.56751e-03 2.04273e-03 1.62522e-03 1.29304e-03 1.02875e-03 8.18486e-04 6.51196e-04 5.18098e-04 4.12203e-04 3.27953e-04 2.60922e-04 2.07592e-04 1.65163e-04 1.31405e-04 1.04547e-04 8.31786e-05 6.61777e-05 5.26516e-05 4.18901e-05 3.33282e-05 2.65162e-05 2.10966e-05 2.00578e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>6.07764e-03 4.87511e-03 3.91052e-03 3.13678e-03 2.51614e-03 2.01830e-03 1.61895e-03 1.29863e-03 1.04168e-03 8.35574e-04 6.70247e-04 5.37631e-04 4.31256e-04 3.45927e-04 2.77482e-04 2.22579e-04 1.78540e-04 1.43214e-04 1.14877e-04 9.21477e-05 7.39154e-05 5.92904e-05 4.75592e-05 3.81491e-05 3.06009e-05 2.45462e-05 2.34219e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -2138,7 +2102,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.99290e-02 1.58557e-02 1.26150e-02 1.00366e-02 7.98521e-03 6.35311e-03 5.05459e-03 4.02148e-03 3.19953e-03 2.54558e-03 2.02529e-03 1.61134e-03 1.28199e-03 1.01997e-03 8.11496e-04 6.45634e-04 5.13673e-04 4.08683e-04 3.25152e-04 2.58694e-04 2.05819e-04 1.63752e-04 1.30283e-04 1.03654e-04 8.24682e-05 6.56125e-05 6.23819e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.87482e-02 1.50387e-02 1.20631e-02 9.67630e-03 7.76174e-03 6.22600e-03 4.99412e-03 4.00599e-03 3.21336e-03 2.57756e-03 2.06757e-03 1.65848e-03 1.33033e-03 1.06711e-03 8.55972e-04 6.86609e-04 5.50756e-04 4.41783e-04 3.54372e-04 2.84256e-04 2.28013e-04 1.82898e-04 1.46710e-04 1.17682e-04 9.43973e-05 7.57198e-05 7.22515e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -2171,7 +2135,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>6.40784e-03 5.09814e-03 4.05613e-03 3.22709e-03 2.56751e-03 2.04273e-03 1.62522e-03 1.29304e-03 1.02875e-03 8.18486e-04 6.51196e-04 5.18098e-04 4.12203e-04 3.27953e-04 2.60922e-04 2.07592e-04 1.65163e-04 1.31405e-04 1.04547e-04 8.31786e-05 6.61777e-05 5.26516e-05 4.18901e-05 3.33282e-05 2.65162e-05 2.10966e-05 2.00578e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>6.07764e-03 4.87511e-03 3.91052e-03 3.13678e-03 2.51614e-03 2.01830e-03 1.61895e-03 1.29863e-03 1.04168e-03 8.35574e-04 6.70247e-04 5.37631e-04 4.31256e-04 3.45927e-04 2.77482e-04 2.22579e-04 1.78540e-04 1.43214e-04 1.14877e-04 9.21477e-05 7.39154e-05 5.92904e-05 4.75592e-05 3.81491e-05 3.06009e-05 2.45462e-05 2.34219e-18 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -2221,7 +2185,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.85207e-01 2.26913e-01 1.80535e-01 1.43635e-01 1.14277e-01 9.09202e-02 7.23370e-02 5.75520e-02 4.57889e-02 3.64301e-02 2.89841e-02 2.30600e-02 1.83468e-02 1.45969e-02 1.16134e-02 9.23975e-03 7.35123e-03 5.84871e-03 4.65329e-03 3.70220e-03 2.94551e-03 2.34347e-03 1.86449e-03 1.48341e-03 1.18021e-03 9.38988e-04 8.92756e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.70510e-01 2.16987e-01 1.74054e-01 1.39615e-01 1.11991e-01 8.98325e-02 7.20582e-02 5.78007e-02 4.63643e-02 3.71906e-02 2.98321e-02 2.39295e-02 1.91948e-02 1.53969e-02 1.23505e-02 9.90680e-03 7.94664e-03 6.37431e-03 5.11309e-03 4.10141e-03 3.28990e-03 2.63896e-03 2.11682e-03 1.69798e-03 1.36202e-03 1.09253e-03 1.04249e-16 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -2271,7 +2235,7 @@
             <magScaleRel>StrasserIntraslab</magScaleRel>
             <ruptAspectRatio>1.25</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.12764e-01 1.69277e-01 1.34678e-01 1.07151e-01 8.52506e-02 6.78262e-02 5.39632e-02 4.29336e-02 3.41584e-02 2.71768e-02 2.16221e-02 1.72027e-02 1.36867e-02 1.08892e-02 8.66358e-03 6.89283e-03 5.48400e-03 4.36312e-03 3.47134e-03 2.76183e-03 2.19734e-03 1.74823e-03 1.39091e-03 1.10662e-03 8.80436e-04 7.00483e-04 6.65993e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>2.01800e-01 1.61872e-01 1.29844e-01 1.04153e-01 8.35451e-02 6.70148e-02 5.37552e-02 4.31192e-02 3.45876e-02 2.77441e-02 2.22546e-02 1.78513e-02 1.43193e-02 1.14861e-02 9.21342e-03 7.39045e-03 5.92817e-03 4.75522e-03 3.81435e-03 3.05964e-03 2.45426e-03 1.96866e-03 1.57914e-03 1.26669e-03 1.01606e-03 8.15025e-04 7.77693e-17 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -2815,7 +2779,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>5.67486e-04 4.43696e-04 3.46909e-04 2.71235e-04 2.12068e-04 1.65808e-04 1.29639e-04 1.01360e-04 7.92493e-05 6.19620e-05 4.84457e-05 3.78778e-05 2.96152e-05 2.31550e-05 1.81040e-05 1.41548e-05 1.10671e-05 8.65297e-06 6.76543e-06 5.28963e-06 4.13576e-06 3.23359e-06 2.52822e-06 1.97672e-06 1.54552e-06 1.20838e-06 9.44790e-07 7.38695e-07 5.77557e-07 4.51570e-07 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>4.62102e-04 3.61300e-04 2.82487e-04 2.20866e-04 1.72686e-04 1.35017e-04 1.05565e-04 8.25369e-05 6.45325e-05 5.04555e-05 3.94492e-05 3.08438e-05 2.41156e-05 1.88551e-05 1.47421e-05 1.15263e-05 9.01194e-06 7.04609e-06 5.50907e-06 4.30733e-06 3.36774e-06 2.63311e-06 2.05872e-06 1.60964e-06 1.25851e-06 9.83984e-07 7.69340e-07 6.01517e-07 4.70304e-07 3.67712e-07 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="196.0" dip="35.0" rake="90.0" />
@@ -3151,7 +3115,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.62156e-03 1.26783e-03 9.91271e-04 7.75037e-04 6.05972e-04 4.73786e-04 3.70435e-04 2.89629e-04 2.26450e-04 1.77053e-04 1.38431e-04 1.08234e-04 8.46238e-05 6.61641e-05 5.17312e-05 4.04466e-05 3.16237e-05 2.47254e-05 1.93318e-05 1.51148e-05 1.18177e-05 9.23980e-06 7.22425e-06 5.64836e-06 4.41624e-06 3.45289e-06 2.69968e-06 2.11078e-06 1.65034e-06 1.29033e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.32043e-03 1.03239e-03 8.07190e-04 6.31111e-04 4.93441e-04 3.85803e-04 3.01645e-04 2.35844e-04 1.84398e-04 1.44174e-04 1.12724e-04 8.81344e-05 6.89089e-05 5.38773e-05 4.21246e-05 3.29356e-05 2.57511e-05 2.01338e-05 1.57418e-05 1.23079e-05 9.62311e-06 7.52395e-06 5.88269e-06 4.59945e-06 3.59613e-06 2.81168e-06 2.19834e-06 1.71880e-06 1.34386e-06 1.05072e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="117.0" dip="35.0" rake="90.0" />
@@ -3234,7 +3198,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>2.24997e-04 1.75917e-04 1.37543e-04 1.07539e-04 8.40808e-05 6.57396e-05 5.13993e-05 4.01871e-05 3.14208e-05 2.45667e-05 1.92078e-05 1.50178e-05 1.17419e-05 9.18052e-06 7.17789e-06 5.61212e-06 4.38790e-06 3.43073e-06 2.68236e-06 2.09723e-06 1.63975e-06 1.28206e-06 1.00239e-06 7.83731e-07 6.12769e-07 4.79101e-07 3.74591e-07 2.92878e-07 2.28990e-07 1.79039e-07 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>1.83215e-04 1.43249e-04 1.12001e-04 8.75689e-05 6.84668e-05 5.35316e-05 4.18543e-05 3.27243e-05 2.55859e-05 2.00046e-05 1.56408e-05 1.22290e-05 9.56137e-06 7.47567e-06 5.84494e-06 4.56994e-06 3.57306e-06 2.79364e-06 2.18424e-06 1.70777e-06 1.33524e-06 1.04398e-06 8.16244e-07 6.38190e-07 4.98977e-07 3.90131e-07 3.05028e-07 2.38490e-07 1.86466e-07 1.45791e-07 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="114.0" dip="35.0" rake="90.0" />
@@ -3354,7 +3318,7 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>4.03847e-04 3.15753e-04 2.46875e-04 1.93022e-04 1.50917e-04 1.17996e-04 9.22565e-05 7.21318e-05 5.63971e-05 4.40948e-05 3.44760e-05 2.69555e-05 2.10755e-05 1.64781e-05 1.28836e-05 1.00732e-05 7.87584e-06 6.15782e-06 4.81457e-06 3.76432e-06 2.94318e-06 2.30116e-06 1.79919e-06 1.40672e-06 1.09986e-06 8.59938e-07 6.72353e-07 5.25687e-07 4.11014e-07 3.21356e-07 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>3.28852e-04 2.57117e-04 2.01030e-04 1.57178e-04 1.22891e-04 9.60839e-05 7.51243e-05 5.87368e-05 4.59241e-05 3.59063e-05 2.80738e-05 2.19498e-05 1.71617e-05 1.34181e-05 1.04911e-05 8.20258e-06 6.41328e-06 5.01430e-06 3.92049e-06 3.06528e-06 2.39663e-06 1.87383e-06 1.46508e-06 1.14549e-06 8.95613e-07 7.00246e-07 5.47495e-07 4.28066e-07 3.34688e-07 2.61680e-07 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="138.0" dip="35.0" rake="90.0" />
@@ -9606,7 +9570,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="22" name="Yallourn Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="22" name="Yallourn Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9640,7 +9604,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="23" name="Haunted Hills Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="23" name="Haunted Hills Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9664,7 +9628,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="24" name="Morwell Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="24" name="Morwell Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9694,7 +9658,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="25" name="Snake Ridge Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="25" name="Snake Ridge Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9720,7 +9684,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="26" name="Rosedale Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="26" name="Rosedale Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9750,7 +9714,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="27" name="Yarram Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="27" name="Yarram Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9785,7 +9749,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="28" name="Waratah Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="28" name="Waratah Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9811,7 +9775,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="29" name="Kongwak Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="29" name="Kongwak Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9839,7 +9803,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="30" name="Bass Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="30" name="Bass Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9869,7 +9833,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="31" name="Yarragon Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="31" name="Yarragon Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9897,7 +9861,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="32" name="Darnum Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="32" name="Darnum Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9924,7 +9888,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="33" name="Heath Hill Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="33" name="Heath Hill Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9950,7 +9914,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="34" name="Selwyn Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="34" name="Selwyn Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -9980,7 +9944,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="35" name="Beaumaris Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="35" name="Beaumaris Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10003,7 +9967,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="36" name="Doomburrin Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="36" name="Doomburrin Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10030,7 +9994,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="37" name="Budgeree Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="37" name="Budgeree Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10055,7 +10019,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="38" name="Tarwin Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="38" name="Tarwin Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10085,7 +10049,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="39" name="Koorooman Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="39" name="Koorooman Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10112,7 +10076,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="40" name="Geliondale Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="40" name="Geliondale Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10144,7 +10108,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="41" name="Tap Tap Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="41" name="Tap Tap Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10168,7 +10132,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="42" name="Napier Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="42" name="Napier Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10195,7 +10159,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="43" name="Darriman Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="43" name="Darriman Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10229,7 +10193,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="44" name="Currajung Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="44" name="Currajung Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10252,7 +10216,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="45" name="Toora Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="45" name="Toora Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10278,7 +10242,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="46" name="Castle Cove Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="46" name="Castle Cove Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10303,7 +10267,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="47" name="Johanna Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="47" name="Johanna Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10330,7 +10294,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="48" name="Bambra Fault Zone2" tectonicRegion="Extended">
+      <simpleFaultSource id="48" name="Bambra Fault Zone2" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10363,7 +10327,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="49" name="Pirron Yallock Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="49" name="Pirron Yallock Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10395,7 +10359,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="50" name="Colac Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="50" name="Colac Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10440,7 +10404,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="51" name="Bambra Fault Zone" tectonicRegion="Extended">
+      <simpleFaultSource id="51" name="Bambra Fault Zone" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10470,7 +10434,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="52" name="Fergusson Hill Anticline" tectonicRegion="Extended">
+      <simpleFaultSource id="52" name="Fergusson Hill Anticline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10504,7 +10468,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="53" name="Coradjil Anticline" tectonicRegion="Extended">
+      <simpleFaultSource id="53" name="Coradjil Anticline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10535,7 +10499,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="54" name="Simpson Anticline" tectonicRegion="Extended">
+      <simpleFaultSource id="54" name="Simpson Anticline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10570,7 +10534,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="55" name="Barrabool Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="55" name="Barrabool Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10595,7 +10559,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="56" name="Winchelsea Scarp" tectonicRegion="Extended">
+      <simpleFaultSource id="56" name="Winchelsea Scarp" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10623,7 +10587,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="57" name="Lovelybanks Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="57" name="Lovelybanks Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -10700,7 +10664,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="59" name="Avalon Scarp" tectonicRegion="Extended">
+      <simpleFaultSource id="59" name="Avalon Scarp" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -11169,7 +11133,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="74" name="Love Creek Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="74" name="Love Creek Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -13788,7 +13752,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="156" name="Curdie Monocline" tectonicRegion="Extended">
+      <simpleFaultSource id="156" name="Curdie Monocline" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -13815,7 +13779,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="157" name="Woolsthorpe Scarp" tectonicRegion="Extended">
+      <simpleFaultSource id="157" name="Woolsthorpe Scarp" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -13845,7 +13809,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="158" name="Kanawinka Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="158" name="Kanawinka Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -17719,7 +17683,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="277" name="Badgingarra Scarp" tectonicRegion="Extended">
+      <simpleFaultSource id="277" name="Badgingarra Scarp" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -17744,7 +17708,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="278" name="Bishop Hill Scarp" tectonicRegion="Extended">
+      <simpleFaultSource id="278" name="Bishop Hill Scarp" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -17894,7 +17858,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="282" name="Wandana Scarp 1" tectonicRegion="Extended">
+      <simpleFaultSource id="282" name="Wandana Scarp 1" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -17932,7 +17896,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="283" name="Wandana Scarp 2" tectonicRegion="Extended">
+      <simpleFaultSource id="283" name="Wandana Scarp 2" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -17957,7 +17921,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="284" name="Hardabut Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="284" name="Hardabut Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18004,7 +17968,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="285" name="Toolonga Scarp 1" tectonicRegion="Extended">
+      <simpleFaultSource id="285" name="Toolonga Scarp 1" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18051,7 +18015,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="286" name="Toolonga Scarp 2" tectonicRegion="Extended">
+      <simpleFaultSource id="286" name="Toolonga Scarp 2" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18082,7 +18046,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="287" name="Toolonga Scarp 3" tectonicRegion="Extended">
+      <simpleFaultSource id="287" name="Toolonga Scarp 3" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18129,7 +18093,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="288" name="Kalbarri Scarps" tectonicRegion="Extended">
+      <simpleFaultSource id="288" name="Kalbarri Scarps" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18156,7 +18120,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="289" name="Zuytdorp Cliffs" tectonicRegion="Extended">
+      <simpleFaultSource id="289" name="Zuytdorp Cliffs" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18184,7 +18148,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="290" name="Wagoe Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="290" name="Wagoe Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18207,7 +18171,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="291" name="Kennedy Range Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="291" name="Kennedy Range Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18244,7 +18208,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="292" name="Middalya Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="292" name="Middalya Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18271,7 +18235,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="293" name="Wandagee Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="293" name="Wandagee Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18303,7 +18267,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="294" name="Round Hill Scarp" tectonicRegion="Extended">
+      <simpleFaultSource id="294" name="Round Hill Scarp" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18339,7 +18303,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="295" name="Dirk Hartog Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="295" name="Dirk Hartog Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18363,7 +18327,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="296" name="Cape Peron Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="296" name="Cape Peron Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18388,7 +18352,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="297" name="Carbla North Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="297" name="Carbla North Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18411,7 +18375,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="298" name="Carbla South Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="298" name="Carbla South Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18434,7 +18398,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="299" name="Cape Cuvier Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="299" name="Cape Cuvier Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18458,7 +18422,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="300" name="Giralia Range Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="300" name="Giralia Range Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18483,7 +18447,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="301" name="Rough Range Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="301" name="Rough Range Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -18509,7 +18473,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="302" name="Cape Range Fault" tectonicRegion="Extended">
+      <simpleFaultSource id="302" name="Cape Range Fault" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20132,7 +20096,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="356" name="Badaminna Shear Zone group (Dunsborough Fault)" tectonicRegion="Extended">
+      <simpleFaultSource id="356" name="Badaminna Shear Zone group (Dunsborough Fault)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20165,7 +20129,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="357" name="Badaminna Shear Zone 2" tectonicRegion="Extended">
+      <simpleFaultSource id="357" name="Badaminna Shear Zone 2" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20198,7 +20162,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="358" name="Badaminna Shear Zone (Felix Fault)" tectonicRegion="Extended">
+      <simpleFaultSource id="358" name="Badaminna Shear Zone (Felix Fault)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20222,7 +20186,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="359" name="Badaminna Shear Zone 3" tectonicRegion="Extended">
+      <simpleFaultSource id="359" name="Badaminna Shear Zone 3" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20245,7 +20209,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="360" name="Badaminna Shear Zone 4" tectonicRegion="Extended">
+      <simpleFaultSource id="360" name="Badaminna Shear Zone 4" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20270,7 +20234,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="361" name="Badaminna Shear Zone 5" tectonicRegion="Extended">
+      <simpleFaultSource id="361" name="Badaminna Shear Zone 5" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20296,7 +20260,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="362" name="Badaminna Shear Zone 6" tectonicRegion="Extended">
+      <simpleFaultSource id="362" name="Badaminna Shear Zone 6" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20321,7 +20285,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="363" name="Badaminna Shear Zone 7" tectonicRegion="Extended">
+      <simpleFaultSource id="363" name="Badaminna Shear Zone 7" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20347,7 +20311,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="364" name="Badaminna Shear Zone 8" tectonicRegion="Extended">
+      <simpleFaultSource id="364" name="Badaminna Shear Zone 8" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20375,7 +20339,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="365" name="Badaminna Shear Zone 9" tectonicRegion="Extended">
+      <simpleFaultSource id="365" name="Badaminna Shear Zone 9" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20398,7 +20362,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="366" name="Badaminna Shear Zone 1" tectonicRegion="Extended">
+      <simpleFaultSource id="366" name="Badaminna Shear Zone 1" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20429,7 +20393,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="367" name="Badaminna Shear Zone 10" tectonicRegion="Extended">
+      <simpleFaultSource id="367" name="Badaminna Shear Zone 10" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20452,7 +20416,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="368" name="West Australian Shear Zone (Long Island Fault)" tectonicRegion="Extended">
+      <simpleFaultSource id="368" name="West Australian Shear Zone (Long Island Fault)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20481,7 +20445,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="369" name="West Australian Shear Zone (Flinders Fault)" tectonicRegion="Extended">
+      <simpleFaultSource id="369" name="West Australian Shear Zone (Flinders Fault)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20531,7 +20495,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="371" name="West Australian Shear Zone (Barrow Is Flt)" tectonicRegion="Extended">
+      <simpleFaultSource id="371" name="West Australian Shear Zone (Barrow Is Flt)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20554,7 +20518,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="372" name="West Australian Shear Zone (Dampier Flt NS)" tectonicRegion="Extended">
+      <simpleFaultSource id="372" name="West Australian Shear Zone (Dampier Flt NS)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20579,7 +20543,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="373" name="West Australian Shear Zone (Inner basin SZ)" tectonicRegion="Extended">
+      <simpleFaultSource id="373" name="West Australian Shear Zone (Inner basin SZ)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20604,7 +20568,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="374" name="West Australian Shear Zone Outer Shelf FZ Nth)" tectonicRegion="Extended">
+      <simpleFaultSource id="374" name="West Australian Shear Zone Outer Shelf FZ Nth)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20633,7 +20597,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="375" name="West Australian Shear Zone (Inner Shelf FZ Nth)" tectonicRegion="Extended">
+      <simpleFaultSource id="375" name="West Australian Shear Zone (Inner Shelf FZ Nth)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
@@ -20683,7 +20647,7 @@
           <rake>90</rake>
         </simpleFaultSource>
     
-      <simpleFaultSource id="377" name="West Australian Shear Zone Outer Shelf FZ Sth)" tectonicRegion="Extended">
+      <simpleFaultSource id="377" name="West Australian Shear Zone Outer Shelf FZ Sth)" tectonicRegion="Non_cratonic">
           <simpleFaultGeometry>
               <gml:LineString>
                 <gml:posList>
