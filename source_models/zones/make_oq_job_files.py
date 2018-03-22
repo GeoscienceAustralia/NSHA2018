@@ -2,7 +2,7 @@ from os import path, sep
 from sys import argv
 
 sourcePath = argv[1] # path to model input files
-doBackground = argv[2] # True=Background or False=Regional
+modelType = int(argv[2]) # 1=Background; 2=Regional; 3=Seismotectonic
 
 # get model from path
 sourceModel = sourcePath.split(sep)[1]
@@ -49,12 +49,17 @@ for i, imt in enumerate(imts):
     # make params file
     ##########################################################################
     
-    # first, parse param file
-    if doBackground == 'True':
+    # do background
+    if modelType == 1:
         paramfile = path.join('templates','params_maps_template_background.txt')
-    else:
+    # do regional
+    elif modelType == 2:
         paramfile = path.join('templates','params_maps_template_regional.txt')
+    # do seismotectonic
+    elif modelType == 3:
+        paramfile = path.join('templates','params_maps_template_seismotectonic.txt')
     
+    # first, parse param file
     paramtxt = open(paramfile).read()
 
     # first replace source model

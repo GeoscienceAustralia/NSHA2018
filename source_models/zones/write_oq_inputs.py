@@ -10,6 +10,13 @@ shpfile = argv[1] # input shapefile
 
 outputType = argv[2] # see key below
 
+doSeismotectonic = argv[3] # True = add AU faults; False = ignore AU faults
+
+if doSeismotectonic == 'True':
+    doSeismotectonic = True
+else:
+    doSeismotectonic = False
+
 """
 set outputType:
     0 = best parameters only - use 
@@ -98,7 +105,11 @@ for ut in unq_trt:
 
 if outputType == '0':
     
-    splitpath.append('best')
+    if doSeismotectonic == True:
+        splitpath.append('seismo_best')
+    else:
+        splitpath.append('best')
+    
     modPath = sep.join(splitpath)
     
     # check to see if exists
@@ -113,7 +124,8 @@ if outputType == '0':
     
     #set metadata dict
     meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':True, 'mx_idx':-1, 'splitXMLPath': True} # need to search for best Mmax
+            'multiMods':False, 'one_mx':True, 'mx_idx':-1, 'splitXMLPath': True,
+            'doSeisTec':doSeismotectonic} # need to search for best Mmax
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:
@@ -133,7 +145,10 @@ if outputType == '0':
 
 elif outputType == '1':
     
-    splitpath.append('collapsed')
+    if doSeismotectonic == True:
+        splitpath.append('seismo_collapsed')
+    else:
+        splitpath.append('collapsed')
     modPath = sep.join(splitpath)
     
     # check to see if exists
@@ -145,7 +160,8 @@ elif outputType == '1':
     
     #set metadata dict
     meta = {'beta_wts':beta_wts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':False, 'splitXMLPath': True}
+            'multiMods':False, 'one_mx':False, 'splitXMLPath': True,
+            'doSeisTec':doSeismotectonic}
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:
@@ -162,7 +178,10 @@ elif outputType == '1':
 # write multiple files
 ##############################################################################
 elif outputType == '2':
-    splitpath.append('multimod')
+    if doSeismotectonic == True:
+        splitpath.append('seismo_multimod')
+    else:
+        splitpath.append('multimod')
     modPath = sep.join(splitpath)
     
     # check to see if exists
@@ -190,7 +209,8 @@ elif outputType == '2':
             
             #set metadata dict
             meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-                    'multiMods':False, 'one_mx':True, 'mx_idx':j, 'splitXMLPath': True}
+                    'multiMods':False, 'one_mx':True, 'mx_idx':j, 'splitXMLPath': True,
+                    'doSeisTec':doSeismotectonic}
             	
             # check to see if exists
             if path.isdir(meta['modelPath']) == False:
@@ -221,7 +241,8 @@ elif outputType == '3':
     
     #set metadata dict
     meta = {'beta_wts':beta_wts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':True, 'mx_idx':-1, 'splitXMLPath': True} # need to search for best Mmax
+            'multiMods':False, 'one_mx':True, 'mx_idx':-1, 'splitXMLPath': True,
+            'doSeisTec':doSeismotectonic} # need to search for best Mmax
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:
@@ -255,7 +276,8 @@ elif outputType == '4':
     
     #set metadata dict
     meta = {'beta_wts':tmp_bwts, 'modelPath':modPath, 'modelFile':xmlfile, 
-            'multiMods':False, 'one_mx':False, 'splitXMLPath': True}
+            'multiMods':False, 'one_mx':False, 'splitXMLPath': True, 
+            'doSeisTec':doSeismotectonic}
     	
     # check to see if exists
     if path.isdir(meta['modelPath']) == False:

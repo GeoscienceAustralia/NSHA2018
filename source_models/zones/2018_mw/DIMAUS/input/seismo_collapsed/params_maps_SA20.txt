@@ -1,0 +1,11 @@
+ncpus = 256 
+mem = 256GB
+walltime = 4:00:00
+jobfs = 100GB
+sandpit_path = /short/w84/NSHA18/sandpit/
+model_rel_path = NSHA2018/source_models/zones/2018_mw/DIMAUS/input/seismo_collapsed
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_March18.xml
+model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_June18/seismotectonic/DIMAUS/SA20
+job_file = job_maps_SA20.ini
+job_type = maps

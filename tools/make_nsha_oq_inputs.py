@@ -556,7 +556,18 @@ def write_oq_sourcefile(model, meta, mx_dict):
             newxml += '        -->\n\n'
             
     ######################################################################
+    # add Australian fault-source model
+    ######################################################################
+    if meta['doSeisTec'] == True:
+        aust_fault_file = path.join('..', 'faults', 'National_Fault_Source_Model_2018_Collapsed_NSHA13', \
+                                    'National_Fault_Source_Model_2018_Collapsed_NSHA13_all_methods_collapsed_inc_cluster.xml')
+        lines = open(aust_fault_file).readlines()[3:-2]
+        for line in lines:
+            newxml += '    ' + line
+    
+    ######################################################################
     # add indoneasia-png fault-source model
+    ######################################################################
     '''
     indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
     lines = open(indo_png_fault_file).readlines()[3:-2]

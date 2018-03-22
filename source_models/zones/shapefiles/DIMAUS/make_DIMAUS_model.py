@@ -95,21 +95,25 @@ bval_sig_fix = neo_bval_sig_fix
 
 # set b-values for zones with weird centroids
 
-bval_fix[28] = bval_fix[48]
-bval_fix[53] = bval_fix[48]
-bval_fix[56] = bval_fix[48]
-bval_fix[45] = bval_fix[16]
-bval_fix[46] = bval_fix[16]
-bval_fix[86] = bval_fix[94]
+#bval_fix[28] = bval_fix[54] # NWO
+bval_fix[53] = bval_fix[54]
+bval_fix[56] = bval_fix[54]
+bval_fix[45] = bval_fix[20]
+bval_fix[46] = bval_fix[20]
+bval_fix[48] = bval_fix[26]
+bval_fix[86] = bval_fix[110]
 bval_fix[118] = bval_fix[94]
+bval_fix[91] = bval_fix[75]
 
-bval_sig_fix[28] = bval_sig_fix[48]
-bval_sig_fix[53] = bval_sig_fix[48]
-bval_sig_fix[56] = bval_sig_fix[48]
-bval_sig_fix[45] = bval_sig_fix[16]
-bval_sig_fix[46] = bval_sig_fix[16]
-bval_sig_fix[86] = bval_sig_fix[94]
+#bval_sig_fix[28] = bval_sig_fix[54]
+bval_sig_fix[53] = bval_sig_fix[54]
+bval_sig_fix[56] = bval_sig_fix[54]
+bval_sig_fix[45] = bval_sig_fix[20]
+bval_sig_fix[46] = bval_sig_fix[20]
+bval_sig_fix[46] = bval_sig_fix[26]
+bval_sig_fix[86] = bval_sig_fix[110]
 bval_sig_fix[118] = bval_sig_fix[94]
+bval_sig_fix[91] = bval_sig_fix[75]
 
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
@@ -123,6 +127,7 @@ zone_class[48] = 7.
 domains[48] = 7
 zone_class[82] = 2.
 zone_class[84] = 2.
+zone_class[86] = 4.
 zone_class[92] = 2.
 zone_class[96] = 2.
 zone_class[112] = 2.
@@ -225,22 +230,34 @@ for i in range(0,len(trt)):
     elif trt_new[i] == 'Intraslab':
         min_rmag[i] = 5.75
 
+min_rmag[27] = 3.8
 min_rmag[71] = 3.8
-'''
-min_rmag[54] = 3.2 
-min_rmag[86] = 3.0
-min_rmag[117] = 3.0
-min_rmag[118] = 3.0 
+min_rmag[3] = 6.1 # TAFS
+min_rmag[11] = 6.0 # NBOT
+min_rmag[86] = 3.0 # NSWC
+min_rmag[100] = 3.3 # BKHL
+min_rmag[102] = 3.8 # NEQB
 
 
-# SEEM - multi-corner
-ycomp[127] = '1980;1964;1900'
-mcomp[127] = '3.5;5.0;6.0'
+# SEOB - multi-corner
+ycomp[118] = '1980;1964;1900'
+mcomp[118] = '3.5;5.0;6.0'
+# QLDP
+ycomp[54] = '1980;1964;1900'
+mcomp[54] = '3.5;5.0;6.0'
 
-# NLP - multi-corner
-ycomp[71] = ycomp[81]
-mcomp[71] = mcomp[81]
-'''
+# BWDP
+ycomp[74] = '1980;1964;1900'
+mcomp[74] = '3.5;5.0;6.0'
+
+# STRZ
+ycomp[85] = '1975;1960;1957;1945;1885'
+
+
+# PERB - multi-corner
+ycomp[76] = ycomp[77]
+mcomp[76] = mcomp[77]
+
 
 ###############################################################################
 # load Rajabi SHMax vectors 
