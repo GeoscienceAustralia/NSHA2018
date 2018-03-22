@@ -560,7 +560,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
     ######################################################################
     if meta['doSeisTec'] == True:
         aust_fault_file = path.join('..', 'faults', 'National_Fault_Source_Model_2018_Collapsed_NSHA13', \
-                                    'National_Fault_Source_Model_2018_Collapsed_NSHA13_all_methods_collapsed_inc_cluster.xml')
+                                    'National_Fault_Source_Model_2018_Collapsed_NSHA13_all_methods_collapsed_inc_cluster_gmm_trt.xml')
         lines = open(aust_fault_file).readlines()[3:-2]
         for line in lines:
             newxml += '    ' + line
