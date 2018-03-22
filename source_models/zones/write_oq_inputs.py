@@ -7,9 +7,7 @@ from os import path, mkdir, sep
 print '\n!!! ADD RATE ADJUSTMENT FACTOR !!!\n'
 
 shpfile = argv[1] # input shapefile
-
 outputType = argv[2] # see key below
-
 doSeismotectonic = argv[3] # True = add AU faults; False = ignore AU faults
 
 if doSeismotectonic == 'True':
