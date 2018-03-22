@@ -61,7 +61,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ADB" name="Amadeus Basin" tectonicRegion="Cratonic">
+        <areaSource id="AMD" name="Amadeus Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -93,13 +93,13 @@
                         </gml:LinearRing>
                     </gml:exterior>
                 </gml:Polygon>
-                <upperSeismoDepth>1.0</upperSeismoDepth>
-                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>3.04349e-03 2.42757e-03 1.93630e-03 1.54444e-03 1.23189e-03 9.82589e-04 7.83740e-04 6.25132e-04 4.98623e-04 3.97715e-04 3.17228e-04 2.53030e-04 2.01824e-04 1.60980e-04 1.28402e-04 1.02417e-04 8.16906e-05 6.51586e-05 5.19723e-05 4.14545e-05 3.30653e-05 2.63738e-05 2.10364e-05 1.67792e-05 1.33836e-05 1.06751e-05 8.51475e-06 6.79160e-06 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
+                <occurRates>4.98109e-03 3.97306e-03 3.16902e-03 2.52770e-03 2.01616e-03 1.60814e-03 1.28270e-03 1.02312e-03 8.16065e-04 6.50916e-04 5.19188e-04 4.14119e-04 3.30312e-04 2.63466e-04 2.10148e-04 1.67620e-04 1.33698e-04 1.06641e-04 8.50599e-05 6.78461e-05 5.41159e-05 4.31643e-05 3.44290e-05 2.74615e-05 2.19041e-05 1.74713e-05 1.39356e-05 1.11154e-05 0.00000e+00 0.00000e+00 0.00000e+00 0.00000e+00</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="134.0" dip="35.0" rake="90.0" />
