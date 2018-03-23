@@ -7,8 +7,8 @@ import ogr
 import shapefile
 from shapely.geometry import Point, Polygon
 
-from NSHA2018.source_models.logic_trees import logic_tree
-from NSHA2018.source_models.utils.pt2fault_distance import read_pt_source, combine_pt_sources
+from source_models.logic_trees import logic_tree
+from source_models.utils.pt2fault_distance import read_pt_source, combine_pt_sources
 from openquake.hazardlib.sourcewriter import write_source_model
 from openquake.hazardlib.sourcewriter import obj_to_node
 from openquake.baselib.node import Node
@@ -138,8 +138,13 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
             filename_stem, dom[bval_key], mmin,
             completeness_string)
         print 'Parsing %s' % filename
+        
+        # TA kluge - hardwire jdg547 path
+        jdgpath = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/'                
+        
         # Only keep points within domain
-        pts = read_pt_source(filename)
+        pts = read_pt_source(jdgpath+filename)
+        
 #        shapes = np.where(trt_types
         for shape in dsf.shapeRecords():
 #            print code_index

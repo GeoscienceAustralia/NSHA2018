@@ -19,7 +19,7 @@ def checkstr(num):
             return str(num)
 
 
-def ggcat2ascii(ggcat_dict, outfile):    
+def ggcat2ascii(ggcat_dict, outfile):
     '''
     # takes event dictionary format as parsed by catalogues.parsers.parse_ggcat
     

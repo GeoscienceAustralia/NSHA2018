@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <nrml xmlns:gml="http://www.opengis.net/gml" xmlns="http://openquake.org/xmlns/nrml/0.4">
   <sourceModel name="Banda_Fault_Sources_NSHA_2018">
-  <complexFaultSource id="banda_0" name="sunda" tectonicRegion="banda">
+    <complexFaultSource id="banda_0" name="sunda" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -2696,8 +2696,9 @@
           <occurRates>0.0202973644376 0.0167550115872 0.0138144160951 0.0113720626792 0.00933894346126 0.00764933070208 0.00622419477836 0.0050342514287 0.0040486484064 0.00321825837907 0.00245450500498 0.00185540008609 0.00129657813268 0.000836237553987 0.000469470783318 0.000192271919482 7.15109576367e-05</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="banda">
+    </complexFaultSource>
+
+    <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -2914,8 +2915,9 @@
           <occurRates>0.0118297305473 0.00902659086193 0.00688638135713 0.00525048373579 0.00399864998739 0.00303962550243 0.00230408529778 0.0017393078322 0.00130515520749 0.000971036421587 0.000713611028859 0.000515050963817 0.000356308808224 0.000244296767663 0.00016143809767 0.00010954051793 7.36188410619e-05 4.86199690536e-05 3.01916026882e-05 1.91304151868e-05 1.16421488097e-05 6.39439185824e-06 3.16357132118e-06 1.58564395144e-06 5.19990798323e-07 1.30205823461e-07</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="banda">
+    </complexFaultSource>
+  
+    <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -2947,8 +2949,9 @@
           <occurRates>0.0858961214803 0.0653616183078 0.0497380172149 0.0378373838531 0.0287622002327 0.0218336720839 0.0165378920198 0.0124853754596 0.00938062000329 0.00699918410234 0.00517041131347 0.00376439705092 0.00268214631471 0.00178199751603 0.00116275869498 0.000741155902719 0.000458022584937 0.000271369454251 0.000151402160705 7.70335407691e-05 3.34088216177e-05 1.01338705156e-05</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -2986,8 +2989,9 @@
           <occurRates>0.00273177015974 0.00213843141857 0.00166312547288 0.00128192111858 0.000975825058533 0.000729746708296 0.000531683125136 0.00036579844106 0.000240915237856 0.000155752733453 9.82967379545e-05 6.00507826743e-05 3.77791634959e-05 2.14413333482e-05 1.12019315364e-05 5.05626684379e-06 1.61817901629e-06 4.40790747056e-07</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -4483,8 +4487,9 @@
           <occurRates>0.135461351551 0.111122403326 0.0911896064801 0.0748498857869 0.061443186714 0.050433100814 0.041383241079 0.0339382203592 0.0278083188121 0.0227571111482 0.018591471239 0.0151534883956 0.0123139225611 0.00993088331659 0.00791509200441 0.00621703943904 0.00478397946363 0.00357731931281 0.00256910378873 0.00186251135357 0.00117582085121 0.000644518225293 0.000256823559348</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -5081,8 +5086,9 @@
           <occurRates>0.0561435486484 0.0448636763094 0.0358306098528 0.0285878427633 0.0227733294423 0.0180996149268 0.0143382059546 0.0113072663589 0.00886192027356 0.00688660286003 0.00528902009142 0.00387358538356 0.00278391240009 0.00188134803117 0.00125751217302 0.000795182234273 0.000422877287915 0.000206594861422 3.85166370575e-05</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_6" name="flores" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_6" name="flores" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -5169,8 +5175,9 @@
           <occurRates>0.095030496043 0.0759430118689 0.0606950997064 0.0485003930515 0.0387362479132 0.0309091468831 0.024627510654 0.0195803123883 0.0155202414917 0.012250436967 0.00953807217396 0.0073926596395 0.00567803477033 0.00422512961711 0.00315052168155 0.00231014006755 0.00166654088941 0.00117421292907 0.000758095592612 0.000500719829432 0.000319000585723 0.000194607057844 0.000110279861448 5.71065536515e-05 1.97535906545e-05 5.65960570449e-06</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -5433,8 +5440,9 @@
           <occurRates>0.131879048088 0.104474135704 0.0828071903588 0.0656587786067 0.0520720430893 0.0412955116949 0.0327384878272 0.025936230159 0.0205227543307 0.016209572708 0.0127690633214 0.0100214500168 0.00782460163337 0.00606603335361 0.00465662959736 0.00352571373084 0.00261717223498 0.00185668411837 0.00126799645786 0.000880100283501 0.000583622152359 0.00037604086891 0.000249153617546 0.000151156730024 9.42477155424e-05 5.12981096652e-05 2.80190125508e-05 1.163734839e-05 2.48669363059e-06</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -5545,8 +5553,9 @@
           <occurRates>0.0791032687172 0.060101053468 0.0456582642871 0.0346661713007 0.0262889857369 0.0198959190749 0.0150103227824 0.011235004079 0.00839718203822 0.006257503848 0.00464134581633 0.003419552933 0.00249591149404 0.00179844104335 0.00127296022751 0.000878541117279 0.000584182740156 0.0003500803536 0.000169449100027 7.2469316367e-05 1.60918350404e-05</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
-  <complexFaultSource id="banda_9" name="timor" tectonicRegion="banda">
+    </complexFaultSource>
+    
+    <complexFaultSource id="banda_9" name="timor" tectonicRegion="Interface">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -6125,6 +6134,7 @@
           <occurRates>0.137298506723 0.109767266215 0.0878295846838 0.0703283549135 0.0563497599231 0.0451713734663 0.0362214738423 0.0290471211967 0.0232890889118 0.0186621598874 0.0149396254378 0.0119410790351 0.00950369181272 0.00755704337871 0.00599041589031 0.00472832692896 0.00371128751329 0.00289216778516 0.0022335924708 0.00170578435404 0.00128495473926 0.000951921256228 0.000691061188342 0.000460489136271 0.000311578911363 0.000201816406815 0.000123160927869 6.88254701769e-05 3.31436420554e-05 1.14561838709e-05</occurRates>
       </incrementalMFD>
       <rake>90</rake>
-    </simpleFaultSource>
+    </complexFaultSource>
+    
   </sourceModel>
 </nrml>

@@ -1,0 +1,11 @@
+ncpus = 512 
+mem = 256GB
+walltime = 5:00:00
+jobfs = 300GB
+sandpit_path = /short/w84/NSHA18/sandpit/
+model_rel_path = NSHA2018/source_models/zones/2018_mw/Domains_single_mc/input/collapsed
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_March18.xml
+model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_June18/background/Domains_single_mc
+job_file = job_maps.ini
+job_type = maps

@@ -162,7 +162,7 @@ def parse_NSHA2018_catalogue(nsha2018cat):
     
 def parse_iscgem(iscgemcsv):
     """
-    function to parse the ISC-GEM earthquake catalogue in csv format
+    function to parse the ISC-GEM V5 earthquake catalogue in csv format
     
     returns a list of dictionaries, each dictionary relating to a single event
     """

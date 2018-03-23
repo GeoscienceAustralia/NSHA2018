@@ -1,323 +1,251 @@
 import shapefile
-from os import path
-from numpy import array, zeros_like, where, around, median, std
-from shapely.geometry import Point, Polygon
+from shapely.geometry import Polygon
+from numpy import ones_like, nan
 try:
-    from tools.nsha_tools import get_field_data, get_shp_centroid, get_preferred_catalogue
+    from tools.nsha_tools import get_field_data
+    from tools.source_shapefile_builder import get_preferred_catalogue, \
+                                               get_completeness_model, get_aus_shmax_vectors, \
+                                               get_rate_adjust_factor, build_source_shape, \
+                                               get_ul_seismo_depths, get_neotectonic_domain_params
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
-
-###############################################################################
-# parse ARUP shp
 ###############################################################################
 
-#arupshp = 'ARUP_source_model.shp'
-arupshp = 'ARUP_NSHA18_FIXEDSHAPES.shp'
+''' START MAIN CODE HERE '''
+   
+###############################################################################
+# parse Domains shp and prep data
+###############################################################################
+
+domshp = 'ARUP_NSHA18_Merged.shp'
 
 print 'Reading source shapefile...'
-sf = shapefile.Reader(arupshp)
+sf = shapefile.Reader(domshp)
 shapes = sf.shapes()
 polygons = []
 for poly in shapes:
     polygons.append(Polygon(poly.points))
     
-# get src name
-#src_name = get_field_data(sf, 'Name', 'str')
+# get field data
+src_codes = get_field_data(sf, 'CODE', 'str')
+src_names1 = get_field_data(sf, 'Name', 'str')
+src_names2 = get_field_data(sf, 'SRC_NAME', 'str')
+domains = get_field_data(sf, 'DOMAIN', 'float')
+mmax1 = get_field_data(sf, 'max_mag', 'float')
+mmax2 = get_field_data(sf, 'MMAX_BEST', 'float')
+trt = get_field_data(sf, 'TRT', 'str')
+usd = get_field_data(sf, 'usd', 'float')
+lsd = get_field_data(sf, 'lsd', 'float')
+hd = get_field_data(sf, 'hd1', 'float')
+stk = get_field_data(sf, 'strike1', 'float')
+dip = get_field_data(sf, 'dip1', 'float')
+rke = get_field_data(sf, 'rake1', 'float')
 
-###############################################################################
-# parse ARUP lookup csv
-###############################################################################
-# input file modified to classify Tasmainia as non-cratonic from super domains
-arupcsv = 'ARUP_source_model.edit.csv'
-
-src_name = []
-codes = []
-neo_domains = []
-
-lines = open(arupcsv).readlines()[1:]
-for line in lines:
-    dat = line.strip().split(',')
-    src_name.append(dat[1])
-    codes.append('ZN'+dat[3]) # use "sub_zone" instead
-    neo_domains.append(dat[2])
+# merge source names
+src_names = []
+mmax = []
+for sn1, sn2 in zip(src_names1, src_names2):
+    if sn1.strip() != '':
+        src_names.append(sn1)
+    elif sn2.strip() != '':
+        src_names.append(sn2)
+    else:
+        src_names.append('null')
+        
+# merge Mmax
+for mm1, mm2 in zip(mmax1, mmax2):
+    if mm1 == 0.0:
+        mmax.append(mm2)
+    elif mm2 == 0.0:
+        mmax.append(mm1)
+    else:
+        mmax.append(nan)
+        
+# set domain for unset domains
+trt_new = []
+for i in range(0,len(trt)):
+    if trt[i] == 'Oceanic':
+        domains[i] = 8
+    elif trt[i] == 'Active':
+        domains[i] = 9
+    elif trt[i] == 'Extended' and domains[i] == 0.:
+        domains[i] = 7
+    elif trt[i] == 'Interface':
+        domains[i] = 10
+    elif trt[i] == 'Intraslab':
+        domains[i] = 11
     
+    if trt[i] == 'NCratonic':
+        trt_new.append('Non_cratonic')
+    else:
+        trt_new.append(trt[i])
+
+###############################################################################
+# load neotectonic domains parameters
+###############################################################################
+
+# set domestic domain numbers based on neotectonic domains
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
+for i in range(0, len(domains)):
+    if neo_domains[i] > 0 and neo_domains[i] < 8:
+        domains[i] = neo_domains[i]
+        mmax[i] = neo_mmax[i]
+
+zone_class = list(domains)[:]
+
+# reset Gawler Craton to Flinders due to b-value similarities
+zone_class[4] = 2.
+
+# reset West Coast to extended
+zone_class[14] = 6.
+domains[14] = 6.
+mmax[14] = 7.7
+
+# reset West Coast Passive Margin to extended
+zone_class[15] = 7.
+domains[15] = 7.
+
+# reset Ottway/Gippsland to extended
+zone_class[0] = 5.
+domains[0] = 5.
+
+# reset Southern Oceanic buffer
+zone_class[19] = 8.
+domains[19] = 8.
+
+# reset Tasmania buffer
+zone_class[11] = 2.
+domains[11] = 2.
+
+###############################################################################
+#  set pref strike/dip/rake
+###############################################################################
+
+pref_stk = []
+pref_dip = []
+pref_rke = []
+for i in range(0,len(stk)):
+    if stk[i] == 0.0 and domains[i] <= 8:
+        pref_stk.append(-999)
+        pref_dip.append(-999)
+        pref_rke.append(-999)
+    else:
+        pref_stk.append(stk[i])
+        pref_dip.append(dip[i])
+        pref_rke.append(rke[i])
+        
+# set depth parameters
+dep_b = []
+dep_u = []
+dep_l = []
+for i in range(0,len(lsd)):
+    if domains[i] <= 8:
+        lsd[i] = 20.
+        if trt[i] == 'Cratonic':
+            dep_b.append(5.0)
+            dep_u.append(2.5)
+            dep_l.append(10.)
+        else:
+            dep_b.append(10.)
+            dep_u.append(5.0)
+            dep_l.append(15.)
+    
+    # don't care about depth logic tree outside Australia
+    else:
+        dep_b.append(hd[i])
+        dep_u.append(-999)
+        dep_l.append(-999)
+
+# fix preferred upper/lower seismo depths from Domains
+usd, lsd = get_ul_seismo_depths(src_codes, usd, lsd)
+
 ###############################################################################
 # get preferred catalogues 
 ###############################################################################
 
 # get preferred catalogues for each zone
-prefCat = get_preferred_catalogue(arupshp)
+prefCat = get_preferred_catalogue(domshp)
+
+# fix catalogue for source zones
+prefCat[44] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
+prefCat[2] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
     
 ###############################################################################
 # load 2018 completeness models
 ###############################################################################
+single_mc = 0
+ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, domains, single_mc)
 
-# load domains shp
-compshp = path.join('..','Other','Mcomp_NSHA18.shp')
-mcsf = shapefile.Reader(compshp)
+# use values from Domains model instead
+min_rmag = neo_min_rmag
 
-# get completeness data
-mc_ycomp = get_field_data(mcsf, 'YCOMP', 'str')
-mc_mcomp = get_field_data(mcsf, 'MCOMP', 'str')
+# use manual modification
+for i in range(0,len(trt_new)):
+    if trt_new[i] == 'Active':
+        min_rmag[i] = 5.75
+    elif trt_new[i] == 'Intraslab':
+        min_rmag[i] = 5.75
 
-# get completeness polygons
-mc_shapes = mcsf.shapes()
+min_rmag[23] = 6.1 # TAFS
+min_rmag[31] = 6.0 # NBOT
+min_rmag[32] = 6.1 # NBT
+min_rmag[44] = 3.8 # TP
+min_rmag[15] = 3.5 # ZN7d
+min_rmag[0] = 3.0 # ZN7d
+min_rmag[14] = 3.2 # ZN6b
 
-# set empty completeness values
-ycomp = []
-mcomp = []
-min_rmag = []
+'''
+#min_rmag[46] = 3.8 # NWO
+min_rmag[45] = 3.5 # NECS
+#min_rmag[50] = 3.2 # CARP
+min_rmag[19] = 3.5 # SEOB
+min_rmag[18] = 3.5 # SWOB
 
-# loop through Mcomp zones
-for code, poly in zip(codes, shapes):
-    # get centroid of leonard sources
-    clon, clat = get_shp_centroid(poly.points)
-    point = Point(clon, clat)
-    print clon, clat
-    
-    # loop through domains and find point in poly    
-    matchidx = -99
-    mccompFound = False
-    for i in range(0, len(mc_shapes)):
-        dom_poly = Polygon(mc_shapes[i].points)
-        
-        # check if Domains centroid in completeness poly
-        if point.within(dom_poly): 
-            ycomp.append(mc_ycomp[i])
-            mcomp.append(mc_mcomp[i])
-            mccompFound = True
-    
-    # if no Mcomp model assigned, use conservative model
-    if mccompFound == False:
-        ycomp.append('1980;1980')
-        mcomp.append('3.5;3.5')
-        
-    # set rmin range
-    min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
+'''
 
-###############################################################################
-# get neotectonic domains number and Mmax from zone centroid
-###############################################################################
-# get path to reference shapefile
-shapepath = open('..//reference_shp.txt').read()
+# SEOB - multi-corner
+ycomp[19] = '1980;1964;1900'
+mcomp[19] = '3.5;5.0;6.0'
 
-#print '\nNOTE: Getting Domains info for original magnitudes\n'
-#shapepath = open('..//reference_shp_mx.txt').read()
+ycomp[18] = '1980;1964;1900'
+mcomp[18] = '3.5;5.0;6.0'
 
-# load domains shp
-dsf = shapefile.Reader(shapepath)
+ycomp[46] = '1980;1964;1900'
+mcomp[46] = '3.5;5.0;6.0'
 
-# get domains
-neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
-neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
-neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
-neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float') # lower curve, higher b-value
-neo_trt  = get_field_data(dsf, 'TRT', 'str')
-neo_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
-neo_ycomp = get_field_data(dsf, 'YCOMP', 'str')
-neo_mcomp = get_field_data(dsf, 'MCOMP', 'str')
+ycomp[13] = '1980;1964;1900'
+mcomp[13] = '3.5;5.0;6.0'
 
-# get bval sigma
-bval_sig = neo_bval_l - neo_bval
 
-# get domain polygons
-dom_shapes = dsf.shapes()
-dom = []
-mmax = []
-trt = []
-nclass = []
-dep_b = []
-bval_fix = []
-bval_sig_fix = []
 
-# loop through ARUP zones
-for code, poly in zip(codes, shapes):
-    # get centroid of leonard sources
-    clon, clat = get_shp_centroid(poly.points)
-    point = Point(clon, clat)
-    print clon, clat
-    
-    # loop through domains and find point in poly    
-    matchidx = -99
-    for i in range(0, len(dom_shapes)):
-        dom_poly = Polygon(dom_shapes[i].points)
-        
-        # check if ARUP centroid in domains poly
-        if point.within(dom_poly): 
-            matchidx = i
-    
-    if code.startswith('ZN7'):
-        matchidx = 3
-        print 'Fixing index: ', code
-    elif code.startswith('ZN1b'):
-        matchidx = 0
-        print 'Fixing index: ', code
-    elif code == 'ZN6b':
-        matchidx = 15
-        print 'Fixing index: ', code
-    elif code == 'ZN5':  
-        matchidx = 2
-        print 'Fixing index: ', code
-            
-    # set dummy values
-    if matchidx == -99:
-        dom.append(-99)
-        mmax.append(-99)
-        trt.append(-99)
-        dep_b.append(-99)
-        bval_fix.append(-99)
-        bval_sig_fix.append(-99)
-        nclass.append(-99)
-    # fill real values
-    else:
-        dom.append(neo_doms[matchidx])
-        mmax.append(neo_mmax[matchidx])
-        trt.append(neo_trt[matchidx])
-        dep_b.append(neo_dep[matchidx])
-        bval_fix.append(neo_bval[matchidx])
-        bval_sig_fix.append(bval_sig[matchidx])
-        #nclass.append(-99)
-
-dep_b = array(dep_b)
-    
 ###############################################################################
 # load Rajabi SHMax vectors 
 ###############################################################################
 
-shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
-
-print 'Reading SHmax shapefile...'
-sf = shapefile.Reader(shmaxshp)
-    
-# get src name
-shmax_lat = get_field_data(sf, 'LAT', 'float')
-shmax_lon = get_field_data(sf, 'LON', 'float')
-shmax     = get_field_data(sf, 'SHMAX', 'float')
+shmax_pref, shmax_sig = get_aus_shmax_vectors(src_codes, shapes)
 
 ###############################################################################
-# get preferred strike
+# get rate adjustment factors 
 ###############################################################################
-shmax_pref = []
-shmax_sig  = []
 
-for code, poly in zip(codes, shapes):
-    # get shmax points in polygon
-    shm_in = []
-    
-    # now loop through earthquakes in cat
-    for shmlo, shmla, shm in zip(shmax_lon, shmax_lat, shmax):
-        
-        # check if pt in poly and compile mag and years
-        pt = Point(shmlo, shmla)
-        if pt.within(Polygon(poly.points)):
-            shm_in.append(shm)
-    
-    if len(shm_in) > 0: 
-        shmax_pref.append(median(array(shm_in)))
-        shmax_sig.append(std(array(shm_in)))
-        print 'Getting SHmax for', code
-    
-    # if no points in polygons, get nearest neighbour
-    else:
-        print 'Getting nearest neighbour...'
-        min_dist = 9999.
-        for shmlo, shmla, shm in zip(shmax_lon, shmax_lat, shmax):
-            pt = Point(shmlo, shmla)
-            pt_dist = pt.distance(Polygon(poly.points))
-            if pt_dist < min_dist:
-                min_dist = pt_dist
-                shm_near = shm
-        
-        shmax_pref.append(shm_near) # set nearest neighbour
-        shmax_sig.append(15.) # set std manually
-
+origshp = 'ARUP_NSHA18_FIXEDSHAPES.shp'
+newField = 'CODE'
+origField = 'CODE'
+rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
+              
 ###############################################################################
 # write initial shapefile
 ###############################################################################
 
-#outshp = path.join('shapefiles','ARUP_NSHA18.shp')
 outshp = 'ARUP_NSHA18.shp'
-#outshp = 'ARUP_NSHA18_MX.shp'
+bval_fix = -99 * ones_like(rte_adj_fact)
+bval_sig_fix = -99 * ones_like(rte_adj_fact)
 
-# set shapefile to write to
-w = shapefile.Writer(shapefile.POLYGON)
-w.field('SRC_NAME','C','100')
-w.field('CODE','C','10')
-#w.field('SRC_REGION','C','100')
-#w.field('SRC_REG_WT','F', 8, 3)
-w.field('SRC_TYPE','C','10')
-w.field('CLASS','C','10')
-w.field('SRC_WEIGHT','F', 8, 2)
-w.field('DEP_BEST','F', 8, 1)
-w.field('DEP_UPPER','F', 8, 1)
-w.field('DEP_LOWER','F', 8, 1)
-w.field('MIN_MAG','F', 8, 2)
-w.field('MIN_RMAG','F', 8, 2)
-w.field('MMAX_BEST','F', 8, 2)
-w.field('MMAX_LOWER','F', 8, 2)
-w.field('MMAX_UPPER','F', 8, 2)
-w.field('N0_BEST','F', 8, 5)
-w.field('N0_LOWER','F', 8, 5)
-w.field('N0_UPPER','F', 8, 5)
-w.field('BVAL_BEST','F', 8, 3)
-w.field('BVAL_LOWER','F', 8, 3)
-w.field('BVAL_UPPER','F', 8, 3)
-w.field('BVAL_FIX','F', 8, 3)
-w.field('BVAL_FIX_S','F', 8, 3)
-w.field('YCOMP','C','70')
-w.field('MCOMP','C','50')
-w.field('SHMAX','F', 6, 2)
-w.field('SHMAX_SIG','F', 6, 2)
-w.field('YMAX','F', 8, 0)
-w.field('TRT','C','100')
-w.field('DOMAIN','F', 2, 0)
-w.field('CAT_FILE','C','50')
+build_source_shape(outshp, shapes, src_names, src_codes, zone_class, \
+                   rte_adj_fact, dep_b, dep_u, dep_l, usd, lsd, \
+                   min_rmag, mmax, bval_fix, bval_sig_fix, \
+                   ycomp, mcomp, pref_stk, pref_dip, pref_rke, \
+                   shmax_pref, shmax_sig, trt_new, domains, prefCat)
 
-src_wt = 1.0
-src_ty = 'area'
-#dep_b = 10.
 
-dep_u = 0.5 * array(dep_b)
-
-idx = where(dep_b > 7.)[0]
-dep_l = zeros_like(dep_b)
-dep_l[idx] = 1.5 * array(dep_b[idx])
-idx = where(dep_b < 7.)[0]
-dep_l[idx] = 2 * array(dep_b[idx])
-
-min_mag = 4.5
-
-#mmax[i]
-#mmax_l = mmax[i]-0.2
-#mmax_u = mmax[i]+0.2
-n0 = -99
-n0_l = -99
-n0_u = -99
-bval = -99
-bval_l = -99
-bval_u = -99
-#bval_fix = -99
-#bval_fix_sig = -99
-ymax  = 2017
-
-# loop through original records
-for i, shape in enumerate(shapes):
-
-    # set shape polygon
-    w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
-    #w.line(parts=[newpoints[i].tolist()], shapeType=shapefile.POLYGON) # used for original AUS poly that needed adjustment
-        
-    # write new records
-    if i >= 0:
-        w.record(src_name[i], codes[i], src_ty, dom[i], src_wt, dep_b[i], dep_u[i], dep_l[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, \
-                 n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], ycomp[i], mcomp[i], shmax_pref[i], shmax_sig[i], ymax, trt[i], dom[i], prefCat[i])
-        
-# now save area shapefile
-w.save(outshp)
-
-# write projection file
-prjfile = outshp.strip().split('.shp')[0]+'.prj'
-f = open(prjfile, 'wb')
-f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
-f.close()

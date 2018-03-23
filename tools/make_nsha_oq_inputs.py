@@ -6,7 +6,7 @@
 #            e.g. python make_openquake_source_file.py SWCan_T3EclC1.pkl swcan
 #####################################################################################
 
-def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
+def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
     from numpy import array, zeros, argmax, zeros_like
     from tools.oq_tools import get_oq_incrementalMFD
     '''
@@ -16,8 +16,15 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     '''
     
     # set mx arrays from mx dictionary using zone trt
-    mx_vals = mx_dict[m['trt']]['mx_vals']
-    mx_wts  = mx_dict[m['trt']]['mx_wts']
+    # first try EE mags
+    try:
+        mx_vals = mx_dict[m['trt']]['mx_vals']
+        mx_wts  = mx_dict[m['trt']]['mx_wts']
+    # else use Mmax from model and theoretical weights
+    except:
+        mx = m['max_mag'][0]
+        mx_vals = [mx-0.2, mx-0.1, mx, mx+0.1, mx+0.2]
+        mx_wts  = [0.02, 0.14, 0.68, 0.14, 0.02]
     
     # REMOVE ME WHEN FINISHED TESTING
     #mx_wts = [0.1, 0.2, 0.4, 0.2, 0.1]
@@ -45,12 +52,12 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
     
     for beta_val, beta_wt, N0 in zip(m['src_beta'], meta['beta_wts'], m['src_N0']):
         # get effective rate
-        effN0 = N0 * m['src_weight']
+        effN0 = N0 * m['src_weight'] * m['rate_adj_fact']
         
         for mx, mxwt in zip(mx_vals, mx_wts):
             
             betacurve, mrange = get_oq_incrementalMFD(beta_val, effN0, \
-                                                      m['min_mag'], mx, \
+                                                      min_mag, mx, \
                                                       binwid)
             
             #print m['src_weight'], betacurve[0], beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
@@ -82,6 +89,54 @@ def make_collapse_occurrence_text(m, binwid, meta, mx_dict):
         octxt += ' ' + str('%0.5e' % bc)
     #print octxt.split()[0]
     return octxt
+
+# makes sure strike angle is within acceptable range
+def check_stk_angle(strike):
+    
+    strike = round(strike)
+    if strike >= 360.:
+        strike -= 360.
+    elif strike < 0.:
+        strike += 360
+        
+    return abs(strike)
+
+# gets nodal plane text for rupture logic tree
+def get_nodal_plane_text(m):
+    nptxt = ''
+    
+    # use shmax info assuming shallow dipping reverse faults
+    if m['pref_stk'] == -999.0:
+        
+        # get preferred strikes from shmax for reverse faulting
+        pref_stk1 = check_stk_angle(m['shmax']+90)
+        pref_stk2 = check_stk_angle(m['shmax']+270)
+        
+        nptxt += '                <nodalPlane probability="0.34" strike="'+str(pref_stk1)+'" dip="35.0" rake="90.0" />\n'
+        nptxt += '                <nodalPlane probability="0.34" strike="'+str(pref_stk2)+'" dip="35.0" rake="90.0" />\n'
+        
+        # check strike values
+        stk_pos1 = check_stk_angle(round(pref_stk1 + m['shmax_sig']))
+        stk_neg1 = check_stk_angle(round(pref_stk1 - m['shmax_sig']))
+         
+        # set shmax +/- sigma
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_pos1)+'" dip="35.0" rake="90.0" />\n'
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_neg1)+'" dip="35.0" rake="90.0" />\n'
+        
+        # check strike values
+        stk_pos2 = check_stk_angle(round(pref_stk2 + m['shmax_sig']))
+        stk_neg2 = check_stk_angle(round(pref_stk2 - m['shmax_sig']))
+         
+        # set shmax +/- sigma
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_pos2)+'" dip="35.0" rake="90.0" />\n'
+        nptxt += '                <nodalPlane probability="0.08" strike="'+str(stk_neg2)+'" dip="35.0" rake="90.0" />\n'
+            
+    # if stk/dip/rke set mostly for offshore regions
+    else:
+        nptxt += '                <nodalPlane probability="1.0" strike="'+str(m['pref_stk']) \
+                                   +'" dip="'+str(m['pref_dip'])+'" rake="'+str(m['pref_rke'])+'" />\n'
+
+    return nptxt
 
 def test_beta_curves(m, binwid, meta, mx_dict):
     from tools.oq_tools import get_oq_incrementalMFD
@@ -138,9 +193,6 @@ def write_oq_sourcefile(model, meta, mx_dict):
     max_mag_wt = [0.60, 0.30, 0.10]
     '''
     
-    # set rupture aspect ratio
-    aspectratio = '1.5' # balance between L14 and Cea14 surface rupture lengths
-
     outbase = path.split(meta['modelPath'])[-1]
     
     # start xml text
@@ -154,6 +206,25 @@ def write_oq_sourcefile(model, meta, mx_dict):
     
     # start loop thru area sources
     for m in model:
+        
+        # set magScaleRel
+        if float(m['class']) <= 7.:
+            magScaleRel = 'Leonard2014_SCR'
+            ruptAspectRatio = 1.5 # balance between L14 and Cea14 surface rupture lengths
+            min_mag = 4.5
+        elif float(m['class']) == 8 or float(m['class']) == 9:
+            magScaleRel = 'WC1994'
+            ruptAspectRatio = 1.0
+            min_mag = 5.5
+        elif float(m['class']) == 10:
+            magScaleRel = 'StrasserInterface'
+            ruptAspectRatio = 1.3
+            min_mag = 6.5
+        elif float(m['class']) == 11:
+            magScaleRel = 'StrasserIntraslab'
+            ruptAspectRatio = 1.25
+            min_mag = 5.5
+        
         # comment out sources with null activitiy rates
         if m['src_N0'][-1] == -99.0:
             newxml += '        <!--\n'
@@ -162,13 +233,13 @@ def write_oq_sourcefile(model, meta, mx_dict):
         # write area sources
         #######################################################################
         if m['src_type'] == 'area':
-            print m['src_type']
+            #print m['src_type']
             
             # rename source code if "." exists
             m['src_code'].replace('.', '')
             
             newxml += '        <areaSource id="'+m['src_code']+'" name="'+\
-                       m['src_name']+'" tectonicRegion="'+m['trt']+'">\n'
+                       m['src_name']+'" tectonicRegion="'+m['gmm_trt']+'">\n'
             
             newxml += '            <areaGeometry>\n'
             newxml += '                <gml:Polygon>\n'
@@ -178,9 +249,22 @@ def write_oq_sourcefile(model, meta, mx_dict):
                             
             # get polygon text
             polytxt = ''
+            pp = 0
             for xy in m['src_shape'][:-1]: # no need to close poly
-                polytxt = polytxt + '                                ' + str("%0.4f" % xy[0]) \
-                                  + ' ' + str("%0.4f" % xy[1]) + '\n'
+                addPoint = True
+                # check if duplicating points
+                if pp > 0:
+                   if xy[0] == xy0[0] and xy[1] == xy0[1]:
+                      addPoint = False
+                      
+                if addPoint == True:
+                    polytxt = polytxt + '                                ' + str("%0.4f" % xy[0]) \
+                                      + ' ' + str("%0.4f" % xy[1]) + '\n'
+                
+                xy0 = xy
+                pp += 1
+                
+            # add poly text
             newxml += polytxt
             
             newxml += '                            </gml:posList>\n'
@@ -205,30 +289,26 @@ def write_oq_sourcefile(model, meta, mx_dict):
             if maxlat > bbmaxlat: bbmaxlat = maxlat
             if minlat < bbminlat: bbminlat = minlat
     
-            print m['src_code'], minlon, minlat, ',', minlon, maxlat, ',', maxlon, maxlat, ',', maxlon, minlat
+            #print m['src_code'], minlon, minlat, ',', minlon, maxlat, ',', maxlon, maxlat, ',', maxlon, minlat
             ###################################################################
     
             # set depth distribution
-            if min(m['src_dep']) != max(m['src_dep']):
-                #newxml += '                <upperSeismoDepth>'+str("%0.1f" % min(m['src_dep']))+'</upperSeismoDepth>\n'
-                #newxml += '                <lowerSeismoDepth>'+str("%0.1f" % max(m['src_dep']))+'</lowerSeismoDepth>\n'
-                newxml += '                <upperSeismoDepth>0.0</upperSeismoDepth>\n'
-                newxml += '                <lowerSeismoDepth>20.0</lowerSeismoDepth>\n'
-            else:
-                newxml += '                <upperSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])-10))+'</upperSeismoDepth>\n'
-                newxml += '                <lowerSeismoDepth>'+str("%0.1f" % (min(m['src_dep'])+10))+'</lowerSeismoDepth>\n'
+            if m['src_dep'][0] <= m['src_usd'] or m['src_dep'][0] >= m['src_lsd']:
+                print m['src_code'], 'FIX DEPTHS'
                 
+            newxml += '                <upperSeismoDepth>'+str(m['src_usd'])+'</upperSeismoDepth>\n'
+            newxml += '                <lowerSeismoDepth>'+str(m['src_lsd'])+'</lowerSeismoDepth>\n'
+            
+            # set source geometry
             newxml += '            </areaGeometry>\n'
-            newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-            #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
-            #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
-            newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
+            newxml += '            <magScaleRel>'+magScaleRel+'</magScaleRel>\n'
+            newxml += '            <ruptAspectRatio>'+str(ruptAspectRatio)+'</ruptAspectRatio>\n'
             
             # get weighted rates
             binwid = 0.1
-            octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
+            octxt = make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict)
                                  
-            newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
+            newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (min_mag+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
             newxml += '                <occurRates>'+octxt+'</occurRates>\n'
             newxml += '            </incrementalMFD>\n'
             
@@ -247,25 +327,20 @@ def write_oq_sourcefile(model, meta, mx_dict):
             """
             # set nodal planes
             newxml += '            <nodalPlaneDist>\n'
-            
-            newxml += '                <nodalPlane probability="0.3" strike="0.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="45.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.2" strike="90.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="135.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.3" strike="180.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="225.0" dip="30.0" rake="90.0" />\n'
-            newxml += '                <nodalPlane probability="0.2" strike="270.0" dip="30.0" rake="90.0" />\n'
-#            newxml += '                <nodalPlane probability="0.0625" strike="315.0" dip="30.0" rake="90.0" />\n'
-    
+            newxml += get_nodal_plane_text(m)
             newxml += '            </nodalPlaneDist>\n'
             
-    
             # set hypo depth
             newxml += '            <hypoDepthDist>\n'
-            newxml += '                <hypoDepth probability="0.50" depth="'+str("%0.1f" % m['src_dep'][0])+'"/>\n' \
-                     +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][1])+'"/>\n' \
-                     +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][2])+'"/>\n'
+            if m['src_dep'][1] != -999.0:
+                newxml += '                <hypoDepth probability="0.50" depth="'+str("%0.1f" % m['src_dep'][0])+'"/>\n' \
+                         +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][1])+'"/>\n' \
+                         +'                <hypoDepth probability="0.25" depth="'+str("%0.1f" % m['src_dep'][2])+'"/>\n'
+            else:
+                newxml += '                <hypoDepth probability="1.0" depth="'+str("%0.1f" % m['src_dep'][0])+'"/>\n'
+            
             newxml += '            </hypoDepthDist>\n'
+            
             if m['src_N0'][-1] == -99.0:
                 newxml += '        </areaSource>\n'
             else:
@@ -292,7 +367,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     idsub = idsub.replace(".", "")
                     
                     newxml += '        <complexFaultSource id="'+src_code+idsub+'" name="'+\
-                               m['src_name']+'" tectonicRegion="'+m['trt']+'">\n'
+                               m['src_name']+'" tectonicRegion="'+m['gmm_trt']+'">\n'
                     newxml += '            <complexFaultGeometry>\n'
                     newxml += '                <faultTopEdge>\n'
                     newxml += '                    <gml:LineString>\n'
@@ -370,10 +445,10 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
+                        newxml += '            <magScaleRel>'+magScaleRel+'</magScaleRel>\n'
                         #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
                     
-                    newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
+                    newxml += '            <ruptAspectRatio>'+str(ruptAspectRatio)+'</ruptAspectRatio>\n'
                 
                     '''
                     # now get appropriate MFD
@@ -382,7 +457,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     if m['src_beta'][0] > -99:
                         # adjust N0 value to account for weighting of fault sources
                     
-                        octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
+                        octxt = make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -407,7 +482,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     idsub = idsub.replace(".", "")
                     
                     newxml += '        <simpleFaultSource id="'+m['src_code']+idsub+'" name="'+\
-                                         m['src_name']+'" tectonicRegion="'+m['trt']+'">\n'
+                                         m['src_name']+'" tectonicRegion="'+m['gmm_trt']+'">\n'
                     newxml += '            <simpleFaultGeometry>\n'
                     newxml += '                <gml:LineString>\n'
                     newxml += '                    <gml:posList>\n'
@@ -452,18 +527,17 @@ def write_oq_sourcefile(model, meta, mx_dict):
                     elif src_code.startswith('EISI'):
                         newxml += '            <magScaleRel>GSCEISI</magScaleRel>\n'
                     else:
-                        newxml += '            <magScaleRel>Leonard2014_SCR</magScaleRel>\n'
-                        #newxml += '            <magScaleRel>WC1994</magScaleRel>\n'
+                        newxml += '            <magScaleRel>'+magScaleRel+'</magScaleRel>\n'
+                        
+                    newxml += '            <ruptAspectRatio>'+str(ruptAspectRatio)+'</ruptAspectRatio>\n'
                     
-                    newxml += '            <ruptAspectRatio>'+aspectratio+'</ruptAspectRatio>\n'
-                    #newxml += '            <ruptAspectRatio>2.0</ruptAspectRatio>\n'
                     '''
                     # now get appropriate MFD
                     '''
                     # do incremental MFD
                     if m['src_beta'][0] > -99:
                         
-                        octxt = make_collapse_occurrence_text(m, binwid, meta, mx_dict)
+                        octxt = make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict)
                                     
                         # make text
                         newxml += '            <incrementalMFD minMag="'+str('%0.2f' % (m['min_mag']+0.5*binwid))+'" binWidth="'+str(binwid)+'">\n'
@@ -483,13 +557,35 @@ def write_oq_sourcefile(model, meta, mx_dict):
         # comment sources with null activity rates
         if m['src_N0'][-1] == -99.0:
             newxml += '        -->\n\n'
+            
+    ######################################################################
+    # add Australian fault-source model
+    ######################################################################
+    if meta['doSeisTec'] == True:
+        aust_fault_file = path.join('..', 'faults', 'National_Fault_Source_Model_2018_Collapsed_NSHA13', \
+                                    'National_Fault_Source_Model_2018_Collapsed_NSHA13_all_methods_collapsed_inc_cluster_gmm_trt.xml')
+        lines = open(aust_fault_file).readlines()[3:-2]
+        for line in lines:
+            newxml += '    ' + line
     
+    ######################################################################
+    # add indoneasia-png fault-source model
+    ######################################################################
+    '''
+    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
+    lines = open(indo_png_fault_file).readlines()[3:-2]
+    for line in lines:
+        newxml += '    ' + line
+    '''
+    print '\nSkipping Banda Faults\n'
+       
+    ######################################################################
     # finish nrml
     newxml += '    </sourceModel>\n'
     newxml += '</nrml>'
     
     # write Big BBOX
-    print '\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
+    #print '\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
     
     # write new data to file
     outxml = path.join(meta['modelPath'], meta['modelFile'])
@@ -508,6 +604,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
 def make_logic_tree(srcxmls, branch_wts, meta):    
     from os import path
     
+    print branch_wts
     # if multimodel - adjust weights
     '''
     if meta['multiMods'] == 'True':
@@ -528,6 +625,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
     
     # make branches
     for i, srcxml in enumerate(srcxmls):
+        #print i, srcxml
         #logictreepath = logicpath + sep + path.split(branch)[-1]
         if meta['splitXMLPath'] == True:
             logictreepath = path.split(srcxml)[-1]
@@ -576,51 +674,65 @@ def src_shape2dict(modelshp):
     # loop thru recs and make dict
     for rec, shape in zip(records, shapes):
         if not float(rec[15]) == -99:
-            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 
-                 'trt':rec[23], 'src_shape':array(shape.points), 
-                 'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])], 
-                 'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 
-                 'src_beta':[bval2beta(float(rec[15])), bval2beta(float(rec[16])), bval2beta(float(rec[17]))], 
-                 'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], 
-                 'min_mag':float(rec[7]), 'src_weight':float(rec[3]), 'src_reg_wt':1}
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2],
+                 'class':rec[3], 'trt':rec[33], 'src_shape':array(shape.points),
+                 'src_dep':[float(rec[6]), float(rec[7]), float(rec[8])],
+                 'src_usd':float(rec[9]), 'src_lsd':float(rec[10]),
+                 'max_mag':[float(rec[14]), float(rec[15]), float(rec[16])],
+                 'src_N0':[float(rec[17]), float(rec[18]), float(rec[19])],
+                 'src_beta':[bval2beta(float(rec[20])), bval2beta(float(rec[21])), bval2beta(float(rec[22]))],
+                 'min_mag':float(rec[12]), 'src_weight':float(rec[4]), 'src_reg_wt':1.,
+                 'rate_adj_fact':float(rec[5]), 'pref_stk':float(rec[28]), 'pref_dip':float(rec[29]),
+                 'pref_rke':float(rec[30]), 'shmax':float(rec[31]), 'shmax_sig':float(rec[32]), 'gmm_trt':rec[34]}
             model.append(m)
             
         else:
             # parse GSC version
-            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'src_type':rec[2]
+            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2], 'src_type':rec[2],
                   'src_weight':float(rec[3]), 'src_shape':array(shape.points), 
                   'src_dep':[float(rec[4]), float(rec[5]), float(rec[6])], 'min_mag':float(rec[7]), 
-                  'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])], ,
-                  'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])], 
-                  'src_beta':[float(rec[15]), float(rec[16]), float(rec[17])], 
-                  'src_reg_wt':1, 'trt':rec[23], }
+                  'max_mag':[float(rec[9]), float(rec[10]), float(rec[11])],
+                  'src_N0':[float(rec[12]), float(rec[13]), float(rec[14])],
+                  'src_beta':[float(rec[15]), float(rec[16]), float(rec[17])],
+                  'src_reg_wt':1, 'trt':rec[23]}
     
     return model 
 """    
-w.field('SRC_NAME','C','100')  
-w.field('CODE','C','10')       
-w.field('SRC_TYPE','C','10')   
-w.field('SRC_WEIGHT','F', 8, 2)
-w.field('DEP_BEST','F', 8, 1)  
-w.field('DEP_UPPER','F', 8, 1) 
-w.field('DEP_LOWER','F', 8, 1) 
-w.field('MIN_MAG','F', 8, 2)   
-w.field('MIN_RMAG','F', 8, 2)  
-w.field('MMAX_BEST','F', 8, 2) 
-w.field('MMAX_LOWER','F', 8, 2)
-w.field('MMAX_UPPER','F', 8, 2)
-w.field('N0_BEST','F', 8, 5)   
-w.field('N0_LOWER','F', 8, 5)  
-w.field('N0_UPPER','F', 8, 5)  
-w.field('BETA_BEST','F', 8, 3) 
-w.field('BETA_LOWER','F', 8, 3)
-w.field('BETA_UPPER','F', 8, 3)
-w.field('BETA_FIX','F', 8, 3)  
-w.field('BETA_FIX_S','F', 8, 3)
-w.field('YCOMP','C','70')      
-w.field('MCOMP','C','30')      
-w.field('YMAX','F', 8, 0)      
-w.field('TRT','C','50')      
-#w.field('DOMAIN','F', 2, 0)   
-w.field('SHEEF_FILE','C','50') 
+0     w.field('SRC_NAME','C','100')
+1     w.field('CODE','C','10')
+2     w.field('SRC_TYPE','C','10')
+3     w.field('CLASS','C','10')
+4     w.field('SRC_WEIGHT','F', 8, 2)
+5     w.field('RTE_ADJ_F','F', 6, 4)
+6     w.field('DEP_BEST','F', 6, 1)
+7     w.field('DEP_UPPER','F', 6, 1)
+8     w.field('DEP_LOWER','F', 6, 1)
+9     w.field('USD','F', 4, 1)
+10    w.field('LSD','F', 4, 1)
+11    w.field('OW_LSD','F', 4, 1)
+12    w.field('MIN_MAG','F', 4, 2)
+13    w.field('MIN_RMAG','F', 4, 2)
+14    w.field('MMAX_BEST','F', 4, 2)
+15    w.field('MMAX_LOWER','F', 4, 2)
+16    w.field('MMAX_UPPER','F', 4, 2)
+17    w.field('N0_BEST','F', 8, 5)
+18    w.field('N0_LOWER','F', 8, 5)
+19    w.field('N0_UPPER','F', 8, 5)
+20    w.field('BVAL_BEST','F', 6, 3)
+21    w.field('BVAL_LOWER','F', 6, 3)
+22    w.field('BVAL_UPPER','F', 6, 3)
+23    w.field('BVAL_FIX','F', 6, 3)
+24    w.field('BVAL_FIX_S','F', 6, 3)
+25    w.field('YCOMP','C','70')
+26    w.field('MCOMP','C','50')
+27    w.field('CAT_YMAX', 'F', 8, 3)
+28    w.field('PREF_STK','F', 6, 2)
+29    w.field('PREF_DIP','F', 6, 2)
+30    w.field('PREF_RKE','F', 6, 2)
+31    w.field('SHMAX','F', 6, 2)
+32    w.field('SHMAX_SIG','F', 6, 2)
+33    w.field('TRT','C','100')
+34    w.field('GMM_TRT','C','100')
+35    w.field('DOMAIN','F', 2, 0)
+36    w.field('CAT_FILE','C','50')
 """

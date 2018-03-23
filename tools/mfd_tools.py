@@ -83,15 +83,32 @@ def parse_hmtk_cat(hmtk_csv):
 # function to get events within polygon
 ###############################################################################
 
-def get_events_in_poly(cat, poly, depmin, depmax):
+def get_events_in_poly(idx, cat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd):
+    # (i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
     '''
-    mvect  = preferred MW
-    mxvect = preferred original magnitudes
-    tvect  = datetime array
-    dec_tvect = decimal datetime
-    ev_dict = event dictionary
+    Input:
+        idx = index for current source
+        cat = catalogue in array of dict format from "parse_hmtk_cat" above
+        poly = current polygon of interest - this will be the original, unmodified area
+        polygons = shapely polygons for all sources
+        src_usd = list of upper seismogenic depths for each area source
+        src_lsd = list of lower seismogenic depths for each area source
+        src_overwrite_lsd = overwritten src_lsd to allow capture of deeper eqs
+        
+    Output:
+        mvect  = preferred MW
+        mxvect = preferred original magnitudes
+        tvect  = datetime array
+        dec_tvect = decimal datetime
+        ev_dict = event dictionary
+        
+    appendEvent key:
+        0 = possibly add, if not in any other zones - first pass
+        1 = definitely add - in zone area and depth range
+        2 = do not add - will be double-counted
+        
     '''
-    
+    #print src_usd[idx], src_lsd[idx], src_overwrite_lsd[idx]
     from numpy import isnan
     
     # set arrays
@@ -110,13 +127,65 @@ def get_events_in_poly(cat, poly, depmin, depmax):
         
         # check if pt in poly and compile mag and years
         pt = Point(ev['lon'], ev['lat'])
-        if pt.within(poly) and ev['dep'] >= depmin and ev['dep'] < depmax:
+        if pt.within(poly) and ev['dep'] >= src_usd[idx] \
+                     and ev['dep'] < src_overwrite_lsd[idx]:
+            
+            appendEvent = 0
+             
+            # check if within actual depth range
+            if ev['dep'] >= src_usd[idx] and ev['dep'] < src_lsd[idx]:
+                appendEvent = 1          
+            
+            # now check that eqs won't be double counted in other zones
+            else:
+                maxdepths = []
+                for j in range(0, len(polygons)):
+                    # skip current polygon
+                    if j != idx:
+                        if pt.within(polygons[j]) and ev['dep'] >= src_usd[j] \
+                                     and ev['dep'] < src_overwrite_lsd[j]:
+                            maxdepths.append(src_usd[j])
+                    
+                    # deepest source gets priority
+                    if not maxdepths == []:
+                        if max(maxdepths) > src_lsd[idx]:
+                            appendEvent = 2
+                        else:
+                            appendEvent = 1 
+                                    
+            if appendEvent <= 1:
+                mvect.append(ev['prefmag'])
+                mxvect.append(ev['mx_origML']) # original catalogue mag for Mc model
+                tvect.append(ev['datetime'])
+                dec_tvect.append(toYearFraction(ev['datetime']))
+                ev_dict.append(ev)
+    
+    #print 'len mvect:', len(mvect)
+    return array(mvect), array(mxvect), array(tvect), array(dec_tvect), ev_dict
+    
+def get_events_in_poly_simple(cat, poly):
+    
+    # set arrays
+    mvect = []
+    mxvect = []
+    tvect = []
+    dec_tvect = []
+    ev_dict = []
+    
+    # now loop through earthquakes in cat
+    for ev in cat:
+        
+        # check if pt in poly and compile mag and years
+        pt = Point(ev['lon'], ev['lat'])
+        if pt.within(poly):
+            
             mvect.append(ev['prefmag'])
             mxvect.append(ev['mx_origML']) # original catalogue mag for Mc model
             tvect.append(ev['datetime'])
             dec_tvect.append(toYearFraction(ev['datetime']))
             ev_dict.append(ev)
-            
+    
+    #print 'len mvect:', len(mvect)
     return array(mvect), array(mxvect), array(tvect), array(dec_tvect), ev_dict
 
 ###############################################################################
@@ -324,7 +393,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
 
     # do Aki ML first if N events less than 50
-    elif len(mvect) >= 50 and len(mvect) < 80:
+    elif len(mvect) >= 30 and len(mvect) < 80:
             
         # do Aki max likelihood
         bval, sigb = aki_maximum_likelihood(mrng[midx]+bin_width/2, n_obs[midx], 0.) # assume completeness taken care of
