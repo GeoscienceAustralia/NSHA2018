@@ -17,7 +17,7 @@ from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, par
 # import non-standard functions
 try:
     from catalogue_tools import weichert_algorithm, aki_maximum_likelihood, bval2beta
-    from oq_tools import get_oq_incrementalMFD, beta2bval#, bval2beta
+    from oq_tools import get_oq_incrementalMFD, beta2bval #, bval2beta
     from mapping_tools import get_field_data, get_field_index, drawoneshapepoly, \
                               drawshapepoly, labelpolygon, get_WGS84_area
     #from catalogue.parsers import parse_ggcat

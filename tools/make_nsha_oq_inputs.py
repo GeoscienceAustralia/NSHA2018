@@ -233,7 +233,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
         # write area sources
         #######################################################################
         if m['src_type'] == 'area':
-            print m['src_type']
+            #print m['src_type']
             
             # rename source code if "." exists
             m['src_code'].replace('.', '')
@@ -289,10 +289,13 @@ def write_oq_sourcefile(model, meta, mx_dict):
             if maxlat > bbmaxlat: bbmaxlat = maxlat
             if minlat < bbminlat: bbminlat = minlat
     
-            print m['src_code'], minlon, minlat, ',', minlon, maxlat, ',', maxlon, maxlat, ',', maxlon, minlat
+            #print m['src_code'], minlon, minlat, ',', minlon, maxlat, ',', maxlon, maxlat, ',', maxlon, minlat
             ###################################################################
     
             # set depth distribution
+            if m['src_dep'][0] <= m['src_usd'] or m['src_dep'][0] >= m['src_lsd']:
+                print m['src_code'], 'FIX DEPTHS'
+                
             newxml += '                <upperSeismoDepth>'+str(m['src_usd'])+'</upperSeismoDepth>\n'
             newxml += '                <lowerSeismoDepth>'+str(m['src_lsd'])+'</lowerSeismoDepth>\n'
             
@@ -582,7 +585,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
     newxml += '</nrml>'
     
     # write Big BBOX
-    print '\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
+    #print '\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
     
     # write new data to file
     outxml = path.join(meta['modelPath'], meta['modelFile'])
@@ -622,7 +625,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
     
     # make branches
     for i, srcxml in enumerate(srcxmls):
-        print i, srcxml
+        #print i, srcxml
         #logictreepath = logicpath + sep + path.split(branch)[-1]
         if meta['splitXMLPath'] == True:
             logictreepath = path.split(srcxml)[-1]
