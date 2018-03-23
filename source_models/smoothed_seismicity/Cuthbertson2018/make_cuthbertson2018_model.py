@@ -34,7 +34,7 @@ trt = 'Non_cratonic'
 
 #############################################
 # Parse original data
-original_source_data = 'original_source_data/Aus_7_rates_and_area.txt'
+original_source_data = 'Aus_9_rates_and_area.txt'
 print 'Reading data from %s' % original_source_data
 data = np.genfromtxt(original_source_data, delimiter = ' ', 
                      skip_header = 1, dtype = ("|S24", float, float, int))
@@ -53,26 +53,19 @@ b_vals = data['f2']
 # get neotectonic domain number from centroid
 ###############################################################################
 # load domains shp
-dsf = shapefile.Reader(os.path.join('..','..','zones','Domains','shapefiles','DOMAINS_NSHA18.shp'))
+dsf = shapefile.Reader(os.path.join('..','..','zones','Domains','shapefiles','Domains_NSHA18_multi_Mc.shp'))
 # get domains
 neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
 dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
+dom_trt  = get_field_data(dsf, 'TRT', 'str')
+dom_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
+
 # get domain polygons
 dom_shapes = dsf.shapes()
-#n_dom = []
-#n_mmax = []
 
 ###############################################################################
 # get TRT, depth from Leonard08
 ###############################################################################
-# load domains shp
-lsf = shapefile.Reader(os.path.join('..','..','zones','Leonard2008','shapefiles','LEONARD08_NSHA18.shp'))
-
-# get domains
-ltrt  = get_field_data(lsf, 'TRT', 'str')
-ldep  = get_field_data(lsf, 'DEP_BEST', 'float')
-# get domain polygons
-l08_shapes = lsf.shapes()
 
 # Build sources
 print 'Building point sources'
@@ -85,15 +78,12 @@ for j in range(len(lons)):
     shapely_pt = shapely.geometry.Point(lons[j], lats[j])
     # Get parameters based on domain
     # loop through domains and find point in poly
-    for neo_dom, mmax, dom_shape in zip(neo_doms, dom_mmax, dom_shapes):
+    for neo_dom, mmax, zone_trt, zone_dep, dom_shape in zip(neo_doms, dom_mmax, dom_trt, dom_dep, dom_shapes):
         dom_poly = Polygon(dom_shape.points)       
         # check if leonard centroid in domains poly
         if shapely_pt.within(dom_poly):
             tmp_dom = neo_dom
             max_mag = mmax
-    for zone_trt, zone_dep, l_shape in zip(ltrt, ldep, l08_shapes):
-        l_poly = Polygon(l_shape.points)
-        if shapely_pt.within(l_poly):
             trt = zone_trt
             depth = zone_dep
 #    print max_mag, trt, depth                       
@@ -106,12 +96,12 @@ for j in range(len(lons)):
                             (0.3, NodalPlane(180, 30, 90)),
                             (0.2, NodalPlane(270, 30, 90))])
     point_source = mtkPointSource(identifier, name, geometry=point, mfd=mfd,
-                           mag_scale_rel = 'Leonard2014_SCR', rupt_aspect_ratio=1.0,
+                           mag_scale_rel = 'Leonard2014_SCR', rupt_aspect_ratio=1.5,
                            upper_depth = 0.1, lower_depth = 20.0,
                            trt = trt, nodal_plane_dist = nodal_plane_dist,
                            hypo_depth_dist = hypo_depth_dist)
     source_list.append(point_source)
-source_model = mtkSourceModel(identifier=0, name='Cuthbertson2016',
+source_model = mtkSourceModel(identifier=0, name='Cuthbertson2018',
                               sources = source_list)
 print 'Writing to NRML'
 outbase = 'cuthbertson2018'
