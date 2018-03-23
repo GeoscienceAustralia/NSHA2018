@@ -53,11 +53,11 @@ b_vals = data['f2']
 # get neotectonic domain number from centroid
 ###############################################################################
 # load domains shp
-dsf = shapefile.Reader(os.path.join('..','..','zones','Domains','shapefiles','Domains_NSHA18_multi_Mc.shp'))
+dsf = shapefile.Reader(os.path.join('..','..','zones','shapefiles','Domains','Domains_NSHA18_multi_Mc.shp'))
 # get domains
 neo_doms  = get_field_data(dsf, 'DOMAIN', 'float')
 dom_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
-dom_trt  = get_field_data(dsf, 'TRT', 'str')
+dom_trt  = get_field_data(dsf, 'GMM_TRT', 'str')
 dom_dep  = get_field_data(dsf, 'DEP_BEST', 'float')
 
 # get domain polygons
@@ -71,6 +71,9 @@ dom_shapes = dsf.shapes()
 print 'Building point sources'
 source_list = []
 source_models = [] # Use later for logic tree
+pt_div = 0.5/3.
+off = np.sqrt(2*(pt_div**2)) # loc offset for distributing rates
+
 for j in range(len(lons)):
     identifier = 'RC_' + str(j)
     name = 'Cuthbertson_' + str(j)
@@ -86,8 +89,14 @@ for j in range(len(lons)):
             max_mag = mmax
             trt = zone_trt
             depth = zone_dep
-#    print max_mag, trt, depth                       
-
+            
+    '''
+    # split rates 5 ways - hold this thought
+    lo_pts = [lons[j]-off, lons[j]+off, lons[j], lons[j]-off, lons[j]+off]
+    la_pts = [lats[j]-off, lats[j]-off, lats[j], lats[j]+off, lats[j]+off]
+    a_split = np.log10((10**a_vals[j]) /  5.)
+    '''
+    
     point = Point(lons[j], lats[j], depth) # Openquake geometry Point
     mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, a_vals[j], b_vals[j])
     hypo_depth_dist = PMF([(1.0, depth)])
@@ -103,6 +112,7 @@ for j in range(len(lons)):
     source_list.append(point_source)
 source_model = mtkSourceModel(identifier=0, name='Cuthbertson2018',
                               sources = source_list)
+
 print 'Writing to NRML'
 outbase = 'cuthbertson2018'
 source_model_filename = outbase + '_source_model.xml'
