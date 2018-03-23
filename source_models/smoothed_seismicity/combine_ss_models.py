@@ -148,13 +148,13 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                 # Check for undefined depths (-999 values)
                 if dom['DEP_BEST'] < 0:
                     print 'Setting best depth to 10 km'
-                    dom['DEP_BEST']=10
+                    dom['DEP_BEST']=5
                 if dom['DEP_UPPER'] < 0:
                     print 'Setting upper depth to 5 km'
-                    dom['DEP_UPPER']=5
+                    dom['DEP_UPPER']=2.5
                 if dom['DEP_LOWER'] < 0:
                     print 'Setting lower depth to 15 km'
-                    dom['DEP_LOWER']=15
+                    dom['DEP_LOWER']=7.5
                 hypo_depth_dist = PMF([(0.5, dom['DEP_BEST']),
                              (0.25, dom['DEP_LOWER']),
                              (0.25, dom['DEP_UPPER'])])
