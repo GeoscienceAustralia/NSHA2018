@@ -90,26 +90,32 @@ for j in range(len(lons)):
             trt = zone_trt
             depth = zone_dep
             
-    '''
     # split rates 5 ways - hold this thought
     lo_pts = [lons[j]-off, lons[j]+off, lons[j], lons[j]-off, lons[j]+off]
     la_pts = [lats[j]-off, lats[j]-off, lats[j], lats[j]+off, lats[j]+off]
     a_split = np.log10((10**a_vals[j]) /  5.)
-    '''
     
-    point = Point(lons[j], lats[j], depth) # Openquake geometry Point
-    mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, a_vals[j], b_vals[j])
-    hypo_depth_dist = PMF([(1.0, depth)])
-    nodal_plane_dist = PMF([(0.3, NodalPlane(0, 30, 90)),
-                            (0.2, NodalPlane(90, 30, 90)),
-                            (0.3, NodalPlane(180, 30, 90)),
-                            (0.2, NodalPlane(270, 30, 90))])
-    point_source = mtkPointSource(identifier, name, geometry=point, mfd=mfd,
-                           mag_scale_rel = 'Leonard2014_SCR', rupt_aspect_ratio=1.5,
-                           upper_depth = 0.1, lower_depth = 20.0,
-                           trt = trt, nodal_plane_dist = nodal_plane_dist,
-                           hypo_depth_dist = hypo_depth_dist)
-    source_list.append(point_source)
+    # now loop through subdivided cells
+    for lo, la in zip(lo_pts, la_pts):
+        point = Point(lo, la, depth) # Openquake geometry Point
+        
+        mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, a_split, b_vals[j])
+        
+        hypo_depth_dist = PMF([(1.0, depth)])
+        
+        nodal_plane_dist = PMF([(0.3, NodalPlane(0, 30, 90)),
+                                (0.2, NodalPlane(90, 30, 90)),
+                                (0.3, NodalPlane(180, 30, 90)),
+                                (0.2, NodalPlane(270, 30, 90))])
+        
+        point_source = mtkPointSource(identifier, name, geometry=point, mfd=mfd,
+                               mag_scale_rel = 'Leonard2014_SCR', rupt_aspect_ratio=1.5,
+                               upper_depth = 0.1, lower_depth = 20.0,
+                               trt = trt, nodal_plane_dist = nodal_plane_dist,
+                               hypo_depth_dist = hypo_depth_dist)
+        
+        source_list.append(point_source)
+
 source_model = mtkSourceModel(identifier=0, name='Cuthbertson2018',
                               sources = source_list)
 
