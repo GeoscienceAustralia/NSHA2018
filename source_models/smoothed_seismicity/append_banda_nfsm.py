@@ -34,7 +34,7 @@ for line in lines:
         ######################################################################
         
         indo_png_fault_file = path.join('..', 'zones', '2018_mw', 'Java_Banda_PNG', 'input', 'collapsed', 'Java_Banda_PNG_collapsed.xml')
-        blines = open(indo_png_fault_file).readlines()[3:-2]
+        blines = open(indo_png_fault_file).readlines()[5:-2]
         for bline in blines:
             newxml += bline
 
