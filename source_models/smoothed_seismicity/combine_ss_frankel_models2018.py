@@ -146,9 +146,11 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         # Only keep points within domain
         pts = read_pt_source(jdgpath+filename)
         
-        shapes = np.where(trt_types
+        shapes = np.where(trt_types)
+        
         for shape in dsf.shapeRecords():
             print shape.record[code_index]
+            '''
             if shape.record[code_index] == dom['CODE']:
                 # Check for undefined depths  (-999 values)
                 if dom['DEP_BEST'] < 0:
@@ -219,6 +221,10 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         else:
                             merged_pts.append(pt)
                             pt_ids.append(pt.source_id)
+                            
+            '''
+    
+    '''
     outfile = "%s_%s.xml" % (
             filename_stem, bval_key)
     outfile = os.path.join(output_dir, outfile)
@@ -229,6 +235,8 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         with open(outfile, 'wb') as f:
             nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
     return outfile
+    
+    '''
             
 if __name__ == "__main__":
 #    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}
