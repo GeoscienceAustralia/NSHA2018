@@ -140,7 +140,11 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         print 'Parsing %s' % filename
         
         # TA kluge - hardwire jdg547 path
-        jdgpath = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/'                
+        jdgpath = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/'
+        
+        print jdgpath+filename
+        
+        """
         
         # Only keep points within domain
         pts = read_pt_source(jdgpath+filename)
@@ -218,6 +222,9 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         else:
                             merged_pts.append(pt)
                             pt_ids.append(pt.source_id)
+                            
+        """
+    """                                
     outfile = "%s_%s.xml" % (
             filename_stem, bval_key)
     outfile = os.path.join(output_dir, outfile)
@@ -228,6 +235,8 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         with open(outfile, 'wb') as f:
             nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
     return outfile
+    
+    """
             
 if __name__ == "__main__":
 #    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}

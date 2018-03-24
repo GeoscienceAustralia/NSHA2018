@@ -144,9 +144,10 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         jdgpath = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/'                
         
         # Only keep points within domain
+        print 'Parsing', filename
         pts = read_pt_source(jdgpath+filename)
         
-        shapes = np.where(trt_types)
+        #shapes = np.where(trt_types)
         
         for shape in dsf.shapeRecords():
             print shape.record[code_index]
