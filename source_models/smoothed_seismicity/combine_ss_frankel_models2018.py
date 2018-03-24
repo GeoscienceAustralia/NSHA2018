@@ -240,7 +240,7 @@ if __name__ == "__main__":
     output_dir = 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness'
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
-    domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
+    domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD_fake.shp' # faking out Jono's code
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
     params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
     filename_stem = 'Australia_Fixed_50_3'
