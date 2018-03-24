@@ -71,8 +71,7 @@ dom_shapes = dsf.shapes()
 print 'Building point sources'
 source_list = []
 source_models = [] # Use later for logic tree
-pt_div = 0.5/3.
-off = np.sqrt(2*(pt_div**2)) # loc offset for distributing rates
+degoff = np.arange(-0.2,0.3,0.1) # loc offset for distributing rates
 
 for j in range(len(lons)):
     identifier = 'RC_' + str(j)
@@ -90,17 +89,19 @@ for j in range(len(lons)):
             trt = zone_trt
             depth = zone_dep
             
-    # split rates 5 ways - hold this thought
-    lo_pts = [lons[j]-off, lons[j], lons[j]+off]
-    la_pts = [lats[j]-off, lats[j], lats[j]+off]
-    a_split = np.log10((10**a_vals[j]) /  9.)
+    # split rates 25 ways
+    a_split = np.log10((10**a_vals[j]) /  25.)
     
     # now loop through subdivided cells
     inc = 0
-    for lo in lo_pts:
-        for la in la_pts:
+    for dlo in degoff:
+        for dla in degoff:
             inc += 1
             splitIdentifier = identifier+'-'+str(inc)
+            
+            # set lola offset
+            lo = lons[j]+dlo
+            la = lats[j]+dla
             
             point = Point(lo, la, depth) # Openquake geometry Point
             

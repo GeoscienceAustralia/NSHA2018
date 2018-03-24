@@ -32,6 +32,7 @@ def params_from_shp(shapefile, trt_ignore=[]):
                   'DEP_LOWER': feature.GetField('DEP_LOWER'),
                   'DEP_UPPER': feature.GetField('DEP_UPPER'),
                   'TRT':  feature.GetField('TRT'),
+                  'GMM_TRT':  feature.GetField('GMM_TRT'),
                   'DOMAIN':  feature.GetField('DOMAIN'),
                   'CODE': feature.GetField('CODE'),
                   'SHMAX': feature.GetField('SHMAX'),
