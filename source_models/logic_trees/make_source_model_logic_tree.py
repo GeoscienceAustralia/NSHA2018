@@ -12,7 +12,7 @@ from numpy import array, hstack, unique
 from shutil import copyfile
 
 xmllist = []
-weighted_smoothing = True
+weighted_smoothing = False # for weighting two adaptive with different Mmin
 
 ###############################################################################
 # copy regional source models
@@ -65,19 +65,19 @@ copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy Domains
-sourceXML = path.join(relpath, 'Domains', 'input', 'collapsed', 'Domains_collapsed.xml')
+sourceXML = path.join(relpath, 'Domains_multi_mc', 'input', 'collapsed', 'Domains_collapsed.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy Leonard08
-sourceXML = path.join(relpath, 'Leonard08', 'input', 'collapsed', 'Leonard08_collapsed.xml')
+sourceXML = path.join(relpath, 'Leonard2008', 'input', 'collapsed', 'Leonard2008_collapsed.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy SinMcC2016
-sourceXML = path.join(relpath, 'SinMcC2016', 'input', 'collapsed', 'SinMcC2016_collapsed.xml')
+sourceXML = path.join(relpath, 'SinMcC2016', 'input', 'collapsed', 'SIN_MCC_collapsed.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
@@ -86,23 +86,23 @@ xmllist.append(path.split(targetXML)[-1])
 # copy seismotectonic source models
 ###############################################################################
 
-relpath = path.join('..', 'faults')
-relpath = path.join('..', 'faults', 'mx') # for testing catalogue with original magnitudes
+#relpath = path.join('..', 'faults')
+#relpath = path.join('..', 'faults', 'mx') # for testing catalogue with original magnitudes
 
 # copy NSHA13
-sourceXML = path.join(relpath, 'NFSM_NSHA13_collapsed_additive_w1', 'NFSM_NSHA13_collapsed_additve_w1.xml')
+sourceXML = path.join(relpath, 'NSHA13', 'input', 'seismo_collapsed', 'NSHA13_collapsed_NFSM.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy AUS6
-sourceXML = path.join(relpath, 'NFSM_AUS6_collapsed_additive_w1', 'NFSM_AUS6_collapsed_additive_w1.xml')
+sourceXML = path.join(relpath, 'AUS6', 'input', 'seismo_collapsed', 'AUS6_collapsed_NFSM.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy DIMAUS
-sourceXML = path.join(relpath, 'NFSM_DIMAUS_collapsed_additive_w1', 'NFSM_DIMAUS_collapsed_additive_w1.xml')
+sourceXML = path.join(relpath, 'DIMAUS', 'input', 'seismo_collapsed', 'DIMAUS_collapsed_NFSM.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
@@ -145,10 +145,11 @@ if weighted_smoothing == True:
         sourceXML = path.join('..', 'testing', 'source_model_Australia_Adaptive_K3_merged_inc_b_mmax_uncert_v1.xml')
         copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
-    
+
+# Use Cuthberson Only
 else:
-    sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p5/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.5.xml'
-    targetXML = path.join('..', 'complete_model', destinationPath, 'GA_adaptive_smoothing_full_uncert.xml')
+    sourceXML = path.join('..', 'smoothed_seismicity', 'Cuthbertson2018', 'cuthbertson2018_source_model_banda.xml')
+    targetXML = path.join('..', 'complete_model', destinationPath, 'cuthbertson2018_source_model_banda.xml')
     copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
 
@@ -193,9 +194,10 @@ if weighted_smoothing == True:
         copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
 
+# Use Cuthberson Only
 else:
-    sourceXML = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K4_mmin3p5_faults/Australia_Adaptive_K4_merged_inc_b_mmax_uncert_mmin3.5_additive_faults.xml'
-    targetXML = path.join('..', 'complete_model', destinationPath, 'GA_NFSM_adaptive_smoothing_full_uncert.xml')
+    sourceXML = path.join('..', 'smoothed_seismicity', 'Cuthbertson2018', 'cuthbertson2018_source_model_banda_nfsm.xml')
+    targetXML = path.join('..', 'complete_model', destinationPath, 'cuthbertson2018_source_model_banda_nfsm.xml')
     copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
     
@@ -247,7 +249,6 @@ for st, sw in zip(src_type, src_wts):
     
     orig_st = st
     
-    
     # assume intra-smoothed fault models have same weight as smoothed seis
     '''
     if st == 'Smoothed_faults':
@@ -256,6 +257,8 @@ for st, sw in zip(src_type, src_wts):
     '''    
     # get weights within source type
     models, mod_wts = lt.get_weights('Source_model', st)
+    print models
+    print mod_wts
     
     # now loop through models within source type
     for mod, mw in zip(models, mod_wts):
@@ -264,18 +267,28 @@ for st, sw in zip(src_type, src_wts):
         for xl in xmllist:
             
             if xl.upper().startswith(mod.upper()):
-            	
+            
                 # do a couple of checks
+                #print mod, xl, mw
                 if mod == 'NSHA13' and xl.upper().startswith('NSHA13_BACKGROUND'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                 
-                elif mod == 'DIMAUS' and orig_st == 'Seismotectonic':
+                elif mod == 'NSHA13' and orig_st == 'Seismotectonic' and xl.endswith('collapsed.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
-                elif mod == 'NSHA13' and orig_st == 'Seismotectonic':
+                elif mod == 'DIMAUS' and orig_st == 'Seismotectonic' and xl.endswith('collapsed.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
-                elif mod == 'AUS6' and orig_st == 'Seismotectonic':
+                elif mod == 'DIMAUS' and orig_st == 'Regional' and xl.endswith('NFSM.xml'):
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'AUS6' and orig_st == 'Seismotectonic' and xl.endswith('collapsed.xml'):
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'AUS6' and orig_st == 'Regional' and xl.endswith('NFSM.xml'):
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'NSHA13' and orig_st == 'Regional' and xl.endswith('NFSM.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
                 elif mod == 'GA_adaptive' and orig_st == 'Smoothed_faults':
@@ -283,13 +296,22 @@ for st, sw in zip(src_type, src_wts):
                     
                 elif mod == 'GA_fixed' and orig_st == 'Smoothed_faults':
                     print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'GA_fixed' and orig_st == 'Smoothed_faults':
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                    
+                elif mod == 'Cuthbertson' and orig_st == 'Smoothed_seismicity' and xl.endswith('nfsm.xml'):
+                    print 'Not adding '+xl+' to '+orig_st+' set'
+                
+                elif mod == 'Cuthbertson' and orig_st == 'Smoothed_faults' and xl.endswith('banda.xml'):
+                    print 'Not adding '+xl+' to '+orig_st+' set'
                 
                 # else, add file to list
                 else:
                     # multiply ARUP models by 0.5
                     if mod.startswith('ARUP'):
                        mod_wt = 0.5
-                       print 'Modifying ARUP model weight'
+                       print '    Modifying ARUP model weight'
                     else:
                        mod_wt = 1.0
                     
@@ -302,7 +324,7 @@ for st, sw in zip(src_type, src_wts):
                     #print xl, mod, st, mw
                     
                     # get models actually added
-                    mod_dict.append({'xml':xl, 'model':mod, 'model_wt':mw, 'src_type':st, 'src_wt':sw})
+                    mod_dict.append({'xml':xl, 'model':mod, 'model_wt':mw, 'src_type':st, 'src_wt':sw, 'cmb_wt':mw*sw})
                     
     # re-normalise source type weights if within type neq 1.0
     src_type_wts = array(src_type_wts) / sum(src_type_wts)
@@ -310,16 +332,17 @@ for st, sw in zip(src_type, src_wts):
     # now append source-type weights to branch wts
     branch_wts = hstack((branch_wts, sw * array(src_type_wts)))
                 
-print branch_wts
+#print branch_wts
 
 # check weights sum to one!
 if not sum(branch_wts) == 1.0:
-    print '\nWeights do not sum to 1.0!'
+    print '\nWeights do not sum to 1.0!:',sum(branch_wts)
     
     # assume testing, so rescale weights
     if sum(branch_wts) < 0.95:
+        print branch_wts
         print '\nAre you testing?  Rescaling weights!!!\n'
-        branch_wts = branch_wts / sum(branch_wts)
+        #branch_wts = branch_wts / sum(branch_wts)
         
        
 # do largest remainder method to make sure numbers 

@@ -105,8 +105,13 @@ if outputType == '0':
     
     if doSeismotectonic == True:
         splitpath.append('seismo_best')
+        # get output filename
+        xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'best_NFSM.xml'
+    
     else:
         splitpath.append('best')
+        # get output filename
+        xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'best.xml'
     
     modPath = sep.join(splitpath)
     
@@ -114,8 +119,6 @@ if outputType == '0':
     if path.isdir(modPath) == False:
         mkdir(modPath)
         
-    # get output filename
-    xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'best.xml'
     
     # reset beta weights
     tmp_bwts = [1.0, 0.0, 0.0] # only use best beta
@@ -145,16 +148,20 @@ elif outputType == '1':
     
     if doSeismotectonic == True:
         splitpath.append('seismo_collapsed')
+        # get output filename
+        xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed_NFSM.xml'
+    
     else:
         splitpath.append('collapsed')
+        # get output filename
+        xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.xml'
+    
     modPath = sep.join(splitpath)
     
     # check to see if exists
     if path.isdir(modPath) == False:
         mkdir(modPath)
         
-    # get output filename
-    xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.xml'
     
     #set metadata dict
     meta = {'beta_wts':beta_wts, 'modelPath':modPath, 'modelFile':xmlfile, 
