@@ -220,9 +220,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         else:
                             merged_pts.append(pt)
                             pt_ids.append(pt.source_id)
-                            
-        """
-    """                                
+
     outfile = "%s_%s.xml" % (
             filename_stem, bval_key)
     outfile = os.path.join(output_dir, outfile)
@@ -234,7 +232,6 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
             nrml.write([source_model], f, '%s', xmlns = NAMESPACE)
     return outfile
     
-    """
             
 if __name__ == "__main__":
 #    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}
