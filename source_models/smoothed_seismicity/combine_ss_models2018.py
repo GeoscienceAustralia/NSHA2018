@@ -142,12 +142,10 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         # TA kluge - hardwire jdg547 path
         jdgpath = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/smoothed_seismicity/'
         
-        print jdgpath+filename
-        
-        """
+        print filename
         
         # Only keep points within domain
-        pts = read_pt_source(jdgpath+filename)
+        pts = read_pt_source(filename)
         
 #        shapes = np.where(trt_types
         for shape in dsf.shapeRecords():
