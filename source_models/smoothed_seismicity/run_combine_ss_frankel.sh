@@ -25,4 +25,4 @@ export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/oq-engine:${PYTHONPATH}
 #export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/NSHA2018/:${PYTHONPATH}
 export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/:${PYTHONPATH}
 
-python combine_ss_frankel_models.py >& combine_ss_frankel_models.log 
+python combine_ss_frankel_models2018.py >& combine_ss_frankel_models2018.log 

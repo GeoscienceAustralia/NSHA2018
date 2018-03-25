@@ -114,7 +114,7 @@ for j in range(len(lons)):
 source_model = mtkSourceModel(identifier=0, name='Cuthbertson2016',
                               sources = source_list)
 print 'Writing to NRML'
-outbase = 'cuthbertson2016'
+outbase = 'cuthbertson2018'
 source_model_filename = outbase + '_source_model.xml'
 source_model.serialise_to_nrml(source_model_filename)
 source_models.append(source_model)

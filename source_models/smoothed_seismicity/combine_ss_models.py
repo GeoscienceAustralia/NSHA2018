@@ -250,7 +250,7 @@ if __name__ == "__main__":
 
     # combine all pt source models
     point_source_list = [bestb_xml, upperb_xml, lowerb_xml]
-    filename = os.path.join(output_dir, output_dir+'.xml')
+    filepath = os.path.join(output_dir, output_dir+'.xml')
     name = output_dir
 
     # read list of files
