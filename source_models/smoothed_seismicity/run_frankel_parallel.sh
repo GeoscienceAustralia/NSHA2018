@@ -27,4 +27,4 @@ export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/hmtk:${PYTHONPATH}
 #export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/NSHA2018/:${PYTHONPATH}
 export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/:${PYTHONPATH}
 
-mpirun -np 16 python fixed_smoothing_parallel.py
+mpirun -np 16 python fixed_smoothing_parallel.py > fixed_smoothing_parallel.log
