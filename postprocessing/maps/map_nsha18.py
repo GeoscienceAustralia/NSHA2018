@@ -31,9 +31,6 @@ mpl.rcParams['pdf.fonttype'] = 42
 
 drawshape = False # decides whether to overlay seismic sources
 
-bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
-bbox = '107.0/153.0/-45.0/-7.0'
-
 # set map resolution
 res = 'i' 
 
@@ -52,7 +49,6 @@ modelName = argv[2]
 
 # add contours?
 addContours = argv[3] # True or False
-
 
 
 # get model name from input file
@@ -116,6 +112,9 @@ for i, key in enumerate(keys): # just plot 1 for now!
     #figure = plt.figure(i,figsize=(19,12))
     
     figure, ax = plt.subplots(i+1,figsize=(16,12))    
+    
+    bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
+    bbox = '107.0/153.0/-45.0/-7.0'
     
     bbox = bbox.split('/')
     minlon = float(bbox[0])
