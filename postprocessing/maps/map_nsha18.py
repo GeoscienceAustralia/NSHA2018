@@ -278,7 +278,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         T = 'Sa(0.2)'
         
     elif period == 'SA10':
-        ncolours = 14 
+        ncolours = 16 
         if probability == '10%':
             vmin = -3
             vmax = vmin + 0.25 * ncolours/2.
