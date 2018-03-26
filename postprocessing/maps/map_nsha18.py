@@ -267,9 +267,9 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         T = 'PGA'
         
     elif period == 'SA02':
-        ncolours = 14
+        ncolours = 12
         if probability == '10%':
-            vmin = -3
+            vmin = -2
             vmax = vmin + 0.5 * ncolours/2.
         
         elif probability == '2%':
@@ -278,7 +278,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         T = 'Sa(0.2 s)'
         
     elif period == 'SA10':
-        
+        ncolours = 12  
         if probability == '10%':
             vmin = -3
             vmax = vmin + 0.25 * ncolours/2.
