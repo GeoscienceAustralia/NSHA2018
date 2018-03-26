@@ -105,7 +105,7 @@ for line in lines[2:]:
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
 #plt.clf()
 #plt.cla()
-for i, key in enumerate([keys[0]]): # just plot 1 for now!
+for i, key in enumerate(keys): # just plot 1 for now!
     
     # get IM period
     period = key.split('-')[0]
