@@ -50,6 +50,10 @@ gridfile = argv[1]
 # get map name for plotting
 modelName = argv[2]
 
+# add contours?
+addContours = argv[3] # True or False
+
+
 
 # get model name from input file
 #model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
@@ -305,28 +309,28 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     ##########################################################################################
     # plot contours
     ##########################################################################################
-    
-    x, y = m(xs, ys)
-    if probability == '10%':
-        levels = arange(0.02, 0.3, 0.02)
-        levels = arange(0.05, 0.3, 0.05)
-        levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
-        levels_lo = array([0.005])
-    elif probability == '2%':
-        levels = arange(0.05, 0.3, 0.05)
-    
-    if cwd.startswith('/nas'):
-        #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
-        #csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
-        csm = plt.contour(x, y, 10**resampled, levels, colors='k')
-        csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+    if addContours == 'True':
+        x, y = m(xs, ys)
+        if probability == '10%':
+            levels = arange(0.02, 0.3, 0.02)
+            levels = arange(0.05, 0.3, 0.05)
+            levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
+            levels_lo = array([0.005])
+        elif probability == '2%':
+            levels = arange(0.05, 0.3, 0.05)
         
-    else:
-        csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
-        csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
-    
-    plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
-    plt.clabel(csm_lo, inline=1, fontsize=10, fmt='%0.3f')
+        if cwd.startswith('/nas'):
+            #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
+            #csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
+            csm = plt.contour(x, y, 10**resampled, levels, colors='k')
+            csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+            
+        else:
+            csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
+            csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+        
+        plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
+        plt.clabel(csm_lo, inline=1, fontsize=10, fmt='%0.3f')
     
     ##########################################################################################
     # get land & lake polygons for masking
