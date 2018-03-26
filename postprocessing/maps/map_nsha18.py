@@ -105,6 +105,8 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     
     # get IM period
     period = key.split('-')[0]
+    period = period.replace('(','')
+    period = period.replace(')','')
     
     # get map probability of exceedance
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
@@ -513,7 +515,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
