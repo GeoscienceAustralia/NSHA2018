@@ -107,6 +107,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     period = key.split('-')[0]
     period = period.replace('(','')
     period = period.replace(')','')
+    period = period.replace('.','')
     
     # get map probability of exceedance
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
