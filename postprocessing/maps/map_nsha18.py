@@ -31,9 +31,6 @@ mpl.rcParams['pdf.fonttype'] = 42
 
 drawshape = False # decides whether to overlay seismic sources
 
-bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
-bbox = '107.0/153.0/-45.0/-7.0'
-
 # set map resolution
 res = 'i' 
 
@@ -49,6 +46,9 @@ gridfile = argv[1]
 
 # get map name for plotting
 modelName = argv[2]
+
+# add contours?
+addContours = argv[3] # True or False
 
 
 # get model name from input file
@@ -105,6 +105,9 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     
     # get IM period
     period = key.split('-')[0]
+    period = period.replace('(','')
+    period = period.replace(')','')
+    period = period.replace('.','')
     
     # get map probability of exceedance
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
@@ -112,6 +115,9 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     #figure = plt.figure(i,figsize=(19,12))
     
     figure, ax = plt.subplots(i+1,figsize=(16,12))    
+    
+    bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
+    bbox = '107.0/153.0/-45.0/-7.0'
     
     bbox = bbox.split('/')
     minlon = float(bbox[0])
@@ -246,9 +252,10 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     #ncols = 9
     
     #cmap = cm.rainbow
+    print period
     if period == 'PGA':
         
-        if probability == '10%':
+        if probability == '10%' or probability == '2%': # kluge to get on same scale
             ncolours = 13
             vmin = -2.
             vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
@@ -260,18 +267,18 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         T = 'PGA'
         
     elif period == 'SA02':
-        ncolours = 14
+        ncolours = 12
         if probability == '10%':
-            vmin = -3
-            vmax = vmin + 0.5 * ncolours/2.
+            vmin = -2
+            vmax = 0.
         
         elif probability == '2%':
             vmin = -1.75
             vmax = vmin + 0.25 * ncolours/2.
-        T = 'Sa(0.2 s)'
+        T = 'Sa(0.2)'
         
     elif period == 'SA10':
-        
+        ncolours = 16 
         if probability == '10%':
             vmin = -3
             vmax = vmin + 0.25 * ncolours/2.
@@ -280,7 +287,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
             ncolours = 14
             vmin = -2
             vmax = vmin + 0.25 * ncolours/2.
-        T = 'Sa(1.0 s)'
+        T = 'Sa(1.0)'
     
     try:
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
@@ -305,28 +312,28 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     ##########################################################################################
     # plot contours
     ##########################################################################################
-    
-    x, y = m(xs, ys)
-    if probability == '10%':
-        levels = arange(0.02, 0.3, 0.02)
-        levels = arange(0.05, 0.3, 0.05)
-        levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
-        levels_lo = array([0.005])
-    elif probability == '2%':
-        levels = arange(0.05, 0.3, 0.05)
-    
-    if cwd.startswith('/nas'):
-        #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
-        #csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
-        csm = plt.contour(x, y, 10**resampled, levels, colors='k')
-        csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+    if addContours == 'True':
+        x, y = m(xs, ys)
+        if probability == '10%':
+            levels = arange(0.02, 0.3, 0.02)
+            levels = arange(0.05, 0.3, 0.05)
+            levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
+            levels_lo = array([0.005])
+        elif probability == '2%':
+            levels = arange(0.05, 0.3, 0.05)
         
-    else:
-        csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
-        csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
-    
-    plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
-    plt.clabel(csm_lo, inline=1, fontsize=10, fmt='%0.3f')
+        if cwd.startswith('/nas'):
+            #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
+            #csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
+            csm = plt.contour(x, y, 10**resampled, levels, colors='k')
+            csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+            
+        else:
+            csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
+            csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+        
+        plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
+        plt.clabel(csm_lo, inline=1, fontsize=10, fmt='%0.3f')
     
     ##########################################################################################
     # get land & lake polygons for masking
@@ -509,7 +516,7 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file

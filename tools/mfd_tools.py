@@ -131,9 +131,13 @@ def get_events_in_poly(idx, cat, poly, polygons, src_usd, src_lsd, src_overwrite
                      and ev['dep'] < src_overwrite_lsd[idx]:
             
             appendEvent = 0
-             
+            
+            # ignore if above sources - this is for testing variable b-values with depth
+            if ev['dep'] < src_usd[idx]:
+                appendEvent = 2
+            
             # check if within actual depth range
-            if ev['dep'] >= src_usd[idx] and ev['dep'] < src_lsd[idx]:
+            elif ev['dep'] >= src_usd[idx] and ev['dep'] < src_lsd[idx]:
                 appendEvent = 1          
             
             # now check that eqs won't be double counted in other zones
