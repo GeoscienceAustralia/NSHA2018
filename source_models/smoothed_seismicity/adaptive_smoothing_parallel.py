@@ -91,7 +91,7 @@ ifile = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
 # Flag for whether to overwrite exiting .xml source model 
 # files with the same b value and completeness combination.
 # Shoudld normally set to True unless you are being really careful.
-overwrite = False
+overwrite = True
 #####################################
 # Shouldn't need input below here
 #####################################
@@ -183,8 +183,8 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     tom = PoissonTOM(50) # Dummy temporal occurence model for building pt sources
     msr = Leonard2014_SCR()
     for j in range(len(data[:,2])):
-        identifier = 'ASS' + str(j)
-        name = 'Helmstetter' + str(j)
+        identifier = 'ASS' + str(j) + '_' + str(run)
+        name = 'Helmstetter' + str(j) + '_' + str(run)
         point = Point(data[j,0],data[j,1],
                     10)
         rate = data[j,2]

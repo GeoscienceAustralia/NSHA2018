@@ -143,8 +143,8 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     msr = Leonard2014_SCR()
     for j in range(len(data[:,4])):
     #    print smoother.data[j,:]
-        identifier = 'FSS' + str(j)
-        name = 'Frankel' + str(j)
+        identifier = 'FSS' + str(j) + '_' + str(run)
+        name = 'Frankel' + str(j) + '_' + str(run)
         point = Point(data[j,0],data[j,1],
                     data[j,2])
         rate = data[j,4]
