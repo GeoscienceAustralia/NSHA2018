@@ -94,7 +94,8 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                             (0.2, NodalPlane(270, 30, 90))])
 
     merged_pts = []
- 
+    pt_ids = []
+
     # Get mmax values and weights
     mmaxs = {}
     mmaxs_w = {}
@@ -127,7 +128,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         mmaxs[dom['CODE']] = mmax_values
         mmaxs_w[dom['CODE']] = mmax_weights
 
-        pt_ids = []
+        #pt_ids = []
     #for trt, filename in filedict.iteritems():
     #    print trt
         completeness_string = 'comp'
@@ -140,7 +141,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         print 'Parsing %s' % filename
         # Only keep points within domain
         pts = read_pt_source(filename)
-#        shapes = np.where(trt_types
+        #shapes = np.where(trt_types
         for shape in dsf.shapeRecords():
             print shape.record[code_index]
             if shape.record[code_index] == dom['CODE']:
@@ -197,7 +198,8 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                 for pt in pts:
                     pt_loc = Point(pt.location.x, pt.location.y)
                     if pt_loc.within(dom_poly):
-                        pt.tectonic_region_type = dom['TRT']
+#                        pt.tectonic_region_type = dom['TRT']
+                        pt.tectonic_region_type = dom['GMM_TRT']
                         pt.nodal_plane_distribution = nodal_plane_dist # FIXME! update based on data extracted from shapefile
                         pt.hypocenter_distribution = hypo_depth_dist
                         pt.rupture_aspect_ratio=2
