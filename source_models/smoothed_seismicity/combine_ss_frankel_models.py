@@ -208,7 +208,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         pt.mfd = new_mfd
                         if pt.source_id in pt_ids:
                             print 'Point source %s already exists!' % pt.source_id
-                            print 'Skipping this source for trt %s' % zone_trt
+                            print 'Skipping this source for trt %s' % dom['TRT']
                         else:
                             merged_pts.append(pt)
                             pt_ids.append(pt.source_id)
@@ -226,25 +226,33 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
 if __name__ == "__main__":
 #    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}
     output_dir = 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness'
+    point_source_names = ['Australia_Fixed_50_3_BVAL_BEST.xml',
+                          'Australia_Fixed_50_3_BVAL_UPPER.xml',
+                          'Australia_Fixed_50_3_BVAL_LOWER.xml']
+    point_source_list = []
+    for fn in point_source_names:
+        point_source_list.append(os.path.join(output_dir, fn))
+
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
     lt  = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
     params = params_from_shp(domains_shp, trt_ignore=['Interface', 'Active', 'Oceanic', 'Intraslab'])
     filename_stem = 'Australia_Fixed_50_3'
-    bestb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_BEST',
-                                  output_dir=output_dir, nrml_version = '04', 
-                                  weight=0.5)
-    upperb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_UPPER',
-                                   output_dir=output_dir, nrml_version = '04',
-                                   weight=0.3)
-    lowerb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_LOWER',
-                                   output_dir=output_dir, nrml_version = '04',
-                                   weight=0.2)
+    if point_source_list is None:
+        bestb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_BEST',
+                                      output_dir=output_dir, nrml_version = '04', 
+                                      weight=0.5)
+        upperb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_UPPER',
+                                       output_dir=output_dir, nrml_version = '04',
+                                       weight=0.3)
+        lowerb_xml = combine_ss_models(filename_stem, domains_shp, params, lt, bval_key='BVAL_LOWER',
+                                       output_dir=output_dir, nrml_version = '04',
+                                       weight=0.2)
+        point_source_list = [bestb_xml, upperb_xml, lowerb_xml]
 
-    # combine all pt source models
-    point_source_list = [bestb_xml, upperb_xml, lowerb_xml]
-    filename = os.path.join(output_dir, output_dir+'.xml')
+    # combine all pt source models  
+    filepath = os.path.join(output_dir, output_dir+'.xml')
     name = output_dir
 
     # read list of files
