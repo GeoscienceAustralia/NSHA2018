@@ -40,3 +40,5 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	
 * ISC-GEM_V4_hmtk_GK74_declustered.csv: declustered ISC-GEM earthquake catalogue in HMTK format:
 	- Catalogue as described above, decustered using the Gardner and Knopoff ([1974](https://pubs.geoscienceworld.org/ssa/bssa/article/64/5/1363/117341/is-the-sequence-of-earthquakes-in-southern)) algorithm
+	
+* GIS files for catalogues are provided [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/shapefiles)
