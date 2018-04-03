@@ -25,7 +25,7 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- NSHA18CAT.mb-MW.csv
 	- NSHA18CAT.MS-MW.csv
 	
-* ISC-GEM_V5_hmtk_full.csv: full International Seismological Centre-Global Earthquake Model (ISC-GEM) earthquake catalogue in HMTK format:
+* ISC-GEM_V5_hmtk_full.csv: full [International Seismological Centre-Global Earthquake Model (ISC-GEM) earthquake catalogue](http://www.isc.ac.uk/iscgem/overview.php) in HMTK format:
 	- Catalogue to be used for adjacent offshore sources
 	- Refomated from original catalogue format as described in Storchak et al. ([2015](https://www.sciencedirect.com/science/article/pii/S003192011400154X))
 	- Version 5 released on 2018-02-27 for the period of 1904-2014
