@@ -96,10 +96,8 @@ for shapefile in contour_shapefiles:
     magnitudes = ratedata[:,0]
     rates = rates[np.argwhere(magnitudes >= min_mag)].flatten()
     print min_mag
-    print rates
     # Get rid of zero valued rates
     rates = rates[np.argwhere(rates > 0)].flatten()
-    print rates
     rake = source_rake_dict[sourcename]
     shp2nrml.append_incremental_mfd(output_xml, magnitude_scale_rel,
                                     rupture_aspect_ratio, rake,
