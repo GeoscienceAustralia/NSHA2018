@@ -50,7 +50,6 @@ modelName = argv[2]
 # add contours?
 addContours = argv[3] # True or False
 
-
 # get model name from input file
 #model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
 
@@ -228,7 +227,6 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     	
     resampled = griddata(lonlist, latlist, log10(hazvals), xs, ys, interp='linear')
     #resampled = griddata(lonlist, latlist, log10(hazvals), lonlist, latlist, interp='linear') # if this suddenly works, I have no idea why!
-    
     
     # get 1D lats and lons for map transform
     lons = ogrid[extent[0]:extent[1]:N]
