@@ -14,6 +14,7 @@ Gareth Davies, Geoscience Australia, 2014
 import os
 import ogr
 import argparse
+from numpy import sqrt
 
 def parse_line_shapefile(shapefile, shapefile_depth_attribute,
                          boundary=[-360, 360, -90, 90]):
@@ -30,20 +31,40 @@ def parse_line_shapefile(shapefile, shapefile_depth_attribute,
 
     fault_contours = []
 
+    m=0
     for feature in layer:
         line = feature.GetGeometryRef().GetPoints()
         depth = float(feature.GetField(shapefile_depth_attribute))
-        line = [list(pts) + [depth] for pts in line]
+        pt_list = [list(pts) + [depth] for pts in line]
         lons = []
         lats = []
         depths = []
-        for pt in line:
+        for pt in pt_list:
             lons.append(pt[0])
             lats.append(pt[1])
             depths.append(pt[2])
+        if m==0:
+            start_lon=lons[0]
+            start_lat=lats[0]
+        print start_lon
+        print lons[0]
+        if m > 0:
+            # Check if start point is closer to start of top trace than
+            # end point; if not, re-order to ensure all contours are
+            # in the same order. Note we assume a flat earth, 
+            # which should be ok in most circumstances as errors should be
+            # 'small' relative to fault lengths
+            start_dist = sqrt((start_lon-lons[0])**2 + (start_lat-lats[0])**2)
+            end_dist = sqrt((start_lon-lons[-1])**2 + (start_lat-lats[-1])**2)
+            if end_dist < start_dist:
+                print 'reordering points to make contours go in same direction'
+                lons = lons[::-1]
+                lats = lats[::-1]
         if boundary is not None:
-            new_line = [ (i,j,k) for (i,j,k) in zip(lons,lats,depths) if i >= boundary[0] if i <= boundary[1] if j >= boundary[2] if j <= boundary[3]]
-            line = new_line
+            line = [ (i,j,k) for (i,j,k) in zip(lons,lats,depths) if i >= boundary[0] if i <= boundary[1] if j >= boundary[2] if j <= boundary[3]]
+        else:
+            line = [(i,j,k) for (i,j,k) in zip(lons,lats,depths)]
+        m+=1
         fault_contours.append(line)
 
     msg = 'Line shapefile must contain at least 2 fault source contour lines'
@@ -110,11 +131,14 @@ def append_gml_Linestring(output_xml, fc, dps=10):
 
     # Add the geometry
     for i in range(len(fc)):
-        output_xml.append(
-            '               ' + '{:.{prec}f}'.format(fc[i][0], prec=dps) + ' ' +\
-                '{:.{prec}f}'.format(fc[i][1], prec=dps) + ' ' +\
-                str(fc[i][2]))
-
+        try:
+            output_xml.append(
+                '               ' + '{:.{prec}f}'.format(fc[i][0], prec=dps) + ' ' +\
+                    '{:.{prec}f}'.format(fc[i][1], prec=dps) + ' ' +\
+                    str(fc[i][2]))
+        except ValueError:
+            print 'Needs python 2.7 or higher for string formatting'
+            sys.exit()
     # Footer
     output_xml.append('            </gml:posList>')
     output_xml.append('          </gml:LineString>')
