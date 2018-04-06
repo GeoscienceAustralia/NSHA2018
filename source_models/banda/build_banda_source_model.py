@@ -17,8 +17,8 @@ except ImportError:
 contour_dir = './shp'
 contour_shapefiles = glob(os.path.join(contour_dir, '*.shp'))
 rate_dir = './source_rates'
-source_model_name = 'Banda_Sources_NSHA_2018'
-tectonic_region = 'banda'
+source_model_name = 'Banda_Fault_Sources_NSHA_2018'
+tectonic_region = 'Subduction'
 magnitude_scale_rel = 'StrasserInterface'
 rupture_aspect_ratio = 1.5
 rake = 90 # Fix for normal sources!
@@ -40,13 +40,25 @@ source_mmin_dict = {'arutrough':6.5,
                 'newguinea':7.0,
 #                'puysegur':6.7,
                 'seram_thrust':7.0,
-                'solomon':7.5,
+#                'solomon':7.5,
                 'sunda':8.0,
                 'tanimbar':6.5,
                 'timor':6.5,
                 'trobriand':7.0}
 
-
+source_rake_dict = {'arutrough':-90,
+                    'banda_detachment':-90,
+                    'flores':90,
+                    #                'hjort':6.5,
+                    'moresby_trough':90,
+                    'newguinea':90,
+                    #                'puysegur':6.7,
+                    'seram_thrust':90,
+                    #                'solomon':7.5,
+                    'sunda':90,
+                    'tanimbar':90,
+                    'timor':90,
+                    'trobriand':-90}
 
 # Now add each fault source
 id_base = 'banda_'
@@ -88,9 +100,11 @@ for shapefile in contour_shapefiles:
     # Get rid of zero valued rates
     rates = rates[np.argwhere(rates > 0)].flatten()
     print rates
+    rake = source_rake_dict[sourcename]
     shp2nrml.append_incremental_mfd(output_xml, magnitude_scale_rel,
                                     rupture_aspect_ratio, rake,
-                                    min_mag, bin_width, rates)
+                                    min_mag, bin_width, rates,
+                                    fault_type='complex')
 
 # Close xml    
 output_xml.append('  </sourceModel>')
