@@ -15,6 +15,44 @@ import os
 import ogr
 import argparse
 from numpy import sqrt
+import numpy
+from openquake.hazardlib.geo.utils import spherical_to_cartesian
+
+def check_aki_richards_convention(edges):
+    # Adapted from openquake/hazardlib/geo/surface/complex_fault.py
+    ul, ur, bl, br = spherical_to_cartesian(
+        [edges[0][0][0], edges[0][-1][0], edges[-1][0][0], edges[-1][-1][0]],
+        [edges[0][0][1], edges[0][-1][1], edges[-1][0][1], edges[-1][-1][1]],
+        [edges[0][0][2], edges[0][-1][2], edges[-1][0][2], edges[-1][-1][2]])
+    top_edge = ur - ul
+    left_edge = bl - ul
+    right_edge = br - ur
+    left_cross_top = numpy.cross(left_edge, top_edge)
+    right_cross_top = numpy.cross(right_edge, top_edge)
+    
+    left_cross_top /= numpy.sqrt(numpy.dot(left_cross_top, left_cross_top))
+    right_cross_top /= numpy.sqrt(
+        numpy.dot(right_cross_top, right_cross_top)
+        )
+    ul /= numpy.sqrt(numpy.dot(ul, ul))
+    ur /= numpy.sqrt(numpy.dot(ur, ur))
+    
+    # rounding to 1st digit, to avoid ValueError raised for floating point                                                                                    
+    # imprecision                                                                                                                                             
+    angle_ul = round(
+        numpy.degrees(numpy.arccos(numpy.dot(ul, left_cross_top))), 1
+        )
+    angle_ur = round(
+        numpy.degrees(numpy.arccos(numpy.dot(ur, right_cross_top))), 1
+        )
+
+    if (angle_ul > 90) or (angle_ur > 90):
+        print 'Contours do not conform to Aki-Richards convention, re-ordering'
+        new_contours = []
+        for contour in edges:
+            new_contours.append(contour[::-1])
+        edges=new_contours
+    return edges
 
 def parse_line_shapefile(shapefile, shapefile_depth_attribute,
                          boundary=[-360, 360, -90, 90]):
@@ -46,8 +84,6 @@ def parse_line_shapefile(shapefile, shapefile_depth_attribute,
         if m==0:
             start_lon=lons[0]
             start_lat=lats[0]
-        print start_lon
-        print lons[0]
         if m > 0:
             # Check if start point is closer to start of top trace than
             # end point; if not, re-order to ensure all contours are
@@ -60,13 +96,20 @@ def parse_line_shapefile(shapefile, shapefile_depth_attribute,
                 print 'reordering points to make contours go in same direction'
                 lons = lons[::-1]
                 lats = lats[::-1]
+        # Check Aki-Richards convention
+        
         if boundary is not None:
             line = [ (i,j,k) for (i,j,k) in zip(lons,lats,depths) if i >= boundary[0] if i <= boundary[1] if j >= boundary[2] if j <= boundary[3]]
         else:
             line = [(i,j,k) for (i,j,k) in zip(lons,lats,depths)]
         m+=1
         fault_contours.append(line)
-
+    # Check Aki-Richards convention 
+    new_contours = check_aki_richards_convention(fault_contours)
+    # And double-check
+    if new_contours != fault_contours:
+        new_contours = check_aki_richards_convention(new_contours)
+    fault_contours=new_contours
     msg = 'Line shapefile must contain at least 2 fault source contour lines'
     assert len(fault_contours) > 1, msg
 
