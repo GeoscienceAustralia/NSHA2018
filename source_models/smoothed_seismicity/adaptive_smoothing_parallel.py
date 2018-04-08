@@ -225,7 +225,7 @@ for config in config_params:
 #sys.exit()
 # Read and clean the catalogue
 parser = CsvCatalogueParser(ifile)
-catalogue = parser.read_file(start_year=1900, end_year=2017)
+catalogue = parser.read_file(start_year=1900, end_year=2016)
 # How many events in the catalogue?
 print "The catalogue contains %g events" % catalogue.get_number_events()
 neq = len(catalogue.data['magnitude'])
@@ -286,7 +286,7 @@ for i in range(0, len(config_params)*3, 1):
         config = {"k": 3,
                   "r_min": 1.0E-6, 
                   "bvalue": bvalue, "mmin": mmin,
-                  "learning_start": 1900, "learning_end": 2017,
+                  "learning_start": 1900, "learning_end": 2016,
                   "target_start": 2018, "target_end": 2019} # using already optimised parameters
         ystart = completeness_table[-1][0]
         # Ensure we aren't training outside completeness model
