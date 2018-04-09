@@ -3,16 +3,19 @@
 % 
 % Coverts all mag types to MW and selects preferred MW
 % 
+% Corrections based on earthquake location, as defined by:
+%	https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/magnitude/ml/australia_ml_regions.txt
+%
 % zone = 1 > WA
 % zone = 2 > EA
 % zone = 3 > SA
+% zone = 4 > outside Australia
 %
-% Author: T. Allen (2011-01-11)
+% Author: T. Allen (2011-01-11) - updated February 2018
 % *************************************************************************
 outfile = fullfile('..','data','NSHA18CAT.MW.V0.1.csv');
 
 % load data
-
 if exist('mdat','var') ~= 1
     disp('Loading mdat');
     load mdat_ml_rev.mat;
