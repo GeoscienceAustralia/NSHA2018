@@ -252,7 +252,7 @@ def pt2fault_distance(pt_sources, fault_sources, min_distance = 5.0,
     # Generate ruptures for point sources
     minimum_distance_list = []
     revised_point_sources = {'Cratonic': [], 'Non_cratonic': [], 
-                             'Extended': [], 'Banda': []}
+                             'Extended': [], 'Subduction': []}
     for pt in pt_sources:
         print 'Looping over point sources'
         # For speeding things up filter based on initial distances
