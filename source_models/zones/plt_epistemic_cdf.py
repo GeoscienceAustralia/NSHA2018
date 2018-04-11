@@ -133,7 +133,7 @@ for k, key in enumerate(keys[:2]):
                 if i == 0:
                     plt.legend(loc=2, fontsize=11)
                 
-    plt.suptitle(fracFolder.split(sep)[1] + ' ' + key, fontsize=20)
+    #plt.suptitle(fracFolder.split(sep)[1] + ' ' + key, fontsize=20)
     
     # set fig file
     figFile = path.join(fracFolder, '_'.join((fracFolder.split(sep)[1],key,'CDF.png')))
