@@ -3,16 +3,19 @@
 % 
 % Coverts all mag types to MW and selects preferred MW
 % 
+% Corrections based on earthquake location, as defined by:
+%	https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/magnitude/ml/australia_ml_regions.txt
+%
 % zone = 1 > WA
 % zone = 2 > EA
 % zone = 3 > SA
+% zone = 4 > outside Australia
 %
-% Author: T. Allen (2011-01-11)
+% Author: T. Allen (2011-01-11) - updated February 2018
 % *************************************************************************
 outfile = fullfile('..','data','NSHA18CAT.MW.V0.1.csv');
 
 % load data
-
 if exist('mdat','var') ~= 1
     disp('Loading mdat');
     load mdat_ml_rev.mat;
@@ -24,6 +27,7 @@ mb2MW = ones(size(mdat)) * NaN;
 ML2MWG = ones(size(mdat)) * NaN;
 prefFinalMW = ones(size(mdat)) * NaN;
 
+% *************************************************************************
 %% Convert MS to MW using Di Giacomo et al (2015) for zone 4
 
 % conversion for shallow earthquakes (h < 70 km)
@@ -55,29 +59,23 @@ ind3 = find([mdat.MDAT_dep] > 70  & [mdat.MDAT_prefMS] > 6.47 ...
 ind = [ind1, ind2, ind3];       
 MS2MW(ind) = 1.10 * [mdat(ind).MDAT_prefMS] - 0.67;
 
-%% Convert MS to MW using Ghasemi & Allen (2018) for Aust events
-% old Ghasemi coeffs - outdated based on 2018 catalogue
-% c1 = 0.84896727404297323;
-% c2 = 1.0509630268292971;
-% 
-% % for 3.0 <= MS <= 7.0
-% ind = find(~isnan([mdat.MDAT_prefMS]) & [mdat.zone] ~= 4);
-% MS2MW(ind) = c1 * [mdat(ind).MDAT_prefMS] + c2;
-
-% 2018 coeff
+% *************************************************************************
+%% Convert MS to MW using Allen et al (in prep) for Aust events
+% 2018 ODR coeff
 c1 = 0.0755045389514;
 c2 = 3.33414891107;
 ind = find(~isnan([mdat.MDAT_prefMS]) & [mdat.zone] ~= 4);
 MS2MW(ind) = c1 * [mdat(ind).MDAT_prefMS].^2 + c2;
 
+% *************************************************************************
 %% Convert mb to MW using Di Giacomo et al (2015) for zone 4
-
 disp('Converting mb to MW...');
 % for 3.5 <= mb <= 6.2
 ind = find([mdat.MDAT_prefmb] >= 3.5 & [mdat.MDAT_prefmb] <= 6.2 ...
            & [mdat.zone] == 4);
 mb2MW(ind) = 1.38 * [mdat(ind).MDAT_prefmb] - 1.79;
 
+% *************************************************************************
 %% Convert mb to MW using Allen (2012) for events below latitude -13 deg - out-dated!
 % c1 = 0.7362;
 % c2 = 0.7374;
@@ -96,7 +94,7 @@ mb2MW(ind) = 1.38 * [mdat(ind).MDAT_prefmb] - 1.79;
 % c1 = 1.1438907424442797;
 % c2 = -0.87192285009579173;
 
-% 2018 coeffs
+% Allen et al (in prep) ODR coeffs
 c1 = 1.20025959882;
 c2 = -1.1760438127;
 
@@ -104,79 +102,12 @@ c2 = -1.1760438127;
 ind = find(~isnan([mdat.MDAT_prefmb]) & [mdat.zone] ~= 4);
 mb2MW(ind) = c1 * [mdat(ind).MDAT_prefmb] + c2;
 
-%% Convert ML to MW using Allen conversions - out-dated, but preserve in catalogue
-% mx = 4.2;
-
-% disp('Converting ML to MW in CWA...');
-% [a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\WA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
-% % for ML rev
-% ind = find([mdat.MDAT_MLrev] <= mx & [mdat.zone] == 1 & ~isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a3;
-% ind = find([mdat.MDAT_MLrev] > mx & [mdat.zone] == 1 & ~isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2 * ([mdat(ind).MDAT_MLrev] - mx) + a3;
-% 
-% % for pref ML
-% ind = find([mdat.MDAT_prefML] <= mx & [mdat.zone] == 1 & isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a3;
-% ind = find([mdat.MDAT_prefML] > mx & [mdat.zone] == 1 & isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a2 * ([mdat(ind).MDAT_prefML] - mx) + a3;
-% 
-% % note, changed max zone number to use SEA conversion for offshore events
-% disp('Converting ML to MW in eastern & south Australia...');
-% [a1,a2,a3,mx] = textread('F:\Catalogues\ML2MW\EA.ML-MW.coef.txt','%f%f%f%f','delimiter',',');
-% % for ML rev
-% ind = find([mdat.MDAT_MLrev] <= mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & ~isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a3;
-% ind = find([mdat.MDAT_MLrev] > mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & ~isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2 * ([mdat(ind).MDAT_MLrev] - mx) + a3;
-% 
-% % for pref ML
-% ind = find([mdat.MDAT_prefML] <= mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a3;
-% ind = find([mdat.MDAT_prefML] > mx & [mdat.zone] >= 2 & [mdat.zone] <= 5 & isnan([mdat.MDAT_MLrev]));
-% ML2MWA(ind) = a1 * [mdat(ind).MDAT_prefML] + a2 * ([mdat(ind).MDAT_prefML] - mx) + a3;
-
-
-%% Convert using Grunthal - out-dated
-
-% disp('Converting ML to MW using Grunthal...');
-% % ind = find([mdat.zone] == 4 & ~isnan([mdat.MDAT_MLrev]));
-% ind = find(~isnan([mdat.MDAT_MLrev]));
-% ML2MWG(ind) = 0.0376*[mdat(ind).MDAT_MLrev].^2 + 0.646*[mdat(ind).MDAT_MLrev] + 0.53;
-% 
-% % ind = find([mdat.zone] == 4 & isnan([mdat.MDAT_MLrev]));
-% ind = find(isnan([mdat.MDAT_MLrev]));
-% ML2MWG(ind) = 0.0376*[mdat(ind).MDAT_prefML].^2 + 0.646*[mdat(ind).MDAT_prefML] + 0.53;
-
-%% Convert using Ghasemi (2017)
+% *************************************************************************
+%% Convert ML to MW onvert using Ghasemi (2017/18)
 
 disp('Converting ML to MW using Ghasemi...');
 
-% % set HG fixed mx reg coefs
-% a1 = 0.66199378;
-% a2 = 1.2156352;
-% a3 = 1.07488336; % fixed coeff 
-% mx = 4.5;
-% my = a1 * mx + a2;
-% 
-% % py implementation
-% % ans1 = (c[0] * x + c[1]) <= mx
-% % yarea = c[0] * hx + c[1]
-% % ans2 = (c[2] * (x-hx) + yarea) > mx
-% 
-% % for ML rev
-% ind = find([mdat.MDAT_MLrev] <= mx & ~isnan([mdat.MDAT_MLrev]));
-% ML2MWG(ind) = a1 * [mdat(ind).MDAT_MLrev] + a2;
-% ind = find([mdat.MDAT_MLrev] > mx  & ~isnan([mdat.MDAT_MLrev]));
-% ML2MWG(ind) = a3 * ([mdat(ind).MDAT_MLrev] - mx) + my;
-% 
-% % for pref ML
-% ind = find([mdat.MDAT_prefML] <= mx & isnan([mdat.MDAT_MLrev]));
-% ML2MWG(ind) = a1 * [mdat(ind).MDAT_prefML] + a2;
-% ind = find([mdat.MDAT_prefML] > mx & isnan([mdat.MDAT_MLrev]));
-% ML2MWG(ind) =  a3 * ([mdat(ind).MDAT_prefML] - mx) + my;
-
-% use polynomial of simulated data from Ghasemi & Allen (2017)
+% use ODR polynomial of simulated data from Ghasemi & Allen (2017)
 a = 0.04160769;
 b = 0.48058286;
 c = 1.39485216;
@@ -192,9 +123,6 @@ for i = 1:length(mdat)
     end
 end
 
-
-
-
 %% set fields
 for i = 1:length(mdat)
     mdat(i).MS2MW = MS2MW(i);
@@ -204,7 +132,9 @@ for i = 1:length(mdat)
     mdat(i).prefFinalMW = prefFinalMW(i);
 end
 
+% *************************************************************************
 %% Set preferred MW
+% *************************************************************************
 
 % conserve actual Mw measurements first
 for i = 1:length(mdat)
@@ -219,17 +149,6 @@ for i = 1:length(mdat)
         mdat(i).prefFinalMWSrc = 'MS2MW';
         mdat(i).MDAT_origMagType = 'MS';
         
-        %maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]); % deliberately use orig mag here
-        %if mdat(i).MDAT_prefMS == maxM
-%             mdat(i).prefFinalMW = mdat(i).MS2MW;
-%             mdat(i).prefFinalMWSrc = 'MS2MW';
-%             mdat(i).MDAT_origMagType = 'MS';
-%         elseif mdat(i).MDAT_prefmb == maxM
-%             mdat(i).prefFinalMW = mdat(i).mb2MW;
-%             mdat(i).prefFinalMWSrc = 'mb2MW';
-%             mdat(i).MDAT_origMagType = 'mb';
-%         end
-%         
 % take ML-MW
     elseif ~isnan(mdat(i).ML2MWG)
         mdat(i).prefFinalMW = mdat(i).ML2MWG;
@@ -253,8 +172,7 @@ for i = 1:length(mdat)
         mdat(i).prefFinalMW = NaN;
         mdat(i).prefFinalMWSrc = '';
         mdat(i).MDAT_origMagType = '';
-    end
- 
+    end 
     
 % ADD GG DEPENDENCE
     if isempty(mdat(i).GG_sourceType)
@@ -266,6 +184,7 @@ for i = 1:length(mdat)
 %     mdat(i).GG_dependence = mdat(i).GG_dependence;
 end
 
+% *************************************************************************
 %% Set preferred non-MW
 
 % conserve actual Mw measurements first
@@ -282,18 +201,6 @@ for i = 1:length(mdat)
         mdat(i).Mx_RevML = mdat(i).MDAT_prefMS;
         mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMSSrc;
         mdat(i).Mx_RevMLtype = 'MS';
-%         maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]);
-%         if mdat(i).MDAT_prefMS == maxM
-%             mdat(i).Mx_OrigML = mdat(i).MDAT_prefMS;
-%             mdat(i).Mx_RevML = mdat(i).MDAT_prefMS;
-%             mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMSSrc;
-%             mdat(i).Mx_RevMLtype = 'MS';
-%         elseif mdat(i).MDAT_prefmb == maxM
-%             mdat(i).Mx_OrigML = mdat(i).MDAT_prefmb;
-%             mdat(i).Mx_RevML = mdat(i).MDAT_prefmb;
-%             mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefmbSrc;
-%             mdat(i).Mx_RevMLtype = 'mb';
-%         end
 
 % take Revised ML   
     elseif ~isnan(mdat(i).MDAT_MLrev)
@@ -301,10 +208,7 @@ for i = 1:length(mdat)
         mdat(i).Mx_RevML = mdat(i).MDAT_MLrev;
         mdat(i).Mx_RevMLSrc = 'REV_ML';
         mdat(i).Mx_RevMLtype = 'REV_ML';
-%         if ~isnan(mdat(i).MDAT_otherM)
-%             mdat(i).Mx_OrigML = mdat(i).MDAT_otherM;
-% %             mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMLSrc;
-%         end
+
 % take Original ML   
     elseif ~isnan(mdat(i).MDAT_prefML)
         mdat(i).Mx_OrigML = mdat(i).MDAT_prefML;
@@ -312,7 +216,7 @@ for i = 1:length(mdat)
         mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMLSrc;
         mdat(i).Mx_RevMLtype = 'ML';
 
-        % take larger of MS/mb < 5.75        
+% take larger of MS/mb < 5.75        
     elseif ~isnan(mdat(i).MDAT_prefMS) | ~isnan(mdat(i).MDAT_prefmb)
         maxM = max([mdat(i).MDAT_prefMS mdat(i).MDAT_prefmb]);
         if mdat(i).MDAT_prefMS == maxM
@@ -326,12 +230,8 @@ for i = 1:length(mdat)
             mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefmbSrc;
             mdat(i).Mx_RevMLtype = 'mb';
         end
-% take Other Mag   
-%     elseif ~isnan(mdat(i).MDAT_otherM)
-%         mdat(i).Mx_OrigML = mdat(i).MDAT_otherM;
-%         mdat(i).Mx_RevMLSrc = mdat(i).MDAT_prefMLSrc; 
-%         mdat(i).Mx_RevMLtype = mdat(i).MDAT_otherMType;
-    else
+
+	else
         mdat(i).Mx_OrigML = NaN;
         mdat(i).Mx_RevML = NaN;
         mdat(i).Mx_RevMLSrc = '';
@@ -339,50 +239,12 @@ for i = 1:length(mdat)
     end
 end
 
-
+% *************************************************************************
 % clear mdat;
 disp('Saving mdat');
 save mdat_mw_pref mdat;
 
-%% remove unecessary events
-% delind = find(strcmp({mdat.MDAT_prefmbSrc},'ISC') & strcmp({mdat.MDAT_prefMLSrc},'AUST') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MEL') == 0 & strcmp({mdat.MDAT_prefMLSrc},'GG') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'ADE') == 0 & strcmp({mdat.MDAT_prefMLSrc},'MGO') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MUN') == 0 & strcmp({mdat.MDAT_prefMLSrc},'AGSO') == 0 ...
-%          & [mdat.MDAT_prefmb] < 5.0);
-% mdat(delind) = [];
-% delind = find(strcmp({mdat.MDAT_prefmbSrc},'IDC') & strcmp({mdat.MDAT_prefMLSrc},'AUST') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MEL') == 0 & strcmp({mdat.MDAT_prefMLSrc},'GG') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'ADE') == 0 & strcmp({mdat.MDAT_prefMLSrc},'MGO') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MUN') == 0 & strcmp({mdat.MDAT_prefMLSrc},'AGSO') == 0 ...
-%          & [mdat.MDAT_prefmb] < 5.0);
-% mdat(delind) = [];
-% delind = find(strcmp({mdat.MDAT_prefmbSrc},'ISC') & strcmp({mdat.MDAT_prefMLSrc},'AUST') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MEL') == 0 & strcmp({mdat.MDAT_prefMLSrc},'GG') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'ADE') == 0 & strcmp({mdat.MDAT_prefMLSrc},'MGO') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MUN') == 0 & strcmp({mdat.MDAT_prefMLSrc},'AGSO') == 0 ...
-%          & [mdat.MDAT_prefmb] < 5.0);
-% mdat(delind) = [];
-% delind = find(strcmp({mdat.MDAT_prefmbSrc},'IDC') & strcmp({mdat.MDAT_prefMLSrc},'AUST') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MEL') == 0 & strcmp({mdat.MDAT_prefMLSrc},'GG') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'ADE') == 0 & strcmp({mdat.MDAT_prefMLSrc},'MGO') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MUN') == 0 & strcmp({mdat.MDAT_prefMLSrc},'AGSO') == 0 ...
-%          & [mdat.MDAT_prefmb] < 5.0);
-% mdat(delind) = [];
-% delind = find(strcmp({mdat.MDAT_prefmbSrc},'DJA') & strcmp({mdat.MDAT_prefMLSrc},'AUST') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MEL') == 0 & strcmp({mdat.MDAT_prefMLSrc},'GG') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'ADE') == 0 & strcmp({mdat.MDAT_prefMLSrc},'MGO') == 0 ...
-%          & strcmp({mdat.MDAT_prefMLSrc},'MUN') == 0 & strcmp({mdat.MDAT_prefMLSrc},'AGSO') == 0 ...
-%          & [mdat.MDAT_prefmb] < 5.0);
-% mdat(delind) = [];
-% delind = find(strcmp({mdat.MDAT_prefMLSrc},'DJA'));
-% mdat(delind) = [];
-
-% delind = find([mdat.MDAT_lon] > 160 & [mdat.MDAT_lon] > -4);
-% mdat(delind) = [];
-% delind = find([mdat.MDAT_lon] < 108 & [mdat.MDAT_lon] < -50);
-% mdat(delind) = [];
-
+% *************************************************************************
 %% write to file
 
 header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREGION,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,PREFMW,PREFMWSRC,COMM';
@@ -434,6 +296,7 @@ end
 txt = txt(1:end-1);
 dlmwrite(outfile,txt,'delimiter','','-append');
 
+% *************************************************************************
 %% Make GMT mag diff file for pre-1990 events
 clear txt;
 ind = find([mdat.zone] ~= 4 & ~isnan([mdat.MDAT_prefML]) ...
@@ -444,18 +307,7 @@ dat = [[mdat(ind).MDAT_lon]' [mdat(ind).MDAT_lat]' mdiff' ...
 
 dlmwrite('ML_diff.dat',dat,'delimiter','\t','precision','%0.3f');
 
-%% plot TA vs HG mags
-
-% taml = [mdat.ML2MWA];
-% hgml = [mdat.ML2MWG];
-% 
-% figure(10);
-% plot(taml, hgml, 'b+')
-% hold on;
-% plot([1, 7],[1, 7],'k--')
-% xlabel('TA MW Conversion');
-% ylabel('HG (Fixed hinge) MW Conversion');
-
+% *************************************************************************
 %% plot histograms of ML difference
 
 figure(1);

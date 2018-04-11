@@ -4,7 +4,7 @@ from numpy import array, zeros_like, where, unique
 from sys import argv
 from os import path, mkdir, sep
 
-print '\n!!! ADD RATE ADJUSTMENT FACTOR !!!\n'
+#print '\n!!! ADD RATE ADJUSTMENT FACTOR !!!\n'
 
 shpfile = argv[1] # input shapefile
 outputType = argv[2] # see key below
