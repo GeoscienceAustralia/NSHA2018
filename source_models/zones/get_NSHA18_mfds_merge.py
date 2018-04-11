@@ -281,7 +281,7 @@ for uclass in unique_classes:
             src_ymax[i] = year_max
             
             # get earthquakes within source zones
-            print src_code[i], src_usd, src_lsd
+            #print src_code[i], src_usd, src_lsd
             mvect, mxvect, tvect, dec_tvect, ev_dict \
                 = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
             
