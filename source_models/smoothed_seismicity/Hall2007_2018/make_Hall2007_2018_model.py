@@ -20,11 +20,16 @@ from shapely.geometry import Polygon
 import shapely.geometry
 from hmtk.sources.source_model import mtkSourceModel
 from hmtk.sources.point_source import mtkPointSource
+from openquake.hazardlib.source.point import PointSource
 from openquake.hazardlib.geo.point import Point
+from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
 from openquake.hazardlib.mfd import TruncatedGRMFD
 from openquake.hazardlib.geo.nodalplane import NodalPlane
 from openquake.hazardlib.pmf import PMF
 from openquake.hazardlib.sourcewriter import write_source_model
+from openquake.hazardlib import nrml
+from openquake.hazardlib.nrml import write, NAMESPACE
+from openquake.hazardlib.tom import PoissonTOM
 from openquake.hazardlib.sourcewriter import obj_to_node
 from openquake.baselib.node import Node
 try:
@@ -37,7 +42,8 @@ from source_models.logic_trees import logic_tree
 
 source_data_filename = 'AB_Values.shp'
 nrml_version='04'
-
+msr = Leonard2014_SCR()
+tom = PoissonTOM(50) 
 
 source_data = shapefile.Reader(source_data_filename)
 shapes = source_data.shapes()
@@ -157,20 +163,26 @@ for dom in params:
                 #print centroid
                 if shapely_pt.within(dom_poly):
                     pt = Point(centroid[0], centroid[1], depth) # Openquake geometry Point
-                    pt.tectonic_region_type = dom['GMM_TRT']
-                    pt.nodal_plane_distribution = nodal_plane_dist # FIXME! update based on data extracted from shapefile
-                    pt.hypocenter_distribution = hypo_depth_dist
-                    pt.rupture_aspect_ratio=2
+                    tectonic_region_type = dom['GMM_TRT']
+                    nodal_plane_distribution = nodal_plane_dist # FIXME! update based on data extracted from shapefile
+                    hypocenter_distribution = hypo_depth_dist
+                    rupture_aspect_ratio=2
                     mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, a_values[i], b_values[i])
                     new_mfd = gr2inc_mmax(mfd, mmaxs[dom['CODE']], mmaxs_w[dom['CODE']], model_weight=1.)
-                    pt.mfd = new_mfd
-                    pt.source_id = 'Hall_%i' % ids[i]
-                    if pt.source_id in pt_ids:
-                        print 'Point source %s already exists!' % pt.source_id
+                    mfd = new_mfd
+                    name = 'Hall_%i' % ids[i]
+                    source_id = name
+                    if source_id in pt_ids:
+                        print 'Point source %s already exists!' % source_id
                         print 'Skipping this source for trt %s' % dom['TRT']
                     else:
-                        merged_pts.append(pt)
-                        pt_ids.append(pt.source_id)
+                        pt_source = PointSource(source_id, name, dom['GMM_TRT'],
+                                                mfd, 2, msr, 2.0,
+                                                tom, 0.1, 20.0, pt,
+                                                nodal_plane_dist, 
+                                                hypo_depth_dist)
+                        merged_pts.append(pt_source)
+                        pt_ids.append(source_id)
 outfile = 'Hall2007_2018.xml'
 name = outfile.rstrip('.xml')
 if nrml_version == '04':
