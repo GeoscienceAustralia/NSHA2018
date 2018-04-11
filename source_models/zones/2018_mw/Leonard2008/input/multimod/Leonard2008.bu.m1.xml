@@ -1287,7 +1287,7 @@
                 <nodalPlane probability="0.08" strike="359.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="1.0" depth="10.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -2784,7 +2784,7 @@
                 <nodalPlane probability="0.08" strike="11.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="1.0" depth="10.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -3012,7 +3012,7 @@
                 <nodalPlane probability="0.08" strike="33.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="1.0" depth="10.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -3333,7 +3333,7 @@
                 <nodalPlane probability="0.08" strike="295.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="1.0" depth="10.0"/>
             </hypoDepthDist>
         </areaSource>
 
@@ -3691,7 +3691,7 @@
                 <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="0.0"/>
+                <hypoDepth probability="1.0" depth="10.0"/>
             </hypoDepthDist>
         </areaSource>
 

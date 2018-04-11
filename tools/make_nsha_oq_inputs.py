@@ -571,13 +571,13 @@ def write_oq_sourcefile(model, meta, mx_dict):
     ######################################################################
     # add indoneasia-png fault-source model
     ######################################################################
-    '''
-    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
+    
+    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018_Simplified.xml')
     lines = open(indo_png_fault_file).readlines()[3:-2]
     for line in lines:
         newxml += '    ' + line
-    '''
-    print '\nSkipping Banda Faults\n'
+    
+    #print '\nSkipping Banda Faults\n'
        
     ######################################################################
     # finish nrml
