@@ -176,7 +176,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         strikes[i]=strike-360
          #           if strikes[i] >=360:
          #               strikes[i]=strikes[i]-360
-                nodal_plan_dist = PMF([(0.34, NodalPlane(strikes[0], 30, 90)),
+                nodal_plane_dist = PMF([(0.34, NodalPlane(strikes[0], 30, 90)),
                                        (0.34, NodalPlane(strikes[1], 30, 90)),
                                        (0.08, NodalPlane(strikes[2], 30, 90)),
                                        (0.08, NodalPlane(strikes[3], 30, 90)),
@@ -184,12 +184,12 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                                        (0.08, NodalPlane(strikes[5], 30, 90))])
                 if dom['CODE'] == 'WARM' or dom['CODE'] == 'WAPM':
                     print 'Define special case for WARM'
-                    nodal_plan_dist = PMF([(0.75, NodalPlane(45, 90, 0)),
+                    nodal_plane_dist = PMF([(0.75, NodalPlane(45, 90, 0)),
                                            (0.125, NodalPlane(strikes[0], 30, 90)),
                                            (0.125, NodalPlane(strikes[1], 30, 90))])
                 if dom['CODE'] == 'FMLR':
                     print 'Define special case for FMLR, 0.5 thrust, 0.5 SS'
-                    nodal_plan_dist = PMF([(0.17, NodalPlane(strikes[0], 30, 90)),
+                    nodal_plane_dist = PMF([(0.17, NodalPlane(strikes[0], 30, 90)),
                                            (0.17, NodalPlane(strikes[1], 30, 90)),
                                            (0.04, NodalPlane(strikes[2], 30, 90)),
                                            (0.04, NodalPlane(strikes[3], 30, 90)),
@@ -215,7 +215,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
                         pt.mfd = new_mfd
                         if pt.source_id in pt_ids:
                             print 'Point source %s already exists!' % pt.source_id
-                            print 'Skipping this source for trt %s' % zone_trt
+                            print 'Skipping this source for trt %s' % dom['TRT']
                         else:
                             merged_pts.append(pt)
                             pt_ids.append(pt.source_id)
