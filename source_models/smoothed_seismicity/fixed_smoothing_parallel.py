@@ -105,6 +105,10 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
                   run, overwrite=True):
     """Run all the smoothing
     """
+    ystart = completeness_table[-1][0]
+    catalogue_comp = deepcopy(catalogue)
+    index = catalogue_comp.data['year']>=ystart
+    catalogue_comp.purge_catalogue(index)
 
     completeness_string = 'comp'
     for ym in completeness_table:
@@ -115,9 +119,9 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     if os.path.exists(filename) and not overwrite:
         print '%s already created, not overwriting!' % filename
         return
-    smoother = SmoothedSeismicity([100.,160.,0.1,-45.,-5,0.1,0.,20., 20.], bvalue = smoothing_config['bvalue'])
+    smoother = SmoothedSeismicity([105.,160.,0.1,-47.,-5,0.1,0.,20., 20.], bvalue = smoothing_config['bvalue'])
     print 'Running smoothing'
-    smoothed_grid = smoother.run_analysis(catalogue, smoothing_config, completeness_table=completeness_table)
+    smoothed_grid = smoother.run_analysis(catalogue_comp, smoothing_config, completeness_table=completeness_table)
 
     smoother.write_to_csv(smoother_filename)
 
@@ -149,6 +153,11 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
                     data[j,2])
         rate = data[j,4]
         aval = np.log10(rate)
+#        inc_rate = data[j,4] # interpreting as incremental rate
+        # therefore 
+#        Nm = inc_rate*(np.exp(-1*bval*np.log(10)*-1*0.05)-np.exp(-1*bval*np.log(10)*0.05))
+#        aval = np.log10(Nm)
+#        aval = np.log10(rate)
        # aval = rate # trying this based on some testing
     #    aval = np.log10(rate) #+ bval*completeness_table_a[0][1]
        # print aval
@@ -198,7 +207,7 @@ t0 = pypar.time()
 parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 
 # Read and process the catalogue content in a variable called "catalogue"
-catalogue = parser.read_file(start_year=1900, end_year=2010)
+catalogue = parser.read_file(start_year=1965, end_year=2017)
 
 # How many events in the catalogue?
 print "The catalogue contains %g events" % catalogue.get_number_events()
@@ -261,6 +270,7 @@ for i in range(0, len(config_combinations), 1):
         run = "%03d" % i
         print 'Run %s' % run
         completeness_table = np.array(config_combinations[i][0])
+        #completeness_table = completeness_table[0]
         bvalue = config_combinations[i][1]
 #        if i % 3 == 0:
 #            bvalue = config_params[i/3]['BVAL_BEST']
