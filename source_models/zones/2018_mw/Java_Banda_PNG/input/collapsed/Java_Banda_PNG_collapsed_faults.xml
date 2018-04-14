@@ -1,0 +1,3779 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+
+    <sourceModel name="collapsed_collapsed">
+
+        <areaSource id="NTS" name="Nusa Tenggara Shallow" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                112.0284 -7.9622
+                                116.3450 -8.3906
+                                117.2898 -8.4565
+                                119.6631 -8.4785
+                                121.8605 -8.6543
+                                123.2009 -8.5884
+                                125.0454 -8.3815
+                                125.3028 -8.3803
+                                125.5082 -8.4565
+                                125.1705 -8.6138
+                                122.0363 -9.9508
+                                121.5089 -9.9727
+                                120.0147 -9.9727
+                                119.5092 -9.6431
+                                118.0370 -9.6431
+                                117.5316 -9.9727
+                                116.9822 -9.7750
+                                116.4329 -9.9727
+                                115.5319 -9.7750
+                                114.6090 -9.7090
+                                114.0377 -9.5772
+                                113.4444 -9.5552
+                                111.9677 -9.0335
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>30.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>6.51818e-02 5.26334e-02 4.25066e-02 3.43330e-02 2.77349e-02 2.24078e-02 1.81064e-02 1.46327e-02 1.18270e-02 9.56057e-03 7.72948e-03 6.24992e-03 5.05423e-03 4.08784e-03 3.30665e-03 2.67509e-03 2.16444e-03 1.75149e-03 1.41751e-03 1.14736e-03 9.28806e-04 7.51980e-04 6.08893e-04 4.83231e-04 3.35467e-04 5.17588e-05 5.24131e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="100.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="TB" name="Tanimbar" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                131.7269 -4.0754
+                                132.5784 -4.8225
+                                132.8692 -4.5535
+                                133.5470 -4.6319
+                                133.5161 -5.4385
+                                133.4244 -5.9652
+                                132.5702 -6.5914
+                                132.6811 -6.7629
+                                131.9880 -7.6253
+                                131.7571 -7.9126
+                                131.5809 -8.1334
+                                131.2196 -8.5837
+                                130.8585 -8.7103
+                                130.8425 -8.6955
+                                130.7657 -7.8362
+                                130.5789 -7.3473
+                                131.4933 -6.6685
+                                131.8701 -5.9508
+                                131.9490 -5.4124
+                                131.7809 -4.8941
+                                131.5326 -4.6173
+                                131.1336 -4.0466
+                                130.4544 -3.7174
+                                129.5482 -3.2177
+                                130.4953 -3.3698
+                                131.5732 -3.9341
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>40.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>5.19874e-02 4.20020e-02 3.39391e-02 2.74277e-02 2.21686e-02 1.79202e-02 1.44879e-02 1.17146e-02 9.47337e-03 7.66195e-03 6.19769e-03 5.01391e-03 4.05676e-03 3.28274e-03 2.65675e-03 2.15039e-03 1.74076e-03 1.40934e-03 1.14116e-03 9.24118e-04 7.48451e-04 6.06249e-04 4.91124e-04 3.89951e-04 2.70836e-04 4.18062e-05 4.23541e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="225.0" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="WBS" name="West Banda Sea" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.4188 -3.2141
+                                129.0227 -3.2253
+                                129.2754 -3.7417
+                                129.3633 -4.5217
+                                128.9678 -5.2579
+                                128.9238 -6.1369
+                                128.8909 -6.5214
+                                124.4334 -7.7208
+                                123.4241 -7.8508
+                                123.6376 -6.7228
+                                124.4902 -5.1179
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>40.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.26572e-01 1.02069e-01 8.23210e-02 6.64033e-02 5.35710e-02 4.32246e-02 3.48813e-02 2.81523e-02 2.27247e-02 1.83459e-02 1.48130e-02 1.19620e-02 9.66110e-03 7.80382e-03 6.30445e-03 5.09384e-03 4.11625e-03 3.32672e-03 2.68899e-03 2.17379e-03 1.75754e-03 1.42118e-03 1.14934e-03 9.11028e-04 6.31680e-04 9.73433e-05 9.84553e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="TAFS" name="Taira Adiuna Fault System" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                135.4872 -4.5232
+                                135.0543 -4.7952
+                                133.5470 -4.6319
+                                132.8692 -4.5535
+                                133.0066 -4.3557
+                                134.0064 -3.9987
+                                134.6800 -3.9619
+                                135.0352 -3.9425
+                                135.7204 -3.9108
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>5.47586e-02 4.42349e-02 3.57386e-02 2.88781e-02 2.33377e-02 1.88628e-02 1.52479e-02 1.23275e-02 9.96769e-03 8.06069e-03 6.51938e-03 5.27348e-03 4.26623e-03 3.45181e-03 2.79321e-03 2.26057e-03 1.82972e-03 1.48118e-03 1.19917e-03 9.70983e-04 7.86311e-04 6.24103e-04 4.33308e-04 6.68618e-05 6.77142e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="78.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="WPG" name="Wapengo" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                135.7204 -3.9108
+                                135.0352 -3.9425
+                                135.0764 -3.6705
+                                135.3868 -3.3107
+                                136.0268 -2.5993
+                                136.5185 -2.1021
+                                136.9278 -2.3686
+                                136.5789 -2.6652
+                                136.1198 -3.1738
+                                135.9101 -3.4588
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>7.13449e-02 5.76019e-02 4.65128e-02 3.75636e-02 3.03405e-02 2.45096e-02 1.98021e-02 1.60009e-02 1.29311e-02 1.04517e-02 8.44879e-03 6.83063e-03 5.52312e-03 4.46648e-03 3.61247e-03 2.92212e-03 2.36401e-03 1.91274e-03 1.54781e-03 1.25267e-03 1.01393e-03 8.20796e-04 6.51242e-04 4.51991e-04 6.97202e-05 7.05846e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="42.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                150.1000 -10.0550
+                                150.1220 -10.1490
+                                150.1430 -10.2410
+                                150.1430 -10.3480
+                                150.3000 -10.3550
+                                150.4670 -10.4130
+                                150.6070 -10.4620
+                                150.7440 -11.0380
+                                150.6957 -11.1103
+                                149.1520 -10.4896
+                                149.2547 -10.1046
+                                148.4387 -9.8040
+                                147.5597 -9.4436
+                                146.9072 -8.9294
+                                146.4473 -8.2825
+                                145.9298 -7.9100
+                                146.3930 -7.6030
+                                146.2010 -7.3680
+                                146.0090 -7.1330
+                                145.5400 -6.6000
+                                144.8780 -6.3860
+                                144.1100 -6.0660
+                                143.0000 -5.5540
+                                142.1470 -5.2770
+                                141.5530 -4.9490
+                                140.7810 -4.7860
+                                140.0770 -4.4020
+                                139.4580 -4.1880
+                                138.8044 -4.1272
+                                138.3254 -4.0806
+                                137.6310 -4.0280
+                                136.9910 -3.8580
+                                136.6060 -3.7080
+                                135.9101 -3.4588
+                                136.1198 -3.1738
+                                136.1942 -3.2207
+                                136.2880 -3.2950
+                                136.5660 -3.4090
+                                136.9590 -3.5090
+                                137.2230 -3.5300
+                                137.4440 -3.4590
+                                137.8010 -3.2950
+                                137.9870 -3.3810
+                                138.2150 -3.4880
+                                138.6220 -3.5380
+                                138.7930 -3.4450
+                                139.0000 -3.4520
+                                139.3520 -3.5780
+                                139.7110 -3.7070
+                                139.9680 -3.7660
+                                141.0300 -3.9260
+                                141.2230 -3.9540
+                                141.3560 -3.9730
+                                142.0130 -4.3090
+                                142.3480 -4.3660
+                                142.6920 -4.3480
+                                143.2330 -4.3730
+                                143.8470 -4.2870
+                                145.2890 -5.5860
+                                145.4180 -5.6650
+                                146.0100 -6.1650
+                                146.4810 -6.4710
+                                146.9520 -6.6570
+                                146.8520 -6.9070
+                                146.7240 -7.1920
+                                146.7530 -7.4920
+                                146.8830 -7.6550
+                                146.9080 -7.6860
+                                147.0570 -7.8720
+                                147.3160 -8.1950
+                                147.4200 -8.5740
+                                147.6800 -8.7810
+                                147.9700 -9.1840
+                                148.2090 -9.4980
+                                148.4370 -9.6730
+                                148.7580 -9.7800
+                                148.9400 -9.8020
+                                148.8150 -9.6530
+                                148.6690 -9.4800
+                                148.6800 -9.4200
+                                148.8070 -9.4440
+                                148.9760 -9.4770
+                                149.1760 -9.5950
+                                149.3150 -9.6770
+                                149.4760 -9.6800
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.14471e-01 9.23169e-02 7.44608e-02 6.00670e-02 4.84624e-02 3.91053e-02 3.15592e-02 2.54728e-02 2.05631e-02 1.66020e-02 1.34057e-02 1.08263e-02 8.74440e-03 7.06380e-03 5.70697e-03 4.61138e-03 3.72661e-03 3.01201e-03 2.43475e-03 1.96839e-03 1.59156e-03 1.28705e-03 1.04093e-03 8.41981e-04 6.81145e-04 5.40081e-04 3.74594e-04 5.77436e-05 5.84213e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="27.5"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="MTB" name="Memberamo Thrust Belt" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                139.5040 -2.3140
+                                139.5380 -2.3220
+                                140.4540 -3.6080
+                                140.0490 -3.7840
+                                139.7110 -3.7070
+                                139.0000 -3.4520
+                                138.7930 -3.4450
+                                138.6220 -3.5380
+                                137.5363 -1.9138
+                                137.4280 -1.7490
+                                137.7610 -1.7670
+                                138.0170 -1.8200
+                                138.4101 -1.8977
+                                138.8094 -2.0857
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.33792e-01 1.07873e-01 8.69873e-02 7.01554e-02 5.65884e-02 4.56515e-02 3.68336e-02 2.97231e-02 2.39886e-02 1.93632e-02 1.56318e-02 1.26212e-02 1.01918e-02 8.23119e-03 6.64865e-03 5.37109e-03 4.33961e-03 3.50669e-03 2.83402e-03 2.29069e-03 1.85177e-03 1.49715e-03 1.21059e-03 9.59437e-04 6.65147e-04 1.02485e-04 1.03641e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="120.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="25.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                143.6785 -4.1350
+                                143.8470 -4.2870
+                                143.8263 -4.5653
+                                142.6920 -4.3480
+                                142.3480 -4.3660
+                                142.0130 -4.3090
+                                141.3560 -3.9730
+                                140.0490 -3.7840
+                                140.4540 -3.6080
+                                140.1870 -3.2340
+                                139.5380 -2.3220
+                                140.6313 -2.8543
+                                141.9372 -3.4935
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>8.91955e-02 7.19513e-02 5.80490e-02 4.68395e-02 3.77998e-02 3.05089e-02 2.46277e-02 1.98830e-02 1.60546e-02 1.29651e-02 1.04715e-02 8.45870e-03 6.83370e-03 5.52162e-03 4.46205e-03 3.60629e-03 2.91504e-03 2.35660e-03 1.90538e-03 1.54077e-03 1.24608e-03 1.00789e-03 8.15331e-04 6.59646e-04 5.33756e-04 4.23306e-04 2.93662e-04 4.52776e-05 4.58185e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="27.5"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="ADB" name="Adelbert Block" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                146.7260 -3.5410
+                                146.7330 -3.5400
+                                146.2330 -4.4370
+                                146.1080 -4.6760
+                                145.9360 -4.9760
+                                145.5820 -5.1860
+                                145.1370 -5.4500
+                                143.6785 -4.1350
+                                143.9038 -3.7394
+                                144.3500 -3.7920
+                                145.3710 -3.7090
+                                146.1250 -3.6160
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>9.09650e-02 7.33787e-02 5.92007e-02 4.77687e-02 3.85497e-02 3.11142e-02 2.51163e-02 2.02775e-02 1.63731e-02 1.32223e-02 1.06793e-02 8.62651e-03 6.96927e-03 5.63116e-03 4.55058e-03 3.67784e-03 2.97287e-03 2.40335e-03 1.94319e-03 1.57133e-03 1.27080e-03 1.00733e-03 6.98466e-04 1.07637e-04 1.08869e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="27.5"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="HP" name="Huon Peninsula" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                147.6420 -7.1200
+                                146.9520 -6.6570
+                                146.4810 -6.4710
+                                146.0100 -6.1650
+                                145.4180 -5.6650
+                                145.2890 -5.5860
+                                145.1370 -5.4490
+                                145.9360 -4.9760
+                                147.6630 -6.0200
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.83214e-01 1.47689e-01 1.19069e-01 9.60095e-02 7.74266e-02 6.24493e-02 5.03764e-02 4.06432e-02 3.27952e-02 2.64663e-02 2.13618e-02 1.72442e-02 1.39222e-02 1.12417e-02 9.07856e-03 7.33265e-03 5.92332e-03 4.78550e-03 3.86678e-03 3.12485e-03 2.52562e-03 2.04157e-03 1.65051e-03 1.33453e-03 1.07919e-03 8.55357e-04 5.93037e-04 9.13817e-05 9.24191e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="30.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="27.5"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="SBS" name="South Bismark Plate" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                147.6630 -6.0200
+                                147.5170 -5.9330
+                                145.9360 -4.9760
+                                146.1020 -4.6850
+                                146.6070 -3.7650
+                                146.7330 -3.5400
+                                146.9030 -3.5190
+                                147.5220 -3.2860
+                                149.4630 -3.8500
+                                149.6130 -3.8430
+                                150.2560 -3.5070
+                                151.2480 -3.9930
+                                151.5340 -3.8360
+                                152.8760 -4.6140
+                                152.5790 -4.6070
+                                152.0070 -4.8550
+                                151.6980 -4.9680
+                                151.4510 -5.1420
+                                151.2260 -5.1890
+                                150.0590 -5.7490
+                                149.6000 -5.8600
+                                149.2280 -5.9100
+                                148.7560 -6.1280
+                                148.3600 -6.1780
+                                148.0500 -6.1630
+                                147.6570 -6.1260
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.43606e-01 2.76853e-01 2.23101e-01 1.79811e-01 1.44942e-01 1.16851e-01 9.42185e-02 7.59804e-02 6.12814e-02 4.94332e-02 3.98813e-02 3.21797e-02 2.59691e-02 2.09600e-02 1.69195e-02 1.36598e-02 1.10297e-02 8.90716e-03 7.19411e-03 5.81131e-03 4.69494e-03 3.79355e-03 3.06563e-03 2.42816e-03 1.68237e-03 2.59067e-04 2.61835e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="27.5"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NBOT" name="New Britain Outer Trench" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                149.0450 -7.0370
+                                149.8410 -6.7880
+                                150.9610 -6.3940
+                                152.2930 -5.7160
+                                152.6620 -5.6570
+                                153.0550 -5.7400
+                                153.6140 -6.1210
+                                154.4110 -6.8700
+                                155.4940 -7.6320
+                                157.2780 -8.8210
+                                159.0630 -9.6900
+                                159.4440 -9.9400
+                                159.7050 -10.0350
+                                159.6980 -10.8340
+                                156.6700 -9.2460
+                                155.5780 -8.5270
+                                155.2720 -8.3880
+                                154.8760 -8.2290
+                                154.7690 -8.1160
+                                154.5340 -7.8690
+                                154.1080 -7.4200
+                                153.1820 -6.7570
+                                152.6940 -6.6000
+                                152.2360 -6.6900
+                                152.0030 -6.7360
+                                151.8890 -6.8110
+                                151.6540 -6.9770
+                                150.6850 -7.5670
+                                150.1470 -7.1790
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>30.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.71314e-01 2.18647e-01 1.76230e-01 1.42062e-01 1.14535e-01 9.23549e-02 7.44808e-02 6.00745e-02 4.84615e-02 3.90990e-02 3.15497e-02 2.54616e-02 2.05512e-02 1.65901e-02 1.33943e-02 1.08156e-02 8.73461e-03 7.05495e-03 5.69907e-03 4.60440e-03 3.72049e-03 3.00667e-03 2.43013e-03 1.96441e-03 1.58815e-03 1.25844e-03 8.72287e-04 1.34378e-04 1.35870e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="270.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="20.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NBT" name="New Britain Trench" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                153.4310 -4.3080
+                                153.0550 -5.7400
+                                152.6620 -5.6570
+                                152.2930 -5.7160
+                                150.9610 -6.3940
+                                149.8580 -6.7820
+                                149.8390 -6.7890
+                                149.7770 -6.8080
+                                149.0450 -7.0370
+                                148.4390 -7.1200
+                                147.6420 -7.1200
+                                147.6570 -6.1260
+                                148.3600 -6.1780
+                                148.7560 -6.1280
+                                149.2280 -5.9100
+                                149.6000 -5.8600
+                                150.0590 -5.7490
+                                151.2260 -5.1890
+                                151.4510 -5.1420
+                                151.6980 -4.9680
+                                152.0410 -4.8400
+                                152.5790 -4.6070
+                                152.8760 -4.6140
+                                153.1770 -4.4220
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>60.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserInterface</magScaleRel>
+            <ruptAspectRatio>1.3</ruptAspectRatio>
+            <incrementalMFD minMag="6.55" binWidth="0.1">
+                <occurRates>6.66518e-02 5.66116e-02 4.80965e-02 4.08728e-02 3.47432e-02 2.95405e-02 2.51234e-02 2.13722e-02 1.81858e-02 1.54784e-02 1.31774e-02 1.12213e-02 9.55797e-03 8.14321e-03 6.93958e-03 5.91531e-03 5.04345e-03 4.30113e-03 3.66896e-03 3.13044e-03 2.67160e-03 2.23494e-03 1.63564e-03 2.66072e-04 2.84104e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="25.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="WM" name="Woodlark Microplate" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                151.3714 -11.2752
+                                150.6957 -11.1103
+                                150.7440 -11.0380
+                                150.6070 -10.4620
+                                150.3000 -10.3550
+                                150.1430 -10.3480
+                                150.1430 -10.2410
+                                150.1000 -10.0550
+                                149.4760 -9.6800
+                                149.3150 -9.6770
+                                148.9760 -9.4770
+                                148.6800 -9.4200
+                                148.6690 -9.4800
+                                148.9400 -9.8020
+                                148.7580 -9.7800
+                                148.4370 -9.6730
+                                148.2090 -9.4980
+                                147.6800 -8.7810
+                                147.4200 -8.5740
+                                147.3160 -8.1950
+                                146.7530 -7.4920
+                                146.7240 -7.1920
+                                146.9520 -6.6570
+                                147.6420 -7.1200
+                                148.4390 -7.1200
+                                149.0450 -7.0370
+                                150.1470 -7.1790
+                                150.6850 -7.5670
+                                151.4220 -7.1190
+                                152.0030 -6.7360
+                                152.6940 -6.6000
+                                153.1820 -6.7570
+                                154.1080 -7.4200
+                                154.8760 -8.2290
+                                155.5780 -8.5270
+                                154.9590 -8.7310
+                                154.5420 -8.9090
+                                154.2840 -8.9720
+                                153.8520 -9.0760
+                                153.0430 -9.1240
+                                152.5120 -9.1420
+                                152.0200 -9.1590
+                                151.2000 -8.8630
+                                150.1880 -8.4340
+                                149.3670 -9.0760
+                                150.1400 -9.7300
+                                150.8660 -10.2660
+                                151.9490 -10.6820
+                                153.4950 -10.7530
+                                154.3330 -10.5050
+                                155.5770 -9.9680
+                                156.5600 -9.1730
+                                158.0780 -9.9840
+                                157.3170 -10.0060
+                                156.8170 -10.1630
+                                156.3600 -10.4770
+                                155.9600 -10.7620
+                                155.5030 -11.1190
+                                154.9750 -11.5050
+                                154.5610 -11.8190
+                                154.0330 -12.0040
+                                153.5900 -12.0040
+                                152.9480 -11.8330
+                                152.3480 -11.4470
+                                152.0746 -11.3301
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>40.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.11520e-01 8.99440e-02 7.25524e-02 5.85318e-02 4.72274e-02 3.81115e-02 3.07594e-02 2.48291e-02 2.00449e-02 1.61847e-02 1.30698e-02 1.05557e-02 8.52647e-03 6.88824e-03 5.56552e-03 4.49739e-03 3.63475e-03 2.93796e-03 2.37506e-03 1.92026e-03 1.55275e-03 1.25574e-03 1.01567e-03 8.21608e-04 6.64707e-04 5.37838e-04 4.35238e-04 3.45210e-04 2.39508e-04 3.69317e-05 3.73767e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="17.5"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="WB" name="Woodlark Basin" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                155.5780 -8.5270
+                                156.5600 -9.1730
+                                155.5770 -9.9680
+                                154.4590 -10.4680
+                                153.4950 -10.7530
+                                151.9490 -10.6820
+                                150.8660 -10.2660
+                                150.1400 -9.7300
+                                149.3670 -9.0760
+                                150.1880 -8.4340
+                                150.9970 -8.7900
+                                152.0200 -9.1590
+                                153.0430 -9.1240
+                                153.8520 -9.0760
+                                154.5420 -8.9090
+                                154.9590 -8.7310
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>8.20568e-02 6.62332e-02 5.34686e-02 4.31700e-02 3.48598e-02 2.81533e-02 2.27401e-02 1.83703e-02 1.48422e-02 1.19934e-02 9.69263e-03 7.83431e-03 6.33313e-03 5.12028e-03 4.14025e-03 3.34824e-03 2.70809e-03 2.19062e-03 1.77226e-03 1.40530e-03 9.74749e-04 1.50266e-04 1.52038e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="PFTB-FPB" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                140.0770 -4.4020
+                                140.2970 -4.5220
+                                140.7810 -4.7860
+                                141.5530 -4.9490
+                                142.1470 -5.2770
+                                143.0000 -5.5540
+                                144.1100 -6.0660
+                                144.8780 -6.3860
+                                145.5400 -6.6000
+                                146.0090 -7.1330
+                                146.3930 -7.6030
+                                145.9298 -7.9100
+                                145.5024 -7.6048
+                                144.8514 -7.1482
+                                144.4489 -7.6439
+                                143.4480 -6.9960
+                                142.4485 -6.4172
+                                141.1469 -5.6635
+                                139.8745 -5.1696
+                                138.9624 -4.8155
+                                138.3484 -4.7617
+                                137.8295 -4.6898
+                                137.0997 -4.5888
+                                136.7670 -4.5428
+                                136.6178 -4.5221
+                                136.5700 -4.5206
+                                136.2951 -4.5114
+                                136.0360 -4.5028
+                                135.8528 -4.5096
+                                135.6357 -4.5177
+                                135.4872 -4.5232
+                                135.7204 -3.9108
+                                135.9101 -3.4588
+                                136.6060 -3.7080
+                                136.9910 -3.8580
+                                137.6310 -4.0280
+                                138.3254 -4.0806
+                                138.8044 -4.1272
+                                139.4580 -4.1880
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>50.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>8.43479e-02 6.80482e-02 5.49059e-02 4.43079e-02 3.57606e-02 2.88660e-02 2.33040e-02 1.88162e-02 1.51947e-02 1.22719e-02 9.91269e-03 8.00808e-03 6.47029e-03 5.22850e-03 4.22560e-03 3.41552e-03 2.76110e-03 2.23236e-03 1.80510e-03 1.45981e-03 1.18072e-03 9.55111e-04 7.72707e-04 6.12713e-04 4.24993e-04 6.55160e-05 6.62882e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="20.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                153.2450 -3.7830
+                                153.4570 -5.2860
+                                152.7580 -5.2230
+                                151.7210 -5.6460
+                                151.1500 -6.0480
+                                150.4510 -6.0690
+                                148.3980 -6.4720
+                                148.1574 -5.3975
+                                149.6430 -5.1100
+                                150.0660 -4.9910
+                                150.2760 -4.8830
+                                150.7130 -4.6140
+                                151.6010 -4.0520
+                                151.8260 -3.4830
+                                152.1430 -3.3640
+                                152.5130 -3.3380
+                                152.9100 -3.3640
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.04856e-01 1.66577e-01 1.35459e-01 1.10162e-01 8.95953e-02 7.28730e-02 5.92757e-02 4.82187e-02 3.92268e-02 3.19138e-02 2.59659e-02 2.11279e-02 1.71925e-02 1.39910e-02 1.13864e-02 9.26727e-03 7.54304e-03 6.14000e-03 4.99826e-03 4.06908e-03 3.31285e-03 2.69734e-03 2.19633e-03 1.78849e-03 1.45647e-03 1.18616e-03 9.46763e-04 6.60986e-04 1.02555e-04 1.04429e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NBTD" name="New Britain Trench Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                156.3360 -8.1650
+                                155.7430 -8.7580
+                                155.4110 -8.5010
+                                154.6210 -7.8900
+                                153.5300 -7.1020
+                                153.0340 -6.6830
+                                152.7370 -6.6410
+                                152.2500 -6.9160
+                                150.6840 -7.6360
+                                148.6310 -7.2760
+                                148.1020 -7.1280
+                                148.3980 -6.4720
+                                150.4510 -6.0690
+                                151.1500 -6.0480
+                                151.7210 -5.6460
+                                152.7580 -5.2230
+                                153.4570 -5.2860
+                                153.9010 -6.1330
+                                154.2820 -6.4500
+                                155.0020 -7.2760
+                                155.4890 -7.4450
+                                155.8700 -7.6990
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>180.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.36978e-01 1.11680e-01 9.10599e-02 7.42514e-02 6.05490e-02 4.93782e-02 4.02706e-02 3.28447e-02 2.67897e-02 2.18522e-02 1.78257e-02 1.45420e-02 1.18638e-02 9.67944e-03 7.89768e-03 6.44426e-03 5.25860e-03 4.29132e-03 3.50216e-03 2.85827e-03 2.33289e-03 1.90419e-03 1.55434e-03 1.26884e-03 1.03584e-03 8.45663e-04 6.76631e-04 4.73540e-04 7.36496e-05 7.51755e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="270.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                148.1574 -5.3975
+                                148.3980 -6.4720
+                                148.1020 -7.1280
+                                147.9360 -7.8090
+                                145.6120 -6.6080
+                                145.2240 -6.4070
+                                143.9810 -5.4150
+                                142.8690 -5.2430
+                                142.5780 -5.1240
+                                143.2912 -4.0361
+                                144.2478 -4.2173
+                                146.3516 -5.0529
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.58505e-01 2.10178e-01 1.70897e-01 1.38967e-01 1.13010e-01 9.19076e-02 7.47507e-02 6.08006e-02 4.94572e-02 4.02327e-02 3.27309e-02 2.66297e-02 2.16672e-02 1.76306e-02 1.43469e-02 1.16756e-02 9.50233e-03 7.73406e-03 6.29526e-03 5.12445e-03 4.17166e-03 3.39624e-03 2.76513e-03 2.25144e-03 1.83330e-03 1.49291e-03 1.19148e-03 8.31755e-04 1.29038e-04 1.31383e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                147.9360 -7.8090
+                                148.7860 -8.6470
+                                148.3300 -8.6340
+                                147.8340 -8.6200
+                                146.8550 -8.1710
+                                145.4390 -7.1120
+                                145.6120 -6.6080
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>180.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>4.72667e-02 3.84975e-02 3.13571e-02 2.55427e-02 2.08078e-02 1.69516e-02 1.38109e-02 1.12528e-02 9.16906e-03 7.47164e-03 6.08882e-03 4.96223e-03 4.04434e-03 3.29642e-03 2.68698e-03 2.19035e-03 1.78561e-03 1.45574e-03 1.18689e-03 9.67741e-04 7.89103e-04 6.43479e-04 5.24758e-04 4.27966e-04 3.49047e-04 2.84697e-04 2.27580e-04 1.59124e-04 2.47257e-05 2.52148e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                143.2912 -4.0361
+                                142.5780 -5.1240
+                                141.1760 -4.3170
+                                139.9720 -4.5280
+                                138.6620 -3.9990
+                                137.7470 -3.8430
+                                138.1464 -1.9338
+                                139.2710 -2.2870
+                                140.3394 -2.7320
+                                141.8895 -3.4769
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>130.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>7.94331e-02 6.46325e-02 5.25931e-02 4.27990e-02 3.48311e-02 2.83483e-02 2.30737e-02 1.87816e-02 1.52889e-02 1.24465e-02 1.01332e-02 8.25035e-03 6.71778e-03 5.47023e-03 4.45465e-03 3.62784e-03 2.95467e-03 2.40656e-03 1.96025e-03 1.59681e-03 1.30083e-03 1.05978e-03 8.63448e-04 7.03531e-04 5.73266e-04 4.67149e-04 3.73084e-04 2.60622e-04 4.04602e-05 4.12231e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                143.9038 -3.7394
+                                144.1684 -3.1413
+                                144.4810 -3.2080
+                                146.9930 -2.8730
+                                147.4660 -2.6910
+                                149.6270 -3.2590
+                                150.2050 -2.8950
+                                151.1470 -3.4240
+                                151.5830 -3.2310
+                                153.4320 -4.3090
+                                153.2400 -4.3940
+                                153.1770 -4.4220
+                                152.8760 -4.6140
+                                151.5340 -3.8360
+                                151.2480 -3.9930
+                                150.2560 -3.5070
+                                149.6130 -3.8430
+                                149.4630 -3.8500
+                                147.5220 -3.2860
+                                146.9030 -3.5190
+                                145.3710 -3.7090
+                                144.3500 -3.7920
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>50.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>4.62658e-01 3.72714e-01 3.00299e-01 2.41989e-01 1.95030e-01 1.57206e-01 1.26736e-01 1.02187e-01 8.24045e-02 6.64614e-02 5.36105e-02 4.32506e-02 3.48977e-02 2.81619e-02 2.27295e-02 1.83475e-02 1.48124e-02 1.19601e-02 9.65839e-03 7.80071e-03 6.30120e-03 5.09064e-03 4.11320e-03 3.32389e-03 2.68641e-03 2.12805e-03 1.47461e-03 2.27100e-04 2.29553e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="100.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="20.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                135.0764 -3.6705
+                                135.0352 -3.9425
+                                134.6800 -3.9619
+                                134.6313 -3.8269
+                                134.4829 -3.4534
+                                134.2852 -3.0194
+                                134.2138 -2.7007
+                                134.0874 -2.1459
+                                133.6369 -1.3274
+                                134.0270 -1.0527
+                                134.5598 -1.6570
+                                134.6159 -1.8428
+                                134.6992 -2.1328
+                                134.5928 -2.4096
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>5.00488e-02 4.04357e-02 3.26735e-02 2.64050e-02 2.13419e-02 1.72520e-02 1.39477e-02 1.12778e-02 9.12011e-03 7.37623e-03 5.96658e-03 4.82694e-03 3.90548e-03 3.16033e-03 2.55768e-03 2.02880e-03 1.40771e-03 2.17086e-04 2.19720e-05 1.40705e-18</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="160.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="CDW" name="Cendrawasih" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                135.0764 -3.6705
+                                134.5928 -2.4096
+                                134.6992 -2.1328
+                                134.6159 -1.8428
+                                136.5231 -1.9241
+                                136.5185 -2.1021
+                                136.0268 -2.5993
+                                135.3868 -3.3107
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.87097e-02 3.13177e-02 2.53405e-02 2.05066e-02 1.65969e-02 1.34343e-02 1.08756e-02 8.80538e-03 7.13008e-03 5.77422e-03 4.67675e-03 3.78832e-03 3.06903e-03 2.48660e-03 2.01493e-03 1.63293e-03 1.32349e-03 1.07282e-03 8.69722e-04 6.91050e-04 4.80301e-04 7.41914e-05 7.52159e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="50.0" dip="40.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="WRP" name="Waropen" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                136.1198 -3.1738
+                                136.5789 -2.6652
+                                136.9278 -2.3686
+                                136.5185 -2.1021
+                                136.5231 -1.9241
+                                137.5363 -1.9138
+                                138.6220 -3.5380
+                                138.2150 -3.4880
+                                137.9870 -3.3810
+                                137.8010 -3.2950
+                                137.4440 -3.4590
+                                137.2230 -3.5300
+                                136.9590 -3.5090
+                                136.5660 -3.4090
+                                136.2880 -3.2950
+                                136.1942 -3.2207
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.70386e-02 1.38062e-02 1.11884e-02 9.06789e-03 7.35014e-03 5.95844e-03 4.83079e-03 3.91698e-03 3.17637e-03 2.57607e-03 2.08945e-03 1.69493e-03 1.37505e-03 1.11565e-03 9.05284e-04 7.34658e-04 5.96253e-04 4.83971e-04 3.92873e-04 3.18954e-04 2.58968e-04 2.06079e-04 1.43446e-04 2.21908e-05 2.25304e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="LGR" name="Lengguru" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                134.6800 -3.9619
+                                134.0064 -3.9987
+                                133.0066 -4.3557
+                                133.0051 -4.2750
+                                132.6946 -4.0353
+                                132.6920 -4.0333
+                                132.4118 -3.4345
+                                131.9668 -3.2587
+                                130.7637 -2.5445
+                                129.0497 -2.3028
+                                129.1102 -1.8963
+                                130.1539 -1.3579
+                                131.5768 -1.3634
+                                133.6369 -1.3274
+                                134.0874 -2.1459
+                                134.2138 -2.7007
+                                134.2852 -3.0194
+                                134.4829 -3.4534
+                                134.6313 -3.8269
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.02972e-02 1.64486e-02 1.33312e-02 1.08058e-02 8.75981e-03 7.10199e-03 5.75855e-03 4.66975e-03 3.78722e-03 3.07181e-03 2.49181e-03 2.02153e-03 1.64018e-03 1.30429e-03 9.07252e-04 1.40253e-04 1.42303e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="155.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS_40_100" name="Banda 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                127.3334 -7.5863
+                                128.5390 -7.3311
+                                128.9897 -7.2713
+                                129.3264 -7.0650
+                                129.6523 -6.8206
+                                129.9401 -6.4785
+                                130.2225 -6.0114
+                                130.3365 -5.7670
+                                130.4126 -5.1262
+                                130.2334 -4.6212
+                                131.3032 -3.5622
+                                131.7540 -4.3496
+                                131.9386 -5.1534
+                                131.8952 -5.9571
+                                131.4933 -6.6685
+                                131.3738 -6.9835
+                                130.6787 -7.6135
+                                130.4832 -7.7710
+                                129.2504 -7.9176
+                                127.5398 -8.0208
+                                126.8319 -8.1601
+                                126.7050 -7.7338
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.32075e-01 1.88700e-01 1.53442e-01 1.24780e-01 1.01479e-01 8.25346e-02 6.71312e-02 5.46061e-02 4.44209e-02 3.61378e-02 2.94012e-02 2.39220e-02 1.94651e-02 1.58397e-02 1.28903e-02 1.04908e-02 8.53849e-03 6.94996e-03 5.65733e-03 4.60542e-03 3.74934e-03 3.05258e-03 2.48547e-03 2.02384e-03 1.64806e-03 1.34213e-03 1.07120e-03 7.47829e-04 1.16024e-04 1.18138e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="SRM_40_100" name="Seram 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                130.2334 -4.6212
+                                129.6469 -4.3062
+                                129.0821 -4.1921
+                                127.3714 -4.0238
+                                126.7523 -4.0075
+                                126.8175 -2.9159
+                                128.1534 -2.9105
+                                130.3203 -3.1060
+                                131.3141 -3.5622
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.50885e-02 2.85970e-02 2.33079e-02 1.89981e-02 1.54862e-02 1.26242e-02 1.02917e-02 8.39070e-03 6.84122e-03 5.57820e-03 4.54862e-03 3.70929e-03 3.02500e-03 2.46709e-03 2.01220e-03 1.64127e-03 1.33879e-03 1.09212e-03 8.90948e-04 7.26872e-04 5.93045e-04 4.83884e-04 3.94837e-04 3.22195e-04 2.62932e-04 2.14580e-04 1.71627e-04 1.20070e-04 1.86677e-05 1.90476e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS_100_200" name="Banda 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                130.8850 -5.9137
+                                130.7384 -6.2721
+                                130.4452 -6.5925
+                                130.2660 -6.8260
+                                129.9510 -7.0758
+                                129.8532 -7.2062
+                                129.4513 -7.3528
+                                128.9626 -7.5103
+                                128.8648 -7.5293
+                                128.3516 -7.6053
+                                127.7570 -7.6949
+                                127.2899 -7.7547
+                                126.7551 -7.8827
+                                126.6932 -7.6623
+                                127.2628 -7.5266
+                                127.8493 -7.3582
+                                128.0394 -7.3039
+                                128.5499 -7.2116
+                                128.8703 -7.0595
+                                129.2450 -6.8097
+                                129.6469 -6.5219
+                                129.8424 -6.3047
+                                129.9184 -5.8485
+                                129.9455 -5.2891
+                                129.8206 -4.9524
+                                130.2334 -4.6212
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.67059e-01 1.35857e-01 1.10489e-01 8.98647e-02 7.30948e-02 5.94583e-02 4.83690e-02 3.93505e-02 3.20157e-02 2.60497e-02 2.11969e-02 1.72492e-02 1.40376e-02 1.14248e-02 9.29883e-03 7.56899e-03 6.16134e-03 5.01580e-03 4.08351e-03 3.32471e-03 2.70709e-03 2.20434e-03 1.79507e-03 1.46188e-03 1.19061e-03 9.69736e-04 7.74090e-04 5.40485e-04 8.38667e-05 8.54067e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS_200_300" name="Banda 200-300km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                127.0564 -7.5917
+                                126.6866 -7.6962
+                                126.5571 -7.2742
+                                126.9016 -7.1736
+                                127.5425 -7.0052
+                                128.1181 -6.8097
+                                128.6395 -6.4622
+                                128.7970 -5.9191
+                                128.8947 -5.1860
+                                129.8206 -4.9524
+                                129.9455 -5.2891
+                                129.9184 -5.8485
+                                130.0243 -6.5545
+                                129.5464 -6.9835
+                                128.8513 -7.1410
+                                128.5499 -7.2116
+                                128.0394 -7.3039
+                                127.8493 -7.3582
+                                127.2628 -7.5266
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>200.0</upperSeismoDepth>
+                <lowerSeismoDepth>300.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.33326e-02 2.71790e-02 2.21628e-02 1.80733e-02 1.47393e-02 1.20210e-02 9.80460e-03 7.99729e-03 6.52348e-03 5.32157e-03 4.34135e-03 3.54187e-03 2.88978e-03 2.35788e-03 1.92398e-03 1.57001e-03 1.28123e-03 1.04563e-03 8.53393e-04 6.96536e-04 5.68540e-04 4.64089e-04 3.78847e-04 3.09278e-04 2.52497e-04 2.06151e-04 1.64954e-04 1.15449e-04 1.79566e-05 1.83295e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="250.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                129.8206 -4.9524
+                                129.4907 -4.7915
+                                129.1404 -4.4277
+                                128.8608 -4.2322
+                                128.3774 -4.0095
+                                127.6769 -4.0313
+                                127.1338 -4.1019
+                                126.9329 -3.7108
+                                128.3720 -3.4936
+                                128.8771 -3.5859
+                                129.8274 -4.0530
+                                130.2334 -4.6212
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.36275e-02 1.92824e-02 1.57371e-02 1.28444e-02 1.04839e-02 8.55763e-03 6.98566e-03 5.70273e-03 4.65566e-03 3.80102e-03 3.10343e-03 2.53399e-03 2.06914e-03 1.68964e-03 1.37982e-03 1.12686e-03 9.20320e-04 7.51672e-04 6.13959e-04 5.01499e-04 4.09659e-04 3.34653e-04 2.73392e-04 2.23357e-04 1.82487e-04 1.49102e-04 1.19394e-04 8.36232e-05 1.30160e-05 1.32960e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                129.8206 -4.9524
+                                128.8947 -5.1860
+                                128.3313 -4.5689
+                                127.8425 -4.4548
+                                127.1474 -4.4956
+                                127.1447 -4.1019
+                                127.6769 -4.0313
+                                128.3774 -4.0095
+                                128.8608 -4.2322
+                                129.1404 -4.4277
+                                129.4907 -4.7915
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>200.0</upperSeismoDepth>
+                <lowerSeismoDepth>300.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.88693e-02 1.53844e-02 1.25439e-02 1.02285e-02 8.34091e-03 6.80207e-03 5.54746e-03 4.52451e-03 3.69041e-03 3.01025e-03 2.45558e-03 2.00323e-03 1.63430e-03 1.33339e-03 1.08794e-03 8.87727e-04 7.24397e-04 5.91150e-04 4.82438e-04 3.93740e-04 3.21367e-04 2.62311e-04 2.14118e-04 1.74789e-04 1.42691e-04 1.16494e-04 9.32091e-05 6.52323e-05 1.01456e-05 1.03558e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="250.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="TMR_40_100" name="Timor 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                126.8319 -8.1601
+                                125.6879 -8.6541
+                                125.3295 -8.9582
+                                124.9222 -9.3873
+                                123.6188 -10.1095
+                                122.6196 -10.2833
+                                121.5389 -10.2236
+                                121.4900 -8.1708
+                                123.8306 -7.9427
+                                125.3240 -7.8449
+                                126.7050 -7.7338
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>4.54358e-02 3.70063e-02 3.01425e-02 2.45533e-02 2.00018e-02 1.62950e-02 1.32759e-02 1.08169e-02 8.81390e-03 7.18223e-03 5.85298e-03 4.77002e-03 3.88768e-03 3.16874e-03 2.58290e-03 2.10550e-03 1.71644e-03 1.39936e-03 1.14091e-03 9.30256e-04 7.58538e-04 6.18554e-04 5.04432e-04 4.11389e-04 3.35527e-04 2.73670e-04 2.18764e-04 1.52960e-04 2.37680e-05 2.42381e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.4900 -8.1708
+                                121.5389 -10.2236
+                                120.1459 -10.0851
+                                119.4182 -9.9222
+                                118.0822 -9.9005
+                                117.5283 -10.1611
+                                116.9527 -10.0091
+                                116.3770 -10.0960
+                                115.3886 -9.8896
+                                114.1287 -9.7158
+                                113.4119 -9.6724
+                                112.8280 -9.4841
+                                111.8913 -9.1510
+                                112.0433 -7.7934
+                                114.8130 -7.9889
+                                115.9860 -8.1952
+                                117.0721 -8.1844
+                                117.6749 -8.0975
+                                118.9186 -7.8802
+                                120.5803 -7.9237
+                                120.9876 -8.0269
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>9.87574e-02 8.03452e-02 6.53700e-02 5.31895e-02 4.32813e-02 3.52212e-02 2.86639e-02 2.33289e-02 1.89880e-02 1.54559e-02 1.25816e-02 1.02425e-02 8.33880e-03 6.78935e-03 5.52815e-03 4.50152e-03 3.66577e-03 2.98537e-03 2.43142e-03 1.98037e-03 1.61310e-03 1.31402e-03 1.07046e-03 8.72093e-04 7.10531e-04 5.78935e-04 4.62305e-04 3.22910e-04 5.01241e-05 5.10631e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                126.7551 -7.8827
+                                124.1483 -8.8333
+                                123.1436 -9.2949
+                                122.7092 -9.4253
+                                121.5253 -9.5067
+                                121.4927 -8.5618
+                                122.5734 -8.4586
+                                123.6107 -8.3011
+                                126.6932 -7.6623
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.92830e-02 1.57377e-02 1.28448e-02 1.04842e-02 8.55793e-03 6.98590e-03 5.70294e-03 4.65582e-03 3.80116e-03 3.10354e-03 2.53408e-03 2.06921e-03 1.68970e-03 1.37987e-03 1.12690e-03 9.20354e-04 7.51701e-04 6.13982e-04 5.01518e-04 4.09674e-04 3.34665e-04 2.73403e-04 2.23365e-04 1.82494e-04 1.49108e-04 1.21835e-04 9.75643e-05 6.83370e-05 1.06372e-05 1.08664e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.5253 -9.5067
+                                120.4962 -9.1673
+                                119.0190 -9.0587
+                                118.7746 -8.9827
+                                118.3239 -8.9284
+                                117.7808 -9.0098
+                                117.1129 -8.9772
+                                115.6737 -8.8849
+                                114.3812 -8.7546
+                                112.7086 -8.4668
+                                112.1221 -8.5211
+                                111.9863 -8.4613
+                                112.0352 -7.3643
+                                115.8964 -7.7228
+                                117.8243 -7.9183
+                                119.9341 -7.9780
+                                120.9089 -8.2767
+                                121.4927 -8.5618
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.72034e-02 1.40404e-02 1.14595e-02 9.35353e-03 7.63497e-03 6.23248e-03 5.08788e-03 4.15370e-03 3.39121e-03 2.76883e-03 2.26078e-03 1.84605e-03 1.50747e-03 1.23105e-03 1.00537e-03 8.21095e-04 6.70631e-04 5.47765e-04 4.47430e-04 3.65491e-04 2.98572e-04 2.43917e-04 1.99276e-04 1.62812e-04 1.33027e-04 1.08696e-04 8.70422e-05 6.09669e-05 9.48999e-06 9.69451e-07</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS_300_400" name="Banda 300-400km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.8016 -4.5170
+                                125.8668 -4.0499
+                                127.8425 -4.4548
+                                128.3313 -4.5689
+                                128.8947 -5.1860
+                                128.9405 -5.4945
+                                128.9079 -5.9181
+                                128.6395 -6.4622
+                                128.3268 -6.6772
+                                128.1181 -6.8097
+                                127.5425 -7.0052
+                                127.1267 -7.2866
+                                126.5999 -7.4224
+                                126.4370 -6.8902
+                                126.9746 -6.7218
+                                127.4851 -6.4394
+                                127.5503 -6.0701
+                                127.4199 -5.6683
+                                127.2353 -5.3859
+                                126.9312 -5.0274
+                                126.4641 -4.7342
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>300.0</upperSeismoDepth>
+                <lowerSeismoDepth>400.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>4.80974e-02 3.91661e-02 3.18952e-02 2.59758e-02 2.11563e-02 1.72321e-02 1.40366e-02 1.14344e-02 9.31522e-03 7.58925e-03 6.18346e-03 5.03837e-03 4.10559e-03 3.34571e-03 2.72663e-03 2.22224e-03 1.81126e-03 1.47638e-03 1.20349e-03 9.81090e-04 7.99840e-04 6.52112e-04 5.31701e-04 4.33548e-04 3.53536e-04 2.88306e-04 2.30423e-04 1.61083e-04 2.50256e-05 2.55161e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="350.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                126.6866 -7.6962
+                                126.1817 -7.7862
+                                123.6945 -8.4379
+                                121.4788 -8.4379
+                                121.4462 -7.7319
+                                122.1848 -7.7319
+                                123.2383 -7.6885
+                                124.5571 -7.6413
+                                125.5464 -7.5283
+                                126.5571 -7.2742
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>200.0</upperSeismoDepth>
+                <lowerSeismoDepth>300.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.36275e-02 1.92824e-02 1.57371e-02 1.28444e-02 1.04839e-02 8.55763e-03 6.98566e-03 5.70273e-03 4.65566e-03 3.80102e-03 3.10343e-03 2.53399e-03 2.06914e-03 1.68964e-03 1.37982e-03 1.12686e-03 9.20320e-04 7.51672e-04 6.13959e-04 5.01499e-04 4.09659e-04 3.34653e-04 2.73392e-04 2.23357e-04 1.82487e-04 1.49102e-04 1.19394e-04 8.36232e-05 1.30160e-05 1.32960e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="250.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.4788 -8.4379
+                                119.6106 -8.3402
+                                118.6277 -8.2044
+                                117.4275 -8.2370
+                                116.4608 -8.1555
+                                113.9845 -7.8568
+                                111.9968 -7.6613
+                                112.0837 -7.0748
+                                114.8099 -7.4006
+                                116.9279 -7.4875
+                                117.1994 -7.4875
+                                119.0350 -7.7048
+                                121.4462 -7.7319
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>200.0</upperSeismoDepth>
+                <lowerSeismoDepth>300.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.92830e-02 1.57377e-02 1.28448e-02 1.04842e-02 8.55793e-03 6.98590e-03 5.70294e-03 4.65582e-03 3.80116e-03 3.10354e-03 2.53408e-03 2.06921e-03 1.68970e-03 1.37987e-03 1.12690e-03 9.20354e-04 7.51701e-04 6.13982e-04 5.01518e-04 4.09674e-04 3.34665e-04 2.73403e-04 2.23365e-04 1.82494e-04 1.49108e-04 1.21835e-04 9.75643e-05 6.83370e-05 1.06372e-05 1.08664e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="250.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                126.5999 -7.4224
+                                125.0848 -7.6124
+                                123.3252 -7.7917
+                                121.4462 -7.7319
+                                121.4516 -7.4006
+                                124.4494 -7.2377
+                                126.4370 -6.8902
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>300.0</upperSeismoDepth>
+                <lowerSeismoDepth>400.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.60897e-02 2.94112e-02 2.39700e-02 1.95367e-02 1.59242e-02 1.29805e-02 1.05816e-02 8.62653e-03 7.03309e-03 5.73431e-03 4.67565e-03 3.81265e-03 3.10912e-03 2.53556e-03 2.06792e-03 1.68662e-03 1.37571e-03 1.12217e-03 9.15414e-04 7.46791e-04 6.09263e-04 4.97089e-04 4.05591e-04 3.30952e-04 2.70063e-04 2.20389e-04 1.76264e-04 1.23307e-04 1.91699e-05 1.95590e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="350.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.4462 -7.7319
+                                117.4492 -7.8270
+                                115.4073 -7.6315
+                                112.0294 -7.2513
+                                112.1163 -6.7625
+                                118.0140 -7.3599
+                                121.4516 -7.4006
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>300.0</upperSeismoDepth>
+                <lowerSeismoDepth>400.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.92830e-02 1.57377e-02 1.28448e-02 1.04842e-02 8.55793e-03 6.98590e-03 5.70294e-03 4.65582e-03 3.80116e-03 3.10354e-03 2.53408e-03 2.06921e-03 1.68970e-03 1.37987e-03 1.12690e-03 9.20354e-04 7.51701e-04 6.13982e-04 5.01518e-04 4.09674e-04 3.34665e-04 2.73403e-04 2.23365e-04 1.82494e-04 1.49108e-04 1.21835e-04 9.75643e-05 6.83370e-05 1.06372e-05 1.08664e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="350.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS_400_500" name="Banda 400-500km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.1934 -4.6446
+                                125.6061 -4.3513
+                                126.7574 -4.8184
+                                127.3133 -5.3644
+                                127.6250 -6.0502
+                                127.6395 -6.2554
+                                127.6453 -6.4177
+                                127.5240 -6.5664
+                                126.3447 -7.4359
+                                125.1282 -7.6749
+                                124.1615 -7.6532
+                                122.3586 -7.5446
+                                119.6215 -7.6097
+                                117.2103 -7.3599
+                                112.0946 -6.7625
+                                112.2629 -5.8013
+                                112.9619 -5.8352
+                                114.3103 -6.0511
+                                116.8138 -6.8169
+                                118.4593 -7.0232
+                                120.5556 -7.0449
+                                122.6301 -6.9635
+                                123.4012 -6.5507
+                                124.5091 -5.8393
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>400.0</upperSeismoDepth>
+                <lowerSeismoDepth>500.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.95718e-01 2.40418e-01 1.95471e-01 1.58939e-01 1.29242e-01 1.05102e-01 8.54758e-02 6.95193e-02 5.65454e-02 4.59957e-02 3.74168e-02 3.04400e-02 2.47657e-02 2.01505e-02 1.63964e-02 1.33426e-02 1.08583e-02 8.83710e-03 7.19261e-03 5.85453e-03 4.76568e-03 3.87959e-03 3.15845e-03 2.57153e-03 2.09380e-03 1.70493e-03 1.36061e-03 9.49758e-04 1.47336e-04 1.50003e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="450.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS_500_600" name="Banda_500_600km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.1934 -4.6446
+                                125.6061 -4.3513
+                                126.7574 -4.8184
+                                127.3133 -5.3644
+                                127.6250 -6.0502
+                                127.6395 -6.2554
+                                127.6453 -6.4177
+                                127.5227 -6.5686
+                                126.3447 -7.4359
+                                125.1282 -7.6749
+                                124.1615 -7.6532
+                                122.3586 -7.5446
+                                119.6215 -7.6097
+                                117.2103 -7.3599
+                                112.0946 -6.7625
+                                112.2629 -5.8013
+                                112.9619 -5.8352
+                                114.3103 -6.0511
+                                116.8138 -6.8169
+                                118.4593 -7.0232
+                                120.5556 -7.0449
+                                122.6301 -6.9635
+                                123.4012 -6.5507
+                                124.5091 -5.8393
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>500.0</upperSeismoDepth>
+                <lowerSeismoDepth>600.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.26933e-01 1.84519e-01 1.50042e-01 1.22015e-01 9.92305e-02 8.07058e-02 6.56437e-02 5.33962e-02 4.34366e-02 3.53371e-02 2.87497e-02 2.33919e-02 1.90338e-02 1.54887e-02 1.26047e-02 1.02583e-02 8.34929e-03 6.79596e-03 5.53198e-03 4.50337e-03 3.66626e-03 2.98494e-03 2.43039e-03 1.97900e-03 1.61154e-03 1.31239e-03 1.04747e-03 7.31258e-04 1.13453e-04 1.15520e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="550.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="BS" name="Banda Sea" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                131.7269 -4.0754
+                                132.5784 -4.8225
+                                132.8692 -4.5535
+                                133.5470 -4.6319
+                                133.5161 -5.4385
+                                133.4244 -5.9652
+                                132.5702 -6.5914
+                                132.6811 -6.7629
+                                131.9880 -7.6253
+                                131.7571 -7.9126
+                                131.5809 -8.1334
+                                131.2196 -8.5837
+                                130.8585 -8.7103
+                                130.8425 -8.6955
+                                130.6941 -7.8055
+                                130.5073 -7.3166
+                                129.7053 -7.4292
+                                127.3485 -7.7808
+                                127.3361 -7.6691
+                                128.3187 -7.5671
+                                129.4005 -7.1532
+                                130.1256 -6.7157
+                                130.7271 -5.8031
+                                130.6557 -5.0725
+                                130.5183 -4.6000
+                                129.8940 -3.6427
+                                129.5860 -3.3477
+                                129.5482 -3.2177
+                                130.4953 -3.3698
+                                131.5732 -3.9341
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>40.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.93408e-01 1.55901e-01 1.25686e-01 1.01341e-01 8.17233e-02 6.59127e-02 5.31684e-02 4.28943e-02 3.46105e-02 2.79304e-02 2.25427e-02 1.81969e-02 1.46909e-02 1.18620e-02 9.57919e-03 7.73676e-03 6.24956e-03 5.04892e-03 4.07949e-03 3.29665e-03 2.66439e-03 2.15367e-03 1.74109e-03 1.37957e-03 9.56208e-04 1.47301e-04 1.48930e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="225.0" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+        
+        <simpleFaultSource id="banda_sunda23.2104042968" name="banda_sunda23.2104042968" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               121.547437667 -11.4252034121
+               120.53666667 -11.51
+               120.04333333 -11.45666667
+               119.35 -11.39666667
+               118.16333333 -11.35666667
+               116.67 -11.29666667
+               116.00333333 -11.23
+               115.34333333 -11.15666667
+               114.49 -11.09666667
+               114.16333333 -11.03
+               113.84333333 -10.95666667
+               113.39 -10.89666667
+               113.04333333 -10.83
+               112.68333333 -10.75666667
+               112.35 -10.69666667
+               112.06333333 -10.63
+               111.58333333 -10.55666667
+               111.15 -10.49666667
+               110.18333333 -10.43
+               109.70333333 -10.35666667
+               108.95 -10.29666667
+               108.68333333 -10.23
+               108.40333333 -10.15666667
+               108.05 -10.09666667
+               107.82333333 -10.03
+               107.64333333 -9.95666667
+               107.45 -9.89666667
+               107.28333333 -9.83
+               107.14333333 -9.75666667
+               106.93 -9.69666667
+               106.80333333 -9.63
+               106.72333333 -9.55666667
+               106.57 -9.49666667
+               106.48333333 -9.43
+               106.38333333 -9.35666667
+               106.25 -9.29666667
+               106.12333333 -9.23
+               106.02333333 -9.15666667
+               105.91 -9.09666667
+               105.80333333 -9.03
+               105.68333333 -8.95666667
+               105.57 -8.89666667
+               105.46333333 -8.83
+               105.36333333 -8.75666667
+               105.23 -8.69666667
+               105.12333333 -8.63
+               105.02333333 -8.55666667
+               104.89 -8.49666667
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>50</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="8.3" binWidth="0.1">
+          <occurRates>0.0113720626792 0.00933894346126 0.00764933070208 0.00622419477836 0.0050342514287 0.0040486484064 0.00321825837907 0.00245450500498 0.00185540008609 0.00129657813268 0.000836237553987 0.000469470783318 0.000192271919482 7.15109576367e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_sunda23.2163077674" name="banda_sunda23.2163077674" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               121.53778272 -9.53921960998
+               121.358686327 -9.54111709742
+               121.27461126 -9.54490489984
+               121.190536193 -9.5403209705
+               121.106461126 -9.54271785431
+               121.022386059 -9.53982984635
+               120.938310992 -9.54412431868
+               120.854235925 -9.54416617268
+               120.770160858 -9.54713403543
+               120.69630564 -9.54966292135
+               120.686085791 -9.55007587242
+               120.602010724 -9.55467513253
+               120.517935657 -9.55877814746
+               120.43386059 -9.55858308844
+               120.349785523 -9.56265310739
+               120.265710456 -9.57202988676
+               120.181635389 -9.57895643578
+               120.097560322 -9.57642671691
+               120.013485255 -9.56528466019
+               119.952995796 -9.54966292135
+               119.929410188 -9.54421660663
+               119.845335121 -9.51436539896
+               119.761260054 -9.47585964581
+               119.743919506 -9.46539325843
+               119.677184987 -9.42744566972
+               119.59310992 -9.3937249772
+               119.552598062 -9.38112359551
+               119.509034853 -9.37121091679
+               119.424959786 -9.35759630556
+               119.340884718 -9.34682521393
+               119.256809651 -9.33500208382
+               119.172734584 -9.3290710856
+               119.088659517 -9.32471256463
+               119.00458445 -9.32155655536
+               118.920509383 -9.31984353489
+               118.836434316 -9.32035322195
+               118.752359249 -9.32273732701
+               118.668284182 -9.32606999981
+               118.584209115 -9.33149079576
+               118.500134048 -9.33819845789
+               118.416058981 -9.34650067061
+               118.331983914 -9.35316813278
+               118.247908847 -9.36212667136
+               118.16383378 -9.36987505652
+               118.108593944 -9.38112359551
+               118.079758713 -9.38905016172
+               117.995683646 -9.41337711216
+               117.911608579 -9.44980587384
+               117.879551162 -9.46539325843
+               117.827533512 -9.49271272165
+               117.743458445 -9.54461731563
+               117.736079617 -9.54966292135
+               117.659383378 -9.60740752043
+               117.593394154 -9.63393258427
+               117.575308311 -9.64185352046
+               117.491233244 -9.65405719605
+               117.407158177 -9.63572556071
+               117.403466659 -9.63393258427
+               117.32308311 -9.59805925641
+               117.256534604 -9.54966292135
+               117.239008043 -9.53803407807
+               117.154932976 -9.49569090974
+               117.070857909 -9.46668827938
+               117.048512448 -9.46539325843
+               116.986782842 -9.46209254782
+               116.971109151 -9.46539325843
+               116.902707775 -9.48071350713
+               116.818632708 -9.52930896999
+               116.780771746 -9.54966292135
+               116.734557641 -9.57654402909
+               116.650482574 -9.61996927334
+               116.614402707 -9.63393258427
+               116.566407507 -9.65378197889
+               116.48233244 -9.66914142719
+               116.398257373 -9.66526777764
+               116.314182306 -9.65015079088
+               116.246919802 -9.63393258427
+               116.230107239 -9.63013667272
+               116.146032172 -9.60667600795
+               116.061957105 -9.58343886222
+               115.977882038 -9.56005433664
+               115.933518269 -9.54966292135
+               115.893806971 -9.54089138547
+               115.809731903 -9.52220489352
+               115.725656836 -9.50187860506
+               115.641581769 -9.48196039866
+               115.572197743 -9.46539325843
+               115.557506702 -9.4619908136
+               115.473431635 -9.44764671491
+               115.389356568 -9.4388880329
+               115.305281501 -9.4289838017
+               115.221206434 -9.42242964236
+               115.137131367 -9.41336491756
+               115.0530563 -9.40654074332
+               114.968981233 -9.40000021734
+               114.884906166 -9.39943178117
+               114.800831099 -9.39710234669
+               114.716756032 -9.39536905071
+               114.632680965 -9.38914363124
+               114.554404856 -9.38112359551
+               114.548605898 -9.38068261355
+               114.464530831 -9.36965482139
+               114.380455764 -9.35140437279
+               114.296380697 -9.32399584839
+               114.21230563 -9.29930768531
+               114.204553626 -9.29685393258
+               114.128230563 -9.2676129675
+               114.044155496 -9.24320889366
+               113.960080429 -9.2274091223
+               113.876005362 -9.22052784152
+               113.791930295 -9.22221171556
+               113.707855228 -9.22736949886
+               113.623780161 -9.23130796612
+               113.539705094 -9.22332329063
+               113.466030765 -9.21258426966
+               113.455630027 -9.21122680981
+               113.37155496 -9.19239130131
+               113.287479893 -9.16748932743
+               113.203404826 -9.14227242
+               113.16967487 -9.12831460674
+               113.119329759 -9.10933740877
+               113.035254692 -9.08558412287
+               112.951179625 -9.05895686512
+               112.909688831 -9.04404494382
+               112.867104558 -9.03292826961
+               112.783029491 -9.00810558539
+               112.698954424 -8.97391312173
+               112.65721264 -8.9597752809
+               112.614879357 -8.94323631491
+               112.53080429 -8.91032459948
+               112.446729223 -8.87591530574
+               112.445868907 -8.87550561798
+               112.362654155 -8.83781851699
+               112.281763871 -8.79123595506
+               112.278579088 -8.78949000133
+               112.194504021 -8.75409860958
+               112.110428954 -8.72581376291
+               112.038265875 -8.70696629213
+               112.026353887 -8.70413445422
+               111.94227882 -8.69791709151
+               111.858203753 -8.70368673072
+               111.840866472 -8.70696629213
+               111.774128686 -8.7218272718
+               111.690053619 -8.74639898497
+               111.605978552 -8.77385865996
+               111.552616323 -8.79123595506
+               111.521903485 -8.80254425294
+               111.437828418 -8.82718813661
+               111.353753351 -8.84520190089
+               111.269678284 -8.86038021513
+               111.185603217 -8.87242202843
+               111.158322572 -8.87550561798
+               111.10152815 -8.88202260511
+               111.017453083 -8.89080633506
+               110.933378016 -8.89095247302
+               110.849302949 -8.89550786708
+               110.765227882 -8.89871062036
+               110.681152815 -8.89993540322
+               110.597077748 -8.89069047021
+               110.513002681 -8.8844677158
+               110.457193017 -8.87550561798
+               110.428927614 -8.87115217784
+               110.344852547 -8.85582932746
+               110.26077748 -8.83877843346
+               110.176702413 -8.81399991375
+               110.092627346 -8.79152436076
+               110.09163101 -8.79123595506
+               110.008552279 -8.76809009435
+               109.924477212 -8.74182177405
+               109.841487059 -8.70696629213
+               109.840402145 -8.70651880101
+               109.756327078 -8.65723018193
+               109.694211116 -8.62269662921
+               109.672252011 -8.61329517887
+               109.588176944 -8.57615775525
+               109.504101877 -8.53880353146
+               109.503291862 -8.53842696629
+               109.42002681 -8.49074591213
+               109.368081462 -8.45415730337
+               109.335951743 -8.433324903
+               109.251876676 -8.39207014574
+               109.212419039 -8.36988764045
+               109.167801609 -8.34570138157
+               109.083726542 -8.30687976709
+               109.047628133 -8.28561797753
+               108.999651475 -8.25840617152
+               108.915576408 -8.22202965751
+               108.856723483 -8.20134831461
+               108.83150134 -8.19475644267
+               108.747426273 -8.17334310621
+               108.663351206 -8.15278112967
+               108.579276139 -8.12494011827
+               108.551328996 -8.11707865169
+               108.495201072 -8.09968613809
+               108.411126005 -8.07284848962
+               108.327050938 -8.04514428833
+               108.296831194 -8.03280898876
+               108.242975871 -8.01285419324
+               108.158900804 -7.97360323949
+               108.090771013 -7.94853932584
+               108.074825737 -7.94307043118
+               107.99075067 -7.91162336091
+               107.906675603 -7.88145781331
+               107.861043218 -7.86426966292
+               107.822600536 -7.85004838158
+               107.738525469 -7.80664635221
+               107.681797574 -7.78
+               107.654450402 -7.7697112604
+               107.570375335 -7.73390174319
+               107.489919491 -7.69573033708
+               107.486300268 -7.69362093298
+               107.402225201 -7.63826645533
+               107.373070331 -7.61146067416
+               107.318150134 -7.56328370636
+               107.269115893 -7.52719101124
+               107.234075067 -7.50354282673
+               107.15 -7.44704320795
+               107.143107209 -7.44292134831
+               107.065924933 -7.40869116853
+               106.981849866 -7.37230201865
+               106.952080784 -7.35865168539
+               106.897774799 -7.32916883799
+               106.813699732 -7.29604095407
+               106.755603794 -7.27438202247
+               106.729624665 -7.26493511252
+               106.645549598 -7.23054196532
+               106.561474531 -7.19366417754
+               106.555899376 -7.19011235955
+               106.477399464 -7.14047724785
+               106.406255942 -7.10584269663
+               106.393324397 -7.100084491
+               106.30924933 -7.06091704774
+               106.235141838 -7.02157303371
+               106.225174263 -7.01781488127
+               106.141099196 -6.98553733494
+               106.057024129 -6.93827051909
+               106.055182365 -6.93730337079
+               105.972949062 -6.88318570936
+               105.935578323 -6.85303370787
+               105.888873995 -6.81407710165
+               105.843009159 -6.76876404494
+               105.804798928 -6.72842669989
+               105.767375169 -6.68449438202
+               105.720723861 -6.63124401519
+               105.699350802 -6.6002247191
+               105.636648794 -6.53289723318
+               105.614325285 -6.51595505618
+               105.552573727 -6.46553003699
+               105.504839958 -6.43168539326
+               105.46849866 -6.40823901865
+               105.384423592 -6.36213891456
+               105.353929763 -6.34741573034
+               105.300348525 -6.32266746523
+               105.216273458 -6.27662694724
+               105.18357904 -6.26314606742
+               105.132198391 -6.24652644272
+               105.048123324 -6.2181118648
+               104.964048257 -6.18929287403
+               104.934108154 -6.17887640449
+               104.87997319 -6.15610887151
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>50</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="8.3" binWidth="0.1">
+          <occurRates>0.0113720626792 0.00933894346126 0.00764933070208 0.00622419477836 0.0050342514287 0.0040486484064 0.00321825837907 0.00245450500498 0.00185540008609 0.00129657813268 0.000836237553987 0.000469470783318 0.000192271919482 7.15109576367e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_sunda23.2135105023" name="banda_sunda23.2135105023" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               121.526836461 -10.1376207143
+               121.513036312 -10.1395505618
+               121.442761394 -10.1495283207
+               121.358686327 -10.1545697941
+               121.27461126 -10.1526702064
+               121.190536193 -10.1574281695
+               121.106461126 -10.1506789653
+               121.022386059 -10.1547163332
+               120.938310992 -10.1538335397
+               120.854235925 -10.1568837635
+               120.770160858 -10.159324545
+               120.686085791 -10.1708888272
+               120.602010724 -10.172810099
+               120.517935657 -10.1674470236
+               120.43386059 -10.1647708541
+               120.349785523 -10.1681965331
+               120.265710456 -10.166930074
+               120.181635389 -10.1711407617
+               120.097560322 -10.1706428047
+               120.013485255 -10.1582906782
+               119.934537662 -10.1395505618
+               119.929410188 -10.1381368043
+               119.845335121 -10.1079557626
+               119.761260054 -10.0693054215
+               119.740190009 -10.0552808989
+               119.677184987 -10.0140048588
+               119.59535483 -9.97101123596
+               119.59310992 -9.9697618089
+               119.509034853 -9.93667148184
+               119.424959786 -9.91419390782
+               119.340884718 -9.89872386931
+               119.28115548 -9.88674157303
+               119.256809651 -9.88189957752
+               119.172734584 -9.87604590482
+               119.088659517 -9.87096595248
+               119.00458445 -9.86441013254
+               118.920509383 -9.85619803995
+               118.836434316 -9.84652670175
+               118.752359249 -9.84038755475
+               118.668284182 -9.83472202819
+               118.584209115 -9.83385295165
+               118.500134048 -9.83650145604
+               118.416058981 -9.84015115367
+               118.331983914 -9.83731484332
+               118.247908847 -9.8428461446
+               118.16383378 -9.85378192787
+               118.079758713 -9.87040867684
+               118.036342059 -9.88674157303
+               117.995683646 -9.90238202891
+               117.911608579 -9.9545148406
+               117.88629984 -9.97101123596
+               117.827533512 -10.007918458
+               117.763088298 -10.0552808989
+               117.743458445 -10.0697680479
+               117.659383378 -10.1330470958
+               117.642063401 -10.1395505618
+               117.575308311 -10.1600879883
+               117.491233244 -10.1677456206
+               117.407158177 -10.1545031881
+               117.365262099 -10.1395505618
+               117.32308311 -10.1210958109
+               117.239008043 -10.0562885945
+               117.237431844 -10.0552808989
+               117.154932976 -10.0039587009
+               117.085687858 -9.97101123596
+               117.070857909 -9.96399901733
+               116.986782842 -9.9535705913
+               116.917289906 -9.97101123596
+               116.902707775 -9.97474157654
+               116.818632708 -10.0231481872
+               116.760866722 -10.0552808989
+               116.734557641 -10.0705410451
+               116.650482574 -10.1116256237
+               116.568844646 -10.1395505618
+               116.566407507 -10.1402579276
+               116.48233244 -10.1491961048
+               116.398257373 -10.1441592398
+               116.371405987 -10.1395505618
+               116.314182306 -10.1282974184
+               116.230107239 -10.1062287919
+               116.146032172 -10.080978129
+               116.065771285 -10.0552808989
+               116.061957105 -10.0541479959
+               115.977882038 -10.0290894092
+               115.893806971 -10.0075678666
+               115.809731903 -9.98459782443
+               115.756883014 -9.97101123596
+               115.725656836 -9.96346523794
+               115.641581769 -9.94215259584
+               115.557506702 -9.9214292189
+               115.473431635 -9.9048200381
+               115.389356568 -9.89022127412
+               115.352420644 -9.88674157303
+               115.305281501 -9.88262367174
+               115.221206434 -9.87232217433
+               115.137131367 -9.86390524759
+               115.0530563 -9.85630885748
+               114.968981233 -9.85004708223
+               114.884906166 -9.85234133025
+               114.800831099 -9.8521055001
+               114.716756032 -9.85441201428
+               114.632680965 -9.8526822644
+               114.548605898 -9.84659629796
+               114.464530831 -9.83274606243
+               114.380455764 -9.81342845904
+               114.353940301 -9.80247191011
+               114.296380697 -9.78439461855
+               114.21230563 -9.76306356803
+               114.128230563 -9.74201136746
+               114.044155496 -9.72078100381
+               114.02712972 -9.71820224719
+               113.960080429 -9.70673058453
+               113.876005362 -9.70169752706
+               113.791930295 -9.70326709567
+               113.707855228 -9.70672608953
+               113.623780161 -9.71146242783
+               113.539705094 -9.70824538397
+               113.455630027 -9.69318803752
+               113.37155496 -9.67654253315
+               113.287479893 -9.65089341883
+               113.244021474 -9.63393258427
+               113.203404826 -9.61894751936
+               113.119329759 -9.58380734704
+               113.035254692 -9.55393990648
+               113.018663645 -9.54966292135
+               112.951179625 -9.533596011
+               112.867104558 -9.51051482666
+               112.783029491 -9.48592335349
+               112.731085414 -9.46539325843
+               112.698954424 -9.45250612394
+               112.614879357 -9.42561498038
+               112.53080429 -9.39400933328
+               112.497839207 -9.38112359551
+               112.446729223 -9.36519492696
+               112.362654155 -9.33309466837
+               112.30073976 -9.29685393258
+               112.278579088 -9.28098017718
+               112.194504021 -9.23677970445
+               112.145622999 -9.21258426966
+               112.110428954 -9.19705499926
+               112.026353887 -9.17753652189
+               111.94227882 -9.17390071492
+               111.858203753 -9.20385374023
+               111.836517283 -9.21258426966
+               111.774128686 -9.23808511716
+               111.690053619 -9.27702476921
+               111.636636736 -9.29685393258
+               111.605978552 -9.30609734133
+               111.521903485 -9.32316270035
+               111.437828418 -9.33729056284
+               111.353753351 -9.33958252025
+               111.269678284 -9.33950938594
+               111.185603217 -9.33834248047
+               111.10152815 -9.33727175815
+               111.017453083 -9.3378230552
+               110.933378016 -9.33409254155
+               110.849302949 -9.33867490193
+               110.765227882 -9.34350226028
+               110.681152815 -9.34740564402
+               110.597077748 -9.34929994439
+               110.513002681 -9.33920251014
+               110.428927614 -9.33278397376
+               110.344852547 -9.31940510255
+               110.26077748 -9.30461178584
+               110.226693644 -9.29685393258
+               110.176702413 -9.28327634639
+               110.092627346 -9.26388670388
+               110.008552279 -9.24413855766
+               109.924477212 -9.2259953465
+               109.873251879 -9.21258426966
+               109.840402145 -9.20409338473
+               109.756327078 -9.17459426236
+               109.672252011 -9.15128293888
+               109.598992256 -9.12831460674
+               109.588176944 -9.12497449617
+               109.504101877 -9.0992704626
+               109.42002681 -9.07201235064
+               109.366827801 -9.04404494382
+               109.335951743 -9.02940160979
+               109.251876676 -8.99498119221
+               109.167801609 -8.96550533193
+               109.149966252 -8.9597752809
+               109.083726542 -8.92658338969
+               108.999651475 -8.87550947674
+               108.999642069 -8.87550561798
+               108.915576408 -8.8404321621
+               108.83150134 -8.81594604069
+               108.766078317 -8.79123595506
+               108.747426273 -8.78444193015
+               108.663351206 -8.76259130633
+               108.579276139 -8.72605841205
+               108.534452966 -8.70696629213
+               108.495201072 -8.69174476767
+               108.411126005 -8.65177784258
+               108.351390048 -8.62269662921
+               108.327050938 -8.61502591182
+               108.242975871 -8.58929476712
+               108.158900804 -8.55921164131
+               108.102924725 -8.53842696629
+               108.074825737 -8.5269208712
+               107.99075067 -8.49664413727
+               107.906675603 -8.47313947847
+               107.829337335 -8.45415730337
+               107.822600536 -8.45240517777
+               107.738525469 -8.42427284919
+               107.654450402 -8.40425952274
+               107.570375335 -8.37812608427
+               107.549235657 -8.36988764045
+               107.486300268 -8.34537379131
+               107.402225201 -8.30398609235
+               107.378230135 -8.28561797753
+               107.318150134 -8.23954179031
+               107.258846954 -8.20134831461
+               107.234075067 -8.18877966574
+               107.15 -8.14254749804
+               107.102469019 -8.11707865169
+               107.065924933 -8.09365225926
+               106.981849866 -8.04047432751
+               106.97100745 -8.03280898876
+               106.897774799 -7.98141122066
+               106.823208969 -7.94853932584
+               106.813699732 -7.94420878551
+               106.729624665 -7.90421242238
+               106.645549598 -7.86632536996
+               106.640737316 -7.86426966292
+               106.561474531 -7.83229451176
+               106.479047251 -7.78
+               106.477399464 -7.77925805266
+               106.393324397 -7.74813291024
+               106.30924933 -7.70919306543
+               106.278541735 -7.69573033708
+               106.225174263 -7.66824276817
+               106.141099196 -7.61507048511
+               106.135988073 -7.61146067416
+               106.057024129 -7.56200598938
+               105.999492567 -7.52719101124
+               105.972949062 -7.51152934965
+               105.888873995 -7.45989719388
+               105.86521478 -7.44292134831
+               105.804798928 -7.4083851582
+               105.728269901 -7.35865168539
+               105.720723861 -7.35188646222
+               105.657109201 -7.27438202247
+               105.636648794 -7.24755090243
+               105.586682664 -7.19011235955
+               105.552573727 -7.1511573953
+               105.508955418 -7.10584269663
+               105.46849866 -7.06616879608
+               105.420253269 -7.02157303371
+               105.384423592 -6.99526691901
+               105.300348525 -6.94513888425
+               105.288572276 -6.93730337079
+               105.216273458 -6.87117585645
+               105.18734403 -6.85303370787
+               105.132198391 -6.82106320665
+               105.048123324 -6.77532964604
+               105.035518652 -6.76876404494
+               104.964048257 -6.73509839587
+               104.87997319 -6.68703259137
+               104.873318245 -6.68449438202
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>50</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="8.3" binWidth="0.1">
+          <occurRates>0.0113720626792 0.00933894346126 0.00764933070208 0.00622419477836 0.0050342514287 0.0040486484064 0.00321825837907 0.00245450500498 0.00185540008609 0.00129657813268 0.000836237553987 0.000469470783318 0.000192271919482 7.15109576367e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_tanimbar-8.52945045971" name="banda_tanimbar-8.52945045971" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               132.683981187 -6.72945043262
+               132.683971296 -6.72946180112
+               132.583992555 -6.82944054151
+               132.58397568 -6.82946180112
+               132.460169792 -7.04850925185
+               132.383971235 -7.12946180112
+               132.283992555 -7.22944048125
+               132.283973105 -7.22946180112
+               132.183992555 -7.3294423513
+               132.183977264 -7.32946180112
+               132.093503016 -7.45327111453
+               131.979209344 -7.60565248771
+               131.883992555 -7.72944045249
+               131.88397355 -7.72946180112
+               131.783992555 -7.82944279643
+               131.78397112 -7.82946180112
+               131.683992555 -7.9294403663
+               131.683971082 -7.92946180112
+               131.583992555 -8.0294403279
+               131.403024688 -8.15803297721
+               131.183992555 -8.32944489531
+               131.183973623 -8.32946180112
+               131.09351628 -8.40563355539
+               130.912563731 -8.48658373845
+               130.783992555 -8.52944893989
+               130.783981214 -8.52945045971
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>25</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.00303962550243 0.00230408529778 0.0017393078322 0.00130515520749 0.000971036421587 0.000713611028859 0.000515050963817 0.000356308808224 0.000244296767663 0.00016143809767 0.00010954051793 7.36188410619e-05 4.86199690536e-05 3.01916026882e-05 1.91304151868e-05 1.16421488097e-05 6.39439185824e-06 3.16357132118e-06 1.58564395144e-06 5.19990798323e-07 1.30205823461e-07</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_tanimbar-8.28614176906" name="banda_tanimbar-8.28614176906" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               132.421514314 -6.56698356027
+               132.388622953 -6.62946180112
+               132.383992555 -6.634079784
+               132.288301016 -6.72946180112
+               132.283992555 -6.73559191603
+               132.213498356 -6.82946180112
+               132.183992555 -6.87272042698
+               132.142456023 -6.92946180112
+               132.083992555 -7.00718296492
+               132.067576575 -7.02946180112
+               131.987402874 -7.12946180112
+               131.983992555 -7.13371813321
+               131.903872604 -7.22946180112
+               131.883992555 -7.25612197358
+               131.826683989 -7.32946180112
+               131.783992555 -7.39662635201
+               131.76001559 -7.42946180112
+               131.687102666 -7.52946180112
+               131.683992555 -7.53256154071
+               131.586235049 -7.62946180112
+               131.583992555 -7.63168193989
+               131.483992555 -7.70536412718
+               131.455853851 -7.72946180112
+               131.383992555 -7.78904219295
+               131.333549454 -7.82946180112
+               131.283992555 -7.86730019355
+               131.211821949 -7.92946180112
+               131.183992555 -7.95309185202
+               131.085957772 -8.02946180112
+               131.083992555 -8.03098849547
+               130.986669543 -8.12946180112
+               130.983992555 -8.13197150634
+               130.883992555 -8.18148940856
+               130.79099736 -8.22946180112
+               130.783992555 -8.23322624768
+               130.683992555 -8.2724858625
+               130.640672523 -8.28614176906
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>25</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.00303962550243 0.00230408529778 0.0017393078322 0.00130515520749 0.000971036421587 0.000713611028859 0.000515050963817 0.000356308808224 0.000244296767663 0.00016143809767 0.00010954051793 7.36188410619e-05 4.86199690536e-05 3.01916026882e-05 1.91304151868e-05 1.16421488097e-05 6.39439185824e-06 3.16357132118e-06 1.58564395144e-06 5.19990798323e-07 1.30205823461e-07</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_tanimbar-7.73512255196" name="banda_tanimbar-7.73512255196" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               131.990725049 -6.26370698321
+               131.405015939 -6.99703383624
+               130.919305945 -7.46845824176
+               130.44788154 -7.73512255196
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>25</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.00303962550243 0.00230408529778 0.0017393078322 0.00130515520749 0.000971036421587 0.000713611028859 0.000515050963817 0.000356308808224 0.000244296767663 0.00016143809767 0.00010954051793 7.36188410619e-05 4.86199690536e-05 3.01916026882e-05 1.91304151868e-05 1.16421488097e-05 6.39439185824e-06 3.16357132118e-06 1.58564395144e-06 5.19990798323e-07 1.30205823461e-07</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_newguinea0.596735039445" name="banda_newguinea0.596735039445" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               143.958643035 -3.36468947621
+               143.861352897 -3.32116070912
+               143.751148552 -3.27750056835
+               143.630673412 -3.22118098941
+               143.451148552 -3.14933606649
+               143.348551836 -3.11092313931
+               143.151148552 -3.04933978586
+               143.046029767 -3.03397723382
+               142.925522818 -2.99556678459
+               142.751148552 -2.94933724045
+               142.653676221 -2.92372010157
+               142.53835159 -2.86726149642
+               142.351148552 -2.74934152685
+               142.151148552 -2.64933732444
+               141.851148552 -2.44934142673
+               141.656267337 -2.32886070948
+               141.451148552 -2.22885825567
+               141.258826729 -2.13909746841
+               141.051148552 -2.04933620344
+               140.851148552 -1.94933805147
+               140.651148552 -1.84934213263
+               140.351148552 -1.74933957561
+               140.251113581 -1.72116070912
+               140.051148552 -1.64933684576
+               139.951117054 -1.61092313931
+               139.751148552 -1.54933475796
+               139.551148552 -1.44933927814
+               139.251148552 -1.34933556997
+               139.051148552 -1.24934044191
+               138.751148552 -1.1493367819
+               138.546029767 -1.05446133439
+               138.251148552 -0.949337784851
+               138.053707944 -0.862140915804
+               137.91787645 -0.816061919219
+               137.751148552 -0.749338281009
+               137.587133463 -0.68276982233
+               137.435792197 -0.623739595325
+               137.251148552 -0.549337447604
+               137.051148552 -0.449343631265
+               136.751148552 -0.349337664341
+               136.551148552 -0.249344021214
+               136.348557666 -0.193007392141
+               136.051148552 -0.113499537771
+               135.761386122 -0.0237382155685
+               135.551148552 0.0506652373395
+               135.351148552 0.150665043697
+               135.151148552 0.250665037148
+               134.961386122 0.366021758917
+               134.756267337 0.468581503764
+               134.515317058 0.596735039445
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>50</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.5" binWidth="0.1">
+          <occurRates>0.050433100814 0.041383241079 0.0339382203592 0.0278083188121 0.0227571111482 0.018591471239 0.0151534883956 0.0123139225611 0.00993088331659 0.00791509200441 0.00621703943904 0.00478397946363 0.00357731931281 0.00256910378873 0.00186251135357 0.00117582085121 0.000644518225293 0.000256823559348</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_newguinea0.194954956658" name="banda_newguinea0.194954956658" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               143.797217616 -3.79418204266
+               143.695269507 -3.7493140261
+               143.651148552 -3.72807875879
+               143.551148552 -3.68163624926
+               143.47954542 -3.6493140261
+               143.451148552 -3.63601506055
+               143.351148552 -3.58906504169
+               143.251148552 -3.55669257049
+               143.222814444 -3.5493140261
+               143.151148552 -3.52913440767
+               143.051148552 -3.49978509059
+               142.951148552 -3.47270968641
+               142.857288259 -3.4493140261
+               142.851148552 -3.44766384199
+               142.751148552 -3.41761811138
+               142.651148552 -3.38990057704
+               142.551148552 -3.36352262749
+               142.508415055 -3.3493140261
+               142.451148552 -3.3276437461
+               142.351148552 -3.27472574713
+               142.303602073 -3.2493140261
+               142.251148552 -3.21963500216
+               142.151148552 -3.16391363442
+               142.124705201 -3.1493140261
+               142.051148552 -3.10800390437
+               141.953121968 -3.0493140261
+               141.951148552 -3.04807174518
+               141.851148552 -2.98592824567
+               141.791108044 -2.9493140261
+               141.751148552 -2.92419021918
+               141.651148552 -2.86237380816
+               141.629573233 -2.8493140261
+               141.551148552 -2.80137053991
+               141.467638989 -2.7493140261
+               141.451148552 -2.73873668933
+               141.351148552 -2.67989471726
+               141.28907869 -2.6493140261
+               141.251148552 -2.63083017332
+               141.151148552 -2.58568079295
+               141.070670098 -2.5493140261
+               141.051148552 -2.54013063725
+               140.951148552 -2.49136249384
+               140.857856266 -2.4493140261
+               140.851148552 -2.44614697049
+               140.751148552 -2.39990700017
+               140.651148552 -2.35484511752
+               140.638526154 -2.3493140261
+               140.551148552 -2.31006571844
+               140.451148552 -2.2738324523
+               140.382569581 -2.2493140261
+               140.351148552 -2.23749224481
+               140.251148552 -2.20134694979
+               140.151148552 -2.16519294368
+               140.106034358 -2.1493140261
+               140.051148552 -2.12878163201
+               139.951148552 -2.09149328271
+               139.851148552 -2.05579224488
+               139.832565324 -2.0493140261
+               139.751148552 -2.01894536472
+               139.651148552 -1.98132470108
+               139.568169568 -1.9493140261
+               139.551148552 -1.94249430377
+               139.451148552 -1.90444239211
+               139.351148552 -1.8651682212
+               139.311861617 -1.8493140261
+               139.251148552 -1.82416855842
+               139.151148552 -1.78473892579
+               139.051770232 -1.7493140261
+               139.051148552 -1.74907682315
+               138.951148552 -1.70754160099
+               138.851148552 -1.67020037447
+               138.794472543 -1.6493140261
+               138.751148552 -1.63230578767
+               138.651148552 -1.59138842552
+               138.551148552 -1.55377244014
+               138.539349199 -1.5493140261
+               138.451148552 -1.51413714867
+               138.351148552 -1.47584427421
+               138.284456489 -1.4493140261
+               138.251148552 -1.43557894142
+               138.151148552 -1.39589911358
+               138.051148552 -1.35421577836
+               138.036958934 -1.3493140261
+               137.951148552 -1.31898574738
+               137.851148552 -1.2775021593
+               137.780264416 -1.2493140261
+               137.751148552 -1.23716822824
+               137.651148552 -1.19816038863
+               137.551148552 -1.15562945811
+               137.533149794 -1.1493140261
+               137.451148552 -1.11890863856
+               137.351148552 -1.0771110665
+               137.279889623 -1.0493140261
+               137.251148552 -1.03732123838
+               137.151148552 -0.99618076491
+               137.051148552 -0.955661680557
+               137.033464104 -0.949314026103
+               136.951148552 -0.917606415492
+               136.851148552 -0.876834948912
+               136.782491308 -0.849314026103
+               136.751148552 -0.835924377285
+               136.651148552 -0.794776602182
+               136.551148552 -0.755718086789
+               136.533686202 -0.749314026103
+               136.451148552 -0.717630896
+               136.351148552 -0.678302641575
+               136.254288287 -0.649314026103
+               136.251148552 -0.648317031733
+               136.151148552 -0.617409504779
+               136.051148552 -0.58654581959
+               135.951148552 -0.557830514379
+               135.922356142 -0.549314026103
+               135.851148552 -0.526789500761
+               135.751148552 -0.495439775411
+               135.651148552 -0.465673102138
+               135.597571647 -0.449314026103
+               135.551148552 -0.433914143742
+               135.451148552 -0.386637465507
+               135.375429099 -0.349314026103
+               135.351148552 -0.336631596717
+               135.251148552 -0.286580551016
+               135.175622345 -0.249314026103
+               135.151148552 -0.236519608863
+               135.051148552 -0.185920418026
+               134.97792895 -0.149314026103
+               134.951148552 -0.135332815401
+               134.851148552 -0.0856730560912
+               134.778496203 -0.0493140261025
+               134.751148552 -0.0350246868181
+               134.651148552 0.0150819253755
+               134.579926076 0.0506859738975
+               134.551148552 0.0654865481148
+               134.451148552 0.116675195633
+               134.380458671 0.150685973897
+               134.351148552 0.165427405268
+               134.295417535 0.194954956658
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>50</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.5" binWidth="0.1">
+          <occurRates>0.050433100814 0.041383241079 0.0339382203592 0.0278083188121 0.0227571111482 0.018591471239 0.0151534883956 0.0123139225611 0.00993088331659 0.00791509200441 0.00621703943904 0.00478397946363 0.00357731931281 0.00256910378873 0.00186251135357 0.00117582085121 0.000644518225293 0.000256823559348</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_newguinea-4.08752675321" name="banda_newguinea-4.08752675321" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               134.151148552 -0.0882504890835
+               134.251148552 -0.138415501593
+               134.272050152 -0.149314026103
+               134.351148552 -0.189500590215
+               134.451148552 -0.240157225549
+               134.469059195 -0.249314026103
+               134.551148552 -0.288883354403
+               134.651148552 -0.340577200133
+               134.668417695 -0.349314026103
+               134.751148552 -0.389554513587
+               134.851148552 -0.440313033103
+               134.868487801 -0.449314026103
+               134.951148552 -0.490955704066
+               135.051148552 -0.54167942723
+               135.065805724 -0.549314026103
+               135.151148552 -0.591175442419
+               135.251148552 -0.640451328946
+               135.269167709 -0.649314026103
+               135.351148552 -0.689725683562
+               135.451148552 -0.734400438252
+               135.496456449 -0.749314026103
+               135.551148552 -0.766334511651
+               135.651148552 -0.79583226138
+               135.751148552 -0.826923114204
+               135.823072323 -0.849314026103
+               135.851148552 -0.857649376752
+               135.951148552 -0.887730908508
+               136.051148552 -0.918656839705
+               136.149021558 -0.949314026103
+               136.151148552 -0.949955380688
+               136.251148552 -0.980631573298
+               136.351148552 -1.01649119906
+               136.432545434 -1.0493140261
+               136.451148552 -1.05657592424
+               136.551148552 -1.09770369364
+               136.651148552 -1.14009143052
+               136.676197812 -1.1493140261
+               136.751148552 -1.17587870073
+               136.851148552 -1.2170874096
+               136.925721793 -1.2493140261
+               136.951148552 -1.259702406
+               137.051148552 -1.29825118566
+               137.151148552 -1.33826152116
+               137.177928926 -1.3493140261
+               137.251148552 -1.37838017149
+               137.351148552 -1.41978918876
+               137.424058418 -1.4493140261
+               137.451148552 -1.45995893704
+               137.551148552 -1.49893833
+               137.651148552 -1.54077491987
+               137.672249895 -1.5493140261
+               137.751148552 -1.57894303865
+               137.851148552 -1.62235292957
+               137.929082674 -1.6493140261
+               137.951148552 -1.65681789609
+               138.051148552 -1.69947852465
+               138.151148552 -1.73828136807
+               138.178392223 -1.7493140261
+               138.251148552 -1.77723566902
+               138.351148552 -1.81574108439
+               138.432616903 -1.8493140261
+               138.451148552 -1.85650796901
+               138.551148552 -1.89199749114
+               138.651148552 -1.93209528605
+               138.695214977 -1.9493140261
+               138.751148552 -1.97044070879
+               138.851148552 -2.01096085402
+               138.948561161 -2.0493140261
+               138.951148552 -2.05030238314
+               139.051148552 -2.0882905466
+               139.151148552 -2.12622243443
+               139.208370691 -2.1493140261
+               139.251148552 -2.1658987646
+               139.351148552 -2.20403490578
+               139.451148552 -2.2454287243
+               139.461403623 -2.2493140261
+               139.551148552 -2.28322655875
+               139.651148552 -2.3213714277
+               139.729051756 -2.3493140261
+               139.751148552 -2.3569173922
+               139.851148552 -2.39326141381
+               139.951148552 -2.42924600415
+               140.002649328 -2.4493140261
+               140.051148552 -2.46727327899
+               140.151148552 -2.50217881326
+               140.251148552 -2.53921475143
+               140.278769139 -2.5493140261
+               140.351148552 -2.57468973205
+               140.451148552 -2.61265279972
+               140.532448353 -2.6493140261
+               140.551148552 -2.65763904422
+               140.651148552 -2.70482240521
+               140.7450384 -2.7493140261
+               140.751148552 -2.75209828564
+               140.851148552 -2.79558914246
+               140.951148552 -2.84296915253
+               140.964649024 -2.8493140261
+               141.051148552 -2.88905190398
+               141.151148552 -2.9343486173
+               141.179581032 -2.9493140261
+               141.251148552 -2.98818132487
+               141.34719277 -3.0493140261
+               141.351148552 -3.05178114048
+               141.451148552 -3.11160301545
+               141.51162674 -3.1493140261
+               141.551148552 -3.17304394682
+               141.651148552 -3.23640076577
+               141.672311202 -3.2493140261
+               141.751148552 -3.2965479914
+               141.836036946 -3.3493140261
+               141.851148552 -3.35819869397
+               141.951148552 -3.41545543135
+               142.010791269 -3.4493140261
+               142.051148552 -3.47145708696
+               142.151148552 -3.52676207573
+               142.192086779 -3.5493140261
+               142.251148552 -3.58035825466
+               142.351148552 -3.63165894832
+               142.408320226 -3.6493140261
+               142.451148552 -3.66135948502
+               142.551148552 -3.68826069456
+               142.651148552 -3.71776307695
+               142.751148552 -3.74714531089
+               142.758999728 -3.7493140261
+               142.851148552 -3.77360566596
+               142.951148552 -3.80115720205
+               143.051148552 -3.82928210646
+               143.123841752 -3.8493140261
+               143.151148552 -3.85645802297
+               143.251148552 -3.89145636679
+               143.351148552 -3.93919512302
+               143.372587756 -3.9493140261
+               143.451148552 -3.98548067153
+               143.551148552 -4.03271924437
+               143.590393697 -4.0493140261
+               143.697217616 -4.08752675321
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>50</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.5" binWidth="0.1">
+          <occurRates>0.050433100814 0.041383241079 0.0339382203592 0.0278083188121 0.0227571111482 0.018591471239 0.0151534883956 0.0123139225611 0.00993088331659 0.00791509200441 0.00621703943904 0.00478397946363 0.00357731931281 0.00256910378873 0.00186251135357 0.00117582085121 0.000644518225293 0.000256823559348</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_seram_thrust-4.40021490288" name="banda_seram_thrust-4.40021490288" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               128.269833229 -2.55192584874
+               129.473410215 -2.60022260721
+               129.573410215 -2.60022437507
+               129.775198708 -2.64137441298
+               130.073410215 -2.69306757204
+               130.376956087 -2.75012321538
+               130.473410215 -2.75908121173
+               130.72080528 -2.80379981732
+               131.073410215 -2.98680906174
+               131.273410215 -3.09128149492
+               131.473410215 -3.20022505933
+               131.673410215 -3.30022674612
+               131.946738429 -3.44672938669
+               132.773410215 -4.20023166305
+               132.873379572 -4.30020102011
+               132.873410215 -4.30022975892
+               132.973381476 -4.40020102011
+               132.973396332 -4.40021490288
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>40</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.5" binWidth="0.1">
+          <occurRates>0.0180996149268 0.0143382059546 0.0113072663589 0.00886192027356 0.00688660286003 0.00528902009142 0.00387358538356 0.00278391240009 0.00188134803117 0.00125751217302 0.000795182234273 0.000422877287915 0.000206594861422 3.85166370575e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_seram_thrust-4.64303219663" name="banda_seram_thrust-4.64303219663" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               128.273410215 -2.9053777776
+               128.373410215 -2.90847290782
+               128.473410215 -2.91246106867
+               128.573410215 -2.91641062732
+               128.673410215 -2.92086673174
+               128.773410215 -2.92453247676
+               128.873410215 -2.92710163423
+               128.973410215 -2.93167687336
+               129.073410215 -2.93602861457
+               129.173410215 -2.93907227938
+               129.273410215 -2.94371587254
+               129.373410215 -2.94758909708
+               129.473410215 -2.95051456583
+               129.573410215 -2.96232262726
+               129.673410215 -2.98102323439
+               129.773410215 -3.00015109839
+               129.773676469 -3.00020102011
+               129.873410215 -3.01694369371
+               129.973410215 -3.03323502515
+               130.073410215 -3.0509430807
+               130.173410215 -3.06744377962
+               130.273410215 -3.0849947095
+               130.358760673 -3.10020102011
+               130.373410215 -3.10255360119
+               130.473410215 -3.11810355295
+               130.573410215 -3.13363786224
+               130.673410215 -3.17480672682
+               130.719663348 -3.20020102011
+               130.773410215 -3.2284085717
+               130.873410215 -3.28041194291
+               130.90981153 -3.30020102011
+               130.973410215 -3.33327836765
+               131.073410215 -3.38632845054
+               131.099726569 -3.40020102011
+               131.173410215 -3.43752517424
+               131.273410215 -3.49005260274
+               131.291807649 -3.50020102011
+               131.373410215 -3.54300392962
+               131.473410215 -3.59698437023
+               131.479315416 -3.60020102011
+               131.573410215 -3.64856931592
+               131.670217508 -3.70020102011
+               131.673410215 -3.70181696196
+               131.773410215 -3.76549532163
+               131.812627088 -3.80020102011
+               131.873410215 -3.8548819539
+               131.923534272 -3.90020102011
+               131.973410215 -3.94494842517
+               132.034879007 -4.00020102011
+               132.073410215 -4.03483387795
+               132.145265205 -4.10020102011
+               132.173410215 -4.12502106248
+               132.255479586 -4.20020102011
+               132.273410215 -4.21651375217
+               132.363031114 -4.30020102011
+               132.373410215 -4.31003960998
+               132.468609566 -4.40020102011
+               132.473410215 -4.40472369515
+               132.573410215 -4.49930338093
+               132.574362049 -4.50020102011
+               132.673410215 -4.59370844696
+               132.68033553 -4.60020102011
+               132.730579039 -4.64303219663
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>40</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.5" binWidth="0.1">
+          <occurRates>0.0180996149268 0.0143382059546 0.0113072663589 0.00886192027356 0.00688660286003 0.00528902009142 0.00387358538356 0.00278391240009 0.00188134803117 0.00125751217302 0.000795182234273 0.000422877287915 0.000206594861422 3.85166370575e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_seram_thrust-4.83192962449" name="banda_seram_thrust-4.83192962449" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               128.273410215 -3.14555428696
+               128.373410215 -3.15015544331
+               128.473410215 -3.15483069061
+               128.573410215 -3.15787427831
+               128.673410215 -3.16267603765
+               128.773410215 -3.1664688963
+               128.873410215 -3.16823139999
+               128.973410215 -3.17475811391
+               129.073410215 -3.17748022633
+               129.173410215 -3.18076490237
+               129.273410215 -3.18698552444
+               129.373410215 -3.18865364139
+               129.473410215 -3.19607186555
+               129.50223248 -3.20020102011
+               129.573410215 -3.20954530106
+               129.673410215 -3.22683228146
+               129.773410215 -3.24391454637
+               129.873410215 -3.261716193
+               129.973410215 -3.27863602034
+               130.073410215 -3.2966901325
+               130.094529985 -3.30020102011
+               130.173410215 -3.31229338719
+               130.273410215 -3.32843932788
+               130.373410215 -3.34501171902
+               130.473410215 -3.35903533262
+               130.573410215 -3.39369200125
+               130.585387853 -3.40020102011
+               130.673410215 -3.44673878511
+               130.770259993 -3.50020102011
+               130.773410215 -3.50186981991
+               130.873410215 -3.55340797369
+               130.960334374 -3.60020102011
+               130.973410215 -3.607000749
+               131.073410215 -3.65895330403
+               131.152964623 -3.70020102011
+               131.173410215 -3.71048690652
+               131.273410215 -3.76366249006
+               131.341750156 -3.80020102011
+               131.373410215 -3.81656262129
+               131.473410215 -3.8680727528
+               131.534525361 -3.90020102011
+               131.573410215 -3.92073208199
+               131.673410215 -3.99715923255
+               131.676661937 -4.00020102011
+               131.773410215 -4.08876139938
+               131.785842926 -4.10020102011
+               131.873410215 -4.18133813104
+               131.894446123 -4.20020102011
+               131.973410215 -4.26994926955
+               132.006271234 -4.30020102011
+               132.073410215 -4.3607325284
+               132.116849127 -4.40020102011
+               132.173410215 -4.45340568332
+               132.222328724 -4.50020102011
+               132.273410215 -4.54825099846
+               132.329217404 -4.60020102011
+               132.373410215 -4.64154137423
+               132.435144268 -4.70020102011
+               132.473410215 -4.73645447043
+               132.541227492 -4.80020102011
+               132.573410215 -4.83192962449
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>40</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.5" binWidth="0.1">
+          <occurRates>0.0180996149268 0.0143382059546 0.0113072663589 0.00886192027356 0.00688660286003 0.00528902009142 0.00387358538356 0.00278391240009 0.00188134803117 0.00125751217302 0.000795182234273 0.000422877287915 0.000206594861422 3.85166370575e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_moresby_trough-10.2981866495" name="banda_moresby_trough-10.2981866495" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               144.463837661 -7.62907788867
+               144.83550065 -7.89818476356
+               145.23550065 -8.19818366836
+               145.63550065 -8.49818249996
+               145.720156282 -8.54938875602
+               145.802240067 -8.63915118621
+               146.035519137 -8.89820090697
+               146.13550065 -8.99818242008
+               146.135517369 -8.99820090697
+               146.197123373 -9.10076029942
+               146.297121379 -9.21611665414
+               146.412476398 -9.38266085791
+               146.492002115 -9.44938875602
+               146.59712245 -9.52635422395
+               146.707347333 -9.62378214528
+               146.827822473 -9.7109832944
+               146.93550065 -9.79818347592
+               147.222703688 -10.0161036257
+               147.43550065 -10.0981854336
+               147.53550065 -10.1263425898
+               147.73550065 -10.1981863691
+               147.93550065 -10.2981810243
+               148.03550065 -10.2981864193
+               148.13550065 -10.2981865271
+               148.23550065 -10.2981864754
+               148.33550065 -10.2981866501
+               148.43550065 -10.2981863378
+               148.53550065 -10.2981865681
+               148.63550065 -10.2981866461
+               148.73550065 -10.2981864587
+               148.83550065 -10.2981866985
+               148.93550065 -10.29818662
+               149.03550065 -10.2981866495
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>30</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="6.5" binWidth="0.1">
+          <occurRates>0.0412955116949 0.0327384878272 0.025936230159 0.0205227543307 0.016209572708 0.0127690633214 0.0100214500168 0.00782460163337 0.00606603335361 0.00465662959736 0.00352571373084 0.00261717223498 0.00185668411837 0.00126799645786 0.000880100283501 0.000583622152359 0.00037604086891 0.000249153617546 0.000151156730024 9.42477155424e-05 5.12981096652e-05 2.80190125508e-05 1.163734839e-05 2.48669363059e-06</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_moresby_trough-7.41707456157" name="banda_moresby_trough-7.41707456157" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               149.03550065 -10.0396965527
+               148.93550065 -10.0391390584
+               148.83550065 -10.0385435072
+               148.73550065 -10.038783075
+               148.63550065 -10.0377353393
+               148.53550065 -10.0369824091
+               148.43550065 -10.0370611856
+               148.33550065 -10.0366313379
+               148.23550065 -10.0364348309
+               148.13550065 -10.038486064
+               148.03550065 -10.0341341489
+               147.93550065 -10.0046844797
+               147.916924256 -9.99820090697
+               147.83550065 -9.9636051802
+               147.73550065 -9.92771579365
+               147.639426874 -9.89820090697
+               147.63550065 -9.89665104326
+               147.53550065 -9.8581290073
+               147.43550065 -9.82542446784
+               147.358066979 -9.79820090697
+               147.33550065 -9.7870524469
+               147.23550065 -9.71485012576
+               147.215035337 -9.69820090697
+               147.13550065 -9.62935052508
+               147.094145501 -9.59820090697
+               147.03550065 -9.55064294658
+               146.966936584 -9.49820090697
+               146.93550065 -9.47277340793
+               146.83832808 -9.39820090697
+               146.83550065 -9.39590910471
+               146.73550065 -9.31507538166
+               146.71318924 -9.29820090697
+               146.63550065 -9.23544664467
+               146.598867055 -9.19820090697
+               146.53550065 -9.11623783287
+               146.522823026 -9.09820090697
+               146.45069187 -8.99820090697
+               146.43550065 -8.97822213009
+               146.380165102 -8.89820090697
+               146.33550065 -8.84668002789
+               146.291032106 -8.79820090697
+               146.23550065 -8.7374932357
+               146.200831656 -8.69820090697
+               146.13550065 -8.62739589782
+               146.108707075 -8.59820090697
+               146.03550065 -8.5186056191
+               146.01730423 -8.49820090697
+               145.93550065 -8.40821946484
+               145.926135661 -8.39820090697
+               145.83550065 -8.31847687323
+               145.807587245 -8.29820090697
+               145.73550065 -8.24206391306
+               145.673390324 -8.19820090697
+               145.63550065 -8.16903701625
+               145.536984284 -8.09820090697
+               145.53550065 -8.09703593004
+               145.43550065 -8.02189453988
+               145.401197471 -7.99820090697
+               145.33550065 -7.95079486517
+               145.255817814 -7.89820090697
+               145.23550065 -7.88318445122
+               145.13550065 -7.8088314526
+               145.120680325 -7.79820090697
+               145.03550065 -7.73396139435
+               144.984250624 -7.69820090697
+               144.93550065 -7.66059373913
+               144.848704564 -7.59820090697
+               144.83550065 -7.58791989222
+               144.73550065 -7.51288754064
+               144.715343471 -7.49820090697
+               144.63550065 -7.43522037469
+               144.616626996 -7.41707456157
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>30</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="6.5" binWidth="0.1">
+          <occurRates>0.0412955116949 0.0327384878272 0.025936230159 0.0205227543307 0.016209572708 0.0127690633214 0.0100214500168 0.00782460163337 0.00606603335361 0.00465662959736 0.00352571373084 0.00261717223498 0.00185668411837 0.00126799645786 0.000880100283501 0.000583622152359 0.00037604086891 0.000249153617546 0.000151156730024 9.42477155424e-05 5.12981096652e-05 2.80190125508e-05 1.163734839e-05 2.48669363059e-06</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_moresby_trough-7.12997264157" name="banda_moresby_trough-7.12997264157" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               149.043175105 -9.70472144909
+               148.193456811 -9.66888995475
+               148.070605973 -9.64329603022
+               147.584321407 -9.47437612834
+               147.512658418 -9.42318827928
+               147.005898713 -9.01880427174
+               146.893285445 -8.91642857363
+               146.555445641 -8.45573793212
+               146.294387611 -8.21003625665
+               146.08451743 -8.04623513968
+               144.830415128 -7.12997264157
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>30</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="6.5" binWidth="0.1">
+          <occurRates>0.0412955116949 0.0327384878272 0.025936230159 0.0205227543307 0.016209572708 0.0127690633214 0.0100214500168 0.00782460163337 0.00606603335361 0.00465662959736 0.00352571373084 0.00261717223498 0.00185668411837 0.00126799645786 0.000880100283501 0.000583622152359 0.00037604086891 0.000249153617546 0.000151156730024 9.42477155424e-05 5.12981096652e-05 2.80190125508e-05 1.163734839e-05 2.48669363059e-06</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_banda_detachment-3.4789851594" name="banda_banda_detachment-3.4789851594" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               128.453668895 -7.36530168462
+               128.843667674 -7.21299667058
+               129.158637204 -6.9744501774
+               129.402640282 -6.7659664002
+               129.533787378 -6.62973833163
+               129.860416009 -6.0331149959
+               130.002039223 -5.55556235073
+               130.017124839 -5.40686974441
+               130.050824093 -5.22455435289
+               130.024316969 -5.06620476791
+               130.03472033 -4.60561792084
+               129.980566701 -4.30652787665
+               129.850645614 -3.95688986645
+               129.631905879 -3.67127652937
+               129.480482937 -3.4789851594
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>20</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.3" binWidth="0.1">
+          <occurRates>0.0346661713007 0.0262889857369 0.0198959190749 0.0150103227824 0.011235004079 0.00839718203822 0.006257503848 0.00464134581633 0.003419552933 0.00249591149404 0.00179844104335 0.00127296022751 0.000878541117279 0.000584182740156 0.0003500803536 0.000169449100027 7.2469316367e-05 1.60918350404e-05</occurRates>
+      </incrementalMFD>
+      <rake>-90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_banda_detachment-7.53568307541" name="banda_banda_detachment-7.53568307541" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               129.599383813 -3.37597154151
+               129.923181207 -3.70526950713
+               130.286286199 -4.25200843673
+               130.499668583 -4.58036594363
+               130.621793291 -5.05084679161
+               130.68616673 -5.49544544
+               130.70378271 -5.82280902
+               130.56285489 -6.07383671
+               130.077425968 -6.71563829551
+               128.868085779 -7.44376695168
+               128.501769182 -7.53568307541
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>20</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.3" binWidth="0.1">
+          <occurRates>0.0346661713007 0.0262889857369 0.0198959190749 0.0150103227824 0.011235004079 0.00839718203822 0.006257503848 0.00464134581633 0.003419552933 0.00249591149404 0.00179844104335 0.00127296022751 0.000878541117279 0.000584182740156 0.0003500803536 0.000169449100027 7.2469316367e-05 1.60918350404e-05</occurRates>
+      </incrementalMFD>
+      <rake>-90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_banda_detachment-7.17539689231" name="banda_banda_detachment-7.17539689231" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               129.346113945 -3.60534125056
+               129.472928208 -3.81210663665
+               129.556495428 -4.07280426824
+               129.533648982 -4.32995391394
+               129.477816274 -4.50612815405
+               129.260020362 -4.95748669063
+               129.07656569 -5.5856054414
+               129.034647885 -6.19744890563
+               128.927293591 -6.70196043214
+               128.699305442 -6.96321455093
+               128.406037298 -7.17539689231
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>20</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.3" binWidth="0.1">
+          <occurRates>0.0346661713007 0.0262889857369 0.0198959190749 0.0150103227824 0.011235004079 0.00839718203822 0.006257503848 0.00464134581633 0.003419552933 0.00249591149404 0.00179844104335 0.00127296022751 0.000878541117279 0.000584182740156 0.0003500803536 0.000169449100027 7.2469316367e-05 1.60918350404e-05</occurRates>
+      </incrementalMFD>
+      <rake>-90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_timor-11.0730476166" name="banda_timor-11.0730476166" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               130.713441677 -7.78513446614
+               130.613441677 -7.81154896365
+               130.513441677 -7.83776247046
+               130.413441677 -7.86376663398
+               130.35018777 -7.88001870321
+               130.313441677 -7.88931994477
+               130.213441677 -7.91415178629
+               130.113441677 -7.93874981702
+               130.013441677 -7.96249744001
+               129.938402995 -7.98001870321
+               129.913441677 -7.98578741494
+               129.813441677 -8.00834145637
+               129.713441677 -8.03016043436
+               129.613441677 -8.05111634465
+               129.513441677 -8.07140579917
+               129.470081876 -8.08001870321
+               129.413441677 -8.09099424461
+               129.313441677 -8.10978879111
+               129.213441677 -8.12810052047
+               129.113441677 -8.14625448986
+               129.013441677 -8.16486492141
+               128.928459058 -8.18001870321
+               128.913441677 -8.18265064476
+               128.813441677 -8.19921968988
+               128.713441677 -8.21523948106
+               128.613441677 -8.22970620906
+               128.513441677 -8.24284563609
+               128.413441677 -8.25492825026
+               128.313441677 -8.26631246554
+               128.213441677 -8.27743219564
+               128.188738174 -8.28001870321
+               128.113441677 -8.28784223859
+               128.013441677 -8.29738145433
+               127.913441677 -8.30680600798
+               127.813441677 -8.31683559034
+               127.713441677 -8.32818932635
+               127.613441677 -8.34158738106
+               127.513441677 -8.35742784831
+               127.413441677 -8.37592637924
+               127.394071068 -8.38001870321
+               127.313441677 -8.39678363728
+               127.213441677 -8.42039245696
+               127.113441677 -8.44706733264
+               127.013441677 -8.47706146647
+               127.004428002 -8.48001870321
+               126.913441677 -8.50812774195
+               126.813441677 -8.54273174058
+               126.717150906 -8.58001870321
+               126.713441677 -8.58143923005
+               126.613441677 -8.62182429973
+               126.513441677 -8.6638087423
+               126.475396246 -8.68001870321
+               126.413441677 -8.70599574709
+               126.313441677 -8.74741045998
+               126.23469115 -8.78001870321
+               126.213441677 -8.78866289479
+               126.113441677 -8.82964531999
+               126.013441677 -8.87113783641
+               125.992389929 -8.88001870321
+               125.913441677 -8.91308642138
+               125.813441677 -8.95539666242
+               125.755569936 -8.98001870321
+               125.713441677 -8.99775677721
+               125.613441677 -9.04062114999
+               125.524047188 -9.08001870321
+               125.513441677 -9.0846588175
+               125.413441677 -9.12912235153
+               125.313441677 -9.17507529042
+               125.302754522 -9.18001870321
+               125.213441677 -9.22066314132
+               125.113441677 -9.26651199962
+               125.084545393 -9.28001870321
+               125.013441677 -9.31300661556
+               124.913441677 -9.35982397622
+               124.870274363 -9.38001870321
+               124.813441677 -9.40585663538
+               124.713441677 -9.45132410976
+               124.650946396 -9.48001870321
+               124.613441677 -9.49709354389
+               124.513441677 -9.54294112753
+               124.43380384 -9.58001870321
+               124.413441677 -9.58936835121
+               124.313441677 -9.63553286604
+               124.21949721 -9.68001870321
+               124.213441677 -9.68286722966
+               124.113441677 -9.72977054343
+               124.013441677 -9.77767519078
+               124.008574249 -9.78001870321
+               123.913441677 -9.82624885625
+               123.813441677 -9.87777406183
+               123.809199632 -9.88001870321
+               123.713441677 -9.92832674959
+               123.613441677 -9.97851201812
+               123.610413578 -9.98001870321
+               123.513441677 -10.0274293396
+               123.413441677 -10.0777764726
+               123.409016928 -10.0800187032
+               123.313441677 -10.1275537023
+               123.213441677 -10.1778036068
+               123.209042907 -10.1800187032
+               123.113441677 -10.2281309231
+               123.013441677 -10.2793654098
+               123.012179707 -10.2800187032
+               122.913441677 -10.3302702703
+               122.816704704 -10.3800187032
+               122.813441677 -10.38166601
+               122.713441677 -10.4334899448
+               122.62653754 -10.4800187032
+               122.613441677 -10.4869377221
+               122.513441677 -10.5400095196
+               122.438618325 -10.5800187032
+               122.413441677 -10.5932135713
+               122.313441677 -10.6447288822
+               122.243366218 -10.6800187032
+               122.213441677 -10.6947175705
+               122.113441677 -10.7421409315
+               122.031508272 -10.7800187032
+               122.013441677 -10.788207748
+               121.913441677 -10.8321143949
+               121.813441677 -10.874754494
+               121.800736423 -10.8800187032
+               121.713441677 -10.9155234896
+               121.613441677 -10.9552796829
+               121.55018836 -10.9800187032
+               121.513441677 -10.9941757132
+               121.413441677 -11.0323872182
+               121.313441677 -11.0704871545
+               121.306470591 -11.0730476166
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>25</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.0451713734663 0.0362214738423 0.0290471211967 0.0232890889118 0.0186621598874 0.0149396254378 0.0119410790351 0.00950369181272 0.00755704337871 0.00599041589031 0.00472832692896 0.00371128751329 0.00289216778516 0.0022335924708 0.00170578435404 0.00128495473926 0.000951921256228 0.000691061188342 0.000460489136271 0.000311578911363 0.000201816406815 0.000123160927869 6.88254701769e-05 3.31436420554e-05 1.14561838709e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_timor-11.79370565" name="banda_timor-11.79370565" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               130.80049442 -8.56921014
+               129.94000758 -8.78320643
+               128.75276846 -9.0036937
+               127.38744346 -9.13937817
+               125.87795371 -9.77539913
+               124.49566816 -10.41142009
+               123.30842903 -11.00503966
+               122.41799969 -11.47145503
+               121.61237314 -11.79370565
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>25</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.0451713734663 0.0362214738423 0.0290471211967 0.0232890889118 0.0186621598874 0.0149396254378 0.0119410790351 0.00950369181272 0.00755704337871 0.00599041589031 0.00472832692896 0.00371128751329 0.00289216778516 0.0022335924708 0.00170578435404 0.00128495473926 0.000951921256228 0.000691061188342 0.000460489136271 0.000311578911363 0.000201816406815 0.000123160927869 6.88254701769e-05 3.31436420554e-05 1.14561838709e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+  <simpleFaultSource id="banda_timor-10.4761011126" name="banda_timor-10.4761011126" tectonicRegion="Subduction">
+      <simpleFaultGeometry>
+          <gml:LineString>
+            <gml:posList>
+               130.498516525 -7.31834980366
+               129.53158197 -7.5144414267
+               128.422650033 -7.68348592932
+               127.340765216 -7.7984361911
+               126.786299247 -7.91338645288
+               126.001932755 -8.2311901178
+               124.615767834 -8.8059414267
+               121.15373642 -10.4761011126
+            </gml:posList>
+          </gml:LineString>
+          <dip>30</dip>
+          <upperSeismoDepth>0</upperSeismoDepth>
+          <lowerSeismoDepth>25</lowerSeismoDepth>
+      </simpleFaultGeometry>
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.0451713734663 0.0362214738423 0.0290471211967 0.0232890889118 0.0186621598874 0.0149396254378 0.0119410790351 0.00950369181272 0.00755704337871 0.00599041589031 0.00472832692896 0.00371128751329 0.00289216778516 0.0022335924708 0.00170578435404 0.00128495473926 0.000951921256228 0.000691061188342 0.000460489136271 0.000311578911363 0.000201816406815 0.000123160927869 6.88254701769e-05 3.31436420554e-05 1.14561838709e-05</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+
+    </sourceModel>
+</nrml>
