@@ -32,8 +32,6 @@ lon = dictlist2array(nshacat, 'lon')
 # get indexes to delete
 delidx = where((ev_type=='blast') | (ev_type=='coal'))[0]
 delidx = hstack((delidx, where(lat > -12)[0]))
-#delidx = hstack((delidx, where(lon < 135)[0])) # just eastern events
-#delidx = hstack((delidx, where(lon > 134)[0])) # just western events
 datelim = dt(1960, 1, 1)
 delidx = hstack((delidx, where(evdt < datelim)[0]))
 
@@ -51,7 +49,7 @@ for ed in evdt:
 decimal_yrs = array(decimal_yrs)    
 
 # get plotting indices
-minmag = 5.
+minmag = 4.5
 
 fig, ax = plt.subplots(1, figsize=(10,6.25))
 
@@ -72,24 +70,31 @@ plt.xticks(rotation=45) #, ha='right')
 ax.set_yticks([0, 4, 8, 12, 16, 20])   
 plt.ylabel('Number of Earthquakes ML '+r'$\geq$'+' '+str(minmag))   
 plt.xlabel('Years')
-ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
-plt.ylim([0, 20])
-plt.grid()
-'''
+leg1 = ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
+leg1.get_frame().set_alpha(1.)
+#plt.ylim([0, 20])
+plt.xlim([1958, 2018]) 
+ax.yaxis.grid(ls='--')
+#plt.grid(ls='--', which='y')
+
+
 # get average from 1960 - 1988
 av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
 av_n_1989_2017 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
 
-plt.plot([1960, 1987], [av_n_1960_1988, av_n_1960_1988], 'm--', lw=2.5)
-plt.plot([1989, 2017], [av_n_1989_2017, av_n_1989_2017], 'm--', lw=2.5)
+plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], '--', c='dodgerblue', lw=2.5, label='Original ML Average Annual Number')
+plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='dodgerblue', lw=2.5)
 
 av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
 av_n_1989_2017 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
 
-plt.plot([1960, 1987], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5)
-plt.plot([1989, 2017], [av_n_1989_2017, av_n_1989_2017], 'k--', lw=2.5)
-'''
-   
+plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5, label='Revised ML Average Annual Number')
+plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], 'k--', lw=2.5)
+leg2 = plt.legend(loc=2)
+leg2.get_frame().set_alpha(1.)
+
+
+plt.gca().add_artist(leg1)
 plt.savefig('mag_time_bar.png', fmt='png', bbox_inches='tight', dpi=300)
 plt.show()
 
