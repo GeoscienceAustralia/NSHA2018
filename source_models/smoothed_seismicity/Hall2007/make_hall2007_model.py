@@ -52,11 +52,14 @@ for filename in original_source_data_files:
     dy = float(header2[2])
     print dx, dy
     dxdy = dx*dy
-    # a values in paper defined as annual rate of M > 5
+    # a values in paper defined as annual rate of M > 5 per 10,000 km^2
+    # i.e. they are NA5, not a0
+    # Rates are defined per 10,000 km^2
     # convert to OpenQuake a value defintion
-    # From Andreas: a0 = a5*10**(5*b)
-    # N = atot*dx*dy
-    # a = log10(N)
+    # From Andreas: NA0 = NA5*10**(5*b)
+    # Then we reduce to the grid cell size
+    # N0 = NA0*dx*dy
+    # a0 = log10(N0)
     b_val = region_b_values[filebase]
     try:
         lons = np.append(lons, data[:,0])
