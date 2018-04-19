@@ -36,7 +36,7 @@ source_mmin_dict = {'arutrough':6.5,
                 'flores':7.0,
 #                'hjort':6.5,
 #                'macquarienorth':5.5,
-                'moresby_trough':5.5,
+                'moresby_trough':6.0,
                 'newguinea':7.0,
 #                'puysegur':6.7,
                 'seram_thrust':7.0,
@@ -44,7 +44,7 @@ source_mmin_dict = {'arutrough':6.5,
                 'sunda':8.0,
                 'tanimbar':6.5,
                 'timor':6.5,
-                'trobriand':7.0}
+                'trobriand':6.5}
 
 source_rake_dict = {'arutrough':-90,
                     'banda_detachment':-90,

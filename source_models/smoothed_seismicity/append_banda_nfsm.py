@@ -33,7 +33,7 @@ for line in lines:
         # add indoneasia-png source model - do this for all
         ######################################################################
         
-        indo_png_fault_file = path.join('..', 'zones', '2018_mw', 'Java_Banda_PNG', 'input', 'collapsed', 'Java_Banda_PNG_collapsed.xml')
+        indo_png_fault_file = path.join('..', 'zones', '2018_mw', 'Java_Banda_PNG', 'input', 'collapsed', 'Java_Banda_PNG_collapsed_faults.xml')
         blines = open(indo_png_fault_file).readlines()[5:-2]
         for bline in blines:
             newxml += bline
@@ -52,4 +52,4 @@ f = open(newFile, 'wb')
 f.write(newxml)
 f.close()
 
-print '\nSkipping Banda Faults\n'
+#print '\nSkipping Banda Faults\n'
