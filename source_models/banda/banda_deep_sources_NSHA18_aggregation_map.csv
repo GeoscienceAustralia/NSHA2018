@@ -1,0 +1,23 @@
+id,Name,usd,lsd,max_mag,strike1,dip1,rake1,hd1,trt,Aggregation_zone
+33,Banda_100_200km,100,200,8.3,0,45,-90,150,Intraslab,11a
+34,Banda_200_300km,200,300,8.3,0,45,-90,250,Intraslab,11a
+38,Banda_300_400km,300,400,8.3,0,45,-90,350,Intraslab,11b
+31,Banda_40_100km,40,100,8.3,0,45,-90,60,Intraslab,11a
+43,Banda_400_500km,400,500,8.3,0,45,-90,450,Intraslab,11b
+43,Banda_500_600km,500,600,8.3,0,45,-90,550,Intraslab,11b
+21,BTFZ Deep,60,200,8.3,300,45,90,100,Intraslab,11d
+23,MTB Deep,60,130,8.3,300,45,90,100,Intraslab,11e
+20,NBT Deep,60,180,8.3,270,45,90,100,Intraslab,11f
+37,NusaTenggara_100_200km,100,200,8.3,85,45,-90,150,Intraslab,11c
+40,NusaTenggara_200_300km,200,300,8.3,85,45,-90,250,Intraslab,11c
+42,NusaTenggara_300_400km,300,400,8.3,85,45,-90,350,Intraslab,11b
+37,NusaTenggara_40_100km,40,100,8.3,85,45,-90,60,Intraslab,11c
+22,OSFZ Deep,60,180,8.3,300,45,90,100,Intraslab,11d
+19,RNB Deep,60,200,8.3,250,45,90,100,Intraslab,11g
+35,Seram_100_200km,100,200,8.3,285,45,-90,150,Intraslab,11c
+36,Seram_200_300km,200,300,8.3,285,45,-90,250,Intraslab,11c
+32,Seram_40_100km,40,100,8.3,285,45,-90,60,Intraslab,11c
+37,Timor_100_200km,100,200,8.3,80,45,-90,150,Intraslab,11c
+39,Timor_200_300km,200,300,8.3,80,45,-90,250,Intraslab,11c
+41,Timor_300_400km,300,400,8.3,80,45,-90,350,Intraslab,11b
+36,Timor_40_100km,40,100,8.3,80,45,-90,60,Intraslab,11c
