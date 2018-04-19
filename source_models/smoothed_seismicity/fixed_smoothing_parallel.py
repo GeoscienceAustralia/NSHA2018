@@ -106,7 +106,10 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
     """Run all the smoothing
     """
     ystart = completeness_table[-1][0]
+    yend = catalogue.end_year
     catalogue_comp = deepcopy(catalogue)
+    # Ensuring that catalogue is cleaned of earthquakes outside of 
+    # completeness period
     index = catalogue_comp.data['year']>=ystart
     catalogue_comp.purge_catalogue(index)
 
@@ -151,16 +154,8 @@ def run_smoothing(grid_lims, smoothing_config, catalogue, completeness_table, ma
         name = 'Frankel' + str(j) + '_' + str(run)
         point = Point(data[j,0],data[j,1],
                     data[j,2])
-        rate = data[j,4]
-        aval = np.log10(rate)
-#        inc_rate = data[j,4] # interpreting as incremental rate
-        # therefore 
-#        Nm = inc_rate*(np.exp(-1*bval*np.log(10)*-1*0.05)-np.exp(-1*bval*np.log(10)*0.05))
-#        aval = np.log10(Nm)
-#        aval = np.log10(rate)
-       # aval = rate # trying this based on some testing
-    #    aval = np.log10(rate) #+ bval*completeness_table_a[0][1]
-       # print aval
+        annual_rate = data[j,4]/(yend - ystart + 1)
+        aval =  np.log10(annual_rate) + smoothing_config['bvalue']*completeness_table[0][1]
         mfd = TruncatedGRMFD(min_mag, max_mag, 0.1, aval, bval)
         hypo_depth_dist = PMF([(0.5, 10.0),
                               (0.25, 5.0),
@@ -207,7 +202,7 @@ t0 = pypar.time()
 parser = CsvCatalogueParser(catalogue_filename) # From .csv to hmtk
 
 # Read and process the catalogue content in a variable called "catalogue"
-catalogue = parser.read_file(start_year=1965, end_year=2017)
+catalogue = parser.read_file(start_year=1965, end_year=2016)
 
 # How many events in the catalogue?
 print "The catalogue contains %g events" % catalogue.get_number_events()
@@ -270,7 +265,8 @@ for i in range(0, len(config_combinations), 1):
         run = "%03d" % i
         print 'Run %s' % run
         completeness_table = np.array(config_combinations[i][0])
-        #completeness_table = completeness_table[0]
+        print 'Only using full period of catalogue'
+        completeness_table = np.array([completeness_table[0]])
         bvalue = config_combinations[i][1]
 #        if i % 3 == 0:
 #            bvalue = config_params[i/3]['BVAL_BEST']
@@ -282,7 +278,7 @@ for i in range(0, len(config_combinations), 1):
         print 'mmin', mmin
         config = {"BandWidth": 50.,
                   "Length_Limit": 3.,
-                  "increment": 0.1,
+                  "increment": False,
                   "bvalue":bvalue}
         ystart = completeness_table[-1][0]
         # Call the smoothing module
