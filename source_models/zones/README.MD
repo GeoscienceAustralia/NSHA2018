@@ -3,7 +3,7 @@ NSHA18 source model workflow
 
 *	Base shapefiles are developed [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/source_models/zones/shapefiles) from original data sources:
 	- Bespoke scripts are written to convert each area source model into a shapefile with common attributes, [for example](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/shapefiles/ARUP/make_ARUP_model.py)
-	- Where possible, attributes are filled, otherwise default values are used
+	- Where possible, attributes are filled, otherwise null values are used
 	- Base shapefiles generated have the suffix *_NSHA18.shp
 
 * The script [get_NSHA18_mfds_merge.py](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/get_NSHA18_mfds_merge.py)  uses these files to generate earthquake magnitude-frequency statistics:
