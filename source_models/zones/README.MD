@@ -2,12 +2,12 @@ NSHA18 source model workflow
 ============================
 
 *	Base shapefiles are developed [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/source_models/zones/shapefiles) from original data sources
-	- Bespoke scripts are written to convert each area source model into a shapefile with common attributes
+	- Bespoke scripts are written to convert each area source model into a shapefile with common attributes, [for example](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/shapefiles/ARUP/make_ARUP_model.py)
 	- Where possible, attributes are filled, otherwise default values are used
 	- Base shapefiles have the suffix *_NSHA18.shp
 
 * The script [get_NSHA18_mfds_merge.py](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/get_NSHA18_mfds_merge.py)  uses these files to generate earthquake magnitude-frequency statistics:
-	- The script parses a parameter file of [this] (https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/2018_mw/ARUP/arup.param) format
+	- The script parses a parameter file of [this](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/2018_mw/ARUP/arup.param) format
 	- The parameter file provides a path to the base shapefiles above
 	- For each area source magnitude-frequency statistics are calculated based on the catalogue specified in the shapefile
 	- The script outputs:
@@ -17,4 +17,4 @@ NSHA18 source model workflow
 		
 * The script [write_oq_inputs.py](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/zones/write_oq_inputs.py) parses these shapefiles to output OpenQuake-engine [input files](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/source_models/zones/2018_mw/AUS6/input)
 
-* The script [make_source_model_logic_tree.py] builds the OpenQuake-engine [source model logic tree](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/logic_trees/nsha18_source_model_logic_tree.xml) and copies the necessary source model files to the appropriate directory for running the combined hazard model
+* The script [make_source_model_logic_tree.py](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/logic_trees/make_source_model_logic_tree.pyhttps://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/logic_trees/make_source_model_logic_tree.py) builds the OpenQuake-engine [source model logic tree](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/source_models/logic_trees/nsha18_source_model_logic_tree.xml) and copies the necessary source model files to the appropriate directory for running the combined hazard model
