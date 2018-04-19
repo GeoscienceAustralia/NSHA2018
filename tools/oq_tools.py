@@ -104,13 +104,28 @@ def return_haz_curves(hazcurvefile):
     elif hazcurvefile.endswith('csv'):
 
         csvlines = open(hazcurvefile).readlines()
-                
+        
+        # get investigation time
+        investigation_time = float(csvlines[0].split(',')[1].split('=')[-1])
+        
         # get intesity measures
         header = csvlines[1].strip().split(',')[2:]
         try:
             imls = array([float(x.split(':')[0]) for x in header])
+        
+        # have to edit to accommodate imls < 10**-4
         except:
-            imls = array([float(x.split('-')[-1]) for x in header])
+            imls = []
+            for iml in header:
+                iml = iml.split('-')
+                if len(iml) > 2:
+                    imls.append(float('-'.join(iml[1:])))
+                else:
+                    imls.append(float(iml[-1]))
+                    
+            imls = array(imls)
+            #imls = array([float(x.split('-')[-1]) for x in header])
+        
         metadata = {'imls': imls}
         	
         # get site data
