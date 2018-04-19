@@ -224,8 +224,8 @@ def bar_plot(q_list, weight_list, label_list, filename, title, fontsize = 12,
         rects1 = ax.bar(x_vals, weight_list, width, color='b')
     if xlabelfont is None:
         xlabelfont = fontsize
-    ax.set_ylabel('Weight')
-    ax.set_title(title)
+    ax.set_ylabel('Weight', fontsize=fontsize)
+    ax.set_title(title, fontsize=(fontsize+2))
     ax.set_xticks(x_vals + width / 2)
     ax.set_xticklabels(label_list, fontsize=xlabelfont)
     ax.set_ylim([0,1])
@@ -618,10 +618,13 @@ print ids
 
 c_gmm_model_all_w = []
 c_gmm_model_all_labels = []
+c_gmm_model_all_labels_short = []
 nc_ex_gmm_model_all_w = []
 nc_ex_gmm_model_all_labels = []
+nc_ex_gmm_model_all_labels_short = []
 banda_gmm_model_all_w = []
 banda_gmm_model_all_labels = []
+banda_gmm_model_all_labels_short = []
 
 gmm_fig_path = fig_path =join(target_path, 'ground_motion_results', 'Figures_%s') % fig_cw
 if not os.path.exists(gmm_fig_path):
@@ -654,7 +657,7 @@ banda_gmm_region_w = largest_remainder(banda_gmm_region_w, expected_sum = 1, pre
 print banda_gmm_region_w, sum(banda_gmm_region_w)
 bar_plot(banda_gmm_region_qlist, banda_gmm_region_w, banda_gmm_region_labels, \
          'banda_sea_gmm_region_weights.png', \
-         'Banda Sea GMM Region Weights', fig_path = gmm_fig_path)
+         'Subduction GMM Region Weights', fig_path = gmm_fig_path)
 
 label_to_oq_gmm_dict = {'Allen2012' : 'Allen2012', 'Allen2012 \n RedSigma' : None,
                         'Som2009 \n Non-cratonic' : 'SomervilleEtAl2009NonCratonic',
@@ -677,11 +680,32 @@ label_to_oq_gmm_dict = {'Allen2012' : 'Allen2012', 'Allen2012 \n RedSigma' : Non
                         'Garcia\n2005SSlab' : 'GarciaEtAl2005SSlab',
                         'MegaPan\n2010' : 'MegawatiPan2010'}
 
+label_to_oq_gmm_dict_short = {'Allen\n2012' : 'Allen2012', 'Allen2012 \n RedSigma' : None,
+                              'Som2009\n NC' : 'SomervilleEtAl2009NonCratonic',
+                              'Som2009 \n Yil' : 'SomervilleEtAl2009YilgarnCraton',
+                              'AtkB\n2006' : 'AtkinsonBoore2006', 
+                              'AtkB\n2006\nM2011' : 'AtkinsonBoore2006Modified2011',
+                              'Camp\n2003' : 'Campbell2003',
+                              'Pez\n2011' : 'PezeshkEtAl2011',
+                              'Silva\n2002\nMwNSHMP\n2008' : 'SilvaEtAl2002MwNSHMP2008',
+                              'Toro\n2002' : 'ToroEtAl2002', 
+                              'YenAtk\n2015' : None,
+                              'Boore2014' : 'BooreEtAl2014',
+                              'ChiYou\n2008' : 'ChiouYoungs2008',
+                              'ChiYou\n2014' : 'ChiouYoungs2014',
+                              'ChiYo\n2008\nSWISS01' : 'ChiouYoungs2008SWISS01', 
+                              'Riet\n2013SS' : 'RietbrockEtAl2013SelfSimilar',
+                              'Zhao\n2006\nASWISS05' : 'ZhaoEtAl2006AscSWISS05',
+                              'Abrah\n2015\nSSlab' : 'AbrahamsonEtAl2015SSlab',
+                              'AtkB\n2003\nSSlab' : 'AtkinsonBoore2003SSlab',
+                              'Garcia\n2005\nSSlab' : 'GarciaEtAl2005SSlab',
+                              'MegP\n2010' : 'MegawatiPan2010'}
 ##############
 # Cratonic models
 # Cratonic GMM Australian models
 c_gmm_aust_qlist = ['S2Q1', 'S2Q2', 'S2Q3', 'S2Q4']
 c_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Som2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
+c_gmm_aust_labels_short = ['Allen\n2012', 'Allen\n2012 \n RedSig', 'Som\n2009\nNC', 'Som\n2009 \n Yil']
 c_gmm_aust_w = get_weights(c_gmm_aust_qlist, weighted_sum)
 # Remove Allen2012 reduced sigma model for now, renormalise other values
 c_gmm_aust_w = np.delete(c_gmm_aust_w,1)
@@ -693,6 +717,7 @@ print c_gmm_aust_w, sum(c_gmm_aust_w)
 c_gmm_aust_region_w = c_gmm_aust_w *c_gmm_region_w[0]
 c_gmm_model_all_w += list(c_gmm_aust_region_w)
 c_gmm_model_all_labels += c_gmm_aust_labels
+c_gmm_model_all_labels_short += c_gmm_aust_labels_short
 bar_plot(c_gmm_aust_qlist, c_gmm_aust_w, c_gmm_aust_labels, \
          'cratonic_gmm_australian_weights.png', \
          'Cratonic Australian GMM Weights', fig_path = gmm_fig_path)
@@ -700,12 +725,14 @@ bar_plot(c_gmm_aust_qlist, c_gmm_aust_w, c_gmm_aust_labels, \
 # Cratonic GMM CEUS models
 c_gmm_ceus_qlist = ['S2Q5', 'S2Q6', 'S2Q7', 'S2Q8', 'S2Q9', 'S2Q10', 'S2Q11']
 c_gmm_ceus_labels = ['AtkBoore\n2006', 'AtkBoore\n2006\nMod2011', 'Campbell\n2003', 'Pezeshk\n2011', 'Silva2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
+c_gmm_ceus_labels_short = ['AtkB\n2006', 'AtkB\n2006\nM2011', 'Camp\n2003', 'Pez\n2011', 'Silva\n2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 c_gmm_ceus_w = get_weights(c_gmm_ceus_qlist, weighted_sum)
 c_gmm_ceus_w = largest_remainder(c_gmm_ceus_w, expected_sum = 1, precision = 3)
 print c_gmm_ceus_w, sum(c_gmm_ceus_w)
 c_gmm_ceus_region_w = c_gmm_ceus_w *c_gmm_region_w[1]
 c_gmm_model_all_w += list(c_gmm_ceus_region_w)
 c_gmm_model_all_labels += c_gmm_ceus_labels
+c_gmm_model_all_labels_short += c_gmm_ceus_labels_short
 bar_plot(c_gmm_ceus_qlist, c_gmm_ceus_w, c_gmm_ceus_labels, \
          'cratonic_gmm_CEUS_weights.png', \
          'Cratonic CEUS GMM Weights', fig_path = gmm_fig_path)
@@ -713,12 +740,14 @@ bar_plot(c_gmm_ceus_qlist, c_gmm_ceus_w, c_gmm_ceus_labels, \
 # Cratonic GMM California models
 c_gmm_cal_qlist = ['S2Q12', 'S2Q13', 'S2Q14']
 c_gmm_cal_labels = ['Boore2014', 'ChiYou2008', 'ChiYou2014']
+c_gmm_cal_labels_short = ['Boore\n2014', 'ChiYou\n2008', 'ChiYou\n2014']
 c_gmm_cal_w = get_weights(c_gmm_cal_qlist, weighted_sum)
 c_gmm_cal_w = largest_remainder(c_gmm_cal_w, expected_sum = 1, precision = 3)
 print c_gmm_cal_w, sum(c_gmm_cal_w)
 c_gmm_cal_region_w = c_gmm_cal_w *c_gmm_region_w[2]
 c_gmm_model_all_w += list(c_gmm_cal_region_w)
 c_gmm_model_all_labels += c_gmm_cal_labels
+c_gmm_model_all_labels_short += c_gmm_cal_labels_short
 bar_plot(c_gmm_cal_qlist, c_gmm_cal_w, c_gmm_cal_labels, \
          'cratonic_gmm_california_weights.png', \
          'Cratonic Californian GMM Weights', fig_path = gmm_fig_path)
@@ -726,12 +755,14 @@ bar_plot(c_gmm_cal_qlist, c_gmm_cal_w, c_gmm_cal_labels, \
 # Cratonic GMM Eurpoean models
 c_gmm_eur_qlist = ['S2Q15', 'S2Q16', 'S2Q17']
 c_gmm_eur_labels = ['ChiYo2008\nSWISS01', 'Rietbrock\n2013SS', 'Zhao2006\nAscSWISS05']
+c_gmm_eur_labels_short = ['ChiYo\n2008\nSWISS01', 'Riet\n2013SS', 'Zhao\n2006\nAWISS05']
 c_gmm_eur_w = get_weights(c_gmm_eur_qlist, weighted_sum)
 c_gmm_eur_w = largest_remainder(c_gmm_eur_w, expected_sum = 1, precision = 3)
 print c_gmm_eur_w, sum(c_gmm_eur_w)
 c_gmm_eur_region_w = c_gmm_eur_w *c_gmm_region_w[3]
 c_gmm_model_all_w += list(c_gmm_eur_region_w)
 c_gmm_model_all_labels += c_gmm_eur_labels
+c_gmm_model_all_labels_short += c_gmm_eur_labels_short
 bar_plot(c_gmm_eur_qlist, c_gmm_eur_w, c_gmm_eur_labels, \
          'cratonic_gmm_european_weights.png', \
          'Cratonic Eurpean GMM Weights', fig_path = gmm_fig_path)
@@ -743,6 +774,7 @@ c_gmm_w_list = [c_gmm_aust_region_w, c_gmm_ceus_region_w, c_gmm_cal_region_w, c_
 # Non-cratonic and Extended GMM Australian models
 nc_ex_gmm_aust_qlist = ['S3Q1', 'S3Q2', 'S3Q3', 'S3Q4']
 nc_ex_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Som2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
+nc_ex_gmm_aust_labels_short =['Allen\n2012', 'Allen\n2012 \n RedSig', 'Som\n2009\nNC', 'Som\n2009 \n Yil']
 nc_ex_gmm_aust_w = get_weights(nc_ex_gmm_aust_qlist, weighted_sum)
 # Remove Allen2012 reduced sigma model for now, renormalise other values
 nc_ex_gmm_aust_w = np.delete(nc_ex_gmm_aust_w, 1)
@@ -754,6 +786,7 @@ print nc_ex_gmm_aust_w, sum(nc_ex_gmm_aust_w)
 nc_ex_gmm_aust_region_w = nc_ex_gmm_aust_w *nc_ex_gmm_region_w[0]
 nc_ex_gmm_model_all_w += list(nc_ex_gmm_aust_region_w)
 nc_ex_gmm_model_all_labels += nc_ex_gmm_aust_labels
+nc_ex_gmm_model_all_labels_short += nc_ex_gmm_aust_labels_short
 bar_plot(nc_ex_gmm_aust_qlist, nc_ex_gmm_aust_w, nc_ex_gmm_aust_labels, \
          'nc_ex_gmm_australian_weights.png', \
          'Non-cratonic and Extended Australian GMM Weights', fig_path = gmm_fig_path)
@@ -761,12 +794,14 @@ bar_plot(nc_ex_gmm_aust_qlist, nc_ex_gmm_aust_w, nc_ex_gmm_aust_labels, \
 # Non-cratonic and Extended GMM CEUS models
 nc_ex_gmm_ceus_qlist = ['S3Q5', 'S3Q6', 'S3Q7', 'S3Q8', 'S3Q9', 'S3Q10', 'S3Q11']
 nc_ex_gmm_ceus_labels = ['AtkBoore\n2006', 'AtkBoore\n2006\nMod2011', 'Campbell\n2003', 'Pezeshk\n2011', 'Silva2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
+nc_ex_gmm_ceus_labels_short = ['AtkB\n2006', 'AtkB\n2006\nM2011', 'Camp\n2003', 'Pez\n2011', 'Silva\n2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 nc_ex_gmm_ceus_w = get_weights(nc_ex_gmm_ceus_qlist, weighted_sum)
 nc_ex_gmm_ceus_w = largest_remainder(nc_ex_gmm_ceus_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_ceus_w, sum(nc_ex_gmm_ceus_w)
 nc_ex_gmm_ceus_region_w = nc_ex_gmm_ceus_w *nc_ex_gmm_region_w[1]
 nc_ex_gmm_model_all_w += list(nc_ex_gmm_ceus_region_w)
 nc_ex_gmm_model_all_labels += nc_ex_gmm_ceus_labels
+nc_ex_gmm_model_all_labels_short += nc_ex_gmm_ceus_labels_short
 bar_plot(nc_ex_gmm_ceus_qlist, nc_ex_gmm_ceus_w, nc_ex_gmm_ceus_labels, \
          'nc_ex_gmm_CEUS_weights.png', \
          'Non-cratonic and Extended CEUS GMM Weights', fig_path = gmm_fig_path)
@@ -774,12 +809,14 @@ bar_plot(nc_ex_gmm_ceus_qlist, nc_ex_gmm_ceus_w, nc_ex_gmm_ceus_labels, \
 # Non-cratonic and Extended GMM California models
 nc_ex_gmm_cal_qlist = ['S3Q12', 'S3Q13', 'S3Q14']
 nc_ex_gmm_cal_labels = ['Boore2014', 'ChiYou2008', 'ChiYou2014']
+nc_ex_gmm_cal_labels_short = ['Boore\n2014', 'ChiYou\n2008', 'ChiYou\n2014']
 nc_ex_gmm_cal_w = get_weights(nc_ex_gmm_cal_qlist, weighted_sum)
 nc_ex_gmm_cal_w = largest_remainder(nc_ex_gmm_cal_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_cal_w, sum(nc_ex_gmm_cal_w)
 nc_ex_gmm_cal_region_w = nc_ex_gmm_cal_w *nc_ex_gmm_region_w[2]
 nc_ex_gmm_model_all_w += list(nc_ex_gmm_cal_region_w)
 nc_ex_gmm_model_all_labels += nc_ex_gmm_cal_labels
+nc_ex_gmm_model_all_labels_short += nc_ex_gmm_cal_labels_short
 bar_plot(nc_ex_gmm_cal_qlist, nc_ex_gmm_cal_w, nc_ex_gmm_cal_labels, \
          'nc_ex_gmm_california_weights.png', \
          'Non-cratonic and Extended Californian GMM Weights', fig_path = gmm_fig_path)
@@ -787,12 +824,14 @@ bar_plot(nc_ex_gmm_cal_qlist, nc_ex_gmm_cal_w, nc_ex_gmm_cal_labels, \
 # Non-cratonic and Extended GMM Eurpoean models
 nc_ex_gmm_eur_qlist = ['S3Q15', 'S3Q16', 'S3Q17']
 nc_ex_gmm_eur_labels = ['ChiYo2008\nSWISS01', 'Rietbrock\n2013SS', 'Zhao2006\nAscSWISS05']
+nc_ex_gmm_eur_labels_short = ['ChiYo\n2008\nSWISS01', 'Riet\n2013SS', 'Zhao\n2006\nAWISS05']
 nc_ex_gmm_eur_w = get_weights(nc_ex_gmm_eur_qlist, weighted_sum)
 nc_ex_gmm_eur_w = largest_remainder(nc_ex_gmm_eur_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_eur_w, sum(nc_ex_gmm_eur_w)
 nc_ex_gmm_eur_region_w = nc_ex_gmm_eur_w *nc_ex_gmm_region_w[3]
 nc_ex_gmm_model_all_w += list(nc_ex_gmm_eur_region_w)
 nc_ex_gmm_model_all_labels += nc_ex_gmm_eur_labels
+nc_ex_gmm_model_all_labels_short += nc_ex_gmm_eur_labels_short
 bar_plot(nc_ex_gmm_eur_qlist, nc_ex_gmm_eur_w, nc_ex_gmm_eur_labels, \
          'nc_ex_gmm_european_weights.png', \
          'Non-cratonic and Extended Eurpean GMM Weights', fig_path = gmm_fig_path)
@@ -804,6 +843,7 @@ nc_ex_gmm_w_list = [nc_ex_gmm_aust_region_w, nc_ex_gmm_ceus_region_w, nc_ex_gmm_
 # Banda Sea GMM Australian models
 banda_gmm_aust_qlist = ['S4Q1', 'S4Q2', 'S4Q3', 'S4Q4']
 banda_gmm_aust_labels = ['Allen2012', 'Allen2012 \n RedSigma', 'Som2009 \n Non-cratonic', 'Som2009 \n Yilgarn']
+banda_gmm_aust_labels_short =['Allen\n2012', 'Allen\n2012 \n RedSig', 'Som\n2009\nNC', 'Som\n2009 \n Yil']
 banda_gmm_aust_w = get_weights(banda_gmm_aust_qlist, weighted_sum)
 # Remove Allen2012 reduced sigma model for now, renormalise other values
 banda_gmm_aust_w = np.delete(banda_gmm_aust_w, 1)
@@ -815,6 +855,7 @@ print banda_gmm_aust_w, sum(banda_gmm_aust_w)
 banda_gmm_aust_region_w = banda_gmm_aust_w *banda_gmm_region_w[0]
 banda_gmm_model_all_w += list(banda_gmm_aust_region_w)
 banda_gmm_model_all_labels += banda_gmm_aust_labels
+banda_gmm_model_all_labels_short += banda_gmm_aust_labels_short
 bar_plot(banda_gmm_aust_qlist, banda_gmm_aust_w, banda_gmm_aust_labels, \
          'banda_gmm_australian_weights.png', \
          'Banda Sea Australian GMM Weights', fig_path = gmm_fig_path)
@@ -822,12 +863,14 @@ bar_plot(banda_gmm_aust_qlist, banda_gmm_aust_w, banda_gmm_aust_labels, \
 # Banda Sea GMM CEUS models
 banda_gmm_ceus_qlist = ['S4Q5', 'S4Q6', 'S4Q7', 'S4Q8', 'S4Q9', 'S4Q10', 'S4Q11']
 banda_gmm_ceus_labels = ['AtkBoore\n2006', 'AtkBoore\n2006\nMod2011', 'Campbell\n2003', 'Pezeshk\n2011', 'Silva2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
+banda_gmm_ceus_labels_short = ['AtkB\n2006', 'AtkB\n2006\nM2011', 'Camp\n2003', 'Pez\n2011', 'Silva\n2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 banda_gmm_ceus_w = get_weights(banda_gmm_ceus_qlist, weighted_sum)
 banda_gmm_ceus_w = largest_remainder(banda_gmm_ceus_w, expected_sum = 1, precision = 3)
 print banda_gmm_ceus_w, sum(banda_gmm_ceus_w)
 banda_gmm_ceus_region_w = banda_gmm_ceus_w *banda_gmm_region_w[1]
 banda_gmm_model_all_w += list(banda_gmm_ceus_region_w)
 banda_gmm_model_all_labels += banda_gmm_ceus_labels
+banda_gmm_model_all_labels_short += banda_gmm_ceus_labels_short
 bar_plot(banda_gmm_ceus_qlist, banda_gmm_ceus_w, banda_gmm_ceus_labels, \
          'banda_gmm_CEUS_weights.png', \
          'Banda Sea CEUS GMM Weights', fig_path = gmm_fig_path)
@@ -835,12 +878,14 @@ bar_plot(banda_gmm_ceus_qlist, banda_gmm_ceus_w, banda_gmm_ceus_labels, \
 # Banda Sea GMM California models
 banda_gmm_cal_qlist = ['S4Q12', 'S4Q13', 'S4Q14']
 banda_gmm_cal_labels = ['Boore2014', 'ChiYou2008', 'ChiYou2014']
+banda_gmm_cal_labels_short = ['Boore\n2014', 'ChiYou\n2008', 'ChiYou\n2014']
 banda_gmm_cal_w = get_weights(banda_gmm_cal_qlist, weighted_sum)
 banda_gmm_cal_w = largest_remainder(banda_gmm_cal_w, expected_sum = 1, precision = 3)
 print banda_gmm_cal_w, sum(banda_gmm_cal_w)
 banda_gmm_cal_region_w = banda_gmm_cal_w *banda_gmm_region_w[2]
 banda_gmm_model_all_w += list(banda_gmm_cal_region_w)
 banda_gmm_model_all_labels += banda_gmm_cal_labels
+banda_gmm_model_all_labels_short += banda_gmm_cal_labels_short
 bar_plot(banda_gmm_cal_qlist, banda_gmm_cal_w, banda_gmm_cal_labels, \
          'banda_gmm_california_weights.png', \
          'Banda Sea Californian GMM Weights', fig_path = gmm_fig_path)
@@ -848,12 +893,14 @@ bar_plot(banda_gmm_cal_qlist, banda_gmm_cal_w, banda_gmm_cal_labels, \
 # Banda Sea GMM Eurpoean models
 banda_gmm_eur_qlist = ['S4Q15', 'S4Q16', 'S4Q17']
 banda_gmm_eur_labels = ['ChiYo2008\nSWISS01', 'Rietbrock\n2013SS', 'Zhao2006\nAscSWISS05']
+banda_gmm_eur_labels_short = ['ChiYo\n2008\nSWISS01', 'Riet\n2013SS', 'Zhao\n2006\nAWISS05']
 banda_gmm_eur_w = get_weights(banda_gmm_eur_qlist, weighted_sum)
 banda_gmm_eur_w = largest_remainder(banda_gmm_eur_w, expected_sum = 1, precision = 3)
 print banda_gmm_eur_w, sum(banda_gmm_eur_w)
 banda_gmm_eur_region_w = banda_gmm_eur_w *banda_gmm_region_w[3]
 banda_gmm_model_all_w += list(banda_gmm_eur_region_w)
 banda_gmm_model_all_labels += banda_gmm_eur_labels
+banda_gmm_model_all_labels_short += banda_gmm_eur_labels_short
 bar_plot(banda_gmm_eur_qlist, banda_gmm_eur_w, banda_gmm_eur_labels, \
          'banda_gmm_european_weights.png', \
          'Banda Sea Eurpean GMM Weights', fig_path = gmm_fig_path)
@@ -862,12 +909,14 @@ bar_plot(banda_gmm_eur_qlist, banda_gmm_eur_w, banda_gmm_eur_labels, \
 #percentile = 0.75
 banda_gmm_inslab_qlist = ['S4Q18', 'S4Q19', 'S4Q20', 'S4Q21']
 banda_gmm_inslab_labels = ['Abrahamson\n2015SSlab', 'AtkBoore\n2003SSlab', 'Garcia\n2005SSlab', 'MegaPan\n2010']
+banda_gmm_inslab_labels_short = ['Abrah\n2015\nSSlab', 'AtkB\n2003\nSSlab', 'Garcia\n2005\nSSlab', 'MegP\n2010']
 banda_gmm_inslab_w = get_weights(banda_gmm_inslab_qlist, weighted_sum)#, percentile = percentile)
 banda_gmm_inslab_w = largest_remainder(banda_gmm_inslab_w, expected_sum = 1, precision = 3)
 print banda_gmm_inslab_w, sum(banda_gmm_inslab_w)
 banda_gmm_inslab_region_w = banda_gmm_inslab_w *banda_gmm_region_w[4]
 banda_gmm_model_all_w += list(banda_gmm_inslab_region_w)
 banda_gmm_model_all_labels += banda_gmm_inslab_labels
+banda_gmm_model_all_labels_short += banda_gmm_inslab_labels_short
 bar_plot(banda_gmm_inslab_qlist, banda_gmm_inslab_w, banda_gmm_inslab_labels, \
          'banda_gmm_inslab_weights.png', \
          'Banda Sea Intraslab GMM Weights', fig_path = gmm_fig_path)
@@ -898,15 +947,15 @@ bar_plot(banda_cutoff_qlist, banda_cutoff_w, banda_cutoff_labels, \
 
 #################################
 # Plot full model weights 
-bar_plot(banda_gmm_model_all_w, banda_gmm_model_all_w, banda_gmm_model_all_labels, \
+bar_plot(banda_gmm_model_all_w, banda_gmm_model_all_w, banda_gmm_model_all_labels_short, \
          'banda_gmm_all_weights.png', \
-         'Banda Sea All Model Weights', fig_path = gmm_fig_path, fontsize=10, wide=2.5)
-bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels, \
+         'Subduction All Model Weights', fig_path = gmm_fig_path, fontsize=18, wide=2.5)
+bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels_short, \
          'cratonic_gmm_all_weights.png', \
-         'Cratonic All Model Weights', fig_path = gmm_fig_path, fontsize=10, wide=2)
-bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels, \
+         'Cratonic All Model Weights', fig_path = gmm_fig_path, fontsize=18, wide=2)
+bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels_short, \
          'noncratonic_extended_gmm_all_weights.png', \
-         'Non-cratonic and Extended All Model Weights', fig_path = gmm_fig_path, fontsize=10, wide=2)
+         'Non-cratonic and Extended All Model Weights', fig_path = gmm_fig_path, fontsize=18, wide=2)
 
 ################################
 # Sort by weight and identify nth percentile cutoff with reweighting
@@ -932,10 +981,10 @@ for percentile in percentiles:
             banda_gmm_model_all_w_copy[max_weight_index] = 0
         else:
             break
-    bar_plot(banda_gmm_model_all_w, banda_gmm_model_all_w, banda_gmm_model_all_labels, \
+    bar_plot(banda_gmm_model_all_w, banda_gmm_model_all_w, banda_gmm_model_all_labels_short, \
              'banda_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
-             'Banda Sea All Model Weights', fig_path = gmm_fig_path, \
-             fontsize=10, wide=2.5, \
+             'Subduction All Model Weights', fig_path = gmm_fig_path, \
+             fontsize=18, wide=2.5, \
              colour_list = banda_gmm_colour_list)
     # Re-normalise weights for remaining GMMs
     banda_gmm_reduced_list = banda_gmm_reduced_list/sum(banda_gmm_reduced_list)
@@ -943,7 +992,7 @@ for percentile in percentiles:
 #    print banda_gmm_reduced_list, sum(banda_gmm_reduced_list)
     bar_plot(banda_gmm_reduced_list, banda_gmm_reduced_list, banda_gmm_reduced_labels, \
              'banda_gmm_reduced_weights_%.0fth_percentile.png' % (percentile*100), \
-             'Banda Sea Selected Model Weights', fig_path = gmm_fig_path, \
+             'Subduction Selected Model Weights', fig_path = gmm_fig_path, \
              fontsize=10, wide=2.5)
 
     # Now we want to elimate the lowest weighted models and redistribute within each 
@@ -978,10 +1027,10 @@ for percentile in percentiles:
     # Round to 3 decimal places using largest remainder method
     banda_gmm_final_weights = largest_remainder(banda_gmm_final_weights, expected_sum = 1, precision = 3)
     print banda_gmm_final_weights, sum(banda_gmm_final_weights)
-    bar_plot(banda_gmm_final_weights, banda_gmm_final_weights, banda_gmm_model_all_labels, \
+    bar_plot(banda_gmm_final_weights, banda_gmm_final_weights, banda_gmm_model_all_labels_short, \
              'banda_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
-             'Banda Sea Re-normalised Model Weights', fig_path = gmm_fig_path, \
-             fontsize=10, wide=2.5)
+             'Subduction Re-normalised Model Weights', fig_path = gmm_fig_path, \
+             fontsize=18, wide=2.5)
 
     ###################
     # Cratonic
@@ -1002,10 +1051,10 @@ for percentile in percentiles:
             c_gmm_model_all_w_copy[max_weight_index] = 0
         else:
             break
-    bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels, \
+    bar_plot(c_gmm_model_all_w, c_gmm_model_all_w, c_gmm_model_all_labels_short, \
              'c_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
              'C Sea All Model Weights', fig_path = gmm_fig_path, \
-             fontsize=10, wide=2.5, \
+             fontsize=18, wide=2.5, \
              colour_list = c_gmm_colour_list)
     # Re-normalise weights for remaining GMMs
     c_gmm_reduced_list = c_gmm_reduced_list/sum(c_gmm_reduced_list)
@@ -1049,10 +1098,10 @@ for percentile in percentiles:
     # Round to 3 decimal places using largest remainder method
     c_gmm_final_weights = largest_remainder(c_gmm_final_weights, expected_sum = 1, precision = 3)
     print c_gmm_final_weights, sum(c_gmm_final_weights)
-    bar_plot(c_gmm_final_weights, c_gmm_final_weights, c_gmm_model_all_labels, \
+    bar_plot(c_gmm_final_weights, c_gmm_final_weights, c_gmm_model_all_labels_short, \
              'c_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
              'Cratonic Re-normalised Model Weights', fig_path = gmm_fig_path, \
-             fontsize=10, wide=2.5)
+             fontsize=18, wide=2.5)
 
 
     ###########################
@@ -1074,10 +1123,10 @@ for percentile in percentiles:
             nc_ex_gmm_model_all_w_copy[max_weight_index] = 0
         else:
             break
-    bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels, \
+    bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_labels_short, \
              'nc_ex_gmm_all_weights_%.0fth_percentile.png' % (percentile*100), \
              'Nc_Ex Sea All Model Weights', fig_path = gmm_fig_path, \
-             fontsize=10, wide=2.5, \
+             fontsize=18, wide=2.5, \
              colour_list = nc_ex_gmm_colour_list)
     # Re-normalise weights for remaining GMMs
     nc_ex_gmm_reduced_list = nc_ex_gmm_reduced_list/sum(nc_ex_gmm_reduced_list)
@@ -1120,10 +1169,10 @@ for percentile in percentiles:
     # Round to 3 decimal places using largest remainder method
     nc_ex_gmm_final_weights = largest_remainder(nc_ex_gmm_final_weights, expected_sum = 1, precision = 3)
     print nc_ex_gmm_final_weights, sum(nc_ex_gmm_final_weights)
-    bar_plot(nc_ex_gmm_final_weights, nc_ex_gmm_final_weights, nc_ex_gmm_model_all_labels, \
+    bar_plot(nc_ex_gmm_final_weights, nc_ex_gmm_final_weights, nc_ex_gmm_model_all_labels_short, \
              'nc_ex_gmm_final_weights_%.0fth_percentile.png' % (percentile*100), \
              'Non-cratonic and Extended Re-normalised Model Weights', fig_path = gmm_fig_path, \
-             fontsize=10, wide=2.5)
+             fontsize=18, wide=2.5)
 
     # Now write out to openquake nrml file
     outline = '<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -1183,5 +1232,36 @@ for percentile in percentiles:
     gmm_path = shared_path
     xml_filename = join(gmm_path, 'NSHA18_Aus_GMPE_%ithp_logic_tree_cal_power_%s.xml' % (int(100*percentile), fig_cw))
     f_out = open(xml_filename, 'w')
+    f_out.write(outline)
+    f_out.close()
+
+    # Also dump to a csv file
+    outline = ''
+    nc_ex_gmm_raw_weight_list = np.concatenate(nc_ex_gmm_w_list).ravel()
+    for i in range(len(nc_ex_gmm_model_all_labels)):
+        gmm_name = label_to_oq_gmm_dict[nc_ex_gmm_model_all_labels[i]]
+        orig_weight = nc_ex_gmm_raw_weight_list[i]
+        weight = nc_ex_gmm_final_weights[i]
+        outline += 'Non_cratonic_Extended,%s,%.3f,%.3f\n' % (
+            gmm_name, orig_weight, weight)
+    c_gmm_raw_weight_list = np.concatenate(c_gmm_w_list).ravel()
+    for i in range(len(c_gmm_model_all_labels)):
+        gmm_name = label_to_oq_gmm_dict[c_gmm_model_all_labels[i]]
+        orig_weight = c_gmm_raw_weight_list[i]
+        weight = c_gmm_final_weights[i]
+        outline += 'Cratonic,%s,%.3f,%.3f\n' % (
+            gmm_name, orig_weight, weight)
+    banda_gmm_raw_weight_list = np.concatenate(banda_gmm_w_list).ravel()
+    for i in range(len(banda_gmm_model_all_labels)):
+        gmm_name = label_to_oq_gmm_dict[banda_gmm_model_all_labels[i]]
+        orig_weight = banda_gmm_raw_weight_list[i]
+        weight = banda_gmm_final_weights[i]
+        outline += 'Subduction,%s,%.3f,%.3f\n' % (
+            gmm_name, orig_weight, weight)
+
+
+
+    csv_filename = join(gmm_path, 'NSHA18_Aus_GMPE_%ithp_logic_tree_cal_power_%s.csv' % (int(100*percentile), fig_cw))
+    f_out = open(csv_filename, 'w')
     f_out.write(outline)
     f_out.close()
