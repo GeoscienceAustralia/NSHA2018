@@ -44,6 +44,8 @@ def gr2inc_mmax(mfd, mmaxs, weights, model_weight=1.):
         new_rates[:idx] += rates[:idx]*weight
     new_rates = new_rates*model_weight
     new_mfd = EvenlyDiscretizedMFD(mfd.min_mag, mfd.bin_width, list(new_rates))
+    # adjust min_mag by bin width
+    new_mfd.min_mag = new_mfd.min_mag + (new_mfd.bin_width/2.)
     return new_mfd
         
 
@@ -101,7 +103,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
     for dom in params:
         print 'Processing source %s' % dom['CODE']
         print dom['TRT']
-        if dom['TRT'] == 'NCratonic':
+        if dom['TRT'] == 'NCratonic' or dom['TRT'] == 'Extended':
             dom['TRT'] = 'Non_cratonic'
         # For the moment, only consider regions within AUstralia
         if dom['TRT'] == 'Active' or dom['TRT'] == 'Interface' or \

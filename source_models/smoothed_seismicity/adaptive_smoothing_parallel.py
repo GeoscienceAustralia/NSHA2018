@@ -132,9 +132,10 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     #sys.exit()
     d_i = smoother.optimise_bandwidths()
     smoother.run_smoothing(config["r_min"], d_i)
-
+    data =  np.column_stack([smoother.grid, smoother.rates])
     np.savetxt(smoother_filename,
-               np.column_stack([smoother.grid, smoother.rates]),
+               data,
+#               np.column_stack([smoother.grid, smoother.rates]),
                delimiter=",",
                fmt=["%.4f", "%.4f", "%.8e"],
                header="longitude,latitude,rate" 
@@ -179,7 +180,8 @@ def run_smoothing(grid_lims, config, catalogue, completeness_table,map_config, r
     max_mag = 7.2
     # Read in data again to solve number fomatting issue in smoother.data
     # For some reason it just returns 0 for all a values
-    data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
+    #data = np.genfromtxt(smoother_filename, delimiter = ',', skip_header = 1)
+
     tom = PoissonTOM(50) # Dummy temporal occurence model for building pt sources
     msr = Leonard2014_SCR()
     for j in range(len(data[:,2])):

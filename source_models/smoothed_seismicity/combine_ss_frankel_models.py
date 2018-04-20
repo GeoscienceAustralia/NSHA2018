@@ -44,6 +44,8 @@ def gr2inc_mmax(mfd, mmaxs, weights, model_weight=1.):
         new_rates[:idx] += rates[:idx]*weight
     new_rates = new_rates*model_weight
     new_mfd = EvenlyDiscretizedMFD(mfd.min_mag, mfd.bin_width, list(new_rates))
+    # adjust min_mag by bin width
+    new_mfd.min_mag = new_mfd.min_mag +  (new_mfd.bin_width/2.)
     return new_mfd
         
 
@@ -102,7 +104,7 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
     for dom in params:
         print 'Processing source %s' % dom['CODE']
         print dom['TRT']
-        if dom['TRT'] == 'NCratonic':
+        if dom['TRT'] == 'NCratonic' or dom['TRT'] == 'Extended':
             dom['TRT'] = 'Non_cratonic'
         # For the moment, only consider regions within AUstralia
         if dom['TRT'] == 'Active' or dom['TRT'] == 'Interface' or \
@@ -131,8 +133,9 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
         #pt_ids = []
     #for trt, filename in filedict.iteritems():
     #    print trt
+        completeness_table = np.array([dom['COMPLETENESS'][0]])
         completeness_string = 'comp'
-        for ym in dom['COMPLETENESS']:
+        for ym in completeness_table:
             completeness_string += '_%i_%.1f' % (ym[0], ym[1])
         mmin = dom['COMPLETENESS'][0][1]
         filename = "%s_b%.3f_mmin_%.1f_0.1%s.xml" % (
@@ -226,13 +229,13 @@ def combine_ss_models(filename_stem, domains_shp, params,lt, bval_key, output_di
 if __name__ == "__main__":
 #    filedict = {'Non_cratonic': 'source_model_adelaide_pts.xml'}
     output_dir = 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness'
-    point_source_names = ['Australia_Fixed_50_3_BVAL_BEST.xml',
-                          'Australia_Fixed_50_3_BVAL_UPPER.xml',
-                          'Australia_Fixed_50_3_BVAL_LOWER.xml']
-    point_source_list = []
-    for fn in point_source_names:
-        point_source_list.append(os.path.join(output_dir, fn))
-
+#    point_source_names = ['Australia_Fixed_50_3_BVAL_BEST.xml',
+#                          'Australia_Fixed_50_3_BVAL_UPPER.xml',
+#                          'Australia_Fixed_50_3_BVAL_LOWER.xml']
+#    point_source_list = []
+#    for fn in point_source_names:
+#        point_source_list.append(os.path.join(output_dir, fn))
+    point_source_list = None
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
     domains_shp = '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
