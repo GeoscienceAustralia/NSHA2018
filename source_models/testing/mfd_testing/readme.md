@@ -39,3 +39,6 @@ array([1.59202868e-01, 1.20758069e-01, 9.15947062e-02, 6.94720332e-02,
 
 
 betacurve, mrange = get_oq_incrementalMFD(bval2beta(1.2), 4e+04, 4.5, 7.5, 0.01)
+
+oq-engine --rh job_locs_PGA.ini --exports csv
+

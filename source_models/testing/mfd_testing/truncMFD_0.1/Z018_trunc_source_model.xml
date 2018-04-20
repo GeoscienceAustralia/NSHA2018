@@ -26,7 +26,7 @@
                 <upperSeismoDepth>0.0</upperSeismoDepth>
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
+            <magScaleRel>WC1994</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <truncGutenbergRichterMFD aValue="4.6020599913279625" bValue="1.2" minMag="4.5" maxMag="7.5" />
             <nodalPlaneDist>

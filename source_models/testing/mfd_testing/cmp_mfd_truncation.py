@@ -39,23 +39,35 @@ for i, bw in enumerate(bin_width):
     oq_rates = gr.get_annual_occurrence_rates()
     # get cum OQ ratescum_oq_rates = []
     
-    
     # get cummulative frisk rates (for OQ)
-    cum_frisk_rates, frisk_mags = get_oq_incrementalMFD(beta, N0, min_mag, max_mag, bw)
+    cum_inc_rates, frisk_mags = get_oq_incrementalMFD(beta, N0, min_mag, max_mag, bw)
     
     # get rates
-    frisk_rates = []
-    for i in range(0, len(cum_frisk_rates)):
-        if i < len(cum_frisk_rates)-1:
-            frisk_rates.append(cum_frisk_rates[i] - cum_frisk_rates[i+1])
+    inc_rates = []
+    for i in range(0, len(cum_inc_rates)):
+        if i < len(cum_inc_rates)-1:
+            inc_rates.append(cum_inc_rates[i] - cum_inc_rates[i+1])
         else:
-            frisk_rates.append(cum_frisk_rates[i])
+            inc_rates.append(cum_inc_rates[i])
     
+    print 'IncrementalMFD'
+    print inc_rates
+    
+    print '\nTruncatedGRMFD'
+    print array(oq_rates)[:,1]
     
     # plt rates
     plt.semilogy(array(oq_rates)[:,0], array(oq_rates)[:,1], 'r-', lw=2.0)
-    #plt.semilogy(frisk_mags+0.5*bin_width, frisk_rates, '-', c='lightblue', lw=2.0)
-    plt.semilogy(frisk_mags+0.5*bw, frisk_rates, '-', c='b', lw=2.0)
+    #plt.semilogy(frisk_mags+0.5*bin_width, inc_rates, '-', c='lightblue', lw=2.0)
+    plt.semilogy(frisk_mags+0.5*bw, inc_rates, '-', c='b', lw=2.0)
+    
+    # convert cummulative rates to annual occurrence rates
+    # make text object                        
+    octxt = str('%0.5e' % inc_rates[0])
+    for ir in inc_rates[1:]:
+        octxt += ' ' + str('%0.5e' % ir)
+    #print octxt.split()[0]
+    print '\n', octxt, '\n'
 
 plt.show()
 
