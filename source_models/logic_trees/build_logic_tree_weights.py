@@ -608,6 +608,17 @@ for i in range(num_gmm_experts):
 weighted_sum = sum(gmm_responses.values())
 #print weighted_sum
 
+# write summarise raw weights
+final_weight_file = join(target_path, 'ground_motion_results', 'ground_motion_model_weights_raw_%s.csv' % fig_cw)
+f_out = open(final_weight_file,'w')
+header = 'Id,0.1,0.5,0.9\n'
+f_out.write(header)
+for i in range(len(ids)):
+    outline = ids[i] + ',' + str(weighted_sum[i][0]) + ',' + str(weighted_sum[i][1]) \
+              + ',' + str(weighted_sum[i][2]) + '\n'
+    f_out.write(outline)
+f_out.close()
+
 # get question ids
 ids = []
 f_in = open(filepath, 'r')
