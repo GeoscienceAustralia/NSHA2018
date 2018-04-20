@@ -102,7 +102,7 @@ for line in lines[2:]:
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
 #plt.clf()
 #plt.cla()
-for i, key in enumerate([keys[0]]): # just plot 1 for now!
+for i, key in enumerate([keys[1]]): # just plot 1 for now!
     
     # get IM period
     period = key.split('-')[0]
@@ -252,10 +252,10 @@ for i, key in enumerate([keys[0]]): # just plot 1 for now!
     #ncols = 9
     
     #cmap = cm.rainbow
-    print period
+    #print period
     if period == 'PGA':
         
-        if probability == '10%' or probability == '2%': # kluge to get on same scale
+        if probability == '10%': #or probability == '2%': # kluge to get on same scale
             ncolours = 13
             vmin = -2.
             vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt

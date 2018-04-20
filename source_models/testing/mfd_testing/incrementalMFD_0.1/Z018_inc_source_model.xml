@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+
+    <sourceModel name="collapsed_collapsed">
+
+        <areaSource id="Z018" name="ZONE 18" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                138.5000 -35.8000
+                                138.0000 -35.8000
+                                138.1000 -34.0000
+                                137.7000 -32.7500
+                                138.1000 -30.2500
+                                138.5000 -29.9000
+                                139.2500 -30.5000
+                                139.5000 -33.5000
+                                139.4000 -35.3000
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>Leonard2014_SCR</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="4.55" binWidth="0.1">
+                <occurRates>2.59067e-02 1.94951e-02 1.46708e-02 1.10409e-02 8.30945e-03 6.25401e-03 4.70721e-03 3.54313e-03 2.66703e-03 2.00765e-03 1.51136e-03 1.13780e-03 8.56604e-04 6.44932e-04 4.85586e-04 3.65625e-04 2.75311e-04 2.07315e-04 1.56119e-04 1.17570e-04 8.85437e-05 6.66863e-05 5.02265e-05 3.78309e-05 2.84957e-05 2.14649e-05 1.61695e-05 1.21809e-05 9.17664e-06 5.83507e-06 2.75548e-06 1.08319e-06 2.60227e-07</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="0.34" strike="190.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="10.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="200.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="180.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="20.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="0.0" dip="35.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+    </sourceModel>
+</nrml>

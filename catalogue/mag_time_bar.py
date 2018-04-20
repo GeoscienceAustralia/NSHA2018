@@ -49,53 +49,72 @@ for ed in evdt:
 decimal_yrs = array(decimal_yrs)    
 
 # get plotting indices
-minmag = 4.5
+minmags = [4.5, 5.0]
+pltmean = [False, True]
 
-fig, ax = plt.subplots(1, figsize=(10,6.25))
-
-plt_years = arange(1960, 2019)
-
-n_origML = []
-n_corrML  = []
-for py in plt_years:
-   n_origML.append(len(where((mx_orig >= minmag) & (decimal_yrs >= py) & (decimal_yrs < py+1))[0]))
-   n_corrML.append(len(where((mx_rev_ml >= minmag) & (decimal_yrs >= py) & (decimal_yrs < py+1))[0]))
-
-width = 0.35  
-bar1 = plt.bar(plt_years - width/2, array(n_origML), width, color='orangered')
-bar2 = plt.bar(plt_years + width/2, array(n_corrML), width, color='seagreen')
-
-ax.set_xticks(plt_years[range(0, len(plt_years)+1, 2)])
-plt.xticks(rotation=45) #, ha='right')
-ax.set_yticks([0, 4, 8, 12, 16, 20])   
-plt.ylabel('Number of Earthquakes ML '+r'$\geq$'+' '+str(minmag))   
-plt.xlabel('Years')
-leg1 = ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
-leg1.get_frame().set_alpha(1.)
-#plt.ylim([0, 20])
-plt.xlim([1958, 2018]) 
-ax.yaxis.grid(ls='--')
-#plt.grid(ls='--', which='y')
-
-
-# get average from 1960 - 1988
-av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
-av_n_1989_2017 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
-
-plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], '--', c='dodgerblue', lw=2.5, label='Original ML Average Annual Number')
-plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='dodgerblue', lw=2.5)
-
-av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
-av_n_1989_2017 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
-
-plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5, label='Revised ML Average Annual Number')
-plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], 'k--', lw=2.5)
-leg2 = plt.legend(loc=2)
-leg2.get_frame().set_alpha(1.)
-
-
-plt.gca().add_artist(leg1)
-plt.savefig('mag_time_bar.png', fmt='png', bbox_inches='tight', dpi=300)
+# loop thru years
+i = 0
+for minmag in minmags:
+    for pm in pltmean:
+        i += 1
+        fig, ax = plt.subplots(1, figsize=(10,6.25))
+        
+        plt_years = arange(1960, 2019)
+        
+        n_origML = []
+        n_corrML  = []
+        for py in plt_years:
+           n_origML.append(len(where((mx_orig >= minmag) & (decimal_yrs >= py) & (decimal_yrs < py+1))[0]))
+           n_corrML.append(len(where((mx_rev_ml >= minmag) & (decimal_yrs >= py) & (decimal_yrs < py+1))[0]))
+        
+        width = 0.35  
+        bar1 = plt.bar(plt_years - width/2, array(n_origML), width, color='orangered')
+        bar2 = plt.bar(plt_years + width/2, array(n_corrML), width, color='seagreen')
+        
+        ax.set_xticks(plt_years[range(0, len(plt_years)+1, 2)])
+        plt.xticks(rotation=45) #, ha='right')
+        ax.set_yticks([0, 4, 8, 12, 16, 20])   
+        plt.ylabel('Number of Earthquakes ML '+r'$\geq$'+' '+str(minmag))   
+        plt.xlabel('Years')
+        leg1 = ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
+        leg1.get_frame().set_alpha(1.)
+        plt.xlim([1958, 2018]) 
+        ax.yaxis.grid(ls='--')
+        #plt.grid(ls='--', which='y')
+        
+        if minmag == 5.0:
+            plt.ylim([0, 20])
+            ax.set_yticks([0, 4, 8, 12, 16, 20])   
+        
+        else:
+            plt.ylim([0, 40])
+            ax.set_yticks([0, 5, 10, 15, 20, 25, 30, 35, 40])   
+        
+        # get average from 1960 - 1988
+        if pm == True:
+            av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
+            av_n_1989_2017 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
+            
+            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], '--', c='dodgerblue', lw=2.5, label='Original ML Average Annual Number')
+            plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='dodgerblue', lw=2.5)
+            
+            av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
+            av_n_1989_2017 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
+            
+            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5, label='Revised ML Average Annual Number')
+            plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], 'k--', lw=2.5)
+            leg2 = plt.legend(loc=2)
+            leg2.get_frame().set_alpha(1.)
+            
+        
+        plt.gca().add_artist(leg1)
+        
+        if pm == True:
+            figname = '_'.join(('mag_time_bar',str(minmag),'avplt.png'))
+        else:
+            figname = '_'.join(('mag_time_bar',str(minmag)+'.png'))
+        plt.savefig(figname, fmt='png', bbox_inches='tight', dpi=300)
+        
 plt.show()
 
 

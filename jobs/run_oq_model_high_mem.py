@@ -93,7 +93,7 @@ f_in.close()
 
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
-outlines += '#PBS -q normalsp\n' # for high-memory jobs
+outlines += '#PBS -q normalbw\n' # for high-memory jobs
 outlines += '#PBS -l walltime=%s\n' % params['walltime']
 outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
 outlines += '#PBS -l mem=%s\n' % params['mem']
