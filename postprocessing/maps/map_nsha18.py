@@ -14,8 +14,10 @@ from sys import argv
 from matplotlib.mlab import griddata
 from matplotlib import colors, colorbar #, cm
 from os import path, mkdir, getcwd
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import matplotlib as mpl
+mpl.use('Agg')
+import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan, where, delete
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
