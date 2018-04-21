@@ -74,7 +74,7 @@ for minmag in minmags:
         ax.set_xticks(plt_years[range(0, len(plt_years)+1, 2)])
         plt.xticks(rotation=45) #, ha='right')
         ax.set_yticks([0, 4, 8, 12, 16, 20])   
-        plt.ylabel('Number of Earthquakes ML '+r'$\geq$'+' '+str(minmag))   
+        plt.ylabel('Numler of Earthquakes ML '+r'$\geq$'+' '+str(minmag))   
         plt.xlabel('Years')
         leg1 = ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
         leg1.get_frame().set_alpha(1.)
@@ -95,13 +95,13 @@ for minmag in minmags:
             av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
             av_n_1989_2017 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
             
-            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], '--', c='dodgerblue', lw=2.5, label='Original ML Average Annual Number')
+            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], '--', c='dodgerblue', lw=2.5, label='Original ML Average Annual Numler')
             plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='dodgerblue', lw=2.5)
             
             av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
             av_n_1989_2017 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
             
-            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5, label='Revised ML Average Annual Number')
+            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5, label='Revised ML Average Annual Numler')
             plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], 'k--', lw=2.5)
             leg2 = plt.legend(loc=2)
             leg2.get_frame().set_alpha(1.)

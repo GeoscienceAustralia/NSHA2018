@@ -5,6 +5,7 @@ import scipy.odr.odrpack as odrpack
 from collections import OrderedDict
 import pdb
 from misc_tools import checkfloat
+from os import path
 
 def highside(x, hx):
     from numpy import zeros_like
@@ -64,15 +65,16 @@ def f(B, x):
 # parse file
 nsha_file = path.join('..','..','data','NSHA18CAT.ML-MW.csv')
 
-cat_nsha = np.genfromtxt(nsha_file,delimiter=',',skip_header=1,dtype=None)
+lines = open(nsha_file).readlines()[1:]
 
-mlo
+ml = []
 mlr = []
 mw = []
 mwref = []
 idx = []
 
-for x in cat_nsha:
+for line in lines:
+    x = line.strip().split(',')
     if np.isnan(checkfloat(x[17])):
         ml.append(x[14])
     else:
@@ -83,29 +85,34 @@ for x in cat_nsha:
 
 ml = np.array(ml)
 mw = np.array(mw)
+mwref = np.array(mwref)
 idx_src = np.array(idx)
 
-Mw = np.array([x[3] for x in cat])
+
+'''mw = np.array([x[3] for x in cat])
 Ml_pre = np.array([x[4] for x in cat])
-Ml_rev = np.array([x[5] for x in cat])
-Mw_ref = np.array([x[6] for x in cat])
-
-# # not include Mw<4.0 for HG estimates
-# idx_exclude = np.where((Mw_ref=='HG') & (Mw<4.0))[0]
-# Mw = Mw[~idx_exclude]
+ml = np.array([x[5] for x in cat])
+mw_ref = np.array([x[6] for x in cat])
+'''
+# # not include mw<4.0 for HG estimates
+# idx_exclude = np.where((mw_ref=='HG') & (mw<4.0))[0]
+# mw = mw[~idx_exclude]
 # Ml_pre = Ml_pre[~idx_exclude]
-# Ml_rev = Ml_rev[~idx_exclude]
-# Mw_ref = Mw_ref[~idx_exclude]
+# ml = ml[~idx_exclude]
+# mw_ref = mw_ref[~idx_exclude]
 
 
-idx1 = np.where(Mw_ref=='HG')[0]
-idx2 = np.where(Mw_ref=='TA-SEA')[0]
-idx3 = np.where(Mw_ref=='TA-WA')[0]
-idx4 = np.where(Mw_ref=='other')[0]
+idx1 = np.where(mwref=='Ghasemi et al (2016)')[0]
+idx2 = np.where(mwref=='Allen (2012)')[0]
+idx3 = np.where(mwref=='Allen et al. (2006)')[0]
+idx4 = []
+for i, mr in enumerate(mwref):
+    if mr != 'Ghasemi et al (2016)' and mr != 'Allen (2012)' and mr != 'Allen et al. (2006)':
+        idx4.append(i)
 
 ############### bilinear auto
-#data = odrpack.RealData(Ml_pre, Mw)
-data = odrpack.RealData(Ml_rev, Mw)
+#data = odrpack.RealData(Ml_pre, mw)
+data = odrpack.RealData(ml, mw)
 
 xrng = np.arange(1.5,6.0,step=0.1)
 
@@ -148,8 +155,8 @@ yrngf[idx] = cf * (xrng[idx]-hxfix) + yhinge
 from scipy.odr import Model, Data, ODR
 from scipy.stats import linregress,norm
 mod = Model(f)
-dat = Data(Ml_rev, Mw)
-co = np.polynomial.polynomial.polyfit(Ml_rev, Mw,2)
+dat = Data(ml, mw)
+co = np.polynomial.polynomial.polyfit(ml, mw,2)
 od = ODR(dat, mod, beta0=[co[2],co[1],co[0]])
 out = od.run()
 
@@ -198,7 +205,7 @@ out_poly = out
 #     two = d*x + e
 #     return np.maximum(one, two)
 # pw0 = (1, 1, 1, 1,1) # a guess for slope, intercept, slope, intercept
-# pw, cov = curve_fit(two_lines, Ml_rev, Mw, pw0)
+# pw, cov = curve_fit(two_lines, ml, mw, pw0)
 # yrngf_mix = two_lines(xrng,*pw)
 ################## Swiss
 yrng_swiss = np.concatenate((0.594 * xrng[xrng<=2]+0.985,
@@ -216,10 +223,10 @@ f.set_size_inches(10, 10)
 ax.plot([1.5,6.0],[1.5,6.0],'k--',lw=1,label='1:1')
 ax.set_xlim([1.5,6.0])
 ax.set_ylim([1.5,6.0])
-ax.scatter(Ml_pre[idx1],Mw[idx1],s= 70, alpha=0.5, marker='o',c='b',label='Ghasemi et al. (2017)')
-ax.scatter(Ml_pre[idx2],Mw[idx2],s= 70, alpha=0.5, marker=(5,1),c='y',label='Allen (2012)')
-ax.scatter(Ml_pre[idx3],Mw[idx3],s= 70, alpha=0.5, marker='^',c='r',label='Allen et al. (2006)')
-ax.scatter(Ml_pre[idx4],Mw[idx4],s= 70, alpha=0.5, marker='>',c='m',label='Other')
+ax.scatter(Ml_pre[idx1],mw[idx1],s= 70, alpha=0.5, marker='o',c='b',label='Ghasemi et al. (2017)')
+ax.scatter(Ml_pre[idx2],mw[idx2],s= 70, alpha=0.5, marker=(5,1),c='y',label='Allen (2012)')
+ax.scatter(Ml_pre[idx3],mw[idx3],s= 70, alpha=0.5, marker='^',c='r',label='Allen et al. (2006)')
+ax.scatter(Ml_pre[idx4],mw[idx4],s= 70, alpha=0.5, marker='>',c='m',label='Other')
 
 ax.plot(xrng,yrng_swiss,'r-',lw=2,label='Goertz-Allmann et al. (2011)')
 ax.plot(xrng[xrng<=4.0],yrng_ross,'b-',lw=2,label='Ross et al. (2016)')
