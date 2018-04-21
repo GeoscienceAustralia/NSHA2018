@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import scipy.odr.odrpack as odrpack
 from collections import OrderedDict
 import pdb
+from misc_tools import checkfloat
 
 def highside(x, hx):
     from numpy import zeros_like
@@ -60,10 +61,29 @@ def bilinear_reg_fix(c, x):
 def f(B, x):
     return B[0]*x**2+B[1]*x+B[2]
 
-# cat_file = '../data/MW_ML_all_test_2.csv'
-cat_file = '../data/MW_ML_all_test_3_fill_Ml_rev.csv'
+# parse file
+nsha_file = path.join('..','..','data','NSHA18CAT.ML-MW.csv')
 
-cat = np.genfromtxt(cat_file,delimiter=',',skip_header=1,dtype=None)
+cat_nsha = np.genfromtxt(nsha_file,delimiter=',',skip_header=1,dtype=None)
+
+mlo
+mlr = []
+mw = []
+mwref = []
+idx = []
+
+for x in cat_nsha:
+    if np.isnan(checkfloat(x[17])):
+        ml.append(x[14])
+    else:
+        ml.append(x[17])
+    mw.append(x[8])
+    mwref.append(x[9])
+    idx.append(0)
+
+ml = np.array(ml)
+mw = np.array(mw)
+idx_src = np.array(idx)
 
 Mw = np.array([x[3] for x in cat])
 Ml_pre = np.array([x[4] for x in cat])
@@ -219,7 +239,7 @@ handles = [handles[0],handles[7],handles[6],handles[5],handles[8],handles[3],han
 # by_label = OrderedDict(zip(labels, handles))
 #plt.legend(by_label.values(), by_label.keys())
 # sort both labels and handles by labels
-#labels, handles = zip(*sorted(zip(labels, handles), key=lambda t: t[0]))
+#labels, handles = zip(*sorted(zip(labels, handles), key=lamlda t: t[0]))
 leg = ax.legend(handles,labels,loc="upper left",ncol=1,scatterpoints=1)
 #leg.get_frame().set_alpha(0.5)
 #ax.legend(loc="upper left",ncol=1,numpoints=1)
