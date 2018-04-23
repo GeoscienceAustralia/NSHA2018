@@ -101,7 +101,7 @@ ml = np.delete(ml, didx)
 mw = np.delete(mw, didx)
 mwref = np.delete(mwref, didx)
 
-didx = np.where(mw > 6.25)[0]
+didx = np.where(mw > 6.)[0]
 print ml[didx]
 ml = np.delete(ml, didx)
 mw = np.delete(mw, didx)
@@ -236,21 +236,28 @@ yrng_swiss = np.concatenate((0.594 * xrng[xrng<=2]+0.985,
 
 yrng_ross = 0.754*xrng[xrng<=4.0] + 0.88
 
+##### Ghasemi & Allen, 2017
+from mag_tools import nsha18_ml2mw
+yrng_ga17 = nsha18_ml2mw(xrng)
 
+##### Plot all
+
+mx = 6.
 f, ax = plt.subplots(1, 1, figsize=(10,10))
-ax.plot([2.5,7.0],[2.5,7.0],'k--',lw=1,label='1:1')
-ax.set_xlim([2.5,7.0])
-ax.set_ylim([2.5,7.0])
+ax.plot([2.5,6.0],[2.5,6.0],'k--',lw=1,label='1:1')
+ax.set_xlim([2.5,6.0])
+ax.set_ylim([2.5,6.0])
 ax.scatter(ml[idx3],mw[idx3],s= 70, alpha=0.5, marker='^',c='r',label='Allen et al. (2006)')
 ax.scatter(ml[idx2],mw[idx2],s= 70, alpha=0.5, marker=(5,1),c='y',label='Allen (2012)')
 ax.scatter(ml[idx1],mw[idx1],s= 70, alpha=0.5, marker='o',c='b',label='Ghasemi et al. (2017)')
 ax.scatter(ml[idx4],mw[idx4],s= 70, alpha=0.5, marker='>',c='m',label='Other')
 
 ax.plot(xrng,yrng_swiss,'r-',lw=2,label='Goertz-Allmann et al. (2011)')
-ax.plot(xrng[xrng<=4.0],yrng_ross,'b-',lw=2,label='Ross et al. (2016)')
-ax.plot(xrng,yrng,'b-',lw=2,label='Automatic-fit')
-ax.plot(xrng,yrngf,'g-',lw=2,label='Bi-linear')
-ax.plot(xrng,yrng_poly,'k-',lw=2,label='Polynomial')
+ax.plot(xrng[xrng<=4.0],yrng_ross,'-',c='orange', lw=2,label='Ross et al. (2016)')
+ax.plot(xrng,yrng,'-',c='dodgerblue',lw=2,label='Automatic Bilinear')
+ax.plot(xrng,yrngf,'-',c='seagreen',lw=2,label='Fixed Bilinear')
+ax.plot(xrng,yrng_poly,'-',c='purple',lw=2,label='Polynomial')
+ax.plot(xrng,yrng_ga17,'-',c='k',lw=2,label='Ghasemi & Allen (2017)')
 
 # ax.plot(xrng,yrngf_mix,'m-',lw=4)
 
@@ -264,9 +271,11 @@ handles = [handles[0],handles[7],handles[6],handles[5],handles[8],handles[3],han
 # make pretty
 ax.set_xlabel(r'$\mathregular{M_{L}}$', fontsize=22)
 ax.set_ylabel(r'$\mathregular{M_{W}}$', fontsize=22)
-ax.legend(loc="upper left",ncol=1, scatterpoints=1,fontsize=16)
+leg = ax.legend(loc="upper left",ncol=1, scatterpoints=1,fontsize=15)
+leg.get_frame().set_alpha(1.0)
+leg.get_frame().set_edgecolor('k')
 ax.set_aspect('equal')
-ax.grid(which='major')
+ax.grid(which='major',ls='--',lw=0.5)
 ax.tick_params(axis='both', labelsize=17)
 #
 plt.savefig('ml2mw.png',dpi=300,bbox_inches='tight')
