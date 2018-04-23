@@ -45,10 +45,10 @@ def bilinear_reg_free(c, x):
 
     return ans1 + ans2
 
-hxfix = 4.5 #4.0 # hinge magnitude
+hxfix = 4.25 #4.0 # hinge magnitude
 def bilinear_reg_fix(c, x):
     from numpy import zeros_like
-    hxfix = 4.5 #4.0 # hinge magnitude
+    hxfix = 4.25 #4.0 # hinge magnitude
     ans2 = zeros_like(x)
     ans1 = zeros_like(x)
 
@@ -83,7 +83,7 @@ for line in lines:
     x = line.strip().split(',')
     if np.isnan(checkfloat(x[17])):
         ml.append(float(x[14]))
-        print checkfloat(x[17])
+        #print checkfloat(x[17])
     else:
         ml.append(float(x[17]))
     mw.append(float(x[8]))
@@ -102,7 +102,7 @@ mw = np.delete(mw, didx)
 mwref = np.delete(mwref, didx)
 
 didx = np.where(mw > 6.)[0]
-print ml[didx]
+#print ml[didx]
 ml = np.delete(ml, didx)
 mw = np.delete(mw, didx)
 mwref = np.delete(mwref, didx)
@@ -141,6 +141,7 @@ odr = odrpack.ODR(data, bilin_reg, beta0=[0.7, 1.0, 1.0, 3.5])
 
 odr.set_job(fit_type=0) #if set fit_type=2, returns the same as least squares
 out = odr.run()
+print '\nbilinear auto\n'
 out.pprint()
 
 a = out.beta[0]
@@ -159,6 +160,7 @@ odr = odrpack.ODR(data, bilin_fix, beta0=[0.7, 1., 1.0])
 
 odr.set_job(fit_type=0) #if set fit_type=2, returns the same as least squares
 out = odr.run()
+print '\nbilinear fix\n'
 out.pprint()
 
 af = out.beta[0]
@@ -178,6 +180,8 @@ dat = Data(ml, mw)
 co = np.polynomial.polynomial.polyfit(ml, mw,2)
 od = ODR(dat, mod, beta0=[co[2],co[1],co[0]])
 out = od.run()
+print '\npolynomial\n'
+out.pprint()
 
 yrng_poly = out.beta[0]*xrng**2+out.beta[1]*xrng+out.beta[2]
 
