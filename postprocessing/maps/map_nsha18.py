@@ -349,7 +349,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
     polys = get_map_polygons(m)
     
     #mask_outside_polygon(polys[1][::-1], ax=None)
-    mask_outside_polygons(polys, '0.9', plt)
+    #mask_outside_polygons(polys, '0.9', plt)
     
     # get lake ploygons
     polygons = []
@@ -358,6 +358,9 @@ for i, key in enumerate(keys): # just plot 1 for now!
         plt.fill(poly[:,0], poly[:,1], '0.9')
         polygons.append(poly)
     
+    ##########################################################################################
+    # format main axis
+    ##########################################################################################
     titlestr = ' '.join((modelName, T, probability, 'in 50-Year Mean Hazard on AS1170.4 Site Class '))    
     plt.title(titlestr+'$\mathregular{B_e}$')
     
@@ -531,7 +534,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probability+'.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probability+'.nomask.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
