@@ -349,7 +349,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
     polys = get_map_polygons(m)
     
     #mask_outside_polygon(polys[1][::-1], ax=None)
-    #mask_outside_polygons(polys, '0.9', plt)
+    mask_outside_polygons(polys, '0.9', plt)
     
     # get lake ploygons
     polygons = []
