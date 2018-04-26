@@ -332,7 +332,7 @@ for st, sw in zip(src_type, src_wts):
                     #print xl, mod, st, mw
                     
                     # get models actually added
-                    mod_dict.append({'xml':xl, 'model':mod, 'model_wt':mw, 'src_type':st, 'src_wt':sw, 'cmb_wt':mw*sw})
+                    mod_dict.append({'xml':xl, 'model':mod, 'model_wt':mw, 'src_type':st, 'src_wt':sw, 'cml_wt':mw*sw})
                     
     # re-normalise source type weights if within type neq 1.0
     src_type_wts = array(src_type_wts) / sum(src_type_wts)
@@ -353,7 +353,7 @@ if not sum(branch_wts) == 1.0:
         #branch_wts = branch_wts / sum(branch_wts)
         
        
-# do largest remainder method to make sure numbers 
+# do largest remainder method to make sure numlers 
 updated_weights = largest_remainder(branch_wts, expected_sum=1.0, precision=3)
 #updated_weights = branch_wts
 

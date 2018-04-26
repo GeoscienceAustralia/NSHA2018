@@ -100,10 +100,11 @@ for line in lines[2:]:
 ##############################################################################
 
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
-#plt.clf()
-#plt.cla()
-for i, key in enumerate([keys[1]]): # just plot 1 for now!
-    
+for i, key in enumerate(keys): # just plot 1 for now!
+    if i > 0:
+        plt.clf()
+        plt.cla()
+
     # get IM period
     period = key.split('-')[0]
     period = period.replace('(','')
@@ -112,10 +113,14 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
     
     # get map probability of exceedance
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
+    #probability = str(100*float(key.split('-')[-1]))+'%'
+    if probability == '9%':
+        pribability = '9.5%'
+    print 'Probability', probability
     
-    #figure = plt.figure(i,figsize=(19,12))
+    figure = plt.figure(i,figsize=(19,12))
     
-    figure, ax = plt.subplots(i+1,figsize=(16,12))    
+    ax = plt.subplot(111)    
     
     bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
     bbox = '107.0/153.0/-45.0/-7.0'
@@ -165,7 +170,6 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
     lonlist = array(lonlist)[idx]
     latlist = array(latlist)[idx]
     hazvals = array(hazvals)[idx]
-    
     
     # delete zero hazvals
     idx =where(hazvals==0)[0]
@@ -255,7 +259,7 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
     #print period
     if period == 'PGA':
         
-        if probability == '10%': #or probability == '2%': # kluge to get on same scale
+        if probability == '10%' or probability == '9.5%': # kluge to get on same scale
             ncolours = 13
             vmin = -2.
             vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
@@ -301,9 +305,13 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
             #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
             cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
         except:
-            ncicptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
-            cmap, zvals = cpt2colormap(ncicptfile, ncolours, rev=True)
+            try:
+                ncicptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
+                cmap, zvals = cpt2colormap(ncicptfile, ncolours, rev=True)
 
+            except:
+                ncicptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/'+ cptfile
+                cmap, zvals = cpt2colormap(ncicptfile, ncolours, rev=True)
     
     print 'Making map...'    
     cmap.set_bad('w', 1.0)
@@ -350,11 +358,15 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
         plt.fill(poly[:,0], poly[:,1], '0.9')
         polygons.append(poly)
     
+    ##########################################################################################
+    # format main axis
+    ##########################################################################################
     titlestr = ' '.join((modelName, T, probability, 'in 50-Year Mean Hazard on AS1170.4 Site Class '))    
     plt.title(titlestr+'$\mathregular{B_e}$')
     
     # get map bbox
-    map_bbox = ax.get_position().extents
+    if i == 0:
+        map_bbox = ax.get_position().extents
     
      ##########################################################################################
     # add DRAFT text!
@@ -382,7 +394,10 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
             try:
                 im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
             except:
-                im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/GAlogo.png')
+                try:
+                    im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/GAlogo.png')
+                except:
+                    im = plt.imread('/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/GAlogo.png')
         
         # set bbox for logo
         imoff = 0.02
@@ -405,7 +420,10 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
             try:
                 im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
             except:
-                im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
+                try:
+                    im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
+                except:
+                    im = plt.imread('/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/ccby_narrow.png')
     
         
         # set bbox for logo
@@ -516,7 +534,7 @@ for i, key in enumerate([keys[1]]): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probability+'.nomask.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
