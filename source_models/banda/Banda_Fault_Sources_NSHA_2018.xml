@@ -700,7 +700,104 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_2" name="newguinea" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
+
+      <complexFaultGeometry>
+        <faultTopEdge>
+          <gml:LineString>
+            <gml:posList>
+               134.1391 -4.7058 0.001
+               133.9652 -5.4617 0.001
+               133.5519 -6.0941 0.001
+               132.6792 -6.7453 0.001
+            </gml:posList>
+          </gml:LineString>
+        </faultTopEdge>
+
+        <intermediateEdge>
+          <gml:LineString>
+            <gml:posList>
+               134.0433 -4.6989 15.0
+               133.8779 -5.4351 15.0
+               133.4900 -6.0268 15.0
+               132.6481 -6.6620 15.0
+            </gml:posList>
+          </gml:LineString>
+        </intermediateEdge>
+
+        <faultBottomEdge>
+          <gml:LineString>
+            <gml:posList>
+               133.9558 -4.6977 30.0
+               133.7937 -5.4130 30.0
+               133.4308 -5.9614 30.0
+               132.6024 -6.5819 30.0
+            </gml:posList>
+          </gml:LineString>
+        </faultBottomEdge>
+      </complexFaultGeometry>
+
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="6.5" binWidth="0.1">
+          <occurRates>0.0858961214803 0.0653616183078 0.0497380172149 0.0378373838531 0.0287622002327 0.0218336720839 0.0165378920198 0.0124853754596 0.00938062000329 0.00699918410234 0.00517041131347 0.00376439705092 0.00268214631471 0.00178199751603 0.00116275869498 0.000741155902719 0.000458022584937 0.000271369454251 0.000151402160705 7.70335407691e-05 3.34088216177e-05 1.01338705156e-05</occurRates>
+      </incrementalMFD>
+      <rake>-90</rake>
+    </complexFaultSource>
+  <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
+
+      <complexFaultGeometry>
+        <faultTopEdge>
+          <gml:LineString>
+            <gml:posList>
+               148.5816 -7.3965 0.001
+               149.4671 -7.6575 0.001
+               150.3731 -7.6524 0.001
+               151.2536 -7.8367 0.001
+               152.1340 -8.1387 0.001
+               152.9376 -8.5277 0.001
+               153.3881 -9.1625 0.001
+            </gml:posList>
+          </gml:LineString>
+        </faultTopEdge>
+
+        <intermediateEdge>
+          <gml:LineString>
+            <gml:posList>
+               148.5574 -7.6136 15.0
+               149.4068 -7.8566 15.0
+               150.3128 -7.8515 15.0
+               151.1933 -8.0357 15.0
+               152.0737 -8.3377 15.0
+               152.8773 -8.7268 15.0
+               153.2433 -9.3072 15.0
+            </gml:posList>
+          </gml:LineString>
+        </intermediateEdge>
+
+        <faultBottomEdge>
+          <gml:LineString>
+            <gml:posList>
+               148.5571 -7.8765 30.0
+               149.3912 -8.0905 30.0
+               150.3406 -8.1015 30.0
+               151.1473 -8.2661 30.0
+               151.9814 -8.5734 30.0
+               152.7058 -8.8807 30.0
+               153.0350 -9.3966 30.0
+            </gml:posList>
+          </gml:LineString>
+        </faultBottomEdge>
+      </complexFaultGeometry>
+
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="6.5" binWidth="0.1">
+          <occurRates>0.00885195440521 0.00702145508522 0.0055636068106 0.00440121445599 0.00347332675772 0.00273177015974 0.00213843141857 0.00166312547288 0.00128192111858 0.000975825058533 0.000729746708296 0.000531683125136 0.00036579844106 0.000240915237856 0.000155752733453 9.82967379545e-05 6.00507826743e-05 3.77791634959e-05 2.14413333482e-05 1.12019315364e-05 5.05626684379e-06 1.61817901629e-06 4.40790747056e-07</occurRates>
+      </incrementalMFD>
+      <rake>-90</rake>
+    </complexFaultSource>
+  <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1054,7 +1151,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_3" name="seram_thrust" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1228,7 +1325,95 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_4" name="moresby_trough" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
+
+      <complexFaultGeometry>
+        <faultTopEdge>
+          <gml:LineString>
+            <gml:posList>
+               112.1216 -7.2966 0.001
+               113.2200 -7.5509 0.001
+               114.6941 -7.6087 0.001
+               116.4601 -7.8602 0.001
+               117.6307 -7.9411 0.001
+               118.9198 -7.8660 0.001
+               120.6888 -7.9180 0.001
+               122.1340 -8.1319 0.001
+               124.4058 -7.8139 0.001
+               126.0360 -7.4324 0.001
+               127.8974 -6.9468 0.001
+               129.0189 -6.4959 0.001
+               129.6895 -6.0450 0.001
+            </gml:posList>
+          </gml:LineString>
+        </faultTopEdge>
+
+        <intermediateEdge>
+          <gml:LineString>
+            <gml:posList>
+               112.0868 -7.6946 20.0
+               113.0204 -7.8304 20.0
+               114.0725 -7.9489 20.0
+               115.6045 -8.1310 20.0
+               116.6392 -8.2293 20.0
+               117.4081 -8.2929 20.0
+               118.6278 -8.2698 20.0
+               119.3099 -8.2235 20.0
+               119.7666 -8.2293 20.0
+               120.2985 -8.2871 20.0
+               121.0384 -8.4085 20.0
+               121.6685 -8.4605 20.0
+               122.1483 -8.4663 20.0
+               122.6455 -8.4432 20.0
+               123.5010 -8.3565 20.0
+               124.8075 -8.1195 20.0
+               126.0446 -7.8304 20.0
+               126.8192 -7.6628 20.0
+               127.8655 -7.3680 20.0
+               128.6055 -7.0789 20.0
+               129.2876 -6.7494 20.0
+               129.9466 -6.3448 20.0
+            </gml:posList>
+          </gml:LineString>
+        </intermediateEdge>
+
+        <faultBottomEdge>
+          <gml:LineString>
+            <gml:posList>
+               112.0371 -8.1477 45.0
+               113.1123 -8.3500 45.0
+               114.1529 -8.4656 45.0
+               115.5923 -8.5813 45.0
+               116.6560 -8.6853 45.0
+               117.4421 -8.7373 45.0
+               118.6214 -8.7084 45.0
+               119.2804 -8.6911 45.0
+               119.7545 -8.7027 45.0
+               120.2979 -8.7431 45.0
+               120.9684 -8.8356 45.0
+               121.6274 -8.8992 45.0
+               122.1882 -8.8992 45.0
+               122.6911 -8.8876 45.0
+               123.5698 -8.7894 45.0
+               124.7375 -8.6159 45.0
+               126.1827 -8.2807 45.0
+               127.1539 -7.9916 45.0
+               128.5008 -7.6216 45.0
+               129.3853 -7.2575 45.0
+               130.2524 -6.7487 45.0
+            </gml:posList>
+          </gml:LineString>
+        </faultBottomEdge>
+      </complexFaultGeometry>
+
+      <magScaleRel>StrasserInterface</magScaleRel>
+      <ruptAspectRatio>1.5</ruptAspectRatio>
+      <incrementalMFD minMag="7.0" binWidth="0.1">
+          <occurRates>0.095030496043 0.0759430118689 0.0606950997064 0.0485003930515 0.0387362479132 0.0309091468831 0.024627510654 0.0195803123883 0.0155202414917 0.012250436967 0.00953807217396 0.0073926596395 0.00567803477033 0.00422512961711 0.00315052168155 0.00231014006755 0.00166654088941 0.00117421292907 0.000758095592612 0.000500719829432 0.000319000585723 0.000194607057844 0.000110279861448 5.71065536515e-05 1.97535906545e-05 5.65960570449e-06</occurRates>
+      </incrementalMFD>
+      <rake>90</rake>
+    </complexFaultSource>
+  <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1376,7 +1561,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_5" name="banda_detachment" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1445,7 +1630,7 @@
       </incrementalMFD>
       <rake>-90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_6" name="timor" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
