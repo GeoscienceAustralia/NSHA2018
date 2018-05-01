@@ -13,6 +13,8 @@ from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
 from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
+import matplotlib as mpl
+mpl.style.use('classic')
 
 # import non-standard functions
 try:
