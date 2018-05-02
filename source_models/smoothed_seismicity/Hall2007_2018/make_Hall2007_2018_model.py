@@ -18,8 +18,6 @@ import numpy as np
 import shapefile
 from shapely.geometry import Polygon
 import shapely.geometry
-from hmtk.sources.source_model import mtkSourceModel
-from hmtk.sources.point_source import mtkPointSource
 from openquake.hazardlib.source.point import PointSource
 from openquake.hazardlib.geo.point import Point
 from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
