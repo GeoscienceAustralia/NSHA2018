@@ -96,11 +96,13 @@ mwref = np.array(mwref)
 idx_src = np.array(idx)
 
 # delete events
+'''
 didx = np.where((ml < 3.75) & (mwref=='Ghasemi et al (2016)'))[0]
 ml = np.delete(ml, didx)
 mw = np.delete(mw, didx)
 mwref = np.delete(mwref, didx)
 
+'''
 didx = np.where(mw > 6.)[0]
 #print ml[didx]
 ml = np.delete(ml, didx)
@@ -134,7 +136,7 @@ for i, mr in enumerate(mwref):
 #data = odrpack.RealData(ml, mw)
 data = odrpack.RealData(ml, mw)
 
-xrng = np.arange(1.5,6.0,step=0.1)
+xrng = np.arange(1.5,6.0,step=0.01)
 
 bilin_reg = odrpack.Model(bilinear_reg_free)
 odr = odrpack.ODR(data, bilin_reg, beta0=[0.7, 1.0, 1.0, 3.5])
