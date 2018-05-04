@@ -234,7 +234,7 @@ for uclass in unique_sup_classes:
     
     # loop thru source zones
     for i in srcidx:        
-        if src_class_num[i] == uclass:
+        if floor(src_class_num[i]) == uclass:
         
             # first check rate adjustment factor
             if not src_rte_adj[i] == 1.0:
@@ -338,7 +338,6 @@ for uclass in unique_sup_classes:
     ###############################################################################
     
     # get bval for combined zones data - uses new MW estimates ("total_mvect") to do cleaning
-    check mcomps
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
           get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
                    mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
@@ -353,14 +352,15 @@ sup_class_bval_sig = array(sup_class_bval_sig)
 unique_sub_classes = array(unique_sub_classes)
 
 ###############################################################################
-# now, fit sub-class rates with super-class b-values    
+# now, assign sub-class rates with super-class b-values
 ###############################################################################
 
 for uclass in unique_sub_classes:
+    
     # fix super-class b-val
-    cidx = where(unique_sub_classes == floor(uclass))
-    sup_bval = sup_class_bval[cidx]
-    sup_bval_sig = sup_class_bval_sig[cidx]
+    cidx = where(unique_sup_classes == floor(uclass))[0]
+    sup_bval = sup_class_bval[cidx][0]
+    sup_bval_sig = sup_class_bval_sig[cidx][0]
     
     total_mvect = []
     total_mxvect = []
@@ -387,8 +387,8 @@ for uclass in unique_sub_classes:
     
     # loop thru source zones
     for i in srcidx:
-        
-        if src_class_num[i] == uclass:
+        # now find matching sub-classes
+        if src_class_num[i] == round(uclass,1):
             class_idx.append(i)
             class_code.append(src_code[i])
         
@@ -559,7 +559,7 @@ for uclass in unique_sub_classes:
             new_dict.append(total_ev_dict[idx])
         
         # write to file
-        ggcat2ascii(new_dict, path.join(classfolder, 'class_'+uclass+'_passed.dat'))
+        ggcat2ascii(new_dict, path.join(classfolder, 'class_'+str(uclass)+'_passed.dat'))
         
         # write list of events that fail completeness
         # reorder out dict
@@ -575,7 +575,7 @@ for uclass in unique_sub_classes:
             idx = where(ordidx == o)[0][0]
             new_dict.append(ev_out[idx])
         
-        outfile = path.join(classfolder, 'class_'+uclass+'_failed.dat')
+        outfile = path.join(classfolder, 'class_'+str(uclass)+'_failed.dat')
         ggcat2ascii(new_dict, outfile)
     
     ##################################################################################################
@@ -622,14 +622,14 @@ for i in srcidx:
     mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
     mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
             
-    for uc in range(0, len(unique_classes)):
+    for uc in range(0, len(unique_sub_classes)):
         
         # set b-value and class data
-        if src_class[i] == unique_classes[uc]:
+        if round(src_class_num[i],1) == unique_sub_classes[uc]:
             bval = class_bval[uc]
             bval_sig = class_bval_sig[uc]
             
-            source_class = unique_classes[uc]
+            source_class = unique_sub_classes[uc]
             class_idx = uc
             
             bval_vect.append(bval)
@@ -752,8 +752,14 @@ for i in srcidx:
                     
                 idxstart -= 1
         
-        # get a-value using region class b-value
-        fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
+        # get a-value for intraslab events based on nornalised class area
+        if floor(src_class_num[i]) == 11.:
+            print '\nIntraslab Source\n', src_class_num[i]
+            fn0 = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
+        
+        # get a-value using region class b-value for other sources
+        else:
+            fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
         
         # get zone confidence limits
         err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
@@ -1216,7 +1222,7 @@ for i in srcidx:
             elif Weichert == True:
                 suptitle += ' - Weichert'
             else:
-                suptitle += ' - Class: '+source_class
+                suptitle += ' - Class: '+str(source_class)
                     
             plt.suptitle(suptitle, fontsize=18)
             
