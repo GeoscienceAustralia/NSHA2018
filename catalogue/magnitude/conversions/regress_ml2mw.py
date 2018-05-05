@@ -246,6 +246,9 @@ yrng_ross = 0.754*xrng[xrng<=4.0] + 0.88
 from mag_tools import nsha18_ml2mw
 yrng_ga17 = nsha18_ml2mw(xrng)
 
+# get residuals
+
+
 ##### Plot all
 
 mx = 6.
@@ -262,7 +265,7 @@ ax.plot(xrng,yrng_swiss,'r-',lw=2,label='Goertz-Allmann et al. (2011)')
 ax.plot(xrng[xrng<=4.0],yrng_ross,'-',c='orange', lw=2,label='Ross et al. (2016)')
 ax.plot(xrng,yrng,'-',c='dodgerblue',lw=2,label='Automatic Bilinear')
 ax.plot(xrng,yrngf,'-',c='seagreen',lw=2,label='Fixed Bilinear')
-ax.plot(xrng,yrng_poly,'-',c='purple',lw=2,label='Polynomial')
+ax.plot(xrng,yrng_poly,'-',c='purple',lw=2,label='Quadratic')
 ax.plot(xrng,yrng_ga17,'-',c='k',lw=2,label='Ghasemi & Allen (2017)')
 
 # ax.plot(xrng,yrngf_mix,'m-',lw=4)
