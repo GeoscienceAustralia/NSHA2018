@@ -349,7 +349,8 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
         get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax)
         
-    print '    Number of events:', len(mvect) 
+    print '    Number of events:', len(mvect)
+    #print cum_rates
             
     ###############################################################################
     # calculate MFDs if at least 50 events
@@ -396,7 +397,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         # scale for N0
         fn0 = 10**(log10(bc_lo100[0]) + beta2bval(beta)*bc_mrng[0])
 
-    # do Aki ML first if N events less than 50
+    # do Aki ML first if N events less than 80
     elif len(mvect) >= 30 and len(mvect) < 80:
             
         # do Aki max likelihood
@@ -406,7 +407,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         
         # now recalc N0
         dummyN0 = 1.
-
+        
         bc_tmp, bc_mrng = get_oq_incrementalMFD(beta, dummyN0, mrng[0], src_mmax, bin_width)
         
         # fit to lowest magnitude considered and observed

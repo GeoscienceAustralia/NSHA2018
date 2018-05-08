@@ -45,10 +45,6 @@ splitpath = shpfile.split(sep)[:-2]
 # set beta wts - keep these consistent accross models and zones
 beta_wts   = [0.5, 0.2, 0.3] # best, lower (hi b), upper (lo b)
 
-# set Mmax array and weights
-#print '\n!!!! temporary override to compare rate collapse method !!!!\n'
-mx_wts  = [0.1, 0.2, 0.4, 0.2, 0.1] # using this for default as Mmax probably not major contributor to hazard
-
 # check that input folder
 splitpath.append('input')
 modPath = sep.join(splitpath)
@@ -94,8 +90,9 @@ unq_trt = unique(trt)
 mx_dict = {}
 for ut in unq_trt:
     idx = where(trt == ut)[0]
-    td = {'mx_vals':mxv[idx], 'mx_wts':mxw[idx]}    
+    td = {'trt':ut, 'mx_vals':mxv[idx], 'mx_wts':mxw[idx]}    
     mx_dict[ut] = td
+    print td
 
 ##############################################################################
 # use best beta & Mmax
@@ -188,6 +185,9 @@ elif outputType == '2':
     else:
         splitpath.append('multimod')
     modPath = sep.join(splitpath)
+    
+    # set Mmax array and weights - cannot equaly weight different TRTs
+    mx_wts  = [0.1, 0.2, 0.4, 0.2, 0.1] # using this for default as Mmax probably not major contributor to hazard
     
     # check to see if exists
     if path.isdir(modPath) == False:

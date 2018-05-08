@@ -8,11 +8,13 @@ from datetime import datetime
 from sys import argv
 import shapefile
 import matplotlib.pyplot as plt
-from matplotlib import colors, colorbar
+from matplotlib import colors, colorbar, style
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
 from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
+import matplotlib as mpl
+style.use('classic')
 
 # import non-standard functions
 try:
@@ -190,7 +192,13 @@ iscMaxYear = toYearFraction(iscCat[-1]['datetime'])
 # get unique zone classes and loop through to merge zones of similar class 
 ###############################################################################
 
-unique_classes = unique(array(src_class))
+# first round sub-classes and get unique super-classes values to assign consistent b-value
+src_class_num = [float(i) for i in src_class]
+unique_sup_classes = unique(floor(array(src_class_num)))
+unique_sub_classes = unique(array(src_class_num))
+
+sup_class_bval = []
+sup_class_bval_sig = []
 class_bval = []
 class_bval_sig = []
 class_cum_rates = []
@@ -205,14 +213,160 @@ class_lovect = []
 class_fn0 = []
 class_area = []
 
-for uclass in unique_classes:
+# first get b-values from super classes
+for uclass in unique_sup_classes:
     
     total_mvect = []
     total_mxvect = []
     total_tvect = []
     total_dec_tvect = []
     total_ev_dict = []
-    #out_idx = []
+    mcomps = [-9999]
+    cum_area = 0
+    class_mmin_reg = 0.0
+    class_mmax = nan
+    
+    print '\nCalculating b-value for class:', uclass
+                
+    ###############################################################################
+    # loop thru zones 
+    ###############################################################################
+    
+    # loop thru source zones
+    for i in srcidx:        
+        if floor(src_class_num[i]) == uclass:
+        
+            # first check rate adjustment factor
+            if not src_rte_adj[i] == 1.0:
+                print '    Getting alternative source boundary for', src_code[i]
+                
+                # loop through original shapes
+                for oPoly, oCode in zip(origPolygons, origCodes):
+                    # assign original polygon                    
+                    if oCode == src_code[i]:
+                        print '        Matched', oCode
+                        poly = oPoly
+                        
+            # if rate adjust == 1., use default shapes
+            else:
+                poly = polygons[i]
+            
+            # get cumulative class area
+            cum_area += get_WGS84_area(poly)
+            
+            print '    Compiling data from:', src_code[i]
+            
+            # definitions of arrays extracted from catalogue
+            '''
+            mvect: preferred MW
+            mxvect: preferred original magnitudes
+            tvect: datetime array
+            dec_tvect: decimal datetime
+            ev_dict: event dictionary
+            '''
+            
+            # set preferred catalogue for each source
+            if src_cat[i].startswith('NSHA'):
+                # use NSHA catalogue
+                sourcecat = nshaCat
+                year_max = nshaMaxYear
+                
+            elif src_cat[i].startswith('ISC-GEM'):
+                # use ISC-GEM catalogue
+                sourcecat = iscCat
+                year_max = iscMaxYear
+                
+            src_ymax[i] = year_max
+            
+            # get earthquakes within source zones
+            #print src_code[i], src_usd, src_lsd
+            mvect, mxvect, tvect, dec_tvect, ev_dict \
+                = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
+            
+            # stack records into total arrays
+            total_mvect = hstack((total_mvect, mvect))
+            total_mxvect = hstack((total_mxvect, mxvect))
+            total_tvect = hstack((total_tvect, tvect))
+            total_dec_tvect = hstack((total_dec_tvect, dec_tvect))
+            total_ev_dict = hstack((total_ev_dict, ev_dict))
+                    
+            ###############################################################################
+            # get earthquakes that pass completeness in merged zones
+            ###############################################################################
+            
+            # get most conservative completeness for given geologic class
+            temp_mcomp = array([float(x) for x in src_mcomp[i].split(';')])
+            if temp_mcomp[-1] > mcomps[0]:
+                ycomps = array([int(x) for x in src_ycomp[i].split(';')])
+                mcomps = array([float(x) for x in src_mcomp[i].split(';')])
+            
+            # get mag range for mfd
+            mcompmin = min(mcomps)
+            
+            mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
+            mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
+            
+            # remove events with NaN mags
+            didx = where(isnan(total_mvect))[0]
+            total_tvect = delete(total_tvect, didx)
+            total_mvect = delete(total_mvect, didx)
+            total_mxvect = delete(total_mxvect, didx)
+            total_dec_tvect = delete(total_dec_tvect, didx)
+            total_ev_dict = delete(total_ev_dict, didx)
+            
+            # remove events with M < min mcomps
+            didx = where(total_mvect < min(mcomps)-bin_width/2)[0]
+            total_tvect = delete(total_tvect, didx)
+            total_mvect = delete(total_mvect, didx)
+            total_mxvect = delete(total_mxvect, didx)
+            total_dec_tvect = delete(total_dec_tvect, didx)
+            total_ev_dict = delete(total_ev_dict, didx)
+            
+            # set min regression magnitude
+            if src_mmin_reg[i] > class_mmin_reg:
+                class_mmin_reg = src_mmin_reg[i]
+                
+            # set class b-values
+            fixed_bval = src_bval_fix[i]
+            fixed_bval_sig = src_bval_fix_sd[i]
+            
+            # set class mmax
+            class_mmax = src_mmax[i]
+                  
+    ###############################################################################
+    # get b-values from joined zones
+    ###############################################################################
+    
+    # get bval for combined zones data - uses new MW estimates ("total_mvect") to do cleaning
+    bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
+          get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
+                   mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
+                   fixed_bval, fixed_bval_sig, bin_width, poly)
+          
+    # only keep b-values for super-classes
+    sup_class_bval.append(bval)
+    sup_class_bval_sig.append(sigb)
+
+sup_class_bval = array(sup_class_bval)
+sup_class_bval_sig = array(sup_class_bval_sig)
+unique_sub_classes = array(unique_sub_classes)
+
+###############################################################################
+# now, assign sub-class rates with super-class b-values
+###############################################################################
+
+for uclass in unique_sub_classes:
+    
+    # fix super-class b-val
+    cidx = where(unique_sup_classes == floor(uclass))[0]
+    sup_bval = sup_class_bval[cidx][0]
+    sup_bval_sig = sup_class_bval_sig[cidx][0]
+    
+    total_mvect = []
+    total_mxvect = []
+    total_tvect = []
+    total_dec_tvect = []
+    total_ev_dict = []
     class_idx = []
     class_code = []
     lavect = []
@@ -233,8 +387,8 @@ for uclass in unique_classes:
     
     # loop thru source zones
     for i in srcidx:
-        
-        if src_class[i] == uclass:
+        # now find matching sub-classes
+        if src_class_num[i] == round(uclass,1):
             class_idx.append(i)
             class_code.append(src_code[i])
         
@@ -331,9 +485,6 @@ for uclass in unique_classes:
             # set class mmax
             class_mmax = src_mmax[i]
             
-            # set class b-values
-            fixed_bval = src_bval_fix[i]
-            fixed_bval_sig = src_bval_fix_sd[i]
                   
     ###############################################################################
     # get b-values from joined zones
@@ -346,13 +497,14 @@ for uclass in unique_classes:
     class_orig_dec_tvect = dec_tvect
     
     # get bval for combined zones data - uses new MW estimates ("total_mvect") to do cleaning
+    # do this to get stats (e.g. err_up, err_lo)
     bval, beta, sigb, sigbeta, fn0, cum_rates, ev_out, err_up, err_lo = \
           get_mfds(total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, \
                    mcomps, ycomps, year_max, mrng, class_mmax, class_mmin_reg, \
-                   fixed_bval, fixed_bval_sig, bin_width, poly)
+                   sup_bval, sup_bval_sig, bin_width, poly)
     
     # get a-value using fixed region class b-value if assigned - need to do this to fit the class rates!
-    if not fixed_bval == -99.0:
+    if not sup_bval == -99.0:
         
         # remove incomplete events based on original preferred magnitudes (mxvect)
         total_mvect, total_mxvect, total_tvect, total_dec_tvect, total_ev_dict, out_idx, ev_out = \
@@ -407,7 +559,7 @@ for uclass in unique_classes:
             new_dict.append(total_ev_dict[idx])
         
         # write to file
-        ggcat2ascii(new_dict, path.join(classfolder, 'class_'+uclass+'_passed.dat'))
+        ggcat2ascii(new_dict, path.join(classfolder, 'class_'+str(uclass)+'_passed.dat'))
         
         # write list of events that fail completeness
         # reorder out dict
@@ -423,14 +575,14 @@ for uclass in unique_classes:
             idx = where(ordidx == o)[0][0]
             new_dict.append(ev_out[idx])
         
-        outfile = path.join(classfolder, 'class_'+uclass+'_failed.dat')
+        outfile = path.join(classfolder, 'class_'+str(uclass)+'_failed.dat')
         ggcat2ascii(new_dict, outfile)
     
     ##################################################################################################
     
     # add to class arrays - used for plotting later
-    class_bval.append(bval)
-    class_bval_sig.append(sigb)
+    class_bval.append(sup_bval)
+    class_bval_sig.append(sup_bval_sig)
     class_cum_rates.append(cum_rates)
     class_mrng.append(mrng)
     class_err_up.append(err_up)
@@ -470,14 +622,14 @@ for i in srcidx:
     mcompminmw = around(ceil(mcompmin*10.) / 10., decimals=1)
     mrng = arange(mcompminmw-bin_width/2, src_mmax[i], bin_width)
             
-    for uc in range(0, len(unique_classes)):
+    for uc in range(0, len(unique_sub_classes)):
         
         # set b-value and class data
-        if src_class[i] == unique_classes[uc]:
+        if round(src_class_num[i],1) == unique_sub_classes[uc]:
             bval = class_bval[uc]
             bval_sig = class_bval_sig[uc]
             
-            source_class = unique_classes[uc]
+            source_class = unique_sub_classes[uc]
             class_idx = uc
             
             bval_vect.append(bval)
@@ -600,8 +752,14 @@ for i in srcidx:
                     
                 idxstart -= 1
         
-        # get a-value using region class b-value
-        fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
+        # get a-value for intraslab events based on nornalised class area
+        if floor(src_class_num[i]) == 11.:
+            print '\nIntraslab Source\n', src_class_num[i]
+            fn0 = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
+        
+        # get a-value using region class b-value for other sources
+        else:
+            fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
         
         # get zone confidence limits
         err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
@@ -1064,7 +1222,7 @@ for i in srcidx:
             elif Weichert == True:
                 suptitle += ' - Weichert'
             else:
-                suptitle += ' - Class: '+source_class
+                suptitle += ' - Class: '+str(source_class)
                     
             plt.suptitle(suptitle, fontsize=18)
             

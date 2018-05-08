@@ -6,7 +6,8 @@ try:
     from tools.source_shapefile_builder import get_preferred_catalogue, \
                                                get_completeness_model, get_aus_shmax_vectors, \
                                                get_rate_adjust_factor, build_source_shape, \
-                                               get_ul_seismo_depths, get_neotectonic_domain_params
+                                               get_ul_seismo_depths, get_neotectonic_domain_params, \
+                                               aggregate_intraslab_sources
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -86,7 +87,9 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix \
+    = get_neotectonic_domain_params(sf, trt_new)
+    
 for i in range(0, len(domains)):
     if neo_domains[i] > 0 and neo_domains[i] < 8:
         domains[i] = neo_domains[i]
@@ -132,6 +135,14 @@ domains[26] = 8.
 # reset Tasmania to Non-cratonic
 zone_class[41] = 4.
 domains[41] = 4.
+
+###############################################################################
+#  set intraslab aggregation class
+###############################################################################
+print '\n!!! REMEMBER TO RESET SRM_200_300 SOURCE CODE !!!!\n'
+for i, src_code in enumerate(src_codes):
+   zone_class[i] =  aggregate_intraslab_sources(src_code, zone_class[i])
+      
 
 ###############################################################################
 #  set pref strike/dip/rake

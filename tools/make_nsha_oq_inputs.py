@@ -20,7 +20,8 @@ def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
     try:
         mx_vals = mx_dict[m['trt']]['mx_vals']
         mx_wts  = mx_dict[m['trt']]['mx_wts']
-    # else use Mmax from model and theoretical weights
+    
+    # else use Mmax from model shapefile and theoretical weights
     except:
         mx = m['max_mag'][0]
         mx_vals = [mx-0.2, mx-0.1, mx, mx+0.1, mx+0.2]

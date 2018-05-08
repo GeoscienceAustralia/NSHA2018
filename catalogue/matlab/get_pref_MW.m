@@ -12,8 +12,11 @@
 % zone = 4 > outside Australia
 %
 % Author: T. Allen (2011-01-11) - updated February 2018
+% 
+% 2018-05-07: V0.2 - Adding column for fixed hunge ML2MW conversion
+%
 % *************************************************************************
-outfile = fullfile('..','data','NSHA18CAT.MW.V0.1.csv');
+outfile = fullfile('..','data','NSHA18CAT.MW.V0.2.csv');
 
 % load data
 if exist('mdat','var') ~= 1
@@ -25,6 +28,8 @@ MS2MW = ones(size(mdat)) * NaN;
 mb2MW = ones(size(mdat)) * NaN;
 %ML2MWA = ones(size(mdat)) * NaN;
 ML2MWG = ones(size(mdat)) * NaN;
+ML2MW_BL = ones(size(mdat)) * NaN;
+
 prefFinalMW = ones(size(mdat)) * NaN;
 
 % *************************************************************************
@@ -112,14 +117,33 @@ a = 0.04160769;
 b = 0.48058286;
 c = 1.39485216;
 
+% add bi-linear coefs - not used in NSHA18
+a_bl = 0.66053496;
+b_bl = 1.20883045;
+c_bl = 0.98659071;
+hx_bl = 4.25;
+hy_bl =  a * hx_bl + b_bl
+
 for i = 1:length(mdat)
     % calculate MW for non-revised ML
-	if isnan(mdat(i).MDAT_MLrev)
+    if isnan(mdat(i).MDAT_MLrev)
         ML2MWG(i) = a*mdat(i).MDAT_prefML^2 + b*mdat(i).MDAT_prefML + c;
+        
+        % calculate bi-linear
+        if mdat(i).MDAT_prefML <= hx_bl
+            ML2MW_BL(i) = a_bl*mdat(i).MDAT_prefML + b_bl;
+        else
+            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_prefML - hx_bl) + b_bl;
 
     % calculate MW for non-revised ML
     else
          ML2MWG(i) = a*mdat(i).MDAT_MLrev^2 + b*mdat(i).MDAT_MLrev + c;
+         
+         % calculate bi-linear
+        if mdat(i).MDAT_prefML <= hx_bl
+            ML2MW_BL(i) = a_bl*mdat(i).MDAT_MLrev + b_bl;
+        else
+            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_MLrev - hx_bl) + b_bl;
     end
 end
 
@@ -129,6 +153,7 @@ for i = 1:length(mdat)
     mdat(i).mb2MW = mb2MW(i);
     %mdat(i).ML2MWA = ML2MWA(i);
     mdat(i).ML2MWG = ML2MWG(i);
+    mdat(i).ML2MW_BL = ML2MW_BL(i);
     mdat(i).prefFinalMW = prefFinalMW(i);
 end
 
@@ -247,7 +272,7 @@ save mdat_mw_pref mdat;
 % *************************************************************************
 %% write to file
 
-header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREGION,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,PREFMW,PREFMWSRC,COMM';
+header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREGION,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,ML2MW_BL,PREFMW,PREFMWSRC,COMM';
 disp('writing to file')
 dlmwrite(outfile,header,'delimiter','');
 txt = [];
@@ -286,7 +311,7 @@ for i = 1:length(mdat)
             num2str(Mx_RevML,'%0.2f'),',',mdat(i).Mx_RevMLtype,',', ...
             mdat(i).Mx_RevMLSrc,',', ...
             num2str(mdat(i).MS2MW,'%0.2f'),',',num2str(mdat(i).mb2MW,'%0.2f'),',', ...
-            num2str(mdat(i).ML2MWG,'%0.2f'),',', ...
+            num2str(mdat(i).ML2MWG,'%0.2f'),',',num2str(mdat(i).ML2MW_BL,'%0.2f'),',', ...
             num2str(mdat(i).prefFinalMW,'%0.2f'),',', ...
             mdat(i).prefFinalMWSrc,',',comms,char(10)];
     txt = [txt line];
@@ -341,40 +366,3 @@ title('ML residual [ML (Richter) >= 4.0], 1940-1990');
 text(-1.15,130,['Events = ',num2str(length(mldiff(nn))),char(10) ...
                 'Median ML Residual = ',num2str(medmldiff,'%0.3f'),char(10), ...
                 'Mean ML Residual = ',num2str(meanmldiff,'%0.3f')],'Fontsize',8);
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

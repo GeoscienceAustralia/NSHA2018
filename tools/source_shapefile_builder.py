@@ -319,6 +319,28 @@ def get_preferred_catalogue(targetshpfile):
         cat.append(tmpcat)
         
     return cat
+    
+# function to aggregate different intraslab sources to obtian improved earthquake recurrence
+def aggregate_intraslab_sources(src_code, src_class):
+    from os import path
+    
+    # set aggregation code file relative to shapfiles
+    aggFile = path.join('..','..','..','banda','banda_deep_sources_NSHA18_aggregation_map.csv')
+    
+    # read file
+    lines = open(aggFile).readlines()[1:]
+    
+    # loop thru lines and find matching code
+    for line in lines:
+        dat = line.strip().split(',')
+        agg_code = dat[2]
+        agg_class = float(dat[-1])
+        
+        # if match, reset zone class
+        if agg_code == src_code:
+            src_class = agg_class
+    
+    return src_class
 
 def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
                        rte_adj_fact, dep_b, dep_u, dep_l, usd, lsd, \
