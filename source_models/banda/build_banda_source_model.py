@@ -16,7 +16,7 @@ except ImportError:
 
 contour_dir = './shp'
 contour_shapefiles = glob(os.path.join(contour_dir, '*.shp'))
-rate_dir = './source_rates'
+#rate_dir = './EVENT_RATES'
 source_model_name = 'Banda_Fault_Sources_NSHA_2018'
 tectonic_region = 'Subduction'
 magnitude_scale_rel = 'StrasserInterface'
