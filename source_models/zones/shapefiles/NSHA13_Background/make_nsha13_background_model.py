@@ -143,7 +143,6 @@ print '\n!!! REMEMBER TO RESET SRM_200_300 SOURCE CODE !!!!\n'
 for i, src_code in enumerate(src_codes):
    zone_class[i] =  aggregate_intraslab_sources(src_code, zone_class[i])
       
-
 ###############################################################################
 #  set pref strike/dip/rake
 ###############################################################################

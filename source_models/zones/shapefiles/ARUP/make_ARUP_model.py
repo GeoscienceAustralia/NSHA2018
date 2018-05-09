@@ -1,12 +1,13 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, nan
+from numpy import array, ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
                                                get_completeness_model, get_aus_shmax_vectors, \
                                                get_rate_adjust_factor, build_source_shape, \
-                                               get_ul_seismo_depths, get_neotectonic_domain_params
+                                               get_ul_seismo_depths, get_neotectonic_domain_params, \
+                                               aggregate_intraslab_sources
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -117,6 +118,27 @@ domains[19] = 8.
 # reset Tasmania buffer
 zone_class[11] = 2.
 domains[11] = 2.
+
+###############################################################################
+#  set intraslab aggregation class
+###############################################################################
+print '\n!!! REMEMBER TO RESET SRM_200_300 SOURCE CODE !!!!\n'
+new_src_codes = []
+for i, src_code in enumerate(src_codes):
+    
+    # fix source codes on the fly
+    if src_code.startswith('TMR') or src_code.startswith('SRM'):
+        if src_code[3] != '_':
+            src_code = src_code[:3]+'_'+src_code[3:]
+    
+    new_src_codes.append(src_code)
+    
+    # now match zone class based on lookup table
+    zone_class[i] =  aggregate_intraslab_sources(src_code, zone_class[i])
+
+# supplant new source codes
+del src_codes
+src_codes = array(new_src_codes).copy()
 
 ###############################################################################
 #  set pref strike/dip/rake

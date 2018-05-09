@@ -647,7 +647,7 @@ for i in srcidx:
     beta = bval2beta(bval)
     sigbeta = bval2beta(bval_sig)
     
-       
+      
     ###############################################################################
     # set appropriate source polygon
     ###############################################################################
@@ -710,10 +710,15 @@ for i in srcidx:
     if len(mvect) <= 1:
     
         N0areanorm = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
-        new_n0_b[i] = N0areanorm 
-        new_n0_l[i] = N0areanorm
-        new_n0_u[i] = N0areanorm
-        
+        if N0areanorm <= 0:
+            new_n0_b[i] = nan 
+            new_n0_l[i] = nan
+            new_n0_u[i] = nan
+        else:
+            new_n0_b[i] = N0areanorm 
+            new_n0_l[i] = N0areanorm
+            new_n0_u[i] = N0areanorm
+            
         new_bval_b[i] = bval
         
         # Use +/- 1 sigma
@@ -756,6 +761,9 @@ for i in srcidx:
         if floor(src_class_num[i]) == 11.:
             print '\nIntraslab Source\n', src_class_num[i]
             fn0 = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
+            
+            # reset cum_rates based on new fn0
+            cum_rates = 
         
         # get a-value using region class b-value for other sources
         else:
@@ -1368,41 +1376,42 @@ fields = [x[0] for x in w.fields]
 # loop through original records
 i = 0
 for record, shape in zip(records, shapes):
-
-    # set shape polygon
-    w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
     
-    # loop thru fields and match with original shapefile
-    for j, field in enumerate(fields):
-       
-        # get field index from old shpfile
-        idx = get_field_index(sf, field)
-    
-        # make record tuple from input shapefile
-        if j == 0:
-            newrec = [record[idx]]
+    if new_n0_b[i] > 0.0:
+        # set shape polygon
+        w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        
+        # loop thru fields and match with original shapefile
+        for j, field in enumerate(fields):
+           
+            # get field index from old shpfile
+            idx = get_field_index(sf, field)
+        
+            # make record tuple from input shapefile
+            if j == 0:
+                newrec = [record[idx]]
+            else:
+                newrec.append(record[idx])
+        
+        # write new records
+        if src_n0[i] != new_n0_b[i]:
+            w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
+                     newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], newrec[12], newrec[13], newrec[14], newrec[15], newrec[16],\
+                     new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
+                     newrec[23], newrec[24], newrec[25], newrec[26], src_ymax[i], newrec[28], newrec[29], \
+                     newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35], newrec[36])
+        
+        # don't edit values
         else:
-            newrec.append(record[idx])
+            w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
+                     newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
+                     newrec[12], newrec[13], newrec[14], newrec[15], newrec[16], newrec[17], \
+                     newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
+                     newrec[25], newrec[26], newrec[27], newrec[28], newrec[29], \
+                     newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35], newrec[36])
     
-    # write new records
-    if src_n0[i] != new_n0_b[i]:
-        w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
-                 newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], newrec[12], newrec[13], newrec[14], newrec[15], newrec[16],\
-                 new_n0_b[i], new_n0_l[i], new_n0_u[i], new_bval_b[i], new_bval_l[i], new_bval_u[i], \
-                 newrec[23], newrec[24], newrec[25], newrec[26], src_ymax[i], newrec[28], newrec[29], \
-                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35], newrec[36])
-    
-    # don't edit values
-    else:
-        w.record(newrec[0], newrec[1], newrec[2], newrec[3], newrec[4], newrec[5], newrec[6], \
-                 newrec[7], newrec[8], newrec[9], newrec[10], newrec[11], \
-                 newrec[12], newrec[13], newrec[14], newrec[15], newrec[16], newrec[17], \
-                 newrec[18], newrec[19], newrec[20], newrec[21], newrec[22], newrec[23], newrec[24], \
-                 newrec[25], newrec[26], newrec[27], newrec[28], newrec[29], \
-                 newrec[30], newrec[31], newrec[32], newrec[33], newrec[34], newrec[35], newrec[36])
-
     i += 1  
-    
+        
 # now save area shapefile
 newshp = path.join(rootfolder,'shapefiles',outsrcshp)
 w.save(newshp)
@@ -1412,6 +1421,10 @@ prjfile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'
 f = open(prjfile, 'wb')
 f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
 f.close()
+
+# open new shape for plotting later
+del sf
+sf = shapefile.Reader(newshp)
 
 ###############################################################################
 # map b-value
@@ -1454,9 +1467,10 @@ b_max = 1.3
 cindex = []
 
 # loop thru b values
-for b in new_bval_b:
-    idx = interp(b, [b_min, b_max], [0, ncolours-1])
-    cindex.append(int(round(idx)))
+for b, n0 in zip(new_bval_b, new_n0_b):
+    if not isnan(n0):
+        idx = interp(b, [b_min, b_max], [0, ncolours-1])
+        cindex.append(int(round(idx)))
     
 # get cmap
 cmap = plt.get_cmap('YlOrRd', ncolours)
@@ -1517,16 +1531,20 @@ m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes
 # get M5 rates
 new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
+new_n0_b = array(new_n0_b)
 
-m5_rates = array(new_n0_b) * exp(-new_beta  * 5.0) * (1 - exp(-new_beta * (src_mmax - 5.0))) \
-           / (1 - exp(-new_beta * src_mmax))
+# remove sources with zero rates
+idx = where(isnan(new_n0_b)==False)[0] 
+
+# calculate rate of M5 events
+m5_rates = array(new_n0_b[idx]) * exp(-new_beta[idx]  * 5.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 5.0))) \
+           / (1 - exp(-new_beta[idx] * src_mmax[idx]))
 
 # get area (in km**2) of sources for normalisation
 src_area= array(src_area)
     
 # normalise M5 rates by area
-lognorm_m5_rates = log10(100**2 * m5_rates / src_area)
-#norm_m5_rates = m5_rates
+lognorm_m5_rates = log10(100**2 * m5_rates / src_area[idx])
     
 # get colour index
 ncolours=20
@@ -1600,14 +1618,15 @@ m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes
 new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
 
-m6_rates = array(new_n0_b) * exp(-new_beta  * 6.0) * (1 - exp(-new_beta * (src_mmax - 6.0))) \
-           / (1 - exp(-new_beta * src_mmax))
+# remove sources with zero rates
+idx = where(isnan(new_n0_b)==False)[0] 
 
-# get area (in km**2) of sources for normalisation
-src_area= array(src_area)
-    
-# normalise M6 rates by area
-lognorm_m6_rates = log10(100**2 * m6_rates / src_area)
+# calculate rate of M5 events
+m6_rates = array(new_n0_b[idx]) * exp(-new_beta[idx]  * 6.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 6.0))) \
+           / (1 - exp(-new_beta[idx] * src_mmax[idx]))
+
+# normalise M5 rates by area
+lognorm_m6_rates = log10(100**2 * m6_rates / src_area[idx])
     
 # get colour index
 ncolours=20
