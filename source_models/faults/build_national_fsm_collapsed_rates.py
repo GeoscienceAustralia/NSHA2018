@@ -33,32 +33,32 @@ shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
 shapefile_uplift_attribute = 'UP_RT_LT'
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed_NSHA13'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_DIMAUS_2018'
 simple_fault_tectonic_region = None # Define based on neotectonic domains
 magnitude_scaling_relation = 'Leonard2014_SCR'
-rupture_aspect_ratio = 2
+rupture_aspect_ratio = 1.5
 upper_depth = 0.001
 lower_depth = 20.0
 a_value = None
 #b_region_shapefile =  '../zones/shapefiles/Leonard2008/LEONARD08_NSHA18_MFD.shp'
-b_region_shapefile =  '../zones/2012_mw_ge_4.0/NSHA13_Background/shapefiles/NSHA13_BACKGROUND_NSHA18_MFD.shp'
+b_region_shapefile =  '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
 default_b = 1.0#None # Get from Leonard 2008 regions
 min_mag = 5.5 #4.8
 #max_mag = 7.5 #None # Get from scaling
 rake = 90
 output_dir = source_model_name
-combined_output_dir = 'National_Seismotectonic_Source_Model_2018_Collapsed_NSHA13'
+#combined_output_dir = 'National_Seismotectonic_Source_Model_2018_Collapsed_NSHA13_2018'
 bin_width = 0.1 # Width of MFD bins in magnitude units
-domains_shapefile = '../zones/shapefiles/NSHA13_Background/NSHA13_BACKGROUND_NSHA18.shp'
+domains_shapefile = '../zones/shapefiles/NSHA13_Background/NSHA13_Background_NSHA18.shp'
 
-area_source_model = '../zones/2012_mw_ge_4.0/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+area_source_model = '../zones/2018_mw/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
 area_source_model_name = area_source_model.split('/')[0].rstrip('.xml')
 investigation_time = 50
 fault_mesh_spacing = 2 #2 Fault source mesh
 rupture_mesh_spacing = 2 #10 # Area source mesh
-area_source_discretisation = 10 #20
+area_source_discretisation = 15 #20
 
 # Get logic tree information
 lt = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
@@ -74,9 +74,9 @@ fault_traces, faultnames, dips, sliprates, fault_lengths = \
 
 # Get b-value and trt from domains
 trts = shp2nrml.trt_from_domains(fault_traces, domains_shapefile,
-                                default_trt = 'Non-cratonic')
+                                default_trt = 'Non_cratonic')
 trt_list = list(set(trts)) # unique trt values
-
+print trt_list
 b_values = shp2nrml.b_value_from_region(fault_traces, 
                                         b_region_shapefile, 
                                         default_b = 1.0)
@@ -106,26 +106,44 @@ clustered_fault_rate_dict = {'Cadell Fault':1.399683e-05,
 
 for i, fault_trace in enumerate(fault_traces):
      # Get basic parameters
-     fault_area = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
+     dip = dips[i]
+     # calculate width based on aspect ratios
+     # lengths and widths are in km
+     width = fault_lengths[i]/1.5
+     # Limit width to seismogenic zone
+     max_down_dip_width = (lower_depth-upper_depth)/np.sin(np.radians(dip))
+     print width, max_down_dip_width
+     if width > max_down_dip_width:
+          width = max_down_dip_width
+     print width
+     fault_area = fault_lengths[i]*width #km^2
+     #fault_area = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
      sliprate = sliprates[i]
      trt = trts[i]
      faultname = faultnames[i]
      b_value = b_values[i]
-     dip = dips[i]
      print 'Calculating rates for %s in domain %s' % (faultname, trt)
      # Calculate M_max from scaling relations
      scalrel = Leonard2014_SCR()
      max_mag = scalrel.get_median_mag(fault_area, float(rake))
      # Round to nearest 0.05 mag unit
      max_mag = np.round((max_mag-0.05), 1) + 0.05
+     # Ensure mmax exceeds default Mmin, otherwise we adjust this
+     if max_mag < min_mag + bin_width:
+          min_mag = max_mag - bin_width
      print 'Maximum magnitude is %.3f' % max_mag
 
      # Append geometry information
+     # Use trt type Non_cratonic for Extended
+     # only for ground motions, not clustering
+     gmm_trt = trt
+     if gmm_trt == 'Extended':
+          gmm_trt == 'Non_cratonic'
      for output_xml in output_xmls:
           shp2nrml.append_rupture_geometry(output_xml, fault_trace,
                                            dip, i, faultname,
                                            upper_depth, lower_depth,
-                                           trt)
+                                           gmm_trt)
                                            
 
      # Get truncated Gutenberg-Richter rates
@@ -299,9 +317,9 @@ area_sources = nrml2sourcelist(area_source_model,
 print 'Converting to point sources'
 area_pt_filename = area_source_model[:-4] + '_pts.xml'
 #name = area_source_model.split('/')[-1][:-4] + '_pts'
-point_sources = area2pt_source(area_source_model, sources=area_sources,
+point_sources, banda_fault_sources = area2pt_source(area_source_model, sources=area_sources,
                                filename=area_pt_filename,
-                               name=source_model_name)
+                               name=source_model_name, return_faults=True)
 pt_source_list = []
 for source_group in point_sources:
      for source in source_group:
@@ -338,6 +356,10 @@ for trt in trt_list:
      total_add_weight[trt], total_geom_weight[trt] = largest_remainder([total_add_weight[trt],
                                                                         total_geom_weight[trt]],
                                                                        expected_sum=1,precision=3)
+print 'Making weights for subduction regions the same as Non_cratonic'
+total_add_weight['Subduction'] = total_add_weight['Non_cratonic']
+total_geom_weight['Subduction'] = total_geom_weight['Non_cratonic']
+total_mb_weight['Subduction'] = total_mb_weight['Non_cratonic']
 ##################
 additive_pt_sources_filename =  area_source_model[:-4] + '_pts_add_weighted.xml'
 model_name = area_source_model.split('/')[-1].rstrip('.xml') + '_additive'
@@ -371,11 +393,13 @@ geom_filtered_pt_source_file = area_source_model[:-4] + '_pts_geom_weighted_merg
 try:
      geom_filtered_pt_sources = read_pt_source(geom_filtered_pt_source_file)
 except IOError:
-     msg = 'File % does not exist, need to run run_geom_filter.sh separately to ' \
-         'apply geometrical filter first!' % geom_filtered_pt_source_file
+     msg = 'File %s does not exist, need to run run_geom_filter.sh separately to ' \
+         'apply geometrical filter first, then redo_ids.py!' % geom_filtered_pt_source_file
      raise IOError(msg)
 
 outfile = os.path.join(source_model_name, source_model_name + '_geom_filtered_zone.xml')
+for fs in banda_fault_sources:
+     fault_sources.append(fs)
 write_combined_faults_points(geom_filtered_pt_sources, fault_sources,
                              outfile, model_name, nrml_version = '04')
 
@@ -385,6 +409,8 @@ fsm = os.path.join(source_model_name, source_model_name + '_additive.xml')
 model_name = source_model_name + '_additive'
 outfile =  os.path.join(source_model_name, source_model_name + '_additive_zone.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
+for fs in banda_fault_sources:
+     fault_sources.append(fs)
 write_combined_faults_points(additive_pt_sources, fault_sources,
                              outfile, model_name, nrml_version = '04')
 
@@ -402,5 +428,9 @@ model_name = source_model_name + '_' + area_source_model_name + '_collapsed_inc_
 outfile = os.path.join(source_model_name, source_model_name + '_' + \
                             area_source_model_name +'_all_methods_collapsed_inc_cluster.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
+
+# Add Banda sources extracted earlier
+for fs in banda_fault_sources:
+     fault_sources.append(fs)
 write_combined_faults_points(combined_pt_sources, fault_sources,
                              outfile, model_name, nrml_version = '04')
