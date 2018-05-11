@@ -763,7 +763,7 @@ for i in srcidx:
             fn0 = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
             
             # reset cum_rates based on new fn0
-            cum_rates = 
+            alt_rates, mrange = get_oq_incrementalMFD(beta, fn0, src_mmin_reg[i], src_mmax[i], bin_width)
         
         # get a-value using region class b-value for other sources
         else:
@@ -789,33 +789,65 @@ for i in srcidx:
             mpltmin = mrng[midx][0]
             dummyN0 = 1.
             
-            # get lower + 1 std
-            bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
-            # fit to err_lo
-            bc_lo100 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
-            # solve for N0
-            N0_lo100 = 10**(log10(bc_lo100[0]) + beta2bval(beta+sigbeta)*bc_mrng_lo[0])
+            # use area-normalised rates
+            if floor(src_class_num[i]) == 11.:
+                # get lower + 1 std
+                bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
+                # fit to err_lo
+                bc_lo100 = (alt_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_lo100 = 10**(log10(bc_lo100[0]) + beta2bval(beta+sigbeta)*bc_mrng_lo[0])
+                
+                # get lower + 1.73 std
+                bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta173, dummyN0, mpltmin, src_mmax_l[i], bin_width)
+                # fit to err_lo
+                bc_lo173 = (alt_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_lo173 = 10**(log10(bc_lo173[0]) + beta2bval(beta+sigbeta173)*bc_mrng_lo[0])
+                
+                # get upper - 1 std
+                bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta, dummyN0, mpltmin, src_mmax_u[i], bin_width)
+                # fit to err_up
+                bc_up100 = (alt_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_up100 = 10**(log10(bc_up100[0]) + beta2bval(beta-sigbeta)*bc_mrng_up[0])
+                
+                # get upper - 1.73 std
+                bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta173, dummyN0, mpltmin, src_mmax_u[i], bin_width)
+                # fit to err_up
+                bc_up173 = (alt_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_up173 = 10**(log10(bc_up173[0]) + beta2bval(beta-sigbeta173)*bc_mrng_up[0])
             
-            # get lower + 1.73 std
-            bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta173, dummyN0, mpltmin, src_mmax_l[i], bin_width)
-            # fit to err_lo
-            bc_lo173 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
-            # solve for N0
-            N0_lo173 = 10**(log10(bc_lo173[0]) + beta2bval(beta+sigbeta173)*bc_mrng_lo[0])
-            
-            # get upper - 1 std
-            bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta, dummyN0, mpltmin, src_mmax_u[i], bin_width)
-            # fit to err_up
-            bc_up100 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
-            # solve for N0
-            N0_up100 = 10**(log10(bc_up100[0]) + beta2bval(beta-sigbeta)*bc_mrng_up[0])
-            
-            # get upper - 1.73 std
-            bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta173, dummyN0, mpltmin, src_mmax_u[i], bin_width)
-            # fit to err_up
-            bc_up173 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
-            # solve for N0
-            N0_up173 = 10**(log10(bc_up173[0]) + beta2bval(beta-sigbeta173)*bc_mrng_up[0])
+            # non-normalised rates
+            else:
+                # get lower + 1 std
+                bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
+                # fit to err_lo
+                bc_lo100 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_lo100 = 10**(log10(bc_lo100[0]) + beta2bval(beta+sigbeta)*bc_mrng_lo[0])
+                
+                # get lower + 1.73 std
+                bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta173, dummyN0, mpltmin, src_mmax_l[i], bin_width)
+                # fit to err_lo
+                bc_lo173 = (cum_rates[midx][0] - err_lo[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_lo173 = 10**(log10(bc_lo173[0]) + beta2bval(beta+sigbeta173)*bc_mrng_lo[0])
+                
+                # get upper - 1 std
+                bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta, dummyN0, mpltmin, src_mmax_u[i], bin_width)
+                # fit to err_up
+                bc_up100 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_up100 = 10**(log10(bc_up100[0]) + beta2bval(beta-sigbeta)*bc_mrng_up[0])
+                
+                # get upper - 1.73 std
+                bc_tmp, bc_mrng_up = get_oq_incrementalMFD(beta-sigbeta173, dummyN0, mpltmin, src_mmax_u[i], bin_width)
+                # fit to err_up
+                bc_up173 = (cum_rates[midx][0] + err_up[midx][0]) * (bc_tmp / bc_tmp[0])
+                # solve for N0
+                N0_up173 = 10**(log10(bc_up173[0]) + beta2bval(beta-sigbeta173)*bc_mrng_up[0])
         
         ###############################################################################
         # fill new values

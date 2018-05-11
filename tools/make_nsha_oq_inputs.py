@@ -61,8 +61,6 @@ def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
                                                       min_mag, mx, \
                                                       binwid)
             
-            #print m['src_weight'], betacurve[0], beta_val, beta_wt, N0, mx, mxwt, beta_wt*mxwt
-            
             wtd_list.append(betacurve * beta_wt * mxwt)
             
             # get max length of arrays

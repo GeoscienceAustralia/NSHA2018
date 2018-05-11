@@ -1,3 +1,8 @@
+'''
+Script to make multiple OpenQuake job.ini files and NCI parameter files for running 
+one intensity measure at a time
+'''
+
 from os import path, sep
 from sys import argv
 
