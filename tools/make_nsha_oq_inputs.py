@@ -172,7 +172,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
     """
 
     from oq_tools import beta2bval, get_line_parallels
-    from numpy import log10, max, min, tan, radians, isinf
+    from numpy import log10, max, min, tan, radians, isinf, floor
     from os import path
     
     # set big bbox params
@@ -213,13 +213,13 @@ def write_oq_sourcefile(model, meta, mx_dict):
             min_mag = 4.5
         elif float(m['class']) == 8 or float(m['class']) == 9:
             magScaleRel = 'WC1994'
-            ruptAspectRatio = 1.0
+            ruptAspectRatio = 1.5
             min_mag = 5.5
         elif float(m['class']) == 10:
             magScaleRel = 'StrasserInterface'
             ruptAspectRatio = 1.3
             min_mag = 6.5
-        elif float(m['class']) == 11:
+        elif floor(float(m['class'])) == 11:
             magScaleRel = 'StrasserIntraslab'
             ruptAspectRatio = 1.25
             min_mag = 5.5
@@ -571,7 +571,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
     # add indoneasia-png fault-source model
     ######################################################################
     
-    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018_Simplified.xml')
+    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
     lines = open(indo_png_fault_file).readlines()[3:-2]
     for line in lines:
         newxml += '    ' + line
@@ -603,7 +603,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
 def make_logic_tree(srcxmls, branch_wts, meta):    
     from os import path
     
-    print branch_wts
+    #print branch_wts
     # if multimodel - adjust weights
     '''
     if meta['multiMods'] == 'True':

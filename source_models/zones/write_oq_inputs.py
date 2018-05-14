@@ -92,7 +92,7 @@ for ut in unq_trt:
     idx = where(trt == ut)[0]
     td = {'trt':ut, 'mx_vals':mxv[idx], 'mx_wts':mxw[idx]}    
     mx_dict[ut] = td
-    print td
+    #print td
 
 ##############################################################################
 # use best beta & Mmax
@@ -158,7 +158,6 @@ elif outputType == '1':
     # check to see if exists
     if path.isdir(modPath) == False:
         mkdir(modPath)
-        
     
     #set metadata dict
     meta = {'beta_wts':beta_wts, 'modelPath':modPath, 'modelFile':xmlfile, 
