@@ -104,7 +104,7 @@ def f(p, x):
     return (p[0] * x) + p[1]
 
 # parse file
-nsha_file = path.join('..','..','data','NSHA18CAT.MS-MW.csv')
+nsha_file = path.join('..','data','NSHA18CAT.MS-MW.csv')
 
 cat_nsha = np.genfromtxt(nsha_file,delimiter=',',skip_header=1,dtype=None)
 
@@ -267,7 +267,7 @@ ax.plot(xrng,mw_j,'m-',lw=2,label='Johnston (1996)')
 ax.plot(xrng,mw_s,'y-',lw=2,label='Scordilis (2006)')
 ax.plot(xrng,mw_das,'b-',lw=2,label='Das et al. (2010)')
 ax.plot(xrng,mw_yon,'c-',lw=2,label='Youngs (2012)')
-ax.plot(xrng,mw_ta,'r-',lw=2,label='Allen (2012)')
+ax.plot(xrng,mw_ta,'r-',lw=2,label='Allen (2012; Unpub.)')
 ax.plot(xrng,mw_dig,'g-',lw=2,label='Di Giacomo et al (2015)')
 #ax.plot(xrng,yrng,'b-',lw=2,label='Automatic-fit')
 ax.plot(xrng,quadfit,'k-',lw=2.5,label='Quadratic')
