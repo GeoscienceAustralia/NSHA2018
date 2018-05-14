@@ -764,14 +764,17 @@ for i in srcidx:
             
             # make alternate rates based on new fn0
             alt_rates, mrange = get_oq_incrementalMFD(beta, fn0, src_mmin_reg[i], src_mmax[i], bin_width)
+            
+            # get zone confidence limits
+            err_up, err_lo = get_confidence_intervals(n_obs, alt_rates)
         
         # get a-value using region class b-value for other sources
         else:
             fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax[i], bin_width, midx)
         
-        # get zone confidence limits
-        err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
-        
+            # get zone confidence limits
+            err_up, err_lo = get_confidence_intervals(n_obs, cum_rates)
+            
         ###############################################################################
         # get upper and lower MFD bounds
         ###############################################################################
@@ -987,8 +990,15 @@ for i in srcidx:
                 #################################################################################
                 # now plt unique values for current source
                 uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
-                plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
-                             yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
+                
+                # get errors
+                if floor(src_class_num[i]) == 11.:
+                    plt.errorbar(mrng[::-1][uidx], alt_rates[::-1][uidx], \
+                                 yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
+                else:
+                    plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
+                                 yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
+                    
                 h0 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=7, zorder=1000)
                 
                 # get betacurve for source
