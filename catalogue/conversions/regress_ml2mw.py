@@ -1,15 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
 import scipy.odr.odrpack as odrpack
 from collections import OrderedDict
 import pdb
 from misc_tools import checkfloat
 from os import path
 
-########
-#hxfix = 4.
-########
+import matplotlib as mpl
+mpl.style.use('classic')
 
 def highside(x, hx):
     from numpy import zeros_like
@@ -69,7 +67,7 @@ def f(B, x):
 
 ####################################################################
 # parse file
-nsha_file = path.join(..','data','NSHA18CAT.ML-MW.csv')
+nsha_file = path.join('..','data','NSHA18CAT.ML-MW.csv')
 
 lines = open(nsha_file).readlines()[1:]
 
@@ -284,7 +282,7 @@ leg = ax.legend(loc="upper left",ncol=1, scatterpoints=1,fontsize=15)
 leg.get_frame().set_alpha(1.0)
 leg.get_frame().set_edgecolor('k')
 ax.set_aspect('equal')
-ax.grid(which='major',ls='--',lw=0.5)
+ax.grid(which='major')
 ax.tick_params(axis='both', labelsize=17)
 #
 plt.savefig('ml2mw.png',dpi=300,bbox_inches='tight')
