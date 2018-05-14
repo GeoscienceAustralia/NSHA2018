@@ -122,7 +122,7 @@ a_bl = 0.66053496;
 b_bl = 1.20883045;
 c_bl = 0.98659071;
 hx_bl = 4.25;
-hy_bl =  a * hx_bl + b_bl;
+hy_bl =  a_bl * hx_bl + b_bl;
 
 for i = 1:length(mdat)
     % calculate MW for non-revised ML
@@ -133,18 +133,18 @@ for i = 1:length(mdat)
         if mdat(i).MDAT_prefML <= hx_bl
             ML2MW_BL(i) = a_bl*mdat(i).MDAT_prefML + b_bl;
         else
-            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_prefML - hx_bl) + b_bl;
+            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_prefML - hx_bl) + hy_bl;
         end
 
-    % calculate MW for non-revised ML
+    % calculate MW for revised ML
     else
          ML2MWG(i) = a*mdat(i).MDAT_MLrev^2 + b*mdat(i).MDAT_MLrev + c;
          
          % calculate bi-linear
-        if mdat(i).MDAT_prefML <= hx_bl
+        if mdat(i).MDAT_MLrev <= hx_bl
             ML2MW_BL(i) = a_bl*mdat(i).MDAT_MLrev + b_bl;
         else
-            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_MLrev - hx_bl) + b_bl;
+            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_MLrev - hx_bl) + hy_bl;
         end
     end
 end
