@@ -221,8 +221,8 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
         if len(shm_in) > 0: 
             shmax_pref.append(median(array(shm_in)))
             
-            # check sigma and make sure it is at least +/- 10 degrees
-            shmax_sig.append(max([std(array(shm_in)), 10.]))        
+            # check sigma and make sure it is at least +/- 15 degrees
+            shmax_sig.append(max([std(array(shm_in)), 15.]))        
             
             print 'Getting SHmax for', code
         
@@ -238,7 +238,7 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
                     shm_near = shm
             
             shmax_pref.append(shm_near) # set nearest neighbour
-            shmax_sig.append(10.) # set std manually
+            shmax_sig.append(15.) # set std manually
             
     return shmax_pref, shmax_sig
 

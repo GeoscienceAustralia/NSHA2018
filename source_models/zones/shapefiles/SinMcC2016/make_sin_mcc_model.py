@@ -1,12 +1,13 @@
 import shapefile
 from shapely.geometry import Polygon
-from numpy import ones_like, nan
+from numpy import array, ones_like, nan
 try:
     from tools.nsha_tools import get_field_data
     from tools.source_shapefile_builder import get_preferred_catalogue, \
                                                get_completeness_model, get_aus_shmax_vectors, \
                                                get_rate_adjust_factor, build_source_shape, \
-                                               get_ul_seismo_depths, get_neotectonic_domain_params
+                                               get_ul_seismo_depths, get_neotectonic_domain_params, \
+                                               aggregate_intraslab_sources
 except:
     print 'Add PYTHONPATH to NSHA18 root directory'
 
@@ -98,35 +99,26 @@ zone_class = list(domains)[:]
 zone_class[48] = 6.
 domains[48] = 6.
 
-'''
-# reset Gawler Craton to Flinders due to b-value similarities
-zone_class[0] = 2.
+###############################################################################
+#  set intraslab aggregation class
+###############################################################################
+new_src_codes = []
+for i, src_code in enumerate(src_codes):
+    
+    # fix source codes on the fly
+    if src_code.startswith('TMR') or src_code.startswith('SRM'):
+        if src_code[3] != '_':
+            src_code = src_code[:3]+'_'+src_code[3:]
+    
+    new_src_codes.append(src_code)
+    
+    # now match zone class based on lookup table
+    zone_class[i] =  aggregate_intraslab_sources(src_code, zone_class[i])
 
+# supplant new source codes
+del src_codes
+src_codes = array(new_src_codes).copy()
 
-# reset West Coast Passive Margin to extended
-zone_class[10] = 7.
-domains[10] = 7.
-
-# reset Ottway/Gippsland to extended
-zone_class[6] = 5.
-domains[6] = 5.
-
-# reset Southern Oceanic buffer
-zone_class[52] = 8.
-domains[52] = 8.
-
-# reset Tasmania 
-zone_class[42] = 4.
-domains[42] = 4.
-
-# reset passive margin extended
-zone_class[39] = 7.
-domains[39] = 7.
-
-# reset NWO to Oceanic
-zone_class[26] = 8.
-domains[26] = 8.
-'''
 ###############################################################################
 #  set pref strike/dip/rake
 ###############################################################################

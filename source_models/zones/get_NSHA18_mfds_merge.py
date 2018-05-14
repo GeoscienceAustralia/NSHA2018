@@ -762,7 +762,7 @@ for i in srcidx:
             print '\nIntraslab Source\n', src_class_num[i]
             fn0 = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
             
-            # reset cum_rates based on new fn0
+            # make alternate rates based on new fn0
             alt_rates, mrange = get_oq_incrementalMFD(beta, fn0, src_mmin_reg[i], src_mmax[i], bin_width)
         
         # get a-value using region class b-value for other sources
@@ -791,6 +791,7 @@ for i in srcidx:
             
             # use area-normalised rates
             if floor(src_class_num[i]) == 11.:
+                print 'Using area-normalised rates...'
                 # get lower + 1 std
                 bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
                 # fit to err_lo
@@ -988,7 +989,7 @@ for i in srcidx:
                 uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
                 plt.errorbar(mrng[::-1][uidx], cum_rates[::-1][uidx], \
                              yerr=[err_lo[::-1][uidx], err_up[::-1][uidx]], fmt='k.')
-                h0 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=7)
+                h0 = plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'ro', ms=7, zorder=1000)
                 
                 # get betacurve for source
                 betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
