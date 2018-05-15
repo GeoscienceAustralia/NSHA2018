@@ -104,7 +104,8 @@ def area2pt_source(area_source_file, sources = None, investigation_time=50,
                    rupture_mesh_spacing=10., width_of_mfd_bin=0.1,
                    area_source_discretisation=10.,
                    filename = None, nrml_version = '04',
-                   name = None):
+                   name = None, return_faults = False,
+                   exclude_ids = []):
     """Calls OpenQuake parsers to read area source model
     from source_mode.xml type file, convert to point sources
     and write to a new nrml source model file.
@@ -114,6 +115,9 @@ def area2pt_source(area_source_file, sources = None, investigation_time=50,
         Grid size (km) for the area source discretisation, 
         which defines the distance between resulting point
         sources.
+    :params exclude_ids:
+        Don't convert sources from given list of source_ids
+        into points, preserve as area sources
     """
     if sources is None:
         sources = nrml2sourcelist(area_source_file, investigation_time=investigation_time, 
@@ -123,17 +127,25 @@ def area2pt_source(area_source_file, sources = None, investigation_time=50,
     if name is None:
         name = '%s_points' % filename
     new_pt_sources = {}
+    faults =[]
+    excluded_area_sources = []
     for source in sources:
-        pt_sources = area_to_point_sources(source)
-        for pt in pt_sources:
-            pt.source_id = pt.source_id.replace(':','')
-            pt.name = pt.name.replace(':','_')
-            try:
-                new_pt_sources[pt.tectonic_region_type].append(pt)
-            except KeyError:
-                new_pt_sources[pt.tectonic_region_type] = [pt]
-           # print [method for method in dir(pt) if callable(getattr(pt, method))]
-          #  print [attribute for attribute in dir(pt)]
+        if type(source).__name__ == 'ComplexFaultSource' or \
+                 type(source).__name__ == 'SimpleFaultSource':
+            faults.append(source)
+        elif source.source_id in exclude_ids:
+            excluded_area_sources.append(source)
+        else:
+            pt_sources = area_to_point_sources(source)
+            for pt in pt_sources:
+                pt.source_id = pt.source_id.replace(':','')
+                pt.name = pt.name.replace(':','_')
+                try:
+                    new_pt_sources[pt.tectonic_region_type].append(pt)
+                except KeyError:
+                    new_pt_sources[pt.tectonic_region_type] = [pt]
+            # print [method for method in dir(pt) if callable(getattr(pt, method))]
+            #  print [attribute for attribute in dir(pt)]
     nrml_pt_file = area_source_file[:-4] + '_pts.xml'
     source_group_list = []
     id = 0
@@ -157,4 +169,14 @@ def area2pt_source(area_source_file, sources = None, investigation_time=50,
                                name = filename)
         else:
             print 'Warning: nrml version not specfied, xml not created'
-    return source_group_list
+    if return_faults:
+        if len(exclude_ids) > 0:
+            return source_group_list, faults, excluded_area_sources
+        else:
+            return source_group_list, faults
+    else:
+        if len(exclude_ids) > 0:
+            return source_group_list, excluded_area_sources
+        else:
+            return source_group_list
+
