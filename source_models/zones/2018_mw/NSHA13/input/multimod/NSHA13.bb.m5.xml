@@ -41,7 +41,7 @@
                 <lowerSeismoDepth>30.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.21608e-02 4.99778e-02 4.01825e-02 3.23070e-02 2.59751e-02 2.08841e-02 1.67910e-02 1.35001e-02 1.08542e-02 8.72683e-03 7.01644e-03 5.64127e-03 4.53562e-03 3.64667e-03 2.93195e-03 2.35731e-03 1.89529e-03 1.52383e-03 1.22517e-03 9.85047e-04 7.91985e-04 6.36761e-04 5.11961e-04 4.11620e-04 3.30946e-04 2.66083e-04 2.13932e-04</occurRates>
             </incrementalMFD>
@@ -92,7 +92,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>4.89000e-02 3.93159e-02 3.16103e-02 2.54149e-02 2.04338e-02 1.64289e-02 1.32090e-02 1.06201e-02 8.53864e-03 6.86513e-03 5.51961e-03 4.43781e-03 3.56803e-03 2.86872e-03 2.30647e-03 1.85442e-03 1.49097e-03 1.19875e-03 9.63804e-04 7.74905e-04 6.23029e-04 5.00920e-04 4.02744e-04 3.23809e-04 2.60345e-04 2.09319e-04 1.68294e-04</occurRates>
             </incrementalMFD>
@@ -129,7 +129,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.26145e-01 1.01422e-01 8.15436e-02 6.55617e-02 5.27121e-02 4.23809e-02 3.40746e-02 2.73962e-02 2.20267e-02 1.77097e-02 1.42387e-02 1.14480e-02 9.20429e-03 7.40031e-03 5.94991e-03 4.78377e-03 3.84618e-03 3.09236e-03 2.48628e-03 1.99899e-03 1.60720e-03 1.29220e-03 1.03894e-03 8.35315e-04 6.71599e-04 5.39971e-04 4.34140e-04</occurRates>
             </incrementalMFD>
@@ -164,7 +164,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>5.17483e-02 4.16060e-02 3.34516e-02 2.68953e-02 2.16240e-02 1.73859e-02 1.39784e-02 1.12387e-02 9.03600e-03 7.26501e-03 5.84112e-03 4.69631e-03 3.77586e-03 3.03582e-03 2.44082e-03 1.96244e-03 1.57782e-03 1.26858e-03 1.01994e-03 8.20042e-04 6.59320e-04 5.30098e-04 4.26203e-04 3.42670e-04 2.75509e-04</occurRates>
             </incrementalMFD>
@@ -200,7 +200,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.83200e-02 5.49298e-02 4.41639e-02 3.55081e-02 2.85488e-02 2.29534e-02 1.84547e-02 1.48377e-02 1.19297e-02 9.59153e-03 7.71166e-03 6.20023e-03 4.98503e-03 4.00800e-03 3.22246e-03 2.59088e-03 2.08309e-03 1.67482e-03 1.34657e-03 1.08265e-03 8.70458e-04 6.99854e-04 5.62688e-04 4.52405e-04 3.63737e-04 2.92447e-04</occurRates>
             </incrementalMFD>
@@ -311,7 +311,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.14044e-01 9.16924e-02 7.37214e-02 5.92725e-02 4.76555e-02 3.83154e-02 3.08059e-02 2.47681e-02 1.99138e-02 1.60108e-02 1.28728e-02 1.03498e-02 8.32134e-03 6.69042e-03 5.37915e-03 4.32487e-03 3.47723e-03 2.79572e-03 2.24778e-03 1.80723e-03 1.45303e-03 1.16824e-03 9.39276e-04 7.55185e-04 6.07174e-04 4.88173e-04 3.92494e-04 3.15568e-04 2.53719e-04</occurRates>
             </incrementalMFD>
@@ -351,7 +351,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.33461e-01 1.07303e-01 8.62726e-02 6.93638e-02 5.57690e-02 4.48387e-02 3.60507e-02 2.89850e-02 2.33041e-02 1.87367e-02 1.50644e-02 1.21119e-02 9.73807e-03 7.82948e-03 6.29496e-03 5.06120e-03 4.06924e-03 3.27170e-03 2.63047e-03 2.11492e-03 1.70041e-03 1.36714e-03 1.09919e-03 8.83757e-04 7.10547e-04 5.71285e-04 4.59318e-04</occurRates>
             </incrementalMFD>
@@ -390,7 +390,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>8.87454e-02 7.13519e-02 5.73675e-02 4.61239e-02 3.70839e-02 2.98158e-02 2.39721e-02 1.92737e-02 1.54962e-02 1.24591e-02 1.00172e-02 8.05389e-03 6.47539e-03 5.20626e-03 4.18587e-03 3.36547e-03 2.70586e-03 2.17553e-03 1.74914e-03 1.40633e-03 1.13070e-03 9.09088e-04 7.30913e-04 5.87660e-04 4.72483e-04 3.79879e-04 3.05426e-04 2.45565e-04 1.97436e-04</occurRates>
             </incrementalMFD>
@@ -428,7 +428,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>9.05060e-02 7.27675e-02 5.85056e-02 4.70389e-02 3.78196e-02 3.04073e-02 2.44477e-02 1.96561e-02 1.58037e-02 1.27063e-02 1.02159e-02 8.21367e-03 6.60385e-03 5.30955e-03 4.26891e-03 3.43224e-03 2.75954e-03 2.21869e-03 1.78385e-03 1.43423e-03 1.15313e-03 9.27123e-04 7.45414e-04 5.99318e-04 4.81856e-04</occurRates>
             </incrementalMFD>
@@ -463,7 +463,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.82961e-01 1.47102e-01 1.18271e-01 9.50909e-02 7.64538e-02 6.14694e-02 4.94219e-02 3.97355e-02 3.19477e-02 2.56862e-02 2.06519e-02 1.66042e-02 1.33499e-02 1.07334e-02 8.62977e-03 6.93840e-03 5.57852e-03 4.48517e-03 3.60611e-03 2.89934e-03 2.33109e-03 1.87421e-03 1.50688e-03 1.21154e-03 9.74090e-04 7.83175e-04 6.29679e-04 5.06266e-04 4.07042e-04</occurRates>
             </incrementalMFD>
@@ -515,7 +515,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.43956e-01 2.76543e-01 2.22343e-01 1.78765e-01 1.43729e-01 1.15559e-01 9.29101e-02 7.47004e-02 6.00597e-02 4.82884e-02 3.88243e-02 3.12150e-02 2.50971e-02 2.01782e-02 1.62234e-02 1.30438e-02 1.04873e-02 8.43185e-03 6.77927e-03 5.45058e-03 4.38231e-03 3.52341e-03 2.83285e-03 2.27763e-03 1.83123e-03 1.47232e-03 1.18376e-03</occurRates>
             </incrementalMFD>
@@ -570,7 +570,7 @@
                 <lowerSeismoDepth>30.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.72690e-01 2.19245e-01 1.76274e-01 1.41726e-01 1.13949e-01 9.16156e-02 7.36596e-02 5.92228e-02 4.76156e-02 3.82833e-02 3.07800e-02 2.47474e-02 1.98971e-02 1.59974e-02 1.28620e-02 1.03412e-02 8.31437e-03 6.68481e-03 5.37464e-03 4.32125e-03 3.47432e-03 2.79338e-03 2.24589e-03 1.80572e-03 1.45181e-03 1.16726e-03 9.38489e-04 7.54552e-04 6.06665e-04</occurRates>
             </incrementalMFD>
@@ -620,7 +620,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserInterface</magScaleRel>
-            <ruptAspectRatio>1.3</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="6.55" binWidth="0.1">
                 <occurRates>6.62241e-02 5.60397e-02 4.74216e-02 4.01288e-02 3.39575e-02 2.87353e-02 2.43162e-02 2.05767e-02 1.74123e-02 1.47345e-02 1.24686e-02 1.05511e-02 8.92845e-03 7.55538e-03 6.39346e-03 5.41023e-03 4.57821e-03 3.87415e-03 3.27836e-03 2.77419e-03 2.34756e-03 1.98653e-03 1.68103e-03 1.42251e-03 1.20375e-03</occurRates>
             </incrementalMFD>
@@ -711,7 +711,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.11061e-01 8.92937e-02 7.17928e-02 5.77219e-02 4.64088e-02 3.73131e-02 3.00000e-02 2.41202e-02 1.93928e-02 1.55920e-02 1.25361e-02 1.00791e-02 8.10365e-03 6.51540e-03 5.23843e-03 4.21173e-03 3.38626e-03 2.72258e-03 2.18897e-03 1.75995e-03 1.41501e-03 1.13768e-03 9.14704e-04 7.35429e-04 5.91290e-04 4.75402e-04 3.82226e-04 3.07313e-04 2.47082e-04 1.98656e-04 1.59721e-04</occurRates>
             </incrementalMFD>
@@ -753,7 +753,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.90686e-02 6.35718e-02 5.11122e-02 4.10946e-02 3.30403e-02 2.65647e-02 2.13582e-02 1.71721e-02 1.38065e-02 1.11005e-02 8.92492e-03 7.17570e-03 5.76932e-03 4.63857e-03 3.72945e-03 2.99850e-03 2.41082e-03 1.93831e-03 1.55842e-03 1.25298e-03 1.00741e-03 8.09961e-04 6.51215e-04</occurRates>
             </incrementalMFD>
@@ -809,7 +809,7 @@
                 <lowerSeismoDepth>50.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>8.38756e-02 6.74366e-02 5.42195e-02 4.35929e-02 3.50490e-02 2.81796e-02 2.26566e-02 1.82161e-02 1.46459e-02 1.17754e-02 9.46751e-03 7.61194e-03 6.12006e-03 4.92057e-03 3.95618e-03 3.18079e-03 2.55738e-03 2.05615e-03 1.65316e-03 1.32915e-03 1.06865e-03 8.59203e-04 6.90805e-04 5.55412e-04 4.46556e-04 3.59034e-04 2.88666e-04</occurRates>
             </incrementalMFD>
@@ -852,60 +852,12 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.04357e-01 1.65874e-01 1.34639e-01 1.09285e-01 8.87053e-02 7.20011e-02 5.84426e-02 4.74372e-02 3.85043e-02 3.12536e-02 2.53682e-02 2.05911e-02 1.67136e-02 1.35662e-02 1.10116e-02 8.93798e-03 7.25487e-03 5.88870e-03 4.77980e-03 3.87971e-03 3.14912e-03 2.55611e-03 2.07477e-03 1.68407e-03 1.36694e-03 1.10953e-03 9.00595e-04 7.31003e-04 5.93348e-04 4.81614e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="100.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NBTD" name="New Britain Trench Deep" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                156.3360 -8.1650
-                                155.7430 -8.7580
-                                155.4110 -8.5010
-                                154.6210 -7.8900
-                                153.5300 -7.1020
-                                153.0340 -6.6830
-                                152.7370 -6.6410
-                                152.2500 -6.9160
-                                150.6840 -7.6360
-                                148.6310 -7.2760
-                                148.1020 -7.1280
-                                148.3980 -6.4720
-                                150.4510 -6.0690
-                                151.1500 -6.0480
-                                151.7210 -5.6460
-                                152.7580 -5.2230
-                                153.4570 -5.2860
-                                153.9010 -6.1330
-                                154.2820 -6.4500
-                                155.0020 -7.2760
-                                155.4890 -7.4450
-                                155.8700 -7.6990
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>60.0</upperSeismoDepth>
-                <lowerSeismoDepth>180.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.20433e-01 9.77540e-02 7.93459e-02 6.44042e-02 5.22763e-02 4.24321e-02 3.44417e-02 2.79560e-02 2.26916e-02 1.84185e-02 1.49501e-02 1.21349e-02 9.84973e-03 7.99493e-03 6.48940e-03 5.26738e-03 4.27548e-03 3.47036e-03 2.81685e-03 2.28641e-03 1.85586e-03 1.50638e-03 1.22271e-03 9.92463e-04 8.05572e-04 6.53875e-04 5.30743e-04 4.30799e-04 3.49675e-04 2.83827e-04</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="270.0" dip="45.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="100.0"/>
@@ -938,9 +890,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.58168e-01 2.09552e-01 1.70091e-01 1.38061e-01 1.12063e-01 9.09604e-02 7.38316e-02 5.99284e-02 4.86432e-02 3.94832e-02 3.20481e-02 2.60131e-02 2.11146e-02 1.71385e-02 1.39111e-02 1.12915e-02 9.16521e-03 7.43931e-03 6.03841e-03 4.90131e-03 3.97835e-03 3.22918e-03 2.62109e-03 2.12751e-03 1.72688e-03 1.40169e-03 1.13774e-03 9.23491e-04 7.49588e-04 6.08433e-04</occurRates>
+                <occurRates>2.42628e-01 1.96939e-01 1.59853e-01 1.29751e-01 1.05318e-01 8.54853e-02 6.93875e-02 5.63211e-02 4.57153e-02 3.71066e-02 3.01191e-02 2.44473e-02 1.98436e-02 1.61069e-02 1.30738e-02 1.06119e-02 8.61353e-03 6.99152e-03 5.67494e-03 4.60629e-03 3.73888e-03 3.03481e-03 2.46332e-03 1.99945e-03 1.62294e-03 1.31732e-03 1.06926e-03 8.67903e-04 7.04468e-04 5.71809e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -971,9 +923,9 @@
                 <lowerSeismoDepth>180.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.41686e-02 3.58512e-02 2.91000e-02 2.36202e-02 1.91723e-02 1.55619e-02 1.26315e-02 1.02528e-02 8.32211e-03 6.75497e-03 5.48294e-03 4.45044e-03 3.61238e-03 2.93213e-03 2.37998e-03 1.93181e-03 1.56803e-03 1.27275e-03 1.03308e-03 8.38539e-04 6.80634e-04 5.52463e-04 4.48429e-04 3.63985e-04 2.95443e-04 2.39808e-04 1.94650e-04 1.57995e-04 1.28243e-04 1.04093e-04</occurRates>
+                <occurRates>5.97084e-02 4.84647e-02 3.93383e-02 3.19305e-02 2.59176e-02 2.10371e-02 1.70756e-02 1.38601e-02 1.12501e-02 9.13157e-03 7.41200e-03 6.01625e-03 4.88332e-03 3.96374e-03 3.21733e-03 2.61147e-03 2.11971e-03 1.72054e-03 1.39655e-03 1.13356e-03 9.20101e-04 7.46836e-04 6.06199e-04 4.92046e-04 3.99388e-04 3.24179e-04 2.63133e-04 2.13582e-04 1.73363e-04 1.40717e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -1007,7 +959,7 @@
                 <lowerSeismoDepth>130.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.86946e-02 6.38756e-02 5.18471e-02 4.20838e-02 3.41590e-02 2.77265e-02 2.25053e-02 1.82673e-02 1.48274e-02 1.20352e-02 9.76888e-03 7.92930e-03 6.43613e-03 5.22414e-03 4.24038e-03 3.44187e-03 2.79373e-03 2.26764e-03 1.84062e-03 1.49401e-03 1.21268e-03 9.84317e-04 7.98960e-04 6.48507e-04 5.26387e-04 4.27263e-04 3.46805e-04 2.81498e-04 2.28489e-04 1.85462e-04</occurRates>
             </incrementalMFD>
@@ -1055,7 +1007,7 @@
                 <lowerSeismoDepth>50.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>4.63534e-01 3.72685e-01 2.99641e-01 2.40914e-01 1.93696e-01 1.55733e-01 1.25211e-01 1.00670e-01 8.09397e-02 6.50761e-02 5.23216e-02 4.20670e-02 3.38222e-02 2.71933e-02 2.18636e-02 1.75785e-02 1.41332e-02 1.13632e-02 9.13611e-03 7.34550e-03 5.90584e-03 4.74834e-03 3.81770e-03 3.06946e-03 2.46787e-03 1.98418e-03 1.59530e-03 1.28263e-03 1.03124e-03</occurRates>
             </incrementalMFD>
@@ -1095,7 +1047,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>4.70765e-02 3.78498e-02 3.04315e-02 2.44672e-02 1.96718e-02 1.58163e-02 1.27164e-02 1.02241e-02 8.22023e-03 6.60913e-03 5.31379e-03 4.27232e-03 3.43498e-03 2.76175e-03 2.22047e-03 1.78527e-03 1.43537e-03 1.15405e-03 9.27863e-04 5.91619e-17</occurRates>
             </incrementalMFD>
@@ -1129,7 +1081,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.48846e-02 2.80475e-02 2.25504e-02 1.81307e-02 1.45772e-02 1.17202e-02 9.42310e-03 7.57624e-03 6.09135e-03 4.89749e-03 3.93762e-03 3.16587e-03 2.54539e-03 2.04651e-03 1.64541e-03 1.32292e-03 1.06364e-03 8.55172e-04 6.87565e-04 5.52807e-04 4.44461e-04 3.57350e-04 2.87312e-04</occurRates>
             </incrementalMFD>
@@ -1171,7 +1123,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.43036e-02 1.15002e-02 9.24627e-03 7.43407e-03 5.97705e-03 4.80559e-03 3.86373e-03 3.10647e-03 2.49762e-03 2.00811e-03 1.61453e-03 1.29810e-03 1.04368e-03 8.39125e-04 6.74662e-04 5.42434e-04 4.36121e-04 3.50644e-04 2.81920e-04 2.26666e-04 1.82241e-04 1.46523e-04 1.17806e-04 9.47167e-05 7.61529e-05</occurRates>
             </incrementalMFD>
@@ -1291,17 +1243,17 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.94224e-03 1.67237e-03 1.44000e-03 1.23992e-03 1.06763e-03 9.19289e-04 7.91557e-04 6.81572e-04 5.86870e-04 5.05326e-04 4.35113e-04 3.74655e-04 3.22598e-04 2.77774e-04 2.39178e-04 2.05945e-04 1.77330e-04 1.52691e-04 1.31475e-04 1.13207e-04 9.74770e-05 8.39329e-05 7.22707e-05 6.22289e-05 5.13766e-18</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="189.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="9.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="199.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="179.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="19.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="359.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="204.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="174.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="24.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="354.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="10.0"/>
@@ -1341,7 +1293,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.69078e-02 1.35940e-02 1.09297e-02 8.78754e-03 7.06525e-03 5.68051e-03 4.56717e-03 3.67204e-03 2.95235e-03 2.37371e-03 1.90848e-03 1.53443e-03 1.23369e-03 9.91899e-04 7.97494e-04 6.41191e-04 5.15522e-04</occurRates>
             </incrementalMFD>
@@ -1389,9 +1341,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.31633e-01 1.88014e-01 1.52609e-01 1.23871e-01 1.00545e-01 8.16112e-02 6.62430e-02 5.37687e-02 4.36435e-02 3.54250e-02 2.87541e-02 2.33394e-02 1.89444e-02 1.53769e-02 1.24813e-02 1.01309e-02 8.22318e-03 6.67467e-03 5.41776e-03 4.39754e-03 3.56944e-03 2.89728e-03 2.35169e-03 1.90884e-03 1.54939e-03 1.25762e-03 1.02080e-03 8.28571e-04 6.72543e-04 5.45896e-04</occurRates>
+                <occurRates>2.31356e-01 1.87789e-01 1.52426e-01 1.23723e-01 1.00425e-01 8.15136e-02 6.61637e-02 5.37044e-02 4.35913e-02 3.53826e-02 2.87197e-02 2.33115e-02 1.89217e-02 1.53585e-02 1.24664e-02 1.01188e-02 8.21334e-03 6.66669e-03 5.41128e-03 4.39228e-03 3.56517e-03 2.89381e-03 2.34888e-03 1.90656e-03 1.54753e-03 1.25612e-03 1.01958e-03 8.27580e-04 6.71738e-04 5.45243e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1424,9 +1376,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.17268e-02 2.57523e-02 2.09029e-02 1.69667e-02 1.37717e-02 1.11783e-02 9.07333e-03 7.36473e-03 5.97787e-03 4.85218e-03 3.93846e-03 3.19681e-03 2.59482e-03 2.10619e-03 1.70957e-03 1.38764e-03 1.12633e-03 9.14233e-04 7.42073e-04 6.02333e-04 4.88908e-04 3.96841e-04 3.22112e-04 2.61455e-04 2.12220e-04 1.72257e-04 1.39819e-04 1.13490e-04 9.21185e-05 7.47716e-05</occurRates>
+                <occurRates>2.17854e-02 1.76829e-02 1.43531e-02 1.16502e-02 9.45637e-03 7.67564e-03 6.23024e-03 5.05702e-03 4.10473e-03 3.33177e-03 2.70436e-03 2.19510e-03 1.78174e-03 1.44622e-03 1.17388e-03 9.52828e-04 7.73401e-04 6.27761e-04 5.09547e-04 4.13594e-04 3.35710e-04 2.72493e-04 2.21179e-04 1.79529e-04 1.45722e-04 1.18281e-04 9.60074e-05 7.79282e-05 6.32535e-05 5.13422e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -1476,9 +1428,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.66468e-01 1.35121e-01 1.09676e-01 8.90228e-02 7.22589e-02 5.86518e-02 4.76071e-02 3.86422e-02 3.13654e-02 2.54590e-02 2.06648e-02 1.67734e-02 1.36148e-02 1.10510e-02 8.96998e-03 7.28084e-03 5.90978e-03 4.79691e-03 3.89360e-03 3.16039e-03 2.56526e-03 2.08219e-03 1.69010e-03 1.37183e-03 1.11350e-03 9.03819e-04 7.33620e-04 5.95472e-04 4.83338e-04 3.92321e-04</occurRates>
+                <occurRates>8.87308e-02 7.20219e-02 5.84594e-02 4.74509e-02 3.85154e-02 3.12625e-02 2.53755e-02 2.05970e-02 1.67184e-02 1.35701e-02 1.10147e-02 8.94055e-03 7.25695e-03 5.89039e-03 4.78117e-03 3.88083e-03 3.15003e-03 2.55684e-03 2.07536e-03 1.68455e-03 1.36733e-03 1.10985e-03 9.00854e-04 7.31214e-04 5.93519e-04 4.81753e-04 3.91034e-04 3.17398e-04 2.57629e-04 2.09115e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1521,9 +1473,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.93156e-02 2.37951e-02 1.93143e-02 1.56772e-02 1.27250e-02 1.03288e-02 8.38374e-03 6.80500e-03 5.52355e-03 4.48341e-03 3.63913e-03 2.95385e-03 2.39761e-03 1.94611e-03 1.57964e-03 1.28218e-03 1.04073e-03 8.44750e-04 6.85675e-04 5.56555e-04 4.51750e-04 3.66681e-04 2.97631e-04 2.41584e-04 1.96091e-04 1.59165e-04 1.29193e-04 1.04864e-04 8.51173e-05 6.90889e-05</occurRates>
+                <occurRates>1.01810e-01 8.26378e-02 6.70763e-02 5.44451e-02 4.41925e-02 3.58706e-02 2.91158e-02 2.36330e-02 1.91827e-02 1.55704e-02 1.26383e-02 1.02584e-02 8.32662e-03 6.75863e-03 5.48591e-03 4.45286e-03 3.61434e-03 2.93372e-03 2.38127e-03 1.93285e-03 1.56888e-03 1.27344e-03 1.03364e-03 8.38994e-04 6.81003e-04 5.52763e-04 4.48672e-04 3.64182e-04 2.95603e-04 2.39938e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1559,9 +1511,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.95437e-02 1.58634e-02 1.28762e-02 1.04515e-02 8.48334e-03 6.88584e-03 5.58917e-03 4.53667e-03 3.68237e-03 2.98894e-03 2.42609e-03 1.96923e-03 1.59841e-03 1.29741e-03 1.05309e-03 8.54785e-04 6.93820e-04 5.63167e-04 4.57117e-04 3.71037e-04 3.01167e-04 2.44454e-04 1.98421e-04 1.61056e-04 1.30727e-04 1.06110e-04 8.61285e-05 6.99096e-05 5.67449e-05 4.60593e-05</occurRates>
+                <occurRates>8.05064e-03 6.53462e-03 5.30408e-03 4.30527e-03 3.49454e-03 2.83648e-03 2.30234e-03 1.86879e-03 1.51688e-03 1.23123e-03 9.99379e-04 8.11186e-04 6.58431e-04 5.34442e-04 4.33801e-04 3.52112e-04 2.85805e-04 2.31985e-04 1.88300e-04 1.52841e-04 1.24060e-04 1.00698e-04 8.17354e-05 6.63438e-05 5.38506e-05 4.37099e-05 3.54789e-05 2.87979e-05 2.33749e-05 1.89732e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -1596,9 +1548,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.65902e-02 1.34661e-02 1.09303e-02 8.87199e-03 7.20130e-03 5.84522e-03 4.74450e-03 3.85106e-03 3.12587e-03 2.53724e-03 2.05945e-03 1.67163e-03 1.35685e-03 1.10134e-03 8.93945e-04 7.25606e-04 5.88967e-04 4.78058e-04 3.88035e-04 3.14964e-04 2.55653e-04 2.07511e-04 1.68434e-04 1.36716e-04 1.10971e-04 9.00743e-05 7.31124e-05 5.93445e-05 4.81694e-05 3.90986e-05</occurRates>
+                <occurRates>5.91943e-03 4.80474e-03 3.89996e-03 3.16555e-03 2.56945e-03 2.08559e-03 1.69286e-03 1.37407e-03 1.11532e-03 9.05294e-04 7.34818e-04 5.96444e-04 4.84128e-04 3.92961e-04 3.18963e-04 2.58899e-04 2.10145e-04 1.70573e-04 1.38452e-04 1.12380e-04 9.12179e-05 7.40406e-05 6.00980e-05 4.87809e-05 3.95950e-05 3.21388e-05 2.60867e-05 2.11743e-05 1.71870e-05 1.39505e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -1633,9 +1585,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.24577e-02 3.44625e-02 2.79728e-02 2.27053e-02 1.84296e-02 1.49591e-02 1.21422e-02 9.85568e-03 7.99975e-03 6.49332e-03 5.27056e-03 4.27806e-03 3.47246e-03 2.81856e-03 2.28779e-03 1.85698e-03 1.50729e-03 1.22345e-03 9.93063e-04 8.06059e-04 6.54269e-04 5.31064e-04 4.31059e-04 3.49886e-04 2.83999e-04 2.30519e-04 1.87110e-04 1.51875e-04 1.23275e-04 1.00061e-04</occurRates>
+                <occurRates>3.67593e-02 2.98371e-02 2.42185e-02 1.96579e-02 1.59561e-02 1.29514e-02 1.05125e-02 8.53291e-03 6.92608e-03 5.62182e-03 4.56318e-03 3.70388e-03 3.00640e-03 2.44027e-03 1.98074e-03 1.60775e-03 1.30499e-03 1.05925e-03 8.59780e-04 6.97874e-04 5.66457e-04 4.59788e-04 3.73205e-04 3.02926e-04 2.45882e-04 1.99580e-04 1.61997e-04 1.31491e-04 1.06730e-04 8.66318e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -1680,9 +1632,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>9.79797e-02 7.95291e-02 6.45530e-02 5.23970e-02 4.25301e-02 3.45212e-02 2.80205e-02 2.27440e-02 1.84610e-02 1.49846e-02 1.21629e-02 9.87248e-03 8.01339e-03 6.50438e-03 5.27954e-03 4.28535e-03 3.47837e-03 2.82336e-03 2.29169e-03 1.86014e-03 1.50986e-03 1.22554e-03 9.94755e-04 8.07432e-04 6.55384e-04 5.31969e-04 4.31794e-04 3.50482e-04 2.84483e-04 2.30912e-04</occurRates>
+                <occurRates>7.77797e-02 6.31330e-02 5.12444e-02 4.15945e-02 3.37619e-02 2.74042e-02 2.22437e-02 1.80550e-02 1.46550e-02 1.18953e-02 9.65531e-03 7.83712e-03 6.36131e-03 5.16341e-03 4.19108e-03 3.40186e-03 2.76125e-03 2.24128e-03 1.81922e-03 1.47665e-03 1.19858e-03 9.72874e-04 7.89671e-04 6.40968e-04 5.20267e-04 4.22295e-04 3.42773e-04 2.78225e-04 2.25832e-04 1.83306e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -1715,9 +1667,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.58634e-02 1.28762e-02 1.04515e-02 8.48334e-03 6.88584e-03 5.58916e-03 4.53667e-03 3.68237e-03 2.98894e-03 2.42609e-03 1.96923e-03 1.59841e-03 1.29741e-03 1.05309e-03 8.54785e-04 6.93820e-04 5.63167e-04 4.57117e-04 3.71037e-04 3.01167e-04 2.44454e-04 1.98421e-04 1.61056e-04 1.30727e-04 1.06110e-04 8.61285e-05 6.99096e-05 5.67449e-05 4.60593e-05 3.73858e-05</occurRates>
+                <occurRates>1.50802e-02 1.22405e-02 9.93546e-03 8.06451e-03 6.54588e-03 5.31322e-03 4.31269e-03 3.50056e-03 2.84137e-03 2.30631e-03 1.87201e-03 1.51949e-03 1.23335e-03 1.00110e-03 8.12583e-04 6.59566e-04 5.35363e-04 4.34548e-04 3.52718e-04 2.86298e-04 2.32385e-04 1.88624e-04 1.53105e-04 1.24273e-04 1.00871e-04 8.18763e-05 6.64581e-05 5.39434e-05 4.37853e-05 3.55400e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -1759,9 +1711,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.41526e-02 1.14875e-02 9.32428e-03 7.56843e-03 6.14321e-03 4.98638e-03 4.04739e-03 3.28523e-03 2.66659e-03 2.16444e-03 1.75685e-03 1.42602e-03 1.15749e-03 9.39519e-04 7.62598e-04 6.18993e-04 5.02430e-04 4.07817e-04 3.31021e-04 2.68686e-04 2.18090e-04 1.77021e-04 1.43686e-04 1.16629e-04 9.46663e-05 7.68397e-05 6.23700e-05 5.06251e-05 4.10918e-05 3.33538e-05</occurRates>
+                <occurRates>4.55689e-02 3.69878e-02 3.00226e-02 2.43691e-02 1.97801e-02 1.60553e-02 1.30319e-02 1.05779e-02 8.58596e-03 6.96914e-03 5.65678e-03 4.59155e-03 3.72691e-03 3.02509e-03 2.45544e-03 1.99305e-03 1.61774e-03 1.31310e-03 1.06583e-03 8.65125e-04 7.02213e-04 5.69979e-04 4.62646e-04 3.75525e-04 3.04810e-04 2.47411e-04 2.00821e-04 1.63004e-04 1.32309e-04 1.07394e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -1806,9 +1758,9 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.53159e-02 3.67824e-02 2.98559e-02 2.42337e-02 1.96703e-02 1.59662e-02 1.29596e-02 1.05191e-02 8.53828e-03 6.93043e-03 5.62536e-03 4.56605e-03 3.70621e-03 3.00830e-03 2.44180e-03 1.98199e-03 1.60876e-03 1.30581e-03 1.05991e-03 8.60321e-04 6.98314e-04 5.66814e-04 4.60077e-04 3.73440e-04 3.03117e-04 2.46037e-04 1.99706e-04 1.62099e-04 1.31574e-04 1.06797e-04</occurRates>
+                <occurRates>6.40575e-02 5.19948e-02 4.22036e-02 3.42562e-02 2.78054e-02 2.25694e-02 1.83193e-02 1.48696e-02 1.20695e-02 9.79670e-03 7.95188e-03 6.45446e-03 5.23902e-03 4.25246e-03 3.45167e-03 2.80169e-03 2.27410e-03 1.84586e-03 1.49827e-03 1.21613e-03 9.87120e-04 8.01235e-04 6.50354e-04 5.27886e-04 4.28479e-04 3.47792e-04 2.82299e-04 2.29139e-04 1.85990e-04 1.50966e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -1842,9 +1794,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.95437e-02 1.58634e-02 1.28762e-02 1.04515e-02 8.48334e-03 6.88584e-03 5.58917e-03 4.53667e-03 3.68237e-03 2.98894e-03 2.42609e-03 1.96923e-03 1.59841e-03 1.29741e-03 1.05309e-03 8.54785e-04 6.93820e-04 5.63167e-04 4.57117e-04 3.71037e-04 3.01167e-04 2.44454e-04 1.98421e-04 1.61056e-04 1.30727e-04 1.06110e-04 8.61285e-05 6.99096e-05 5.67449e-05 4.60593e-05</occurRates>
+                <occurRates>1.34623e-02 1.09272e-02 8.86953e-03 7.19930e-03 5.84360e-03 4.74319e-03 3.85000e-03 3.12500e-03 2.53653e-03 2.05888e-03 1.67117e-03 1.35647e-03 1.10103e-03 8.93698e-04 7.25405e-04 5.88804e-04 4.77926e-04 3.87927e-04 3.14877e-04 2.55582e-04 2.07453e-04 1.68388e-04 1.36679e-04 1.10941e-04 9.00493e-05 7.30921e-05 5.93281e-05 4.81560e-05 3.90877e-05 3.17271e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -1881,9 +1833,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.58634e-02 1.28762e-02 1.04515e-02 8.48334e-03 6.88584e-03 5.58916e-03 4.53667e-03 3.68237e-03 2.98894e-03 2.42609e-03 1.96923e-03 1.59841e-03 1.29741e-03 1.05309e-03 8.54785e-04 6.93820e-04 5.63167e-04 4.57117e-04 3.71037e-04 3.01167e-04 2.44454e-04 1.98421e-04 1.61056e-04 1.30727e-04 1.06110e-04 8.61285e-05 6.99096e-05 5.67449e-05 4.60593e-05 3.73858e-05</occurRates>
+                <occurRates>2.53646e-02 2.05882e-02 1.67112e-02 1.35643e-02 1.10100e-02 8.93671e-03 7.25384e-03 5.88786e-03 4.77912e-03 3.87916e-03 3.14867e-03 2.55575e-03 2.07447e-03 1.68383e-03 1.36675e-03 1.10937e-03 9.00467e-04 7.30900e-04 5.93264e-04 4.81546e-04 3.90866e-04 3.17262e-04 2.57518e-04 2.09025e-04 1.69663e-04 1.37714e-04 1.11781e-04 9.07314e-05 7.36458e-05 5.97775e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -1914,9 +1866,9 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.27641e-02 2.65943e-02 2.15863e-02 1.75214e-02 1.42219e-02 1.15438e-02 9.36998e-03 7.60552e-03 6.17332e-03 5.01082e-03 4.06723e-03 3.30133e-03 2.67965e-03 2.17505e-03 1.76546e-03 1.43301e-03 1.16316e-03 9.44123e-04 7.66335e-04 6.22026e-04 5.04892e-04 4.09816e-04 3.32643e-04 2.70003e-04 2.19159e-04 1.77889e-04 1.44391e-04 1.17200e-04 9.51303e-05 7.72162e-05</occurRates>
+                <occurRates>3.20081e-02 2.59807e-02 2.10882e-02 1.71171e-02 1.38938e-02 1.12774e-02 9.15377e-03 7.43002e-03 6.03087e-03 4.89520e-03 3.97338e-03 3.22515e-03 2.61782e-03 2.12486e-03 1.72473e-03 1.39994e-03 1.13632e-03 9.22338e-04 7.48652e-04 6.07673e-04 4.93242e-04 4.00360e-04 3.24968e-04 2.63773e-04 2.14102e-04 1.73784e-04 1.41059e-04 1.14496e-04 9.29352e-05 7.54345e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -1947,9 +1899,9 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.58634e-02 1.28762e-02 1.04515e-02 8.48334e-03 6.88584e-03 5.58916e-03 4.53667e-03 3.68237e-03 2.98894e-03 2.42609e-03 1.96923e-03 1.59841e-03 1.29741e-03 1.05309e-03 8.54785e-04 6.93820e-04 5.63167e-04 4.57117e-04 3.71037e-04 3.01167e-04 2.44454e-04 1.98421e-04 1.61056e-04 1.30727e-04 1.06110e-04 8.61285e-05 6.99096e-05 5.67449e-05 4.60593e-05 3.73858e-05</occurRates>
+                <occurRates>6.24293e-02 5.06732e-02 4.11309e-02 3.33856e-02 2.70987e-02 2.19957e-02 1.78537e-02 1.44917e-02 1.17627e-02 9.54770e-03 7.74977e-03 6.29041e-03 5.10586e-03 4.14437e-03 3.36394e-03 2.73048e-03 2.21630e-03 1.79895e-03 1.46019e-03 1.18522e-03 9.62030e-04 7.80870e-04 6.33824e-04 5.14468e-04 4.17589e-04 3.38952e-04 2.75124e-04 2.23315e-04 1.81263e-04 1.47129e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -1997,9 +1949,9 @@
                 <lowerSeismoDepth>500.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.95552e-01 2.39897e-01 1.94722e-01 1.58053e-01 1.28290e-01 1.04132e-01 8.45228e-02 6.86063e-02 5.56870e-02 4.52006e-02 3.66889e-02 2.97800e-02 2.41721e-02 1.96202e-02 1.59255e-02 1.29266e-02 1.04924e-02 8.51656e-03 6.91280e-03 5.61105e-03 4.55443e-03 3.69678e-03 3.00064e-03 2.43559e-03 1.97694e-03 1.60466e-03 1.30249e-03 1.05722e-03 8.58132e-04 6.96537e-04</occurRates>
+                <occurRates>2.25660e-01 1.83166e-01 1.48674e-01 1.20677e-01 9.79525e-02 7.95070e-02 6.45350e-02 5.23824e-02 4.25183e-02 3.45116e-02 2.80127e-02 2.27376e-02 1.84559e-02 1.49805e-02 1.21595e-02 9.86974e-03 8.01116e-03 6.50258e-03 5.27807e-03 4.28416e-03 3.47741e-03 2.82258e-03 2.29106e-03 1.85963e-03 1.50944e-03 1.22520e-03 9.94479e-04 8.07208e-04 6.55202e-04 5.31821e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -2047,9 +1999,9 @@
                 <lowerSeismoDepth>600.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.26500e-01 1.83848e-01 1.49227e-01 1.21126e-01 9.83170e-02 7.98029e-02 6.47751e-02 5.25773e-02 4.26765e-02 3.46400e-02 2.81170e-02 2.28222e-02 1.85246e-02 1.50362e-02 1.22047e-02 9.90646e-03 8.04097e-03 6.52677e-03 5.29771e-03 4.30010e-03 3.49035e-03 2.83308e-03 2.29958e-03 1.86654e-03 1.51506e-03 1.22975e-03 9.98179e-04 8.10212e-04 6.57640e-04 5.33800e-04</occurRates>
+                <occurRates>2.25671e-01 1.83175e-01 1.48681e-01 1.20683e-01 9.79569e-02 7.95106e-02 6.45379e-02 5.23848e-02 4.25202e-02 3.45132e-02 2.80140e-02 2.27387e-02 1.84567e-02 1.49811e-02 1.21600e-02 9.87018e-03 8.01152e-03 6.50287e-03 5.27831e-03 4.28435e-03 3.47756e-03 2.82270e-03 2.29116e-03 1.85971e-03 1.50951e-03 1.22525e-03 9.94524e-04 8.07244e-04 6.55232e-04 5.31845e-04</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -2102,7 +2054,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.93176e-01 1.55315e-01 1.24874e-01 1.00400e-01 8.07221e-02 6.49012e-02 5.21810e-02 4.19539e-02 3.37313e-02 2.71202e-02 2.18048e-02 1.75312e-02 1.40952e-02 1.13327e-02 9.11156e-03 7.32576e-03 5.88996e-03 4.73557e-03 3.80744e-03 3.06121e-03 2.46123e-03 1.97885e-03 1.59101e-03 1.27918e-03 1.02847e-03 8.26899e-04 6.64833e-04</occurRates>
             </incrementalMFD>
@@ -2157,10 +2109,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="224.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="44.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="234.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="214.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="54.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="34.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="239.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="209.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="59.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="29.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -2200,10 +2152,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="223.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="43.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="233.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="213.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="53.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="33.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="238.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="208.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="58.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="28.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -2239,10 +2191,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="218.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="38.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="228.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="208.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="48.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="28.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="233.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="203.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="53.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="23.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -2291,10 +2243,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="127.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="307.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="137.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="117.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="317.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="297.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="142.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="112.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="322.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="292.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -2340,10 +2292,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="178.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="358.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="188.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="168.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="8.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="348.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="193.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="163.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="13.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="343.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -2382,10 +2334,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="179.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="359.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="189.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="169.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="9.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="194.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="164.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="14.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="344.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -2432,10 +2384,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="185.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="5.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="195.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="175.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="15.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="355.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="200.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="170.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="20.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="350.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -2480,10 +2432,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="192.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="12.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="202.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="182.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="22.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="2.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="207.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="177.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="27.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="357.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -2579,10 +2531,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="170.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="350.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="181.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="159.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="1.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="339.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="185.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="155.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="5.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="335.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -2625,10 +2577,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="151.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="331.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="161.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="141.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="341.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="321.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="166.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="136.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="346.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="316.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -3286,10 +3238,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="139.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="319.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="149.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="129.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="329.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="309.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="154.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="124.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="334.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="304.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3330,10 +3282,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="159.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="339.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="169.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="149.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="329.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="174.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="144.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="354.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="324.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3501,7 +3453,7 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.58906e-04 6.53459e-04 5.62663e-04 4.84482e-04 4.17165e-04 3.59201e-04 3.09292e-04 2.66316e-04 2.29313e-04 1.97450e-04 1.70015e-04 1.46392e-04 1.26051e-04 1.08537e-04 9.34562e-05 8.04707e-05 6.92896e-05 5.96620e-05 5.13722e-05 4.42342e-05 3.80880e-05 3.27958e-05</occurRates>
             </incrementalMFD>
@@ -3551,10 +3503,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="109.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="289.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="119.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="99.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="299.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="279.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="124.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="94.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="304.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="274.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3594,10 +3546,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="220.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="40.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="230.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="210.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="50.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="30.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="235.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="205.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="55.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="25.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3637,10 +3589,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="228.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="48.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="238.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="218.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="58.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="38.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="243.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="213.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="63.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="33.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3682,10 +3634,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="227.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="47.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="237.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="217.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="57.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="37.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="242.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="212.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="62.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="32.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3722,10 +3674,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="206.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="26.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="216.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="196.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="36.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="16.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="221.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="191.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="41.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="11.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -3764,10 +3716,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="190.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="10.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="200.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="180.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="20.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="0.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="205.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="175.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="25.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="355.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3809,10 +3761,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="188.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="8.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="198.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="178.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="18.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="358.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="203.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="173.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="23.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="353.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3851,10 +3803,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="127.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="307.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="137.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="117.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="317.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="297.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="142.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="112.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="322.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="292.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3892,10 +3844,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="257.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="77.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="267.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="247.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="87.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="67.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="272.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="242.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="92.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="62.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -4031,10 +3983,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="145.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="325.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="155.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="135.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="335.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="315.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="160.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="130.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="340.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="310.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -4080,10 +4032,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="151.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="331.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="161.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="141.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="341.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="321.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="166.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="136.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="346.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="316.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -4120,10 +4072,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="149.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="329.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="159.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="139.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="339.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="319.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="164.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="134.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="344.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="314.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -4163,10 +4115,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="153.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="333.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="163.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="143.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="343.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="323.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="168.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="138.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="348.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="318.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -4249,10 +4201,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="183.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="3.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="193.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="173.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="13.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="353.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="198.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="168.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="18.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="348.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -4462,17 +4414,17 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.64561e-04 5.72222e-04 4.92714e-04 4.24253e-04 3.65304e-04 3.14546e-04 2.70841e-04 2.33209e-04 2.00805e-04 1.72904e-04 1.48879e-04 1.28193e-04 1.10381e-04 9.50440e-05 8.18380e-05 7.04668e-05 6.06757e-05 5.22450e-05 4.49857e-05 3.87351e-05 3.33530e-05 2.87187e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="179.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="359.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="189.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="169.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="9.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="194.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="164.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="14.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="344.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="10.0"/>
@@ -4912,7 +4864,7 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.34475e-03 2.88000e-03 2.47984e-03 2.13527e-03 1.83858e-03 1.58312e-03 1.36315e-03 1.17374e-03 1.01066e-03 8.70228e-04 7.49313e-04 6.45198e-04 5.55550e-04 4.78358e-04 4.11892e-04 3.54661e-04 3.05382e-04 2.62950e-04 2.26414e-04 1.94954e-04 1.67866e-04 1.44542e-04</occurRates>
             </incrementalMFD>
@@ -4972,10 +4924,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="195.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="15.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="205.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="185.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="25.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="5.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="210.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="180.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="30.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="0.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -5015,10 +4967,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="175.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="355.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="185.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="165.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="5.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="345.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="190.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="160.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="10.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="340.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -5622,12 +5574,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="8.0" binWidth="0.1">
-              <occurRates>0.0202973644376 0.0167550115872 0.0138144160951 0.0113720626792 0.00933894346126 0.00764933070208 0.00622419477836 0.0050342514287 0.0040486484064 0.00321825837907 0.00245450500498 0.00185540008609 0.00129657813268 0.000836237553987 0.000469470783318 0.000192271919482 7.15109576367e-05</occurRates>
+          <incrementalMFD minMag="8.05" binWidth="0.1">
+              <occurRates>0.00354235285044 0.00294059549203 0.00244235341597 0.00203311921789 0.00168961275918 0.00142513592373 0.00118994334966 0.000985603022297 0.000830390027329 0.000763753374084 0.000599104918891 0.000558821953409 0.000460340578697 0.000366766770669 0.000277198863836 0.000120760961845 7.15109576367e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_16" name="tanimbar" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5662,7 +5614,6 @@
                 </gml:posList>
               </gml:LineString>
             </faultTopEdge>
-    
     
             <intermediateEdge>
               <gml:LineString>
@@ -5722,12 +5673,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.0118297305473 0.00902659086193 0.00688638135713 0.00525048373579 0.00399864998739 0.00303962550243 0.00230408529778 0.0017393078322 0.00130515520749 0.000971036421587 0.000713611028859 0.000515050963817 0.000356308808224 0.000244296767663 0.00016143809767 0.00010954051793 7.36188410619e-05 4.86199690536e-05 3.01916026882e-05 1.91304151868e-05 1.16421488097e-05 6.39439185824e-06 3.16357132118e-06 1.58564395144e-06 5.19990798323e-07 1.30205823461e-07</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.00283504837065 0.00216897707953 0.00166128000243 0.00127387083466 0.000977919923684 0.000751582318926 0.000578288493886 0.000445457239018 0.000375320144296 0.0002507247253 0.000174631800042 0.000121480872591 8.43512149746e-05 5.84202861794e-05 4.03328252115e-05 2.773949301e-05 1.99229159145e-05 1.26958693535e-05 8.85814616481e-06 5.35143869069e-06 3.63928680731e-06 2.1997864707e-06 1.15519435077e-06 7.11992830135e-07 2.69913094893e-07 5.69002380543e-08</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_25" name="arutrough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5766,12 +5717,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.0858961214803 0.0653616183078 0.0497380172149 0.0378373838531 0.0287622002327 0.0218336720839 0.0165378920198 0.0124853754596 0.00938062000329 0.00699918410234 0.00517041131347 0.00376439705092 0.00268214631471 0.00178199751603 0.00116275869498 0.000741155902719 0.000458022584937 0.000271369454251 0.000151402160705 7.70335407691e-05 3.34088216177e-05 1.01338705156e-05</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.0198567703109 0.0151264990738 0.0115361796898 0.00880811762948 0.00673294105048 0.00515263749355 0.00394783718693 0.00302827189515 0.00235585906235 0.00169670920967 0.00117429614354 0.000813022030246 0.000560871048298 0.000384259671322 0.000260583751299 0.000174245553562 0.000114316477996 7.3057031962e-05 4.49631042386e-05 2.6108230952e-05 1.36917671932e-05 4.48909101966e-06</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_21" name="trobriand" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5819,12 +5770,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.00273177015974 0.00213843141857 0.00166312547288 0.00128192111858 0.000975825058533 0.000729746708296 0.000531683125136 0.00036579844106 0.000240915237856 0.000155752733453 9.82967379545e-05 6.00507826743e-05 3.77791634959e-05 2.14413333482e-05 1.12019315364e-05 5.05626684379e-06 1.61817901629e-06 4.40790747056e-07</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.00219271166988 0.00175123079161 0.00140027402117 0.00112096867911 0.000898435795584 0.000720933749209 0.000579187677371 0.000465863947508 0.000411790153101 0.000296091105793 0.000193092315105 0.000132870237377 9.3576473159e-05 5.88324345497e-05 3.9090076564e-05 2.6546525622e-05 1.53232864989e-05 9.28563925285e-06 5.65004144046e-06 2.33585459128e-06 3.96509786381e-07</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_20" name="newguinea" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -6173,12 +6124,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.135461351551 0.111122403326 0.0911896064801 0.0748498857869 0.061443186714 0.050433100814 0.041383241079 0.0339382203592 0.0278083188121 0.0227571111482 0.018591471239 0.0151534883956 0.0123139225611 0.00993088331659 0.00791509200441 0.00621703943904 0.00478397946363 0.00357731931281 0.00256910378873 0.00186251135357 0.00117582085121 0.000644518225293 0.000256823559348</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0213391760336 0.0173115454104 0.0140602999642 0.0114326615203 0.00930651399063 0.00758413522425 0.00618723205157 0.00505300342162 0.00413101539631 0.00338071788508 0.00276946916403 0.00227096259867 0.00197961965393 0.00162057793378 0.001298840512 0.00103261860901 0.000812683472642 0.000631183254139 0.000481169273631 0.000356442179975 0.000284445768593 0.000157463667657</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_21" name="seram_thrust" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -6347,12 +6298,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.0561435486484 0.0448636763094 0.0358306098528 0.0285878427633 0.0227733294423 0.0180996149268 0.0143382059546 0.0113072663589 0.00886192027356 0.00688660286003 0.00528902009142 0.00387358538356 0.00278391240009 0.00188134803117 0.00125751217302 0.000795182234273 0.000422877287915 0.000206594861422 3.85166370575e-05</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.00825455172678 0.00660533460536 0.00529211388234 0.00424520183793 0.00340959885931 0.00274185312423 0.00220760014395 0.00177963336623 0.00143638991576 0.00116076110271 0.00100758025114 0.000811774713478 0.00061089506222 0.000451995777858 0.00032635906169 0.000227420154599 0.000150163412486 9.06663542086e-05 2.2983425332e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_18" name="flores" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -6435,12 +6386,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.095030496043 0.0759430118689 0.0606950997064 0.0485003930515 0.0387362479132 0.0309091468831 0.024627510654 0.0195803123883 0.0155202414917 0.012250436967 0.00953807217396 0.0073926596395 0.00567803477033 0.00422512961711 0.00315052168155 0.00231014006755 0.00166654088941 0.00117421292907 0.000758095592612 0.000500719829432 0.000319000585723 0.000194607057844 0.000110279861448 5.71065536515e-05 1.97535906545e-05 5.65960570449e-06</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0191813792839 0.0153446632157 0.0122898232458 0.00985476916042 0.00791153783986 0.00635900812381 0.00511718991233 0.00412274367167 0.00339044272092 0.00275556673705 0.00215689177502 0.00163001292353 0.00131063199734 0.00101200174112 0.000776664346846 0.000582537523093 0.000398051111097 0.000308576568001 0.000211865750679 0.000136557683293 8.19837566126e-05 3.64289386371e-05 1.51269009011e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_22" name="moresby_trough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -6483,7 +6434,6 @@
               </gml:LineString>
             </faultTopEdge>
     
-     
             <intermediateEdge>
               <gml:LineString>
                 <gml:posList>
@@ -6563,24 +6513,6 @@
               </gml:LineString>
             </intermediateEdge>
     
-            <intermediateEdge>
-              <gml:LineString>
-                <gml:posList>
-                   149.0329 -9.9274 20.0
-                   148.1423 -9.9172 20.0
-                   148.0552 -9.9095 20.0
-                   147.4743 -9.7303 20.0
-                   147.3796 -9.6766 20.0
-                   146.7295 -9.1672 20.0
-                   146.6399 -9.0572 20.0
-                   146.3097 -8.6426 20.0
-                   146.0973 -8.4173 20.0
-                   145.9412 -8.2587 20.0
-                   144.6666 -7.3398 20.0
-                </gml:posList>
-              </gml:LineString>
-            </intermediateEdge>
-    
             <faultBottomEdge>
               <gml:LineString>
                 <gml:posList>
@@ -6602,12 +6534,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="5.5" binWidth="0.1">
-              <occurRates>0.131879048088 0.104474135704 0.0828071903588 0.0656587786067 0.0520720430893 0.0412955116949 0.0327384878272 0.025936230159 0.0205227543307 0.016209572708 0.0127690633214 0.0100214500168 0.00782460163337 0.00606603335361 0.00465662959736 0.00352571373084 0.00261717223498 0.00185668411837 0.00126799645786 0.000880100283501 0.000583622152359 0.00037604086891 0.000249153617546 0.000151156730024 9.42477155424e-05 5.12981096652e-05 2.80190125508e-05 1.163734839e-05 2.48669363059e-06</occurRates>
+          <incrementalMFD minMag="6.05" binWidth="0.1">
+              <occurRates>0.0283672034673 0.0224576918184 0.0177984021582 0.014121205363 0.0112161671614 0.00891878563166 0.00710005292896 0.0056587113652 0.0045152153973 0.00360702057036 0.00288490525714 0.0023100967368 0.00185202408605 0.00152360595374 0.00111194748325 0.000827576224859 0.000590769651401 0.000401084420476 0.000299400123986 0.000199605478734 0.000147917936344 9.52873293274e-05 6.92401203773e-05 4.56016082528e-05 2.70453526916e-05 1.87676565792e-05 9.72311164715e-06 6.10881984466e-06 2.06558810878e-06</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_28" name="banda_detachment" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -6671,12 +6603,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.0791032687172 0.060101053468 0.0456582642871 0.0346661713007 0.0262889857369 0.0198959190749 0.0150103227824 0.011235004079 0.00839718203822 0.006257503848 0.00464134581633 0.003419552933 0.00249591149404 0.00179844104335 0.00127296022751 0.000878541117279 0.000584182740156 0.0003500803536 0.000169449100027 7.2469316367e-05 1.60918350404e-05</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0182097656878 0.0138118675898 0.0104898401013 0.00784715609869 0.00577880675314 0.00426756950754 0.00317916598719 0.00235585432354 0.0017938991472 0.00134846082576 0.00101414910203 0.000745888605858 0.000576255950723 0.000431516343696 0.000321210694149 0.000255250500154 0.000178003690922 0.000111241859887 7.95586943487e-05 3.93429572419e-05 8.25696284271e-06</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_20" name="timor" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -6848,8 +6780,8 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.137298506723 0.109767266215 0.0878295846838 0.0703283549135 0.0563497599231 0.0451713734663 0.0362214738423 0.0290471211967 0.0232890889118 0.0186621598874 0.0149396254378 0.0119410790351 0.00950369181272 0.00755704337871 0.00599041589031 0.00472832692896 0.00371128751329 0.00289216778516 0.0022335924708 0.00170578435404 0.00128495473926 0.000951921256228 0.000691061188342 0.000460489136271 0.000311578911363 0.000201816406815 0.000123160927869 6.88254701769e-05 3.31436420554e-05 1.14561838709e-05</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.0245450144923 0.019512425972 0.0155297660486 0.0123745634187 0.00987213745637 0.00788520814594 0.00630578854289 0.00504885378762 0.00400358539258 0.00315230759336 0.00247783525413 0.00195837553776 0.0015521235244 0.00123182063955 0.000955676237405 0.000780347000265 0.000618242177038 0.000488568118567 0.000384578036616 0.000300994170337 0.000233703163213 0.000167106903333 0.000137903841266 0.000102753708754 7.49027084788e-05 5.30851783859e-05 3.62407306977e-05 1.91984627983e-05 1.45895044483e-05 7.63452034228e-06</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>

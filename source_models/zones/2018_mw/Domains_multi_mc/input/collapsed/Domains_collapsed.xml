@@ -621,7 +621,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserInterface</magScaleRel>
-            <ruptAspectRatio>1.3</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="6.55" binWidth="0.1">
                 <occurRates>6.64670e-02 5.64533e-02 4.79608e-02 4.07566e-02 3.46436e-02 2.94552e-02 2.50503e-02 2.13096e-02 1.81322e-02 1.54324e-02 1.31380e-02 1.11876e-02 9.52904e-03 8.11842e-03 6.91833e-03 5.89709e-03 5.02783e-03 4.28774e-03 3.65747e-03 3.12060e-03 2.66316e-03 2.22784e-03 1.63042e-03 2.65219e-04 2.83189e-05</occurRates>
             </incrementalMFD>
@@ -862,7 +862,7 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.42624e-01 1.97351e-01 1.60537e-01 1.30601e-01 1.06255e-01 8.64546e-02 7.03491e-02 5.72482e-02 4.65905e-02 3.79198e-02 3.08651e-02 2.51247e-02 2.04534e-02 1.66519e-02 1.35580e-02 1.10397e-02 8.98982e-03 7.32111e-03 5.96258e-03 4.85650e-03 3.95588e-03 3.22252e-03 2.62529e-03 2.13890e-03 1.74275e-03 1.42007e-03 1.13408e-03 7.92193e-04 1.22981e-04 1.25298e-05</occurRates>
             </incrementalMFD>
@@ -900,7 +900,7 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.42824e-01 1.97436e-01 1.60542e-01 1.30552e-01 1.06171e-01 8.63486e-02 7.02321e-02 5.71274e-02 4.64710e-02 3.78050e-02 3.07570e-02 2.50247e-02 2.03620e-02 1.65693e-02 1.34838e-02 1.09737e-02 8.93137e-03 7.26965e-03 5.91748e-03 4.81713e-03 3.92164e-03 3.19283e-03 2.59963e-03 2.11678e-03 1.72372e-03 1.40373e-03 1.12036e-03 7.82140e-04 1.21346e-04 1.23556e-05</occurRates>
             </incrementalMFD>
@@ -933,7 +933,7 @@
                 <lowerSeismoDepth>180.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.38623e-02 5.20162e-02 4.23702e-02 3.45151e-02 2.81181e-02 2.29081e-02 1.86646e-02 1.52081e-02 1.23925e-02 1.00988e-02 8.23010e-03 6.70762e-03 5.46711e-03 4.45629e-03 3.63257e-03 2.96130e-03 2.41421e-03 1.96832e-03 1.60487e-03 1.30861e-03 1.06710e-03 8.70216e-04 7.09698e-04 5.78822e-04 4.72108e-04 3.85091e-04 3.07847e-04 2.15258e-04 3.34499e-05 3.41134e-06</occurRates>
             </incrementalMFD>
@@ -969,7 +969,7 @@
                 <lowerSeismoDepth>130.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.93912e-02 6.46008e-02 5.25692e-02 4.27812e-02 3.48179e-02 2.83387e-02 2.30667e-02 1.87767e-02 1.52855e-02 1.24442e-02 1.01317e-02 8.24948e-03 6.71734e-03 5.47010e-03 4.45472e-03 3.62805e-03 2.95496e-03 2.40690e-03 1.96061e-03 1.59717e-03 1.30118e-03 1.06011e-03 8.63758e-04 7.03815e-04 5.73523e-04 4.67380e-04 3.73285e-04 2.60775e-04 4.04858e-05 4.12511e-06</occurRates>
             </incrementalMFD>
@@ -1416,7 +1416,7 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.31682e-01 1.88387e-01 1.53194e-01 1.24583e-01 1.01322e-01 8.24101e-02 6.70324e-02 5.45279e-02 4.43589e-02 3.60888e-02 2.93624e-02 2.38913e-02 1.94410e-02 1.58206e-02 1.28753e-02 1.04790e-02 8.52924e-03 6.94271e-03 5.65166e-03 4.60099e-03 3.74589e-03 3.04990e-03 2.48339e-03 2.02223e-03 1.64682e-03 1.34118e-03 1.07049e-03 7.47365e-04 1.15957e-04 1.18075e-05</occurRates>
             </incrementalMFD>
@@ -1451,7 +1451,7 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.40805e-02 1.96264e-02 1.59971e-02 1.30397e-02 1.06297e-02 8.66558e-03 7.06483e-03 5.76011e-03 4.69663e-03 3.82971e-03 3.12300e-03 2.54684e-03 2.07710e-03 1.69410e-03 1.38180e-03 1.12713e-03 9.19452e-04 7.50081e-04 6.11944e-04 4.99274e-04 4.07372e-04 3.32404e-04 2.71248e-04 2.21355e-04 1.80649e-04 1.47437e-04 1.17931e-04 8.25082e-05 1.28286e-05 1.30903e-06</occurRates>
             </incrementalMFD>
@@ -1503,7 +1503,7 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>8.90008e-02 7.23804e-02 5.88676e-02 4.78808e-02 3.89471e-02 3.16823e-02 2.57744e-02 2.09695e-02 1.70615e-02 1.38827e-02 1.12969e-02 9.19333e-03 7.48195e-03 6.08956e-03 4.95661e-03 4.03470e-03 3.28448e-03 2.67392e-03 2.17701e-03 1.77255e-03 1.44333e-03 1.17533e-03 9.57151e-04 7.79524e-04 6.34901e-04 5.17142e-04 4.12826e-04 2.88256e-04 4.47305e-05 4.55539e-06</occurRates>
             </incrementalMFD>
@@ -1548,7 +1548,7 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.15622e-01 9.42809e-02 7.68833e-02 6.26996e-02 5.11355e-02 4.17066e-02 3.40183e-02 2.77488e-02 2.26360e-02 1.84663e-02 1.50655e-02 1.22917e-02 1.00292e-02 8.18354e-03 6.67792e-03 5.44960e-03 4.44745e-03 3.62979e-03 2.96261e-03 2.41819e-03 1.97392e-03 1.61136e-03 1.31546e-03 1.07395e-03 8.76828e-04 7.15923e-04 5.72885e-04 4.00975e-04 6.23701e-05 6.36688e-06</occurRates>
             </incrementalMFD>
@@ -1586,7 +1586,7 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>9.72093e-03 7.93357e-03 6.47520e-03 5.28518e-03 4.31409e-03 3.52161e-03 2.87485e-03 2.34699e-03 1.91615e-03 1.56448e-03 1.27742e-03 1.04308e-03 8.51772e-04 6.95586e-04 5.68067e-04 4.63949e-04 3.78932e-04 3.09510e-04 2.52818e-04 2.06520e-04 1.68709e-04 1.37827e-04 1.12603e-04 9.19996e-05 7.51697e-05 6.14214e-05 4.91861e-05 3.44519e-05 5.36278e-06 5.47843e-07</occurRates>
             </incrementalMFD>
@@ -1623,7 +1623,7 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.84395e-03 5.58028e-03 4.55021e-03 3.71050e-03 3.02593e-03 2.46781e-03 2.01274e-03 1.64169e-03 1.33912e-03 1.09237e-03 8.91147e-04 7.27028e-04 5.93169e-04 4.83982e-04 3.94916e-04 3.22259e-04 2.62984e-04 2.14623e-04 1.75166e-04 1.42970e-04 1.16698e-04 9.52590e-05 7.77628e-05 6.34835e-05 5.18291e-05 4.23164e-05 3.38604e-05 2.36988e-05 3.68613e-06 3.76275e-07</occurRates>
             </incrementalMFD>
@@ -1660,7 +1660,7 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.93166e-02 3.20236e-02 2.60851e-02 2.12491e-02 1.73108e-02 1.41033e-02 1.14908e-02 9.36283e-03 7.62940e-03 6.21728e-03 5.06684e-03 4.12952e-03 3.36581e-03 2.74350e-03 2.23638e-03 1.82311e-03 1.48630e-03 1.21179e-03 9.88033e-04 8.05642e-04 6.56958e-04 5.35746e-04 4.36924e-04 3.56350e-04 2.90652e-04 2.37080e-04 1.89525e-04 1.32523e-04 2.05934e-05 2.10018e-06</occurRates>
             </incrementalMFD>
@@ -1707,7 +1707,7 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.83562e-02 6.37499e-02 5.18698e-02 4.22063e-02 3.43454e-02 2.79504e-02 2.27476e-02 1.85145e-02 1.50701e-02 1.22672e-02 9.98632e-03 8.13004e-03 6.61922e-03 5.38951e-03 4.38853e-03 3.57368e-03 2.91031e-03 2.37024e-03 1.93050e-03 1.57245e-03 1.28088e-03 1.04344e-03 8.50070e-04 6.92577e-04 5.64297e-04 4.59805e-04 3.67191e-04 2.56487e-04 3.98154e-05 4.05632e-06</occurRates>
             </incrementalMFD>
@@ -1742,7 +1742,7 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.83208e-02 1.49530e-02 1.22050e-02 9.96249e-03 8.13244e-03 6.63890e-03 5.41993e-03 4.42500e-03 3.61289e-03 2.94998e-03 2.40882e-03 1.96703e-03 1.60635e-03 1.31187e-03 1.07142e-03 8.75093e-04 7.14772e-04 5.83852e-04 4.76934e-04 3.89614e-04 3.18296e-04 2.60045e-04 2.12465e-04 1.73598e-04 1.41848e-04 1.15910e-04 9.28250e-05 6.50213e-05 1.01217e-05 1.03405e-06</occurRates>
             </incrementalMFD>
@@ -1786,7 +1786,7 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>5.53612e-02 4.51846e-02 3.68806e-02 3.01043e-02 2.45743e-02 2.00612e-02 1.63778e-02 1.33713e-02 1.09173e-02 8.91414e-03 7.27889e-03 5.94391e-03 4.85401e-03 3.96416e-03 3.23759e-03 2.64433e-03 2.15988e-03 1.76426e-03 1.44118e-03 1.17732e-03 9.61817e-04 7.85796e-04 6.42018e-04 5.24572e-04 4.28631e-04 3.50253e-04 2.80495e-04 1.96479e-04 3.05855e-05 3.12465e-06</occurRates>
             </incrementalMFD>
@@ -1833,7 +1833,7 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.79532e-02 5.53370e-02 4.50660e-02 3.67037e-02 2.98950e-02 2.43508e-02 1.98361e-02 1.61595e-02 1.31651e-02 1.07263e-02 8.73977e-03 7.12161e-03 5.80340e-03 4.72948e-03 3.85453e-03 3.14163e-03 2.56074e-03 2.08739e-03 1.70163e-03 1.38725e-03 1.13102e-03 9.22165e-04 7.51925e-04 6.13149e-04 5.00015e-04 4.07779e-04 3.25926e-04 2.27858e-04 3.54015e-05 3.60973e-06</occurRates>
             </incrementalMFD>
@@ -1869,7 +1869,7 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.62554e-02 1.32666e-02 1.08279e-02 8.83791e-03 7.21405e-03 5.88886e-03 4.80734e-03 3.92465e-03 3.20420e-03 2.61614e-03 2.13611e-03 1.74424e-03 1.42434e-03 1.16316e-03 9.49926e-04 7.75819e-04 6.33653e-04 5.17564e-04 4.22764e-04 3.45344e-04 2.82116e-04 2.30475e-04 1.88295e-04 1.53842e-04 1.25699e-04 1.02709e-04 8.22494e-05 5.76107e-05 8.96768e-06 9.16108e-07</occurRates>
             </incrementalMFD>
@@ -1908,7 +1908,7 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.08151e-02 2.51507e-02 2.05285e-02 1.67567e-02 1.36786e-02 1.11665e-02 9.11619e-03 7.44274e-03 6.07680e-03 4.96179e-03 4.05157e-03 3.30850e-03 2.70184e-03 2.20653e-03 1.80211e-03 1.47188e-03 1.20223e-03 9.82024e-04 8.02191e-04 6.55321e-04 5.35366e-04 4.37390e-04 3.57360e-04 2.91987e-04 2.38585e-04 1.94958e-04 1.56129e-04 1.09364e-04 1.70245e-05 1.73924e-06</occurRates>
             </incrementalMFD>
@@ -1941,7 +1941,7 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.52156e-02 2.87000e-02 2.33914e-02 1.90658e-02 1.55411e-02 1.26687e-02 1.03279e-02 8.42002e-03 6.86502e-03 5.59752e-03 4.56431e-03 3.72203e-03 3.03535e-03 2.47551e-03 2.01903e-03 1.64683e-03 1.34331e-03 1.09580e-03 8.93941e-04 7.29308e-04 5.95028e-04 4.85499e-04 3.96153e-04 3.23267e-04 2.63805e-04 2.15293e-04 1.72197e-04 1.20468e-04 1.87296e-05 1.91107e-06</occurRates>
             </incrementalMFD>
@@ -1974,7 +1974,7 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.58447e-02 6.19028e-02 5.05264e-02 4.12428e-02 3.36668e-02 2.74838e-02 2.24375e-02 1.83187e-02 1.49567e-02 1.22124e-02 9.97206e-03 8.14314e-03 6.64998e-03 5.43089e-03 4.43550e-03 3.62272e-03 2.95902e-03 2.41704e-03 1.97442e-03 1.61293e-03 1.31769e-03 1.07654e-03 8.79563e-04 7.18663e-04 5.87223e-04 4.79845e-04 3.84278e-04 2.69176e-04 4.19020e-05 4.28077e-06</occurRates>
             </incrementalMFD>
@@ -2024,7 +2024,7 @@
                 <lowerSeismoDepth>500.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.25676e-01 1.83481e-01 1.49184e-01 1.21307e-01 9.86453e-02 8.02227e-02 6.52450e-02 5.30671e-02 4.31652e-02 3.51132e-02 2.85651e-02 2.32397e-02 1.89083e-02 1.53853e-02 1.25195e-02 1.01881e-02 8.29149e-03 6.74837e-03 5.49279e-03 4.47111e-03 3.63971e-03 2.96309e-03 2.41242e-03 1.96421e-03 1.59937e-03 1.30239e-03 1.03941e-03 7.25578e-04 1.12564e-04 1.14606e-05</occurRates>
             </incrementalMFD>
@@ -2074,7 +2074,7 @@
                 <lowerSeismoDepth>600.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.25989e-01 1.83758e-01 1.49429e-01 1.21521e-01 9.88325e-02 8.03851e-02 6.53853e-02 5.31880e-02 4.32689e-02 3.52020e-02 2.86409e-02 2.33043e-02 1.89632e-02 1.54319e-02 1.25589e-02 1.02215e-02 8.31965e-03 6.77211e-03 5.51279e-03 4.48793e-03 3.65384e-03 2.97496e-03 2.42237e-03 1.97254e-03 1.60635e-03 1.30823e-03 1.04419e-03 7.29001e-04 1.13108e-04 1.15174e-05</occurRates>
             </incrementalMFD>
@@ -7696,12 +7696,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="8.0" binWidth="0.1">
-              <occurRates>0.0202973644376 0.0167550115872 0.0138144160951 0.0113720626792 0.00933894346126 0.00764933070208 0.00622419477836 0.0050342514287 0.0040486484064 0.00321825837907 0.00245450500498 0.00185540008609 0.00129657813268 0.000836237553987 0.000469470783318 0.000192271919482 7.15109576367e-05</occurRates>
+          <incrementalMFD minMag="8.05" binWidth="0.1">
+              <occurRates>0.00354235285044 0.00294059549203 0.00244235341597 0.00203311921789 0.00168961275918 0.00142513592373 0.00118994334966 0.000985603022297 0.000830390027329 0.000763753374084 0.000599104918891 0.000558821953409 0.000460340578697 0.000366766770669 0.000277198863836 0.000120760961845 7.15109576367e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_16" name="tanimbar" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -7795,12 +7795,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.0118802870683 0.00904523869765 0.00687626161812 0.00521498161569 0.00394111078103 0.00296319085735 0.00221160853842 0.00163332004454 0.00118786280552 0.000812542661223 0.000561817935924 0.000387186135882 0.000265705263291 0.000181354048316 0.000122933762137 8.26009369254e-05 5.48614439154e-05 3.49385280009e-05 2.22426586474e-05 1.33845124825e-05 8.03307379185e-06 4.39378698454e-06 2.19400051385e-06 1.03880616308e-06 3.26813332948e-07 5.69002380543e-08</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.00283504837065 0.00216897707953 0.00166128000243 0.00127387083466 0.000977919923684 0.000751582318926 0.000578288493886 0.000445457239018 0.000375320144296 0.0002507247253 0.000174631800042 0.000121480872591 8.43512149746e-05 5.84202861794e-05 4.03328252115e-05 2.773949301e-05 1.99229159145e-05 1.26958693535e-05 8.85814616481e-06 5.35143869069e-06 3.63928680731e-06 2.1997864707e-06 1.15519435077e-06 7.11992830135e-07 2.69913094893e-07 5.69002380543e-08</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_25" name="arutrough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -7839,12 +7839,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.0818857265037 0.0620289561928 0.046902457119 0.0353662774292 0.0265581597998 0.0198252187493 0.0146725812557 0.0107247440688 0.00769647217364 0.0053406131113 0.00364390390163 0.00246960775809 0.00165658572784 0.00109571467955 0.000711455008223 0.000450871256924 0.000276625703362 0.000162309225365 8.92521934035e-05 4.42890891648e-05 1.81808582129e-05 4.48909101966e-06</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.0198567703109 0.0151264990738 0.0115361796898 0.00880811762948 0.00673294105048 0.00515263749355 0.00394783718693 0.00302827189515 0.00235585906235 0.00169670920967 0.00117429614354 0.000813022030246 0.000560871048298 0.000384259671322 0.000260583751299 0.000174245553562 0.000114316477996 7.3057031962e-05 4.49631042386e-05 2.6108230952e-05 1.36917671932e-05 4.48909101966e-06</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_21" name="trobriand" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -7892,12 +7892,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.0104144869843 0.0082217753144 0.00647054452279 0.00507027050162 0.00394930182251 0.00305086602693 0.00232993227772 0.00175074460035 0.00128488065284 0.00087309049974 0.000576999393947 0.000383907078842 0.000251036841465 0.000157460368306 9.86279337559e-05 5.95378571919e-05 3.29913315699e-05 1.7668045071e-05 8.38240581813e-06 2.73236437767e-06 3.96509786381e-07</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.00219271166988 0.00175123079161 0.00140027402117 0.00112096867911 0.000898435795584 0.000720933749209 0.000579187677371 0.000465863947508 0.000411790153101 0.000296091105793 0.000193092315105 0.000132870237377 9.3576473159e-05 5.88324345497e-05 3.9090076564e-05 2.6546525622e-05 1.53232864989e-05 9.28563925285e-06 5.65004144046e-06 2.33585459128e-06 3.96509786381e-07</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_20" name="newguinea" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -8246,12 +8246,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.113481776986 0.0921426009524 0.074831055542 0.0607707555778 0.0493380940575 0.0400315800669 0.0324474448426 0.0262602127911 0.0212072093694 0.0170761939731 0.013695476088 0.010926006924 0.00865504432535 0.00667542467143 0.00505484673764 0.00375600622564 0.00272338761664 0.00191070414399 0.00127952088985 0.000798351616224 0.000441909436249 0.000157463667657</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0213391760336 0.0173115454104 0.0140602999642 0.0114326615203 0.00930651399063 0.00758413522425 0.00618723205157 0.00505300342162 0.00413101539631 0.00338071788508 0.00276946916403 0.00227096259867 0.00197961965393 0.00162057793378 0.001298840512 0.00103261860901 0.000812683472642 0.000631183254139 0.000481169273631 0.000356442179975 0.000284445768593 0.000157463667657</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_21" name="seram_thrust" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -8420,12 +8420,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.0408328767776 0.0325783250508 0.0259729904455 0.0206808765631 0.0164356747252 0.0130260758659 0.0102842227417 0.00807662259772 0.00629698923149 0.00486059931572 0.00369983821301 0.00269225796187 0.00188048324839 0.00126958818617 0.000817592408316 0.000491233346625 0.000263813192027 0.000113649779541 2.2983425332e-05</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.00825455172678 0.00660533460536 0.00529211388234 0.00424520183793 0.00340959885931 0.00274185312423 0.00220760014395 0.00177963336623 0.00143638991576 0.00116076110271 0.00100758025114 0.000811774713478 0.00061089506222 0.000451995777858 0.00032635906169 0.000227420154599 0.000150163412486 9.06663542086e-05 2.2983425332e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_18" name="flores" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -8508,12 +8508,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.0949844549276 0.0758030756438 0.060458412428 0.0481685891822 0.0383138200218 0.030402282182 0.0240432740582 0.0189260841458 0.0148033404742 0.0114128977532 0.00865733101618 0.00650043924116 0.00487042631763 0.00355979432028 0.00254779257916 0.00177112823231 0.00118859070922 0.000790539598124 0.000481963030123 0.000270097279444 0.000133539596151 5.15558395382e-05 1.51269009011e-05</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0191813792839 0.0153446632157 0.0122898232458 0.00985476916042 0.00791153783986 0.00635900812381 0.00511718991233 0.00412274367167 0.00339044272092 0.00275556673705 0.00215689177502 0.00163001292353 0.00131063199734 0.00101200174112 0.000776664346846 0.000582537523093 0.000398051111097 0.000308576568001 0.000211865750679 0.000136557683293 8.19837566126e-05 3.64289386371e-05 1.51269009011e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_22" name="moresby_trough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -8656,12 +8656,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.0" binWidth="0.1">
-              <occurRates>0.136183228801 0.107816025334 0.0853583335157 0.0675599313575 0.0534387259945 0.0422225588331 0.0333037732014 0.0262037202725 0.0205450089073 0.01602979351 0.0124227729396 0.00953786768247 0.00722777094567 0.00537574685962 0.00385214090588 0.00274019342263 0.00191261719777 0.00132184754637 0.000920763125893 0.000621363001907 0.000421757523173 0.000273839586829 0.000178552257501 0.000109312137124 6.37105288714e-05 3.66651761798e-05 1.78975196006e-05 8.17440795344e-06 2.06558810878e-06</occurRates>
+          <incrementalMFD minMag="6.05" binWidth="0.1">
+              <occurRates>0.0283672034673 0.0224576918184 0.0177984021582 0.014121205363 0.0112161671614 0.00891878563166 0.00710005292896 0.0056587113652 0.0045152153973 0.00360702057036 0.00288490525714 0.0023100967368 0.00185202408605 0.00152360595374 0.00111194748325 0.000827576224859 0.000590769651401 0.000401084420476 0.000299400123986 0.000199605478734 0.000147917936344 9.52873293274e-05 6.92401203773e-05 4.56016082528e-05 2.70453526916e-05 1.87676565792e-05 9.72311164715e-06 6.10881984466e-06 2.06558810878e-06</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_28" name="banda_detachment" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -8725,12 +8725,12 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="7.0" binWidth="0.1">
-              <occurRates>0.0728430613839 0.0546332956961 0.0408214281062 0.0303315880049 0.0224844319062 0.0167056251531 0.0124380556455 0.00925888965835 0.00690303533481 0.00510913618761 0.00376067536185 0.00274652625982 0.00200063765396 0.00142438170324 0.000992865359545 0.000671654665397 0.000416404165243 0.000238400474321 0.000127158614433 4.75999200846e-05 8.25696284271e-06</occurRates>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0182097656878 0.0138118675898 0.0104898401013 0.00784715609869 0.00577880675314 0.00426756950754 0.00317916598719 0.00235585432354 0.0017938991472 0.00134846082576 0.00101414910203 0.000745888605858 0.000576255950723 0.000431516343696 0.000321210694149 0.000255250500154 0.000178003690922 0.000111241859887 7.95586943487e-05 3.93429572419e-05 8.25696284271e-06</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
+      <complexFaultSource id="banda_20" name="timor" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -8902,8 +8902,8 @@
     
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
-          <incrementalMFD minMag="6.5" binWidth="0.1">
-              <occurRates>0.119825330268 0.0952803157758 0.0757678898039 0.0602381237552 0.0478635603366 0.0379914228802 0.0301062147342 0.0238004261914 0.0187515724037 0.0147479870112 0.0115956794178 0.00911784416366 0.0071594686259 0.0056073451015 0.00437552446195 0.00341984822454 0.00263950122428 0.00202125904724 0.00153269092867 0.00114811289205 0.000847118721718 0.000613415558505 0.000446308655172 0.000308404813905 0.000205651105151 0.000130748396673 7.76632182866e-05 4.14224875889e-05 2.22240247906e-05 7.63452034228e-06</occurRates>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.0245450144923 0.019512425972 0.0155297660486 0.0123745634187 0.00987213745637 0.00788520814594 0.00630578854289 0.00504885378762 0.00400358539258 0.00315230759336 0.00247783525413 0.00195837553776 0.0015521235244 0.00123182063955 0.000955676237405 0.000780347000265 0.000618242177038 0.000488568118567 0.000384578036616 0.000300994170337 0.000233703163213 0.000167106903333 0.000137903841266 0.000102753708754 7.49027084788e-05 5.30851783859e-05 3.62407306977e-05 1.91984627983e-05 1.45895044483e-05 7.63452034228e-06</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
