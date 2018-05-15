@@ -601,7 +601,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_16" name="tanimbar" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -700,7 +700,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_25" name="arutrough" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -744,7 +744,7 @@
       </incrementalMFD>
       <rake>-90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_21" name="trobriand" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -797,7 +797,7 @@
       </incrementalMFD>
       <rake>-90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_20" name="newguinea" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1151,7 +1151,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_21" name="seram_thrust" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1325,7 +1325,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_18" name="flores" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1413,7 +1413,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_22" name="moresby_trough" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1561,7 +1561,7 @@
       </incrementalMFD>
       <rake>90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_28" name="banda_detachment" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
@@ -1630,7 +1630,7 @@
       </incrementalMFD>
       <rake>-90</rake>
     </complexFaultSource>
-  <complexFaultSource id="banda_20" name="timor" tectonicRegion="Subduction">
+  <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
 
       <complexFaultGeometry>
         <faultTopEdge>
