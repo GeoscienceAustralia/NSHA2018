@@ -92,13 +92,29 @@ for shapefile in contour_shapefiles:
     ratedata = np.genfromtxt(ratefilename, delimiter=',', skip_header=1)
     # Get rates above Mmin
     min_mag = source_mmin_dict[sourcename]
-    rates = ratedata[:,1]
+    cum_rates = ratedata[:,1]
     magnitudes = ratedata[:,0]
-    rates = rates[np.argwhere(magnitudes >= min_mag)].flatten()
+    cum_rates = cum_rates[np.argwhere(magnitudes >= min_mag)].flatten()
     print min_mag
     # Get rid of zero valued rates
-    rates = rates[np.argwhere(rates > 0)].flatten()
+    cum_rates = cum_rates[np.argwhere(cum_rates > 0)].flatten()
+    # Convert rates to increments, as at present they are cumulative, 
+    # i.e. prob Mw >= m
+    cum_rates = cum_rates[::-1]
+    rates = []
+    for i, rate in enumerate(cum_rates):
+        if i==0:
+            rates.append(rate)
+            tmp_rate = rate
+        else:
+            inc_rate = rate - tmp_rate
+            rates.append(inc_rate)
+            tmp_rate = rate
+    rates = np.array(rates)
+    rates = rates[::-1]
     rake = source_rake_dict[sourcename]
+    # Adjust min_mag for Openquake MFD distribution
+    min_mag += bin_width/2.
     shp2nrml.append_incremental_mfd(output_xml, magnitude_scale_rel,
                                     rupture_aspect_ratio, rake,
                                     min_mag, bin_width, rates,
