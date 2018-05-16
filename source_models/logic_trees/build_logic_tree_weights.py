@@ -247,7 +247,7 @@ def bar_subplots(q_lists, weight_lists, label_lists, filename,
     fig = plt.figure()
     for i,weight_list in enumerate(weight_lists):
         x_vals = np.arange(len(q_lists[i]))
-        ax = fig.add_subplot(num_row,num_col,i)
+        ax = fig.add_subplot(num_row,num_col,i+1)
         rects1 = ax.bar(x_vals, weight_list, width, color='b')
         ax.set_ylabel('Weight', fontsize = fontsize + 2)
         ax.set_title(title_list[i])
@@ -315,7 +315,7 @@ print cl_type_w, sum(cl_type_w)
 cl_qlists = [cl_type_qlist, cl_c_qlist, cl_nc_qlist, cl_ex_qlist]
 cl_weight_lists = [cl_type_w, cl_c_w, cl_nc_w, cl_ex_w]
 cl_label_lists = [cl_type_labels, cl_c_labels, cl_nc_labels, cl_ex_labels]
-cl_title_list = ['d) Clustering Method', 'a) Cratonic', 'b) Non-cratonic', 'c) Extended']
+cl_title_list = ['a) Clustering Method', 'b) Cratonic', 'c) Non-cratonic', 'd) Extended']
 bar_subplots(cl_qlists, cl_weight_lists, cl_label_lists, 'clustering_weights.png', cl_title_list)
 
 # MFD and integration method
@@ -347,7 +347,7 @@ print mfd_ex_w, sum(mfd_ex_w)
 mfd_qlists = [mfd_c_qlist, mfd_nc_qlist, mfd_ex_qlist]
 mfd_weight_lists = [mfd_c_w, mfd_nc_w, mfd_ex_w]
 mfd_label_lists = [mfd_c_labels, mfd_nc_labels, mfd_ex_labels]
-mfd_title_list = ['c) Cratonic', 'a) Non-cratonic', 'b) Extended']
+mfd_title_list = ['a) Cratonic', 'b) Non-cratonic', 'c) Extended']
 bar_subplots(mfd_qlists, mfd_weight_lists, mfd_label_lists, \
              'fault_mfd_integration_weights.png', mfd_title_list, \
              num_row = 3, num_col = 1, fontsize = 10)
@@ -417,7 +417,7 @@ print ex_mmax_w, sum(ex_mmax_w)
 mmax_qlists = [arc_mmaxs, pro_mmaxs, nc_mmaxs, ex_mmaxs]
 mmax_weight_lists = [arc_mmax_w, pro_mmax_w, nc_mmax_w, ex_mmax_w]
 mmax_label_lists = [arc_mmax_labels, pro_mmax_labels, nc_mmax_labels, ex_mmax_labels]
-mmax_title_list = ['d) Archaen Mmax', 'a) Proterozoic Mmax', 'b) Non-cratonic Mmax', 'c) Extended Mmax']
+mmax_title_list = ['a) Domain 1 Mmax', 'b) Domain 3 Mmax', 'c) Non-cratonic Mmax', 'd) Extended Mmax']
 bar_subplots(mmax_qlists, mmax_weight_lists, mmax_label_lists, 'mmax_weights.png', mmax_title_list)
 
 # b-values
@@ -454,7 +454,7 @@ print dec_w, sum(dec_w)
 dec_qlists = [ss_dec_qlist, dec_qlist]
 dec_weight_lists = [ss_dec_w, dec_w]
 dec_label_lists = [ss_dec_labels, dec_labels]
-dec_title_list = ['b) Smoothed Seismicity Declustering', 'a) Source Zone Declustering']
+dec_title_list = ['a) Smoothed Seismicity Declustering', 'b) Source Zone Declustering']
 bar_subplots(dec_qlists, dec_weight_lists, dec_label_lists, \
              'declustering_weights.png',dec_title_list, \
              num_row=1, num_col=2)
@@ -970,7 +970,7 @@ bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_label
 
 ################################
 # Sort by weight and identify nth percentile cutoff with reweighting
-percentiles = [0.75, 0.8]
+percentiles = [0.75, 0.8, 1.01]
 colour_in = 'b'
 colour_out = 'r'
 for percentile in percentiles:
@@ -1223,7 +1223,7 @@ for percentile in percentiles:
 
     outline += '        <logicTreeBranchingLevel branchingLevelID="bl3">\n\n'
     outline += '            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"\n'
-    outline += '                    applyToTectonicRegionType="Banda_Sea">\n\n'
+    outline += '                    applyToTectonicRegionType="Subduction">\n\n'
 
     for i in range(len(banda_gmm_model_all_labels)):
         gmm_name = label_to_oq_gmm_dict[banda_gmm_model_all_labels[i]]
