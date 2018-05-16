@@ -944,7 +944,7 @@ c_nc_ex_cutoff_w = largest_remainder(c_nc_ex_cutoff_w, expected_sum = 1, precisi
 print c_nc_ex_cutoff_w, sum(c_nc_ex_cutoff_w)
 bar_plot(c_nc_ex_cutoff_qlist, c_nc_ex_cutoff_w, c_nc_ex_cutoff_labels, \
          'c_nc_ex_cutoff_distance_weights.png', \
-         'Cratonic, Non-cratonic and Extended Cutoff Distance Weights', fig_path = gmm_fig_path)
+         'Cratonic, Non-cratonic and Extended Cut-off Distance Weights', fig_path = gmm_fig_path)
 
 # Banda Sea cutoff distances
 banda_cutoff_qlist = ['S5Q6', 'S5Q7', 'S5Q8', 'S5Q9']
@@ -954,7 +954,7 @@ banda_cutoff_w = largest_remainder(banda_cutoff_w, expected_sum = 1, precision =
 print banda_cutoff_w, sum(banda_cutoff_w)
 bar_plot(banda_cutoff_qlist, banda_cutoff_w, banda_cutoff_labels, \
          'banda_cutoff_distance_weights.png', \
-         'Banda Sea Cutoff Distance Weights', fig_path = gmm_fig_path)
+         'Subduction Cut-off Distance Weights', fig_path = gmm_fig_path)
 
 #################################
 # Plot full model weights 
