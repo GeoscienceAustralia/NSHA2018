@@ -118,8 +118,9 @@ def combine_pt_sources(point_source_list, filename, name, nrml_version='04',
         
 
 def write_combined_faults_points(point_sources, fault_sources,
-                                filename, name, nrml_version='04'):
-    """Write pts and fault sources to file
+                                 filename, name, area_sources = None,
+                                 nrml_version='04'):
+    """Write pts, area and fault sources to file
     :param point_sources:
        list without trt or dict with trt key of point sources
     """
@@ -147,6 +148,9 @@ def write_combined_faults_points(point_sources, fault_sources,
             fault_source.source_id = "FS_%i" % fs_id_index
             fs_id_index += 1
             source_list.append(fault_source)
+        if area_sources is not None:
+            for area_source in area_sources:
+                source_list.append(area_source)
         nodes = list(map(obj_to_node, sorted(source_list)))
         source_model = Node("sourceModel", {"name": name}, nodes=nodes)
         with open(filename, 'wb') as f:
@@ -164,6 +168,10 @@ def write_combined_faults_points(point_sources, fault_sources,
                         id_index += 1
                         fault_source.source_id = "%i" % id_index
                         sources.append(fault_source)
+                if area_sources is not None:
+                    for area_source in area_sources:
+                        if area_source.tectonic_region_type == trt:
+                            sources.append(area_source)
                 source_group = SourceGroup(trt, sources = sources, id=id)
                 id +=1
                 source_group_list.append(source_group)
