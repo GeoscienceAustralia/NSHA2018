@@ -744,6 +744,7 @@ c_gmm_ceus_w = np.delete(c_gmm_ceus_w, 6)
 del c_gmm_ceus_qlist[6]
 del c_gmm_ceus_labels[6]
 del c_gmm_ceus_labels_short[6]
+c_gmm_ceus_w = c_gmm_ceus_w/sum(c_gmm_ceus_w)
 c_gmm_ceus_w = largest_remainder(c_gmm_ceus_w, expected_sum = 1, precision = 3)
 print c_gmm_ceus_w, sum(c_gmm_ceus_w)
 c_gmm_ceus_region_w = c_gmm_ceus_w *c_gmm_region_w[1]
@@ -819,6 +820,7 @@ nc_ex_gmm_ceus_w = np.delete(nc_ex_gmm_ceus_w, 6)
 del nc_ex_gmm_ceus_qlist[6]
 del nc_ex_gmm_ceus_labels[6]
 del nc_ex_gmm_ceus_labels_short[6]
+nc_ex_gmm_ceus_w = nc_ex_gmm_ceus_w/sum(nc_ex_gmm_ceus_w)
 nc_ex_gmm_ceus_w = largest_remainder(nc_ex_gmm_ceus_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_ceus_w, sum(nc_ex_gmm_ceus_w)
 nc_ex_gmm_ceus_region_w = nc_ex_gmm_ceus_w *nc_ex_gmm_region_w[1]
@@ -894,6 +896,7 @@ banda_gmm_ceus_w = np.delete(banda_gmm_ceus_w, 6)
 del banda_gmm_ceus_qlist[6]
 del banda_gmm_ceus_labels[6]
 del banda_gmm_ceus_labels_short[6]
+banda_gmm_ceus_w = banda_gmm_ceus_w/sum(banda_gmm_ceus_w)
 banda_gmm_ceus_w = largest_remainder(banda_gmm_ceus_w, expected_sum = 1, precision = 3)
 print banda_gmm_ceus_w, sum(banda_gmm_ceus_w)
 banda_gmm_ceus_region_w = banda_gmm_ceus_w *banda_gmm_region_w[1]
@@ -945,6 +948,7 @@ banda_gmm_inslab_w = np.delete(banda_gmm_inslab_w, 3)
 del banda_gmm_inslab_qlist[3]
 del banda_gmm_inslab_labels[3]
 del banda_gmm_inslab_labels_short[3]
+banda_gmm_inslab_w = banda_gmm_inslab_w/sum(banda_gmm_inslab_w)
 banda_gmm_inslab_w = largest_remainder(banda_gmm_inslab_w, expected_sum = 1, precision = 3)
 print banda_gmm_inslab_w, sum(banda_gmm_inslab_w)
 banda_gmm_inslab_region_w = banda_gmm_inslab_w *banda_gmm_region_w[4]

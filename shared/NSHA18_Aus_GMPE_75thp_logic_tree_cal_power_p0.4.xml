@@ -62,12 +62,12 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
 
                 <logicTreeBranch branchID="AtkinsonBoore2006">
                     <uncertaintyModel>AtkinsonBoore2006</uncertaintyModel>
-                    <uncertaintyWeight>0.127</uncertaintyWeight>
+                    <uncertaintyWeight>0.124</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="AtkinsonBoore2006Modified2011">
                     <uncertaintyModel>AtkinsonBoore2006Modified2011</uncertaintyModel>
-                    <uncertaintyWeight>0.116</uncertaintyWeight>
+                    <uncertaintyWeight>0.119</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="BooreEtAl2014">
@@ -96,7 +96,7 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
 
                 <logicTreeBranch branchID="Allen2012">
                     <uncertaintyModel>Allen2012</uncertaintyModel>
-                    <uncertaintyWeight>0.083</uncertaintyWeight>
+                    <uncertaintyWeight>0.082</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="SomervilleEtAl2009NonCratonic">
@@ -106,12 +106,12 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
 
                 <logicTreeBranch branchID="AtkinsonBoore2006">
                     <uncertaintyModel>AtkinsonBoore2006</uncertaintyModel>
-                    <uncertaintyWeight>0.116</uncertaintyWeight>
+                    <uncertaintyWeight>0.110</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="AtkinsonBoore2006Modified2011">
                     <uncertaintyModel>AtkinsonBoore2006Modified2011</uncertaintyModel>
-                    <uncertaintyWeight>0.127</uncertaintyWeight>
+                    <uncertaintyWeight>0.134</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="BooreEtAl2014">
@@ -121,17 +121,17 @@ power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
 
                 <logicTreeBranch branchID="AbrahamsonEtAl2015SSlab">
                     <uncertaintyModel>AbrahamsonEtAl2015SSlab</uncertaintyModel>
-                    <uncertaintyWeight>0.269</uncertaintyWeight>
+                    <uncertaintyWeight>0.217</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="AtkinsonBoore2003SSlab">
                     <uncertaintyModel>AtkinsonBoore2003SSlab</uncertaintyModel>
-                    <uncertaintyWeight>0.111</uncertaintyWeight>
+                    <uncertaintyWeight>0.137</uncertaintyWeight>
                 </logicTreeBranch>
 
                 <logicTreeBranch branchID="GarciaEtAl2005SSlab">
                     <uncertaintyModel>GarciaEtAl2005SSlab</uncertaintyModel>
-                    <uncertaintyWeight>0.116</uncertaintyWeight>
+                    <uncertaintyWeight>0.142</uncertaintyWeight>
                 </logicTreeBranch>
 
            </logicTreeBranchSet>
