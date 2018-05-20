@@ -247,7 +247,7 @@ def bar_subplots(q_lists, weight_lists, label_lists, filename,
     fig = plt.figure()
     for i,weight_list in enumerate(weight_lists):
         x_vals = np.arange(len(q_lists[i]))
-        ax = fig.add_subplot(num_row,num_col,i)
+        ax = fig.add_subplot(num_row,num_col,i+1)
         rects1 = ax.bar(x_vals, weight_list, width, color='b')
         ax.set_ylabel('Weight', fontsize = fontsize + 2)
         ax.set_title(title_list[i])
@@ -315,7 +315,7 @@ print cl_type_w, sum(cl_type_w)
 cl_qlists = [cl_type_qlist, cl_c_qlist, cl_nc_qlist, cl_ex_qlist]
 cl_weight_lists = [cl_type_w, cl_c_w, cl_nc_w, cl_ex_w]
 cl_label_lists = [cl_type_labels, cl_c_labels, cl_nc_labels, cl_ex_labels]
-cl_title_list = ['d) Clustering Method', 'a) Cratonic', 'b) Non-cratonic', 'c) Extended']
+cl_title_list = ['a) Clustering Method', 'b) Cratonic', 'c) Non-cratonic', 'd) Extended']
 bar_subplots(cl_qlists, cl_weight_lists, cl_label_lists, 'clustering_weights.png', cl_title_list)
 
 # MFD and integration method
@@ -347,7 +347,7 @@ print mfd_ex_w, sum(mfd_ex_w)
 mfd_qlists = [mfd_c_qlist, mfd_nc_qlist, mfd_ex_qlist]
 mfd_weight_lists = [mfd_c_w, mfd_nc_w, mfd_ex_w]
 mfd_label_lists = [mfd_c_labels, mfd_nc_labels, mfd_ex_labels]
-mfd_title_list = ['c) Cratonic', 'a) Non-cratonic', 'b) Extended']
+mfd_title_list = ['a) Cratonic', 'b) Non-cratonic', 'c) Extended']
 bar_subplots(mfd_qlists, mfd_weight_lists, mfd_label_lists, \
              'fault_mfd_integration_weights.png', mfd_title_list, \
              num_row = 3, num_col = 1, fontsize = 10)
@@ -417,7 +417,7 @@ print ex_mmax_w, sum(ex_mmax_w)
 mmax_qlists = [arc_mmaxs, pro_mmaxs, nc_mmaxs, ex_mmaxs]
 mmax_weight_lists = [arc_mmax_w, pro_mmax_w, nc_mmax_w, ex_mmax_w]
 mmax_label_lists = [arc_mmax_labels, pro_mmax_labels, nc_mmax_labels, ex_mmax_labels]
-mmax_title_list = ['d) Archaen Mmax', 'a) Proterozoic Mmax', 'b) Non-cratonic Mmax', 'c) Extended Mmax']
+mmax_title_list = ['a) Domain 1 Mmax', 'b) Domain 3 Mmax', 'c) Non-cratonic Mmax', 'd) Extended Mmax']
 bar_subplots(mmax_qlists, mmax_weight_lists, mmax_label_lists, 'mmax_weights.png', mmax_title_list)
 
 # b-values
@@ -454,7 +454,7 @@ print dec_w, sum(dec_w)
 dec_qlists = [ss_dec_qlist, dec_qlist]
 dec_weight_lists = [ss_dec_w, dec_w]
 dec_label_lists = [ss_dec_labels, dec_labels]
-dec_title_list = ['b) Smoothed Seismicity Declustering', 'a) Source Zone Declustering']
+dec_title_list = ['a) Smoothed Seismicity Declustering', 'b) Source Zone Declustering']
 bar_subplots(dec_qlists, dec_weight_lists, dec_label_lists, \
              'declustering_weights.png',dec_title_list, \
              num_row=1, num_col=2)
@@ -691,8 +691,8 @@ label_to_oq_gmm_dict = {'Allen2012' : 'Allen2012', 'Allen2012 \n RedSigma' : Non
                         'Garcia\n2005SSlab' : 'GarciaEtAl2005SSlab',
                         'MegaPan\n2010' : 'MegawatiPan2010'}
 
-label_to_oq_gmm_dict_short = {'Allen\n2012' : 'Allen2012', 'Allen2012 \n RedSigma' : None,
-                              'Som2009\n NC' : 'SomervilleEtAl2009NonCratonic',
+label_to_oq_gmm_dict_short = {'Allen\n2012' : 'Allen2012', 'Allen\n2012 \n RedSig' : None,
+                              'Som\n2009\nNC' : 'SomervilleEtAl2009NonCratonic',
                               'Som2009 \n Yil' : 'SomervilleEtAl2009YilgarnCraton',
                               'AtkB\n2006' : 'AtkinsonBoore2006', 
                               'AtkB\n2006\nM2011' : 'AtkinsonBoore2006Modified2011',
@@ -722,6 +722,7 @@ c_gmm_aust_w = get_weights(c_gmm_aust_qlist, weighted_sum)
 c_gmm_aust_w = np.delete(c_gmm_aust_w,1)
 del c_gmm_aust_qlist[1]
 del c_gmm_aust_labels[1]
+del c_gmm_aust_labels_short[1]
 c_gmm_aust_w = c_gmm_aust_w/sum(c_gmm_aust_w)
 c_gmm_aust_w = largest_remainder(c_gmm_aust_w, expected_sum = 1, precision = 3)
 print c_gmm_aust_w, sum(c_gmm_aust_w)
@@ -738,6 +739,12 @@ c_gmm_ceus_qlist = ['S2Q5', 'S2Q6', 'S2Q7', 'S2Q8', 'S2Q9', 'S2Q10', 'S2Q11']
 c_gmm_ceus_labels = ['AtkBoore\n2006', 'AtkBoore\n2006\nMod2011', 'Campbell\n2003', 'Pezeshk\n2011', 'Silva2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 c_gmm_ceus_labels_short = ['AtkB\n2006', 'AtkB\n2006\nM2011', 'Camp\n2003', 'Pez\n2011', 'Silva\n2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 c_gmm_ceus_w = get_weights(c_gmm_ceus_qlist, weighted_sum)
+# Remove YenAtk model for now as not implemented in OQ, renormalise other values
+c_gmm_ceus_w = np.delete(c_gmm_ceus_w, 6)
+del c_gmm_ceus_qlist[6]
+del c_gmm_ceus_labels[6]
+del c_gmm_ceus_labels_short[6]
+c_gmm_ceus_w = c_gmm_ceus_w/sum(c_gmm_ceus_w)
 c_gmm_ceus_w = largest_remainder(c_gmm_ceus_w, expected_sum = 1, precision = 3)
 print c_gmm_ceus_w, sum(c_gmm_ceus_w)
 c_gmm_ceus_region_w = c_gmm_ceus_w *c_gmm_region_w[1]
@@ -791,6 +798,7 @@ nc_ex_gmm_aust_w = get_weights(nc_ex_gmm_aust_qlist, weighted_sum)
 nc_ex_gmm_aust_w = np.delete(nc_ex_gmm_aust_w, 1)
 del nc_ex_gmm_aust_qlist[1]
 del nc_ex_gmm_aust_labels[1]
+del nc_ex_gmm_aust_labels_short[1]
 nc_ex_gmm_aust_w = nc_ex_gmm_aust_w/sum(nc_ex_gmm_aust_w)
 nc_ex_gmm_aust_w = largest_remainder(nc_ex_gmm_aust_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_aust_w, sum(nc_ex_gmm_aust_w)
@@ -807,6 +815,12 @@ nc_ex_gmm_ceus_qlist = ['S3Q5', 'S3Q6', 'S3Q7', 'S3Q8', 'S3Q9', 'S3Q10', 'S3Q11'
 nc_ex_gmm_ceus_labels = ['AtkBoore\n2006', 'AtkBoore\n2006\nMod2011', 'Campbell\n2003', 'Pezeshk\n2011', 'Silva2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 nc_ex_gmm_ceus_labels_short = ['AtkB\n2006', 'AtkB\n2006\nM2011', 'Camp\n2003', 'Pez\n2011', 'Silva\n2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 nc_ex_gmm_ceus_w = get_weights(nc_ex_gmm_ceus_qlist, weighted_sum)
+# Remove YenAtk model for now as not implemented in OQ, renormalise other values
+nc_ex_gmm_ceus_w = np.delete(nc_ex_gmm_ceus_w, 6)
+del nc_ex_gmm_ceus_qlist[6]
+del nc_ex_gmm_ceus_labels[6]
+del nc_ex_gmm_ceus_labels_short[6]
+nc_ex_gmm_ceus_w = nc_ex_gmm_ceus_w/sum(nc_ex_gmm_ceus_w)
 nc_ex_gmm_ceus_w = largest_remainder(nc_ex_gmm_ceus_w, expected_sum = 1, precision = 3)
 print nc_ex_gmm_ceus_w, sum(nc_ex_gmm_ceus_w)
 nc_ex_gmm_ceus_region_w = nc_ex_gmm_ceus_w *nc_ex_gmm_region_w[1]
@@ -860,6 +874,7 @@ banda_gmm_aust_w = get_weights(banda_gmm_aust_qlist, weighted_sum)
 banda_gmm_aust_w = np.delete(banda_gmm_aust_w, 1)
 del banda_gmm_aust_qlist[1]
 del banda_gmm_aust_labels[1]
+del banda_gmm_aust_labels_short[1]
 banda_gmm_aust_w = banda_gmm_aust_w/sum(banda_gmm_aust_w)
 banda_gmm_aust_w = largest_remainder(banda_gmm_aust_w, expected_sum = 1, precision = 3)
 print banda_gmm_aust_w, sum(banda_gmm_aust_w)
@@ -876,6 +891,12 @@ banda_gmm_ceus_qlist = ['S4Q5', 'S4Q6', 'S4Q7', 'S4Q8', 'S4Q9', 'S4Q10', 'S4Q11'
 banda_gmm_ceus_labels = ['AtkBoore\n2006', 'AtkBoore\n2006\nMod2011', 'Campbell\n2003', 'Pezeshk\n2011', 'Silva2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 banda_gmm_ceus_labels_short = ['AtkB\n2006', 'AtkB\n2006\nM2011', 'Camp\n2003', 'Pez\n2011', 'Silva\n2002\nMwNSHMP\n2008', 'Toro\n2002', 'YenAtk\n2015']
 banda_gmm_ceus_w = get_weights(banda_gmm_ceus_qlist, weighted_sum)
+# Remove YenAtk model for now as not implemented in OQ, renormalise other values
+banda_gmm_ceus_w = np.delete(banda_gmm_ceus_w, 6)
+del banda_gmm_ceus_qlist[6]
+del banda_gmm_ceus_labels[6]
+del banda_gmm_ceus_labels_short[6]
+banda_gmm_ceus_w = banda_gmm_ceus_w/sum(banda_gmm_ceus_w)
 banda_gmm_ceus_w = largest_remainder(banda_gmm_ceus_w, expected_sum = 1, precision = 3)
 print banda_gmm_ceus_w, sum(banda_gmm_ceus_w)
 banda_gmm_ceus_region_w = banda_gmm_ceus_w *banda_gmm_region_w[1]
@@ -922,6 +943,12 @@ banda_gmm_inslab_qlist = ['S4Q18', 'S4Q19', 'S4Q20', 'S4Q21']
 banda_gmm_inslab_labels = ['Abrahamson\n2015SSlab', 'AtkBoore\n2003SSlab', 'Garcia\n2005SSlab', 'MegaPan\n2010']
 banda_gmm_inslab_labels_short = ['Abrah\n2015\nSSlab', 'AtkB\n2003\nSSlab', 'Garcia\n2005\nSSlab', 'MegP\n2010']
 banda_gmm_inslab_w = get_weights(banda_gmm_inslab_qlist, weighted_sum)#, percentile = percentile)
+# Remove Megawati-Pan GMM for now as not defined for periods > 0.5s, renormalise other values
+banda_gmm_inslab_w = np.delete(banda_gmm_inslab_w, 3)
+del banda_gmm_inslab_qlist[3]
+del banda_gmm_inslab_labels[3]
+del banda_gmm_inslab_labels_short[3]
+banda_gmm_inslab_w = banda_gmm_inslab_w/sum(banda_gmm_inslab_w)
 banda_gmm_inslab_w = largest_remainder(banda_gmm_inslab_w, expected_sum = 1, precision = 3)
 print banda_gmm_inslab_w, sum(banda_gmm_inslab_w)
 banda_gmm_inslab_region_w = banda_gmm_inslab_w *banda_gmm_region_w[4]
@@ -944,7 +971,7 @@ c_nc_ex_cutoff_w = largest_remainder(c_nc_ex_cutoff_w, expected_sum = 1, precisi
 print c_nc_ex_cutoff_w, sum(c_nc_ex_cutoff_w)
 bar_plot(c_nc_ex_cutoff_qlist, c_nc_ex_cutoff_w, c_nc_ex_cutoff_labels, \
          'c_nc_ex_cutoff_distance_weights.png', \
-         'Cratonic, Non-cratonic and Extended Cutoff Distance Weights', fig_path = gmm_fig_path)
+         'Cratonic, Non-cratonic and Extended Cut-off Distance Weights', fig_path = gmm_fig_path)
 
 # Banda Sea cutoff distances
 banda_cutoff_qlist = ['S5Q6', 'S5Q7', 'S5Q8', 'S5Q9']
@@ -954,7 +981,7 @@ banda_cutoff_w = largest_remainder(banda_cutoff_w, expected_sum = 1, precision =
 print banda_cutoff_w, sum(banda_cutoff_w)
 bar_plot(banda_cutoff_qlist, banda_cutoff_w, banda_cutoff_labels, \
          'banda_cutoff_distance_weights.png', \
-         'Banda Sea Cutoff Distance Weights', fig_path = gmm_fig_path)
+         'Subduction Cut-off Distance Weights', fig_path = gmm_fig_path)
 
 #################################
 # Plot full model weights 
@@ -970,7 +997,7 @@ bar_plot(nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_w, nc_ex_gmm_model_all_label
 
 ################################
 # Sort by weight and identify nth percentile cutoff with reweighting
-percentiles = [0.75, 0.8]
+percentiles = [0.75, 0.8, 1.01]
 colour_in = 'b'
 colour_out = 'r'
 for percentile in percentiles:
@@ -1011,6 +1038,16 @@ for percentile in percentiles:
     # aims to preserve the original regional weights
     banda_gmm_orig = copy.deepcopy(banda_gmm_w_list)
     num_models = sum(len(item) for item in banda_gmm_orig)
+#    # Now set weights to zero for models that aren't implemented in OQ
+#    p=0
+#    for n,reg in enumerate(banda_gmm_orig):
+#        m=0
+#        for w in reg:
+#            print label_to_oq_gmm_dict[banda_gmm_model_all_labels[p]]
+#            if label_to_oq_gmm_dict[banda_gmm_model_all_labels[p]] is None:
+#                banda_gmm_orig[n][m]=0
+#            m+=1
+#            p+=1
     # Remove models that already have zero weighting from count
     num_nonzero = sum(np.count_nonzero(item) for item in banda_gmm_orig)
     num_models = num_models - (num_models - num_nonzero)
@@ -1223,7 +1260,7 @@ for percentile in percentiles:
 
     outline += '        <logicTreeBranchingLevel branchingLevelID="bl3">\n\n'
     outline += '            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"\n'
-    outline += '                    applyToTectonicRegionType="Banda_Sea">\n\n'
+    outline += '                    applyToTectonicRegionType="Subduction">\n\n'
 
     for i in range(len(banda_gmm_model_all_labels)):
         gmm_name = label_to_oq_gmm_dict[banda_gmm_model_all_labels[i]]
