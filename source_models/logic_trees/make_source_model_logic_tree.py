@@ -179,18 +179,19 @@ else:
     #GA fixed kernel 
     sourceXML = path.join('..', 'smoothed_seismicity', 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness', \
                           'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness_banda_nfsm.xml')
-    targetXML = path.join('..', 'complete_model', destinationPath, 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness_banda_nfsm.xml')
+    targetXML = path.join('..', 'complete_model', destinationPath, 'GA_NFSM_fixed_smoothing_50_3_collapsed_single_corner_completeness_banda_nfsm.xml')
     copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
     
 ###############################################################################
 # parse weights file
 ###############################################################################
-
+'''
 if weighted_smoothing == True:
     lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.ss_split.csv')
 else:
-    lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
+'''
+lt = LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.edit.csv')
 
 # set up metadata dictionary
 modelPath = getcwd() # path where source logic tree is to be saved
@@ -272,13 +273,13 @@ for st, sw in zip(src_type, src_wts):
                 elif mod == 'NSHA13' and orig_st == 'Regional' and xl.endswith('NFSM.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
-                elif mod == 'GA_adaptive' and orig_st == 'Smoothed_seismicity' and xl.endswith('nfsm.xml'):
+                elif mod == 'GA_NFSM_adaptive' and orig_st == 'Smoothed_seismicity' and xl.endswith('nfsm.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
                 elif mod == 'GA_adaptive' and orig_st == 'Smoothed_faults' and xl.endswith('banda.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
-                elif mod == 'GA_fixed' and orig_st == 'Smoothed_faults':
+                elif mod == 'GA_NFSM_fixed' and orig_st == 'Smoothed_seismicity' and xl.endswith('nfsm.xml'):
                     print 'Not adding '+xl+' to '+orig_st+' set'
                     
                 elif mod == 'GA_fixed' and orig_st == 'Smoothed_faults':
