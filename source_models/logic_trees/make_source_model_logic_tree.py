@@ -137,7 +137,7 @@ if weighted_smoothing == True:
         copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
 
-# Use Cuthberson Only
+# Use four smoothed models
 else:
     sourceXML = path.join('..', 'smoothed_seismicity', 'Cuthbertson2018', 'cuthbertson2018_source_model_banda.xml')
     targetXML = path.join('..', 'complete_model', destinationPath, 'cuthbertson2018_source_model_banda.xml')
@@ -151,6 +151,12 @@ else:
     
     #source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K3_single_corner_completeness/ 
     sourceXML = path.join('..', 'smoothed_seismicity', 'GA_adaptive_smoothing_collapsed_K3_single_corner_completeness', 'GA_adaptive_smoothing_collapsed_K3_single_corner_completeness_banda.xml')
+    targetXML = path.join('..', 'complete_model', destinationPath, 'GA_adaptive_smoothing_collapsed_K3_single_corner_completeness_banda.xml')
+    copyfile(sourceXML, targetXML)
+    xmllist.append(path.split(targetXML)[-1])
+    
+    #source_models/smoothed_seismicity/GA_adaptive_smoothing_collapsed_K3_single_corner_completeness/ 
+    sourceXML = path.join('..', 'smoothed_seismicity', 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness', 'GA_fixed_smoothing_50_3_collapsed_single_corner_completeness.xml')
     targetXML = path.join('..', 'complete_model', destinationPath, 'GA_adaptive_smoothing_collapsed_K3_single_corner_completeness_banda.xml')
     copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
@@ -183,7 +189,7 @@ if weighted_smoothing == True:
         copyfile(sourceXML, targetXML)
     xmllist.append(path.split(targetXML)[-1])
 
-# Use Cuthberson Only
+# Use four smoothed models with faults
 else:
     sourceXML = path.join('..', 'smoothed_seismicity', 'Cuthbertson2018', 'cuthbertson2018_source_model_banda_nfsm.xml')
     targetXML = path.join('..', 'complete_model', destinationPath, 'cuthbertson2018_source_model_banda_nfsm.xml')
