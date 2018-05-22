@@ -92,21 +92,24 @@ xmllist.append(path.split(targetXML)[-1])
 
 # copy NSHA13
 #sourceXML = path.join(relpath, 'NSHA13', 'input', 'seismo_collapsed', 'NSHA13_collapsed_NFSM.xml')
-sourceXML = path.join(faultpath, 'National_Fault_Source_Model_2018_Collapsed_NSHA13_2018', 'National_Fault_Source_Model_2018_Collapsed_NSHA13_2018__all_methods_collapsed_inc_cluster.xml')
+sourceXML = path.join(faultpath, 'National_Fault_Source_Model_2018_Collapsed_NSHA13_2018', \
+                      'National_Fault_Source_Model_2018_Collapsed_NSHA13_2018__all_methods_collapsed_inc_cluster.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, 'NFSM_NSHA13_' + path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy AUS6
 #sourceXML = path.join(relpath, 'AUS6', 'input', 'seismo_collapsed', 'AUS6_collapsed_NFSM.xml')
-sourceXML = path.join(faultpath, 'National_Fault_Source_Model_2018_Collapsed_AUS6_2018', 'National_Fault_Source_Model_2018_Collapsed_AUS6_2018__all_methods_collapsed_inc_cluster.xml')
+sourceXML = path.join(faultpath, 'National_Fault_Source_Model_2018_Collapsed_AUS6_2018', \
+                      'National_Fault_Source_Model_2018_Collapsed_AUS6_2018__all_methods_collapsed_inc_cluster.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, 'NFSM_AUS6_' + path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
 
 # copy DIMAUS
 #sourceXML = path.join(relpath, 'DIMAUS', 'input', 'seismo_collapsed', 'DIMAUS_collapsed_NFSM.xml')
-sourceXML = path.join(faultpath, 'National_Fault_Source_Model_2018_Collapsed_DIMAUS_2018', 'National_Fault_Source_Model_2018_Collapsed_DIMAUS_2018__all_methods_collapsed_inc_cluster.xml')
+sourceXML = path.join(faultpath, 'National_Fault_Source_Model_2018_Collapsed_DIMAUS_2018', \
+                      'National_Fault_Source_Model_2018_Collapsed_DIMAUS_2018__all_methods_collapsed_inc_cluster.xml')
 targetXML = path.join('..', 'complete_model', destinationPath, 'NFSM_DIMAUS_' + path.split(sourceXML)[-1])
 copyfile(sourceXML, targetXML)
 xmllist.append(path.split(targetXML)[-1])
