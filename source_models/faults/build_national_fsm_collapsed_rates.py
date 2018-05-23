@@ -22,6 +22,7 @@ from NSHA2018.source_models.utils.pt2fault_distance import read_simplefault_sour
 #from hmtk.parsers.source_model.nrml04_parser import nrmlSourceModelParser
 from openquake.hazardlib.sourcewriter import write_source_model
 from openquake.hazardlib.scalerel.leonard2014 import Leonard2014_SCR
+from NSHA2018.source_models.utils.scaling import Leonard2014_SCR_extension
 from subprocess import call
 
 from openquake.hazardlib.sourceconverter import SourceConverter, \
@@ -33,17 +34,18 @@ shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
 shapefile_uplift_attribute = 'UP_RT_LT'
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed_DIMAUS_2018'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_NSHA13_2018'
 simple_fault_tectonic_region = None # Define based on neotectonic domains
 magnitude_scaling_relation = 'Leonard2014_SCR'
 rupture_aspect_ratio = 1.5
 upper_depth = 0.001
-lower_depth = 20.0
+default_lower_depth = 20.0
 a_value = None
 #b_region_shapefile =  '../zones/shapefiles/Leonard2008/LEONARD08_NSHA18_MFD.shp'
 b_region_shapefile =  '../zones/2018_mw/Domains_single_mc/shapefiles/Domains_NSHA18_MFD.shp'
 default_b = 1.0#None # Get from Leonard 2008 regions
-min_mag = 5.5 #4.8
+default_min_mag = 5.5 #4.8
+minimum_allowed_min_mag = 4.4 # Protect against problems with rupture mesh spacing
 #max_mag = 7.5 #None # Get from scaling
 rake = 90
 output_dir = source_model_name
@@ -51,7 +53,7 @@ output_dir = source_model_name
 bin_width = 0.1 # Width of MFD bins in magnitude units
 domains_shapefile = '../zones/shapefiles/NSHA13_Background/NSHA13_Background_NSHA18.shp'
 
-area_source_model = '../zones/2018_mw/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
+area_source_model = '../zones/2018_mw/NSHA13/input/collapsed/NSHA13_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
 area_source_model_name = area_source_model.split('/')[0].rstrip('.xml')
@@ -59,6 +61,21 @@ investigation_time = 50
 fault_mesh_spacing = 2 #2 Fault source mesh
 rupture_mesh_spacing = 2 #10 # Area source mesh
 area_source_discretisation = 15 #20
+
+scalerel = Leonard2014_SCR_extension()
+# Define a list of area sources that we won't convert to points, 
+# to avoid converting plate boundary region area sources to point
+# sources and creating enormous files
+area_source_ids = ['NTS', 'TB', 'WBS', 'TAFS', 'WPG', 'PFTB', 'MTB',
+                   'BTFZS', 'ADB', 'HP', 'SBS', 'NBOT', 'NBT', 'WM',
+                   'WB', 'PFTB-FPB', 'RNBD', 'NBTD', 'BTFZD', 'OSFZD',
+                   'MTBD', 'BSSL', 'WRFS', 'CDW', 'WRP', 'NECS', 'NWO',
+                   'LGR', 'BS_40_100', 'SRM_40_100', 'BS_100_200', 
+                   'BS_200_300', 'SRM_100_200', 'SRM_200_300', 'TMR_40_100',
+                   'NT_40_100', 'TMR_100_200', 'NT_100_200', 'BS_300_400',
+                   'TMR_200_300', 'NT_200_300', 'TMR_300_400', 'NT_300_400',
+                   'BS_400_500', 'BS_500_600', 'BS', 'SWOB', 'WOB', 'SEOB',
+                   'NWMB2', 'NWMB1']
 
 # Get logic tree information
 lt = logic_tree.LogicTree('../../shared/seismic_source_model_weights_rounded_p0.4.csv')
@@ -109,13 +126,21 @@ for i, fault_trace in enumerate(fault_traces):
      dip = dips[i]
      # calculate width based on aspect ratios
      # lengths and widths are in km
-     width = fault_lengths[i]/1.5
+     #width = fault_lengths[i]/1.5
+     # Calculate width based on Leonard 2014 scaling relations
+     length_m = fault_lengths[i]*1000. # convert km to m
+     width_m = scalerel.get_width_from_length(length_m, rake)
+     width = width_m/1000. # convert back to km
      # Limit width to seismogenic zone
-     max_down_dip_width = (lower_depth-upper_depth)/np.sin(np.radians(dip))
+     max_down_dip_width = (default_lower_depth-upper_depth)/np.sin(np.radians(dip))
      print width, max_down_dip_width
      if width > max_down_dip_width:
           width = max_down_dip_width
-     print width
+          lower_depth = default_lower_depth
+     elif width < max_down_dip_width:
+          lower_depth = width*np.sin(np.radians(dip)) + upper_depth
+     print fault_lengths[i], width, dip
+     print 'lower_depth', lower_depth
      fault_area = fault_lengths[i]*width #km^2
      #fault_area = fault_lengths[i]*(float(lower_depth)-float(upper_depth))
      sliprate = sliprates[i]
@@ -124,14 +149,19 @@ for i, fault_trace in enumerate(fault_traces):
      b_value = b_values[i]
      print 'Calculating rates for %s in domain %s' % (faultname, trt)
      # Calculate M_max from scaling relations
-     scalrel = Leonard2014_SCR()
-     max_mag = scalrel.get_median_mag(fault_area, float(rake))
+     #scalrel = Leonard2014_SCR()
+     max_mag = scalerel.get_median_mag(fault_area, float(rake))
      # Round to nearest 0.05 mag unit
      max_mag = np.round((max_mag-0.05), 1) + 0.05
      # Ensure mmax exceeds default Mmin, otherwise we adjust this
-     if max_mag < min_mag + bin_width:
+     if max_mag < default_min_mag + bin_width:
           min_mag = max_mag - bin_width
+     else:
+          min_mag = default_min_mag
      print 'Maximum magnitude is %.3f' % max_mag
+     if min_mag < minimum_allowed_min_mag:
+          print 'Skipping fault %s as not big enough for minimum allowed min_mag of 4.4' % faultname
+          continue
 
      # Append geometry information
      # Use trt type Non_cratonic for Extended
@@ -317,9 +347,10 @@ area_sources = nrml2sourcelist(area_source_model,
 print 'Converting to point sources'
 area_pt_filename = area_source_model[:-4] + '_pts.xml'
 #name = area_source_model.split('/')[-1][:-4] + '_pts'
-point_sources, banda_fault_sources = area2pt_source(area_source_model, sources=area_sources,
-                               filename=area_pt_filename,
-                               name=source_model_name, return_faults=True)
+point_sources, banda_fault_sources, subduction_area_sources = area2pt_source(area_source_model, sources=area_sources,
+                                                    filename=area_pt_filename,
+                                                    name=source_model_name, return_faults=True,
+                                                    exclude_ids = area_source_ids)
 pt_source_list = []
 for source_group in point_sources:
      for source in source_group:
@@ -401,7 +432,8 @@ outfile = os.path.join(source_model_name, source_model_name + '_geom_filtered_zo
 for fs in banda_fault_sources:
      fault_sources.append(fs)
 write_combined_faults_points(geom_filtered_pt_sources, fault_sources,
-                             outfile, model_name, nrml_version = '04')
+                             outfile, model_name, area_sources=subduction_area_sources, 
+                             nrml_version = '04')
 
 # Apply additive approach                                                                                     
 print 'Writing full additive model'
@@ -412,7 +444,8 @@ fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_s
 for fs in banda_fault_sources:
      fault_sources.append(fs)
 write_combined_faults_points(additive_pt_sources, fault_sources,
-                             outfile, model_name, nrml_version = '04')
+                             outfile, model_name,  area_sources=subduction_area_sources,
+                             nrml_version = '04')
 
 # Merge pt source rates                                                                                       
 merged_filename = area_source_model[:-4] + '_pts_geom_add_merged_pts.xml'
@@ -429,8 +462,9 @@ outfile = os.path.join(source_model_name, source_model_name + '_' + \
                             area_source_model_name +'_all_methods_collapsed_inc_cluster.xml')
 fault_sources = read_simplefault_source(fsm, rupture_mesh_spacing = fault_mesh_spacing)
 
-# Add Banda sources extracted earlier
+# Add Banda fault and area sources extracted earlier
 for fs in banda_fault_sources:
      fault_sources.append(fs)
 write_combined_faults_points(combined_pt_sources, fault_sources,
-                             outfile, model_name, nrml_version = '04')
+                             outfile, model_name,  area_sources=subduction_area_sources,
+                             nrml_version = '04')
