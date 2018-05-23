@@ -405,7 +405,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         imoff = 0.02
         logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
         logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
-        logo_bbox = [map_bbox[0]+0.10,map_bbox[1]-0.075,0.25,0.25]
+        logo_bbox = [map_bbox[0]+0.13,map_bbox[1]-0.075,0.25,0.25]
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
@@ -431,7 +431,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         # set bbox for logo
         imoff = 0.02
         logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
-        logo_bbox = [0.70,map_bbox[1]-0.03,0.1,0.1]
+        logo_bbox = [0.67,map_bbox[1]-0.03,0.1,0.1]
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
@@ -536,7 +536,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probability+'.nomask.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probability.strip('%')+'.nomask.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
@@ -544,7 +544,8 @@ for i, key in enumerate(keys): # just plot 1 for now!
     plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
                 dpi=300, format='pdf', bbox_inches='tight')
     '''
-    plt.show()
+    #plt.show()
+    plt.close()
     
     ##########################################################################################
     # make shapefile of contour lines
