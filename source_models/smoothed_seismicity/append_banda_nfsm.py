@@ -17,7 +17,9 @@ else:
     
 # first de-compress tar.gz file
 print 'Extracting tar.gz file ...'
-system('tar -xvf '+ ssTarFile)
+tarFolder = path.split(ssTarFile)[0]
+system('cd '+tarFolder)
+system('tar -xvf '+ path.split(ssTarFile)[-1])
 
 # move xml file to whence it came
 xmlFile = ssTarFile.strip('.tar.gz')

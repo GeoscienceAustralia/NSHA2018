@@ -16,19 +16,20 @@ from matplotlib import colors, colorbar #, cm
 from os import path, mkdir, getcwd
 #import matplotlib.pyplot as plt
 import matplotlib as mpl
-mpl.use('Agg')
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan, where, delete
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
-from scipy.constants import g
+#from scipy.constants import g
 #from gmt_tools import cpt2colormap
 #from shapely.geometry import Point, Polygon
 
 ##############################################################################
 # set some default values here
 ##############################################################################
+mpl.use('Agg')
+mpl.style.use('classic')
 mpl.rcParams['pdf.fonttype'] = 42
 
 drawshape = False # decides whether to overlay seismic sources
@@ -40,20 +41,21 @@ res = 'i'
 cwd = getcwd()
 
 ##############################################################################
-# parse hazard map file
+# define inputs
 ##############################################################################
 
 # set map file to plot
 gridfile = argv[1]
 
-# get map name for plotting
+# assign map name for plotting
 modelName = argv[2]
 
 # add contours?
 addContours = argv[3] # True or False
 
-# get model name from input file
-#model = path.split(gridfile)[-1].split('_')[2].split('.')[0] # this will likely need modifying depending on filename format
+##############################################################################
+# parse hazard map file
+##############################################################################
 
 # parse hazard grid file 
 lines = open(gridfile).readlines()
@@ -120,7 +122,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
     
     figure = plt.figure(i,figsize=(19,12))
     
-    ax = plt.subplot(111)    
+    ax = figure.add_subplot(111)    
     
     bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
     bbox = '107.0/153.0/-45.0/-7.0'
