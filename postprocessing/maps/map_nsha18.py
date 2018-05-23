@@ -318,6 +318,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
     print 'Making map...'    
     cmap.set_bad('w', 1.0)
     m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
+    plt.subplots(figsize=(19,12))
     
     ##########################################################################################
     # plot contours
@@ -405,7 +406,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         imoff = 0.02
         #logo_bbox = mpl.transforms.Bbox(array([[map_bbox[0]+imoff,map_bbox[1]+imoff],[0.15,0.15]]))
         #logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.15,0.15]
-        logo_bbox = [map_bbox[0]+0.15,map_bbox[1]-0.075,0.25,0.25]
+        logo_bbox = [map_bbox[0]+0.14,map_bbox[1]-0.075,0.25,0.25]
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
@@ -431,7 +432,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         # set bbox for logo
         imoff = 0.02
         logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
-        logo_bbox = [0.65,map_bbox[1]-0.03,0.1,0.1]
+        logo_bbox = [0.66,map_bbox[1]-0.03,0.1,0.1]
         newax = figure.add_axes(logo_bbox) #, zorder=-1)
         newax.imshow(im)
         newax.axis('off')
