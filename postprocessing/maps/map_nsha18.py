@@ -123,7 +123,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
     
     figure = plt.figure(i,figsize=(19,12))
     
-    ax = figure.add_subplot(111)    
+    ax = figure.add_subplot(111)
     
     bbox = '108/152/-44/-8' # map boundary - lon1/lon2/lat1/lat2
     bbox = '107.0/153.0/-45.0/-7.0'

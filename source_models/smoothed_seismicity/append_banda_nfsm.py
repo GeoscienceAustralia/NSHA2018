@@ -7,7 +7,7 @@ Takes a tar.gz file and unzips to generate output xml
 from sys import argv
 from os import path, system
 
-ssTarFile = argv[1] # tar.gz file to append sources
+xmlFile = argv[1] # tar.gz file to append sources
 appendNFSM = argv[2] # True = append; False = ignore
 
 if appendNFSM == 'True':
@@ -16,14 +16,17 @@ else:
     appendNFSM = False
     
 # first de-compress tar.gz file
+'''
 print 'Extracting tar.gz file ...'
 tarFolder = path.split(ssTarFile)[0]
 system('cd '+tarFolder)
 system('tar -xvf '+ path.split(ssTarFile)[-1])
+system('cd ..')
+'''
 
 # move xml file to whence it came
-xmlFile = ssTarFile.strip('.tar.gz')
-system(' '.join(('mv', path.split(xmlFile)[-1], path.split(xmlFile)[0]+path.sep)))
+#xmlFile = ssTarFile.strip('.tar.gz')
+#system(' '.join(('mv', path.split(xmlFile)[-1], path.split(xmlFile)[0]+path.sep)))
 
 # now parse SS file
 lines = open(xmlFile).readlines()
