@@ -205,8 +205,7 @@ source_model_list[0].serialise_to_nrml(outfile)
 ##########################################                                                                
 # MM faults                                                                                               
 #########################################
-nsha_zones = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/zones/NSHA13/NSHA13_collapsed_rates_F\
-F.xml'
+nsha_zones = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/zones/NSHA13/NSHA13_collapsed_rates_FF.xml'
 parser = nrmlSourceModelParser(nsha_zones)
 nsha_source_model = parser.read_file('NSHA13_zones')
 parser = nrmlSourceModelParser(source_model_filename_MM)

@@ -102,8 +102,8 @@ for shapefile in contour_shapefiles:
     # i.e. prob Mw >= m
     cum_rates = cum_rates[::-1]
     rates = []
-    for i, rate in enumerate(cum_rates):
-        if i==0:
+    for j, rate in enumerate(cum_rates):
+        if j==0:
             rates.append(rate)
             tmp_rate = rate
         else:

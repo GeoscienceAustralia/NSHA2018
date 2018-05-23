@@ -1,5 +1,5 @@
 #PBS -P w84
-#PBS -q normal
+#PBS -q express
 #PBS -l walltime=10:00:00
 #PBS -l ncpus=1
 #PBS -l mem=32GB

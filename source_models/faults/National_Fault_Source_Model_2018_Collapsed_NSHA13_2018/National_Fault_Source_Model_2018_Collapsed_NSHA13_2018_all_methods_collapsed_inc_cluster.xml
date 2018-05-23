@@ -37,7 +37,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.8053793147</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -61,7 +61,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.2009958528</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -83,7 +83,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.14876169995</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -132,7 +132,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.2196348263</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -154,7 +154,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.5919217029</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -178,7 +178,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.8344769697</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -199,7 +199,7 @@
           </gml:LineString>
           <dip>46.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.33833754179</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -221,7 +221,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.88870754995</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -243,7 +243,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.5274010289</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -289,7 +289,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.11372433178</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -312,7 +312,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.4699852291</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -337,7 +337,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.4120499254</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -362,7 +362,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.8649824934</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -387,7 +387,7 @@
           </gml:LineString>
           <dip>36.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.1178677183</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -409,7 +409,7 @@
           </gml:LineString>
           <dip>48.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.4542227616</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -430,7 +430,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.4869920527</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -451,7 +451,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.90672966305</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -476,7 +476,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.3736645106</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -543,7 +543,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.9742982493</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -567,7 +567,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.47943520866</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -597,7 +597,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.2563094209</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -623,7 +623,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.1735612333</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -688,7 +688,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.7725775607</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -714,7 +714,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.95611169495</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -742,7 +742,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.2773243194</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -772,7 +772,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.9014075097</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -800,7 +800,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.9017257635</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -827,7 +827,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.12491708689</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -853,7 +853,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.685158015</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -883,7 +883,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.8513578662</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -906,7 +906,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.97134798938</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -933,7 +933,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.88471018293</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -958,7 +958,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.46423026786</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -988,7 +988,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.8642375869</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1015,7 +1015,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.8641016585</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1047,7 +1047,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.09338956175</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1071,7 +1071,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.03883548789</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1098,7 +1098,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.67782948451</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1132,7 +1132,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.6941902471</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1155,7 +1155,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.5388902612</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1181,7 +1181,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.2088775516</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1206,7 +1206,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.00923710389</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1233,7 +1233,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.1734224297</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1266,7 +1266,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.2557343815</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1298,7 +1298,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.9390650106</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1343,7 +1343,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>19.9191891755</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1373,7 +1373,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.365620469</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1407,7 +1407,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.067627233</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1438,7 +1438,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.79274480259</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1473,7 +1473,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.64019655258</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1498,7 +1498,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.48233262016</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1526,7 +1526,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.32220699435</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1559,7 +1559,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.80999671517</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1603,7 +1603,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.2404246494</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1630,7 +1630,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.77899959643</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1656,7 +1656,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.82837255296</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1686,7 +1686,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.9213617565</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1716,7 +1716,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.8846133875</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1753,7 +1753,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.16434498781</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1789,7 +1789,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.5033780404</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1826,7 +1826,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>19.126738294</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1851,7 +1851,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.93331531548</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1888,7 +1888,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.8942590196</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1919,7 +1919,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.2110267909</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -1944,7 +1944,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.75794707995</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2016,7 +2016,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.56627075534</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2049,7 +2049,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.5382586281</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2072,7 +2072,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.96675789271</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2103,7 +2103,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.82133760779</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2130,7 +2130,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>19.0227620507</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2152,7 +2152,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.10804508111</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2182,7 +2182,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.6607805652</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2271,7 +2271,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.687428012</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2329,7 +2329,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.3968297047</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2366,7 +2366,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.6151814266</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2389,7 +2389,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.02791472058</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2419,7 +2419,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.2555127698</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2449,7 +2449,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.32650593452</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2480,7 +2480,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.30022934886</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2505,7 +2505,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.71543692899</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2529,7 +2529,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.23277974153</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2567,7 +2567,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.12191629067</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2600,7 +2600,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.57888652038</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2630,7 +2630,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.26400683801</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2650,7 +2650,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.40462608864</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2676,7 +2676,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.0293950526</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2722,7 +2722,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.035680056</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2744,7 +2744,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.6171706473</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2770,7 +2770,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.10736486755</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2794,7 +2794,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.70766731972</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2822,7 +2822,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.43989820921</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2845,7 +2845,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.95203423205</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2874,7 +2874,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.0694206949</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2903,7 +2903,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.11472119377</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2934,7 +2934,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.91550571036</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2963,7 +2963,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.15484151387</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -2995,7 +2995,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.76703174668</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3019,7 +3019,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.13304084742</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3056,7 +3056,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.63028774655</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3085,7 +3085,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.90850246271</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3115,7 +3115,7 @@
           </gml:LineString>
           <dip>25.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.94921867447</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3142,7 +3142,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.24613461274</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3170,7 +3170,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.406630007</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3207,7 +3207,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.8253585409</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3238,7 +3238,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.9215496855</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3264,7 +3264,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.0456775915</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3286,7 +3286,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.6392992817</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3313,7 +3313,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.9842363646</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3340,7 +3340,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.2845275689</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3370,7 +3370,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.4695428911</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3397,7 +3397,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.87139471986</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3427,7 +3427,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.70529549258</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3460,7 +3460,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.93451902481</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3488,7 +3488,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.2515122953</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3534,7 +3534,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.0026465392</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3575,7 +3575,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.2229318233</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3604,7 +3604,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.8340292471</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3656,7 +3656,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.2257769792</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3699,7 +3699,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.3459482254</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3743,7 +3743,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.9538249614</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3779,7 +3779,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.4882857343</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3847,7 +3847,7 @@
           </gml:LineString>
           <dip>20.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.47991878349</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3881,7 +3881,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.4349013806</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3916,7 +3916,7 @@
           </gml:LineString>
           <dip>60.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.2365811487</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3953,7 +3953,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.5327224156</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -3996,7 +3996,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.8634556262</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4032,7 +4032,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.67156442354</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4065,7 +4065,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.0845348405</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4092,7 +4092,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.9932401253</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4142,7 +4142,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.565217252</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4181,7 +4181,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.8326249904</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4227,7 +4227,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.0416689828</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4272,7 +4272,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.641291067</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4302,7 +4302,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.89157444517</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4330,7 +4330,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.02887981303</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4366,7 +4366,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.43110284015</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4442,7 +4442,7 @@
           </gml:LineString>
           <dip>80.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.9630095467</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4472,7 +4472,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.81511389629</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4494,7 +4494,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.03033469472</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4528,7 +4528,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.4083306925</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4554,7 +4554,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.6891784286</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4582,7 +4582,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.336593905</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4644,7 +4644,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.0905447313</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4667,7 +4667,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.49306572342</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4691,7 +4691,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.7244672685</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4718,7 +4718,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.75115241227</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4748,7 +4748,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.90084037053</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4804,7 +4804,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.4960176732</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4841,7 +4841,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.87610270647</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4875,7 +4875,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.013685511</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4911,7 +4911,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.87869657359</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4941,7 +4941,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.20049346066</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -4969,7 +4969,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.57659880809</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5017,7 +5017,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.46766381003</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5045,7 +5045,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.5374149826</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5088,7 +5088,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.77605805904</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5116,7 +5116,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.74331756583</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5148,7 +5148,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.48315161323</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5182,7 +5182,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.33933280871</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5220,7 +5220,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.46866472868</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5251,7 +5251,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.54553157489</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5279,7 +5279,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.07771624226</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5300,7 +5300,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>1.82584684977</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5351,7 +5351,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.53668846853</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5378,7 +5378,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.92981887399</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5421,7 +5421,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.6764982958</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5458,7 +5458,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.0955818387</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5490,7 +5490,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.36411823418</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5540,7 +5540,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.92390525285</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5566,7 +5566,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.169471719</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5608,7 +5608,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.79658177047</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5650,7 +5650,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.37332140417</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5682,7 +5682,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.58350195821</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5708,7 +5708,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.77316855704</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5737,7 +5737,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.96912312833</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5820,7 +5820,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.8687959844</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5867,7 +5867,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.2449972634</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5900,7 +5900,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.3861069716</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5934,7 +5934,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.1430831914</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -5981,7 +5981,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.9185679018</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6006,7 +6006,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.4675225226</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6033,7 +6033,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.48217080573</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6077,7 +6077,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.2797220587</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6106,7 +6106,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.28417954922</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6131,7 +6131,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.34945749643</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6156,7 +6156,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.59526519227</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6191,7 +6191,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.5592021943</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6227,7 +6227,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.5524199278</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6260,7 +6260,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.96037163094</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6288,7 +6288,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.41331990796</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6325,7 +6325,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.160374336</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6359,7 +6359,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.733569871</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6390,7 +6390,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.33373136215</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6415,7 +6415,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.85061046877</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6437,7 +6437,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.56864448198</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6465,7 +6465,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.32348244253</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6495,7 +6495,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.70042836658</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6522,7 +6522,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.77090091531</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6565,7 +6565,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.69533095694</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6596,7 +6596,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.843562083</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6645,7 +6645,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.4042508636</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6683,7 +6683,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.46755811429</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6711,7 +6711,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.2038189694</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6735,7 +6735,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.74651706684</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6776,7 +6776,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.1625267561</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6810,7 +6810,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.4255438752</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6836,7 +6836,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.39292687686</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6862,7 +6862,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.91391312299</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6892,7 +6892,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.03572474058</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6932,7 +6932,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>17.1680467351</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6956,7 +6956,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.35394849326</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -6987,7 +6987,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.06074150538</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7012,7 +7012,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.08975518197</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7050,7 +7050,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.8733416246</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7096,7 +7096,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>18.8834674273</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7125,7 +7125,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.66950234408</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7149,7 +7149,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.22088869512</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7173,7 +7173,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.83124355864</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7227,7 +7227,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>18.9198171686</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7260,7 +7260,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.96345376766</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7313,7 +7313,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.5985102339</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7345,7 +7345,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.42804027801</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7376,7 +7376,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.61253619207</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7426,7 +7426,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.0987182159</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7450,7 +7450,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.86960839478</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7483,7 +7483,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.8116400895</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7507,7 +7507,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.82885433977</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7543,7 +7543,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.03581876425</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7581,7 +7581,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.8862278394</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7609,7 +7609,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.38550408846</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7637,7 +7637,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.9563997781</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7663,7 +7663,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.49000271444</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7686,7 +7686,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.41635751429</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7714,7 +7714,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.6177252267</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7749,7 +7749,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.9780374858</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7777,7 +7777,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.95994674892</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7813,7 +7813,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.5087400609</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7837,7 +7837,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.94569621021</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7863,7 +7863,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.50282072178</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7888,7 +7888,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.38717974085</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7947,7 +7947,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.8715599615</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -7981,7 +7981,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>18.2197236981</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8011,7 +8011,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.7274525172</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8041,7 +8041,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.03467536523</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8072,7 +8072,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>18.5752989531</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8138,7 +8138,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.23705199486</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8162,7 +8162,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.244800701</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8198,7 +8198,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.4197671948</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8227,7 +8227,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.62477465129</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8259,7 +8259,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.62062692491</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8286,7 +8286,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.45656483343</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8315,7 +8315,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.30692089763</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8339,7 +8339,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.17491145573</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8369,7 +8369,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.18815388972</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8393,7 +8393,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.69568201713</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8434,7 +8434,7 @@
           </gml:LineString>
           <dip>56.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.7976272034</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8465,7 +8465,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.87563743756</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8499,7 +8499,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.59586958341</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8536,7 +8536,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.35333851383</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8569,7 +8569,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.58489619048</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8594,7 +8594,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.5873709527</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8622,7 +8622,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.30206502085</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8647,7 +8647,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>1.98235109809</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8680,7 +8680,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>2.97042455213</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8715,7 +8715,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.80402584345</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8746,7 +8746,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.03167707467</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8797,7 +8797,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.80494946569</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8835,7 +8835,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.9634443208</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8860,7 +8860,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.95147834992</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8907,7 +8907,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.5826850172</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8954,7 +8954,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.6891649464</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -8985,7 +8985,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.29472495855</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9032,7 +9032,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.0842727599</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9059,7 +9059,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.13914907019</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9110,7 +9110,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.06183158171</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9147,7 +9147,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.3728117494</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9174,7 +9174,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.2741417443</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9206,7 +9206,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.4807142792</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9242,7 +9242,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.67357099299</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9266,7 +9266,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>15.1251518089</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9314,7 +9314,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.85605374122</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9337,7 +9337,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.79050814706</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9361,7 +9361,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.94247982</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9386,7 +9386,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.6078141583</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9412,7 +9412,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.4681715036</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9464,7 +9464,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.5771463294</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9501,7 +9501,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.0154331168</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9535,7 +9535,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.9123722831</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9565,7 +9565,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.9824822847</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9595,7 +9595,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.3696013272</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9627,7 +9627,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>18.0917900124</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9664,7 +9664,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>19.1539407678</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9692,7 +9692,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.7902393304</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9721,7 +9721,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.67248299565</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9797,7 +9797,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.3381660837</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9829,7 +9829,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.4961739232</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9852,7 +9852,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.43279938514</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9877,7 +9877,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.28012527495</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9912,7 +9912,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.1627241352</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9945,7 +9945,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.67251452503</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -9982,7 +9982,7 @@
           </gml:LineString>
           <dip>30.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.00237049652</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10018,7 +10018,7 @@
           </gml:LineString>
           <dip>35.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.91154716134</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10051,7 +10051,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.1484892323</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10079,7 +10079,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.80557703249</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10102,7 +10102,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.07325249418</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10129,7 +10129,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.179459324</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10153,7 +10153,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.3820364705</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10185,7 +10185,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>13.371961853</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10319,7 +10319,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>18.0261927539</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10344,7 +10344,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.1399149205</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10367,7 +10367,7 @@
           </gml:LineString>
           <dip>45.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.38471415845</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10394,7 +10394,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.2872653108</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10416,7 +10416,7 @@
           </gml:LineString>
           <dip>80.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.43936582584</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10446,7 +10446,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>16.983505105</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10472,7 +10472,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.377787818</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10499,7 +10499,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.3332476173</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10523,7 +10523,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.32907431601</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10545,7 +10545,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.8414481412</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10602,7 +10602,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.55550467247</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10624,7 +10624,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.80505810096</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10656,7 +10656,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.2494573964</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10689,7 +10689,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.11866298814</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10727,7 +10727,7 @@
           </gml:LineString>
           <dip>48.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.2179829024</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10762,7 +10762,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.1151895199</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10787,7 +10787,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.81490072059</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10820,7 +10820,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.96644585965</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10852,7 +10852,7 @@
           </gml:LineString>
           <dip>70.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>10.4090517061</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10875,7 +10875,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.29336581228</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10907,7 +10907,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.29606340349</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10934,7 +10934,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.57285884246</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10968,7 +10968,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.70420345471</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -10999,7 +10999,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.89746452969</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11035,7 +11035,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.72438871037</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11068,7 +11068,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.45413647166</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11101,7 +11101,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>12.324391032</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11125,7 +11125,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>7.47317559593</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11148,7 +11148,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.88688908987</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11173,7 +11173,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.82407722164</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11199,7 +11199,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>4.19023903417</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11224,7 +11224,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.63906619642</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11250,7 +11250,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>5.12827941992</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11278,7 +11278,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>6.27130058627</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11301,7 +11301,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.7422881201</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11332,7 +11332,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>9.33123754309</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11355,7 +11355,7 @@
           </gml:LineString>
           <dip>50.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>3.78599954302</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11434,7 +11434,7 @@
           </gml:LineString>
           <dip>55.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>8.38273005818</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11457,7 +11457,7 @@
           </gml:LineString>
           <dip>84.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>14.5633270029</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>
@@ -11647,7 +11647,7 @@
           </gml:LineString>
           <dip>40.0</dip>
           <upperSeismoDepth>0.001</upperSeismoDepth>
-          <lowerSeismoDepth>20.0</lowerSeismoDepth>
+          <lowerSeismoDepth>11.8304823209</lowerSeismoDepth>
       </simpleFaultGeometry>
       <magScaleRel>Leonard2014_SCR</magScaleRel>
       <ruptAspectRatio>1.5</ruptAspectRatio>

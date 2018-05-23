@@ -39,10 +39,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="225.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="45.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="235.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="215.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="55.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="35.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="240.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="210.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="60.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="30.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -81,10 +81,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="149.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="329.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="163.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="135.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="343.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="315.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="164.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="134.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="344.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="314.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -191,10 +191,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="192.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="12.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="202.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="182.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="22.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="2.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="207.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="177.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="27.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="357.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -237,10 +237,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="190.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="10.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="200.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="180.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="20.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="0.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="205.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="175.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="25.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="355.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -277,10 +277,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="182.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="2.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="195.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="169.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="15.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="197.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="167.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="17.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="347.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -337,10 +337,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="179.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="359.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="189.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="169.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="9.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="349.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="194.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="164.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="14.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="344.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -524,10 +524,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="119.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="299.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="132.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="106.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="312.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="286.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="134.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="104.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="314.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="284.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -567,10 +567,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="229.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="49.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="239.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="219.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="59.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="39.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="244.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="214.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="64.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="34.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -718,10 +718,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="185.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="5.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="197.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="173.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="17.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="353.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="200.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="170.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="20.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="350.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -770,10 +770,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="193.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="13.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="203.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="183.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="23.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="3.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="208.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="178.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="28.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="358.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -814,10 +814,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="178.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="358.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="188.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="168.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="8.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="348.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="193.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="163.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="13.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="343.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="5.0"/>
@@ -856,10 +856,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="188.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="8.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="198.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="178.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="18.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="358.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="203.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="173.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="23.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="353.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -1169,7 +1169,7 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.22782e-03 1.96373e-03 1.73143e-03 1.52701e-03 1.34709e-03 1.18868e-03 1.04918e-03 9.26284e-04 8.17995e-04 7.22548e-04 6.38398e-04 5.64188e-04 4.98727e-04 4.40967e-04 3.89989e-04 3.44986e-04 3.05247e-04 2.70147e-04 2.34354e-04 1.77856e-04 3.00014e-05 3.32185e-06</occurRates>
             </incrementalMFD>
@@ -1597,7 +1597,7 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.98505e-03 2.63056e-03 2.31880e-03 2.04455e-03 1.80322e-03 1.59081e-03 1.40379e-03 1.23908e-03 1.09398e-03 9.66117e-04 8.53416e-04 7.54051e-04 6.66420e-04 5.89117e-04 5.20907e-04 4.60704e-04 4.07555e-04 3.60622e-04 3.12782e-04 2.37332e-04 4.00267e-05 4.43108e-06</occurRates>
             </incrementalMFD>
@@ -1653,7 +1653,7 @@
                 <lowerSeismoDepth>30.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>6.50571e-02 5.25309e-02 4.24223e-02 3.42637e-02 2.76780e-02 2.23612e-02 1.80681e-02 1.46013e-02 1.18013e-02 9.53945e-03 7.71217e-03 6.23573e-03 5.04262e-03 4.07833e-03 3.29887e-03 2.66872e-03 2.15923e-03 1.74723e-03 1.41402e-03 1.14451e-03 9.26479e-04 7.50078e-04 6.07340e-04 4.81988e-04 3.34597e-04 5.16235e-05 5.22752e-06</occurRates>
             </incrementalMFD>
@@ -1702,7 +1702,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>5.18880e-02 4.19203e-02 3.38720e-02 2.73726e-02 2.21233e-02 1.78831e-02 1.44574e-02 1.16896e-02 9.45287e-03 7.64514e-03 6.18392e-03 5.00264e-03 4.04753e-03 3.27519e-03 2.65056e-03 2.14533e-03 1.73662e-03 1.40595e-03 1.13839e-03 9.21858e-04 7.46604e-04 6.04741e-04 4.89892e-04 3.88965e-04 2.70146e-04 4.16990e-05 4.22447e-06</occurRates>
             </incrementalMFD>
@@ -1739,7 +1739,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.26325e-01 1.01866e-01 8.21542e-02 6.62661e-02 5.34583e-02 4.31320e-02 3.48053e-02 2.80900e-02 2.26735e-02 1.83040e-02 1.47786e-02 1.19338e-02 9.63800e-03 7.78490e-03 6.28895e-03 5.08116e-03 4.10587e-03 3.31823e-03 2.68204e-03 2.16812e-03 1.75290e-03 1.41739e-03 1.14624e-03 9.08546e-04 6.29943e-04 9.70730e-05 9.81795e-06</occurRates>
             </incrementalMFD>
@@ -1774,7 +1774,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>5.46538e-02 4.41487e-02 3.56677e-02 2.88199e-02 2.32899e-02 1.88235e-02 1.52157e-02 1.23011e-02 9.94605e-03 8.04295e-03 6.50485e-03 5.26157e-03 4.25648e-03 3.44382e-03 2.78668e-03 2.25522e-03 1.82535e-03 1.47760e-03 1.19625e-03 9.68595e-04 7.84360e-04 6.22541e-04 4.32215e-04 6.66917e-05 6.75407e-06</occurRates>
             </incrementalMFD>
@@ -1810,7 +1810,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>7.12082e-02 5.74896e-02 4.64204e-02 3.74877e-02 3.02781e-02 2.44585e-02 1.97601e-02 1.59664e-02 1.29029e-02 1.04285e-02 8.42981e-03 6.81508e-03 5.51039e-03 4.45606e-03 3.60393e-03 2.91514e-03 2.35830e-03 1.90807e-03 1.54399e-03 1.24954e-03 1.01138e-03 8.18710e-04 6.49572e-04 4.50822e-04 6.95385e-05 7.03991e-06</occurRates>
             </incrementalMFD>
@@ -1921,7 +1921,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.14248e-01 9.21330e-02 7.43097e-02 5.99428e-02 4.83603e-02 3.90214e-02 3.14903e-02 2.54163e-02 2.05167e-02 1.65639e-02 1.33746e-02 1.08008e-02 8.72347e-03 7.04666e-03 5.69293e-03 4.59989e-03 3.71721e-03 3.00432e-03 2.42846e-03 1.96325e-03 1.58736e-03 1.28361e-03 1.03812e-03 8.39688e-04 6.79273e-04 5.38583e-04 3.73545e-04 5.75806e-05 5.82550e-06</occurRates>
             </incrementalMFD>
@@ -1961,7 +1961,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.33533e-01 1.07660e-01 8.68117e-02 7.00110e-02 5.64698e-02 4.55541e-02 3.67536e-02 2.96574e-02 2.39347e-02 1.93190e-02 1.55955e-02 1.25915e-02 1.01675e-02 8.21126e-03 6.63232e-03 5.35773e-03 4.32868e-03 3.49774e-03 2.82670e-03 2.28470e-03 1.84687e-03 1.49315e-03 1.20733e-03 9.56820e-04 6.63315e-04 1.02201e-04 1.03350e-05</occurRates>
             </incrementalMFD>
@@ -2000,7 +2000,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>8.90202e-02 7.18071e-02 5.79305e-02 4.67420e-02 3.77197e-02 3.04432e-02 2.45738e-02 1.98387e-02 1.60182e-02 1.29353e-02 1.04471e-02 8.43870e-03 6.81731e-03 5.50820e-03 4.45107e-03 3.59730e-03 2.90768e-03 2.35058e-03 1.90046e-03 1.53674e-03 1.24279e-03 1.00520e-03 8.13136e-04 6.57852e-04 5.32291e-04 4.22135e-04 2.92843e-04 4.51502e-05 4.56886e-06</occurRates>
             </incrementalMFD>
@@ -2038,7 +2038,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>9.07863e-02 7.32317e-02 5.90797e-02 4.76693e-02 3.84681e-02 3.10472e-02 2.50613e-02 2.02323e-02 1.63360e-02 1.31919e-02 1.06544e-02 8.60611e-03 6.95256e-03 5.61748e-03 4.53937e-03 3.66867e-03 2.96537e-03 2.39721e-03 1.93817e-03 1.56723e-03 1.26745e-03 1.00464e-03 6.96585e-04 1.07345e-04 1.08570e-05</occurRates>
             </incrementalMFD>
@@ -2073,7 +2073,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.82861e-01 1.47398e-01 1.18830e-01 9.58129e-02 7.72650e-02 6.23166e-02 5.02674e-02 4.05537e-02 3.27218e-02 2.64061e-02 2.13124e-02 1.72037e-02 1.38890e-02 1.12145e-02 9.05629e-03 7.31442e-03 5.90840e-03 4.77330e-03 3.85679e-03 3.11668e-03 2.51894e-03 2.03611e-03 1.64605e-03 1.33089e-03 1.07621e-03 8.52974e-04 5.91369e-04 9.11224e-05 9.21546e-06</occurRates>
             </incrementalMFD>
@@ -2125,7 +2125,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.42952e-01 2.76314e-01 2.22658e-01 1.79446e-01 1.44642e-01 1.16605e-01 9.40163e-02 7.58143e-02 6.11451e-02 4.93213e-02 3.97896e-02 3.21045e-02 2.59074e-02 2.09095e-02 1.68781e-02 1.36259e-02 1.10019e-02 8.88446e-03 7.17552e-03 5.79611e-03 4.68251e-03 3.78338e-03 3.05732e-03 2.42151e-03 1.67771e-03 2.58342e-04 2.61095e-05</occurRates>
             </incrementalMFD>
@@ -2180,7 +2180,7 @@
                 <lowerSeismoDepth>30.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.70790e-01 2.18217e-01 1.75876e-01 1.41771e-01 1.14295e-01 9.21581e-02 7.43191e-02 5.99418e-02 4.83526e-02 3.90097e-02 3.14764e-02 2.54015e-02 2.05020e-02 1.65498e-02 1.33613e-02 1.07886e-02 8.71247e-03 7.03683e-03 5.68425e-03 4.59228e-03 3.71058e-03 2.99857e-03 2.42351e-03 1.95900e-03 1.58373e-03 1.25490e-03 8.69810e-04 1.33993e-04 1.35478e-05</occurRates>
             </incrementalMFD>
@@ -2230,7 +2230,7 @@
                 <lowerSeismoDepth>60.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserInterface</magScaleRel>
-            <ruptAspectRatio>1.3</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="6.55" binWidth="0.1">
                 <occurRates>6.64670e-02 5.64533e-02 4.79608e-02 4.07566e-02 3.46436e-02 2.94552e-02 2.50503e-02 2.13096e-02 1.81322e-02 1.54324e-02 1.31380e-02 1.11876e-02 9.52904e-03 8.11842e-03 6.91833e-03 5.89709e-03 5.02783e-03 4.28774e-03 3.65747e-03 3.12060e-03 2.66316e-03 2.22784e-03 1.63042e-03 2.65219e-04 2.83189e-05</occurRates>
             </incrementalMFD>
@@ -2321,7 +2321,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.11302e-01 8.97646e-02 7.24048e-02 5.84106e-02 4.71277e-02 3.80296e-02 3.06922e-02 2.47740e-02 1.99997e-02 1.61477e-02 1.30394e-02 1.05308e-02 8.50605e-03 6.87152e-03 5.55183e-03 4.48619e-03 3.62558e-03 2.93046e-03 2.36892e-03 1.91524e-03 1.54865e-03 1.25239e-03 1.01294e-03 8.19372e-04 6.62881e-04 5.36347e-04 4.34021e-04 3.44236e-04 2.38828e-04 3.68259e-05 3.72688e-06</occurRates>
             </incrementalMFD>
@@ -2363,7 +2363,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>8.18996e-02 6.61040e-02 5.33623e-02 4.30827e-02 3.47881e-02 2.80944e-02 2.26918e-02 1.83307e-02 1.48097e-02 1.19667e-02 9.67078e-03 7.81641e-03 6.31846e-03 5.10827e-03 4.13042e-03 3.34019e-03 2.70151e-03 2.18523e-03 1.76785e-03 1.40177e-03 9.72277e-04 1.49881e-04 1.51645e-05</occurRates>
             </incrementalMFD>
@@ -2406,60 +2406,12 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.05258e-01 1.66911e-01 1.35736e-01 1.10392e-01 8.97860e-02 7.30311e-02 5.94069e-02 4.83275e-02 3.93170e-02 3.19886e-02 2.60279e-02 2.11793e-02 1.72351e-02 1.40263e-02 1.14156e-02 9.29152e-03 7.56313e-03 6.15664e-03 5.01205e-03 4.08051e-03 3.32232e-03 2.70518e-03 2.20282e-03 1.79386e-03 1.46092e-03 1.18985e-03 9.49755e-04 6.63109e-04 1.02890e-04 1.04775e-05</occurRates>
+                <occurRates>2.04754e-01 1.66500e-01 1.35402e-01 1.10119e-01 8.95638e-02 7.28501e-02 5.92593e-02 4.82071e-02 3.92189e-02 3.19086e-02 2.59627e-02 2.11261e-02 1.71917e-02 1.39909e-02 1.13867e-02 9.26794e-03 7.54388e-03 6.14094e-03 4.99922e-03 4.07004e-03 3.31377e-03 2.69820e-03 2.19712e-03 1.78921e-03 1.45712e-03 1.18674e-03 9.47268e-04 6.61368e-04 1.02619e-04 1.04498e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="100.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NBTD" name="New Britain Trench Deep" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                156.3360 -8.1650
-                                155.7430 -8.7580
-                                155.4110 -8.5010
-                                154.6210 -7.8900
-                                153.5300 -7.1020
-                                153.0340 -6.6830
-                                152.7370 -6.6410
-                                152.2500 -6.9160
-                                150.6840 -7.6360
-                                148.6310 -7.2760
-                                148.1020 -7.1280
-                                148.3980 -6.4720
-                                150.4510 -6.0690
-                                151.1500 -6.0480
-                                151.7210 -5.6460
-                                152.7580 -5.2230
-                                153.4570 -5.2860
-                                153.9010 -6.1330
-                                154.2820 -6.4500
-                                155.0020 -7.2760
-                                155.4890 -7.4450
-                                155.8700 -7.6990
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>60.0</upperSeismoDepth>
-                <lowerSeismoDepth>180.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.37285e-01 1.11937e-01 9.12741e-02 7.44301e-02 6.06981e-02 4.95025e-02 4.03743e-02 3.29312e-02 2.68618e-02 2.19123e-02 1.78758e-02 1.45837e-02 1.18986e-02 9.70835e-03 7.92175e-03 6.46430e-03 5.27528e-03 4.30520e-03 3.51370e-03 2.86788e-03 2.34088e-03 1.91083e-03 1.55987e-03 1.27344e-03 1.03966e-03 8.48837e-04 6.79217e-04 4.75382e-04 7.39412e-05 7.54783e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="270.0" dip="45.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="1.0" depth="100.0"/>
@@ -2492,9 +2444,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.59012e-01 2.10599e-01 1.71246e-01 1.39257e-01 1.13250e-01 9.21071e-02 7.49161e-02 6.09377e-02 4.95709e-02 4.03270e-02 3.28090e-02 2.66944e-02 2.17208e-02 1.76750e-02 1.43838e-02 1.17061e-02 9.52759e-03 7.75499e-03 6.31259e-03 5.13880e-03 4.18355e-03 3.40609e-03 2.77328e-03 2.25819e-03 1.83889e-03 1.49754e-03 1.19524e-03 8.34419e-04 1.29458e-04 1.31817e-05</occurRates>
+                <occurRates>2.42824e-01 1.97436e-01 1.60542e-01 1.30552e-01 1.06171e-01 8.63486e-02 7.02321e-02 5.71274e-02 4.64710e-02 3.78050e-02 3.07570e-02 2.50247e-02 2.03620e-02 1.65693e-02 1.34838e-02 1.09737e-02 8.93137e-03 7.26965e-03 5.91748e-03 4.81713e-03 3.92164e-03 3.19283e-03 2.59963e-03 2.11678e-03 1.72372e-03 1.40373e-03 1.12036e-03 7.82140e-04 1.21346e-04 1.23556e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -2525,9 +2477,9 @@
                 <lowerSeismoDepth>180.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.73650e-02 3.85794e-02 3.14254e-02 2.55996e-02 2.08551e-02 1.69910e-02 1.38437e-02 1.12801e-02 9.19180e-03 7.49056e-03 6.10456e-03 4.97533e-03 4.05522e-03 3.30548e-03 2.69451e-03 2.19660e-03 1.79081e-03 1.46007e-03 1.19048e-03 9.70725e-04 7.91583e-04 6.45538e-04 5.26469e-04 4.29386e-04 3.50227e-04 2.85677e-04 2.28377e-04 1.59691e-04 2.48154e-05 2.53078e-06</occurRates>
+                <occurRates>6.38623e-02 5.20162e-02 4.23702e-02 3.45151e-02 2.81181e-02 2.29081e-02 1.86646e-02 1.52081e-02 1.23925e-02 1.00988e-02 8.23010e-03 6.70762e-03 5.46711e-03 4.45629e-03 3.63257e-03 2.96130e-03 2.41421e-03 1.96832e-03 1.60487e-03 1.30861e-03 1.06710e-03 8.70216e-04 7.09698e-04 5.78822e-04 4.72108e-04 3.85091e-04 3.07847e-04 2.15258e-04 3.34499e-05 3.41134e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -2561,9 +2513,9 @@
                 <lowerSeismoDepth>130.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>7.95880e-02 6.47613e-02 5.27001e-02 4.28880e-02 3.49051e-02 2.84098e-02 2.31247e-02 1.88240e-02 1.53242e-02 1.24758e-02 1.01575e-02 8.27054e-03 6.73453e-03 5.48414e-03 4.46619e-03 3.63742e-03 2.96262e-03 2.41316e-03 1.96573e-03 1.60135e-03 1.30460e-03 1.06290e-03 8.66039e-04 7.05680e-04 5.75048e-04 4.68627e-04 3.74285e-04 2.61475e-04 4.05949e-05 4.13627e-06</occurRates>
+                <occurRates>7.93912e-02 6.46008e-02 5.25692e-02 4.27812e-02 3.48179e-02 2.83387e-02 2.30667e-02 1.87767e-02 1.52855e-02 1.24442e-02 1.01317e-02 8.24948e-03 6.71734e-03 5.47010e-03 4.45472e-03 3.62805e-03 2.95496e-03 2.40690e-03 1.96061e-03 1.59717e-03 1.30118e-03 1.06011e-03 8.63758e-04 7.03815e-04 5.73523e-04 4.67380e-04 3.73285e-04 2.60775e-04 4.04858e-05 4.12511e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
@@ -2609,7 +2561,7 @@
                 <lowerSeismoDepth>50.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>4.61781e-01 3.71992e-01 2.99705e-01 2.41501e-01 1.94628e-01 1.56876e-01 1.26465e-01 1.01964e-01 8.22216e-02 6.63113e-02 5.34874e-02 4.31497e-02 3.48150e-02 2.80941e-02 2.26739e-02 1.83020e-02 1.47752e-02 1.19296e-02 9.63345e-03 7.78031e-03 6.28451e-03 5.07699e-03 4.10205e-03 3.31478e-03 2.67896e-03 2.12209e-03 1.47044e-03 2.26451e-04 2.28891e-05</occurRates>
             </incrementalMFD>
@@ -2649,7 +2601,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>4.99531e-02 4.03571e-02 3.26089e-02 2.63519e-02 2.12983e-02 1.72162e-02 1.39183e-02 1.12537e-02 9.10038e-03 7.36006e-03 5.95333e-03 4.81609e-03 3.89659e-03 3.15306e-03 2.55172e-03 2.02403e-03 1.40437e-03 2.16564e-04 2.19188e-05 1.40340e-18</occurRates>
             </incrementalMFD>
@@ -2683,7 +2635,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>3.86366e-02 3.12576e-02 2.52911e-02 2.04661e-02 1.65637e-02 1.34070e-02 1.08533e-02 8.78705e-03 7.11506e-03 5.76192e-03 4.66667e-03 3.78007e-03 3.06227e-03 2.48107e-03 2.01042e-03 1.62923e-03 1.32047e-03 1.07035e-03 8.67705e-04 6.89435e-04 4.79171e-04 7.40155e-05 7.50365e-06</occurRates>
             </incrementalMFD>
@@ -2725,7 +2677,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.70077e-02 1.37809e-02 1.11675e-02 9.05081e-03 7.33612e-03 5.94695e-03 4.82137e-03 3.90926e-03 3.17005e-03 2.57090e-03 2.08522e-03 1.69147e-03 1.37221e-03 1.11333e-03 9.03388e-04 7.33109e-04 5.94987e-04 4.82937e-04 3.92028e-04 3.18264e-04 2.58405e-04 2.05628e-04 1.43131e-04 2.21419e-05 2.24805e-06</occurRates>
             </incrementalMFD>
@@ -2774,10 +2726,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="141.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="321.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="151.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="131.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="331.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="311.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="156.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="126.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="336.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="306.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -2825,7 +2777,7 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.97103e-03 2.63376e-03 2.33526e-03 2.07100e-03 1.83702e-03 1.62978e-03 1.44621e-03 1.28355e-03 1.13940e-03 1.01162e-03 8.98339e-04 7.97880e-04 7.08778e-04 6.29734e-04 5.59599e-04 4.97356e-04 4.42108e-04 3.93059e-04 3.42516e-04 2.61093e-04 4.42340e-05 4.91871e-06</occurRates>
             </incrementalMFD>
@@ -2870,17 +2822,17 @@
                 <lowerSeismoDepth>20.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.72051e-03 2.39917e-03 2.11636e-03 1.86738e-03 1.64814e-03 1.45502e-03 1.28487e-03 1.13490e-03 1.00269e-03 8.86112e-04 7.83278e-04 6.92548e-04 6.12476e-04 5.41791e-04 4.79377e-04 4.24251e-04 3.75551e-04 3.32516e-04 2.94478e-04 2.60849e-04 2.26487e-04 1.72036e-04 2.90447e-05 3.21865e-06 2.67968e-19</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="189.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="9.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="199.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="179.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="19.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="359.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="204.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="174.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="24.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="354.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -2922,7 +2874,7 @@
                 <lowerSeismoDepth>35.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>2.02606e-02 1.64185e-02 1.33065e-02 1.07856e-02 8.74322e-03 7.08839e-03 5.74741e-03 4.66062e-03 3.77974e-03 3.06569e-03 2.48680e-03 2.01743e-03 1.63683e-03 1.30160e-03 9.05368e-04 1.39960e-04 1.42003e-05</occurRates>
             </incrementalMFD>
@@ -2970,9 +2922,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.32530e-01 1.89078e-01 1.53756e-01 1.25041e-01 1.01695e-01 8.27137e-02 6.72798e-02 5.47293e-02 4.45231e-02 3.62225e-02 2.94714e-02 2.39801e-02 1.95133e-02 1.58796e-02 1.29234e-02 1.05182e-02 8.56121e-03 6.96879e-03 5.67293e-03 4.61833e-03 3.76003e-03 3.06144e-03 2.49280e-03 2.02991e-03 1.65309e-03 1.34630e-03 1.07458e-03 7.50227e-04 1.16402e-04 1.18529e-05</occurRates>
+                <occurRates>2.31682e-01 1.88387e-01 1.53194e-01 1.24583e-01 1.01322e-01 8.24101e-02 6.70324e-02 5.45279e-02 4.43589e-02 3.60888e-02 2.93624e-02 2.38913e-02 1.94410e-02 1.58206e-02 1.28753e-02 1.04790e-02 8.52924e-03 6.94271e-03 5.65166e-03 4.60099e-03 3.74589e-03 3.04990e-03 2.48339e-03 2.02223e-03 1.64682e-03 1.34118e-03 1.07049e-03 7.47365e-04 1.15957e-04 1.18075e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -3022,9 +2974,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.67386e-01 1.36128e-01 1.10715e-01 9.00520e-02 7.32503e-02 5.95873e-02 4.84761e-02 3.94393e-02 3.20893e-02 2.61108e-02 2.12475e-02 1.72912e-02 1.40725e-02 1.14536e-02 9.32276e-03 7.58882e-03 6.17778e-03 5.02942e-03 4.09480e-03 3.33406e-03 2.71484e-03 2.21076e-03 1.80039e-03 1.46628e-03 1.19426e-03 9.72759e-04 7.76543e-04 5.42226e-04 8.41415e-05 8.56911e-06</occurRates>
+                <occurRates>8.90008e-02 7.23804e-02 5.88676e-02 4.78808e-02 3.89471e-02 3.16823e-02 2.57744e-02 2.09695e-02 1.70615e-02 1.38827e-02 1.12969e-02 9.19333e-03 7.48195e-03 6.08956e-03 4.95661e-03 4.03470e-03 3.28448e-03 2.67392e-03 2.17701e-03 1.77255e-03 1.44333e-03 1.17533e-03 9.57151e-04 7.79524e-04 6.34901e-04 5.17142e-04 4.12826e-04 2.88256e-04 4.47305e-05 4.55539e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -3067,9 +3019,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.34058e-02 2.72402e-02 2.22139e-02 1.81160e-02 1.47749e-02 1.20507e-02 9.82939e-03 8.01796e-03 6.54072e-03 5.33594e-03 4.35333e-03 3.55185e-03 2.89810e-03 2.36480e-03 1.92975e-03 1.57481e-03 1.28523e-03 1.04896e-03 8.56164e-04 6.98842e-04 5.70459e-04 4.65685e-04 3.80175e-04 3.10382e-04 2.53415e-04 2.06914e-04 1.65576e-04 1.15892e-04 1.80268e-05 1.84024e-06</occurRates>
+                <occurRates>1.15622e-01 9.42809e-02 7.68833e-02 6.26996e-02 5.11355e-02 4.17066e-02 3.40183e-02 2.77488e-02 2.26360e-02 1.84663e-02 1.50655e-02 1.22917e-02 1.00292e-02 8.18354e-03 6.67792e-03 5.44960e-03 4.44745e-03 3.62979e-03 2.96261e-03 2.41819e-03 1.97392e-03 1.61136e-03 1.31546e-03 1.07395e-03 8.76828e-04 7.15923e-04 5.72885e-04 4.00975e-04 6.23701e-05 6.36688e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -3104,9 +3056,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.55303e-02 3.70850e-02 3.02081e-02 2.46080e-02 2.00473e-02 1.63329e-02 1.33075e-02 1.08432e-02 8.83575e-03 7.20042e-03 5.86811e-03 4.78261e-03 3.89815e-03 3.17744e-03 2.59014e-03 2.11152e-03 1.72144e-03 1.40351e-03 1.14437e-03 9.33124e-04 7.60921e-04 6.20533e-04 5.06076e-04 4.12754e-04 3.36661e-04 2.74611e-04 2.19531e-04 1.53505e-04 2.38542e-05 2.43275e-06</occurRates>
+                <occurRates>3.93166e-02 3.20236e-02 2.60851e-02 2.12491e-02 1.73108e-02 1.41033e-02 1.14908e-02 9.36283e-03 7.62940e-03 6.21728e-03 5.06684e-03 4.12952e-03 3.36581e-03 2.74350e-03 2.23638e-03 1.82311e-03 1.48630e-03 1.21179e-03 9.88033e-04 8.05642e-04 6.56958e-04 5.35746e-04 4.36924e-04 3.56350e-04 2.90652e-04 2.37080e-04 1.89525e-04 1.32523e-04 2.05934e-05 2.10018e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -3151,9 +3103,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>9.89501e-02 8.05055e-02 6.55032e-02 5.33002e-02 4.33733e-02 3.52976e-02 2.87273e-02 2.33816e-02 1.90318e-02 1.54922e-02 1.26118e-02 1.02675e-02 8.35957e-03 6.80659e-03 5.54245e-03 4.51339e-03 3.67562e-03 2.99354e-03 2.43819e-03 1.98599e-03 1.61775e-03 1.31788e-03 1.07366e-03 8.74747e-04 7.12732e-04 5.80759e-04 4.63787e-04 3.23963e-04 5.02904e-05 5.12354e-06</occurRates>
+                <occurRates>7.83562e-02 6.37499e-02 5.18698e-02 4.22063e-02 3.43454e-02 2.79504e-02 2.27476e-02 1.85145e-02 1.50701e-02 1.22672e-02 9.98632e-03 8.13004e-03 6.61922e-03 5.38951e-03 4.38853e-03 3.57368e-03 2.91031e-03 2.37024e-03 1.93050e-03 1.57245e-03 1.28088e-03 1.04344e-03 8.50070e-04 6.92577e-04 5.64297e-04 4.59805e-04 3.67191e-04 2.56487e-04 3.98154e-05 4.05632e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -3195,9 +3147,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.72435e-02 1.40740e-02 1.14876e-02 9.37700e-03 7.65459e-03 6.24888e-03 5.10158e-03 4.16513e-03 3.40076e-03 2.77680e-03 2.26743e-03 1.85160e-03 1.51210e-03 1.23491e-03 1.00858e-03 8.23777e-04 6.72866e-04 5.49627e-04 4.48982e-04 3.66784e-04 2.99648e-04 2.44813e-04 2.00022e-04 1.63433e-04 1.33544e-04 1.09126e-04 8.73928e-05 6.12170e-05 9.52961e-06 9.73569e-07</occurRates>
+                <occurRates>5.53612e-02 4.51846e-02 3.68806e-02 3.01043e-02 2.45743e-02 2.00612e-02 1.63778e-02 1.33713e-02 1.09173e-02 8.91414e-03 7.27889e-03 5.94391e-03 4.85401e-03 3.96416e-03 3.23759e-03 2.64433e-03 2.15988e-03 1.76426e-03 1.44118e-03 1.17732e-03 9.61817e-04 7.85796e-04 6.42018e-04 5.24572e-04 4.28631e-04 3.50253e-04 2.80495e-04 1.96479e-04 3.05855e-05 3.12465e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -3242,9 +3194,9 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.81967e-02 3.92488e-02 3.19641e-02 2.60332e-02 2.12041e-02 1.72718e-02 1.40697e-02 1.14620e-02 9.33812e-03 7.60830e-03 6.19929e-03 5.05154e-03 4.11654e-03 3.35481e-03 2.73419e-03 2.22852e-03 1.81648e-03 1.48072e-03 1.20709e-03 9.84083e-04 8.02325e-04 6.54176e-04 5.33415e-04 4.34971e-04 3.54717e-04 2.89287e-04 2.31220e-04 1.61650e-04 2.51153e-05 2.56091e-06</occurRates>
+                <occurRates>6.79532e-02 5.53370e-02 4.50660e-02 3.67037e-02 2.98950e-02 2.43508e-02 1.98361e-02 1.61595e-02 1.31651e-02 1.07263e-02 8.73977e-03 7.12161e-03 5.80340e-03 4.72948e-03 3.85453e-03 3.14163e-03 2.56074e-03 2.08739e-03 1.70163e-03 1.38725e-03 1.13102e-03 9.22165e-04 7.51925e-04 6.13149e-04 5.00015e-04 4.07779e-04 3.25926e-04 2.27858e-04 3.54015e-05 3.60973e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -3281,9 +3233,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.93280e-02 1.57753e-02 1.28763e-02 1.05105e-02 8.57992e-03 7.00428e-03 5.71828e-03 4.66864e-03 3.81186e-03 3.11247e-03 2.54153e-03 2.07543e-03 1.69489e-03 1.38419e-03 1.13051e-03 9.23360e-04 7.54206e-04 6.16069e-04 5.03257e-04 4.11123e-04 3.35872e-04 2.74407e-04 2.24202e-04 1.83190e-04 1.49687e-04 1.22317e-04 9.79574e-05 6.86172e-05 1.06816e-05 1.09126e-06</occurRates>
+                <occurRates>3.08151e-02 2.51507e-02 2.05285e-02 1.67567e-02 1.36786e-02 1.11665e-02 9.11619e-03 7.44274e-03 6.07680e-03 4.96179e-03 4.05157e-03 3.30850e-03 2.70184e-03 2.20653e-03 1.80211e-03 1.47188e-03 1.20223e-03 9.82024e-04 8.02191e-04 6.55321e-04 5.35366e-04 4.37390e-04 3.57360e-04 2.91987e-04 2.38585e-04 1.94958e-04 1.56129e-04 1.09364e-04 1.70245e-05 1.73924e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -3314,9 +3266,9 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.93280e-02 1.57753e-02 1.28763e-02 1.05105e-02 8.57992e-03 7.00428e-03 5.71828e-03 4.66864e-03 3.81186e-03 3.11247e-03 2.54153e-03 2.07543e-03 1.69489e-03 1.38419e-03 1.13051e-03 9.23360e-04 7.54206e-04 6.16069e-04 5.03257e-04 4.11123e-04 3.35872e-04 2.74407e-04 2.24202e-04 1.83190e-04 1.49687e-04 1.22317e-04 9.79574e-05 6.86172e-05 1.06816e-05 1.09126e-06</occurRates>
+                <occurRates>7.58447e-02 6.19028e-02 5.05264e-02 4.12428e-02 3.36668e-02 2.74838e-02 2.24375e-02 1.83187e-02 1.49567e-02 1.22124e-02 9.97206e-03 8.14314e-03 6.64998e-03 5.43089e-03 4.43550e-03 3.62272e-03 2.95902e-03 2.41704e-03 1.97442e-03 1.61293e-03 1.31769e-03 1.07654e-03 8.79563e-04 7.18663e-04 5.87223e-04 4.79845e-04 3.84278e-04 2.69176e-04 4.19020e-05 4.28077e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
@@ -3364,9 +3316,9 @@
                 <lowerSeismoDepth>500.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.96299e-01 2.40900e-01 1.95871e-01 1.59270e-01 1.29518e-01 1.05330e-01 8.56649e-02 6.96761e-02 5.66753e-02 4.61034e-02 3.75060e-02 3.05139e-02 2.48270e-02 2.02012e-02 1.64385e-02 1.33774e-02 1.08871e-02 8.86098e-03 7.21239e-03 5.87090e-03 4.77924e-03 3.89081e-03 3.16775e-03 2.57922e-03 2.10017e-03 1.71021e-03 1.36488e-03 9.52793e-04 1.47814e-04 1.50498e-05</occurRates>
+                <occurRates>2.25676e-01 1.83481e-01 1.49184e-01 1.21307e-01 9.86453e-02 8.02227e-02 6.52450e-02 5.30671e-02 4.31652e-02 3.51132e-02 2.85651e-02 2.32397e-02 1.89083e-02 1.53853e-02 1.25195e-02 1.01881e-02 8.29149e-03 6.74837e-03 5.49279e-03 4.47111e-03 3.63971e-03 2.96309e-03 2.41242e-03 1.96421e-03 1.59937e-03 1.30239e-03 1.03941e-03 7.25578e-04 1.12564e-04 1.14606e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -3414,9 +3366,9 @@
                 <lowerSeismoDepth>600.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.27378e-01 1.84888e-01 1.50349e-01 1.22270e-01 9.94416e-02 8.08809e-02 6.57890e-02 5.35166e-02 4.35365e-02 3.54199e-02 2.88184e-02 2.34488e-02 1.90810e-02 1.55277e-02 1.26370e-02 1.02851e-02 8.37151e-03 6.81437e-03 5.54722e-03 4.51600e-03 3.67672e-03 2.99360e-03 2.43757e-03 1.98494e-03 1.61646e-03 1.31646e-03 1.05077e-03 7.33604e-04 1.13823e-04 1.15903e-05</occurRates>
+                <occurRates>2.25989e-01 1.83758e-01 1.49429e-01 1.21521e-01 9.88325e-02 8.03851e-02 6.53853e-02 5.31880e-02 4.32689e-02 3.52020e-02 2.86409e-02 2.33043e-02 1.89632e-02 1.54319e-02 1.25589e-02 1.02215e-02 8.31965e-03 6.77211e-03 5.51279e-03 4.48793e-03 3.65384e-03 2.97496e-03 2.42237e-03 1.97254e-03 1.60635e-03 1.30823e-03 1.04419e-03 7.29001e-04 1.13108e-04 1.15174e-05</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
@@ -3467,7 +3419,7 @@
                 <lowerSeismoDepth>40.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>1.93036e-01 1.55594e-01 1.25433e-01 1.01134e-01 8.15529e-02 6.57727e-02 5.30534e-02 4.27999e-02 3.45330e-02 2.78668e-02 2.24906e-02 1.81541e-02 1.46558e-02 1.18333e-02 9.55570e-03 7.71753e-03 6.23382e-03 5.03604e-03 4.06896e-03 3.28803e-03 2.65734e-03 2.14791e-03 1.73638e-03 1.37580e-03 9.53570e-04 1.46890e-04 1.48511e-05</occurRates>
             </incrementalMFD>
@@ -3523,7 +3475,7 @@
                 <lowerSeismoDepth>50.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.0</ruptAspectRatio>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
                 <occurRates>8.41817e-02 6.79114e-02 5.47934e-02 4.42155e-02 3.56847e-02 2.88037e-02 2.32528e-02 1.87742e-02 1.51603e-02 1.22437e-02 9.88955e-03 7.98913e-03 6.45476e-03 5.21579e-03 4.21519e-03 3.40700e-03 2.75413e-03 2.22666e-03 1.80044e-03 1.45600e-03 1.17761e-03 9.52565e-04 7.70628e-04 6.11049e-04 4.23827e-04 6.53348e-05 6.61033e-06</occurRates>
             </incrementalMFD>
@@ -3558,9 +3510,9 @@
                 <lowerSeismoDepth>100.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.51637e-02 2.86598e-02 2.33603e-02 1.90418e-02 1.55226e-02 1.26546e-02 1.03170e-02 8.41180e-03 6.85880e-03 5.59284e-03 4.56081e-03 3.71944e-03 3.03345e-03 2.47413e-03 2.01805e-03 1.64614e-03 1.34284e-03 1.09549e-03 8.93753e-04 7.29205e-04 5.94985e-04 4.85497e-04 3.96178e-04 3.23309e-04 2.63858e-04 2.15350e-04 1.72254e-04 1.20516e-04 1.87383e-05 1.91209e-06</occurRates>
+                <occurRates>2.40805e-02 1.96264e-02 1.59971e-02 1.30397e-02 1.06297e-02 8.66558e-03 7.06483e-03 5.76011e-03 4.69663e-03 3.82971e-03 3.12300e-03 2.54684e-03 2.07710e-03 1.69410e-03 1.38180e-03 1.12713e-03 9.19452e-04 7.50081e-04 6.11944e-04 4.99274e-04 4.07372e-04 3.32404e-04 2.71248e-04 2.21355e-04 1.80649e-04 1.47437e-04 1.17931e-04 8.25082e-05 1.28286e-05 1.30903e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -3570,7 +3522,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM100_200" name="Seram 100-200km" tectonicRegion="Subduction">
+        <areaSource id="SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3596,9 +3548,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.36824e-02 1.93283e-02 1.57755e-02 1.28764e-02 1.05107e-02 8.58002e-03 7.00436e-03 5.71835e-03 4.66870e-03 3.81191e-03 3.11251e-03 2.54157e-03 2.07546e-03 1.69491e-03 1.38421e-03 1.13052e-03 9.23371e-04 7.54215e-04 6.16077e-04 5.03264e-04 4.11128e-04 3.35876e-04 2.74411e-04 2.24204e-04 1.83192e-04 1.49689e-04 1.19873e-04 8.39645e-05 1.30701e-05 1.33522e-06</occurRates>
+                <occurRates>9.72093e-03 7.93357e-03 6.47520e-03 5.28518e-03 4.31409e-03 3.52161e-03 2.87485e-03 2.34699e-03 1.91615e-03 1.56448e-03 1.27742e-03 1.04308e-03 8.51772e-04 6.95586e-04 5.68067e-04 4.63949e-04 3.78932e-04 3.09510e-04 2.52818e-04 2.06520e-04 1.68709e-04 1.37827e-04 1.12603e-04 9.19996e-05 7.51697e-05 6.14214e-05 4.91861e-05 3.44519e-05 5.36278e-06 5.47843e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -3608,7 +3560,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR100_200" name="Timor 100-200km" tectonicRegion="Subduction">
+        <areaSource id="TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3631,9 +3583,9 @@
                 <lowerSeismoDepth>200.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.93280e-02 1.57753e-02 1.28763e-02 1.05105e-02 8.57992e-03 7.00428e-03 5.71828e-03 4.66864e-03 3.81186e-03 3.11247e-03 2.54153e-03 2.07543e-03 1.69489e-03 1.38419e-03 1.13051e-03 9.23360e-04 7.54206e-04 6.16069e-04 5.03257e-04 4.11123e-04 3.35872e-04 2.74407e-04 2.24202e-04 1.83190e-04 1.49687e-04 1.22317e-04 9.79574e-05 6.86172e-05 1.06816e-05 1.09126e-06</occurRates>
+                <occurRates>1.83208e-02 1.49530e-02 1.22050e-02 9.96249e-03 8.13244e-03 6.63890e-03 5.41993e-03 4.42500e-03 3.61289e-03 2.94998e-03 2.40882e-03 1.96703e-03 1.60635e-03 1.31187e-03 1.07142e-03 8.75093e-04 7.14772e-04 5.83852e-04 4.76934e-04 3.89614e-04 3.18296e-04 2.60045e-04 2.12465e-04 1.73598e-04 1.41848e-04 1.15910e-04 9.28250e-05 6.50213e-05 1.01217e-05 1.03405e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -3643,7 +3595,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM200_300" name="Seram 200-300km" tectonicRegion="Subduction">
+        <areaSource id="SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3668,9 +3620,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.89116e-02 1.54198e-02 1.25734e-02 1.02531e-02 8.36145e-03 6.81920e-03 5.56175e-03 4.53643e-03 3.70034e-03 3.01852e-03 2.46247e-03 2.00897e-03 1.63908e-03 1.33737e-03 1.09126e-03 8.90487e-04 7.26694e-04 5.93061e-04 4.84029e-04 3.95063e-04 3.22468e-04 2.63226e-04 2.14879e-04 1.75422e-04 1.43217e-04 1.16931e-04 9.35653e-05 6.54860e-05 1.01857e-05 1.03975e-06</occurRates>
+                <occurRates>6.84395e-03 5.58028e-03 4.55021e-03 3.71050e-03 3.02593e-03 2.46781e-03 2.01274e-03 1.64169e-03 1.33912e-03 1.09237e-03 8.91147e-04 7.27028e-04 5.93169e-04 4.83982e-04 3.94916e-04 3.22259e-04 2.62984e-04 2.14623e-04 1.75166e-04 1.42970e-04 1.16698e-04 9.52590e-05 7.77628e-05 6.34835e-05 5.18291e-05 4.23164e-05 3.38604e-05 2.36988e-05 3.68613e-06 3.76275e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="285.0" dip="45.0" rake="-90.0" />
@@ -3680,7 +3632,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR200_300" name="Timor 200-300km" tectonicRegion="Subduction">
+        <areaSource id="TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3704,9 +3656,9 @@
                 <lowerSeismoDepth>300.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.36824e-02 1.93283e-02 1.57755e-02 1.28764e-02 1.05107e-02 8.58002e-03 7.00436e-03 5.71835e-03 4.66870e-03 3.81191e-03 3.11251e-03 2.54157e-03 2.07546e-03 1.69491e-03 1.38421e-03 1.13052e-03 9.23371e-04 7.54215e-04 6.16077e-04 5.03264e-04 4.11128e-04 3.35876e-04 2.74411e-04 2.24204e-04 1.83192e-04 1.49689e-04 1.19873e-04 8.39645e-05 1.30701e-05 1.33522e-06</occurRates>
+                <occurRates>1.62554e-02 1.32666e-02 1.08279e-02 8.83791e-03 7.21405e-03 5.88886e-03 4.80734e-03 3.92465e-03 3.20420e-03 2.61614e-03 2.13611e-03 1.74424e-03 1.42434e-03 1.16316e-03 9.49926e-04 7.75819e-04 6.33653e-04 5.17564e-04 4.22764e-04 3.45344e-04 2.82116e-04 2.30475e-04 1.88295e-04 1.53842e-04 1.25699e-04 1.02709e-04 8.22494e-05 5.76107e-05 8.96768e-06 9.16108e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -3716,7 +3668,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR300_400" name="Timor 300-400km" tectonicRegion="Subduction">
+        <areaSource id="TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3737,9 +3689,9 @@
                 <lowerSeismoDepth>400.0</lowerSeismoDepth>
             </areaGeometry>
             <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.25</ruptAspectRatio>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
             <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.61667e-02 2.94755e-02 2.40237e-02 1.95814e-02 1.59615e-02 1.30116e-02 1.06075e-02 8.64812e-03 7.05108e-03 5.74930e-03 4.68813e-03 3.82304e-03 3.11777e-03 2.54275e-03 2.07391e-03 1.69161e-03 1.37986e-03 1.12562e-03 9.18283e-04 7.49177e-04 6.11247e-04 4.98738e-04 4.06961e-04 3.32091e-04 2.71010e-04 2.21176e-04 1.76904e-04 1.23763e-04 1.92421e-05 1.96339e-06</occurRates>
+                <occurRates>3.52156e-02 2.87000e-02 2.33914e-02 1.90658e-02 1.55411e-02 1.26687e-02 1.03279e-02 8.42002e-03 6.86502e-03 5.59752e-03 4.56431e-03 3.72203e-03 3.03535e-03 2.47551e-03 2.01903e-03 1.64683e-03 1.34331e-03 1.09580e-03 8.93941e-04 7.29308e-04 5.95028e-04 4.85499e-04 3.96153e-04 3.23267e-04 2.63805e-04 2.15293e-04 1.72197e-04 1.20468e-04 1.87296e-05 1.91107e-06</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
@@ -3778,15 +3730,15 @@
             <magScaleRel>Leonard2014_SCR</magScaleRel>
             <ruptAspectRatio>1.5</ruptAspectRatio>
             <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>4.89803e-03 3.97863e-03 3.23224e-03 2.62622e-03 2.13412e-03 1.73445e-03 1.40981e-03 1.14609e-03 9.31817e-04 7.57702e-04 6.16199e-04 5.01184e-04 4.07688e-04 3.31674e-04 2.69866e-04 2.19603e-04 1.78722e-04 1.45469e-04 1.18417e-04 9.64062e-05 7.84960e-05 6.39204e-05 5.20570e-05 4.24002e-05 3.45386e-05 2.81376e-05 2.29254e-05 1.86807e-05 1.52235e-05 1.24074e-05 8.70754e-06 5.12788e-06 1.72062e-06 4.82248e-07</occurRates>
+                <occurRates>4.87859e-03 3.96284e-03 3.21941e-03 2.61580e-03 2.12565e-03 1.72757e-03 1.40422e-03 1.14154e-03 9.28119e-04 7.54695e-04 6.13753e-04 4.99195e-04 4.06070e-04 3.30358e-04 2.68795e-04 2.18731e-04 1.78013e-04 1.44891e-04 1.17947e-04 9.60236e-05 7.81845e-05 6.36667e-05 5.18504e-05 4.22319e-05 3.44015e-05 2.80259e-05 2.28344e-05 1.86066e-05 1.51631e-05 1.23582e-05 8.67298e-06 5.10753e-06 1.71380e-06 4.80334e-07</occurRates>
             </incrementalMFD>
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="197.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="17.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="207.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="187.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="27.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="7.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="212.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="182.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="32.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="2.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3824,10 +3776,10 @@
             <nodalPlaneDist>
                 <nodalPlane probability="0.34" strike="175.0" dip="35.0" rake="90.0" />
                 <nodalPlane probability="0.34" strike="355.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="185.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="165.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="5.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="345.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="190.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="160.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="10.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="340.0" dip="35.0" rake="90.0" />
             </nodalPlaneDist>
             <hypoDepthDist>
                 <hypoDepth probability="0.50" depth="10.0"/>
@@ -3836,5 +3788,1811 @@
             </hypoDepthDist>
         </areaSource>
 
+      <complexFaultSource id="banda_0" name="sunda" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   121.5474 -11.4252 0.0
+                   120.5367 -11.5100 0.0
+                   120.0433 -11.4567 0.0
+                   119.3500 -11.3967 0.0
+                   118.1633 -11.3567 0.0
+                   116.6700 -11.2967 0.0
+                   116.0033 -11.2300 0.0
+                   115.3433 -11.1567 0.0
+                   114.4900 -11.0967 0.0
+                   114.1633 -11.0300 0.0
+                   113.8433 -10.9567 0.0
+                   113.3900 -10.8967 0.0
+                   113.0433 -10.8300 0.0
+                   112.6833 -10.7567 0.0
+                   112.3500 -10.6967 0.0
+                   112.0633 -10.6300 0.0
+                   111.5833 -10.5567 0.0
+                   111.1500 -10.4967 0.0
+                   110.1833 -10.4300 0.0
+                   109.7033 -10.3567 0.0
+                   108.9500 -10.2967 0.0
+                   108.6833 -10.2300 0.0
+                   108.4033 -10.1567 0.0
+                   108.0500 -10.0967 0.0
+                   107.8233 -10.0300 0.0
+                   107.6433 -9.9567 0.0
+                   107.4500 -9.8967 0.0
+                   107.2833 -9.8300 0.0
+                   107.1433 -9.7567 0.0
+                   106.9300 -9.6967 0.0
+                   106.8033 -9.6300 0.0
+                   106.7233 -9.5567 0.0
+                   106.5700 -9.4967 0.0
+                   106.4833 -9.4300 0.0
+                   106.3833 -9.3567 0.0
+                   106.2500 -9.2967 0.0
+                   106.1233 -9.2300 0.0
+                   106.0233 -9.1567 0.0
+                   105.9100 -9.0967 0.0
+                   105.8033 -9.0300 0.0
+                   105.6833 -8.9567 0.0
+                   105.5700 -8.8967 0.0
+                   105.4633 -8.8300 0.0
+                   105.3633 -8.7567 0.0
+                   105.2300 -8.6967 0.0
+                   105.1233 -8.6300 0.0
+                   105.0233 -8.5567 0.0
+                   104.8900 -8.4967 0.0
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   121.5268 -10.1376 25.0
+                   121.5130 -10.1396 25.0
+                   121.4428 -10.1495 25.0
+                   121.3587 -10.1546 25.0
+                   121.2746 -10.1527 25.0
+                   121.1905 -10.1574 25.0
+                   121.1065 -10.1507 25.0
+                   121.0224 -10.1547 25.0
+                   120.9383 -10.1538 25.0
+                   120.8542 -10.1569 25.0
+                   120.7702 -10.1593 25.0
+                   120.6861 -10.1709 25.0
+                   120.6020 -10.1728 25.0
+                   120.5179 -10.1674 25.0
+                   120.4339 -10.1648 25.0
+                   120.3498 -10.1682 25.0
+                   120.2657 -10.1669 25.0
+                   120.1816 -10.1711 25.0
+                   120.0976 -10.1706 25.0
+                   120.0135 -10.1583 25.0
+                   119.9345 -10.1396 25.0
+                   119.9294 -10.1381 25.0
+                   119.8453 -10.1080 25.0
+                   119.7613 -10.0693 25.0
+                   119.7402 -10.0553 25.0
+                   119.6772 -10.0140 25.0
+                   119.5954 -9.9710 25.0
+                   119.5931 -9.9698 25.0
+                   119.5090 -9.9367 25.0
+                   119.4250 -9.9142 25.0
+                   119.3409 -9.8987 25.0
+                   119.2812 -9.8867 25.0
+                   119.2568 -9.8819 25.0
+                   119.1727 -9.8760 25.0
+                   119.0887 -9.8710 25.0
+                   119.0046 -9.8644 25.0
+                   118.9205 -9.8562 25.0
+                   118.8364 -9.8465 25.0
+                   118.7524 -9.8404 25.0
+                   118.6683 -9.8347 25.0
+                   118.5842 -9.8339 25.0
+                   118.5001 -9.8365 25.0
+                   118.4161 -9.8402 25.0
+                   118.3320 -9.8373 25.0
+                   118.2479 -9.8428 25.0
+                   118.1638 -9.8538 25.0
+                   118.0798 -9.8704 25.0
+                   118.0363 -9.8867 25.0
+                   117.9957 -9.9024 25.0
+                   117.9116 -9.9545 25.0
+                   117.8863 -9.9710 25.0
+                   117.8275 -10.0079 25.0
+                   117.7631 -10.0553 25.0
+                   117.7435 -10.0698 25.0
+                   117.6594 -10.1330 25.0
+                   117.6421 -10.1396 25.0
+                   117.5753 -10.1601 25.0
+                   117.4912 -10.1677 25.0
+                   117.4072 -10.1545 25.0
+                   117.3653 -10.1396 25.0
+                   117.3231 -10.1211 25.0
+                   117.2390 -10.0563 25.0
+                   117.2374 -10.0553 25.0
+                   117.1549 -10.0040 25.0
+                   117.0857 -9.9710 25.0
+                   117.0709 -9.9640 25.0
+                   116.9868 -9.9536 25.0
+                   116.9173 -9.9710 25.0
+                   116.9027 -9.9747 25.0
+                   116.8186 -10.0231 25.0
+                   116.7609 -10.0553 25.0
+                   116.7346 -10.0705 25.0
+                   116.6505 -10.1116 25.0
+                   116.5688 -10.1396 25.0
+                   116.5664 -10.1403 25.0
+                   116.4823 -10.1492 25.0
+                   116.3983 -10.1442 25.0
+                   116.3714 -10.1396 25.0
+                   116.3142 -10.1283 25.0
+                   116.2301 -10.1062 25.0
+                   116.1460 -10.0810 25.0
+                   116.0658 -10.0553 25.0
+                   116.0620 -10.0541 25.0
+                   115.9779 -10.0291 25.0
+                   115.8938 -10.0076 25.0
+                   115.8097 -9.9846 25.0
+                   115.7569 -9.9710 25.0
+                   115.7257 -9.9635 25.0
+                   115.6416 -9.9422 25.0
+                   115.5575 -9.9214 25.0
+                   115.4734 -9.9048 25.0
+                   115.3894 -9.8902 25.0
+                   115.3524 -9.8867 25.0
+                   115.3053 -9.8826 25.0
+                   115.2212 -9.8723 25.0
+                   115.1371 -9.8639 25.0
+                   115.0531 -9.8563 25.0
+                   114.9690 -9.8500 25.0
+                   114.8849 -9.8523 25.0
+                   114.8008 -9.8521 25.0
+                   114.7168 -9.8544 25.0
+                   114.6327 -9.8527 25.0
+                   114.5486 -9.8466 25.0
+                   114.4645 -9.8327 25.0
+                   114.3805 -9.8134 25.0
+                   114.3539 -9.8025 25.0
+                   114.2964 -9.7844 25.0
+                   114.2123 -9.7631 25.0
+                   114.1282 -9.7420 25.0
+                   114.0442 -9.7208 25.0
+                   114.0271 -9.7182 25.0
+                   113.9601 -9.7067 25.0
+                   113.8760 -9.7017 25.0
+                   113.7919 -9.7033 25.0
+                   113.7079 -9.7067 25.0
+                   113.6238 -9.7115 25.0
+                   113.5397 -9.7082 25.0
+                   113.4556 -9.6932 25.0
+                   113.3716 -9.6765 25.0
+                   113.2875 -9.6509 25.0
+                   113.2440 -9.6339 25.0
+                   113.2034 -9.6189 25.0
+                   113.1193 -9.5838 25.0
+                   113.0353 -9.5539 25.0
+                   113.0187 -9.5497 25.0
+                   112.9512 -9.5336 25.0
+                   112.8671 -9.5105 25.0
+                   112.7830 -9.4859 25.0
+                   112.7311 -9.4654 25.0
+                   112.6990 -9.4525 25.0
+                   112.6149 -9.4256 25.0
+                   112.5308 -9.3940 25.0
+                   112.4978 -9.3811 25.0
+                   112.4467 -9.3652 25.0
+                   112.3627 -9.3331 25.0
+                   112.3007 -9.2969 25.0
+                   112.2786 -9.2810 25.0
+                   112.1945 -9.2368 25.0
+                   112.1456 -9.2126 25.0
+                   112.1104 -9.1971 25.0
+                   112.0264 -9.1775 25.0
+                   111.9423 -9.1739 25.0
+                   111.8582 -9.2039 25.0
+                   111.8365 -9.2126 25.0
+                   111.7741 -9.2381 25.0
+                   111.6901 -9.2770 25.0
+                   111.6366 -9.2969 25.0
+                   111.6060 -9.3061 25.0
+                   111.5219 -9.3232 25.0
+                   111.4378 -9.3373 25.0
+                   111.3538 -9.3396 25.0
+                   111.2697 -9.3395 25.0
+                   111.1856 -9.3383 25.0
+                   111.1015 -9.3373 25.0
+                   111.0175 -9.3378 25.0
+                   110.9334 -9.3341 25.0
+                   110.8493 -9.3387 25.0
+                   110.7652 -9.3435 25.0
+                   110.6812 -9.3474 25.0
+                   110.5971 -9.3493 25.0
+                   110.5130 -9.3392 25.0
+                   110.4289 -9.3328 25.0
+                   110.3449 -9.3194 25.0
+                   110.2608 -9.3046 25.0
+                   110.2267 -9.2969 25.0
+                   110.1767 -9.2833 25.0
+                   110.0926 -9.2639 25.0
+                   110.0086 -9.2441 25.0
+                   109.9245 -9.2260 25.0
+                   109.8733 -9.2126 25.0
+                   109.8404 -9.2041 25.0
+                   109.7563 -9.1746 25.0
+                   109.6723 -9.1513 25.0
+                   109.5990 -9.1283 25.0
+                   109.5882 -9.1250 25.0
+                   109.5041 -9.0993 25.0
+                   109.4200 -9.0720 25.0
+                   109.3668 -9.0440 25.0
+                   109.3360 -9.0294 25.0
+                   109.2519 -8.9950 25.0
+                   109.1678 -8.9655 25.0
+                   109.1500 -8.9598 25.0
+                   109.0837 -8.9266 25.0
+                   108.9997 -8.8755 25.0
+                   108.9996 -8.8755 25.0
+                   108.9156 -8.8404 25.0
+                   108.8315 -8.8159 25.0
+                   108.7661 -8.7912 25.0
+                   108.7474 -8.7844 25.0
+                   108.6634 -8.7626 25.0
+                   108.5793 -8.7261 25.0
+                   108.5345 -8.7070 25.0
+                   108.4952 -8.6917 25.0
+                   108.4111 -8.6518 25.0
+                   108.3514 -8.6227 25.0
+                   108.3271 -8.6150 25.0
+                   108.2430 -8.5893 25.0
+                   108.1589 -8.5592 25.0
+                   108.1029 -8.5384 25.0
+                   108.0748 -8.5269 25.0
+                   107.9908 -8.4966 25.0
+                   107.9067 -8.4731 25.0
+                   107.8293 -8.4542 25.0
+                   107.8226 -8.4524 25.0
+                   107.7385 -8.4243 25.0
+                   107.6545 -8.4043 25.0
+                   107.5704 -8.3781 25.0
+                   107.5492 -8.3699 25.0
+                   107.4863 -8.3454 25.0
+                   107.4022 -8.3040 25.0
+                   107.3782 -8.2856 25.0
+                   107.3182 -8.2395 25.0
+                   107.2588 -8.2013 25.0
+                   107.2341 -8.1888 25.0
+                   107.1500 -8.1425 25.0
+                   107.1025 -8.1171 25.0
+                   107.0659 -8.0937 25.0
+                   106.9818 -8.0405 25.0
+                   106.9710 -8.0328 25.0
+                   106.8978 -7.9814 25.0
+                   106.8232 -7.9485 25.0
+                   106.8137 -7.9442 25.0
+                   106.7296 -7.9042 25.0
+                   106.6455 -7.8663 25.0
+                   106.6407 -7.8643 25.0
+                   106.5615 -7.8323 25.0
+                   106.4790 -7.7800 25.0
+                   106.4774 -7.7793 25.0
+                   106.3933 -7.7481 25.0
+                   106.3092 -7.7092 25.0
+                   106.2785 -7.6957 25.0
+                   106.2252 -7.6682 25.0
+                   106.1411 -7.6151 25.0
+                   106.1360 -7.6115 25.0
+                   106.0570 -7.5620 25.0
+                   105.9995 -7.5272 25.0
+                   105.9729 -7.5115 25.0
+                   105.8889 -7.4599 25.0
+                   105.8652 -7.4429 25.0
+                   105.8048 -7.4084 25.0
+                   105.7283 -7.3587 25.0
+                   105.7207 -7.3519 25.0
+                   105.6571 -7.2744 25.0
+                   105.6366 -7.2476 25.0
+                   105.5867 -7.1901 25.0
+                   105.5526 -7.1512 25.0
+                   105.5090 -7.1058 25.0
+                   105.4685 -7.0662 25.0
+                   105.4203 -7.0216 25.0
+                   105.3844 -6.9953 25.0
+                   105.3003 -6.9451 25.0
+                   105.2886 -6.9373 25.0
+                   105.2163 -6.8712 25.0
+                   105.1873 -6.8530 25.0
+                   105.1322 -6.8211 25.0
+                   105.0481 -6.7753 25.0
+                   105.0355 -6.7688 25.0
+                   104.9640 -6.7351 25.0
+                   104.8800 -6.6870 25.0
+                   104.8733 -6.6845 25.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   121.5378 -9.5392 50.0
+                   121.3587 -9.5411 50.0
+                   121.2746 -9.5449 50.0
+                   121.1905 -9.5403 50.0
+                   121.1065 -9.5427 50.0
+                   121.0224 -9.5398 50.0
+                   120.9383 -9.5441 50.0
+                   120.8542 -9.5442 50.0
+                   120.7702 -9.5471 50.0
+                   120.6963 -9.5497 50.0
+                   120.6861 -9.5501 50.0
+                   120.6020 -9.5547 50.0
+                   120.5179 -9.5588 50.0
+                   120.4339 -9.5586 50.0
+                   120.3498 -9.5627 50.0
+                   120.2657 -9.5720 50.0
+                   120.1816 -9.5790 50.0
+                   120.0976 -9.5764 50.0
+                   120.0135 -9.5653 50.0
+                   119.9530 -9.5497 50.0
+                   119.9294 -9.5442 50.0
+                   119.8453 -9.5144 50.0
+                   119.7613 -9.4759 50.0
+                   119.7439 -9.4654 50.0
+                   119.6772 -9.4274 50.0
+                   119.5931 -9.3937 50.0
+                   119.5526 -9.3811 50.0
+                   119.5090 -9.3712 50.0
+                   119.4250 -9.3576 50.0
+                   119.3409 -9.3468 50.0
+                   119.2568 -9.3350 50.0
+                   119.1727 -9.3291 50.0
+                   119.0887 -9.3247 50.0
+                   119.0046 -9.3216 50.0
+                   118.9205 -9.3198 50.0
+                   118.8364 -9.3204 50.0
+                   118.7524 -9.3227 50.0
+                   118.6683 -9.3261 50.0
+                   118.5842 -9.3315 50.0
+                   118.5001 -9.3382 50.0
+                   118.4161 -9.3465 50.0
+                   118.3320 -9.3532 50.0
+                   118.2479 -9.3621 50.0
+                   118.1638 -9.3699 50.0
+                   118.1086 -9.3811 50.0
+                   118.0798 -9.3891 50.0
+                   117.9957 -9.4134 50.0
+                   117.9116 -9.4498 50.0
+                   117.8796 -9.4654 50.0
+                   117.8275 -9.4927 50.0
+                   117.7435 -9.5446 50.0
+                   117.7361 -9.5497 50.0
+                   117.6594 -9.6074 50.0
+                   117.5934 -9.6339 50.0
+                   117.5753 -9.6419 50.0
+                   117.4912 -9.6541 50.0
+                   117.4072 -9.6357 50.0
+                   117.4035 -9.6339 50.0
+                   117.3231 -9.5981 50.0
+                   117.2565 -9.5497 50.0
+                   117.2390 -9.5380 50.0
+                   117.1549 -9.4957 50.0
+                   117.0709 -9.4667 50.0
+                   117.0485 -9.4654 50.0
+                   116.9868 -9.4621 50.0
+                   116.9711 -9.4654 50.0
+                   116.9027 -9.4807 50.0
+                   116.8186 -9.5293 50.0
+                   116.7808 -9.5497 50.0
+                   116.7346 -9.5765 50.0
+                   116.6505 -9.6200 50.0
+                   116.6144 -9.6339 50.0
+                   116.5664 -9.6538 50.0
+                   116.4823 -9.6691 50.0
+                   116.3983 -9.6653 50.0
+                   116.3142 -9.6502 50.0
+                   116.2469 -9.6339 50.0
+                   116.2301 -9.6301 50.0
+                   116.1460 -9.6067 50.0
+                   116.0620 -9.5834 50.0
+                   115.9779 -9.5601 50.0
+                   115.9335 -9.5497 50.0
+                   115.8938 -9.5409 50.0
+                   115.8097 -9.5222 50.0
+                   115.7257 -9.5019 50.0
+                   115.6416 -9.4820 50.0
+                   115.5722 -9.4654 50.0
+                   115.5575 -9.4620 50.0
+                   115.4734 -9.4476 50.0
+                   115.3894 -9.4389 50.0
+                   115.3053 -9.4290 50.0
+                   115.2212 -9.4224 50.0
+                   115.1371 -9.4134 50.0
+                   115.0531 -9.4065 50.0
+                   114.9690 -9.4000 50.0
+                   114.8849 -9.3994 50.0
+                   114.8008 -9.3971 50.0
+                   114.7168 -9.3954 50.0
+                   114.6327 -9.3891 50.0
+                   114.5544 -9.3811 50.0
+                   114.5486 -9.3807 50.0
+                   114.4645 -9.3697 50.0
+                   114.3805 -9.3514 50.0
+                   114.2964 -9.3240 50.0
+                   114.2123 -9.2993 50.0
+                   114.2046 -9.2969 50.0
+                   114.1282 -9.2676 50.0
+                   114.0442 -9.2432 50.0
+                   113.9601 -9.2274 50.0
+                   113.8760 -9.2205 50.0
+                   113.7919 -9.2222 50.0
+                   113.7079 -9.2274 50.0
+                   113.6238 -9.2313 50.0
+                   113.5397 -9.2233 50.0
+                   113.4660 -9.2126 50.0
+                   113.4556 -9.2112 50.0
+                   113.3716 -9.1924 50.0
+                   113.2875 -9.1675 50.0
+                   113.2034 -9.1423 50.0
+                   113.1697 -9.1283 50.0
+                   113.1193 -9.1093 50.0
+                   113.0353 -9.0856 50.0
+                   112.9512 -9.0590 50.0
+                   112.9097 -9.0440 50.0
+                   112.8671 -9.0329 50.0
+                   112.7830 -9.0081 50.0
+                   112.6990 -8.9739 50.0
+                   112.6572 -8.9598 50.0
+                   112.6149 -8.9432 50.0
+                   112.5308 -8.9103 50.0
+                   112.4467 -8.8759 50.0
+                   112.4459 -8.8755 50.0
+                   112.3627 -8.8378 50.0
+                   112.2818 -8.7912 50.0
+                   112.2786 -8.7895 50.0
+                   112.1945 -8.7541 50.0
+                   112.1104 -8.7258 50.0
+                   112.0383 -8.7070 50.0
+                   112.0264 -8.7041 50.0
+                   111.9423 -8.6979 50.0
+                   111.8582 -8.7037 50.0
+                   111.8409 -8.7070 50.0
+                   111.7741 -8.7218 50.0
+                   111.6901 -8.7464 50.0
+                   111.6060 -8.7739 50.0
+                   111.5526 -8.7912 50.0
+                   111.5219 -8.8025 50.0
+                   111.4378 -8.8272 50.0
+                   111.3538 -8.8452 50.0
+                   111.2697 -8.8604 50.0
+                   111.1856 -8.8724 50.0
+                   111.1583 -8.8755 50.0
+                   111.1015 -8.8820 50.0
+                   111.0175 -8.8908 50.0
+                   110.9334 -8.8910 50.0
+                   110.8493 -8.8955 50.0
+                   110.7652 -8.8987 50.0
+                   110.6812 -8.8999 50.0
+                   110.5971 -8.8907 50.0
+                   110.5130 -8.8845 50.0
+                   110.4572 -8.8755 50.0
+                   110.4289 -8.8712 50.0
+                   110.3449 -8.8558 50.0
+                   110.2608 -8.8388 50.0
+                   110.1767 -8.8140 50.0
+                   110.0926 -8.7915 50.0
+                   110.0916 -8.7912 50.0
+                   110.0086 -8.7681 50.0
+                   109.9245 -8.7418 50.0
+                   109.8415 -8.7070 50.0
+                   109.8404 -8.7065 50.0
+                   109.7563 -8.6572 50.0
+                   109.6942 -8.6227 50.0
+                   109.6723 -8.6133 50.0
+                   109.5882 -8.5762 50.0
+                   109.5041 -8.5388 50.0
+                   109.5033 -8.5384 50.0
+                   109.4200 -8.4907 50.0
+                   109.3681 -8.4542 50.0
+                   109.3360 -8.4333 50.0
+                   109.2519 -8.3921 50.0
+                   109.2124 -8.3699 50.0
+                   109.1678 -8.3457 50.0
+                   109.0837 -8.3069 50.0
+                   109.0476 -8.2856 50.0
+                   108.9997 -8.2584 50.0
+                   108.9156 -8.2220 50.0
+                   108.8567 -8.2013 50.0
+                   108.8315 -8.1948 50.0
+                   108.7474 -8.1733 50.0
+                   108.6634 -8.1528 50.0
+                   108.5793 -8.1249 50.0
+                   108.5513 -8.1171 50.0
+                   108.4952 -8.0997 50.0
+                   108.4111 -8.0728 50.0
+                   108.3271 -8.0451 50.0
+                   108.2968 -8.0328 50.0
+                   108.2430 -8.0129 50.0
+                   108.1589 -7.9736 50.0
+                   108.0908 -7.9485 50.0
+                   108.0748 -7.9431 50.0
+                   107.9908 -7.9116 50.0
+                   107.9067 -7.8815 50.0
+                   107.8610 -7.8643 50.0
+                   107.8226 -7.8500 50.0
+                   107.7385 -7.8066 50.0
+                   107.6818 -7.7800 50.0
+                   107.6545 -7.7697 50.0
+                   107.5704 -7.7339 50.0
+                   107.4899 -7.6957 50.0
+                   107.4863 -7.6936 50.0
+                   107.4022 -7.6383 50.0
+                   107.3731 -7.6115 50.0
+                   107.3182 -7.5633 50.0
+                   107.2691 -7.5272 50.0
+                   107.2341 -7.5035 50.0
+                   107.1500 -7.4470 50.0
+                   107.1431 -7.4429 50.0
+                   107.0659 -7.4087 50.0
+                   106.9818 -7.3723 50.0
+                   106.9521 -7.3587 50.0
+                   106.8978 -7.3292 50.0
+                   106.8137 -7.2960 50.0
+                   106.7556 -7.2744 50.0
+                   106.7296 -7.2649 50.0
+                   106.6455 -7.2305 50.0
+                   106.5615 -7.1937 50.0
+                   106.5559 -7.1901 50.0
+                   106.4774 -7.1405 50.0
+                   106.4063 -7.1058 50.0
+                   106.3933 -7.1001 50.0
+                   106.3092 -7.0609 50.0
+                   106.2351 -7.0216 50.0
+                   106.2252 -7.0178 50.0
+                   106.1411 -6.9855 50.0
+                   106.0570 -6.9383 50.0
+                   106.0552 -6.9373 50.0
+                   105.9729 -6.8832 50.0
+                   105.9356 -6.8530 50.0
+                   105.8889 -6.8141 50.0
+                   105.8430 -6.7688 50.0
+                   105.8048 -6.7284 50.0
+                   105.7674 -6.6845 50.0
+                   105.7207 -6.6312 50.0
+                   105.6994 -6.6002 50.0
+                   105.6366 -6.5329 50.0
+                   105.6143 -6.5160 50.0
+                   105.5526 -6.4655 50.0
+                   105.5048 -6.4317 50.0
+                   105.4685 -6.4082 50.0
+                   105.3844 -6.3621 50.0
+                   105.3539 -6.3474 50.0
+                   105.3003 -6.3227 50.0
+                   105.2163 -6.2766 50.0
+                   105.1836 -6.2631 50.0
+                   105.1322 -6.2465 50.0
+                   105.0481 -6.2181 50.0
+                   104.9640 -6.1893 50.0
+                   104.9341 -6.1789 50.0
+                   104.8800 -6.1561 50.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="8.05" binWidth="0.1">
+              <occurRates>0.00354235285044 0.00294059549203 0.00244235341597 0.00203311921789 0.00168961275918 0.00142513592373 0.00118994334966 0.000985603022297 0.000830390027329 0.000763753374084 0.000599104918891 0.000558821953409 0.000460340578697 0.000366766770669 0.000277198863836 0.000120760961845 7.15109576367e-05</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   132.6840 -6.7295 0.001
+                   132.6840 -6.7295 0.001
+                   132.5840 -6.8294 0.001
+                   132.5840 -6.8295 0.001
+                   132.4602 -7.0485 0.001
+                   132.3840 -7.1295 0.001
+                   132.2840 -7.2294 0.001
+                   132.2840 -7.2295 0.001
+                   132.1840 -7.3294 0.001
+                   132.1840 -7.3295 0.001
+                   132.0935 -7.4533 0.001
+                   131.9792 -7.6057 0.001
+                   131.8840 -7.7294 0.001
+                   131.8840 -7.7295 0.001
+                   131.7840 -7.8294 0.001
+                   131.7840 -7.8295 0.001
+                   131.6840 -7.9294 0.001
+                   131.6840 -7.9295 0.001
+                   131.5840 -8.0294 0.001
+                   131.4030 -8.1580 0.001
+                   131.1840 -8.3294 0.001
+                   131.1840 -8.3295 0.001
+                   131.0935 -8.4056 0.001
+                   130.9126 -8.4866 0.001
+                   130.7840 -8.5294 0.001
+                   130.7840 -8.5295 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   132.4215 -6.5670 15.0
+                   132.3886 -6.6295 15.0
+                   132.3840 -6.6341 15.0
+                   132.2883 -6.7295 15.0
+                   132.2840 -6.7356 15.0
+                   132.2135 -6.8295 15.0
+                   132.1840 -6.8727 15.0
+                   132.1425 -6.9295 15.0
+                   132.0840 -7.0072 15.0
+                   132.0676 -7.0295 15.0
+                   131.9874 -7.1295 15.0
+                   131.9840 -7.1337 15.0
+                   131.9039 -7.2295 15.0
+                   131.8840 -7.2561 15.0
+                   131.8267 -7.3295 15.0
+                   131.7840 -7.3966 15.0
+                   131.7600 -7.4295 15.0
+                   131.6871 -7.5295 15.0
+                   131.6840 -7.5326 15.0
+                   131.5862 -7.6295 15.0
+                   131.5840 -7.6317 15.0
+                   131.4840 -7.7054 15.0
+                   131.4559 -7.7295 15.0
+                   131.3840 -7.7890 15.0
+                   131.3335 -7.8295 15.0
+                   131.2840 -7.8673 15.0
+                   131.2118 -7.9295 15.0
+                   131.1840 -7.9531 15.0
+                   131.0860 -8.0295 15.0
+                   131.0840 -8.0310 15.0
+                   130.9867 -8.1295 15.0
+                   130.9840 -8.1320 15.0
+                   130.8840 -8.1815 15.0
+                   130.7910 -8.2295 15.0
+                   130.7840 -8.2332 15.0
+                   130.6840 -8.2725 15.0
+                   130.6407 -8.2861 15.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   131.9907 -6.2637 25.0
+                   131.4050 -6.9970 25.0
+                   130.9193 -7.4685 25.0
+                   130.4479 -7.7351 25.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.00283504837065 0.00216897707953 0.00166128000243 0.00127387083466 0.000977919923684 0.000751582318926 0.000578288493886 0.000445457239018 0.000375320144296 0.0002507247253 0.000174631800042 0.000121480872591 8.43512149746e-05 5.84202861794e-05 4.03328252115e-05 2.773949301e-05 1.99229159145e-05 1.26958693535e-05 8.85814616481e-06 5.35143869069e-06 3.63928680731e-06 2.1997864707e-06 1.15519435077e-06 7.11992830135e-07 2.69913094893e-07 5.69002380543e-08</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   134.1391 -4.7058 0.001
+                   133.9652 -5.4617 0.001
+                   133.5519 -6.0941 0.001
+                   132.6792 -6.7453 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   134.0433 -4.6989 15.0
+                   133.8779 -5.4351 15.0
+                   133.4900 -6.0268 15.0
+                   132.6481 -6.6620 15.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   133.9558 -4.6977 30.0
+                   133.7937 -5.4130 30.0
+                   133.4308 -5.9614 30.0
+                   132.6024 -6.5819 30.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.0198567703109 0.0151264990738 0.0115361796898 0.00880811762948 0.00673294105048 0.00515263749355 0.00394783718693 0.00302827189515 0.00235585906235 0.00169670920967 0.00117429614354 0.000813022030246 0.000560871048298 0.000384259671322 0.000260583751299 0.000174245553562 0.000114316477996 7.3057031962e-05 4.49631042386e-05 2.6108230952e-05 1.36917671932e-05 4.48909101966e-06</occurRates>
+          </incrementalMFD>
+          <rake>-90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   148.5816 -7.3965 0.001
+                   149.4671 -7.6575 0.001
+                   150.3731 -7.6524 0.001
+                   151.2536 -7.8367 0.001
+                   152.1340 -8.1387 0.001
+                   152.9376 -8.5277 0.001
+                   153.3881 -9.1625 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   148.5574 -7.6136 15.0
+                   149.4068 -7.8566 15.0
+                   150.3128 -7.8515 15.0
+                   151.1933 -8.0357 15.0
+                   152.0737 -8.3377 15.0
+                   152.8773 -8.7268 15.0
+                   153.2433 -9.3072 15.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   148.5571 -7.8765 30.0
+                   149.3912 -8.0905 30.0
+                   150.3406 -8.1015 30.0
+                   151.1473 -8.2661 30.0
+                   151.9814 -8.5734 30.0
+                   152.7058 -8.8807 30.0
+                   153.0350 -9.3966 30.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.00219271166988 0.00175123079161 0.00140027402117 0.00112096867911 0.000898435795584 0.000720933749209 0.000579187677371 0.000465863947508 0.000411790153101 0.000296091105793 0.000193092315105 0.000132870237377 9.3576473159e-05 5.88324345497e-05 3.9090076564e-05 2.6546525622e-05 1.53232864989e-05 9.28563925285e-06 5.65004144046e-06 2.33585459128e-06 3.96509786381e-07</occurRates>
+          </incrementalMFD>
+          <rake>-90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   134.5153 0.5967 0.001
+                   134.7563 0.4686 0.001
+                   134.9614 0.3660 0.001
+                   135.1511 0.2507 0.001
+                   135.3511 0.1507 0.001
+                   135.5511 0.0507 0.001
+                   135.7614 -0.0237 0.001
+                   136.0511 -0.1135 0.001
+                   136.3486 -0.1930 0.001
+                   136.5511 -0.2493 0.001
+                   136.7511 -0.3493 0.001
+                   137.0511 -0.4493 0.001
+                   137.2511 -0.5493 0.001
+                   137.4358 -0.6237 0.001
+                   137.5871 -0.6828 0.001
+                   137.7511 -0.7493 0.001
+                   137.9179 -0.8161 0.001
+                   138.0537 -0.8621 0.001
+                   138.2511 -0.9493 0.001
+                   138.5460 -1.0545 0.001
+                   138.7511 -1.1493 0.001
+                   139.0511 -1.2493 0.001
+                   139.2511 -1.3493 0.001
+                   139.5511 -1.4493 0.001
+                   139.7511 -1.5493 0.001
+                   139.9511 -1.6109 0.001
+                   140.0511 -1.6493 0.001
+                   140.2511 -1.7212 0.001
+                   140.3511 -1.7493 0.001
+                   140.6511 -1.8493 0.001
+                   140.8511 -1.9493 0.001
+                   141.0511 -2.0493 0.001
+                   141.2588 -2.1391 0.001
+                   141.4511 -2.2289 0.001
+                   141.6563 -2.3289 0.001
+                   141.8511 -2.4493 0.001
+                   142.1511 -2.6493 0.001
+                   142.3511 -2.7493 0.001
+                   142.5384 -2.8673 0.001
+                   142.6537 -2.9237 0.001
+                   142.7511 -2.9493 0.001
+                   142.9255 -2.9956 0.001
+                   143.0460 -3.0340 0.001
+                   143.1511 -3.0493 0.001
+                   143.3486 -3.1109 0.001
+                   143.4511 -3.1493 0.001
+                   143.6307 -3.2212 0.001
+                   143.7511 -3.2775 0.001
+                   143.8614 -3.3212 0.001
+                   143.9586 -3.3647 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   134.2954 0.1950 25.0
+                   134.3511 0.1654 25.0
+                   134.3805 0.1507 25.0
+                   134.4511 0.1167 25.0
+                   134.5511 0.0655 25.0
+                   134.5799 0.0507 25.0
+                   134.6511 0.0151 25.0
+                   134.7511 -0.0350 25.0
+                   134.7785 -0.0493 25.0
+                   134.8511 -0.0857 25.0
+                   134.9511 -0.1353 25.0
+                   134.9779 -0.1493 25.0
+                   135.0511 -0.1859 25.0
+                   135.1511 -0.2365 25.0
+                   135.1756 -0.2493 25.0
+                   135.2511 -0.2866 25.0
+                   135.3511 -0.3366 25.0
+                   135.3754 -0.3493 25.0
+                   135.4511 -0.3866 25.0
+                   135.5511 -0.4339 25.0
+                   135.5976 -0.4493 25.0
+                   135.6511 -0.4657 25.0
+                   135.7511 -0.4954 25.0
+                   135.8511 -0.5268 25.0
+                   135.9224 -0.5493 25.0
+                   135.9511 -0.5578 25.0
+                   136.0511 -0.5865 25.0
+                   136.1511 -0.6174 25.0
+                   136.2511 -0.6483 25.0
+                   136.2543 -0.6493 25.0
+                   136.3511 -0.6783 25.0
+                   136.4511 -0.7176 25.0
+                   136.5337 -0.7493 25.0
+                   136.5511 -0.7557 25.0
+                   136.6511 -0.7948 25.0
+                   136.7511 -0.8359 25.0
+                   136.7825 -0.8493 25.0
+                   136.8511 -0.8768 25.0
+                   136.9511 -0.9176 25.0
+                   137.0335 -0.9493 25.0
+                   137.0511 -0.9557 25.0
+                   137.1511 -0.9962 25.0
+                   137.2511 -1.0373 25.0
+                   137.2799 -1.0493 25.0
+                   137.3511 -1.0771 25.0
+                   137.4511 -1.1189 25.0
+                   137.5331 -1.1493 25.0
+                   137.5511 -1.1556 25.0
+                   137.6511 -1.1982 25.0
+                   137.7511 -1.2372 25.0
+                   137.7803 -1.2493 25.0
+                   137.8511 -1.2775 25.0
+                   137.9511 -1.3190 25.0
+                   138.0370 -1.3493 25.0
+                   138.0511 -1.3542 25.0
+                   138.1511 -1.3959 25.0
+                   138.2511 -1.4356 25.0
+                   138.2845 -1.4493 25.0
+                   138.3511 -1.4758 25.0
+                   138.4511 -1.5141 25.0
+                   138.5393 -1.5493 25.0
+                   138.5511 -1.5538 25.0
+                   138.6511 -1.5914 25.0
+                   138.7511 -1.6323 25.0
+                   138.7945 -1.6493 25.0
+                   138.8511 -1.6702 25.0
+                   138.9511 -1.7075 25.0
+                   139.0511 -1.7491 25.0
+                   139.0518 -1.7493 25.0
+                   139.1511 -1.7847 25.0
+                   139.2511 -1.8242 25.0
+                   139.3119 -1.8493 25.0
+                   139.3511 -1.8652 25.0
+                   139.4511 -1.9044 25.0
+                   139.5511 -1.9425 25.0
+                   139.5682 -1.9493 25.0
+                   139.6511 -1.9813 25.0
+                   139.7511 -2.0189 25.0
+                   139.8326 -2.0493 25.0
+                   139.8511 -2.0558 25.0
+                   139.9511 -2.0915 25.0
+                   140.0511 -2.1288 25.0
+                   140.1060 -2.1493 25.0
+                   140.1511 -2.1652 25.0
+                   140.2511 -2.2013 25.0
+                   140.3511 -2.2375 25.0
+                   140.3826 -2.2493 25.0
+                   140.4511 -2.2738 25.0
+                   140.5511 -2.3101 25.0
+                   140.6385 -2.3493 25.0
+                   140.6511 -2.3548 25.0
+                   140.7511 -2.3999 25.0
+                   140.8511 -2.4461 25.0
+                   140.8579 -2.4493 25.0
+                   140.9511 -2.4914 25.0
+                   141.0511 -2.5401 25.0
+                   141.0707 -2.5493 25.0
+                   141.1511 -2.5857 25.0
+                   141.2511 -2.6308 25.0
+                   141.2891 -2.6493 25.0
+                   141.3511 -2.6799 25.0
+                   141.4511 -2.7387 25.0
+                   141.4676 -2.7493 25.0
+                   141.5511 -2.8014 25.0
+                   141.6296 -2.8493 25.0
+                   141.6511 -2.8624 25.0
+                   141.7511 -2.9242 25.0
+                   141.7911 -2.9493 25.0
+                   141.8511 -2.9859 25.0
+                   141.9511 -3.0481 25.0
+                   141.9531 -3.0493 25.0
+                   142.0511 -3.1080 25.0
+                   142.1247 -3.1493 25.0
+                   142.1511 -3.1639 25.0
+                   142.2511 -3.2196 25.0
+                   142.3036 -3.2493 25.0
+                   142.3511 -3.2747 25.0
+                   142.4511 -3.3276 25.0
+                   142.5084 -3.3493 25.0
+                   142.5511 -3.3635 25.0
+                   142.6511 -3.3899 25.0
+                   142.7511 -3.4176 25.0
+                   142.8511 -3.4477 25.0
+                   142.8573 -3.4493 25.0
+                   142.9511 -3.4727 25.0
+                   143.0511 -3.4998 25.0
+                   143.1511 -3.5291 25.0
+                   143.2228 -3.5493 25.0
+                   143.2511 -3.5567 25.0
+                   143.3511 -3.5891 25.0
+                   143.4511 -3.6360 25.0
+                   143.4795 -3.6493 25.0
+                   143.5511 -3.6816 25.0
+                   143.6511 -3.7281 25.0
+                   143.6953 -3.7493 25.0
+                   143.7972 -3.7942 25.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   134.1511 -0.0883 50.0
+                   134.2511 -0.1384 50.0
+                   134.2721 -0.1493 50.0
+                   134.3511 -0.1895 50.0
+                   134.4511 -0.2402 50.0
+                   134.4691 -0.2493 50.0
+                   134.5511 -0.2889 50.0
+                   134.6511 -0.3406 50.0
+                   134.6684 -0.3493 50.0
+                   134.7511 -0.3896 50.0
+                   134.8511 -0.4403 50.0
+                   134.8685 -0.4493 50.0
+                   134.9511 -0.4910 50.0
+                   135.0511 -0.5417 50.0
+                   135.0658 -0.5493 50.0
+                   135.1511 -0.5912 50.0
+                   135.2511 -0.6405 50.0
+                   135.2692 -0.6493 50.0
+                   135.3511 -0.6897 50.0
+                   135.4511 -0.7344 50.0
+                   135.4965 -0.7493 50.0
+                   135.5511 -0.7663 50.0
+                   135.6511 -0.7958 50.0
+                   135.7511 -0.8269 50.0
+                   135.8231 -0.8493 50.0
+                   135.8511 -0.8576 50.0
+                   135.9511 -0.8877 50.0
+                   136.0511 -0.9187 50.0
+                   136.1490 -0.9493 50.0
+                   136.1511 -0.9500 50.0
+                   136.2511 -0.9806 50.0
+                   136.3511 -1.0165 50.0
+                   136.4325 -1.0493 50.0
+                   136.4511 -1.0566 50.0
+                   136.5511 -1.0977 50.0
+                   136.6511 -1.1401 50.0
+                   136.6762 -1.1493 50.0
+                   136.7511 -1.1759 50.0
+                   136.8511 -1.2171 50.0
+                   136.9257 -1.2493 50.0
+                   136.9511 -1.2597 50.0
+                   137.0511 -1.2983 50.0
+                   137.1511 -1.3383 50.0
+                   137.1779 -1.3493 50.0
+                   137.2511 -1.3784 50.0
+                   137.3511 -1.4198 50.0
+                   137.4241 -1.4493 50.0
+                   137.4511 -1.4600 50.0
+                   137.5511 -1.4989 50.0
+                   137.6511 -1.5408 50.0
+                   137.6722 -1.5493 50.0
+                   137.7511 -1.5789 50.0
+                   137.8511 -1.6224 50.0
+                   137.9291 -1.6493 50.0
+                   137.9511 -1.6568 50.0
+                   138.0511 -1.6995 50.0
+                   138.1511 -1.7383 50.0
+                   138.1784 -1.7493 50.0
+                   138.2511 -1.7772 50.0
+                   138.3511 -1.8157 50.0
+                   138.4326 -1.8493 50.0
+                   138.4511 -1.8565 50.0
+                   138.5511 -1.8920 50.0
+                   138.6511 -1.9321 50.0
+                   138.6952 -1.9493 50.0
+                   138.7511 -1.9704 50.0
+                   138.8511 -2.0110 50.0
+                   138.9486 -2.0493 50.0
+                   138.9511 -2.0503 50.0
+                   139.0511 -2.0883 50.0
+                   139.1511 -2.1262 50.0
+                   139.2084 -2.1493 50.0
+                   139.2511 -2.1659 50.0
+                   139.3511 -2.2040 50.0
+                   139.4511 -2.2454 50.0
+                   139.4614 -2.2493 50.0
+                   139.5511 -2.2832 50.0
+                   139.6511 -2.3214 50.0
+                   139.7291 -2.3493 50.0
+                   139.7511 -2.3569 50.0
+                   139.8511 -2.3933 50.0
+                   139.9511 -2.4292 50.0
+                   140.0026 -2.4493 50.0
+                   140.0511 -2.4673 50.0
+                   140.1511 -2.5022 50.0
+                   140.2511 -2.5392 50.0
+                   140.2788 -2.5493 50.0
+                   140.3511 -2.5747 50.0
+                   140.4511 -2.6127 50.0
+                   140.5324 -2.6493 50.0
+                   140.5511 -2.6576 50.0
+                   140.6511 -2.7048 50.0
+                   140.7450 -2.7493 50.0
+                   140.7511 -2.7521 50.0
+                   140.8511 -2.7956 50.0
+                   140.9511 -2.8430 50.0
+                   140.9646 -2.8493 50.0
+                   141.0511 -2.8891 50.0
+                   141.1511 -2.9343 50.0
+                   141.1796 -2.9493 50.0
+                   141.2511 -2.9882 50.0
+                   141.3472 -3.0493 50.0
+                   141.3511 -3.0518 50.0
+                   141.4511 -3.1116 50.0
+                   141.5116 -3.1493 50.0
+                   141.5511 -3.1730 50.0
+                   141.6511 -3.2364 50.0
+                   141.6723 -3.2493 50.0
+                   141.7511 -3.2965 50.0
+                   141.8360 -3.3493 50.0
+                   141.8511 -3.3582 50.0
+                   141.9511 -3.4155 50.0
+                   142.0108 -3.4493 50.0
+                   142.0511 -3.4715 50.0
+                   142.1511 -3.5268 50.0
+                   142.1921 -3.5493 50.0
+                   142.2511 -3.5804 50.0
+                   142.3511 -3.6317 50.0
+                   142.4083 -3.6493 50.0
+                   142.4511 -3.6614 50.0
+                   142.5511 -3.6883 50.0
+                   142.6511 -3.7178 50.0
+                   142.7511 -3.7471 50.0
+                   142.7590 -3.7493 50.0
+                   142.8511 -3.7736 50.0
+                   142.9511 -3.8012 50.0
+                   143.0511 -3.8293 50.0
+                   143.1238 -3.8493 50.0
+                   143.1511 -3.8565 50.0
+                   143.2511 -3.8915 50.0
+                   143.3511 -3.9392 50.0
+                   143.3726 -3.9493 50.0
+                   143.4511 -3.9855 50.0
+                   143.5511 -4.0327 50.0
+                   143.5904 -4.0493 50.0
+                   143.6972 -4.0875 50.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0213391760336 0.0173115454104 0.0140602999642 0.0114326615203 0.00930651399063 0.00758413522425 0.00618723205157 0.00505300342162 0.00413101539631 0.00338071788508 0.00276946916403 0.00227096259867 0.00197961965393 0.00162057793378 0.001298840512 0.00103261860901 0.000812683472642 0.000631183254139 0.000481169273631 0.000356442179975 0.000284445768593 0.000157463667657</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   128.2698 -2.5519 0.001
+                   129.4734 -2.6002 0.001
+                   129.5734 -2.6002 0.001
+                   129.7752 -2.6414 0.001
+                   130.0734 -2.6931 0.001
+                   130.3770 -2.7501 0.001
+                   130.4734 -2.7591 0.001
+                   130.7208 -2.8038 0.001
+                   131.0734 -2.9868 0.001
+                   131.2734 -3.0913 0.001
+                   131.4734 -3.2002 0.001
+                   131.6734 -3.3002 0.001
+                   131.9467 -3.4467 0.001
+                   132.7734 -4.2002 0.001
+                   132.8734 -4.3002 0.001
+                   132.8734 -4.3002 0.001
+                   132.9734 -4.4002 0.001
+                   132.9734 -4.4002 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   128.2734 -2.9054 20.0
+                   128.3734 -2.9085 20.0
+                   128.4734 -2.9125 20.0
+                   128.5734 -2.9164 20.0
+                   128.6734 -2.9209 20.0
+                   128.7734 -2.9245 20.0
+                   128.8734 -2.9271 20.0
+                   128.9734 -2.9317 20.0
+                   129.0734 -2.9360 20.0
+                   129.1734 -2.9391 20.0
+                   129.2734 -2.9437 20.0
+                   129.3734 -2.9476 20.0
+                   129.4734 -2.9505 20.0
+                   129.5734 -2.9623 20.0
+                   129.6734 -2.9810 20.0
+                   129.7734 -3.0002 20.0
+                   129.7737 -3.0002 20.0
+                   129.8734 -3.0169 20.0
+                   129.9734 -3.0332 20.0
+                   130.0734 -3.0509 20.0
+                   130.1734 -3.0674 20.0
+                   130.2734 -3.0850 20.0
+                   130.3588 -3.1002 20.0
+                   130.3734 -3.1026 20.0
+                   130.4734 -3.1181 20.0
+                   130.5734 -3.1336 20.0
+                   130.6734 -3.1748 20.0
+                   130.7197 -3.2002 20.0
+                   130.7734 -3.2284 20.0
+                   130.8734 -3.2804 20.0
+                   130.9098 -3.3002 20.0
+                   130.9734 -3.3333 20.0
+                   131.0734 -3.3863 20.0
+                   131.0997 -3.4002 20.0
+                   131.1734 -3.4375 20.0
+                   131.2734 -3.4901 20.0
+                   131.2918 -3.5002 20.0
+                   131.3734 -3.5430 20.0
+                   131.4734 -3.5970 20.0
+                   131.4793 -3.6002 20.0
+                   131.5734 -3.6486 20.0
+                   131.6702 -3.7002 20.0
+                   131.6734 -3.7018 20.0
+                   131.7734 -3.7655 20.0
+                   131.8126 -3.8002 20.0
+                   131.8734 -3.8549 20.0
+                   131.9235 -3.9002 20.0
+                   131.9734 -3.9449 20.0
+                   132.0349 -4.0002 20.0
+                   132.0734 -4.0348 20.0
+                   132.1453 -4.1002 20.0
+                   132.1734 -4.1250 20.0
+                   132.2555 -4.2002 20.0
+                   132.2734 -4.2165 20.0
+                   132.3630 -4.3002 20.0
+                   132.3734 -4.3100 20.0
+                   132.4686 -4.4002 20.0
+                   132.4734 -4.4047 20.0
+                   132.5734 -4.4993 20.0
+                   132.5744 -4.5002 20.0
+                   132.6734 -4.5937 20.0
+                   132.6803 -4.6002 20.0
+                   132.7306 -4.6430 20.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   128.2734 -3.1456 40.0
+                   128.3734 -3.1502 40.0
+                   128.4734 -3.1548 40.0
+                   128.5734 -3.1579 40.0
+                   128.6734 -3.1627 40.0
+                   128.7734 -3.1665 40.0
+                   128.8734 -3.1682 40.0
+                   128.9734 -3.1748 40.0
+                   129.0734 -3.1775 40.0
+                   129.1734 -3.1808 40.0
+                   129.2734 -3.1870 40.0
+                   129.3734 -3.1887 40.0
+                   129.4734 -3.1961 40.0
+                   129.5022 -3.2002 40.0
+                   129.5734 -3.2095 40.0
+                   129.6734 -3.2268 40.0
+                   129.7734 -3.2439 40.0
+                   129.8734 -3.2617 40.0
+                   129.9734 -3.2786 40.0
+                   130.0734 -3.2967 40.0
+                   130.0945 -3.3002 40.0
+                   130.1734 -3.3123 40.0
+                   130.2734 -3.3284 40.0
+                   130.3734 -3.3450 40.0
+                   130.4734 -3.3590 40.0
+                   130.5734 -3.3937 40.0
+                   130.5854 -3.4002 40.0
+                   130.6734 -3.4467 40.0
+                   130.7703 -3.5002 40.0
+                   130.7734 -3.5019 40.0
+                   130.8734 -3.5534 40.0
+                   130.9603 -3.6002 40.0
+                   130.9734 -3.6070 40.0
+                   131.0734 -3.6590 40.0
+                   131.1530 -3.7002 40.0
+                   131.1734 -3.7105 40.0
+                   131.2734 -3.7637 40.0
+                   131.3418 -3.8002 40.0
+                   131.3734 -3.8166 40.0
+                   131.4734 -3.8681 40.0
+                   131.5345 -3.9002 40.0
+                   131.5734 -3.9207 40.0
+                   131.6734 -3.9972 40.0
+                   131.6767 -4.0002 40.0
+                   131.7734 -4.0888 40.0
+                   131.7858 -4.1002 40.0
+                   131.8734 -4.1813 40.0
+                   131.8944 -4.2002 40.0
+                   131.9734 -4.2699 40.0
+                   132.0063 -4.3002 40.0
+                   132.0734 -4.3607 40.0
+                   132.1168 -4.4002 40.0
+                   132.1734 -4.4534 40.0
+                   132.2223 -4.5002 40.0
+                   132.2734 -4.5483 40.0
+                   132.3292 -4.6002 40.0
+                   132.3734 -4.6415 40.0
+                   132.4351 -4.7002 40.0
+                   132.4734 -4.7365 40.0
+                   132.5412 -4.8002 40.0
+                   132.5734 -4.8319 40.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.00825455172678 0.00660533460536 0.00529211388234 0.00424520183793 0.00340959885931 0.00274185312423 0.00220760014395 0.00177963336623 0.00143638991576 0.00116076110271 0.00100758025114 0.000811774713478 0.00061089506222 0.000451995777858 0.00032635906169 0.000227420154599 0.000150163412486 9.06663542086e-05 2.2983425332e-05</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   112.1216 -7.2966 0.001
+                   113.2200 -7.5509 0.001
+                   114.6941 -7.6087 0.001
+                   116.4601 -7.8602 0.001
+                   117.6307 -7.9411 0.001
+                   118.9198 -7.8660 0.001
+                   120.6888 -7.9180 0.001
+                   122.1340 -8.1319 0.001
+                   124.4058 -7.8139 0.001
+                   126.0360 -7.4324 0.001
+                   127.8974 -6.9468 0.001
+                   129.0189 -6.4959 0.001
+                   129.6895 -6.0450 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   112.0868 -7.6946 20.0
+                   113.0204 -7.8304 20.0
+                   114.0725 -7.9489 20.0
+                   115.6045 -8.1310 20.0
+                   116.6392 -8.2293 20.0
+                   117.4081 -8.2929 20.0
+                   118.6278 -8.2698 20.0
+                   119.3099 -8.2235 20.0
+                   119.7666 -8.2293 20.0
+                   120.2985 -8.2871 20.0
+                   121.0384 -8.4085 20.0
+                   121.6685 -8.4605 20.0
+                   122.1483 -8.4663 20.0
+                   122.6455 -8.4432 20.0
+                   123.5010 -8.3565 20.0
+                   124.8075 -8.1195 20.0
+                   126.0446 -7.8304 20.0
+                   126.8192 -7.6628 20.0
+                   127.8655 -7.3680 20.0
+                   128.6055 -7.0789 20.0
+                   129.2876 -6.7494 20.0
+                   129.9466 -6.3448 20.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   112.0371 -8.1477 45.0
+                   113.1123 -8.3500 45.0
+                   114.1529 -8.4656 45.0
+                   115.5923 -8.5813 45.0
+                   116.6560 -8.6853 45.0
+                   117.4421 -8.7373 45.0
+                   118.6214 -8.7084 45.0
+                   119.2804 -8.6911 45.0
+                   119.7545 -8.7027 45.0
+                   120.2979 -8.7431 45.0
+                   120.9684 -8.8356 45.0
+                   121.6274 -8.8992 45.0
+                   122.1882 -8.8992 45.0
+                   122.6911 -8.8876 45.0
+                   123.5698 -8.7894 45.0
+                   124.7375 -8.6159 45.0
+                   126.1827 -8.2807 45.0
+                   127.1539 -7.9916 45.0
+                   128.5008 -7.6216 45.0
+                   129.3853 -7.2575 45.0
+                   130.2524 -6.7487 45.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0191813792839 0.0153446632157 0.0122898232458 0.00985476916042 0.00791153783986 0.00635900812381 0.00511718991233 0.00412274367167 0.00339044272092 0.00275556673705 0.00215689177502 0.00163001292353 0.00131063199734 0.00101200174112 0.000776664346846 0.000582537523093 0.000398051111097 0.000308576568001 0.000211865750679 0.000136557683293 8.19837566126e-05 3.64289386371e-05 1.51269009011e-05</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   149.0355 -10.2982 0.001
+                   148.9355 -10.2982 0.001
+                   148.8355 -10.2982 0.001
+                   148.7355 -10.2982 0.001
+                   148.6355 -10.2982 0.001
+                   148.5355 -10.2982 0.001
+                   148.4355 -10.2982 0.001
+                   148.3355 -10.2982 0.001
+                   148.2355 -10.2982 0.001
+                   148.1355 -10.2982 0.001
+                   148.0355 -10.2982 0.001
+                   147.9355 -10.2982 0.001
+                   147.7355 -10.1982 0.001
+                   147.5355 -10.1263 0.001
+                   147.4355 -10.0982 0.001
+                   147.2227 -10.0161 0.001
+                   146.9355 -9.7982 0.001
+                   146.8278 -9.7110 0.001
+                   146.7073 -9.6238 0.001
+                   146.5971 -9.5264 0.001
+                   146.4920 -9.4494 0.001
+                   146.4125 -9.3827 0.001
+                   146.2971 -9.2161 0.001
+                   146.1971 -9.1008 0.001
+                   146.1355 -8.9982 0.001
+                   146.1355 -8.9982 0.001
+                   146.0355 -8.8982 0.001
+                   145.8022 -8.6392 0.001
+                   145.7202 -8.5494 0.001
+                   145.6355 -8.4982 0.001
+                   145.2355 -8.1982 0.001
+                   144.8355 -7.8982 0.001
+                   144.4638 -7.6291 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   149.0355 -10.0397 15.0
+                   148.9355 -10.0391 15.0
+                   148.8355 -10.0385 15.0
+                   148.7355 -10.0388 15.0
+                   148.6355 -10.0377 15.0
+                   148.5355 -10.0370 15.0
+                   148.4355 -10.0371 15.0
+                   148.3355 -10.0366 15.0
+                   148.2355 -10.0364 15.0
+                   148.1355 -10.0385 15.0
+                   148.0355 -10.0341 15.0
+                   147.9355 -10.0047 15.0
+                   147.9169 -9.9982 15.0
+                   147.8355 -9.9636 15.0
+                   147.7355 -9.9277 15.0
+                   147.6394 -9.8982 15.0
+                   147.6355 -9.8967 15.0
+                   147.5355 -9.8581 15.0
+                   147.4355 -9.8254 15.0
+                   147.3581 -9.7982 15.0
+                   147.3355 -9.7871 15.0
+                   147.2355 -9.7149 15.0
+                   147.2150 -9.6982 15.0
+                   147.1355 -9.6294 15.0
+                   147.0941 -9.5982 15.0
+                   147.0355 -9.5506 15.0
+                   146.9669 -9.4982 15.0
+                   146.9355 -9.4728 15.0
+                   146.8383 -9.3982 15.0
+                   146.8355 -9.3959 15.0
+                   146.7355 -9.3151 15.0
+                   146.7132 -9.2982 15.0
+                   146.6355 -9.2354 15.0
+                   146.5989 -9.1982 15.0
+                   146.5355 -9.1162 15.0
+                   146.5228 -9.0982 15.0
+                   146.4507 -8.9982 15.0
+                   146.4355 -8.9782 15.0
+                   146.3802 -8.8982 15.0
+                   146.3355 -8.8467 15.0
+                   146.2910 -8.7982 15.0
+                   146.2355 -8.7375 15.0
+                   146.2008 -8.6982 15.0
+                   146.1355 -8.6274 15.0
+                   146.1087 -8.5982 15.0
+                   146.0355 -8.5186 15.0
+                   146.0173 -8.4982 15.0
+                   145.9355 -8.4082 15.0
+                   145.9261 -8.3982 15.0
+                   145.8355 -8.3185 15.0
+                   145.8076 -8.2982 15.0
+                   145.7355 -8.2421 15.0
+                   145.6734 -8.1982 15.0
+                   145.6355 -8.1690 15.0
+                   145.5370 -8.0982 15.0
+                   145.5355 -8.0970 15.0
+                   145.4355 -8.0219 15.0
+                   145.4012 -7.9982 15.0
+                   145.3355 -7.9508 15.0
+                   145.2558 -7.8982 15.0
+                   145.2355 -7.8832 15.0
+                   145.1355 -7.8088 15.0
+                   145.1207 -7.7982 15.0
+                   145.0355 -7.7340 15.0
+                   144.9843 -7.6982 15.0
+                   144.9355 -7.6606 15.0
+                   144.8487 -7.5982 15.0
+                   144.8355 -7.5879 15.0
+                   144.7355 -7.5129 15.0
+                   144.7153 -7.4982 15.0
+                   144.6355 -7.4352 15.0
+                   144.6166 -7.4171 15.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   149.0432 -9.7047 30.0
+                   148.1935 -9.6689 30.0
+                   148.0706 -9.6433 30.0
+                   147.5843 -9.4744 30.0
+                   147.5127 -9.4232 30.0
+                   147.0059 -9.0188 30.0
+                   146.8933 -8.9164 30.0
+                   146.5554 -8.4557 30.0
+                   146.2944 -8.2100 30.0
+                   146.0845 -8.0462 30.0
+                   144.8304 -7.1300 30.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="6.05" binWidth="0.1">
+              <occurRates>0.0283672034673 0.0224576918184 0.0177984021582 0.014121205363 0.0112161671614 0.00891878563166 0.00710005292896 0.0056587113652 0.0045152153973 0.00360702057036 0.00288490525714 0.0023100967368 0.00185202408605 0.00152360595374 0.00111194748325 0.000827576224859 0.000590769651401 0.000401084420476 0.000299400123986 0.000199605478734 0.000147917936344 9.52873293274e-05 6.92401203773e-05 4.56016082528e-05 2.70453526916e-05 1.87676565792e-05 9.72311164715e-06 6.10881984466e-06 2.06558810878e-06</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   129.5994 -3.3760 0.001
+                   129.9232 -3.7053 0.001
+                   130.2863 -4.2520 0.001
+                   130.4997 -4.5804 0.001
+                   130.6218 -5.0508 0.001
+                   130.6862 -5.4954 0.001
+                   130.7038 -5.8228 0.001
+                   130.5629 -6.0738 0.001
+                   130.0774 -6.7156 0.001
+                   128.8681 -7.4438 0.001
+                   128.5018 -7.5357 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   129.4805 -3.4790 10.0
+                   129.6319 -3.6713 10.0
+                   129.8506 -3.9569 10.0
+                   129.9806 -4.3065 10.0
+                   130.0347 -4.6056 10.0
+                   130.0243 -5.0662 10.0
+                   130.0508 -5.2246 10.0
+                   130.0171 -5.4069 10.0
+                   130.0020 -5.5556 10.0
+                   129.8604 -6.0331 10.0
+                   129.5338 -6.6297 10.0
+                   129.4026 -6.7660 10.0
+                   129.1586 -6.9745 10.0
+                   128.8437 -7.2130 10.0
+                   128.4537 -7.3653 10.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   129.3461 -3.6053 20.0
+                   129.4729 -3.8121 20.0
+                   129.5565 -4.0728 20.0
+                   129.5336 -4.3300 20.0
+                   129.4778 -4.5061 20.0
+                   129.2600 -4.9575 20.0
+                   129.0766 -5.5856 20.0
+                   129.0346 -6.1974 20.0
+                   128.9273 -6.7020 20.0
+                   128.6993 -6.9632 20.0
+                   128.4060 -7.1754 20.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="7.05" binWidth="0.1">
+              <occurRates>0.0182097656878 0.0138118675898 0.0104898401013 0.00784715609869 0.00577880675314 0.00426756950754 0.00317916598719 0.00235585432354 0.0017938991472 0.00134846082576 0.00101414910203 0.000745888605858 0.000576255950723 0.000431516343696 0.000321210694149 0.000255250500154 0.000178003690922 0.000111241859887 7.95586943487e-05 3.93429572419e-05 8.25696284271e-06</occurRates>
+          </incrementalMFD>
+          <rake>-90</rake>
+        </complexFaultSource>
+      <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
+    
+          <complexFaultGeometry>
+            <faultTopEdge>
+              <gml:LineString>
+                <gml:posList>
+                   130.8005 -8.5692 0.001
+                   129.9400 -8.7832 0.001
+                   128.7528 -9.0037 0.001
+                   127.3874 -9.1394 0.001
+                   125.8780 -9.7754 0.001
+                   124.4957 -10.4114 0.001
+                   123.3084 -11.0050 0.001
+                   122.4180 -11.4715 0.001
+                   121.6124 -11.7937 0.001
+                </gml:posList>
+              </gml:LineString>
+            </faultTopEdge>
+    
+            <intermediateEdge>
+              <gml:LineString>
+                <gml:posList>
+                   130.7134 -7.7851 15.0
+                   130.6134 -7.8115 15.0
+                   130.5134 -7.8378 15.0
+                   130.4134 -7.8638 15.0
+                   130.3502 -7.8800 15.0
+                   130.3134 -7.8893 15.0
+                   130.2134 -7.9142 15.0
+                   130.1134 -7.9387 15.0
+                   130.0134 -7.9625 15.0
+                   129.9384 -7.9800 15.0
+                   129.9134 -7.9858 15.0
+                   129.8134 -8.0083 15.0
+                   129.7134 -8.0302 15.0
+                   129.6134 -8.0511 15.0
+                   129.5134 -8.0714 15.0
+                   129.4701 -8.0800 15.0
+                   129.4134 -8.0910 15.0
+                   129.3134 -8.1098 15.0
+                   129.2134 -8.1281 15.0
+                   129.1134 -8.1463 15.0
+                   129.0134 -8.1649 15.0
+                   128.9285 -8.1800 15.0
+                   128.9134 -8.1827 15.0
+                   128.8134 -8.1992 15.0
+                   128.7134 -8.2152 15.0
+                   128.6134 -8.2297 15.0
+                   128.5134 -8.2428 15.0
+                   128.4134 -8.2549 15.0
+                   128.3134 -8.2663 15.0
+                   128.2134 -8.2774 15.0
+                   128.1887 -8.2800 15.0
+                   128.1134 -8.2878 15.0
+                   128.0134 -8.2974 15.0
+                   127.9134 -8.3068 15.0
+                   127.8134 -8.3168 15.0
+                   127.7134 -8.3282 15.0
+                   127.6134 -8.3416 15.0
+                   127.5134 -8.3574 15.0
+                   127.4134 -8.3759 15.0
+                   127.3941 -8.3800 15.0
+                   127.3134 -8.3968 15.0
+                   127.2134 -8.4204 15.0
+                   127.1134 -8.4471 15.0
+                   127.0134 -8.4771 15.0
+                   127.0044 -8.4800 15.0
+                   126.9134 -8.5081 15.0
+                   126.8134 -8.5427 15.0
+                   126.7172 -8.5800 15.0
+                   126.7134 -8.5814 15.0
+                   126.6134 -8.6218 15.0
+                   126.5134 -8.6638 15.0
+                   126.4754 -8.6800 15.0
+                   126.4134 -8.7060 15.0
+                   126.3134 -8.7474 15.0
+                   126.2347 -8.7800 15.0
+                   126.2134 -8.7887 15.0
+                   126.1134 -8.8296 15.0
+                   126.0134 -8.8711 15.0
+                   125.9924 -8.8800 15.0
+                   125.9134 -8.9131 15.0
+                   125.8134 -8.9554 15.0
+                   125.7556 -8.9800 15.0
+                   125.7134 -8.9978 15.0
+                   125.6134 -9.0406 15.0
+                   125.5240 -9.0800 15.0
+                   125.5134 -9.0847 15.0
+                   125.4134 -9.1291 15.0
+                   125.3134 -9.1751 15.0
+                   125.3028 -9.1800 15.0
+                   125.2134 -9.2207 15.0
+                   125.1134 -9.2665 15.0
+                   125.0845 -9.2800 15.0
+                   125.0134 -9.3130 15.0
+                   124.9134 -9.3598 15.0
+                   124.8703 -9.3800 15.0
+                   124.8134 -9.4059 15.0
+                   124.7134 -9.4513 15.0
+                   124.6509 -9.4800 15.0
+                   124.6134 -9.4971 15.0
+                   124.5134 -9.5429 15.0
+                   124.4338 -9.5800 15.0
+                   124.4134 -9.5894 15.0
+                   124.3134 -9.6355 15.0
+                   124.2195 -9.6800 15.0
+                   124.2134 -9.6829 15.0
+                   124.1134 -9.7298 15.0
+                   124.0134 -9.7777 15.0
+                   124.0086 -9.7800 15.0
+                   123.9134 -9.8262 15.0
+                   123.8134 -9.8778 15.0
+                   123.8092 -9.8800 15.0
+                   123.7134 -9.9283 15.0
+                   123.6134 -9.9785 15.0
+                   123.6104 -9.9800 15.0
+                   123.5134 -10.0274 15.0
+                   123.4134 -10.0778 15.0
+                   123.4090 -10.0800 15.0
+                   123.3134 -10.1276 15.0
+                   123.2134 -10.1778 15.0
+                   123.2090 -10.1800 15.0
+                   123.1134 -10.2281 15.0
+                   123.0134 -10.2794 15.0
+                   123.0122 -10.2800 15.0
+                   122.9134 -10.3303 15.0
+                   122.8167 -10.3800 15.0
+                   122.8134 -10.3817 15.0
+                   122.7134 -10.4335 15.0
+                   122.6265 -10.4800 15.0
+                   122.6134 -10.4869 15.0
+                   122.5134 -10.5400 15.0
+                   122.4386 -10.5800 15.0
+                   122.4134 -10.5932 15.0
+                   122.3134 -10.6447 15.0
+                   122.2434 -10.6800 15.0
+                   122.2134 -10.6947 15.0
+                   122.1134 -10.7421 15.0
+                   122.0315 -10.7800 15.0
+                   122.0134 -10.7882 15.0
+                   121.9134 -10.8321 15.0
+                   121.8134 -10.8748 15.0
+                   121.8007 -10.8800 15.0
+                   121.7134 -10.9155 15.0
+                   121.6134 -10.9553 15.0
+                   121.5502 -10.9800 15.0
+                   121.5134 -10.9942 15.0
+                   121.4134 -11.0324 15.0
+                   121.3134 -11.0705 15.0
+                   121.3065 -11.0730 15.0
+                </gml:posList>
+              </gml:LineString>
+            </intermediateEdge>
+    
+            <faultBottomEdge>
+              <gml:LineString>
+                <gml:posList>
+                   130.4985 -7.3183 25.0
+                   129.5316 -7.5144 25.0
+                   128.4227 -7.6835 25.0
+                   127.3408 -7.7984 25.0
+                   126.7863 -7.9134 25.0
+                   126.0019 -8.2312 25.0
+                   124.6158 -8.8059 25.0
+                   121.1537 -10.4761 25.0
+                </gml:posList>
+              </gml:LineString>
+            </faultBottomEdge>
+          </complexFaultGeometry>
+    
+          <magScaleRel>StrasserInterface</magScaleRel>
+          <ruptAspectRatio>1.5</ruptAspectRatio>
+          <incrementalMFD minMag="6.55" binWidth="0.1">
+              <occurRates>0.0245450144923 0.019512425972 0.0155297660486 0.0123745634187 0.00987213745637 0.00788520814594 0.00630578854289 0.00504885378762 0.00400358539258 0.00315230759336 0.00247783525413 0.00195837553776 0.0015521235244 0.00123182063955 0.000955676237405 0.000780347000265 0.000618242177038 0.000488568118567 0.000384578036616 0.000300994170337 0.000233703163213 0.000167106903333 0.000137903841266 0.000102753708754 7.49027084788e-05 5.30851783859e-05 3.62407306977e-05 1.91984627983e-05 1.45895044483e-05 7.63452034228e-06</occurRates>
+          </incrementalMFD>
+          <rake>90</rake>
+        </complexFaultSource>
     </sourceModel>
 </nrml>

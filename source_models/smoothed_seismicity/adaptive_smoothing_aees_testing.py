@@ -1,7 +1,4 @@
 # coding: utf-8
-
-#get_ipython().magic(u'matplotlib inline')
-
 from hmtk.seismicity.smoothing.smoothed_seismicity import SmoothedSeismicity
 
 # Python dependences
@@ -81,10 +78,10 @@ learning_start = int(sys.argv[2])
 learning_end = int(sys.argv[3])
 target_start = int(sys.argv[4])
 target_end = int(sys.argv[5])
-ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_declustered.csv"
-#ifile = "../../catalogue/data/AUSTCAT_V0.12_hmtk_mx_orig.csv"
+ifile = "../../catalogue/data/NSHA18CAT_V0.1_hmtk_declustered.csv"
+
 parser = CsvCatalogueParser(ifile)
-catalogue = parser.read_file(start_year=1965, end_year=2010)
+catalogue = parser.read_file(start_year=1900, end_year=2017)
 # How many events in the catalogue?
 print "The catalogue contains %g events" % catalogue.get_number_events()
 neq = len(catalogue.data['magnitude'])
@@ -124,7 +121,7 @@ llon, ulon, llat, ulat = catalogue_clean.get_bounding_box()
 #map_config = {'min_lon': np.floor(llon), 'max_lon': np.ceil(ulon),
  #             'min_lat': np.floor(llat), 'max_lat': np.ceil(ulat), 'resolution':'c'}
 map_config = {'min_lon': np.floor(100), 'max_lon': np.ceil(160),
-              'min_lat': np.floor(-45), 'max_lat': np.ceil(-4), 'resolution':'c'}
+              'min_lat': np.floor(-46), 'max_lat': np.ceil(-4), 'resolution':'c'}
 # Creating a basemap - input a cconfiguration and (if desired) a title
 #basemap1 = HMTKBaseMap(map_config, 'Earthquake Catalogue')
 
@@ -135,7 +132,6 @@ map_config = {'min_lon': np.floor(100), 'max_lon': np.ceil(160),
 selector1 = CatalogueSelector(catalogue_depth_clean, create_copy=True)
 for source in source_model.sources:
     source.select_catalogue(selector1)
-    
     llon, ulon, llat, ulat = source.catalogue.get_bounding_box()
     print llon, ulon, llat, ulat
     # Map the Source
@@ -152,7 +148,7 @@ for source in source_model.sources:
 #                                 [1965., 4.0]])
 completeness_table_a = np.array([[1965., 3.0]])
 
-grid_lims = [110., 160.0, 0.1, -45.0, -5.0, 0.1, 0., 20., 20.]
+grid_lims = [105., 160.0, 0.1, -47.0, -5.0, 0.1, 0., 20., 20.]
 grid_res = grid_lims[2]
 try:
     os.remove("Aus1_tmp.hdf5")

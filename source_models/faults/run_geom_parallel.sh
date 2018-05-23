@@ -1,8 +1,8 @@
 #PBS -P w84
 #PBS -q hugemem
-#PBS -l walltime=24:00:00
-#PBS -l ncpus=28
-#PBS -l mem=800GB
+#PBS -l walltime=32:00:00
+#PBS -l ncpus=21
+#PBS -l mem=1024GB
 #PBS -l wd
 
 module load intel-cc/12.1.9.293
@@ -25,4 +25,4 @@ export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/oq-hazardlib:${PYTHONPATH}
 export PYTHONPATH=.:/short/w84/NSHA18/sandpit/jdg547/oq-engine:${PYTHONPATH}
 export PYTHONPATH=.::/short/w84/NSHA18/sandpit/jdg547/:${PYTHONPATH}
 
-mpirun -np 28 -x PYTHONPATH python geom_filter_parallel.py
+mpirun -np 21 -x PYTHONPATH python geom_filter_parallel.py

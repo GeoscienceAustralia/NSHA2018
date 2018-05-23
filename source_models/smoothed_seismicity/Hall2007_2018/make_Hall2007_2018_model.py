@@ -175,7 +175,7 @@ for dom in params:
                         print 'Skipping this source for trt %s' % dom['TRT']
                     else:
                         pt_source = PointSource(source_id, name, dom['GMM_TRT'],
-                                                mfd, 2, msr, 2.0,
+                                                mfd, 2, msr, 1.5,
                                                 tom, 0.1, 20.0, pt,
                                                 nodal_plane_dist, 
                                                 hypo_depth_dist)

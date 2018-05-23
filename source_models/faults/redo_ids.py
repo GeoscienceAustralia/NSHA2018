@@ -21,7 +21,7 @@ def number_ids(source_file, prefix = ''):
     f_out.close()
 
 if __name__ == "__main__":
-    pathname = '/short/w84/NSHA18/sandpit/jdg547/NSHA2018/source_models/zones/2012_mw_ge_4.0/AUS6/input/collapsed'
+    pathname = '../zones/2018_mw/AUS6/input/collapsed/'
     source_filename = 'AUS6_collapsed_pts_geom_weighted_merged_parallel.xml'
     source_file = os.path.join(pathname, source_filename)
-    number_ids(source_file, prefix = 'NSHA13GF')
+    number_ids(source_file, prefix = 'AUS6')

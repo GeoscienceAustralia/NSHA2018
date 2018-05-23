@@ -1,7 +1,13 @@
-from sys import argv
-from os import path
+'''
+Appends finite fault and banda sea sources to smoothed seismicity models
 
-ssFilename = argv[1] # filename to append
+Takes a tar.gz file and unzips to generate output xml
+'''
+
+from sys import argv
+from os import path, system
+
+ssTarFile = argv[1] # tar.gz file to append sources
 appendNFSM = argv[2] # True = append; False = ignore
 
 if appendNFSM == 'True':
@@ -9,8 +15,16 @@ if appendNFSM == 'True':
 else:
     appendNFSM = False
     
-# first parse SS file
-lines = open(ssFilename).readlines()
+# first de-compress tar.gz file
+print 'Extracting tar.gz file ...'
+system('tar -xvf '+ ssTarFile)
+
+# move xml file to whence it came
+xmlFile = ssTarFile.strip('.tar.gz')
+system(' '.join(('mv', path.split(xmlFile)[-1], path.split(xmlFile)[0]+path.sep)))
+
+# now parse SS file
+lines = open(xmlFile).readlines()
 newxml = ''
 
 for line in lines:
@@ -22,8 +36,8 @@ for line in lines:
         ######################################################################
         if appendNFSM == True:
  
-            aust_fault_file = path.join('..', 'faults', 'National_Fault_Source_Model_2018_Collapsed_NSHA13', \
-                                        'National_Fault_Source_Model_2018_Collapsed_NSHA13_all_methods_collapsed_inc_cluster_gmm_trt.xml')
+            aust_fault_file = path.join('..', 'faults', 'NFSM', \
+                                        'National_Fault_Source_Model_2018_Collapsed_all_methods_collapsed_inc_cluster.xml')
 
             flines = open(aust_fault_file).readlines()[3:-2]
             for fline in flines:
@@ -44,9 +58,9 @@ for line in lines:
         newxml += line
 
 if appendNFSM == True:
-    newFile = ssFilename[:-4]+'_banda_nfsm.xml'
+    newFile = xmlFile[:-4]+'_banda_nfsm.xml'
 else:
-    newFile = ssFilename[:-4]+'_banda.xml'
+    newFile = xmlFile[:-4]+'_banda.xml'
     	
 f = open(newFile, 'wb')
 f.write(newxml)
