@@ -349,9 +349,20 @@ for i, key in enumerate(keys): # just plot 1 for now!
     ##########################################################################################
     # get land & lake polygons for masking
     ##########################################################################################
-    polys = get_map_polygons(m)
-    
+    # mask non-AU polygons
+    nonmask = [0, 2, 3, 4, 6, 7, 11, 13, 16, 17] # polygon number
+    landpolys = []
+    for pidx, polygon in enumerate(m.landpolygons):
+        maskPoly = True
+        for nmidx in nonmask:
+            if pidx == nmidx:
+                maskPoly = False 
+        if maskPoly == True:
+            poly = polygon.get_coords()
+            plt.fill(poly[:,0], poly[:,1], 'w')
+        
     #mask_outside_polygon(polys[1][::-1], ax=None)
+    polys = get_map_polygons(m)
     mask_outside_polygons(polys, '0.9', plt)
     
     # get lake ploygons
@@ -545,7 +556,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
     plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
                 dpi=300, format='pdf', bbox_inches='tight')
     '''
-    #plt.show()
+    plt.show()
     plt.close('all')
     
     ##########################################################################################
