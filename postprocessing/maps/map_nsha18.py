@@ -114,10 +114,11 @@ for i, key in enumerate(keys): # just plot 1 for now!
     period = period.replace('.','')
     
     # get map probability of exceedance
+    probFraction = str(float(key.split('-')[-1]))
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
     #probability = str(100*float(key.split('-')[-1]))+'%'
     if probability == '9%':
-        pribability = '9.5%'
+        probability = '9.5%'
     print 'Probability', probability
     
     figure = plt.figure(i,figsize=(19,12))
@@ -318,7 +319,6 @@ for i, key in enumerate(keys): # just plot 1 for now!
     print 'Making map...'    
     cmap.set_bad('w', 1.0)
     m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
-    plt.subplots(figsize=(19,12))
     
     ##########################################################################################
     # plot contours
@@ -537,7 +537,7 @@ for i, key in enumerate(keys): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probability.strip('%')+'.nomask.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probFraction+'.nomask.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
