@@ -18,7 +18,7 @@ from os import path, mkdir, getcwd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 from mpl_toolkits.basemap import Basemap
-from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan, where, delete
+from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan, where, delete, floor
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
 #from scipy.constants import g
@@ -52,6 +52,9 @@ modelName = argv[2]
 
 # add contours?
 addContours = argv[3] # True or False
+
+# which probability - acceptable values are: 2 (2%), 9 (9.5%) or 10 (10%)
+pltProbability = argv[4]
 
 ##############################################################################
 # parse hazard map file
@@ -98,11 +101,21 @@ for line in lines[2:]:
     grddict.append(tmpdict)
     
 ##############################################################################    
+# get key index for plotting
+##############################################################################
+print keys
+for i, key in enumerate(keys):
+    keyProb = str(int(floor(100*float(key.split('-')[-1]))))
+    print keyProb
+    if keyProb == pltProbability:
+        mapidx = i
+
+##############################################################################    
 # now make maps
 ##############################################################################
 
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
-for i, key in enumerate(keys): # just plot 1 for now!
+for i, key in enumerate(keys[mapidx]): # just plot 1 for now!
     if i > 0:
         plt.clf()
         plt.cla()
