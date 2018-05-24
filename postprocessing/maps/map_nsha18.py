@@ -103,10 +103,9 @@ for line in lines[2:]:
 ##############################################################################    
 # get key index for plotting
 ##############################################################################
-print keys
+
 for i, key in enumerate(keys):
     keyProb = str(int(floor(100*float(key.split('-')[-1]))))
-    print keyProb
     if keyProb == pltProbability:
         mapidx = i
 
@@ -115,7 +114,7 @@ for i, key in enumerate(keys):
 ##############################################################################
 
 #keys = ['PGA_10', 'PGA_02', 'SA02_10', 'SA02_02', 'SA10_10', 'SA10_02']
-for i, key in enumerate(keys[mapidx]): # just plot 1 for now!
+for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     if i > 0:
         plt.clf()
         plt.cla()
