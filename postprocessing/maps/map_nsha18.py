@@ -287,21 +287,26 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         
     elif period == 'SA02':
         ncolours = 12
+        ncolours = 13
         if probability == '10%' or probability == '9.5%':
             vmin = -2
             vmax = 0.
+            vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
         
         elif probability == '2%':
             ncolours = 12
             vmin = -1.5
             vmax = vmin + 0.25 * ncolours/2.
+            
         T = 'Sa(0.2)'
         
     elif period == 'SA10':
         ncolours = 16 
+        ncolours = 13
         if probability == '10%' or probability == '9.5%':
             vmin = -3
             vmax = vmin + 0.25 * ncolours/2.
+            vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
         
         elif probability == '2%':
             ncolours = 14
