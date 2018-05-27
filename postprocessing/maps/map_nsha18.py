@@ -568,7 +568,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+key+'.pdf'), \
                 dpi=300, format='pdf', bbox_inches='tight')
     '''
-    plt.show()
+    #plt.show()
     plt.close('all')
     
     ##########################################################################################
