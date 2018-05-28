@@ -21,7 +21,7 @@ from mpl_toolkits.basemap import Basemap
 from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isnan, nan, where, delete, floor
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
-#from scipy.constants import g
+from scipy.constants import g
 #from gmt_tools import cpt2colormap
 #from shapely.geometry import Point, Polygon
 
@@ -92,7 +92,8 @@ for line in lines[2:]:
     idx = 2
     for key in keys:
         if gshap == True:
-            tmpdict[key] = float(dat[idx]) #/ g
+            # convert to m/s**2
+            tmpdict[key] = float(dat[idx]) / g
         else:
             tmpdict[key] = float(dat[idx])
         idx += 1
@@ -304,7 +305,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         ncolours = 16 
         ncolours = 13
         if probability == '10%' or probability == '9.5%':
-            vmin = -3
+            vmin = -2
             vmax = vmin + 0.25 * ncolours/2.
             vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
         
