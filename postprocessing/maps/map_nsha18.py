@@ -181,8 +181,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             hazvals.append(gridval[key])
         '''
     
-    idx = array(range(0, len(lonlist), 10)) # resample for quickly testing mapping
-    #idx = array(range(0, len(lonlist), 1))
+    #idx = array(range(0, len(lonlist), 10)) # resample for quickly testing mapping
+    idx = array(range(0, len(lonlist), 1))
     lonlist = array(lonlist)[idx]
     latlist = array(latlist)[idx]
     hazvals = array(hazvals)[idx]
