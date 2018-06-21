@@ -287,8 +287,9 @@ was based on these magnitudes
 '''
 prefmag1 = 'orig' # declusters based on original catalogue magnitude
 
-# Use 2012 NSHA catalogue
-nsha2018csv = path.join('data', 'NSHA18CAT.MW.V0.1.csv')
+# Use 2018 NSHA catalogue
+print 'Declustering NSHA18CAT.MW.V0.1.csv'
+nsha2018csv = path.join('data', 'NSHA18CAT.MW.V0.2.csv')
 nsha_dict = parse_NSHA2018_catalogue(nsha2018csv)
 
 # set HMTK file name

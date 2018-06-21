@@ -56,9 +56,17 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
     '''
     
     # make oq cat dict
-    header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', \
-                       'longitude', 'latitude','depth','magnitude','magnitudeType', \
-                       'Agency', 'flag', 'mx_origML', 'mx_origType', 'mx_revML', 'pref_mw'))
+    try:
+        test = ggcat_dict[0]['ml2mw_qd']
+        header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', \
+                           'longitude', 'latitude','depth','magnitude','magnitudeType', \
+                           'Agency', 'flag', 'mx_origML', 'mx_origType', 'mx_revML', 'pref_mw', \
+                           'ml2mw_qd','ml2mw_bl'))
+    except:
+        header = ','.join(('eventID','year', 'month', 'day', 'hour', 'minute', 'second', \
+                           'longitude', 'latitude','depth','magnitude','magnitudeType', \
+                           'Agency', 'flag', 'mx_origML', 'mx_origType', 'mx_revML', 'pref_mw'))
+                           
     oq_dat = header + '\n'
     
     '''
@@ -96,14 +104,31 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
             
         # set Original magnitude as main magnitude for declustering (mx_orig) and add additional columns
         if prefmag == 'orig':
-            line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
+            # try alt ml2mw version
+            try:
+                line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
                              checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
-                             checkstr(ggc['dep']),checkstr(ggc['mx_orig']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
+                             checkstr(ggc['dep']),checkstr(ggc['mx_origML']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
+                             checkstr(ggc['mx_origML']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_revML']), checkstr(ggc['prefmag']), \
+                             checkstr(ggc['ml2mw_qd']),checkstr(ggc['ml2mw_bl'])))
+                             
+            except:
+                line = ','.join((datestr, checkstr(ggc['year']), checkstr(ggc['month']),checkstr(ggc['day']), \
+                             checkstr(ggc['hour']).zfill(2),checkstr(ggc['min']).zfill(2),checkstr(ggc['sec']),checkstr(ggc['lon']),checkstr(ggc['lat']), \
+                             checkstr(ggc['dep']),checkstr(ggc['mx_origML']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
                              checkstr(ggc['mx_origML']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_revML']), checkstr(ggc['prefmag'])))
         
         # else use pref mw
         else:
-            line = ','.join((datestr, checkstr(ggc['datetime'].year), checkstr(ggc['datetime'].month),checkstr(ggc['datetime'].day), \
+            try:
+                line = ','.join((datestr, checkstr(ggc['datetime'].year), checkstr(ggc['datetime'].month),checkstr(ggc['datetime'].day), \
+                             checkstr(ggc['datetime'].hour),checkstr(ggc['datetime'].minute),checkstr(ggc['datetime'].second),checkstr(ggc['lon']),checkstr(ggc['lat']), \
+                             checkstr(ggc['dep']),checkstr(ggc['prefmag']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
+                             checkstr(ggc['mx_origML']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_revML']), checkstr(ggc['prefmag']), \
+                             checkstr(ggc['ml2mw_qd']),checkstr(ggc['ml2mw_bl'])))
+                                             
+            except:
+                line = ','.join((datestr, checkstr(ggc['datetime'].year), checkstr(ggc['datetime'].month),checkstr(ggc['datetime'].day), \
                              checkstr(ggc['datetime'].hour),checkstr(ggc['datetime'].minute),checkstr(ggc['datetime'].second),checkstr(ggc['lon']),checkstr(ggc['lat']), \
                              checkstr(ggc['dep']),checkstr(ggc['prefmag']),checkstr(ggc['mx_origType']),ggc['auth'], flag, \
                              checkstr(ggc['mx_origML']), checkstr(ggc['mx_origType']), checkstr(ggc['mx_revML']), checkstr(ggc['prefmag'])))     
