@@ -181,7 +181,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             hazvals.append(gridval[key])
         '''
     
-    #idx = array(range(0, len(lonlist), 100)) # resample for quickly testing mapping
+    #idx = array(range(0, len(lonlist), 10)) # resample for quickly testing mapping
     idx = array(range(0, len(lonlist), 1))
     lonlist = array(lonlist)[idx]
     latlist = array(latlist)[idx]
@@ -350,7 +350,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
             levels_lo = array([0.005])
         elif probability == '2%':
-            levels = arange(0.05, 0.3, 0.05)
+            levels = arange(0.05, 0.31, 0.05)
         
         if cwd.startswith('/nas'):
             #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')

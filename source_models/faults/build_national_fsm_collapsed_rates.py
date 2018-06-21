@@ -34,7 +34,7 @@ shapefile_faultname_attribute = 'Name'
 shapefile_dip_attribute = 'Dip'
 shapefile_sliprate_attribute = 'SL_RT_LT'
 shapefile_uplift_attribute = 'UP_RT_LT'
-source_model_name = 'National_Fault_Source_Model_2018_Collapsed_NSHA13_2018'
+source_model_name = 'National_Fault_Source_Model_2018_Collapsed_AUS6_2018'
 simple_fault_tectonic_region = None # Define based on neotectonic domains
 magnitude_scaling_relation = 'Leonard2014_SCR'
 rupture_aspect_ratio = 1.5
@@ -53,7 +53,7 @@ output_dir = source_model_name
 bin_width = 0.1 # Width of MFD bins in magnitude units
 domains_shapefile = '../zones/shapefiles/NSHA13_Background/NSHA13_Background_NSHA18.shp'
 
-area_source_model = '../zones/2018_mw/NSHA13/input/collapsed/NSHA13_collapsed.xml'
+area_source_model = '../zones/2018_mw/AUS6/input/collapsed/AUS6_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/AUS6/input/collapsed/AUS6_collapsed.xml'
 #area_source_model = '../zones/2012_mw_ge_4.0/DIMAUS/input/collapsed/DIMAUS_collapsed.xml'
 area_source_model_name = area_source_model.split('/')[0].rstrip('.xml')
