@@ -313,6 +313,7 @@ def labelpolygon(m, plt, sf, field, **kwargs):
     fstyle = 'normal'
     fweight = 'normal'
     value = None
+    addOutline = False
     for key in ('xoff', 'yoff', 'fsize', 'fweight', 'col', 'fstyle', 'value'):
         if key in kwargs:
             if key == 'xoff':
@@ -329,6 +330,8 @@ def labelpolygon(m, plt, sf, field, **kwargs):
                 col = kwargs[key]
             if key == 'value':
                 value = kwargs[key]
+            if key == 'addOutline':
+                value = kwargs[key]
     
     shapes = sf.shapes()
     recs = sf.records()
@@ -342,8 +345,13 @@ def labelpolygon(m, plt, sf, field, **kwargs):
         tx, ty = m(float(centroid[0]),float(centroid[1]))
         if tx > m.xmin and tx < m.xmax and ty > m.ymin and ty < m.ymax:
             if value == None or value == recs[i][findex]:
-                plt.text(tx + xoff, ty + yoff, recs[i][findex], size=fsize, \
-                         weight=fweight, color=col, style=fstyle, va='center', ha='center')
+                txtHandle = plt.text(tx + xoff, ty + yoff, recs[i][findex], size=fsize, \
+                                     weight=fweight, color=col, style=fstyle, va='center', ha='center')
+                
+                if addOutline == True:
+                    lineWidth= 4.
+                    backColour = 'w'
+                    addTextOutline(txtHandle, lineWidth, backColour)
                      
         '''
         centroidx = []
@@ -353,6 +361,16 @@ def labelpolygon(m, plt, sf, field, **kwargs):
                 centroidy.append(shape.points[j][1])
             tx, ty = m(mean(centroidx),mean(centroidy))
         '''
+
+# Add background to text to highlight
+def addTextOutline(textHandle, lineWidth, backColour):
+    '''
+    e.g.:
+        textHandle = plt.text(2,2,'This is a test', size=11, color='black')
+    '''
+
+    import matplotlib.patheffects as PathEffects
+    textHandle.set_path_effects([PathEffects.withStroke(linewidth=lineWidth, foreground=backColour)])
     
 # join two epicentres with a line
 def joinpoints(m,plt,joinfile):
