@@ -6,17 +6,17 @@ List of catalogues used to determine MFDs for the 2018 NSHA:
 	- Uses Ghasemi & Allen (2017) as preferred ML-MW conversions
 	- Uses updated mb-MW and MS-MW conversions as outlined in Allen et al (in prep)
 	- Preferred magnitude column is MX_REVML
-	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/catalogue/data/2012_catalogue_readme.txt) (to be updated)
+	- Further details on the catalogue's development is [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/info/NSHA18_description_of_files_and_metadata.XLS) (to be updated)
 
 * NSHA18CAT_V0.1_hmtk_mx_orig.csv: full catalogue developed for the 2018 NSHA in [Hazard Modellers Toolkit (HMTK)](https://github.com/GEMScienceTools/hmtk) format:
 	- Based on NSHA18CAT.MW.V0.1.csv
 	- Preferred magnitude is [mx_origML](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt) as required for the Leonard (2008) declustering algorithm
-	- Catalogue adds several additional magnitude columns to standard HMTK format.  Details are [here](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt) and preferred Mw as per 2018 conversions
+	- Catalogue adds several additional magnitude columns to standard HMTK format.  Details are [here](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/info/NSHA18_description_of_files_and_metadata.XLS) and preferred Mw as per 2018 conversions
 	- Not declustered
 	
 * NSHA18CAT_V0.1_hmtk_declustered.csv: declustered catalogue developed for the 2018 NSHA in HMTK format:
 	- Based on NSHA18CAT.MW.V0.1.csv
-	- Declustered using Leonard ([2008](https://pubs.geoscienceworld.org/ssa/bssa/article/98/3/1458/341978)) algorithm using [mx_origML](https://github.com/GeoscienceAustralia/NSHA2018/tree/master/catalogue/data/2012_catalogue_readme.txt)
+	- Declustered using Leonard ([2008](https://pubs.geoscienceworld.org/ssa/bssa/article/98/3/1458/341978)) algorithm using [mx_origML](https://github.com/GeoscienceAustralia/NSHA2018/blob/master/info/NSHA18_description_of_files_and_metadata.XLS)
 	- Preferred magnitude is in MW as per 2018 conversions
 	- Catalogue adds several additional magnitude columns to standard HMTK format.
 	
