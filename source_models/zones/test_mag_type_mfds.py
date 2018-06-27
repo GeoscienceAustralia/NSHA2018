@@ -180,12 +180,14 @@ nshaMaxYear = toYearFraction(nshaCat[-1]['datetime'])
 ###############################################################################
 
 src_area = [] 
-
+fig = plt.figure(1, figsize=(16, 10))
+k = 0
 for i in srcidx:
     print '\nFitting MFD for', src_code[i]
     
-    fig = plt.figure(i, figsize=(8, 10))
-    ax = fig.add_subplot(111)
+    if i == 2 or i == 3:
+        k =+ 1
+        ax = fig.add_subplot(2,1,k)
     
     # get completeness periods for zone
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
@@ -267,55 +269,56 @@ for i in srcidx:
         # start making plots
         ###############################################################################
         
-        # now plt unique values for current source
-        uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
-                
-        plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'o', c=cs[2*j], ms=7, mec=cs[2*j])
-                
-        # get betacurve for source
-        mpltmin = round(mcomps[0],1) - bin_width/2.
-        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin, mrng[-1], bin_width)
-        
-        plt.semilogy(mfd_mrng[:-1], betacurve[:-1], '-', c=cs[2*j+1], label=magLabels[j], zorder=1000)
+        if i == 2 or i == 3:
+            # now plt unique values for current source
+            uidx = unique(cum_rates[::-1], return_index=True, return_inverse=True)[1]
+                    
+            plt.semilogy(mrng[::-1][uidx], cum_rates[::-1][uidx], 'o', c=cs[2*j], ms=7, mec=cs[2*j])
+                    
+            # get betacurve for source
+            mpltmin = round(mcomps[0],1) - bin_width/2.
+            betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin, mrng[-1], bin_width)
+            
+            plt.semilogy(mfd_mrng[:-1], betacurve[:-1], '-', c=cs[2*j+1], label=magLabels[j], zorder=1000)
     
     ###############################################################################
     # finish mfd
     ###############################################################################
+    if i == 2 or i == 3:
+        plt.ylabel('Cumulative Rate (/yr)', fontsize=16)
+        plt.xlabel('Magnitude (MW)', fontsize=16)
+        plt.ylim([2.5, 7])
+        plt.ylim([1E-3, 1E2])
+        plt.grid(which='both')
+        plt.legend(loc=1, fontsize=13)
     
-    plt.ylabel('Cumulative Rate (/yr)', fontsize=16)
-    plt.xlabel('Magnitude (MW)', fontsize=16)
-    plt.ylim([2.5, 7])
-    plt.ylim([1E-3, 1E2])
-    plt.grid(which='both')
-    plt.legend(loc=1, fontsize=13)
-    
-    ###############################################################################
-    # make map inset
-    ###############################################################################
-    
-    #a = plt.axes([.05, .05, .25, .25])
-    
-    axins = inset_axes(ax,
-                   width="35%",  # width = 30% of parent_bbox
-                   height=2.1,  # height : 1 inch
-                   loc=3)
-    
-    m = Basemap(projection='merc',\
-                llcrnrlon=111,llcrnrlat=-45, \
-                urcrnrlon=156,urcrnrlat=-9,\
-                rsphere=6371200.,resolution='c',area_thresh=10000)
-                
-    m.drawmapboundary(fill_color='0.8', zorder=0)
-    m.fillcontinents(color='w', lake_color='0.8', zorder=1)
-    m.drawcoastlines()
-    m.drawcountries()
-    m.drawstates()
-
-    # fill main area
-    drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=1.5, col='r')
-    
-    # save figure
-    plt.savefig(path.join('cat_mfd_test', src_code[i]+'_mfdplt.png'), fmt='png', bbox_inches='tight')
+        ###############################################################################
+        # make map inset
+        ###############################################################################
+        
+        #a = plt.axes([.05, .05, .25, .25])
+        
+        axins = inset_axes(ax,
+                       width="35%",  # width = 30% of parent_bbox
+                       height=2.1,  # height : 1 inch
+                       loc=3)
+        
+        m = Basemap(projection='merc',\
+                    llcrnrlon=111,llcrnrlat=-45, \
+                    urcrnrlon=156,urcrnrlat=-9,\
+                    rsphere=6371200.,resolution='c',area_thresh=10000)
+                    
+        m.drawmapboundary(fill_color='0.8', zorder=0)
+        m.fillcontinents(color='w', lake_color='0.8', zorder=1)
+        m.drawcoastlines()
+        m.drawcountries()
+        m.drawstates()
+        
+        # fill main area
+        drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=1.5, col='r')
+        
+        # save figure
+        plt.savefig(path.join('cat_mfd_test', src_code[i]+'_mfdplt.png'), fmt='png', bbox_inches='tight')
     
 
 plt.show()                
