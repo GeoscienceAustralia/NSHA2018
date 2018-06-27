@@ -15,25 +15,25 @@
 145.9,-41.05,Burnie,
 145.76,-16.91,Cairns,
 150.7,-34.06,Camden,
-149.13,-35.3,Canberra,
+149.13,-35.3,Canberra,ACT
 113.66,-24.88,Carnarvon,
 153.11,-30.3,Coffs Harbour,
 149.13,-36.23,Cooma,
 116.71,-20.66,Dampier,
-130.83,-12.45,Darwin,
+130.83,-12.45,Darwin,NT
 123.63,-17.31,Derby,
 117.03,-31.2,Dowerin,
-148.6,-32.25,Dubbo,
-121.88,-33.86,Esperance,
+148.6,-32.25,Dubbo,NSW
+121.88,-33.86,Esperance,WA
 144.35,-38.15,Geelong,
 114.61,-28.78,Geraldton,
-151.25,-23.85,Gladstone,
-153.43,-28.02,Gold Coast,
+151.25,-23.85,Gladstone,QLD
+153.43,-28.02,Gold Coast,QLD
 116.83,-31.3,Goomalling,
 151.35,-33.41,Gosford,
-149.71,-34.75,Goulburn,
+149.71,-34.75,Goulburn,NSW
 152.93,-29.68,Grafton,
-147.33,-42.88,Hobart,
+147.33,-42.88,Hobart,TAS
 121.46,-30.75,Kalgoorlie,
 116.85,-20.73,Karratha,
 150.31,-33.71,Katoomba,
@@ -97,3 +97,15 @@
 145.92,-38.52,Leongatha,VIC
 147.07,-38.11,Sale,VIC
 145.93,-38.17,Warragul,VIC
+114.13,-21.93,Exmouth,WA
+113.53,-25.93,Denham,WA
+119.73,-23.36,Newman,WA
+128.74,-15.77,Kununurra,WA
+115.35,-33.65,Busselton,WA
+115.05,-33.97,Margaret River, WA
+121.16,-30.95,Coolgardie,WA
+117.40,-32.01,Quairading,WA
+138.60,-33.21,Jamestown,SA
+138.84,-32.97,Peterborough,SA
+138.47,-30.54,Leigh Creek,SA
+146.79,-37.98,Heyfield,VIC
