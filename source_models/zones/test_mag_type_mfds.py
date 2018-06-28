@@ -121,9 +121,9 @@ def parse_alt_mag_catalogue(hmtk_csv):
         mx_origML = float(data[19])
         mx_revML = float(data[21])
         mw_pref = float(data[22])
-        mw_qds = float(data[23])
-        mw_ble = float(data[24])
-        mw_qde = float(data[25])
+        mw_qds = float(data[25])
+        mw_ble = float(data[23])
+        mw_qde = float(data[24])
         
         # set empirical alt MW
         if mw_qds == mw_pref:
@@ -194,8 +194,8 @@ for i in srcidx:
     print '\nFitting MFD for', src_code[i]
     
     if i == 2 or i == 3:
-        k =+ 1
-        ax = fig.add_subplot(2,1,k)
+        k += 1
+        ax = fig.add_subplot(1,2,k)
     
     # get completeness periods for zone
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
@@ -274,7 +274,7 @@ for i in srcidx:
         
         # mk txt:'SRCZONE,SRCAREA,MAGTYPE,NEQ,A0,BVAL,BVALSIG\n'
         mfdtxt += ','.join((src_code[i], str(round(src_area[i])), mk, str(len(mvect)), \
-                            str('%0.2f' % log10(fn0)), str('%0.2f' % bval), str('%0.2f' % sigb))) + '\n'
+                            str('%0.2f' % log10(fn0)), str('%0.2f' % bval), str('%0.3f' % sigb))) + '\n'
         ###############################################################################
         # start making plots
         ###############################################################################
@@ -289,13 +289,14 @@ for i in srcidx:
             mpltmin = round(mcomps[0],1) - bin_width/2.
             betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin, mrng[-1], bin_width)
             
-            plt.semilogy(mfd_mrng[:-1], betacurve[:-1], '-', c=cs[2*j+1], label=magLabels[j], zorder=1000)
+            plt.semilogy(mfd_mrng[:-1], betacurve[:-1], '-', lw=1.5, c=cs[2*j+1], label=magLabels[j], zorder=1000)
     
     ###############################################################################
     # finish mfd
     ###############################################################################
     if i == 2 or i == 3:
-        plt.ylabel('Cumulative Rate (/yr)', fontsize=16)
+        if i == 2:
+            plt.ylabel('Cumulative Rate (/yr)', fontsize=16)
         plt.xlabel('Magnitude (MW)', fontsize=16)
         plt.ylim([2.5, 7])
         plt.ylim([1E-3, 1E2])
@@ -316,7 +317,7 @@ for i in srcidx:
         m = Basemap(projection='merc',\
                     llcrnrlon=111,llcrnrlat=-45, \
                     urcrnrlon=156,urcrnrlat=-9,\
-                    rsphere=6371200.,resolution='c',area_thresh=10000)
+                    rsphere=6371200.,resolution='l',area_thresh=10000)
                     
         m.drawmapboundary(fill_color='0.8', zorder=0)
         m.fillcontinents(color='w', lake_color='0.8', zorder=1)
@@ -328,7 +329,8 @@ for i in srcidx:
         drawoneshapepoly(m, plt, sf, 'CODE', src_code[i], lw=1.5, col='r')
         
         # save figure
-        plt.savefig(path.join('cat_mfd_test', src_code[i]+'_mfdplt.png'), fmt='png', bbox_inches='tight')
+#plt.savefig(path.join('cat_mfd_test', src_code[i]+'_mfdplt.png'), fmt='png', bbox_inches='tight')
+plt.savefig(path.join('cat_mfd_test', 'mfdplt.png'), fmt='png', bbox_inches='tight')
     
 ###############################################################################
 # write csv
