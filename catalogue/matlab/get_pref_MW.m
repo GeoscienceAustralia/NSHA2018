@@ -28,7 +28,8 @@ MS2MW = ones(size(mdat)) * NaN;
 mb2MW = ones(size(mdat)) * NaN;
 %ML2MWA = ones(size(mdat)) * NaN;
 ML2MWG = ones(size(mdat)) * NaN;
-ML2MW_BL = ones(size(mdat)) * NaN;
+ML2MW_BLE = ones(size(mdat)) * NaN;
+ML2MW_QDE = ones(size(mdat)) * NaN;
 
 prefFinalMW = ones(size(mdat)) * NaN;
 
@@ -117,34 +118,48 @@ a = 0.04160769;
 b = 0.48058286;
 c = 1.39485216;
 
-% add bi-linear coefs - not used in NSHA18
+% add ODR bi-linear coefs from empirical data - not used in NSHA18
 a_bl = 0.66053496;
 b_bl = 1.20883045;
 c_bl = 0.98659071;
 hx_bl = 4.25;
 hy_bl =  a_bl * hx_bl + b_bl;
 
+% add ODR quadratic coefs from empirical data - not used in NSHA18
+a_qd = 0.08165208;
+b_qd = 0.11965149;
+c_qd = 2.08418142;
+
+
 for i = 1:length(mdat)
     % calculate MW for non-revised ML
     if isnan(mdat(i).MDAT_MLrev)
+        % get quadratic ML2MW from simulation
         ML2MWG(i) = a*mdat(i).MDAT_prefML^2 + b*mdat(i).MDAT_prefML + c;
         
-        % calculate bi-linear
+        % get quadratic ML2MW from empirical
+        ML2MW_QDE(i) = a_qd*mdat(i).MDAT_prefML^2 + b_qd*mdat(i).MDAT_prefML + c_qd;
+        
+        % calculate bi-linear empirical
         if mdat(i).MDAT_prefML <= hx_bl
-            ML2MW_BL(i) = a_bl*mdat(i).MDAT_prefML + b_bl;
+            ML2MW_BLE(i) = a_bl*mdat(i).MDAT_prefML + b_bl;
         else
-            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_prefML - hx_bl) + hy_bl;
+            ML2MW_BLE(i) = c_bl*(mdat(i).MDAT_prefML - hx_bl) + hy_bl;
         end
 
     % calculate MW for revised ML
     else
-         ML2MWG(i) = a*mdat(i).MDAT_MLrev^2 + b*mdat(i).MDAT_MLrev + c;
+        % get quadratic ML2MW from simulation
+        ML2MWG(i) = a*mdat(i).MDAT_MLrev^2 + b*mdat(i).MDAT_MLrev + c;
+        
+        % get quadratic ML2MW from empirical
+        ML2MW_QDE(i) = a_qd*mdat(i).MDAT_MLrev^2 + b_qd*mdat(i).MDAT_MLrev + c_qd;
          
-         % calculate bi-linear
+         % calculate bi-linear empirical
         if mdat(i).MDAT_MLrev <= hx_bl
-            ML2MW_BL(i) = a_bl*mdat(i).MDAT_MLrev + b_bl;
+            ML2MW_BLE(i) = a_bl*mdat(i).MDAT_MLrev + b_bl;
         else
-            ML2MW_BL(i) = c_bl*(mdat(i).MDAT_MLrev - hx_bl) + hy_bl;
+            ML2MW_BLE(i) = c_bl*(mdat(i).MDAT_MLrev - hx_bl) + hy_bl;
         end
     end
 end
@@ -155,7 +170,8 @@ for i = 1:length(mdat)
     mdat(i).mb2MW = mb2MW(i);
     %mdat(i).ML2MWA = ML2MWA(i);
     mdat(i).ML2MWG = ML2MWG(i);
-    mdat(i).ML2MW_BL = ML2MW_BL(i);
+    mdat(i).ML2MW_BLE = ML2MW_BLE(i);
+    mdat(i).ML2MW_QDE = ML2MW_QDE(i);
     mdat(i).prefFinalMW = prefFinalMW(i);
 end
 
@@ -274,7 +290,7 @@ save mdat_mw_pref mdat;
 % *************************************************************************
 %% write to file
 
-header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREGION,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,ML2MW_BL,PREFMW,PREFMWSRC,COMM';
+header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREGION,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,ML2MW_BLE,ML2MW_QDE,PREFMW,PREFMWSRC,COMM';
 disp('writing to file')
 dlmwrite(outfile,header,'delimiter','');
 txt = [];
@@ -313,8 +329,8 @@ for i = 1:length(mdat)
             num2str(Mx_RevML,'%0.2f'),',',mdat(i).Mx_RevMLtype,',', ...
             mdat(i).Mx_RevMLSrc,',', ...
             num2str(mdat(i).MS2MW,'%0.2f'),',',num2str(mdat(i).mb2MW,'%0.2f'),',', ...
-            num2str(mdat(i).ML2MWG,'%0.2f'),',',num2str(mdat(i).ML2MW_BL,'%0.2f'),',', ...
-            num2str(mdat(i).prefFinalMW,'%0.2f'),',', ...
+            num2str(mdat(i).ML2MWG,'%0.2f'),',',num2str(mdat(i).ML2MW_BLE,'%0.2f'),',', ...
+            num2str(mdat(i).ML2MW_QDE,'%0.2f'),',',num2str(mdat(i).prefFinalMW,'%0.2f'),',', ...
             mdat(i).prefFinalMWSrc,',',comms,char(10)];
     txt = [txt line];
 end
