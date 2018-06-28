@@ -1,7 +1,7 @@
 ncpus = 980 
-mem = 9800GB
+mem = 8000GB
 walltime = 24:00:00
-jobfs = 1000GB
+jobfs = 2000GB
 sandpit_path = /short/w84/NSHA18/sandpit/
 model_rel_path = NSHA2018/source_models/complete_model/final/
 shared_rel_path = NSHA2018/shared
