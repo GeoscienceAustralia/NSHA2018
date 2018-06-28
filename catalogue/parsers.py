@@ -151,13 +151,18 @@ def parse_NSHA2018_catalogue(nsha2018cat):
         
         # read V0.2 with alternatle ML mag conversion
         try:
+            '''
+            ml2mw_qds = quadratic simulated
+            ml2mw_qde = quadratic empirical
+            ml2mw_ble = bi-linear empirical
+            '''
             # fill temp dict
             tmpdict = {'auth':line[7], 'place':line[29],'year':evdt.year, 'month':evdt.month, 'day':evdt.day, \
                        'hour':evdt.hour, 'min':evdt.minute, 'sec':evdt.second, 'lon':float(line[4]), 'lat':float(line[5]), 'dep':float(line[6]), \
-                       'prefmag':float(line[27]), 'prefmagtype':line[28], 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
+                       'prefmag':float(line[28]), 'prefmagtype':line[29], 'ml':float(line[14]), 'mb':float(line[12]), 'ms':float(line[10]), \
                        'mw':float(line[8]), 'fixdep':0, 'datetime':evdt, 'dependence':int(line[3]), 'mx_origML':float(line[18]), \
                        'mx_origType':str(line[19]), 'mx_revML':float(line[20]), 'mx_rev_src':line[22], 'mw_src':line[28], 'ev_type':str(line[2]), \
-                       'ml2mw_qd':float(line[25]),'ml2mw_bl':float(line[26])}
+                       'ml2mw_qds':float(line[25]),'ml2mw_ble':float(line[26]),'ml2mw_qde':float(line[27])}
         
         # read V0.1
         except:
