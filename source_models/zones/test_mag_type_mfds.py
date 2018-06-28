@@ -48,7 +48,9 @@ bin_width = 0.1
 shpfile  = 'shapefiles/Other/Mcomp_NSHA18_multi.shp'
 
 magLabels = ['Original Magnitude', 'Original Magnitude (Revised ML)', \
-             'Preferred MW (Quadratic Simulated)', 'Alternate MW (Bilinear Empirical)']
+             'Alternate MW (Bilinear Empirical)', 'Alternate MW (Quadratic Empirical)', \
+             'Preferred MW (Quadratic Simulated)']
+
 cptfile = '//Users//tallen//Documents//DATA//GMT//cpt//Paired_10.cpt'
 ncolours = 11
 cmap, zvals = cpt2colormap(cptfile, ncolours)
@@ -119,14 +121,17 @@ def parse_alt_mag_catalogue(hmtk_csv):
         mx_origML = float(data[19])
         mx_revML = float(data[21])
         mw_pref = float(data[22])
-        mw_quad = float(data[23])
-        mw_blin = float(data[24])
+        mw_qds = float(data[23])
+        mw_ble = float(data[24])
+        mw_qde = float(data[25])
         
-        # set bilinear alt MW
-        if mw_quad == mw_pref:
-            mw_alt = mw_blin
+        # set empirical alt MW
+        if mw_qds == mw_pref:
+            mw_alt_ble = mw_ble
+            mw_alt_qde = mw_qde
         else:
-            mw_alt = mw_pref
+            mw_alt_ble = mw_pref
+            mw_alt_qde = mw_pref
             
         # make datetime object
         try:
@@ -138,8 +143,9 @@ def parse_alt_mag_catalogue(hmtk_csv):
         
         tmpdict = {'datetime':ev_date, 'lon':lon, 'lat':lat, 'dep':dep,
                    'mx_origML':mx_origML, 'mx_revML': mx_revML,
-                   'mw_pref':mw_pref, 'mw_quad':mw_quad, 'mw_blin':mw_blin,
-                   'mw_alt':mw_alt, 'prefmag':mw_pref}
+                   'mw_pref':mw_pref, 'mw_qds':mw_qds, 'mw_qde':mw_qde, 
+                   'mw_ble':mw_ble, 'mw_alt_ble':mw_alt_ble, 
+                   'mw_alt_qde':mw_alt_qde, 'prefmag':mw_pref}
                    	
         altMWdict.append(tmpdict)
         
@@ -148,6 +154,7 @@ def parse_alt_mag_catalogue(hmtk_csv):
 ###############################################################################
 # initiate new arrays for writing new shpfile
 ###############################################################################
+
 new_bval_b = src_bval  
 new_bval_l = src_bval_l
 new_bval_u = src_bval_u
@@ -178,6 +185,7 @@ nshaMaxYear = toYearFraction(nshaCat[-1]['datetime'])
 ###############################################################################
 # loop through source zones
 ###############################################################################
+mfdtxt = 'SRCZONE,SRCAREA,MAGTYPE,NEQ,A0,BVAL,BVALSIG\n'
 
 src_area = [] 
 fig = plt.figure(1, figsize=(16, 10))
@@ -230,8 +238,8 @@ for i in srcidx:
     # set preferred catalogue for each source
     ###############################################################################
     
-    # mw alt based om mw_blin; pref_mw based on mw_quad
-    magKeys = ['mx_origML', 'mx_revML', 'mw_pref', 'mw_alt']
+    # mw alt based om mw_ble; pref_mw based on mw_qds
+    magKeys = ['mx_origML', 'mx_revML', 'mw_alt_ble', 'mw_alt_qde', 'mw_pref']
     
     # loop through mag keys and get events
     for j, mk in enumerate(magKeys):
@@ -263,8 +271,10 @@ for i in srcidx:
               get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, \
                        mcomps, ycomps, nshaMaxYear, mrng, src_mmax[i], src_mmin_reg[i], \
                        src_bval_fix[i], src_bval_fix_sd[i], bin_width, poly)
-    
-    
+        
+        # mk txt:'SRCZONE,SRCAREA,MAGTYPE,NEQ,A0,BVAL,BVALSIG\n'
+        mfdtxt += ','.join((src_code[i], str(round(src_area[i])), mk, str(len(mvect)), \
+                            str('%0.2f' % log10(fn0)), str('%0.2f' % bval), str('%0.2f' % sigb))) + '\n'
         ###############################################################################
         # start making plots
         ###############################################################################
@@ -320,5 +330,12 @@ for i in srcidx:
         # save figure
         plt.savefig(path.join('cat_mfd_test', src_code[i]+'_mfdplt.png'), fmt='png', bbox_inches='tight')
     
+###############################################################################
+# write csv
+############################################################################### 
+csvfile = path.join('cat_mfd_test', 'cat_mfd_test.csv')
+f = open(csvfile, 'wb')
+f.write(mfdtxt)
+f.close()
 
 plt.show()                

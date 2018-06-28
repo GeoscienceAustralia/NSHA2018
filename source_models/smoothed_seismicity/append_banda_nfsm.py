@@ -7,7 +7,7 @@ Takes a tar.gz file and unzips to generate output xml
 from sys import argv
 from os import path, system
 
-xmlFile = argv[1] # tar.gz file to append sources
+xmlFile = argv[1] # xml file to append sources - assume already untarred
 appendNFSM = argv[2] # True = append; False = ignore
 
 if appendNFSM == 'True':
