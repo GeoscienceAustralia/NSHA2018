@@ -7,7 +7,7 @@ from numpy import array
 
 
 shpfile = '../source_models/zones/shapefiles/Other/hazard_crop.shp'
-csvfile = '../source_models/zones/2018_mw/Domains_multi_mc/results_maps/hazard_map-mean_mapping.csv'
+csvfile = '../source_models/zones/2018_mw/Domains_multi_mc/results_maps_PGA/hazard_map-mean_mapping.csv'
 
 # parse file
 print 'Reading csv file...'
@@ -25,8 +25,8 @@ lon = array(lon)
 lat = array(lat)
 
 # down sample lo/la
-dlon = lon[range(0, len(lon), 100)]
-dlat = lat[range(0, len(lat), 100)]
+dlon = lon[range(0, len(lon), 10)]
+dlat = lat[range(0, len(lat), 10)]
     
 #parese shapefile
 print 'Reading source shapefile...'
