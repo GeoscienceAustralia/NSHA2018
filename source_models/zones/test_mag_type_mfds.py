@@ -51,7 +51,11 @@ magLabels = ['Original Magnitude', 'Original Magnitude (Revised ML)', \
              'Alternate MW (Bilinear Empirical)', 'Alternate MW (Quadratic Empirical)', \
              'Preferred MW (Quadratic Simulated)']
 
-cptfile = '//Users//tallen//Documents//DATA//GMT//cpt//Paired_10.cpt'
+if getcwd().startswith('/nas'):
+    cptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/DATA/cpt/Paired_10.cpt'
+else:
+    cptfile = '//Users//tallen//Documents//DATA//GMT//cpt//Paired_10.cpt'
+    
 ncolours = 11
 cmap, zvals = cpt2colormap(cptfile, ncolours)
 cmap = remove_last_cmap_colour(cmap)
@@ -297,7 +301,11 @@ for i in srcidx:
     if i == 2 or i == 3:
         if i == 2:
             plt.ylabel('Cumulative Rate (/yr)', fontsize=16)
+            plt.text(2.1, 85, 'a)', fontsize=15, va='top', ha='left')
+        else:
+            plt.text(2.1, 85, 'b)', fontsize=15, va='top', ha='left')
         plt.xlabel('Magnitude (MW)', fontsize=16)
+        
         plt.ylim([2.5, 7])
         plt.ylim([1E-3, 1E2])
         plt.grid(which='both')
