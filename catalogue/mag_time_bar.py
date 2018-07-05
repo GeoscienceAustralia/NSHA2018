@@ -7,33 +7,46 @@ Created on Tue May 23 13:59:45 2017
 
 #from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 #from hmtk.seismicity.utils import haversine
-from catalogue.parsers import parse_NSHA2018_catalogue
+from catalogue.parsers import parse_altmag_hmtk_catalogue
 from misc_tools import dictlist2array,timedelta2days_hours_minutes, toYearFraction, ymd2doy
 from numpy import array, where, hstack, delete, arange
 import matplotlib.pyplot as plt
 from datetime import datetime as dt 
+import matplotlib as mpl
+mpl.style.use('classic')
 
 #hmtk_csv = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/catalogue/data/AUSTCAT_V0.12_hmtk_deblast.csv'
+'''
 nsha_csv = 'data/NSHA18CAT.MW.V0.1.csv'
-
-# parse HMTK csv
-#parser = CsvCatalogueParser(hmtk_csv)
-#nshacat = parser.read_file()
-
 nshacat = parse_NSHA2018_catalogue(nsha_csv)
-mx_orig = dictlist2array(nshacat, 'mx_orig')
-mx_rev_ml = dictlist2array(nshacat, 'mx_rev_ml')
+'''
+
+# parse HMTK csv - use declustered catalogue
+hmtk_csv = 'data//NSHA18CAT_V0.2_hmtk_declustered.csv'
+nshacat = parse_altmag_hmtk_catalogue(hmtk_csv)
+
+'''
+tmpdict = {'datetime':ev_date, 'lon':lon, 'lat':lat, 'dep':dep,
+                   'mx_origML':mx_origML, 'mx_revML': mx_revML,
+                   'mw_pref':mw_pref, 'mw_qds':mw_qds, 'mw_qde':mw_qde, 
+                   'mw_ble':mw_ble, 'mw_alt_ble':mw_alt_ble, 
+                   'mw_alt_qde':mw_alt_qde, 'prefmag':mw_pref}
+'''
+
+mx_orig = dictlist2array(nshacat, 'mx_origML')
+mx_rev_ml = dictlist2array(nshacat, 'mx_revML')
 mw_pref = dictlist2array(nshacat, 'prefmag')
 evdt = dictlist2array(nshacat, 'datetime')
-ev_type = dictlist2array(nshacat, 'ev_type')
+#ev_type = dictlist2array(nshacat, 'ev_type')
 lat = dictlist2array(nshacat, 'lat')
 lon = dictlist2array(nshacat, 'lon')
 
 # get indexes to delete
-delidx = where((ev_type=='blast') | (ev_type=='coal'))[0]
-delidx = hstack((delidx, where(lat > -12)[0]))
+#delidx = where((ev_type=='blast') | (ev_type=='coal'))[0]
+#delidx = hstack((delidx, where(lat > -12)[0]))
 datelim = dt(1960, 1, 1)
-delidx = hstack((delidx, where(evdt < datelim)[0]))
+#delidx = hstack((delidx, where(evdt < datelim)[0]))
+delidx = where(evdt < datelim)[0]
 
 # delete events
 mx_orig = delete(mx_orig, delidx)

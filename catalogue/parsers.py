@@ -177,6 +177,55 @@ def parse_NSHA2018_catalogue(nsha2018cat):
             
     return austcat
     
+def parse_altmag_hmtk_catalogue(hmtk_csv):
+    from datetime import datetime
+    
+    lines = open(hmtk_csv).readlines()[1:]
+    
+    # set arrays
+    altMWdict = []
+    
+    # fill arrays
+    for line in lines:
+        data = line.strip().split(',')
+        dateStr = data[0]
+        lon = float(data[9])
+        lat = float(data[10])
+        dep = float(data[14])
+        mx_origML = float(data[19])
+        mx_revML = float(data[21])
+        mw_pref = float(data[22])
+        mw_qds = float(data[25])
+        mw_ble = float(data[23])
+        mw_qde = float(data[24])
+        
+        # set empirical alt MW
+        if mw_qds == mw_pref:
+            mw_alt_ble = mw_ble
+            mw_alt_qde = mw_qde
+        else:
+            mw_alt_ble = mw_pref
+            mw_alt_qde = mw_pref
+            
+        # make datetime object
+        try:
+            evdt = datetime.strptime(dateStr, '%Y%m%d%H%M')
+        except:
+            print dateStr
+            evdt = datetime.strptime(dateStr, '%Y-%m-%d %H:%M')
+        ev_date = evdt
+        
+        tmpdict = {'datetime':ev_date, 'lon':lon, 'lat':lat, 'dep':dep,
+                   'mx_origML':mx_origML, 'mx_revML': mx_revML,
+                   'mw_pref':mw_pref, 'mw_qds':mw_qds, 'mw_qde':mw_qde, 
+                   'mw_ble':mw_ble, 'mw_alt_ble':mw_alt_ble, 
+                   'mw_alt_qde':mw_alt_qde, 'prefmag':mw_pref}
+                   	
+        altMWdict.append(tmpdict)
+        
+    return altMWdict, len(altMWdict)
+
+
 def parse_iscgem(iscgemcsv):
     """
     function to parse the ISC-GEM V5 earthquake catalogue in csv format
