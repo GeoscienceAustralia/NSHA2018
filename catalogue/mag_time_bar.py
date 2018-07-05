@@ -8,7 +8,8 @@ Created on Tue May 23 13:59:45 2017
 #from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 #from hmtk.seismicity.utils import haversine
 from catalogue.parsers import parse_altmag_hmtk_catalogue
-from misc_tools import dictlist2array,timedelta2days_hours_minutes, toYearFraction, ymd2doy
+from misc_tools import dictlist2array,timedelta2days_hours_minutes, toYearFraction, ymd2doy, remove_last_cmap_colour
+from gmt_tools import cpt2colormap 
 from numpy import array, where, hstack, delete, arange
 import matplotlib.pyplot as plt
 from datetime import datetime as dt 
@@ -21,9 +22,16 @@ nsha_csv = 'data/NSHA18CAT.MW.V0.1.csv'
 nshacat = parse_NSHA2018_catalogue(nsha_csv)
 '''
 
+# get colours
+cptfile = '//Users//tallen//Documents//DATA//GMT//cpt//Paired_10.cpt'
+ncolours = 11
+cmap, zvals = cpt2colormap(cptfile, ncolours)
+cmap = remove_last_cmap_colour(cmap)
+cs = (cmap(arange(ncolours-1)))
+
 # parse HMTK csv - use declustered catalogue
 hmtk_csv = 'data//NSHA18CAT_V0.2_hmtk_declustered.csv'
-nshacat = parse_altmag_hmtk_catalogue(hmtk_csv)
+nshacat = parse_altmag_hmtk_catalogue(hmtk_csv)[0]
 
 '''
 tmpdict = {'datetime':ev_date, 'lon':lon, 'lat':lat, 'dep':dep,
@@ -64,13 +72,14 @@ decimal_yrs = array(decimal_yrs)
 # get plotting indices
 minmags = [4.5, 5.0]
 pltmean = [False, True]
+pltmean = [True]
 
 # loop thru years
 i = 0
 for minmag in minmags:
     for pm in pltmean:
         i += 1
-        fig, ax = plt.subplots(1, figsize=(10,6.25))
+        fig, ax = plt.subplots(1, figsize=(14, 8))
         
         plt_years = arange(1960, 2019)
         
@@ -81,14 +90,24 @@ for minmag in minmags:
            n_corrML.append(len(where((mx_rev_ml >= minmag) & (decimal_yrs >= py) & (decimal_yrs < py+1))[0]))
         
         width = 0.35  
-        bar1 = plt.bar(plt_years - width/2, array(n_origML), width, color='orangered')
-        bar2 = plt.bar(plt_years + width/2, array(n_corrML), width, color='seagreen')
+        #bar1 = plt.bar(plt_years - width/2, array(n_origML), width, color='orangered')
+        #bar2 = plt.bar(plt_years + width/2, array(n_corrML), width, color='seagreen')
+        #bar1 = plt.bar(plt_years - width/2, array(n_origML), width, color=cs[1])
+        #bar2 = plt.bar(plt_years + width/2, array(n_corrML), width, color=cs[7])
+        bar1 = plt.bar(plt_years - width, array(n_origML), width, color=cs[1])
+        bar2 = plt.bar(plt_years + 0., array(n_corrML), width, color=cs[7])
         
-        ax.set_xticks(plt_years[range(0, len(plt_years)+1, 2)])
-        plt.xticks(rotation=45) #, ha='right')
-        ax.set_yticks([0, 4, 8, 12, 16, 20])   
-        plt.ylabel('Numler of Earthquakes ML '+r'$\geq$'+' '+str(minmag))   
-        plt.xlabel('Years')
+        #ax.set_xticks(plt_years[range(0, len(plt_years)+1, 2)])
+        xticks = plt_years[range(0, len(plt_years)+1, 2)]
+        xtick_labels = [str(x) for x in xticks]
+        plt.xticks(xticks)
+        ax.set_xticklabels(xtick_labels)
+        
+        plt.xticks(rotation=65) #, ha='right')
+        #ax.set_yticks([0, 4, 8, 12, 16, 20])   
+        plt.ylabel('Numler of Earthquakes ML '+r'$\geq$'+' '+str(minmag), fontsize=17)   
+        plt.xlabel('Year', fontsize=17)
+        
         leg1 = ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
         leg1.get_frame().set_alpha(1.)
         plt.xlim([1958, 2018]) 
@@ -96,26 +115,33 @@ for minmag in minmags:
         #plt.grid(ls='--', which='y')
         
         if minmag == 5.0:
-            plt.ylim([0, 20])
-            ax.set_yticks([0, 4, 8, 12, 16, 20])   
+            ax.set_yticks([0, 2, 4, 6])  
+            plt.ylim([0, 7])
+             
         
         else:
-            plt.ylim([0, 40])
-            ax.set_yticks([0, 5, 10, 15, 20, 25, 30, 35, 40])   
+            
+            ax.set_yticks([0, 4, 8, 12])   
+            plt.ylim([0, 13])
         
         # get average from 1960 - 1988
         if pm == True:
-            av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
+            av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs <= 1988))[0]) / 29. # years
             av_n_1989_2017 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
             
-            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], '--', c='dodgerblue', lw=2.5, label='Original ML Average Annual Numler')
-            plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='dodgerblue', lw=2.5)
+            plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c='darkblue', lw=2.5, label='Original ML Average Annual Number')
+            plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='darkblue', lw=2.5)
+            #plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c=cs[-1], lw=2.5, label='Original ML Average Annual Numler')
+            #plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c=cs[-1], lw=2.5)
             
-            av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs < 1988))[0]) / 28. # years
+            av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs <= 1988))[0]) / 29. # years
             av_n_1989_2017 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
             
-            plt.plot([1959.65, 1987.35], [av_n_1960_1988, av_n_1960_1988], 'k--', lw=2.5, label='Revised ML Average Annual Numler')
-            plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], 'k--', lw=2.5)
+            plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c='orangered', lw=2.5, label='Revised ML Average Annual Numler')
+            plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='orangered', lw=2.5)
+            #plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c=cs[5], lw=2.5, label='Revised ML Average Annual Number')
+            #plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c=cs[5], lw=2.5)
+            
             leg2 = plt.legend(loc=2)
             leg2.get_frame().set_alpha(1.)
             

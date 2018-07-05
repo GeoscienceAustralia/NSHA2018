@@ -318,7 +318,7 @@ for i in srcidx:
         #a = plt.axes([.05, .05, .25, .25])
         
         axins = inset_axes(ax,
-                       width="35%",  # width = 30% of parent_bbox
+                       width="39%",  # width = 30% of parent_bbox
                        height=2.1,  # height : 1 inch
                        loc=3)
         
