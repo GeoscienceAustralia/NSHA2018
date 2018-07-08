@@ -5,6 +5,8 @@ if exist('mdat','var') ~= 1
     load mdat_mw.mat;
 end
 
+tabtxt = ''
+
 %% loop thru all events
 for i = 1:length(mdat)
     % find preferred ML
@@ -96,7 +98,26 @@ for i = 1:length(mdat)
         mdat(i).MDAT_prefmbSrc = '';
     end
     
+    % make text for Appendix of NSHA18-Cat
+    if ~isnan(mdat(i).Allen_ML)
+        line = [str(mdat(i).MDAT_dateNum), ',', str(mdat(i).MDAT_lon), ',', str(mdat(i).MDAT_lat), ',', ...
+                str(mdat(i).GG_Mval), ',', str(mdat(i).GG_Mtype), ',', str(mdat(i).ANSN_ml), ',', ...
+                str(mdat(i).Allen_ML), ',', str(mdat(i).MDAT_prefMW)]
+                
+        tabtxt = [tabtxt line];
+        
+    end
+    
+
+    
 end
+
+% write alt ML file
+header = 'DATESTR,LON,LAT,GGML,GGTYPE,AUSTML,ALLENML,PREFMW';
+disp('writing to file')
+dlmwrite(outfile,header,'delimiter','');
+
+dlmwrite('ml_comparisons.csv',txt,'delimiter','','-append');
 
 % save mat file
 save mdat_pref_mag_types mdat
