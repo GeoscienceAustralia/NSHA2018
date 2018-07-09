@@ -117,7 +117,7 @@ header = 'DATESTR,LON,LAT,GGML,GGTYPE,AUSTML,ALLENML,PREFMW';
 disp('writing to file')
 dlmwrite(outfile,header,'delimiter','');
 
-dlmwrite('ml_comparisons.csv',txt,'delimiter','','-append');
+dlmwrite('ml_comparisons.csv',tabtxt,'delimiter','','-append');
 
 % save mat file
 save mdat_pref_mag_types mdat
