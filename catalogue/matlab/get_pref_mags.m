@@ -5,7 +5,7 @@ if exist('mdat','var') ~= 1
     load mdat_mw.mat;
 end
 
-tabtxt = ''
+tabtxt = '';
 
 %% loop thru all events
 for i = 1:length(mdat)
@@ -100,22 +100,19 @@ for i = 1:length(mdat)
     
     % make text for Appendix of NSHA18-Cat
     if ~isnan(mdat(i).Allen_ML)
-        line = [str(mdat(i).MDAT_dateNum), ',', str(mdat(i).MDAT_lon), ',', str(mdat(i).MDAT_lat), ',', ...
-                str(mdat(i).GG_Mval), ',', str(mdat(i).GG_Mtype), ',', str(mdat(i).ANSN_ml), ',', ...
-                str(mdat(i).Allen_ML), ',', str(mdat(i).MDAT_prefMW)]
+        line = [datestr(mdat(i).MDAT_dateNum, 31), ',', num2str(mdat(i).MDAT_lon), ',', num2str(mdat(i).MDAT_lat), ',', ...
+                num2str(mdat(i).GG_Mval), ',', num2str(mdat(i).GG_Mtype), ',', num2str(mdat(i).ANSN_ml), ',', ...
+                num2str(mdat(i).Allen_ML), ',', num2str(mdat(i).MDAT_prefMW)];
                 
-        tabtxt = [tabtxt line];
+        tabtxt = [tabtxt line char(10)];
         
     end
-    
-
-    
 end
 
 % write alt ML file
 header = 'DATESTR,LON,LAT,GGML,GGTYPE,AUSTML,ALLENML,PREFMW';
 disp('writing to file')
-dlmwrite(outfile,header,'delimiter','');
+dlmwrite('ml_comparisons.csv',header,'delimiter','');
 
 dlmwrite('ml_comparisons.csv',tabtxt,'delimiter','','-append');
 
