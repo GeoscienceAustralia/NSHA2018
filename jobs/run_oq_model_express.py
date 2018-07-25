@@ -30,11 +30,8 @@ for line in f_in.readlines():
 user = getpass.getuser()
 run_start_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
 model_name = params['model_rel_path'].split('/')[-1]
-deag_name = params['deag_rel_path'].split('/')[-1]
 model_path = join(params['sandpit_path'], user, params['model_rel_path'])
-deag_path = join(params['sandpit_path'], user, params['deag_rel_path'])
-
-job_file = join(deag_path, params['job_file'])
+job_file = join(model_path, params['job_file'])
 
 # Make output directory and copy input files
 if not os.path.exists(params['model_output_base']):
@@ -96,7 +93,7 @@ f_in.close()
 
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
-outlines += '#PBS -q normal\n' # for high-memory jobs
+outlines += '#PBS -q express\n'
 outlines += '#PBS -l walltime=%s\n' % params['walltime']
 outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
 outlines += '#PBS -l mem=%s\n' % params['mem']
