@@ -1135,7 +1135,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="Northeast Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_NECS" name="Northeast Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1251,7 +1251,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1806,7 +1806,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CBGZ" name="Cratonic Background Zone" tectonicRegion="Cratonic">
+        <areaSource id="NSHMB_CBGZ" name="Cratonic Background Zone" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2379,7 +2379,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2591,7 +2591,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NCBM" name="Non Cratonic Background Zone - Main" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_NCBM" name="Non Cratonic Background Zone - Main" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2962,7 +2962,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NCBT" name="Non Cratonic Background Zone - Tasmania" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_NCBT" name="Non Cratonic Background Zone - Tasmania" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3471,7 +3471,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3701,7 +3701,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4222,7 +4222,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwest Margin Buffer 2" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_NWMB2" name="Northwest Margin Buffer 2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4295,7 +4295,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB1" name="Northwest Margin Buffer 1" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_NWMB1" name="Northwest Margin Buffer 1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4358,7 +4358,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EBGZ" name="Extended Background Zone" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHMB_EBGZ" name="Extended Background Zone" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

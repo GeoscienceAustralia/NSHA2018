@@ -1135,7 +1135,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="Northeastern Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_NECS" name="Northeastern Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1209,7 +1209,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwestern Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_NWO" name="Northwestern Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2066,7 +2066,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z012" name="ZONE 12" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z012" name="ZONE 12" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2121,7 +2121,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z013" name="ZONE 13" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z013" name="ZONE 13" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2164,7 +2164,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z016" name="ZONE 16" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z016" name="ZONE 16" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2203,7 +2203,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z020" name="ZONE 20" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z020" name="ZONE 20" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2255,7 +2255,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z021" name="ZONE 21" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z021" name="ZONE 21" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2304,7 +2304,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z022" name="ZONE 22" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z022" name="ZONE 22" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2346,7 +2346,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z023" name="ZONE 23" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z023" name="ZONE 23" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2396,7 +2396,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z024" name="ZONE 24" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z024" name="ZONE 24" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2444,7 +2444,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z025" name="ZONE 25" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z025" name="ZONE 25" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2495,7 +2495,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z026" name="ZONE 26" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z026" name="ZONE 26" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2543,7 +2543,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z027" name="ZONE 27" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z027" name="ZONE 27" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2589,7 +2589,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z031" name="ZONE 31" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z031" name="ZONE 31" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2667,7 +2667,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z032" name="ZONE 32" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z032" name="ZONE 32" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2751,7 +2751,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z034" name="ZONE 34" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z034" name="ZONE 34" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2893,7 +2893,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z035" name="ZONE 35" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z035" name="ZONE 35" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2971,7 +2971,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z036" name="ZONE 36" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z036" name="ZONE 36" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3082,7 +3082,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z037" name="ZONE 37" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z037" name="ZONE 37" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3163,7 +3163,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z038" name="ZONE 38" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z038" name="ZONE 38" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3250,7 +3250,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z006" name="ZONE 6" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z006" name="ZONE 6" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3294,7 +3294,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3470,7 +3470,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z001" name="ZONE 1" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z001" name="ZONE 1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3515,7 +3515,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z011" name="ZONE 11" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z011" name="ZONE 11" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3558,7 +3558,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z014" name="ZONE 14" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z014" name="ZONE 14" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3601,7 +3601,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z015" name="ZONE 15" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z015" name="ZONE 15" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3646,7 +3646,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z017" name="ZONE 17" tectonicRegion="Cratonic">
+        <areaSource id="NSHM_Z017" name="ZONE 17" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3686,7 +3686,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z018" name="ZONE 18" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z018" name="ZONE 18" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3728,7 +3728,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z019" name="ZONE 19" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z019" name="ZONE 19" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3773,7 +3773,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z002" name="ZONE 2" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z002" name="ZONE 2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3815,7 +3815,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z028" name="ZONE 28" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z028" name="ZONE 28" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3856,7 +3856,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z029" name="ZONE 29" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z029" name="ZONE 29" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3952,7 +3952,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z003" name="ZONE 3" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z003" name="ZONE 3" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3995,7 +3995,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z030" name="ZONE 30" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z030" name="ZONE 30" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4044,7 +4044,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z004" name="ZONE 4" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z004" name="ZONE 4" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4084,7 +4084,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z005" name="ZONE 5" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z005" name="ZONE 5" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4127,7 +4127,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z007" name="ZONE 7" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z007" name="ZONE 7" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4171,7 +4171,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z008" name="ZONE 8" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z008" name="ZONE 8" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4213,7 +4213,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="Z009" name="ZONE 9" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_Z009" name="ZONE 9" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4255,7 +4255,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4431,7 +4431,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeasetrn Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_SEOB" name="Southeasetrn Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4881,7 +4881,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwestern Margin - Buffer 2" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_NWMB2" name="Northwestern Margin - Buffer 2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4936,7 +4936,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB1" name="Northwestern Margin - Buffer 1 argin" tectonicRegion="Non_cratonic">
+        <areaSource id="NSHM_NWMB1" name="Northwestern Margin - Buffer 1 argin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

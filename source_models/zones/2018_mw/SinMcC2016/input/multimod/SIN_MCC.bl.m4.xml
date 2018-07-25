@@ -1133,7 +1133,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TP" name="Timor Platform" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_TP" name="Timor Platform" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1181,7 +1181,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="Northeast Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_NECS" name="Northeast Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1255,7 +1255,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWM" name="Northwestern Margin" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_NWM" name="Northwestern Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1319,7 +1319,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2167,7 +2167,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN1" name="Coastal Western Australia" tectonicRegion="Cratonic">
+        <areaSource id="SM_ZN1" name="Coastal Western Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2223,7 +2223,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN2" name="Central Australia" tectonicRegion="Cratonic">
+        <areaSource id="SM_ZN2" name="Central Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2266,7 +2266,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CWB" name="Central-Western Background" tectonicRegion="Cratonic">
+        <areaSource id="SM_CWB" name="Central-Western Background" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2430,7 +2430,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBA" name="North-Central Background" tectonicRegion="Cratonic">
+        <areaSource id="SM_NBA" name="North-Central Background" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2533,7 +2533,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2961,7 +2961,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3330,7 +3330,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EO" name="Eastern Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_EO" name="Eastern Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3673,7 +3673,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEM" name="Southern Extended Margin" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_SEM" name="Southern Extended Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4669,7 +4669,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN3" name="South Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_ZN3" name="South Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4714,7 +4714,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN4" name="Southeastern Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_ZN4" name="Southeastern Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4756,7 +4756,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN5" name="Queensland" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_ZN5" name="Queensland" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4803,7 +4803,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EAFZ" name="Eastern Australian Fill Zone" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_EAFZ" name="Eastern Australian Fill Zone" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4843,7 +4843,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="SM_WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

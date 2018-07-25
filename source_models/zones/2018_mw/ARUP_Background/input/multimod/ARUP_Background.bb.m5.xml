@@ -4,7 +4,7 @@
 
     <sourceModel name="multimod_collapsed">
 
-        <areaSource id="ZN1a" name="Zone 1a" tectonicRegion="Cratonic">
+        <areaSource id="ARUPB_ZN1a" name="Zone 1a" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -51,7 +51,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN1b" name="Zone 1b" tectonicRegion="Cratonic">
+        <areaSource id="ARUPB_ZN1b" name="Zone 1b" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -117,7 +117,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN2" name="Zone 2" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN2" name="Zone 2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -163,7 +163,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN3a" name="Zone 3a" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN3a" name="Zone 3a" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -206,7 +206,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN3b" name="Zone 3b" tectonicRegion="Cratonic">
+        <areaSource id="ARUPB_ZN3b" name="Zone 3b" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -259,7 +259,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN4" name="Zone 4" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN4" name="Zone 4" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -312,7 +312,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN5" name="Zone 5" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN5" name="Zone 5" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -361,7 +361,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN6" name="Zone 6" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN6" name="Zone 6" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -419,7 +419,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7a" name="Zone 7a" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN7a" name="Zone 7a" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -478,7 +478,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7b" name="Zone 7b" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN7b" name="Zone 7b" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -523,7 +523,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7c" name="Zone 7c" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_ZN7c" name="Zone 7c" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -575,7 +575,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN8" name="Zone 8" tectonicRegion="Cratonic">
+        <areaSource id="ARUPB_ZN8" name="Zone 8" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -623,7 +623,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -942,7 +942,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2442,7 +2442,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TP" name="Timor Platform" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_TP" name="Timor Platform" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2491,7 +2491,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2549,7 +2549,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="NW oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_NWO" name="NW oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3452,7 +3452,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3493,7 +3493,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUPB_NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

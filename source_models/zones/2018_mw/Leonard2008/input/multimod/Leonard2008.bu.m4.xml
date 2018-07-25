@@ -1135,7 +1135,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="Northeast Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_NECS" name="Northeast Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1198,7 +1198,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2049,7 +2049,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NA_3" name="Non-cratonic Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_NA_3" name="Non-cratonic Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2209,7 +2209,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWA" name="Northwestern Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_NWA" name="Northwestern Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2259,7 +2259,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWA" name="Southwestern Australia" tectonicRegion="Cratonic">
+        <areaSource id="L08_SWA" name="Southwestern Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2299,7 +2299,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2740,7 +2740,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2968,7 +2968,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EOB" name="Eastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_EOB" name="Eastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3289,7 +3289,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3647,7 +3647,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NA_2" name="Center Australia Cratonic" tectonicRegion="Cratonic">
+        <areaSource id="L08_NA_2" name="Center Australia Cratonic" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3918,7 +3918,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEM" name="Southern Extended Margin" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_SEM" name="Southern Extended Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4552,7 +4552,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TEC" name="Tasman Extended Crust" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_TEC" name="Tasman Extended Crust" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4700,7 +4700,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ECS" name="East Coast Sliver" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_ECS" name="East Coast Sliver" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4793,7 +4793,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SA" name="South Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_SA" name="South Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4837,7 +4837,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEA" name="Southeastern Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_SEA" name="Southeastern Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4883,7 +4883,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB1" name="Northwestern Margin - Buffer 1" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_NWMB1" name="Northwestern Margin - Buffer 1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4923,7 +4923,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwestern Margin - Buffer 2" tectonicRegion="Non_cratonic">
+        <areaSource id="L08_NWMB2" name="Northwestern Margin - Buffer 2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

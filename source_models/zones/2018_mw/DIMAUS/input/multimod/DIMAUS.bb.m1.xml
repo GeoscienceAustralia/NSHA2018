@@ -1162,7 +1162,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="Northeastern Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NECS" name="Northeastern Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1301,7 +1301,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SCOT" name="Scott Plateau" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SCOT" name="Scott Plateau" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1364,7 +1364,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwestern Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NWO" name="Northwestern Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2255,7 +2255,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NPLT" name="Naturaliste Plateau" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NPLT" name="Naturaliste Plateau" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2315,7 +2315,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PNCK" name="Pine Creek" tectonicRegion="Cratonic">
+        <areaSource id="DIM_PNCK" name="Pine Creek" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2385,7 +2385,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MCAR" name="McArthur" tectonicRegion="Cratonic">
+        <areaSource id="DIM_MCAR" name="McArthur" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2496,7 +2496,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CAYK" name="Cape York" tectonicRegion="Cratonic">
+        <areaSource id="DIM_CAYK" name="Cape York" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2591,7 +2591,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MISA" name="Mt Isa" tectonicRegion="Cratonic">
+        <areaSource id="DIM_MISA" name="Mt Isa" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2683,7 +2683,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WLBY" name="Wallaby Plateau" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_WLBY" name="Wallaby Plateau" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2748,7 +2748,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="QLDP" name="Queensland Plateau" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_QLDP" name="Queensland Plateau" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2839,7 +2839,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MSAB" name="Money Shoal-Arafura Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_MSAB" name="Money Shoal-Arafura Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2948,7 +2948,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PAPU" name="Papuan Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_PAPU" name="Papuan Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3084,7 +3084,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BLHB" name="Bligh Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_BLHB" name="Bligh Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3167,7 +3167,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EPPL" name="Eastern-Papuan Plateau" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_EPPL" name="Eastern-Papuan Plateau" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3287,7 +3287,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CARP" name="Carpentaria Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_CARP" name="Carpentaria Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3386,7 +3386,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="AMDS" name="Amadeus Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_AMDS" name="Amadeus Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3484,7 +3484,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ULUR" name="Uluru" tectonicRegion="Cratonic">
+        <areaSource id="DIM_ULUR" name="Uluru" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3544,7 +3544,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ARTA" name="Arunta Block" tectonicRegion="Cratonic">
+        <areaSource id="DIM_ARTA" name="Arunta Block" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3613,7 +3613,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MGVE" name="Musgrave East" tectonicRegion="Cratonic">
+        <areaSource id="DIM_MGVE" name="Musgrave East" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3703,7 +3703,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MGVW" name="Musgrave West" tectonicRegion="Cratonic">
+        <areaSource id="DIM_MGVW" name="Musgrave West" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3818,7 +3818,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NODR" name="New Ord River" tectonicRegion="Cratonic">
+        <areaSource id="DIM_NODR" name="New Ord River" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3881,7 +3881,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="KIMB" name="Kimberley Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_KIMB" name="Kimberley Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3951,7 +3951,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WGAB" name="Wiso-Georgina Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_WGAB" name="Wiso-Georgina Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4137,7 +4137,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="FITZ" name="Fitzroy Crossing" tectonicRegion="Cratonic">
+        <areaSource id="DIM_FITZ" name="Fitzroy Crossing" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4199,7 +4199,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BROM" name="Broome Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_BROM" name="Broome Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4273,7 +4273,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MBLB" name="Marble Bar" tectonicRegion="Cratonic">
+        <areaSource id="DIM_MBLB" name="Marble Bar" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4330,7 +4330,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWBN" name="Northwest Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NWBN" name="Northwest Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4432,7 +4432,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CNNG" name="Canning Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_CNNG" name="Canning Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4572,7 +4572,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="GSYN" name="Gascoyne" tectonicRegion="Cratonic">
+        <areaSource id="DIM_GSYN" name="Gascoyne" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4637,7 +4637,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BWDP" name="Barrow-Dampier Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_BWDP" name="Barrow-Dampier Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4750,7 +4750,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PILB" name="Pilbara" tectonicRegion="Cratonic">
+        <areaSource id="DIM_PILB" name="Pilbara" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4844,7 +4844,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PERB" name="Perth Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_PERB" name="Perth Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4906,7 +4906,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SKBY" name="Shark Bay" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SKBY" name="Shark Bay" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4971,7 +4971,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ALBF" name="Albany-Fraser" tectonicRegion="Cratonic">
+        <areaSource id="DIM_ALBF" name="Albany-Fraser" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5083,7 +5083,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="YILG" name="Yilgarn Craton" tectonicRegion="Cratonic">
+        <areaSource id="DIM_YILG" name="Yilgarn Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5211,7 +5211,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="YGSW" name="Southwestern Yilgarn" tectonicRegion="Cratonic">
+        <areaSource id="DIM_YGSW" name="Southwestern Yilgarn" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5272,7 +5272,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="FRSR" name="Fraser" tectonicRegion="Cratonic">
+        <areaSource id="DIM_FRSR" name="Fraser" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5323,7 +5323,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EYPN" name="Eyre Peninsula" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_EYPN" name="Eyre Peninsula" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5375,7 +5375,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OFEU" name="Officer-Eucla Basin" tectonicRegion="Cratonic">
+        <areaSource id="DIM_OFEU" name="Officer-Eucla Basin" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5504,7 +5504,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TRNS" name="Torrens" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_TRNS" name="Torrens" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5572,7 +5572,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="STRZ" name="Strzelecki Ranges" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_STRZ" name="Strzelecki Ranges" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5626,7 +5626,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NSWC" name="NSW Coastal" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NSWC" name="NSW Coastal" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5713,7 +5713,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SOCN" name="Southern Ocean" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SOCN" name="Southern Ocean" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5836,7 +5836,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OTYB" name="Otway Shelf" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_OTYB" name="Otway Shelf" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5903,7 +5903,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OTSR" name="Otway-Sorell Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_OTSR" name="Otway-Sorell Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5978,7 +5978,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="FLET" name="Flinders-East Tassie" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_FLET" name="Flinders-East Tassie" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6054,7 +6054,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="GAWL" name="Gawler Craton" tectonicRegion="Cratonic">
+        <areaSource id="DIM_GAWL" name="Gawler Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6137,7 +6137,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SPCG" name="Spencer Gulf" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SPCG" name="Spencer Gulf" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6232,7 +6232,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MELB" name="Greater Melbourne" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_MELB" name="Greater Melbourne" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6333,7 +6333,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB1" name="Western Oceatnic Buffer 1" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_WOB1" name="Western Oceatnic Buffer 1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6413,7 +6413,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB2" name="Western Oceatnic Buffer 2" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_WOB2" name="Western Oceatnic Buffer 2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6539,7 +6539,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WTAS" name="Western Tasmania" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_WTAS" name="Western Tasmania" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6611,7 +6611,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ADEF" name="Adelaide Foldbelt" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_ADEF" name="Adelaide Foldbelt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6700,7 +6700,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="FLDR" name="Flinders Ranges" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_FLDR" name="Flinders Ranges" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6781,7 +6781,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="LOFT" name="Mt Lofty Ranges" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_LOFT" name="Mt Lofty Ranges" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6838,7 +6838,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BKHL" name="Broken Hill" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_BKHL" name="Broken Hill" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6926,7 +6926,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NENG" name="New England" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NENG" name="New England" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6989,7 +6989,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NEQB" name="NE Qld Basins" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NEQB" name="NE Qld Basins" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7076,7 +7076,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TAMW" name="Tamworth" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_TAMW" name="Tamworth" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7132,7 +7132,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="GLBN" name="Goulburn" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_GLBN" name="Goulburn" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7178,7 +7178,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WYLG" name="Wyalong" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_WYLG" name="Wyalong" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7223,7 +7223,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NEWC" name="Newcastle" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_NEWC" name="Newcastle" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7268,7 +7268,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BNLO" name="Bunnaloo" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_BNLO" name="Bunnaloo" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7322,7 +7322,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ORNG" name="Orange" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_ORNG" name="Orange" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7377,7 +7377,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SNSW" name="Southern NSW Coastline" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SNSW" name="Southern NSW Coastline" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7449,7 +7449,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEHI" name="Southeastern Highlands" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SEHI" name="Southeastern Highlands" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7515,7 +7515,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="KNMT" name="Kanmantoo Province" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_KNMT" name="Kanmantoo Province" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7620,7 +7620,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MWTA" name="Northwestern Tasmania" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_MWTA" name="Northwestern Tasmania" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7696,7 +7696,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="VICG" name="Victorian Goldfields" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_VICG" name="Victorian Goldfields" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7778,7 +7778,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SYDB" name="Sydney Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SYDB" name="Sydney Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7840,7 +7840,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BNBA" name="Benambra Terrane" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_BNBA" name="Benambra Terrane" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7923,7 +7923,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EIBA" name="Eastern Inland Basins" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_EIBA" name="Eastern Inland Basins" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -8175,7 +8175,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="GNDH" name="Gunnedah Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_GNDH" name="Gunnedah Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -8262,7 +8262,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="DIM_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

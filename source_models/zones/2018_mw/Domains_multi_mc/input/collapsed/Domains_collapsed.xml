@@ -1145,7 +1145,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1265,7 +1265,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_NWO" name="Northwest Oceanic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2142,7 +2142,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OSGB" name="Otway-Sorell-Gippsland Basins" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_OSGB" name="Otway-Sorell-Gippsland Basins" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2499,7 +2499,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SAPM" name="South Australian Passive Margin" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_SAPM" name="South Australian Passive Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2793,7 +2793,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="YLGN" name="Yilgarn Craton" tectonicRegion="Cratonic">
+        <areaSource id="DOM_YLGN" name="Yilgarn Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2946,7 +2946,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PLBR" name="Pilbra Craton" tectonicRegion="Cratonic">
+        <areaSource id="DOM_PLBR" name="Pilbra Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3022,7 +3022,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CARP" name="Central Australia Reactivated Proterozoic" tectonicRegion="Cratonic">
+        <areaSource id="DOM_CARP" name="Central Australia Reactivated Proterozoic" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3426,7 +3426,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="EAPM" name="Eastern Australia Passive Margin" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_EAPM" name="Eastern Australia Passive Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3614,7 +3614,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="KMBY" name="Kimberly Craton" tectonicRegion="Cratonic">
+        <areaSource id="DOM_KMBY" name="Kimberly Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3722,7 +3722,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WAPM" name="Western Australia Passive Margin" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_WAPM" name="Western Australia Passive Margin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4003,7 +4003,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NAOR" name="North Australian Orogens" tectonicRegion="Cratonic">
+        <areaSource id="DOM_NAOR" name="North Australian Orogens" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4229,7 +4229,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NACR" name="North Australian Craton" tectonicRegion="Cratonic">
+        <areaSource id="DOM_NACR" name="North Australian Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -4449,7 +4449,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WAEP" name="Western Australian Extended Proterozoic" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_WAEP" name="Western Australian Extended Proterozoic" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5017,7 +5017,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SOB" name="Southern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_SOB" name="Southern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5276,7 +5276,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_WOB" name="Western Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -5508,7 +5508,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6031,7 +6031,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ETAS" name="Eastern Tasmania" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_ETAS" name="Eastern Tasmania" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6137,7 +6137,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WTAS" name="Western Tasmania" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_WTAS" name="Western Tasmania" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6275,7 +6275,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="GAWL" name="Gawler Craton" tectonicRegion="Cratonic">
+        <areaSource id="DOM_GAWL" name="Gawler Craton" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6449,7 +6449,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="FMLR" name="Flinders and Mt Lofty Ranges" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_FMLR" name="Flinders and Mt Lofty Ranges" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6643,7 +6643,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TSMN" name="Tasmanides" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_TSMN" name="Tasmanides" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -6965,7 +6965,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -7038,7 +7038,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
+        <areaSource id="DOM_NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>

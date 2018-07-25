@@ -1,6 +1,6 @@
 from numpy import array, arange, argsort, where, delete, hstack, sqrt, \
                   unique, mean, percentile, log10, ceil, floor, \
-                  nan, isnan, around, diff, interp, exp, ones_like
+                  nan, isnan, isinf, around, diff, interp, exp, ones_like
 from os import path, sep, mkdir, getcwd, walk
 from shapely.geometry import Point, Polygon
 #from osgeo import ogr
@@ -43,6 +43,8 @@ def timedelta2days_hours_minutes(td):
 #try:
 # parse param file
 paramfile = argv[1] # parameter file
+
+# skip plotting offshore events
 skipPlotting = argv[2] # True or False
 if skipPlotting == 'True':
     skipPlotting = True
@@ -1198,7 +1200,7 @@ for i in srcidx:
                         free_dep.append(ev['dep'])
             
             # first plt all data
-            plt.hist(array(all_dep), bins=deprng, facecolor='w', label='Fixed Depths')
+            #plt.hist(array(all_dep), bins=deprng, facecolor='w', label='Fixed Depths')
             
             # plt data with free depths
             plt.hist(array(free_dep), bins=deprng, facecolor='seagreen', label='Free Depths')
@@ -1664,7 +1666,7 @@ src_mmax = array(src_mmax)
 # remove sources with zero rates
 idx = where(isnan(new_n0_b)==False)[0] 
 
-# calculate rate of M5 events
+# calculate rate of M6 events
 m6_rates = array(new_n0_b[idx]) * exp(-new_beta[idx]  * 6.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 6.0))) \
            / (1 - exp(-new_beta[idx] * src_mmax[idx]))
 
@@ -1711,6 +1713,92 @@ cb.set_label('M 6.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
 
 # set filename
 rmap = path.join(rootfolder,modelsplit+'_m6_rate_map.pdf')
+plt.savefig(rmap, format='pdf', bbox_inches='tight')
+plt.gcf().clear()
+plt.clf()
+plt.close()
+
+###############################################################################
+# map activity rate of M7
+###############################################################################
+
+# set figure
+plt.clf()
+fig = plt.figure(333, figsize=(13, 9))
+
+# set national-scale basemap
+m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
+            urcrnrlon=urcrnrlon,urcrnrlat=urcrnrlat,
+            projection='lcc',lat_1=lat_1,lat_2=lat_2,lon_0=lon_0,
+            resolution='l',area_thresh=1000.)
+
+# annotate
+m2.drawcoastlines(linewidth=0.5,color='0.25')
+m2.drawcountries()
+m2.drawstates()
+    
+# draw parallels and meridians.
+m2.drawparallels(arange(-90.,90.,ll_space/2.0), labels=[1,0,0,0],fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+m2.drawmeridians(arange(0.,360.,ll_space), labels=[0,0,0,1], fontsize=10, dashes=[2, 2], color='0.5', linewidth=0.5)
+
+# get M7 rates
+new_beta = bval2beta(array(new_bval_b))
+src_mmax = array(src_mmax)
+
+# remove sources with zero rates
+#idx = where(isnan(new_n0_b)==False)[0]
+idx = where(isnan(new_n0_b))[0]
+new_n0_b[idx] = 0.
+idx = where(isnan(new_n0_b)==False)[0]
+
+# calculate rate of M5 events
+m7_rates = array(new_n0_b[idx]) * exp(-new_beta[idx]  * 7.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 7.0))) \
+           / (1 - exp(-new_beta[idx] * src_mmax[idx]))
+
+# normalise M5 rates by area
+lognorm_m7_rates = log10(100**2 * m7_rates / src_area[idx])
+    
+# get colour index
+ncolours=20
+r_min = -6.0
+r_max = -3.5
+r_rng = arange(r_min, r_max+0.1, 0.5)
+
+cindex = []
+# loop thru rates and get c-index
+for r in lognorm_m7_rates:
+    idx = interp(r, [r_min, r_max], [0, ncolours-1])
+    #print r, idx
+    cindex.append(int(round(idx)))
+    if isnan(idx) or isinf(idx):
+        idx = 0
+        
+   # cindex.append(int(round(idx)))
+    
+# get cmap
+cmap = plt.get_cmap('rainbow', ncolours)
+
+# plt source zone boundary
+drawshapepoly(m2, plt, sf, cindex=cindex, cmap=cmap, ncolours=ncolours, fillshape=True)
+
+# label polygons
+labelpolygon(m2, plt, sf, 'CODE')
+
+# set colorbar
+plt.gcf().subplots_adjust(bottom=0.1)
+cax = fig.add_axes([0.33,0.05,0.34,0.02]) # setup colorbar axes.
+norm = colors.Normalize(vmin=r_min, vmax=r_max)
+cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
+
+# set cb labels
+ticks = arange(r_min, r_max+0.5, 0.5)
+cb.set_ticks(ticks)
+labels = [str('%0.1e' % 10**x) for x in ticks]
+cb.ax.set_xticklabels(labels, fontsize=10)
+cb.set_label('M 7.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
+
+# set filename
+rmap = path.join(rootfolder,modelsplit+'_m7_rate_map.pdf')
 plt.savefig(rmap, format='pdf', bbox_inches='tight')
 plt.gcf().clear()
 plt.clf()
