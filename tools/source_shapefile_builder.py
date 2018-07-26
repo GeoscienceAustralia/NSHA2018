@@ -190,11 +190,14 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data
     
-    shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
-
     print 'Reading SHmax shapefile...'
-    sf = shapefile.Reader(shmaxshp)
-        
+    try:
+        shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
+        sf = shapefile.Reader(shmaxshp)
+    except:
+        shmaxshp = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
+        sf = shapefile.Reader(shmaxshp)
+
     # get shmax attributes
     shmax_lat = get_field_data(sf, 'LAT', 'float')
     shmax_lon = get_field_data(sf, 'LON', 'float')
