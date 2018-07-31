@@ -73,6 +73,7 @@ f_in.close()
 copy2(job_file, output_dir)
 copy2(src_lt_file, output_dir)
 copy2(gsim_lt_file, output_dir)
+copy2('job_stats.ini', output_dir)
 try:
     copy2(sites_file, output_dir)
 except IOError:
@@ -106,8 +107,9 @@ outlines += '#PBS -l other=hyperthread\n\n'
 #outlines += 'module load openquake/2.4\n'
 outlines += 'module load openquake/3.1\n'
 outlines += 'oq-ini.all.sh\n'
-outlines += 'oq engine info %s' % params['job_file']
+outlines += 'oq engine --info %s\n' % params['job_file']
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
+outlines += 'oq engine --run job_stats.ini --hc PREV_CALC_ID --exports csv >&  jobstats.log\n'
 outlines += 'oq-end.sh'
 
 run_script_name = 'run_%s.sh' % model_name
