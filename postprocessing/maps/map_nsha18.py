@@ -247,7 +247,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     extent = (minlon-mbuff, maxlon+mbuff, minlat-mbuff, maxlat+mbuff)
     xs,ys = mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
     	
-    resampled = griddata(lonlist, latlist, log10(hazvals), xs, ys, interp='linear')
+    #resampled = griddata(lonlist, latlist, log10(hazvals), xs, ys, interp='linear')
+    resampled = griddata(lonlist, latlist, hazvals, xs, ys, interp='linear')
     #resampled = griddata(lonlist, latlist, log10(hazvals), lonlist, latlist, interp='linear') # if this suddenly works, I have no idea why!
     
     # get 1D lats and lons for map transform
@@ -322,7 +323,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             if gshap == True:
                 nascptfile = '/nas/gemd/ehp/georisk_earthquake/hazard/DATA/cpt/gshap.cpt'
             else:
-                nascptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+                nascptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
             
             #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
             cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
@@ -337,7 +338,17 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     
     print 'Making map...'    
     cmap.set_bad('w', 1.0)
-    m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
+    
+    if probability == '10%' or probability == '9.5%':
+        bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12])
+        ncolours = 10
+    else:
+        bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5])
+        ncolours = 10
+    norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
+    
+    #m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
+    m.imshow(masked_array, cmap=cmap, extent=extent, norm=norm, zorder=0)
     
     ##########################################################################################
     # plot contours
@@ -394,7 +405,10 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     ##########################################################################################
     # format main axis
     ##########################################################################################
-    titlestr = ' '.join((modelName, T, probability, 'in 50-Year Mean Hazard on AS1170.4 Site Class '))    
+    if probability == '9.5%':
+        titlestr = ' '.join((modelName, '1 in 500-Year AEP Mean', T, 'Hazard on AS1170.4 Site Class '))
+    else:
+        titlestr = ' '.join((modelName, T, probability, 'in 50-Year Mean Hazard on AS1170.4 Site Class '))    
     plt.title(titlestr+'$\mathregular{B_e}$')
     
     # get map bbox
@@ -425,7 +439,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         except:
             # cover all bases
             try:
-                im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
+                im = plt.imread('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/GAlogo.png')
             except:
                 try:
                     im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/GAlogo.png')
@@ -451,7 +465,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         except:
             # covering all bases again
             try:
-                im = plt.imread('/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
+                im = plt.imread('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
             except:
                 try:
                     im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
@@ -542,18 +556,26 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     # set colourbar
     plt.gcf().subplots_adjust(bottom=0.1)
     cax = figure.add_axes([0.34,0.05,0.33,0.02]) # setup colorbar axes.
-    norm = colors.Normalize(vmin=vmin, vmax=vmax)
+    #norm = colors.Normalize(vmin=vmin, vmax=vmax)
     cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
     
     # set cb labels
     #linticks = array([0.01, 0.03, 0.1, 0.3 ])
-    logticks = arange(vmin, vmax+0.25, 0.25)
-    cb.set_ticks(logticks)
-    labels = [str('%0.3f' % 10**x) for x in logticks]
+    #logticks = arange(vmin, vmax+0.25, 0.25)
+    #cb.set_ticks(logticks)
+    #labels = [str('%0.3f' % 10**x) for x in logticks]
+    
+    cb.set_ticks(bounds)
+    labels = ['0'+str('%0.3f' % x).strip('0') for x in bounds]
+    labels[0] = '0.0'
+    
     cb.set_ticklabels(labels)
     
     # set title
-    titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
+    if probability == '9.5%':
+        titlestr = ' '.join(('1 in 500-Year AEP Mean', T, 'Hazard (g)'))
+    else:
+        titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
     cb.set_label(titlestr, fontsize=12)
     
     '''
@@ -567,7 +589,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         mkdir('maps')
         
     # now save png file
-    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probFraction+'.nomask.png'), \
+    plt.savefig(path.join('maps', 'hazard_map_'+modelName.replace(' ','_')+'.'+period+'.'+probFraction+'.png'), \
                 dpi=300, format='png', bbox_inches='tight')
     
     # save pdf file
@@ -581,7 +603,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     ##########################################################################################
     # make shapefile of contour lines
     ##########################################################################################
-    
+    """
     # check to see if shapefile contours exists
     if path.isdir('contours') == False:
         mkdir('contours')
@@ -642,6 +664,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         f = open(prjfile, 'wb')
         f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
         f.close()
+        """
 
     
 
