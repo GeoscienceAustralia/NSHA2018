@@ -1,5 +1,5 @@
 ncpus = 980
-mem = 3920GB
+mem = 7000GB
 walltime = 5:00:00
 jobfs = 500GB
 sandpit_path = /short/w84/NSHA18/sandpit/
