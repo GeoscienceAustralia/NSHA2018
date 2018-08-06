@@ -41,6 +41,7 @@ if not os.path.exists(model_output_base_source_folder):
     os.mkdir(model_output_base_source_folder)
 output_dir_name = '_'.join((params['job_type'], run_start_time, model_name, user))
 output_dir = join(model_output_base_source_folder, output_dir_name)
+print 'Output Path:', output_dir
 os.mkdir(output_dir)
 
 # We want to ensure we are using the same ground motion models
@@ -107,6 +108,8 @@ outlines += '#PBS -l other=hyperthread\n\n'
 #outlines += 'module load openquake/2.4\n'
 outlines += 'module load openquake/3.1\n'
 outlines += 'oq-ini.all.sh\n'
+# zip inputs - oq zip /path/to/your/job.ini job.zip
+outlines += 'oq engine zip %s job.zip\n' % output_dir
 outlines += 'oq engine info %s >& info.log\n' % params['job_file']
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
 outlines += 'oq engine --lhc >&  lhc.log\n'
