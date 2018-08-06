@@ -44,6 +44,10 @@ output_dir = join(model_output_base_source_folder, output_dir_name)
 print 'Output Path:', output_dir
 os.mkdir(output_dir)
 
+# make full job path
+full_job_dir = join(output_dir, params['job_file'])
+print full_job_dir
+
 # We want to ensure we are using the same ground motion models
 # for all model runs
 gsim_lt_file = join(params['sandpit_path'], user, params['shared_rel_path'],
@@ -109,7 +113,7 @@ outlines += '#PBS -l other=hyperthread\n\n'
 outlines += 'module load openquake/3.1\n'
 outlines += 'oq-ini.all.sh\n'
 # zip inputs - oq zip /path/to/your/job.ini job.zip
-outlines += 'oq engine --zip %s job.zip\n' % output_dir
+outlines += 'oq engine --zip %s job.zip\n' % full_job_dir
 outlines += 'oq engine --info %s >& info.log\n' % params['job_file']
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
 outlines += 'oq engine --lhc >&  lhc.log\n'
