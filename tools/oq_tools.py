@@ -6,7 +6,7 @@ Created on Tue Oct 21 16:17:40 2014
 """
 
 def return_annualised_haz_curves(hazcurvefile):
-    from numpy import array, log
+    from numpy import array, log, unique, where
     
     # set lists to fill
     curvelat = []
@@ -28,7 +28,7 @@ def return_annualised_haz_curves(hazcurvefile):
             hazcurves.append((poes))
         
         investigation_time = float(hcm.metadata['investigation_time'])
-        metadata = hcm.metadata
+        #metadata = hcm.metadata
         
     # from OQ V2.2 or higher, returns csv files only
     elif hazcurvefile.endswith('csv'):
@@ -39,13 +39,14 @@ def return_annualised_haz_curves(hazcurvefile):
         investigation_time = float(csvlines[0].split(',')[1].split('=')[-1])
         
         # get intesity measures
-        header = csvlines[1].strip().split(',')[2:]
+        header = csvlines[1].strip().split(',')[3:] # changed to 3 for oq version 3.1
         try:
             imls = array([float(x.split(':')[0]) for x in header])
         
         # have to edit to accommodate imls < 10**-4
         except:
             imls = []
+            imts = []
             for iml in header:
                 iml = iml.split('-')
                 if len(iml) > 2:
@@ -53,27 +54,48 @@ def return_annualised_haz_curves(hazcurvefile):
                 else:
                     imls.append(float(iml[-1]))
                     
+                imts.append(iml[0].strip(')').split('(')[-1])
+                    
             imls = array(imls)
+            imts = array(imts)
             #imls = array([float(x.split('-')[-1]) for x in header])
         
-        metadata = {'imls': imls}
-        	
+        #metadata = {'imls': imls, 'imts':imts}
+        
+        uimts = unique(imts) # get unique periods
+        print 'needs fixing here to deal with multiple periods'
         # get site data
+        siteDict = []
         for line in csvlines[2:]:
             dat = line.split(',')
-            curvelon.append(float(dat[0]))
-            curvelat.append(float(dat[1]))
-            hazcurves.append(array([float(x) for x in dat[2:]]))
-    
-    # now get annualised curves
+            tmpdict = {'lon': float(dat[0]), 'lat': float(dat[1]), 'depth': float(dat[2])}
+            
+            dat = dat[2:]
+            # loop through imts
+            for ut in uimts:
+                idx = where(imts == ut)[0]
+                tmpdict[ut+'_imls'] = imls[idx]
+                hazcurve = array([float(x) for x in array(dat)[idx]])
+                
+                # now get annualised curves
+                P0 = 1 - array(hazcurve)
+                n = -1*log(P0)
+                annual_probs = n / investigation_time
+                
+                tmpdict[ut+'_probs'] = annual_probs
+                
+            siteDict.append(tmpdict)
+        
+    '''
     annual_hazcurves = []
     for i, hazcurve in enumerate(hazcurves):
         # for curves, plot annual probablility
         P0 = 1 - array(hazcurve)
         n = -1*log(P0)
         annual_hazcurves.append(n / investigation_time)
-        
-    return annual_hazcurves, curvelon, curvelat, metadata
+    '''    
+    #return annual_hazcurves, curvelon, curvelat, metadata
+    return siteDict
     
 # return curves for given time interval (e.g. 50-years)
 def return_haz_curves(hazcurvefile):

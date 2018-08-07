@@ -113,7 +113,7 @@ outlines += '#PBS -l other=hyperthread\n\n'
 outlines += 'module load openquake/3.1\n'
 outlines += 'oq-ini.all.sh\n'
 # zip inputs - oq zip /path/to/your/job.ini job.zip
-outlines += 'oq zip %s job.zip\n' % full_job_dir
+#outlines += 'oq zip %s job.zip\n' % full_job_dir
 outlines += 'oq info %s >& info.log\n' % params['job_file']
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
 outlines += 'oq engine --lhc >&  lhc.log\n'

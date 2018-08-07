@@ -568,13 +568,14 @@ def write_oq_sourcefile(model, meta, mx_dict):
             newxml += '    ' + line
     
     ######################################################################
-    # add indoneasia-png fault-source model
+    # add indoneasia-png area and fault-source model
     ######################################################################
     
-    indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
-    lines = open(indo_png_fault_file).readlines()[3:-2]
+    #indo_png_fault_file = path.join('..', 'banda', 'Banda_Fault_Sources_NSHA_2018.xml')
+    indo_png_source_file = path.join('2018_mw', 'Java_Banda_PNG', 'input', 'collapsed', 'Java_Banda_PNG_collapsed.xml')
+    lines = open(indo_png_source_file).readlines()[4:-2]
     for line in lines:
-        newxml += '    ' + line
+        newxml += line
     
     #print '\nSkipping Banda Faults\n'
        
@@ -655,7 +656,31 @@ def make_logic_tree(srcxmls, branch_wts, meta):
 ###############################################################################
 # make source dict for OQ input writer
 ###############################################################################
-
+# set code prefix to ensure unique ids and optimise jobs
+def get_code_prefix(modelshp):
+    if modelshp.endswith('ARUP_NSHA18_MFD.shp'):
+        code_prefix = 'ARUP'
+    elif modelshp.endswith('ARUP_Background_NSHA18_MFD.shp'):
+        code_prefix = 'ARUPB'
+    elif modelshp.endswith('AUS6_NSHA18_MFD.shp'):
+        code_prefix = 'AUS6'
+    elif modelshp.endswith('DIMAUS_NSHA18_MFD.shp'):
+        code_prefix = 'DIM'
+    elif modelshp.endswith('Domains_NSHA18_MFD.shp'):
+        code_prefix = 'DOM'
+    elif modelshp.endswith('Leonard2008_NSHA18_MFD.shp'):
+        code_prefix = 'L08'
+    elif modelshp.endswith('NSHA13_NSHA18_MFD.shp'):
+        code_prefix = 'NSHM'
+    elif modelshp.endswith('NSHA13_BACKGROUND_NSHA18_MFD.shp'):
+        code_prefix = 'NSHMB'
+    elif modelshp.endswith('SIN_MCC_NSHA18_MFD.shp'):
+        code_prefix = 'SM'
+    else:
+        code_prefix = ''
+        
+    return code_prefix
+    
 def src_shape2dict(modelshp):
     import shapefile  
     from numpy import array
@@ -670,20 +695,35 @@ def src_shape2dict(modelshp):
     # set model list
     model = []
     
+    # set source code prefix
+    code_prefix = get_code_prefix(modelshp)
+    
     # loop thru recs and make dict
     for rec, shape in zip(records, shapes):
         if not float(rec[15]) == -99:
-            m = {'src_name':rec[0], 'src_code':rec[1], 'src_type':rec[2],
-                 'class':rec[3], 'trt':rec[33], 'src_shape':array(shape.points),
-                 'src_dep':[float(rec[6]), float(rec[7]), float(rec[8])],
-                 'src_usd':float(rec[9]), 'src_lsd':float(rec[10]),
-                 'max_mag':[float(rec[14]), float(rec[15]), float(rec[16])],
-                 'src_N0':[float(rec[17]), float(rec[18]), float(rec[19])],
-                 'src_beta':[bval2beta(float(rec[20])), bval2beta(float(rec[21])), bval2beta(float(rec[22]))],
-                 'min_mag':float(rec[12]), 'src_weight':float(rec[4]), 'src_reg_wt':1.,
-                 'rate_adj_fact':float(rec[5]), 'pref_stk':float(rec[28]), 'pref_dip':float(rec[29]),
-                 'pref_rke':float(rec[30]), 'shmax':float(rec[31]), 'shmax_sig':float(rec[32]), 'gmm_trt':rec[34]}
-            model.append(m)
+            # determine whether source optimization occurs - ignores banda, etc sources to ensure same params are used
+            if float(rec[3]) <= 8.:
+                optim_code = '_'.join((code_prefix, rec[1]))
+                
+                m = {'src_name':rec[0], 'src_code':optim_code, 'src_type':rec[2],
+                     'class':rec[3], 'trt':rec[33], 'src_shape':array(shape.points),
+                     'src_dep':[float(rec[6]), float(rec[7]), float(rec[8])],
+                     'src_usd':float(rec[9]), 'src_lsd':float(rec[10]),
+                     'max_mag':[float(rec[14]), float(rec[15]), float(rec[16])],
+                     'src_N0':[float(rec[17]), float(rec[18]), float(rec[19])],
+                     'src_beta':[bval2beta(float(rec[20])), bval2beta(float(rec[21])), bval2beta(float(rec[22]))],
+                     'min_mag':float(rec[12]), 'src_weight':float(rec[4]), 'src_reg_wt':1.,
+                     'rate_adj_fact':float(rec[5]), 'pref_stk':float(rec[28]), 'pref_dip':float(rec[29]),
+                     'pref_rke':float(rec[30]), 'shmax':float(rec[31]), 'shmax_sig':float(rec[32]), 'gmm_trt':rec[34]}
+                
+                model.append(m)
+                
+            '''
+            else:
+                optim_code = rec[1]
+            '''    
+            
+            
             
         else:
             # parse GSC version

@@ -248,9 +248,9 @@ yrng_ga17 = nsha18_ml2mw(xrng)
 
 
 ##### Plot all
-
+fig = plt.figure(1, figsize=(10,20))
 mx = 6.
-f, ax = plt.subplots(1, 1, figsize=(10,10))
+ax = plt.subplot(211)
 ax.plot([2.5,6.0],[2.5,6.0],'k--',lw=1,label='1:1')
 ax.set_xlim([2.5,6.0])
 ax.set_ylim([2.5,6.0])
@@ -276,15 +276,40 @@ handles = [handles[0],handles[7],handles[6],handles[5],handles[8],handles[3],han
 #leg = ax.legend(handles,labels,loc="upper left",ncol=1,scatterpoints=1)
 
 # make pretty
-ax.set_xlabel(r'$\mathregular{M_{L}}$', fontsize=22)
+ax.set_xlabel(r'$\mathregular{M_{LR}}$', fontsize=22)
 ax.set_ylabel(r'$\mathregular{M_{W}}$', fontsize=22)
-leg = ax.legend(loc="upper left",ncol=1, scatterpoints=1,fontsize=15)
-leg.get_frame().set_alpha(1.0)
-leg.get_frame().set_edgecolor('k')
-ax.set_aspect('equal')
+leg = ax.legend(loc="upper left",ncol=1, scatterpoints=1,fontsize=14)
+#leg.get_frame().set_alpha(1.0)
+#leg.get_frame().set_edgecolor('k')
+#ax.set_aspect('equal')
 ax.grid(which='major')
-ax.tick_params(axis='both', labelsize=17)
-#
-plt.savefig('ml2mw.png',dpi=300,bbox_inches='tight')
+ax.tick_params(axis='both', labelsize=16)
+tx = 2.5+(6-2.5)*.98
+ty = 2.5+(6-2.5)*.02
+plt.text(tx, ty, 'a)', ha='right', va='bottom', fontsize=22)
+
+##############################################################################
+# add difference subplot
+##############################################################################
+
+ax = plt.subplot(413)
+ax.plot(xrng,yrng_swiss-xrng,'r-',lw=2,label='Goertz-Allmann et al. (2011)')
+ax.plot(xrng[xrng<=4.0],yrng_ross-xrng[xrng<=4.0],'-',c='orange', lw=2,label='Ross et al. (2016)')
+ax.plot(xrng,yrng-xrng,'-',c='dodgerblue',lw=2,label='Automatic Bilinear')
+ax.plot(xrng,yrngf-xrng,'-',c='seagreen',lw=2,label='Fixed Bilinear')
+ax.plot(xrng,yrng_poly-xrng,'-',c='purple',lw=2,label='Quadratic Empirical')
+ax.plot(xrng,yrng_ga17-xrng,'-',c='k',lw=2,label='Quadratic Simulated')
+ax.plot([2.5,6.0],[0,0],'k--')
+
+ax.set_xlabel(r'$\mathregular{M_{LR}}$', fontsize=22)
+ax.set_ylabel(r'$\mathregular{M_{W} - M_{LR}}$', fontsize=22)
+ax.tick_params(axis='both', labelsize=16)
+ax.set_xlim([2.5,6.0])
+ax.set_ylim([-0.5,0.5])
+
+ty = -0.5+(1.0)*.96
+plt.text(tx, ty, 'b)', ha='right', va='top', fontsize=22)
+
+plt.savefig('ml2mw.png',fmt='png',bbox_inches='tight') #dpi=300,
 plt.show()
 plt.close()

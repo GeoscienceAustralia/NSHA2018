@@ -1667,10 +1667,10 @@ src_mmax = array(src_mmax)
 idx = where(isnan(new_n0_b)==False)[0] 
 
 # calculate rate of M6 events
-m6_rates = array(new_n0_b[idx]) * exp(-new_beta[idx]  * 6.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 6.0))) \
+m6_rates = array(new_n0_b[idx]) * exp(-new_beta[idx] * 6.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 6.0))) \
            / (1 - exp(-new_beta[idx] * src_mmax[idx]))
 
-# normalise M5 rates by area
+# normalise M6 rates by area
 lognorm_m6_rates = log10(100**2 * m6_rates / src_area[idx])
     
 # get colour index
@@ -1724,7 +1724,7 @@ plt.close()
 
 # set figure
 plt.clf()
-fig = plt.figure(333, figsize=(13, 9))
+fig = plt.figure(444, figsize=(13, 9))
 
 # set national-scale basemap
 m2 = Basemap(llcrnrlon=llcrnrlon,llcrnrlat=llcrnrlat, \
@@ -1746,14 +1746,20 @@ new_beta = bval2beta(array(new_bval_b))
 src_mmax = array(src_mmax)
 
 # remove sources with zero rates
-#idx = where(isnan(new_n0_b)==False)[0]
-idx = where(isnan(new_n0_b))[0]
-new_n0_b[idx] = 0.
-idx = where(isnan(new_n0_b)==False)[0]
+idx = where(isnan(new_n0_b)==False)[0] 
 
-# calculate rate of M5 events
-m7_rates = array(new_n0_b[idx]) * exp(-new_beta[idx]  * 7.0) * (1 - exp(-new_beta[idx] * (src_mmax[idx] - 7.0))) \
-           / (1 - exp(-new_beta[idx] * src_mmax[idx]))
+# adjust Mmax for plotting only
+mx = []
+for x in src_mmax:
+    if x <= 7.0:
+        mx.append(7.7) # nominal value
+    else:
+        mx.append(x)
+mx = array(mx)
+
+# calculate rate of M7 events
+m7_rates = array(new_n0_b[idx]) * exp(-new_beta[idx] * 7.0) * (1 - exp(-new_beta[idx] * (mx[idx] - 7.0))) \
+           / (1 - exp(-new_beta[idx] * mx[idx]))
 
 # normalise M5 rates by area
 lognorm_m7_rates = log10(100**2 * m7_rates / src_area[idx])
@@ -1764,6 +1770,18 @@ r_min = -6.0
 r_max = -3.5
 r_rng = arange(r_min, r_max+0.1, 0.5)
 
+
+cindex = []
+# loop thru rates and get c-index
+for r in lognorm_m7_rates:
+    idx = interp(r, [r_min, r_max], [0, ncolours-1])
+    
+    if isnan(idx):
+        idx = 0
+        
+    cindex.append(int(round(idx)))
+
+'''
 cindex = []
 # loop thru rates and get c-index
 for r in lognorm_m7_rates:
@@ -1774,7 +1792,7 @@ for r in lognorm_m7_rates:
         idx = 0
         
    # cindex.append(int(round(idx)))
-    
+'''    
 # get cmap
 cmap = plt.get_cmap('rainbow', ncolours)
 
@@ -1782,7 +1800,7 @@ cmap = plt.get_cmap('rainbow', ncolours)
 drawshapepoly(m2, plt, sf, cindex=cindex, cmap=cmap, ncolours=ncolours, fillshape=True)
 
 # label polygons
-labelpolygon(m2, plt, sf, 'CODE')
+labelpolygon(m2, plt, sf, 'CODE', value='OSGB')
 
 # set colorbar
 plt.gcf().subplots_adjust(bottom=0.1)
@@ -1799,7 +1817,9 @@ cb.set_label('M 7.0 / yr / 10,000 $\mathregular{km^{2}}$', fontsize=12)
 
 # set filename
 rmap = path.join(rootfolder,modelsplit+'_m7_rate_map.pdf')
+rmap_png = path.join(rootfolder,modelsplit+'_m7_rate_map.png')
 plt.savefig(rmap, format='pdf', bbox_inches='tight')
+plt.savefig(rmap_png, format='png', bbox_inches='tight')
 plt.gcf().clear()
 plt.clf()
 plt.close()
