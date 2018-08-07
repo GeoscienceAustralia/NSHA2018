@@ -3,7 +3,7 @@
       xmlns="http://openquake.org/xmlns/nrml/0.4">
     <sourceModel name="collapsed_collapsed">
 
-        <areaSource id="NTS" name="Nusa Tenggara Shallow" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_NTS" name="Nusa Tenggara Shallow" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -52,7 +52,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TB" name="Tanimbar" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_TB" name="Tanimbar" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -103,7 +103,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WBS" name="West Banda Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WBS" name="West Banda Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -140,7 +140,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TAFS" name="Taira Adiuna Fault System" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_TAFS" name="Taira Adiuna Fault System" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -175,7 +175,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WPG" name="Wapengo" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WPG" name="Wapengo" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -211,7 +211,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -322,7 +322,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MTB" name="Memberamo Thrust Belt" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_MTB" name="Memberamo Thrust Belt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -362,7 +362,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -401,7 +401,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ADB" name="Adelbert Block" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_ADB" name="Adelbert Block" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -439,7 +439,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="HP" name="Huon Peninsula" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_HP" name="Huon Peninsula" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -474,7 +474,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SBS" name="South Bismark Plate" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_SBS" name="South Bismark Plate" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -526,7 +526,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBOT" name="New Britain Outer Trench" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_NBOT" name="New Britain Outer Trench" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -581,7 +581,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBT" name="New Britain Trench" tectonicRegion="Subduction">
+        <areaSource id="JBP_NBT" name="New Britain Trench" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -631,7 +631,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WM" name="Woodlark Microplate" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WM" name="Woodlark Microplate" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -722,7 +722,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WB" name="Woodlark Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WB" name="Woodlark Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -764,7 +764,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PFTB-FPB" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_PFTB-FPB" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -820,7 +820,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
+        <areaSource id="JBP_RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -863,7 +863,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
+        <areaSource id="JBP_BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -901,7 +901,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
+        <areaSource id="JBP_OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -934,7 +934,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
+        <areaSource id="JBP_MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -970,7 +970,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1018,7 +1018,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1058,7 +1058,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="CDW" name="Cendrawasih" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_CDW" name="Cendrawasih" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1092,7 +1092,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WRP" name="Waropen" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WRP" name="Waropen" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1134,7 +1134,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="LGR" name="Lengguru" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_LGR" name="Lengguru" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1179,7 +1179,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_40_100" name="Banda 40-100km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_40_100" name="Banda 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1227,7 +1227,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_40_100" name="Seram 40-100km" tectonicRegion="Subduction">
+        <areaSource id="JBP_SRM_40_100" name="Seram 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1262,7 +1262,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_100_200" name="Banda 100-200km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_100_200" name="Banda 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1314,7 +1314,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_200_300" name="Banda 200-300km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_200_300" name="Banda 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1359,7 +1359,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Subduction">
+        <areaSource id="JBP_NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1406,7 +1406,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Subduction">
+        <areaSource id="JBP_NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1445,7 +1445,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Subduction">
+        <areaSource id="JBP_NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1478,7 +1478,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_400_500" name="Banda 400-500km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_400_500" name="Banda 400-500km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1528,7 +1528,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_500_600" name="Banda_500_600km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_500_600" name="Banda_500_600km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1578,7 +1578,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS" name="Banda Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_BS" name="Banda Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1633,7 +1633,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
+        <areaSource id="JBP_SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1671,7 +1671,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
+        <areaSource id="JBP_SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1708,7 +1708,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_40_100" name="Timor 40-100km" tectonicRegion="Subduction">
+        <areaSource id="JBP_TMR_40_100" name="Timor 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1745,7 +1745,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
+        <areaSource id="JBP_TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1780,7 +1780,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Subduction">
+        <areaSource id="JBP_NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1824,7 +1824,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BS_300_400" name="Banda 300-400km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_300_400" name="Banda 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1871,7 +1871,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
+        <areaSource id="JBP_TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1907,7 +1907,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
+        <areaSource id="JBP_TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1940,7 +1940,7 @@
             </hypoDepthDist>
         </areaSource>
 
-      <complexFaultSource id="banda_0" name="sunda" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_0" name="sunda" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -2540,7 +2540,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_1" name="tanimbar" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -2639,7 +2639,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_2" name="arutrough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -2683,7 +2683,7 @@
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_3" name="trobriand" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -2736,7 +2736,7 @@
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_4" name="newguinea" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -3090,7 +3090,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_5" name="seram_thrust" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -3264,7 +3264,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_6" name="flores" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -3352,7 +3352,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_7" name="moresby_trough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -3500,7 +3500,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_8" name="banda_detachment" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -3569,7 +3569,7 @@
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_9" name="timor" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
