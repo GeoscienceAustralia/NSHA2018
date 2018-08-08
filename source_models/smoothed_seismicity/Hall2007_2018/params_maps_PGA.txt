@@ -1,7 +1,7 @@
-ncpus = 256 
-mem = 256GB
+ncpus = 512 
+mem = 512GB
 walltime = 5:00:00
-jobfs = 50GB
+jobfs = 500GB
 sandpit_path = /short/w84/NSHA18/sandpit/
 model_rel_path = NSHA2018/source_models/smoothed_seismicity/Hall2007_2018/
 shared_rel_path = NSHA2018/shared
