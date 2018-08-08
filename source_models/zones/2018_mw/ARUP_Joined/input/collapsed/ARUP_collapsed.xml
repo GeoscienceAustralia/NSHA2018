@@ -4,7 +4,7 @@
 
     <sourceModel name="collapsed_collapsed">
 
-        <areaSource id="ZN5" name="Southeastern Basins" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN5" name="Southeastern Basins" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -51,7 +51,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN6a" name="Northwest Australia" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN6a" name="Northwest Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -93,7 +93,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN1a" name="Northern Territory" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN1a" name="Northern Territory" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -160,7 +160,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN2a" name="Flinders Ranges" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN2a" name="Flinders Ranges" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -203,7 +203,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN1b" name="Southern South Australia" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN1b" name="Southern South Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -249,7 +249,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN3a" name="South-Central Australia" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN3a" name="South-Central Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -289,7 +289,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN8b" name="Western Australia" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN8b" name="Western Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -349,7 +349,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN4a" name="Eastern Australia Inner Zone" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN4a" name="Eastern Australia Inner Zone" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -396,7 +396,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN4b" name="Eastern Australia" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN4b" name="Eastern Australia" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -447,7 +447,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN3b" name="Central Australia" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN3b" name="Central Australia" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -497,7 +497,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7a" name="Offshore Northeast" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN7a" name="Offshore Northeast" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -536,7 +536,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN3c" name="Tasmania" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN3c" name="Tasmania" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -579,7 +579,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7b" name="Offshore South" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN7b" name="Offshore South" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -632,7 +632,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7c" name="Offshore East" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN7c" name="Offshore East" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -674,7 +674,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN6b" name="West Coast" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN6b" name="West Coast" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -730,7 +730,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN7d" name="Offshore West" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN7d" name="Offshore West" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -782,7 +782,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN8a" name="Southwest Seismic Zone" tectonicRegion="Cratonic">
+        <areaSource id="ARUP_ZN8a" name="Southwest Seismic Zone" tectonicRegion="Cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -826,7 +826,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ZN2b" name="Eastern Sprigg Orogen" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_ZN2b" name="Eastern Sprigg Orogen" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -868,7 +868,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_SWOB" name="Southwestern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1188,7 +1188,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_SEOB" name="Southeastern Oceanic Buffer" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1616,7 +1616,247 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NTS" name="Nusa Tenggara Shallow" tectonicRegion="Non_cratonic">
+        <areaSource id="ARUP_TP" name="Timor Platform" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                132.1720 -8.6274
+                                131.8806 -9.0002
+                                131.5683 -9.4707
+                                131.4359 -10.0177
+                                124.2458 -13.6825
+                                122.3193 -12.7789
+                                122.2940 -11.9124
+                                123.2060 -11.2312
+                                125.5242 -10.1545
+                                127.4250 -9.3524
+                                130.8425 -8.6955
+                                131.0089 -8.8497
+                                131.7571 -7.9126
+                                132.6811 -6.7629
+                                133.4591 -6.5754
+                                133.0094 -8.0384
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>Leonard2014_SCR</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="4.55" binWidth="0.1">
+                <occurRates>1.35022e-02 1.05900e-02 8.30824e-03 6.51994e-03 5.11798e-03 4.01859e-03 3.15622e-03 2.47958e-03 1.94853e-03 1.53162e-03 1.20424e-03 9.47080e-04 7.45031e-04 5.86238e-04 4.61407e-04 3.63249e-04 2.86045e-04 2.25305e-04 1.77507e-04 1.39883e-04 1.10260e-04 8.69313e-05 6.85544e-05 5.40749e-05 4.26634e-05 3.36677e-05 2.65748e-05 2.09808e-05 1.65679e-05 1.30861e-05 8.90113e-06 5.08109e-06 1.65280e-06 4.49124e-07</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="0.34" strike="141.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="321.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="156.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="126.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="336.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="306.0" dip="35.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="ARUP_NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                147.2073 -10.0666
+                                148.2071 -10.5500
+                                149.1520 -10.4896
+                                150.6957 -11.1103
+                                151.3714 -11.2752
+                                152.0746 -11.3301
+                                152.3480 -11.4470
+                                152.9480 -11.8330
+                                153.5900 -12.0040
+                                154.0330 -12.0040
+                                154.5610 -11.8190
+                                155.8308 -12.3505
+                                159.4566 -22.3488
+                                156.1243 -23.0424
+                                156.0929 -22.4782
+                                154.4305 -22.4147
+                                154.8406 -16.0891
+                                144.8315 -13.8938
+                                144.2312 -11.4242
+                                144.2232 -11.3099
+                                144.4494 -10.8177
+                                144.8198 -9.8166
+                                144.9406 -9.4540
+                                145.6987 -8.6849
+                                146.1635 -9.2425
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.97103e-03 2.63376e-03 2.33526e-03 2.07100e-03 1.83702e-03 1.62978e-03 1.44621e-03 1.28355e-03 1.13940e-03 1.01162e-03 8.98339e-04 7.97880e-04 7.08778e-04 6.29734e-04 5.59599e-04 4.97356e-04 4.42108e-04 3.93059e-04 3.42516e-04 2.61093e-04 4.42340e-05 4.91871e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="0.34" strike="152.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="332.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="175.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="129.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="355.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="309.0" dip="35.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="ARUP_NWO" name="NW oceanic" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                116.3706 -11.5979
+                                118.5021 -11.6199
+                                119.4003 -11.5677
+                                118.7236 -15.0030
+                                116.4821 -16.3615
+                                113.6650 -16.1603
+                                114.4781 -14.7759
+                                113.6211 -13.5234
+                                112.5443 -13.4575
+                                109.8552 -13.3888
+                                110.3387 -10.6970
+                                113.3821 -11.1145
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.72051e-03 2.39917e-03 2.11636e-03 1.86738e-03 1.64814e-03 1.45502e-03 1.28487e-03 1.13490e-03 1.00269e-03 8.86112e-04 7.83278e-04 6.92548e-04 6.12476e-04 5.41791e-04 4.79377e-04 4.24251e-04 3.75551e-04 3.32516e-04 2.94478e-04 2.60849e-04 2.26487e-04 1.72036e-04 2.90447e-05 3.21865e-06 2.67968e-19</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="0.34" strike="189.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="9.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="204.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="174.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="24.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="354.0" dip="35.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="ARUP_NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                111.5701 -15.4716
+                                112.5443 -13.4575
+                                113.6211 -13.5234
+                                114.4781 -14.7759
+                                113.6650 -16.1603
+                                116.4821 -16.3615
+                                116.2732 -16.4881
+                                110.6577 -19.6290
+                                110.5211 -20.3801
+                                109.7887 -19.9368
+                                109.3581 -19.6762
+                                110.5886 -17.5007
+                                111.4864 -15.6446
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>Leonard2014_SCR</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="4.55" binWidth="0.1">
+                <occurRates>4.87859e-03 3.96284e-03 3.21941e-03 2.61580e-03 2.12565e-03 1.72757e-03 1.40422e-03 1.14154e-03 9.28119e-04 7.54695e-04 6.13753e-04 4.99195e-04 4.06070e-04 3.30358e-04 2.68795e-04 2.18731e-04 1.78013e-04 1.44891e-04 1.17947e-04 9.60236e-05 7.81845e-05 6.36667e-05 5.18504e-05 4.22319e-05 3.44015e-05 2.80259e-05 2.28344e-05 1.86066e-05 1.51631e-05 1.23582e-05 8.67298e-06 5.10753e-06 1.71380e-06 4.80334e-07</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="0.34" strike="197.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="17.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="212.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="182.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="32.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="2.0" dip="35.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="ARUP_NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                119.3364 -11.8923
+                                119.3733 -11.7045
+                                119.4003 -11.5677
+                                122.2940 -11.9124
+                                122.3193 -12.7789
+                                121.6497 -12.4648
+                                119.4141 -14.5845
+                                118.7236 -15.0030
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>20.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>Leonard2014_SCR</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="4.55" binWidth="0.1">
+                <occurRates>8.99175e-03 7.28613e-03 5.90494e-03 4.78629e-03 3.88015e-03 3.14602e-03 2.55117e-03 2.06910e-03 1.67837e-03 1.36162e-03 1.10481e-03 8.96558e-04 7.27668e-04 5.90676e-04 4.79541e-04 3.89370e-04 3.16199e-04 2.56813e-04 2.08608e-04 1.69475e-04 1.37701e-04 1.11899e-04 9.09440e-05 7.39226e-05 6.00948e-05 4.88598e-05 3.97303e-05 3.23107e-05 2.62800e-05 2.13775e-05 1.49743e-05 8.80181e-06 2.94789e-06 8.24701e-07</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="0.34" strike="175.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.34" strike="355.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="190.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="160.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="10.0" dip="35.0" rake="90.0" />
+                <nodalPlane probability="0.08" strike="340.0" dip="35.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="0.50" depth="10.0"/>
+                <hypoDepth probability="0.25" depth="5.0"/>
+                <hypoDepth probability="0.25" depth="15.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+
+        <areaSource id="JBP_NTS" name="Nusa Tenggara Shallow" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1665,12 +1905,26 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TB" name="Tanimbar" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_TB" name="Tanimbar" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
                         <gml:LinearRing>
                             <gml:posList>
+                                131.7269 -4.0754
+                                132.5784 -4.8225
+                                132.8692 -4.5535
+                                133.5470 -4.6319
+                                133.5161 -5.4385
+                                133.4244 -5.9652
+                                132.5702 -6.5914
+                                132.6811 -6.7629
+                                131.9793 -7.6362
+                                131.7571 -7.9126
+                                131.4883 -8.2494
+                                131.2200 -8.5840
+                                130.8425 -8.6955
+                                130.7657 -7.8362
                                 130.5789 -7.3473
                                 131.4933 -6.6685
                                 131.8701 -5.9508
@@ -1682,18 +1936,6 @@
                                 129.5482 -3.2177
                                 130.4953 -3.3698
                                 131.5732 -3.9341
-                                131.7269 -4.0754
-                                132.5784 -4.8225
-                                132.8692 -4.5535
-                                133.5470 -4.6319
-                                133.5161 -5.4385
-                                133.4244 -5.9652
-                                132.5702 -6.5914
-                                132.6811 -6.7629
-                                131.7571 -7.9126
-                                131.0089 -8.8497
-                                130.8425 -8.6955
-                                130.7657 -7.8362
                             </gml:posList>
                         </gml:LinearRing>
                     </gml:exterior>
@@ -1714,7 +1956,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WBS" name="West Banda Sea" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WBS" name="West Banda Sea" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1751,7 +1993,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TAFS" name="Taira Adiuna Fault System" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_TAFS" name="Taira Adiuna Fault System" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1786,7 +2028,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WPG" name="Wapengo" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WPG" name="Wapengo" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1822,7 +2064,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_PFTB" name="Papuan Fold-Thrust Belt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1933,7 +2175,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="MTB" name="Memberamo Thrust Belt" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_MTB" name="Memberamo Thrust Belt" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -1973,7 +2215,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_BTFZS" name="Bewani-Torricelli Fault Zone South" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2012,7 +2254,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="ADB" name="Adelbert Block" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_ADB" name="Adelbert Block" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2050,7 +2292,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="HP" name="Huon Peninsula" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_HP" name="Huon Peninsula" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2085,7 +2327,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SBS" name="South Bismark Plate" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_SBS" name="South Bismark Plate" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2137,7 +2379,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBOT" name="New Britain Outer Trench" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_NBOT" name="New Britain Outer Trench" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2192,7 +2434,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NBT" name="New Britain Trench" tectonicRegion="Subduction">
+        <areaSource id="JBP_NBT" name="New Britain Trench" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2242,7 +2484,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WM" name="Woodlark Microplate" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WM" name="Woodlark Microplate" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2333,7 +2575,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="WB" name="Woodlark Basin" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_WB" name="Woodlark Basin" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -2375,1063 +2617,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                153.2450 -3.7830
-                                153.4570 -5.2860
-                                152.7580 -5.2230
-                                151.7210 -5.6460
-                                151.1500 -6.0480
-                                150.4510 -6.0690
-                                148.3980 -6.4720
-                                148.1574 -5.3975
-                                149.6430 -5.1100
-                                150.0660 -4.9910
-                                150.2760 -4.8830
-                                150.7130 -4.6140
-                                151.6010 -4.0520
-                                151.8260 -3.4830
-                                152.1430 -3.3640
-                                152.5130 -3.3380
-                                152.9100 -3.3640
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>60.0</upperSeismoDepth>
-                <lowerSeismoDepth>200.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.04754e-01 1.66500e-01 1.35402e-01 1.10119e-01 8.95638e-02 7.28501e-02 5.92593e-02 4.82071e-02 3.92189e-02 3.19086e-02 2.59627e-02 2.11261e-02 1.71917e-02 1.39909e-02 1.13867e-02 9.26794e-03 7.54388e-03 6.14094e-03 4.99922e-03 4.07004e-03 3.31377e-03 2.69820e-03 2.19712e-03 1.78921e-03 1.45712e-03 1.18674e-03 9.47268e-04 6.61368e-04 1.02619e-04 1.04498e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="100.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                148.1574 -5.3975
-                                148.3980 -6.4720
-                                148.1020 -7.1280
-                                147.9360 -7.8090
-                                145.6120 -6.6080
-                                145.2240 -6.4070
-                                143.9810 -5.4150
-                                142.8690 -5.2430
-                                142.5780 -5.1240
-                                143.2912 -4.0361
-                                144.2478 -4.2173
-                                146.3516 -5.0529
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>60.0</upperSeismoDepth>
-                <lowerSeismoDepth>200.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.42824e-01 1.97436e-01 1.60542e-01 1.30552e-01 1.06171e-01 8.63486e-02 7.02321e-02 5.71274e-02 4.64710e-02 3.78050e-02 3.07570e-02 2.50247e-02 2.03620e-02 1.65693e-02 1.34838e-02 1.09737e-02 8.93137e-03 7.26965e-03 5.91748e-03 4.81713e-03 3.92164e-03 3.19283e-03 2.59963e-03 2.11678e-03 1.72372e-03 1.40373e-03 1.12036e-03 7.82140e-04 1.21346e-04 1.23556e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="100.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                147.9360 -7.8090
-                                148.7860 -8.6470
-                                148.3300 -8.6340
-                                147.8340 -8.6200
-                                146.8550 -8.1710
-                                145.4390 -7.1120
-                                145.6120 -6.6080
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>60.0</upperSeismoDepth>
-                <lowerSeismoDepth>180.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>6.38623e-02 5.20162e-02 4.23702e-02 3.45151e-02 2.81181e-02 2.29081e-02 1.86646e-02 1.52081e-02 1.23925e-02 1.00988e-02 8.23010e-03 6.70762e-03 5.46711e-03 4.45629e-03 3.63257e-03 2.96130e-03 2.41421e-03 1.96832e-03 1.60487e-03 1.30861e-03 1.06710e-03 8.70216e-04 7.09698e-04 5.78822e-04 4.72108e-04 3.85091e-04 3.07847e-04 2.15258e-04 3.34499e-05 3.41134e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="100.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                143.2912 -4.0361
-                                142.5780 -5.1240
-                                141.1760 -4.3170
-                                139.9720 -4.5280
-                                138.6620 -3.9990
-                                137.7470 -3.8430
-                                138.1464 -1.9338
-                                139.2710 -2.2870
-                                140.3394 -2.7320
-                                141.8895 -3.4769
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>60.0</upperSeismoDepth>
-                <lowerSeismoDepth>130.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>7.93912e-02 6.46008e-02 5.25692e-02 4.27812e-02 3.48179e-02 2.83387e-02 2.30667e-02 1.87767e-02 1.52855e-02 1.24442e-02 1.01317e-02 8.24948e-03 6.71734e-03 5.47010e-03 4.45472e-03 3.62805e-03 2.95496e-03 2.40690e-03 1.96061e-03 1.59717e-03 1.30118e-03 1.06011e-03 8.63758e-04 7.03815e-04 5.73523e-04 4.67380e-04 3.73285e-04 2.60775e-04 4.04858e-05 4.12511e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="100.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                143.9038 -3.7394
-                                144.1684 -3.1413
-                                144.4810 -3.2080
-                                146.9930 -2.8730
-                                147.4660 -2.6910
-                                149.6270 -3.2590
-                                150.2050 -2.8950
-                                151.1470 -3.4240
-                                151.5830 -3.2310
-                                153.4320 -4.3090
-                                153.2400 -4.3940
-                                153.1770 -4.4220
-                                152.8760 -4.6140
-                                151.5340 -3.8360
-                                151.2480 -3.9930
-                                150.2560 -3.5070
-                                149.6130 -3.8430
-                                149.4630 -3.8500
-                                147.5220 -3.2860
-                                146.9030 -3.5190
-                                145.3710 -3.7090
-                                144.3500 -3.7920
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>1.0</upperSeismoDepth>
-                <lowerSeismoDepth>50.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.61781e-01 3.71992e-01 2.99705e-01 2.41501e-01 1.94628e-01 1.56876e-01 1.26465e-01 1.01964e-01 8.22216e-02 6.63113e-02 5.34874e-02 4.31497e-02 3.48150e-02 2.80941e-02 2.26739e-02 1.83020e-02 1.47752e-02 1.19296e-02 9.63345e-03 7.78031e-03 6.28451e-03 5.07699e-03 4.10205e-03 3.31478e-03 2.67896e-03 2.12209e-03 1.47044e-03 2.26451e-04 2.28891e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="100.0" dip="90.0" rake="0.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="20.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                135.0764 -3.6705
-                                135.0352 -3.9425
-                                134.6800 -3.9619
-                                134.6313 -3.8269
-                                134.4829 -3.4534
-                                134.2852 -3.0194
-                                134.2138 -2.7007
-                                134.0874 -2.1459
-                                133.6369 -1.3274
-                                134.0270 -1.0527
-                                134.5598 -1.6570
-                                134.6159 -1.8428
-                                134.6992 -2.1328
-                                134.5928 -2.4096
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>35.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>4.99531e-02 4.03571e-02 3.26089e-02 2.63519e-02 2.12983e-02 1.72162e-02 1.39183e-02 1.12537e-02 9.10038e-03 7.36006e-03 5.95333e-03 4.81609e-03 3.89659e-03 3.15306e-03 2.55172e-03 2.02403e-03 1.40437e-03 2.16564e-04 2.19188e-05 1.40340e-18</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="160.0" dip="90.0" rake="0.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="CDW" name="Cendrawasih" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                135.0764 -3.6705
-                                134.5928 -2.4096
-                                134.6992 -2.1328
-                                134.6159 -1.8428
-                                136.5231 -1.9241
-                                136.5185 -2.1021
-                                136.0268 -2.5993
-                                135.3868 -3.3107
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>35.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.86366e-02 3.12576e-02 2.52911e-02 2.04661e-02 1.65637e-02 1.34070e-02 1.08533e-02 8.78705e-03 7.11506e-03 5.76192e-03 4.66667e-03 3.78007e-03 3.06227e-03 2.48107e-03 2.01042e-03 1.62923e-03 1.32047e-03 1.07035e-03 8.67705e-04 6.89435e-04 4.79171e-04 7.40155e-05 7.50365e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="50.0" dip="40.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="WRP" name="Waropen" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                136.1198 -3.1738
-                                136.5789 -2.6652
-                                136.9278 -2.3686
-                                136.5185 -2.1021
-                                136.5231 -1.9241
-                                137.5363 -1.9138
-                                138.6220 -3.5380
-                                138.2150 -3.4880
-                                137.9870 -3.3810
-                                137.8010 -3.2950
-                                137.4440 -3.4590
-                                137.2230 -3.5300
-                                136.9590 -3.5090
-                                136.5660 -3.4090
-                                136.2880 -3.2950
-                                136.1942 -3.2207
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>35.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.70077e-02 1.37809e-02 1.11675e-02 9.05081e-03 7.33612e-03 5.94695e-03 4.82137e-03 3.90926e-03 3.17005e-03 2.57090e-03 2.08522e-03 1.69147e-03 1.37221e-03 1.11333e-03 9.03388e-04 7.33109e-04 5.94987e-04 4.82937e-04 3.92028e-04 3.18264e-04 2.58405e-04 2.05628e-04 1.43131e-04 2.21419e-05 2.24805e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="90.0" dip="30.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="TP" name="Timor Platform" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                132.1720 -8.6274
-                                131.8806 -9.0002
-                                131.5683 -9.4707
-                                131.4359 -10.0177
-                                124.2458 -13.6825
-                                122.3193 -12.7789
-                                122.2940 -11.9124
-                                123.2060 -11.2312
-                                125.5242 -10.1545
-                                127.4250 -9.3524
-                                130.8425 -8.6955
-                                131.0089 -8.8497
-                                131.7571 -7.9126
-                                132.6811 -6.7629
-                                133.4591 -6.5754
-                                133.0094 -8.0384
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>20.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>1.35022e-02 1.05900e-02 8.30824e-03 6.51994e-03 5.11798e-03 4.01859e-03 3.15622e-03 2.47958e-03 1.94853e-03 1.53162e-03 1.20424e-03 9.47080e-04 7.45031e-04 5.86238e-04 4.61407e-04 3.63249e-04 2.86045e-04 2.25305e-04 1.77507e-04 1.39883e-04 1.10260e-04 8.69313e-05 6.85544e-05 5.40749e-05 4.26634e-05 3.36677e-05 2.65748e-05 2.09808e-05 1.65679e-05 1.30861e-05 8.90113e-06 5.08109e-06 1.65280e-06 4.49124e-07</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="0.34" strike="141.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.34" strike="321.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="156.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="126.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="336.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="306.0" dip="35.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="10.0"/>
-                <hypoDepth probability="0.25" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="15.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NECS" name="NE Coral Sea" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                147.2073 -10.0666
-                                148.2071 -10.5500
-                                149.1520 -10.4896
-                                150.6957 -11.1103
-                                151.3714 -11.2752
-                                152.0746 -11.3301
-                                152.3480 -11.4470
-                                152.9480 -11.8330
-                                153.5900 -12.0040
-                                154.0330 -12.0040
-                                154.5610 -11.8190
-                                155.8308 -12.3505
-                                159.4566 -22.3488
-                                156.1243 -23.0424
-                                156.0929 -22.4782
-                                154.4305 -22.4147
-                                154.8406 -16.0891
-                                144.8315 -13.8938
-                                144.2312 -11.4242
-                                144.2232 -11.3099
-                                144.4494 -10.8177
-                                144.8198 -9.8166
-                                144.9406 -9.4540
-                                145.6987 -8.6849
-                                146.1635 -9.2425
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>20.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.97103e-03 2.63376e-03 2.33526e-03 2.07100e-03 1.83702e-03 1.62978e-03 1.44621e-03 1.28355e-03 1.13940e-03 1.01162e-03 8.98339e-04 7.97880e-04 7.08778e-04 6.29734e-04 5.59599e-04 4.97356e-04 4.42108e-04 3.93059e-04 3.42516e-04 2.61093e-04 4.42340e-05 4.91871e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="0.34" strike="152.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.34" strike="332.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="175.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="129.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="355.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="309.0" dip="35.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="10.0"/>
-                <hypoDepth probability="0.25" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="15.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NWO" name="NW oceanic" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                116.3706 -11.5979
-                                118.5021 -11.6199
-                                119.4003 -11.5677
-                                118.7236 -15.0030
-                                116.4821 -16.3615
-                                113.6650 -16.1603
-                                114.4781 -14.7759
-                                113.6211 -13.5234
-                                112.5443 -13.4575
-                                109.8552 -13.3888
-                                110.3387 -10.6970
-                                113.3821 -11.1145
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>20.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.72051e-03 2.39917e-03 2.11636e-03 1.86738e-03 1.64814e-03 1.45502e-03 1.28487e-03 1.13490e-03 1.00269e-03 8.86112e-04 7.83278e-04 6.92548e-04 6.12476e-04 5.41791e-04 4.79377e-04 4.24251e-04 3.75551e-04 3.32516e-04 2.94478e-04 2.60849e-04 2.26487e-04 1.72036e-04 2.90447e-05 3.21865e-06 2.67968e-19</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="0.34" strike="189.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.34" strike="9.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="204.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="174.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="24.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="354.0" dip="35.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="10.0"/>
-                <hypoDepth probability="0.25" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="15.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="LGR" name="Lengguru" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                134.6800 -3.9619
-                                134.0064 -3.9987
-                                133.0066 -4.3557
-                                133.0051 -4.2750
-                                132.6946 -4.0353
-                                132.6920 -4.0333
-                                132.4118 -3.4345
-                                131.9668 -3.2587
-                                130.7637 -2.5445
-                                129.0497 -2.3028
-                                129.1102 -1.8963
-                                130.1539 -1.3579
-                                131.5768 -1.3634
-                                133.6369 -1.3274
-                                134.0874 -2.1459
-                                134.2138 -2.7007
-                                134.2852 -3.0194
-                                134.4829 -3.4534
-                                134.6313 -3.8269
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>35.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.02606e-02 1.64185e-02 1.33065e-02 1.07856e-02 8.74322e-03 7.08839e-03 5.74741e-03 4.66062e-03 3.77974e-03 3.06569e-03 2.48680e-03 2.01743e-03 1.63683e-03 1.30160e-03 9.05368e-04 1.39960e-04 1.42003e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="155.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="10.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS_40_100" name="Banda 40-100km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                127.3334 -7.5863
-                                128.5390 -7.3311
-                                128.9897 -7.2713
-                                129.3264 -7.0650
-                                129.6523 -6.8206
-                                129.9401 -6.4785
-                                130.2225 -6.0114
-                                130.3365 -5.7670
-                                130.4126 -5.1262
-                                130.2334 -4.6212
-                                131.3032 -3.5622
-                                131.7540 -4.3496
-                                131.9386 -5.1534
-                                131.8952 -5.9571
-                                131.4933 -6.6685
-                                131.3738 -6.9835
-                                130.6787 -7.6135
-                                130.4832 -7.7710
-                                129.2504 -7.9176
-                                127.5398 -8.0208
-                                126.8319 -8.1601
-                                126.7050 -7.7338
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>40.0</upperSeismoDepth>
-                <lowerSeismoDepth>100.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.31682e-01 1.88387e-01 1.53194e-01 1.24583e-01 1.01322e-01 8.24101e-02 6.70324e-02 5.45279e-02 4.43589e-02 3.60888e-02 2.93624e-02 2.38913e-02 1.94410e-02 1.58206e-02 1.28753e-02 1.04790e-02 8.52924e-03 6.94271e-03 5.65166e-03 4.60099e-03 3.74589e-03 3.04990e-03 2.48339e-03 2.02223e-03 1.64682e-03 1.34118e-03 1.07049e-03 7.47365e-04 1.15957e-04 1.18075e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="60.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS_100_200" name="Banda 100-200km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                130.8850 -5.9137
-                                130.7384 -6.2721
-                                130.4452 -6.5925
-                                130.2660 -6.8260
-                                129.9510 -7.0758
-                                129.8532 -7.2062
-                                129.4513 -7.3528
-                                128.9626 -7.5103
-                                128.8648 -7.5293
-                                128.3516 -7.6053
-                                127.7570 -7.6949
-                                127.2899 -7.7547
-                                126.7551 -7.8827
-                                126.6932 -7.6623
-                                127.2628 -7.5266
-                                127.8493 -7.3582
-                                128.0394 -7.3039
-                                128.5499 -7.2116
-                                128.8703 -7.0595
-                                129.2450 -6.8097
-                                129.6469 -6.5219
-                                129.8424 -6.3047
-                                129.9184 -5.8485
-                                129.9455 -5.2891
-                                129.8206 -4.9524
-                                130.2334 -4.6212
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>100.0</upperSeismoDepth>
-                <lowerSeismoDepth>200.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>8.90008e-02 7.23804e-02 5.88676e-02 4.78808e-02 3.89471e-02 3.16823e-02 2.57744e-02 2.09695e-02 1.70615e-02 1.38827e-02 1.12969e-02 9.19333e-03 7.48195e-03 6.08956e-03 4.95661e-03 4.03470e-03 3.28448e-03 2.67392e-03 2.17701e-03 1.77255e-03 1.44333e-03 1.17533e-03 9.57151e-04 7.79524e-04 6.34901e-04 5.17142e-04 4.12826e-04 2.88256e-04 4.47305e-05 4.55539e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="150.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS_200_300" name="Banda 200-300km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                127.0564 -7.5917
-                                126.6866 -7.6962
-                                126.5571 -7.2742
-                                126.9016 -7.1736
-                                127.5425 -7.0052
-                                128.1181 -6.8097
-                                128.6395 -6.4622
-                                128.7970 -5.9191
-                                128.8947 -5.1860
-                                129.8206 -4.9524
-                                129.9455 -5.2891
-                                129.9184 -5.8485
-                                130.0243 -6.5545
-                                129.5464 -6.9835
-                                128.8513 -7.1410
-                                128.5499 -7.2116
-                                128.0394 -7.3039
-                                127.8493 -7.3582
-                                127.2628 -7.5266
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>200.0</upperSeismoDepth>
-                <lowerSeismoDepth>300.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.15622e-01 9.42809e-02 7.68833e-02 6.26996e-02 5.11355e-02 4.17066e-02 3.40183e-02 2.77488e-02 2.26360e-02 1.84663e-02 1.50655e-02 1.22917e-02 1.00292e-02 8.18354e-03 6.67792e-03 5.44960e-03 4.44745e-03 3.62979e-03 2.96261e-03 2.41819e-03 1.97392e-03 1.61136e-03 1.31546e-03 1.07395e-03 8.76828e-04 7.15923e-04 5.72885e-04 4.00975e-04 6.23701e-05 6.36688e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="250.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="TMR_40_100" name="Timor 40-100km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                126.8319 -8.1601
-                                125.6879 -8.6541
-                                125.3295 -8.9582
-                                124.9222 -9.3873
-                                123.6188 -10.1095
-                                122.6196 -10.2833
-                                121.5389 -10.2236
-                                121.4900 -8.1708
-                                123.8306 -7.9427
-                                125.3240 -7.8449
-                                126.7050 -7.7338
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>40.0</upperSeismoDepth>
-                <lowerSeismoDepth>100.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.93166e-02 3.20236e-02 2.60851e-02 2.12491e-02 1.73108e-02 1.41033e-02 1.14908e-02 9.36283e-03 7.62940e-03 6.21728e-03 5.06684e-03 4.12952e-03 3.36581e-03 2.74350e-03 2.23638e-03 1.82311e-03 1.48630e-03 1.21179e-03 9.88033e-04 8.05642e-04 6.56958e-04 5.35746e-04 4.36924e-04 3.56350e-04 2.90652e-04 2.37080e-04 1.89525e-04 1.32523e-04 2.05934e-05 2.10018e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="60.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                121.4900 -8.1708
-                                121.5389 -10.2236
-                                120.1459 -10.0851
-                                119.4182 -9.9222
-                                118.0822 -9.9005
-                                117.5283 -10.1611
-                                116.9527 -10.0091
-                                116.3770 -10.0960
-                                115.3886 -9.8896
-                                114.1287 -9.7158
-                                113.4119 -9.6724
-                                112.8280 -9.4841
-                                111.8913 -9.1510
-                                112.0433 -7.7934
-                                114.8130 -7.9889
-                                115.9860 -8.1952
-                                117.0721 -8.1844
-                                117.6749 -8.0975
-                                118.9186 -7.8802
-                                120.5803 -7.9237
-                                120.9876 -8.0269
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>40.0</upperSeismoDepth>
-                <lowerSeismoDepth>100.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>7.83562e-02 6.37499e-02 5.18698e-02 4.22063e-02 3.43454e-02 2.79504e-02 2.27476e-02 1.85145e-02 1.50701e-02 1.22672e-02 9.98632e-03 8.13004e-03 6.61922e-03 5.38951e-03 4.38853e-03 3.57368e-03 2.91031e-03 2.37024e-03 1.93050e-03 1.57245e-03 1.28088e-03 1.04344e-03 8.50070e-04 6.92577e-04 5.64297e-04 4.59805e-04 3.67191e-04 2.56487e-04 3.98154e-05 4.05632e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="60.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                121.5253 -9.5067
-                                120.4962 -9.1673
-                                119.0190 -9.0587
-                                118.7746 -8.9827
-                                118.3239 -8.9284
-                                117.7808 -9.0098
-                                117.1129 -8.9772
-                                115.6737 -8.8849
-                                114.3812 -8.7546
-                                112.7086 -8.4668
-                                112.1221 -8.5211
-                                111.9863 -8.4613
-                                112.0352 -7.3643
-                                115.8964 -7.7228
-                                117.8243 -7.9183
-                                119.9341 -7.9780
-                                120.9089 -8.2767
-                                121.4927 -8.5618
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>100.0</upperSeismoDepth>
-                <lowerSeismoDepth>200.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>5.53612e-02 4.51846e-02 3.68806e-02 3.01043e-02 2.45743e-02 2.00612e-02 1.63778e-02 1.33713e-02 1.09173e-02 8.91414e-03 7.27889e-03 5.94391e-03 4.85401e-03 3.96416e-03 3.23759e-03 2.64433e-03 2.15988e-03 1.76426e-03 1.44118e-03 1.17732e-03 9.61817e-04 7.85796e-04 6.42018e-04 5.24572e-04 4.28631e-04 3.50253e-04 2.80495e-04 1.96479e-04 3.05855e-05 3.12465e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="150.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS_300_400" name="Banda 300-400km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                125.8016 -4.5170
-                                125.8668 -4.0499
-                                127.8425 -4.4548
-                                128.3313 -4.5689
-                                128.8947 -5.1860
-                                128.9405 -5.4945
-                                128.9079 -5.9181
-                                128.6395 -6.4622
-                                128.3268 -6.6772
-                                128.1181 -6.8097
-                                127.5425 -7.0052
-                                127.1267 -7.2866
-                                126.5999 -7.4224
-                                126.4370 -6.8902
-                                126.9746 -6.7218
-                                127.4851 -6.4394
-                                127.5503 -6.0701
-                                127.4199 -5.6683
-                                127.2353 -5.3859
-                                126.9312 -5.0274
-                                126.4641 -4.7342
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>300.0</upperSeismoDepth>
-                <lowerSeismoDepth>400.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>6.79532e-02 5.53370e-02 4.50660e-02 3.67037e-02 2.98950e-02 2.43508e-02 1.98361e-02 1.61595e-02 1.31651e-02 1.07263e-02 8.73977e-03 7.12161e-03 5.80340e-03 4.72948e-03 3.85453e-03 3.14163e-03 2.56074e-03 2.08739e-03 1.70163e-03 1.38725e-03 1.13102e-03 9.22165e-04 7.51925e-04 6.13149e-04 5.00015e-04 4.07779e-04 3.25926e-04 2.27858e-04 3.54015e-05 3.60973e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="350.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                121.4788 -8.4379
-                                119.6106 -8.3402
-                                118.6277 -8.2044
-                                117.4275 -8.2370
-                                116.4608 -8.1555
-                                113.9845 -7.8568
-                                111.9968 -7.6613
-                                112.0837 -7.0748
-                                114.8099 -7.4006
-                                116.9279 -7.4875
-                                117.1994 -7.4875
-                                119.0350 -7.7048
-                                121.4462 -7.7319
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>200.0</upperSeismoDepth>
-                <lowerSeismoDepth>300.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>3.08151e-02 2.51507e-02 2.05285e-02 1.67567e-02 1.36786e-02 1.11665e-02 9.11619e-03 7.44274e-03 6.07680e-03 4.96179e-03 4.05157e-03 3.30850e-03 2.70184e-03 2.20653e-03 1.80211e-03 1.47188e-03 1.20223e-03 9.82024e-04 8.02191e-04 6.55321e-04 5.35366e-04 4.37390e-04 3.57360e-04 2.91987e-04 2.38585e-04 1.94958e-04 1.56129e-04 1.09364e-04 1.70245e-05 1.73924e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="250.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                121.4462 -7.7319
-                                117.4492 -7.8270
-                                115.4073 -7.6315
-                                112.0294 -7.2513
-                                112.1163 -6.7625
-                                118.0140 -7.3599
-                                121.4516 -7.4006
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>300.0</upperSeismoDepth>
-                <lowerSeismoDepth>400.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>7.58447e-02 6.19028e-02 5.05264e-02 4.12428e-02 3.36668e-02 2.74838e-02 2.24375e-02 1.83187e-02 1.49567e-02 1.22124e-02 9.97206e-03 8.14314e-03 6.64998e-03 5.43089e-03 4.43550e-03 3.62272e-03 2.95902e-03 2.41704e-03 1.97442e-03 1.61293e-03 1.31769e-03 1.07654e-03 8.79563e-04 7.18663e-04 5.87223e-04 4.79845e-04 3.84278e-04 2.69176e-04 4.19020e-05 4.28077e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="350.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS_400_500" name="Banda 400-500km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                125.1934 -4.6446
-                                125.6061 -4.3513
-                                126.7574 -4.8184
-                                127.3133 -5.3644
-                                127.6250 -6.0502
-                                127.6395 -6.2554
-                                127.6453 -6.4177
-                                127.5240 -6.5664
-                                126.3447 -7.4359
-                                125.1282 -7.6749
-                                124.1615 -7.6532
-                                122.3586 -7.5446
-                                119.6215 -7.6097
-                                117.2103 -7.3599
-                                112.0946 -6.7625
-                                112.2629 -5.8013
-                                112.9619 -5.8352
-                                114.3103 -6.0511
-                                116.8138 -6.8169
-                                118.4593 -7.0232
-                                120.5556 -7.0449
-                                122.6301 -6.9635
-                                123.4012 -6.5507
-                                124.5091 -5.8393
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>400.0</upperSeismoDepth>
-                <lowerSeismoDepth>500.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.25676e-01 1.83481e-01 1.49184e-01 1.21307e-01 9.86453e-02 8.02227e-02 6.52450e-02 5.30671e-02 4.31652e-02 3.51132e-02 2.85651e-02 2.32397e-02 1.89083e-02 1.53853e-02 1.25195e-02 1.01881e-02 8.29149e-03 6.74837e-03 5.49279e-03 4.47111e-03 3.63971e-03 2.96309e-03 2.41242e-03 1.96421e-03 1.59937e-03 1.30239e-03 1.03941e-03 7.25578e-04 1.12564e-04 1.14606e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="450.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS_500_600" name="Banda_500_600km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                125.1934 -4.6446
-                                125.6061 -4.3513
-                                126.7574 -4.8184
-                                127.3133 -5.3644
-                                127.6250 -6.0502
-                                127.6395 -6.2554
-                                127.6453 -6.4177
-                                127.5227 -6.5686
-                                126.3447 -7.4359
-                                125.1282 -7.6749
-                                124.1615 -7.6532
-                                122.3586 -7.5446
-                                119.6215 -7.6097
-                                117.2103 -7.3599
-                                112.0946 -6.7625
-                                112.2629 -5.8013
-                                112.9619 -5.8352
-                                114.3103 -6.0511
-                                116.8138 -6.8169
-                                118.4593 -7.0232
-                                120.5556 -7.0449
-                                122.6301 -6.9635
-                                123.4012 -6.5507
-                                124.5091 -5.8393
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>500.0</upperSeismoDepth>
-                <lowerSeismoDepth>600.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>2.25989e-01 1.83758e-01 1.49429e-01 1.21521e-01 9.88325e-02 8.03851e-02 6.53853e-02 5.31880e-02 4.32689e-02 3.52020e-02 2.86409e-02 2.33043e-02 1.89632e-02 1.54319e-02 1.25589e-02 1.02215e-02 8.31965e-03 6.77211e-03 5.51279e-03 4.48793e-03 3.65384e-03 2.97496e-03 2.42237e-03 1.97254e-03 1.60635e-03 1.30823e-03 1.04419e-03 7.29001e-04 1.13108e-04 1.15174e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="550.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="BS" name="Banda Sea" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                129.7053 -7.4292
-                                127.3485 -7.7808
-                                127.3361 -7.6691
-                                128.3187 -7.5671
-                                129.4005 -7.1532
-                                130.1256 -6.7157
-                                130.7271 -5.8031
-                                130.6557 -5.0725
-                                130.5183 -4.6000
-                                129.8940 -3.6427
-                                129.5860 -3.3477
-                                129.5482 -3.2177
-                                130.4953 -3.3698
-                                131.5732 -3.9341
-                                131.7269 -4.0754
-                                132.5784 -4.8225
-                                132.8692 -4.5535
-                                133.5470 -4.6319
-                                133.5161 -5.4385
-                                133.4244 -5.9652
-                                132.5702 -6.5914
-                                132.6811 -6.7629
-                                131.7571 -7.9126
-                                131.0089 -8.8497
-                                130.8425 -8.6955
-                                130.6941 -7.8055
-                                130.5073 -7.3166
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>40.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>WC1994</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.93036e-01 1.55594e-01 1.25433e-01 1.01134e-01 8.15529e-02 6.57727e-02 5.30534e-02 4.27999e-02 3.45330e-02 2.78668e-02 2.24906e-02 1.81541e-02 1.46558e-02 1.18333e-02 9.55570e-03 7.71753e-03 6.23382e-03 5.03604e-03 4.06896e-03 3.28803e-03 2.65734e-03 2.14791e-03 1.73638e-03 1.37580e-03 9.53570e-04 1.46890e-04 1.48511e-05</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="225.0" dip="30.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="1.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="PFTB-FP" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Non_cratonic">
+        <areaSource id="JBP_PFTB-FPB" name="Papaua Fold-Thrust Belt - Fly Platform Boundary" tectonicRegion="Non_cratonic">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3487,7 +2673,414 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_40_100" name="Seram 40-100km" tectonicRegion="Subduction">
+        <areaSource id="JBP_RNBD" name="Region of New Britain Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                153.2450 -3.7830
+                                153.4570 -5.2860
+                                152.7580 -5.2230
+                                151.7210 -5.6460
+                                151.1500 -6.0480
+                                150.4510 -6.0690
+                                148.3980 -6.4720
+                                148.1574 -5.3975
+                                149.6430 -5.1100
+                                150.0660 -4.9910
+                                150.2760 -4.8830
+                                150.7130 -4.6140
+                                151.6010 -4.0520
+                                151.8260 -3.4830
+                                152.1430 -3.3640
+                                152.5130 -3.3380
+                                152.9100 -3.3640
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.04754e-01 1.66500e-01 1.35402e-01 1.10119e-01 8.95638e-02 7.28501e-02 5.92593e-02 4.82071e-02 3.92189e-02 3.19086e-02 2.59627e-02 2.11261e-02 1.71917e-02 1.39909e-02 1.13867e-02 9.26794e-03 7.54388e-03 6.14094e-03 4.99922e-03 4.07004e-03 3.31377e-03 2.69820e-03 2.19712e-03 1.78921e-03 1.45712e-03 1.18674e-03 9.47268e-04 6.61368e-04 1.02619e-04 1.04498e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="250.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BTFZD" name="Bewani-Torricelli Fault Zone Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                148.1574 -5.3975
+                                148.3980 -6.4720
+                                148.1020 -7.1280
+                                147.9360 -7.8090
+                                145.6120 -6.6080
+                                145.2240 -6.4070
+                                143.9810 -5.4150
+                                142.8690 -5.2430
+                                142.5780 -5.1240
+                                143.2912 -4.0361
+                                144.2478 -4.2173
+                                146.3516 -5.0529
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.42824e-01 1.97436e-01 1.60542e-01 1.30552e-01 1.06171e-01 8.63486e-02 7.02321e-02 5.71274e-02 4.64710e-02 3.78050e-02 3.07570e-02 2.50247e-02 2.03620e-02 1.65693e-02 1.34838e-02 1.09737e-02 8.93137e-03 7.26965e-03 5.91748e-03 4.81713e-03 3.92164e-03 3.19283e-03 2.59963e-03 2.11678e-03 1.72372e-03 1.40373e-03 1.12036e-03 7.82140e-04 1.21346e-04 1.23556e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_OSFZD" name="Owen Stanley Fault Zone Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                147.9360 -7.8090
+                                148.7860 -8.6470
+                                148.3300 -8.6340
+                                147.8340 -8.6200
+                                146.8550 -8.1710
+                                145.4390 -7.1120
+                                145.6120 -6.6080
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>180.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>6.38623e-02 5.20162e-02 4.23702e-02 3.45151e-02 2.81181e-02 2.29081e-02 1.86646e-02 1.52081e-02 1.23925e-02 1.00988e-02 8.23010e-03 6.70762e-03 5.46711e-03 4.45629e-03 3.63257e-03 2.96130e-03 2.41421e-03 1.96832e-03 1.60487e-03 1.30861e-03 1.06710e-03 8.70216e-04 7.09698e-04 5.78822e-04 4.72108e-04 3.85091e-04 3.07847e-04 2.15258e-04 3.34499e-05 3.41134e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_MTBD" name="Mamberamo Thrust Belt Deep" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                143.2912 -4.0361
+                                142.5780 -5.1240
+                                141.1760 -4.3170
+                                139.9720 -4.5280
+                                138.6620 -3.9990
+                                137.7470 -3.8430
+                                138.1464 -1.9338
+                                139.2710 -2.2870
+                                140.3394 -2.7320
+                                141.8895 -3.4769
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>60.0</upperSeismoDepth>
+                <lowerSeismoDepth>130.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>7.93912e-02 6.46008e-02 5.25692e-02 4.27812e-02 3.48179e-02 2.83387e-02 2.30667e-02 1.87767e-02 1.52855e-02 1.24442e-02 1.01317e-02 8.24948e-03 6.71734e-03 5.47010e-03 4.45472e-03 3.62805e-03 2.95496e-03 2.40690e-03 1.96061e-03 1.59717e-03 1.30118e-03 1.06011e-03 8.63758e-04 7.03815e-04 5.73523e-04 4.67380e-04 3.73285e-04 2.60775e-04 4.04858e-05 4.12511e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="300.0" dip="45.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="100.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BSSL" name="Bismake Sea Seismic Lineation" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                143.9038 -3.7394
+                                144.1684 -3.1413
+                                144.4810 -3.2080
+                                146.9930 -2.8730
+                                147.4660 -2.6910
+                                149.6270 -3.2590
+                                150.2050 -2.8950
+                                151.1470 -3.4240
+                                151.5830 -3.2310
+                                153.4320 -4.3090
+                                153.2400 -4.3940
+                                153.1770 -4.4220
+                                152.8760 -4.6140
+                                151.5340 -3.8360
+                                151.2480 -3.9930
+                                150.2560 -3.5070
+                                149.6130 -3.8430
+                                149.4630 -3.8500
+                                147.5220 -3.2860
+                                146.9030 -3.5190
+                                145.3710 -3.7090
+                                144.3500 -3.7920
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>1.0</upperSeismoDepth>
+                <lowerSeismoDepth>50.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>4.61781e-01 3.71992e-01 2.99705e-01 2.41501e-01 1.94628e-01 1.56876e-01 1.26465e-01 1.01964e-01 8.22216e-02 6.63113e-02 5.34874e-02 4.31497e-02 3.48150e-02 2.80941e-02 2.26739e-02 1.83020e-02 1.47752e-02 1.19296e-02 9.63345e-03 7.78031e-03 6.28451e-03 5.07699e-03 4.10205e-03 3.31478e-03 2.67896e-03 2.12209e-03 1.47044e-03 2.26451e-04 2.28891e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="100.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="20.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_WRFS" name="Wandamen Ransiki Fault Zone" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                135.0764 -3.6705
+                                135.0352 -3.9425
+                                134.6800 -3.9619
+                                134.6313 -3.8269
+                                134.4829 -3.4534
+                                134.2852 -3.0194
+                                134.2138 -2.7007
+                                134.0874 -2.1459
+                                133.6369 -1.3274
+                                134.0270 -1.0527
+                                134.5598 -1.6570
+                                134.6159 -1.8428
+                                134.6992 -2.1328
+                                134.5928 -2.4096
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>4.99531e-02 4.03571e-02 3.26089e-02 2.63519e-02 2.12983e-02 1.72162e-02 1.39183e-02 1.12537e-02 9.10038e-03 7.36006e-03 5.95333e-03 4.81609e-03 3.89659e-03 3.15306e-03 2.55172e-03 2.02403e-03 1.40437e-03 2.16564e-04 2.19188e-05 1.40340e-18</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="160.0" dip="90.0" rake="0.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_CDW" name="Cendrawasih" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                135.0764 -3.6705
+                                134.5928 -2.4096
+                                134.6992 -2.1328
+                                134.6159 -1.8428
+                                136.5231 -1.9241
+                                136.5185 -2.1021
+                                136.0268 -2.5993
+                                135.3868 -3.3107
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.86366e-02 3.12576e-02 2.52911e-02 2.04661e-02 1.65637e-02 1.34070e-02 1.08533e-02 8.78705e-03 7.11506e-03 5.76192e-03 4.66667e-03 3.78007e-03 3.06227e-03 2.48107e-03 2.01042e-03 1.62923e-03 1.32047e-03 1.07035e-03 8.67705e-04 6.89435e-04 4.79171e-04 7.40155e-05 7.50365e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="50.0" dip="40.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_WRP" name="Waropen" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                136.1198 -3.1738
+                                136.5789 -2.6652
+                                136.9278 -2.3686
+                                136.5185 -2.1021
+                                136.5231 -1.9241
+                                137.5363 -1.9138
+                                138.6220 -3.5380
+                                138.2150 -3.4880
+                                137.9870 -3.3810
+                                137.8010 -3.2950
+                                137.4440 -3.4590
+                                137.2230 -3.5300
+                                136.9590 -3.5090
+                                136.5660 -3.4090
+                                136.2880 -3.2950
+                                136.1942 -3.2207
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.70077e-02 1.37809e-02 1.11675e-02 9.05081e-03 7.33612e-03 5.94695e-03 4.82137e-03 3.90926e-03 3.17005e-03 2.57090e-03 2.08522e-03 1.69147e-03 1.37221e-03 1.11333e-03 9.03388e-04 7.33109e-04 5.94987e-04 4.82937e-04 3.92028e-04 3.18264e-04 2.58405e-04 2.05628e-04 1.43131e-04 2.21419e-05 2.24805e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="90.0" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_LGR" name="Lengguru" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                134.6800 -3.9619
+                                134.0064 -3.9987
+                                133.0066 -4.3557
+                                133.0051 -4.2750
+                                132.6946 -4.0353
+                                132.6920 -4.0333
+                                132.4118 -3.4345
+                                131.9668 -3.2587
+                                130.7637 -2.5445
+                                129.0497 -2.3028
+                                129.1102 -1.8963
+                                130.1539 -1.3579
+                                131.5768 -1.3634
+                                133.6369 -1.3274
+                                134.0874 -2.1459
+                                134.2138 -2.7007
+                                134.2852 -3.0194
+                                134.4829 -3.4534
+                                134.6313 -3.8269
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>35.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.02606e-02 1.64185e-02 1.33065e-02 1.07856e-02 8.74322e-03 7.08839e-03 5.74741e-03 4.66062e-03 3.77974e-03 3.06569e-03 2.48680e-03 2.01743e-03 1.63683e-03 1.30160e-03 9.05368e-04 1.39960e-04 1.42003e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="155.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="10.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BS_40_100" name="Banda 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                127.3334 -7.5863
+                                128.5390 -7.3311
+                                128.9897 -7.2713
+                                129.3264 -7.0650
+                                129.6523 -6.8206
+                                129.9401 -6.4785
+                                130.2225 -6.0114
+                                130.3365 -5.7670
+                                130.4126 -5.1262
+                                130.2334 -4.6212
+                                131.3032 -3.5622
+                                131.7540 -4.3496
+                                131.9386 -5.1534
+                                131.8952 -5.9571
+                                131.4933 -6.6685
+                                131.3738 -6.9835
+                                130.6787 -7.6135
+                                130.4832 -7.7710
+                                129.2504 -7.9176
+                                127.5398 -8.0208
+                                126.8319 -8.1601
+                                126.7050 -7.7338
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.31682e-01 1.88387e-01 1.53194e-01 1.24583e-01 1.01322e-01 8.24101e-02 6.70324e-02 5.45279e-02 4.43589e-02 3.60888e-02 2.93624e-02 2.38913e-02 1.94410e-02 1.58206e-02 1.28753e-02 1.04790e-02 8.52924e-03 6.94271e-03 5.65166e-03 4.60099e-03 3.74589e-03 3.04990e-03 2.48339e-03 2.02223e-03 1.64682e-03 1.34118e-03 1.07049e-03 7.47365e-04 1.15957e-04 1.18075e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_SRM_40_100" name="Seram 40-100km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3522,7 +3115,378 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
+        <areaSource id="JBP_BS_100_200" name="Banda 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                130.8850 -5.9137
+                                130.7384 -6.2721
+                                130.4452 -6.5925
+                                130.2660 -6.8260
+                                129.9510 -7.0758
+                                129.8532 -7.2062
+                                129.4513 -7.3528
+                                128.9626 -7.5103
+                                128.8648 -7.5293
+                                128.3516 -7.6053
+                                127.7570 -7.6949
+                                127.2899 -7.7547
+                                126.7551 -7.8827
+                                126.6932 -7.6623
+                                127.2628 -7.5266
+                                127.8493 -7.3582
+                                128.0394 -7.3039
+                                128.5499 -7.2116
+                                128.8703 -7.0595
+                                129.2450 -6.8097
+                                129.6469 -6.5219
+                                129.8424 -6.3047
+                                129.9184 -5.8485
+                                129.9455 -5.2891
+                                129.8206 -4.9524
+                                130.2334 -4.6212
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>8.90008e-02 7.23804e-02 5.88676e-02 4.78808e-02 3.89471e-02 3.16823e-02 2.57744e-02 2.09695e-02 1.70615e-02 1.38827e-02 1.12969e-02 9.19333e-03 7.48195e-03 6.08956e-03 4.95661e-03 4.03470e-03 3.28448e-03 2.67392e-03 2.17701e-03 1.77255e-03 1.44333e-03 1.17533e-03 9.57151e-04 7.79524e-04 6.34901e-04 5.17142e-04 4.12826e-04 2.88256e-04 4.47305e-05 4.55539e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BS_200_300" name="Banda 200-300km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                127.0564 -7.5917
+                                126.6866 -7.6962
+                                126.5571 -7.2742
+                                126.9016 -7.1736
+                                127.5425 -7.0052
+                                128.1181 -6.8097
+                                128.6395 -6.4622
+                                128.7970 -5.9191
+                                128.8947 -5.1860
+                                129.8206 -4.9524
+                                129.9455 -5.2891
+                                129.9184 -5.8485
+                                130.0243 -6.5545
+                                129.5464 -6.9835
+                                128.8513 -7.1410
+                                128.5499 -7.2116
+                                128.0394 -7.3039
+                                127.8493 -7.3582
+                                127.2628 -7.5266
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>200.0</upperSeismoDepth>
+                <lowerSeismoDepth>300.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.15622e-01 9.42809e-02 7.68833e-02 6.26996e-02 5.11355e-02 4.17066e-02 3.40183e-02 2.77488e-02 2.26360e-02 1.84663e-02 1.50655e-02 1.22917e-02 1.00292e-02 8.18354e-03 6.67792e-03 5.44960e-03 4.44745e-03 3.62979e-03 2.96261e-03 2.41819e-03 1.97392e-03 1.61136e-03 1.31546e-03 1.07395e-03 8.76828e-04 7.15923e-04 5.72885e-04 4.00975e-04 6.23701e-05 6.36688e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="250.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_NT_40_100" name="Nusa Tenggara 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.4900 -8.1708
+                                121.5389 -10.2236
+                                120.1459 -10.0851
+                                119.4182 -9.9222
+                                118.0822 -9.9005
+                                117.5283 -10.1611
+                                116.9527 -10.0091
+                                116.3770 -10.0960
+                                115.3886 -9.8896
+                                114.1287 -9.7158
+                                113.4119 -9.6724
+                                112.8280 -9.4841
+                                111.8913 -9.1510
+                                112.0433 -7.7934
+                                114.8130 -7.9889
+                                115.9860 -8.1952
+                                117.0721 -8.1844
+                                117.6749 -8.0975
+                                118.9186 -7.8802
+                                120.5803 -7.9237
+                                120.9876 -8.0269
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>7.83562e-02 6.37499e-02 5.18698e-02 4.22063e-02 3.43454e-02 2.79504e-02 2.27476e-02 1.85145e-02 1.50701e-02 1.22672e-02 9.98632e-03 8.13004e-03 6.61922e-03 5.38951e-03 4.38853e-03 3.57368e-03 2.91031e-03 2.37024e-03 1.93050e-03 1.57245e-03 1.28088e-03 1.04344e-03 8.50070e-04 6.92577e-04 5.64297e-04 4.59805e-04 3.67191e-04 2.56487e-04 3.98154e-05 4.05632e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_NT_200_300" name="Nusa Tenggara 200-300km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.4788 -8.4379
+                                119.6106 -8.3402
+                                118.6277 -8.2044
+                                117.4275 -8.2370
+                                116.4608 -8.1555
+                                113.9845 -7.8568
+                                111.9968 -7.6613
+                                112.0837 -7.0748
+                                114.8099 -7.4006
+                                116.9279 -7.4875
+                                117.1994 -7.4875
+                                119.0350 -7.7048
+                                121.4462 -7.7319
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>200.0</upperSeismoDepth>
+                <lowerSeismoDepth>300.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.08151e-02 2.51507e-02 2.05285e-02 1.67567e-02 1.36786e-02 1.11665e-02 9.11619e-03 7.44274e-03 6.07680e-03 4.96179e-03 4.05157e-03 3.30850e-03 2.70184e-03 2.20653e-03 1.80211e-03 1.47188e-03 1.20223e-03 9.82024e-04 8.02191e-04 6.55321e-04 5.35366e-04 4.37390e-04 3.57360e-04 2.91987e-04 2.38585e-04 1.94958e-04 1.56129e-04 1.09364e-04 1.70245e-05 1.73924e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="250.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_NT_300_400" name="Nusa Tenggara 300-400km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.4462 -7.7319
+                                117.4492 -7.8270
+                                115.4073 -7.6315
+                                112.0294 -7.2513
+                                112.1163 -6.7625
+                                118.0140 -7.3599
+                                121.4516 -7.4006
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>300.0</upperSeismoDepth>
+                <lowerSeismoDepth>400.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>7.58447e-02 6.19028e-02 5.05264e-02 4.12428e-02 3.36668e-02 2.74838e-02 2.24375e-02 1.83187e-02 1.49567e-02 1.22124e-02 9.97206e-03 8.14314e-03 6.64998e-03 5.43089e-03 4.43550e-03 3.62272e-03 2.95902e-03 2.41704e-03 1.97442e-03 1.61293e-03 1.31769e-03 1.07654e-03 8.79563e-04 7.18663e-04 5.87223e-04 4.79845e-04 3.84278e-04 2.69176e-04 4.19020e-05 4.28077e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="350.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BS_400_500" name="Banda 400-500km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.1934 -4.6446
+                                125.6061 -4.3513
+                                126.7574 -4.8184
+                                127.3133 -5.3644
+                                127.6250 -6.0502
+                                127.6395 -6.2554
+                                127.6453 -6.4177
+                                127.5240 -6.5664
+                                126.3447 -7.4359
+                                125.1282 -7.6749
+                                124.1615 -7.6532
+                                122.3586 -7.5446
+                                119.6215 -7.6097
+                                117.2103 -7.3599
+                                112.0946 -6.7625
+                                112.2629 -5.8013
+                                112.9619 -5.8352
+                                114.3103 -6.0511
+                                116.8138 -6.8169
+                                118.4593 -7.0232
+                                120.5556 -7.0449
+                                122.6301 -6.9635
+                                123.4012 -6.5507
+                                124.5091 -5.8393
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>400.0</upperSeismoDepth>
+                <lowerSeismoDepth>500.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.25676e-01 1.83481e-01 1.49184e-01 1.21307e-01 9.86453e-02 8.02227e-02 6.52450e-02 5.30671e-02 4.31652e-02 3.51132e-02 2.85651e-02 2.32397e-02 1.89083e-02 1.53853e-02 1.25195e-02 1.01881e-02 8.29149e-03 6.74837e-03 5.49279e-03 4.47111e-03 3.63971e-03 2.96309e-03 2.41242e-03 1.96421e-03 1.59937e-03 1.30239e-03 1.03941e-03 7.25578e-04 1.12564e-04 1.14606e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="450.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BS_500_600" name="Banda_500_600km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.1934 -4.6446
+                                125.6061 -4.3513
+                                126.7574 -4.8184
+                                127.3133 -5.3644
+                                127.6250 -6.0502
+                                127.6395 -6.2554
+                                127.6453 -6.4177
+                                127.5227 -6.5686
+                                126.3447 -7.4359
+                                125.1282 -7.6749
+                                124.1615 -7.6532
+                                122.3586 -7.5446
+                                119.6215 -7.6097
+                                117.2103 -7.3599
+                                112.0946 -6.7625
+                                112.2629 -5.8013
+                                112.9619 -5.8352
+                                114.3103 -6.0511
+                                116.8138 -6.8169
+                                118.4593 -7.0232
+                                120.5556 -7.0449
+                                122.6301 -6.9635
+                                123.4012 -6.5507
+                                124.5091 -5.8393
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>500.0</upperSeismoDepth>
+                <lowerSeismoDepth>600.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>2.25989e-01 1.83758e-01 1.49429e-01 1.21521e-01 9.88325e-02 8.03851e-02 6.53853e-02 5.31880e-02 4.32689e-02 3.52020e-02 2.86409e-02 2.33043e-02 1.89632e-02 1.54319e-02 1.25589e-02 1.02215e-02 8.31965e-03 6.77211e-03 5.51279e-03 4.48793e-03 3.65384e-03 2.97496e-03 2.42237e-03 1.97254e-03 1.60635e-03 1.30823e-03 1.04419e-03 7.29001e-04 1.13108e-04 1.15174e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="550.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BS" name="Banda Sea" tectonicRegion="Non_cratonic">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                131.7269 -4.0754
+                                132.5784 -4.8225
+                                132.8692 -4.5535
+                                133.5470 -4.6319
+                                133.5161 -5.4385
+                                133.4244 -5.9652
+                                132.5702 -6.5914
+                                132.6811 -6.7629
+                                131.9793 -7.6362
+                                131.7571 -7.9126
+                                131.4883 -8.2494
+                                131.2200 -8.5840
+                                130.8425 -8.6955
+                                130.6941 -7.8055
+                                130.5073 -7.3166
+                                129.7053 -7.4292
+                                127.3485 -7.7808
+                                127.3361 -7.6691
+                                128.3187 -7.5671
+                                129.4005 -7.1532
+                                130.1256 -6.7157
+                                130.7271 -5.8031
+                                130.6557 -5.0725
+                                130.5183 -4.6000
+                                129.8940 -3.6427
+                                129.5860 -3.3477
+                                129.5482 -3.2177
+                                130.4953 -3.3698
+                                131.5732 -3.9341
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>0.0</upperSeismoDepth>
+                <lowerSeismoDepth>40.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>WC1994</magScaleRel>
+            <ruptAspectRatio>1.5</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.93036e-01 1.55594e-01 1.25433e-01 1.01134e-01 8.15529e-02 6.57727e-02 5.30534e-02 4.27999e-02 3.45330e-02 2.78668e-02 2.24906e-02 1.81541e-02 1.46558e-02 1.18333e-02 9.55570e-03 7.71753e-03 6.23382e-03 5.03604e-03 4.06896e-03 3.28803e-03 2.65734e-03 2.14791e-03 1.73638e-03 1.37580e-03 9.53570e-04 1.46890e-04 1.48511e-05</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="225.0" dip="30.0" rake="90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="20.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_SRM_100_200" name="Seram 100-200km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3560,42 +3524,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                126.7551 -7.8827
-                                124.1483 -8.8333
-                                123.1436 -9.2949
-                                122.7092 -9.4253
-                                121.5253 -9.5067
-                                121.4927 -8.5618
-                                122.5734 -8.4586
-                                123.6107 -8.3011
-                                126.6932 -7.6623
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>100.0</upperSeismoDepth>
-                <lowerSeismoDepth>200.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>StrasserIntraslab</magScaleRel>
-            <ruptAspectRatio>1.2</ruptAspectRatio>
-            <incrementalMFD minMag="5.55" binWidth="0.1">
-                <occurRates>1.83208e-02 1.49530e-02 1.22050e-02 9.96249e-03 8.13244e-03 6.63890e-03 5.41993e-03 4.42500e-03 3.61289e-03 2.94998e-03 2.40882e-03 1.96703e-03 1.60635e-03 1.31187e-03 1.07142e-03 8.75093e-04 7.14772e-04 5.83852e-04 4.76934e-04 3.89614e-04 3.18296e-04 2.60045e-04 2.12465e-04 1.73598e-04 1.41848e-04 1.15910e-04 9.28250e-05 6.50213e-05 1.01217e-05 1.03405e-06</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="1.0" depth="150.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
+        <areaSource id="JBP_SRM_200_300" name="Seram 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3632,7 +3561,170 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
+        <areaSource id="JBP_TMR_40_100" name="Timor 40-100km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                126.8319 -8.1601
+                                125.6879 -8.6541
+                                125.3295 -8.9582
+                                124.9222 -9.3873
+                                123.6188 -10.1095
+                                122.6196 -10.2833
+                                121.5389 -10.2236
+                                121.4900 -8.1708
+                                123.8306 -7.9427
+                                125.3240 -7.8449
+                                126.7050 -7.7338
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>40.0</upperSeismoDepth>
+                <lowerSeismoDepth>100.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>3.93166e-02 3.20236e-02 2.60851e-02 2.12491e-02 1.73108e-02 1.41033e-02 1.14908e-02 9.36283e-03 7.62940e-03 6.21728e-03 5.06684e-03 4.12952e-03 3.36581e-03 2.74350e-03 2.23638e-03 1.82311e-03 1.48630e-03 1.21179e-03 9.88033e-04 8.05642e-04 6.56958e-04 5.35746e-04 4.36924e-04 3.56350e-04 2.90652e-04 2.37080e-04 1.89525e-04 1.32523e-04 2.05934e-05 2.10018e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="60.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_TMR_100_200" name="Timor 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                126.7551 -7.8827
+                                124.1483 -8.8333
+                                123.1436 -9.2949
+                                122.7092 -9.4253
+                                121.5253 -9.5067
+                                121.4927 -8.5618
+                                122.5734 -8.4586
+                                123.6107 -8.3011
+                                126.6932 -7.6623
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>1.83208e-02 1.49530e-02 1.22050e-02 9.96249e-03 8.13244e-03 6.63890e-03 5.41993e-03 4.42500e-03 3.61289e-03 2.94998e-03 2.40882e-03 1.96703e-03 1.60635e-03 1.31187e-03 1.07142e-03 8.75093e-04 7.14772e-04 5.83852e-04 4.76934e-04 3.89614e-04 3.18296e-04 2.60045e-04 2.12465e-04 1.73598e-04 1.41848e-04 1.15910e-04 9.28250e-05 6.50213e-05 1.01217e-05 1.03405e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="80.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_NT_100_200" name="Nusa Tenggara 100-200km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                121.5253 -9.5067
+                                120.4962 -9.1673
+                                119.0190 -9.0587
+                                118.7746 -8.9827
+                                118.3239 -8.9284
+                                117.7808 -9.0098
+                                117.1129 -8.9772
+                                115.6737 -8.8849
+                                114.3812 -8.7546
+                                112.7086 -8.4668
+                                112.1221 -8.5211
+                                111.9863 -8.4613
+                                112.0352 -7.3643
+                                115.8964 -7.7228
+                                117.8243 -7.9183
+                                119.9341 -7.9780
+                                120.9089 -8.2767
+                                121.4927 -8.5618
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>100.0</upperSeismoDepth>
+                <lowerSeismoDepth>200.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>5.53612e-02 4.51846e-02 3.68806e-02 3.01043e-02 2.45743e-02 2.00612e-02 1.63778e-02 1.33713e-02 1.09173e-02 8.91414e-03 7.27889e-03 5.94391e-03 4.85401e-03 3.96416e-03 3.23759e-03 2.64433e-03 2.15988e-03 1.76426e-03 1.44118e-03 1.17732e-03 9.61817e-04 7.85796e-04 6.42018e-04 5.24572e-04 4.28631e-04 3.50253e-04 2.80495e-04 1.96479e-04 3.05855e-05 3.12465e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="85.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="150.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_BS_300_400" name="Banda 300-400km" tectonicRegion="Subduction">
+            <areaGeometry>
+                <gml:Polygon>
+                    <gml:exterior>
+                        <gml:LinearRing>
+                            <gml:posList>
+                                125.8016 -4.5170
+                                125.8668 -4.0499
+                                127.8425 -4.4548
+                                128.3313 -4.5689
+                                128.8947 -5.1860
+                                128.9405 -5.4945
+                                128.9079 -5.9181
+                                128.6395 -6.4622
+                                128.3268 -6.6772
+                                128.1181 -6.8097
+                                127.5425 -7.0052
+                                127.1267 -7.2866
+                                126.5999 -7.4224
+                                126.4370 -6.8902
+                                126.9746 -6.7218
+                                127.4851 -6.4394
+                                127.5503 -6.0701
+                                127.4199 -5.6683
+                                127.2353 -5.3859
+                                126.9312 -5.0274
+                                126.4641 -4.7342
+                            </gml:posList>
+                        </gml:LinearRing>
+                    </gml:exterior>
+                </gml:Polygon>
+                <upperSeismoDepth>300.0</upperSeismoDepth>
+                <lowerSeismoDepth>400.0</lowerSeismoDepth>
+            </areaGeometry>
+            <magScaleRel>StrasserIntraslab</magScaleRel>
+            <ruptAspectRatio>1.2</ruptAspectRatio>
+            <incrementalMFD minMag="5.55" binWidth="0.1">
+                <occurRates>6.79532e-02 5.53370e-02 4.50660e-02 3.67037e-02 2.98950e-02 2.43508e-02 1.98361e-02 1.61595e-02 1.31651e-02 1.07263e-02 8.73977e-03 7.12161e-03 5.80340e-03 4.72948e-03 3.85453e-03 3.14163e-03 2.56074e-03 2.08739e-03 1.70163e-03 1.38725e-03 1.13102e-03 9.22165e-04 7.51925e-04 6.13149e-04 5.00015e-04 4.07779e-04 3.25926e-04 2.27858e-04 3.54015e-05 3.60973e-06</occurRates>
+            </incrementalMFD>
+            <nodalPlaneDist>
+                <nodalPlane probability="1.0" strike="0.0" dip="45.0" rake="-90.0" />
+            </nodalPlaneDist>
+            <hypoDepthDist>
+                <hypoDepth probability="1.0" depth="350.0"/>
+            </hypoDepthDist>
+        </areaSource>
+
+        <areaSource id="JBP_TMR_200_300" name="Timor 200-300km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3668,7 +3760,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
+        <areaSource id="JBP_TMR_300_400" name="Timor 300-400km" tectonicRegion="Subduction">
             <areaGeometry>
                 <gml:Polygon>
                     <gml:exterior>
@@ -3701,94 +3793,7 @@
             </hypoDepthDist>
         </areaSource>
 
-        <areaSource id="NWMB2" name="Northwest Margin - Buffer2" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                111.5701 -15.4716
-                                112.5443 -13.4575
-                                113.6211 -13.5234
-                                114.4781 -14.7759
-                                113.6650 -16.1603
-                                116.4821 -16.3615
-                                116.2732 -16.4881
-                                110.6577 -19.6290
-                                110.5211 -20.3801
-                                109.7887 -19.9368
-                                109.3581 -19.6762
-                                110.5886 -17.5007
-                                111.4864 -15.6446
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>20.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>4.87859e-03 3.96284e-03 3.21941e-03 2.61580e-03 2.12565e-03 1.72757e-03 1.40422e-03 1.14154e-03 9.28119e-04 7.54695e-04 6.13753e-04 4.99195e-04 4.06070e-04 3.30358e-04 2.68795e-04 2.18731e-04 1.78013e-04 1.44891e-04 1.17947e-04 9.60236e-05 7.81845e-05 6.36667e-05 5.18504e-05 4.22319e-05 3.44015e-05 2.80259e-05 2.28344e-05 1.86066e-05 1.51631e-05 1.23582e-05 8.67298e-06 5.10753e-06 1.71380e-06 4.80334e-07</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="0.34" strike="197.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.34" strike="17.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="212.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="182.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="32.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="2.0" dip="35.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="10.0"/>
-                <hypoDepth probability="0.25" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="15.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-        <areaSource id="NWMB1" name="Northwest Margin - Buffer1" tectonicRegion="Non_cratonic">
-            <areaGeometry>
-                <gml:Polygon>
-                    <gml:exterior>
-                        <gml:LinearRing>
-                            <gml:posList>
-                                119.3364 -11.8923
-                                119.3733 -11.7045
-                                119.4003 -11.5677
-                                122.2940 -11.9124
-                                122.3193 -12.7789
-                                121.6497 -12.4648
-                                119.4141 -14.5845
-                                118.7236 -15.0030
-                            </gml:posList>
-                        </gml:LinearRing>
-                    </gml:exterior>
-                </gml:Polygon>
-                <upperSeismoDepth>0.0</upperSeismoDepth>
-                <lowerSeismoDepth>20.0</lowerSeismoDepth>
-            </areaGeometry>
-            <magScaleRel>Leonard2014_SCR</magScaleRel>
-            <ruptAspectRatio>1.5</ruptAspectRatio>
-            <incrementalMFD minMag="4.55" binWidth="0.1">
-                <occurRates>8.99175e-03 7.28613e-03 5.90494e-03 4.78629e-03 3.88015e-03 3.14602e-03 2.55117e-03 2.06910e-03 1.67837e-03 1.36162e-03 1.10481e-03 8.96558e-04 7.27668e-04 5.90676e-04 4.79541e-04 3.89370e-04 3.16199e-04 2.56813e-04 2.08608e-04 1.69475e-04 1.37701e-04 1.11899e-04 9.09440e-05 7.39226e-05 6.00948e-05 4.88598e-05 3.97303e-05 3.23107e-05 2.62800e-05 2.13775e-05 1.49743e-05 8.80181e-06 2.94789e-06 8.24701e-07</occurRates>
-            </incrementalMFD>
-            <nodalPlaneDist>
-                <nodalPlane probability="0.34" strike="175.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.34" strike="355.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="190.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="160.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="10.0" dip="35.0" rake="90.0" />
-                <nodalPlane probability="0.08" strike="340.0" dip="35.0" rake="90.0" />
-            </nodalPlaneDist>
-            <hypoDepthDist>
-                <hypoDepth probability="0.50" depth="10.0"/>
-                <hypoDepth probability="0.25" depth="5.0"/>
-                <hypoDepth probability="0.25" depth="15.0"/>
-            </hypoDepthDist>
-        </areaSource>
-
-      <complexFaultSource id="banda_0" name="sunda" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_0" name="sunda" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -4388,7 +4393,7 @@
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_1" name="tanimbar" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_1" name="tanimbar" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -4483,11 +4488,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="6.55" binWidth="0.1">
-              <occurRates>0.00283504837065 0.00216897707953 0.00166128000243 0.00127387083466 0.000977919923684 0.000751582318926 0.000578288493886 0.000445457239018 0.000375320144296 0.0002507247253 0.000174631800042 0.000121480872591 8.43512149746e-05 5.84202861794e-05 4.03328252115e-05 2.773949301e-05 1.99229159145e-05 1.26958693535e-05 8.85814616481e-06 5.35143869069e-06 3.63928680731e-06 2.1997864707e-06 1.15519435077e-06 7.11992830135e-07 2.69913094893e-07 5.69002380543e-08</occurRates>
+              <occurRates>0.00294031265728 0.00224908894899 0.00172231815211 0.00132042931856 0.00101347429244 0.000778764660178 0.000599094222153 0.000461400711873 0.000388347644663 0.000259459919372 0.000180394822113 0.000125234582219 8.67510086839e-05 5.99133838015e-05 4.12247321215e-05 2.82383441367e-05 2.02202322072e-05 1.27980701182e-05 8.57787372525e-06 5.69267331888e-06 3.73124047377e-06 2.40676469602e-06 1.51964501124e-06 1.01488628647e-06 5.25846079411e-07 2.40813377468e-07</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_2" name="arutrough" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_2" name="arutrough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -4527,11 +4532,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="6.55" binWidth="0.1">
-              <occurRates>0.0198567703109 0.0151264990738 0.0115361796898 0.00880811762948 0.00673294105048 0.00515263749355 0.00394783718693 0.00302827189515 0.00235585906235 0.00169670920967 0.00117429614354 0.000813022030246 0.000560871048298 0.000384259671322 0.000260583751299 0.000174245553562 0.000114316477996 7.3057031962e-05 4.49631042386e-05 2.6108230952e-05 1.36917671932e-05 4.48909101966e-06</occurRates>
+              <occurRates>0.0206692325866 0.0157399619562 0.0119998679205 0.00915897019582 0.00699870236716 0.00535416516878 0.00410082620909 0.00314454380525 0.00244269394746 0.00175915470934 0.00121841322418 0.000844488078741 0.000583350161098 0.000400254274793 0.000271865777684 0.000182097108499 0.000119677753063 7.6622746151e-05 4.72475685415e-05 2.7491459813e-05 1.44529697784e-05 4.75383025583e-06</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_3" name="trobriand" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_3" name="trobriand" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -4580,11 +4585,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="6.55" binWidth="0.1">
-              <occurRates>0.00219271166988 0.00175123079161 0.00140027402117 0.00112096867911 0.000898435795584 0.000720933749209 0.000579187677371 0.000465863947508 0.000411790153101 0.000296091105793 0.000193092315105 0.000132870237377 9.3576473159e-05 5.88324345497e-05 3.9090076564e-05 2.6546525622e-05 1.53232864989e-05 9.28563925285e-06 5.65004144046e-06 2.33585459128e-06 3.96509786381e-07</occurRates>
+              <occurRates>0.00231320736874 0.00184738520068 0.00147709376838 0.00118241360959 0.000947641060871 0.000760384163039 0.000610854714606 0.000491313484486 0.000433031708163 0.000312315266721 0.000203790530501 0.000140280901477 9.88408821433e-05 6.21750887693e-05 4.13265803043e-05 2.80781073268e-05 1.62139554722e-05 9.82870332014e-06 5.98330865904e-06 2.47473405672e-06 4.20295825525e-07</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_4" name="newguinea" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_4" name="newguinea" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -4934,11 +4939,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="7.05" binWidth="0.1">
-              <occurRates>0.0213391760336 0.0173115454104 0.0140602999642 0.0114326615203 0.00930651399063 0.00758413522425 0.00618723205157 0.00505300342162 0.00413101539631 0.00338071788508 0.00276946916403 0.00227096259867 0.00197961965393 0.00162057793378 0.001298840512 0.00103261860901 0.000812683472642 0.000631183254139 0.000481169273631 0.000356442179975 0.000284445768593 0.000157463667657</occurRates>
+              <occurRates>0.0211926231613 0.0172023316228 0.0139794741481 0.0113733499756 0.00926344683539 0.00755327973401 0.00616550889952 0.00503806717834 0.00412108483181 0.00337444485984 0.00276583741168 0.00226920965548 0.00197181034948 0.00160495468919 0.00127860637052 0.00101056842048 0.000790869197618 0.000611103106209 0.000463952440602 0.000342920614792 0.000273716725813 0.00015243923425</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_5" name="seram_thrust" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_5" name="seram_thrust" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5108,11 +5113,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="7.05" binWidth="0.1">
-              <occurRates>0.00825455172678 0.00660533460536 0.00529211388234 0.00424520183793 0.00340959885931 0.00274185312423 0.00220760014395 0.00177963336623 0.00143638991576 0.00116076110271 0.00100758025114 0.000811774713478 0.00061089506222 0.000451995777858 0.00032635906169 0.000227420154599 0.000150163412486 9.06663542086e-05 2.2983425332e-05</occurRates>
+              <occurRates>0.00824285313683 0.00659715740708 0.00528652190172 0.00424149331318 0.00340724964996 0.00274047341552 0.00220690147673 0.0017794035617 0.00143647403234 0.00116104699774 0.00100724669076 0.000812128644873 0.000612514260648 0.000454570554644 0.000329517207738 0.000230765871936 0.000153327620597 9.33517645212e-05 2.38339204693e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_6" name="flores" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_6" name="flores" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5196,11 +5201,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="7.05" binWidth="0.1">
-              <occurRates>0.0191813792839 0.0153446632157 0.0122898232458 0.00985476916042 0.00791153783986 0.00635900812381 0.00511718991233 0.00412274367167 0.00339044272092 0.00275556673705 0.00215689177502 0.00163001292353 0.00131063199734 0.00101200174112 0.000776664346846 0.000582537523093 0.000398051111097 0.000308576568001 0.000211865750679 0.000136557683293 8.19837566126e-05 3.64289386371e-05 1.51269009011e-05</occurRates>
+              <occurRates>0.02064482164 0.0165377549889 0.0132638976749 0.0106511388062 0.00856350391062 0.00689345669124 0.00555586188315 0.00448324675448 0.0037548723626 0.00289811726017 0.00219997562249 0.0015604930383 0.00116939214257 0.000776045385251 0.000551443849449 0.000340196835969 0.000159483011315 2.2517073604e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_7" name="moresby_trough" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_7" name="moresby_trough" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5344,11 +5349,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="6.05" binWidth="0.1">
-              <occurRates>0.0283672034673 0.0224576918184 0.0177984021582 0.014121205363 0.0112161671614 0.00891878563166 0.00710005292896 0.0056587113652 0.0045152153973 0.00360702057036 0.00288490525714 0.0023100967368 0.00185202408605 0.00152360595374 0.00111194748325 0.000827576224859 0.000590769651401 0.000401084420476 0.000299400123986 0.000199605478734 0.000147917936344 9.52873293274e-05 6.92401203773e-05 4.56016082528e-05 2.70453526916e-05 1.87676565792e-05 9.72311164715e-06 6.10881984466e-06 2.06558810878e-06</occurRates>
+              <occurRates>0.029627576389 0.0234523943842 0.0185842397723 0.014742684489 0.0117081872801 0.00930873641516 0.0074094491234 0.00590446815054 0.00471064397992 0.0037626059368 0.00300891420143 0.00240905356088 0.00193108306221 0.00158541181308 0.00115885065845 0.000863191070909 0.000617577103178 0.000420244602765 0.000314253114487 0.000209941287295 0.000155825955281 0.000100583600085 7.32056933689e-05 4.829861844e-05 2.86825657378e-05 1.99336324035e-05 1.03401461407e-05 6.5078996876e-06 2.20473702362e-06</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_8" name="banda_detachment" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_8" name="banda_detachment" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5413,11 +5418,11 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="7.05" binWidth="0.1">
-              <occurRates>0.0182097656878 0.0138118675898 0.0104898401013 0.00784715609869 0.00577880675314 0.00426756950754 0.00317916598719 0.00235585432354 0.0017938991472 0.00134846082576 0.00101414910203 0.000745888605858 0.000576255950723 0.000431516343696 0.000321210694149 0.000255250500154 0.000178003690922 0.000111241859887 7.95586943487e-05 3.93429572419e-05 8.25696284271e-06</occurRates>
+              <occurRates>0.0167372933437 0.0127212803589 0.0096817550562 0.00726845645207 0.00538135460036 0.00399310403856 0.00298717882699 0.00222388933316 0.00169805306862 0.00128142284515 0.000967666880595 0.00071646136843 0.000554444903817 0.000417441564708 0.000313440996209 0.000224882907526 0.000176136389904 0.000130053044095 9.50733111955e-05 6.23443934965e-05 7.5560885566e-05</occurRates>
           </incrementalMFD>
           <rake>-90</rake>
         </complexFaultSource>
-      <complexFaultSource id="banda_9" name="timor" tectonicRegion="Subduction">
+      <complexFaultSource id="JBP_banda_9" name="timor" tectonicRegion="Subduction">
     
           <complexFaultGeometry>
             <faultTopEdge>
@@ -5590,9 +5595,10 @@
           <magScaleRel>StrasserInterface</magScaleRel>
           <ruptAspectRatio>1.5</ruptAspectRatio>
           <incrementalMFD minMag="6.55" binWidth="0.1">
-              <occurRates>0.0245450144923 0.019512425972 0.0155297660486 0.0123745634187 0.00987213745637 0.00788520814594 0.00630578854289 0.00504885378762 0.00400358539258 0.00315230759336 0.00247783525413 0.00195837553776 0.0015521235244 0.00123182063955 0.000955676237405 0.000780347000265 0.000618242177038 0.000488568118567 0.000384578036616 0.000300994170337 0.000233703163213 0.000167106903333 0.000137903841266 0.000102753708754 7.49027084788e-05 5.30851783859e-05 3.62407306977e-05 1.91984627983e-05 1.45895044483e-05 7.63452034228e-06</occurRates>
+              <occurRates>0.0299510232131 0.0237472031458 0.0188498911456 0.0149798707276 0.0119183685485 0.00949382340138 0.00757157949587 0.00604585231743 0.004798365149 0.00358352217543 0.00270414597412 0.00196707318923 0.00146878689431 0.00108652424472 0.000802348818968 0.000618054117705 0.000411571735409 0.000282202099575 0.000185600916806 0.000130000765764 4.15903431883e-05</occurRates>
           </incrementalMFD>
           <rake>90</rake>
         </complexFaultSource>
+
     </sourceModel>
 </nrml>
