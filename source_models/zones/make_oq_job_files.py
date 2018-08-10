@@ -7,13 +7,13 @@ from os import path, sep
 from sys import argv
 
 sourcePath = argv[1] # path to model input files
-modelType = int(argv[2]) # 1=Background; 2=Regional; 3=Seismotectonic
+modelType = int(argv[2]) # 0=Final; 1=Background; 2=Regional; 3=Seismotectonic
 
 # get model from path
 sourceModel = sourcePath.split(sep)[1]
 sourceModelSimple = sourceModel.split('_')[0]
 
-imts = ['PGA', 'SA(0.1)', 'SA(0.2)', 'SA(0.3)', 'SA(0.5)', 'SA(0.7)', 'SA(1.0)', 'SA(2.0)', 'SA(4.0)']
+imts = ['PGA', 'SA(0.05)', 'SA(0.1)', 'SA(0.2)', 'SA(0.3)', 'SA(0.5)', 'SA(0.7)', 'SA(1.0)', 'SA(1.5)', 'SA(2.0)', 'SA(4.0)']
 
 print '\nMAKE OPTION FOR mean_hazard_curves= TRUE OR FALSE\n'
 
@@ -26,7 +26,10 @@ for i, imt in enumerate(imts):
     imtstrp = imtstrp.replace('.', '')
     
     # first, parse job file
-    jobfile = path.join('templates','job_maps_templates.ini')
+    if modelType == 0:
+        jobfile = path.join('templates','job_maps_complete.ini')
+    else:
+        jobfile = path.join('templates','job_maps_templates.ini')
     
     jobtxt = open(jobfile).read()
 
@@ -63,6 +66,9 @@ for i, imt in enumerate(imts):
     # do seismotectonic
     elif modelType == 3:
         paramfile = path.join('templates','params_maps_template_seismotectonic.txt')
+    # do final
+    elif modelType == 0:
+        paramfile = path.join('templates','params_maps_complete_himem.txt')
     
     # first, parse param file
     paramtxt = open(paramfile).read()
@@ -76,7 +82,10 @@ for i, imt in enumerate(imts):
     paramtxt = paramtxt.replace('job_maps_PGA.ini', path.split(jobFile)[-1])
     
     # make job file
-    paramFile = sourcePath + sep + 'params_maps_' + imtstrp + '.txt'
+    if modelType == 0:
+        paramFile = sourcePath + sep + 'params_maps_' + imtstrp + '_himem.txt'
+    else:
+        paramFile = sourcePath + sep + 'params_maps_' + imtstrp + '.txt'
     
     # write file
     f = open(paramFile, 'wb')
