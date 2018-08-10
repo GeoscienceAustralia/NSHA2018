@@ -22,6 +22,7 @@ from numpy import arange, array, log10, mean, mgrid, ogrid, percentile, ma, isna
 from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2colormap # drawshapepoly, labelpolygon, 
 import shapefile
 from scipy.constants import g
+from misc_tools import remove_last_cmap_colour
 #from gmt_tools import cpt2colormap
 #from shapely.geometry import Point, Polygon
 
@@ -56,6 +57,9 @@ addContours = argv[3] # True or False
 # which probability - acceptable values are: 2 (2%), 9 (9.5%) or 10 (10%)
 pltProbability = argv[4]
 
+# plt GSHAP colours 
+pltGSHAP = argv[5]  # True or False
+
 ##############################################################################
 # parse hazard map file
 ##############################################################################
@@ -74,7 +78,7 @@ keys = line.strip().split(',')[2:]
 
 # make grid dictionary
 grddict = []
-gshap = False
+
 print '\nReading', modelName
 for line in lines[2:]:
     dat = line.strip().split(',')
@@ -91,9 +95,9 @@ for line in lines[2:]:
     # fill keys
     idx = 2
     for key in keys:
-        if gshap == True:
+        if pltGSHAP == 'True':
             # convert to m/s**2
-            tmpdict[key] = float(dat[idx]) / g
+            tmpdict[key] = float(dat[idx]) * g
         else:
             tmpdict[key] = float(dat[idx])
         idx += 1
@@ -320,13 +324,18 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
         try:
-            if gshap == True:
-                nascptfile = '/nas/gemd/ehp/georisk_earthquake/hazard/DATA/cpt/gshap.cpt'
+            if pltGSHAP == 'True':
+                nascptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/DATA/cpt/gshap_mpl.cpt'
+                ncolours = 10
+                cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=False)
+                cmap = remove_last_cmap_colour(cmap)
+                
             else:
                 nascptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+                cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
             
             #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
-            cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
+            
         except:
             try:
                 ncicptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
@@ -340,8 +349,14 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     cmap.set_bad('w', 1.0)
     
     if probability == '10%' or probability == '9.5%':
-        bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12])
-        ncolours = 10
+        if pltGSHAP == 'True':
+            bounds = array([0., 0.2, 0.4, 0.8, 1.6, 2.4, 3.2, 4.0, 4.8, 6.0])
+            ncolours = 9
+            #norm = colors.Normalize(vmin=0,vmax=10)
+        else:
+            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12])
+            ncolours = 10
+            norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     else:
         bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5])
         ncolours = 10
@@ -566,16 +581,22 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     #labels = [str('%0.3f' % 10**x) for x in logticks]
     
     cb.set_ticks(bounds)
-    labels = ['0'+str('%0.3f' % x).strip('0') for x in bounds]
+    if pltGSHAP == 'True':
+        labels = [str('%0.1f' % x) for x in bounds]
+    else:
+        labels = ['0'+str('%0.3f' % x).strip('0') for x in bounds]
     labels[0] = '0.0'
     
     cb.set_ticklabels(labels)
     
     # set title
-    if probability == '9.5%':
-        titlestr = ' '.join(('1 in 500-Year AEP Mean', T, 'Hazard (g)'))
+    if pltGSHAP == 'True':
+        titlestr = 'PGA 10% in 50-Year Mean Hazard (m/s^2)'
     else:
-        titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
+        if probability == '9.5%':
+            titlestr = ' '.join(('1 in 500-Year AEP Mean', T, 'Hazard (g)'))
+        else:
+            titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
     cb.set_label(titlestr, fontsize=12)
     
     '''
