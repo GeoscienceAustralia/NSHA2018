@@ -728,7 +728,44 @@ for i in srcidx:
         new_bval_u[i] = bval-bval_sig # upper curve, so lower b
         
         print 'Setting N0 based on area-normalised class rates:', src_code[i], src_cat[i]
-    
+        
+        ###############################################################################
+        # export rates file - too hard basket for now
+        ###############################################################################
+        '''
+        # check (again) to see if folder exists
+        srcfolder = path.join(outfolder, src_code[i])
+            
+        if path.isdir(srcfolder) == False:
+            mkdir(srcfolder)
+            
+        # get beta curve again at consistent mags
+        mpltmin_best = 2.0 + bin_width/2.
+        plt_width = 0.1
+        beta = bval2beta(bval)
+        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, N0areanorm, mpltmin_best, mrng[-1], plt_width)
+        
+        header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT,MFD_FIT_AREA_NORM'
+        
+        rate_txt = header + '\n'
+        for mr in range(0,len(mrng)):
+            for bm in range(0, len(mfd_mrng)):
+                if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
+                    beta_curve_val = betacurve[bm]
+            
+            # normalise rates by 10,000 km2
+            area_norm_beta_curve_val = 10000. * beta_curve_val / src_area[i]
+            line = ','.join((str(mrng[mr]), str(n_obs[mr]), str(cum_num[mr]), \
+                             str('%0.4e' % bin_rates[mr]), str('%0.4e' % cum_rates[mr]), \
+                             str('%0.4e' % beta_curve_val), str('%0.4e' % area_norm_beta_curve_val))) + '\n'
+            rate_txt += line
+                
+        # export to file
+        ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
+        f = open(ratefile, 'wb')
+        f.write(rate_txt)
+        f.close()
+        '''
     ###############################################################################
     # start making outputs
     ###############################################################################
@@ -1310,17 +1347,19 @@ for i in srcidx:
         plt_width = 0.1
         betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
         
-        header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT'
+        header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT,MFD_FIT_AREA_NORM'
         
         rate_txt = header + '\n'
         for mr in range(0,len(mrng)):
             for bm in range(0, len(mfd_mrng)):
                 if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
                     beta_curve_val = betacurve[bm]
-                    
+            
+            # normalise rates by 10,000 km2
+            area_norm_beta_curve_val = 10000. * beta_curve_val / src_area[i]
             line = ','.join((str(mrng[mr]), str(n_obs[mr]), str(cum_num[mr]), \
                              str('%0.4e' % bin_rates[mr]), str('%0.4e' % cum_rates[mr]), \
-                             str('%0.4e' % beta_curve_val))) + '\n'
+                             str('%0.4e' % beta_curve_val), str('%0.4e' % area_norm_beta_curve_val))) + '\n'
             rate_txt += line
                 
         # export to file
