@@ -23,7 +23,7 @@ fig_cw = 'p' + cw[0] + '.' + cw[-1]
 
 #########################################################
 # Seismic source model
-calib_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/'
+calib_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/'
 if cw == '0p0':
     # Equal weights
     ssc_weights = np.ones(num_ssc_experts)/num_ssc_experts
@@ -35,7 +35,7 @@ else:
 #print ssc_weights
 
 # Load in target responses for seismic source mode,l
-target_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
+target_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
 fig_path =join(target_path, 'seismic_source_results', 'Figures_%s') % fig_cw
 if not os.path.exists(fig_path):
     os.makedirs(fig_path)
@@ -370,7 +370,7 @@ bar_plot(ss_models, ss_w, ss_labels, 'smoothed_seismicity_weights.png', 'Smoothe
 
 # Background models
 bg_models = ['S4Q1', 'S4Q2', 'S4Q3', 'S4Q4', 'S4Q5']
-bg_labels = ['GA NSHA13', 'S&Mc', 'Leonard08', 'Arup', 'Neotectonic \nDomains']
+bg_labels = ['GA NSHM12', 'S&Mc', 'Leonard08', 'Arup', 'Neotectonic \nDomains']
 bg_w =  get_weights(bg_models, weighted_sum)
 bg_w = largest_remainder(bg_w, expected_sum = 1, precision = 3)
 print bg_w, sum(bg_w)
@@ -378,7 +378,7 @@ bar_plot(bg_models, bg_w, bg_labels, 'background_model_weights.png', 'Background
 
 # Regional models
 rg_models = ['S5Q1', 'S5Q2', 'S5Q3', 'S5Q4']
-rg_labels = ['GA NSHA13 \nno H/S', 'GA NSHA13 \nwith H/S', 'AUS6', 'DIM-AUS']
+rg_labels = ['GA NSHM12 \nno H/S', 'GA NSHM12 \nwith H/S', 'AUS6', 'DIM-AUS']
 rg_w =  get_weights(rg_models, weighted_sum)
 rg_w = largest_remainder(rg_w, expected_sum = 1, precision = 3)
 print rg_w, sum(rg_w)
@@ -431,7 +431,7 @@ bar_plot(b_qlist, b_w, b_labels, 'b_value_weights.png', 'b Value Weights')
 
 # Magnitude completeness
 mcomp_qlist = ['S9Q1', 'S9Q2', 'S9Q3', 'S9Q4']
-mcomp_labels = ['GA NSHA13', 'Cuthbertson', 'Dimas', 'Mote']
+mcomp_labels = ['GA NSHM12', 'Cuthbertson', 'Dimas', 'Mote']
 mcomp_w = get_weights(mcomp_qlist, weighted_sum)
 mcomp_w = largest_remainder(mcomp_w, expected_sum = 1, precision = 3)
 print mcomp_w, sum(mcomp_w)
@@ -441,12 +441,12 @@ bar_plot(mcomp_qlist, mcomp_w, mcomp_labels, \
 
 # Declustering
 ss_dec_qlist = ['S10Q1', 'S10Q2']
-ss_dec_labels = ['GA NSHA13', 'Full Catalogue']
+ss_dec_labels = ['GA NSHM12', 'Full Catalogue']
 ss_dec_w = get_weights(ss_dec_qlist, weighted_sum)
 ss_dec_w = largest_remainder(ss_dec_w, expected_sum = 1, precision = 3)
 print ss_dec_w, sum(ss_dec_w)
 dec_qlist = ['S10Q3', 'S10Q4']
-dec_labels = ['GA NSHA13', 'Full Catalogue']
+dec_labels = ['GA NSHM12', 'Full Catalogue']
 dec_w = get_weights(dec_qlist, weighted_sum)
 dec_w = largest_remainder(dec_w, expected_sum = 1, precision = 3)
 print dec_w, sum(dec_w)
@@ -482,7 +482,7 @@ f_out.close()
 ######################################################
 # Calculate and plot ground motion logic tree weights
 # Load data
-calib_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/GMPE/'
+calib_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/GMPE/'
 if cw == '0p0':
     # Equal weights
     gmm_weights = np.ones(num_gmm_experts)/num_gmm_experts
@@ -496,7 +496,7 @@ else:
 
 # Load in target responses for ground motion model
 print 'Loading ground motion model weight data'
-target_path = '/nas/gemd/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
+target_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
 #fig_path =join(target_path, 'ground_motion_results', 'Figures_p0.3')
 #gmm_weights
 gmm_responses = {}
@@ -944,11 +944,11 @@ banda_gmm_inslab_labels = ['Abrahamson\n2015SSlab', 'AtkBoore\n2003SSlab', 'Garc
 banda_gmm_inslab_labels_short = ['Abrah\n2015\nSSlab', 'AtkB\n2003\nSSlab', 'Garcia\n2005\nSSlab', 'MegP\n2010']
 banda_gmm_inslab_w = get_weights(banda_gmm_inslab_qlist, weighted_sum)#, percentile = percentile)
 # Remove Megawati-Pan GMM for now as not defined for periods > 0.5s, renormalise other values
-banda_gmm_inslab_w = np.delete(banda_gmm_inslab_w, 3)
-del banda_gmm_inslab_qlist[3]
-del banda_gmm_inslab_labels[3]
-del banda_gmm_inslab_labels_short[3]
-banda_gmm_inslab_w = banda_gmm_inslab_w/sum(banda_gmm_inslab_w)
+#banda_gmm_inslab_w = np.delete(banda_gmm_inslab_w, 3)
+#del banda_gmm_inslab_qlist[3]
+#del banda_gmm_inslab_labels[3]
+#del banda_gmm_inslab_labels_short[3]
+#banda_gmm_inslab_w = banda_gmm_inslab_w/sum(banda_gmm_inslab_w)
 banda_gmm_inslab_w = largest_remainder(banda_gmm_inslab_w, expected_sum = 1, precision = 3)
 print banda_gmm_inslab_w, sum(banda_gmm_inslab_w)
 banda_gmm_inslab_region_w = banda_gmm_inslab_w *banda_gmm_region_w[4]
