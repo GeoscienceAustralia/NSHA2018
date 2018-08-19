@@ -12,7 +12,7 @@
                     <uncertaintyWeight>0.5</uncertaintyWeight>
                 </logicTreeBranch>
                 
-                <logicTreeBranch branchID="b1">
+                <logicTreeBranch branchID="b2">
                     <uncertaintyModel>ARUP_Background_collapsed.xml</uncertaintyModel>
                     <uncertaintyWeight>0.5</uncertaintyWeight>
                 </logicTreeBranch>
