@@ -130,6 +130,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     period = period.replace(')','')
     period = period.replace('.','')
     
+    print period
+    
     # get map probability of exceedance
     probFraction = str(float(key.split('-')[-1]))
     probability = str(100*float(key.split('-')[-1])).split('.')[0]+'%'
@@ -281,43 +283,50 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     if period == 'PGA':
         
         if probability == '10%' or probability == '9.5%': # kluge to get on same scale
-            ncolours = 13
-            vmin = -2.
-            vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
+            ncolours = 12
+            #vmin = -2.
+            #vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
             
         elif probability == '2%':
             ncolours = 12
-            vmin = -1.5
-            vmax = vmin + 0.25 * ncolours/2.
+            #vmin = -1.5
+            #vmax = vmin + 0.25 * ncolours/2.
         T = 'PGA'
+    
+    elif period == 'SA005':
+        
+        if probability == '10%' or probability == '9.5%': # kluge to get on same scale
+            ncolours = 12
+            
+        elif probability == '2%':
+            ncolours = 10
+        T = 'Sa(0.05)'
+        
+    elif period == 'SA01':
+        
+        if probability == '10%' or probability == '9.5%': # kluge to get on same scale
+            ncolours = 12
+            
+        elif probability == '2%':
+            ncolours = 10
+        T = 'Sa(0.1)'
         
     elif period == 'SA02':
-        ncolours = 12
-        ncolours = 13
         if probability == '10%' or probability == '9.5%':
-            vmin = -2
-            vmax = 0.
-            vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
-        
+            ncolours = 13
+            
         elif probability == '2%':
             ncolours = 12
-            vmin = -1.5
-            vmax = vmin + 0.25 * ncolours/2.
             
         T = 'Sa(0.2)'
         
     elif period == 'SA10':
-        ncolours = 16 
-        ncolours = 13
         if probability == '10%' or probability == '9.5%':
-            vmin = -2
-            vmax = vmin + 0.25 * ncolours/2.
-            vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
+            ncolours = 13
         
         elif probability == '2%':
             ncolours = 14
-            vmin = -2
-            vmax = vmin + 0.25 * ncolours/2.
+            
         T = 'Sa(1.0)'
     
     try:
@@ -351,15 +360,15 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     if probability == '10%' or probability == '9.5%':
         if pltGSHAP == 'True':
             bounds = array([0., 0.2, 0.4, 0.8, 1.6, 2.4, 3.2, 4.0, 4.8, 6.0])
-            ncolours = 9
+            #ncolours = 9
             #norm = colors.Normalize(vmin=0,vmax=10)
         else:
-            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12])
-            ncolours = 10
+            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
+            ncolours = 11
             norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     else:
-        bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5])
-        ncolours = 10
+        bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7, 1.0])
+        #ncolours = 12
     norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     
     #m.imshow(masked_array, cmap=cmap, extent=extent, vmin=vmin, vmax=vmax, zorder=0)
@@ -586,6 +595,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     else:
         labels = ['0'+str('%0.3f' % x).strip('0') for x in bounds]
     labels[0] = '0.0'
+    if labels[-1] == '01.':
+        labels[-1] = '1.0'
     
     cb.set_ticklabels(labels)
     
