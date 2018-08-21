@@ -283,12 +283,12 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     if period == 'PGA':
         
         if probability == '10%' or probability == '9.5%': # kluge to get on same scale
-            ncolours = 12
+            ncolours = 13
             #vmin = -2.
             #vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
             
         elif probability == '2%':
-            ncolours = 12
+            ncolours = 13
             #vmin = -1.5
             #vmax = vmin + 0.25 * ncolours/2.
         T = 'PGA'
@@ -296,7 +296,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     elif period == 'SA005':
         
         if probability == '10%' or probability == '9.5%': # kluge to get on same scale
-            ncolours = 12
+            ncolours = 13
             
         elif probability == '2%':
             ncolours = 10
@@ -329,29 +329,35 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             
         T = 'Sa(1.0)'
     
+    ncolours = 13
     try:
         cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
     except:
         try:
             if pltGSHAP == 'True':
                 nascptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/DATA/cpt/gshap_mpl.cpt'
+                capfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/shared/capitals_names.csv'
                 ncolours = 10
                 cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=False)
                 cmap = remove_last_cmap_colour(cmap)
                 
             else:
                 nascptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/'+ cptfile
+                capfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/shared/capitals_names.csv'
                 cmap, zvals = cpt2colormap(nascptfile, ncolours, rev=True)
+                #cmap = remove_last_cmap_colour(cmap)
             
             #cptfile = '/nas/gemd/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/GMT_no_green.cpt'
             
         except:
             try:
                 ncicptfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/maps/'+ cptfile
+                capfile = '/short/w84/NSHA18/sandpit/tia547/NSHA2018/shared/capitals_names.csv'
                 cmap, zvals = cpt2colormap(ncicptfile, ncolours, rev=True)
 
             except:
                 ncicptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/'+ cptfile
+                capfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/shared/capitals_names.csv'
                 cmap, zvals = cpt2colormap(ncicptfile, ncolours, rev=True)
     
     print 'Making map...'    
@@ -363,11 +369,14 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             #ncolours = 9
             #norm = colors.Normalize(vmin=0,vmax=10)
         else:
-            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
-            ncolours = 11
+            if period == 'PGA' or period == 'SA01' or period == 'SA02' or period == 'SA05':
+                bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
+            else:
+                bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
+            ncolours = 12
             norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     else:
-        bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7, 1.0])
+        bounds = array([0, 0.02, 0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7])
         #ncolours = 12
     norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     
@@ -380,22 +389,19 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     if addContours == 'True':
         x, y = m(xs, ys)
         if probability == '10%':
+            '''
             levels = arange(0.02, 0.3, 0.02)
             levels = arange(0.05, 0.3, 0.05)
             levels = array([0.01, 0.02, 0.04, 0.06, 0.08001, 0.12, 0.16, 0.18, 0.24])
-            levels_lo = array([0.005])
+            '''
+            levels_lo = bounds[1:4]
+            levels = bounds[4:]
         elif probability == '2%':
-            levels = arange(0.05, 0.31, 0.05)
+            #levels = arange(0.05, 0.31, 0.05)
+            levels = bounds[1:]
         
-        if cwd.startswith('/nas'):
-            #csm = plt.contour(x, y, 10**resampled.T, levels, colors='k')
-            #csm_lo = plt.contour(x, y, 10**resampled.T, levels_lo, colors='k')
-            csm = plt.contour(x, y, 10**resampled, levels, colors='k')
-            csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
-            
-        else:
-            csm = plt.contour(x, y, 10**resampled, levels, colors='k')    
-            csm_lo = plt.contour(x, y, 10**resampled, levels_lo, colors='k')
+        csm = plt.contour(x, y, resampled, levels, colors='0.2', lw=0.3)    
+        csm_lo = plt.contour(x, y, resampled, levels_lo, colors='0.2', lw=0.3)
         
         plt.clabel(csm, inline=1, fontsize=10, fmt='%0.2f')
         plt.clabel(csm_lo, inline=1, fontsize=10, fmt='%0.3f')
@@ -433,13 +439,15 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         titlestr = ' '.join((modelName, '1 in 500-Year AEP Mean', T, 'Hazard on AS1170.4 Site Class '))
     else:
         titlestr = ' '.join((modelName, T, probability, 'in 50-Year Mean Hazard on AS1170.4 Site Class '))    
-    plt.title(titlestr+'$\mathregular{B_e}$')
+    
+    # comment out for final GA Record
+    #plt.title(titlestr+'$\mathregular{B_e}$')
     
     # get map bbox
     if i == 0:
         map_bbox = ax.get_position().extents
     
-     ##########################################################################################
+    ##########################################################################################
     # add DRAFT text!
     ##########################################################################################
     '''
@@ -452,7 +460,50 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     drafttext.set_path_effects([path_effects.Stroke(linewidth=4, foreground='maroon'),
                        path_effects.Normal()])
     drafttext.set_alpha(0.5)
-    '''    
+    ''' 
+    
+    '''
+    ###########################################################################################
+    annotate cities
+    ###########################################################################################
+    '''
+    
+    import matplotlib.patheffects as PathEffects
+    pe = [PathEffects.withStroke(linewidth=2.5, foreground="w")]
+              
+    llat = []
+    llon = []
+    locs = []
+    textoffset = []
+    
+    # read data
+    lines = open(capfile).readlines()
+    for line in lines:
+        llon.append(float(line.strip().split(',')[0]))
+        llat.append(float(line.strip().split(',')[1]))
+        locs.append(line.strip().split(',')[2])
+        textoffset.append(float(line.strip().split(',')[3]))
+    
+    # plot locs on map
+    x, y = m(array(llon), array(llat))
+    plt.plot(x, y, 's', markerfacecolor='None', markeredgecolor='k', markeredgewidth=0.5, markersize=8)
+    
+    # label cities
+    for i, loc in enumerate(locs):
+        if textoffset[i] == 0.:
+            x, y = m(llon[i]-0.35, llat[i]+0.12)
+            plt.text(x, y, loc, size=15, ha='right', va='bottom', weight='light')
+        elif textoffset[i] == 1.:
+            x, y = m(llon[i]+0.35, llat[i]+0.12)
+            #plt.text(x, y, loc, size=15, ha='left', va='bottom', weight='light', path_effects=pe)
+            plt.text(x, y, loc, size=15, ha='left', va='bottom', weight='light')
+        elif textoffset[i] == 2.:
+            x, y = m(llon[i]+0.3, llat[i]-0.3)
+            plt.text(x, y, loc, size=15, ha='left', va='top', weight='light')
+        elif textoffset[i] == 3.:
+            x, y = m(llon[i]-0.3, llat[i]-0.2)
+            plt.text(x, y, loc, size=15, ha='right', va='top', weight='light')
+    
     ##########################################################################################
     # add GA logo
     ##########################################################################################
@@ -490,13 +541,15 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             # covering all bases again
             try:
                 im = plt.imread('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/ccby_narrow.png')
+                
             except:
                 try:
                     im = plt.imread('/short/w84/NSHA18/sandpit/tia547/NSHA2018/postprocessing/ccby_narrow.png')
+                    
                 except:
                     im = plt.imread('/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/ccby_narrow.png')
+                    
     
-        
         # set bbox for logo
         imoff = 0.02
         logo_bbox = [map_bbox[0]+0.11,map_bbox[1]-0.005,0.2,0.2]
@@ -519,58 +572,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             drawshapepoly(m, plt, sf, col='k', lw=1.5, polyline=True)
             labelpolygon(m, plt, sf, 'CODE', fsize=14)    
     '''
-    '''
-    ###########################################################################################
-    annotate cities
-    ###########################################################################################
-    '''
-    """
-    import matplotlib.patheffects as PathEffects
-    pe = [PathEffects.withStroke(linewidth=2.5, foreground="w")]
-    
-    # set cities
-    locs = ['Yellowknife', 'Inuvik', 'Whitehorse', 'Sandspit', 'Victoria', \
-            'Vancouver', 'Kamloops', 'Cranbrook', 'Calgary', 'Edmonton', 'Regina', \
-            'Winnipeg', 'Thunder Bay', 'Windsor', 'Sudbury', 'Toronto', 'Ottawa', \
-            'Montreal', 'Quebec City', 'Riviere-du-Loup', 'Fredericton', 'Charlottetown', \
-            'Halifax', "St. John's", 'Iqaluit']
-            
-    locidx = [621, 616, 606, 62, 88, 82, 30, 15, 96, 106, 167, 199, 393, 416, 387, \
-              646, 338, 678, 497, 502, 543, 578, 561, 595, 632]
-              
-    tbflag = [1, 1, 1, 1, -2, 0, -3, 0, 1, 1, 1, 1, -2, -3, 1, 0, -2, 0, -3, -3, 0, 1, 1, -3, 1]
-              
-    pfile = 'MMI8.0_50-yr.locs.csv'
-    
-    llat = []
-    llon = []
-    
-    # read data
-    lines = open(pfile).readlines()[1:]
-    for idx in locidx:
-        llon.append(float(lines[idx].strip().split(',')[1]))
-        llat.append(float(lines[idx].strip().split(',')[2]))
-    
-    # plot locs on map
-    x, y = m(llon, llat)
-    plt.plot(x, y, 'o', markerfacecolor='maroon', markeredgecolor='w', markeredgewidth=2., markersize=10)
-    
-    # label cities
-    for i, loc in enumerate(locs):
-        if tbflag[i] == 1:
-            x, y = m(llon[i]+0.3, llat[i]+0.3)
-            plt.text(x, y, loc, size=15, ha='left', va='bottom', weight='normal', path_effects=pe)
-        elif tbflag[i] == 0 or tbflag[i] == -1:
-            x, y = m(llon[i]+0.3, llat[i]-0.35)
-            plt.text(x, y, loc, size=15, ha='left', va='top', weight='normal', path_effects=pe)
-        elif tbflag[i] == -2:
-            x, y = m(llon[i]-0.3, llat[i]-0.35)
-            plt.text(x, y, loc, size=15, ha='right', va='top', weight='normal', path_effects=pe)
-        elif tbflag[i] == -3:
-            x, y = m(llon[i]-0.35, llat[i]+0.3)
-            plt.text(x, y, loc, size=15, ha='right', va='bottom', weight='normal', path_effects=pe)
-    """
-    
+   
     '''
     ###########################################################################################
     make colourbar
