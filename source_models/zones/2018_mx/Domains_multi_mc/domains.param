@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mx//Domains_multi_mc
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_mx_orig_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//Domains//Domains_NSHA18_multi_Mc_MX.shp
+ORIGINAL SHAPES  = shapefiles//Domains//Domains_Sep2011_edit.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = Domains_NSHA18_MFD_MX.shp
+MFD BIN WIDTH    = 0.1

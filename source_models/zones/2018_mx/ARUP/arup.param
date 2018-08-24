@@ -1,7 +1,7 @@
 ROOT FOLDER      = 2018_mx//ARUP
 CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_mx_orig_declustered.csv
 DECLUSTERED      = True
-SHAPEFILE INPUT  = shapefiles//ARUP//ARUP_NSHA18.shp
+SHAPEFILE INPUT  = shapefiles//ARUP//ARUP_NSHA18_MX.shp
 ORIGINAL SHAPES  = shapefiles//ARUP//ARUP_NSHA18_FIXEDSHAPES.shp
 OUTPUT FOLDER    = mfd
 SHAPEFILE OUTPUT = ARUP_NSHA18_MFD_MX.shp

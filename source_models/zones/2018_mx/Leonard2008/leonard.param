@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mx//Leonard2008
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_mx_orig_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//Leonard2008//Leonard2008_NSHA18_MX.shp
+ORIGINAL SHAPES  = shapefiles//Leonard2008//LEONARD08_NSHA18_ALT_MC.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = Leonard2008_NSHA18_MFD_MX.shp
+MFD BIN WIDTH    = 0.1

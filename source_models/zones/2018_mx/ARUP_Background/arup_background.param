@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mx//ARUP_Background
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_mx_orig_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//ARUP_Background//ARUP_Background_NSHA18_MX.shp
+ORIGINAL SHAPES  = shapefiles//ARUP_Background//ARUP_Background_NSHA18_Submitted.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = ARUP_Background_NSHA18_MFD_MX.shp
+MFD BIN WIDTH    = 0.1

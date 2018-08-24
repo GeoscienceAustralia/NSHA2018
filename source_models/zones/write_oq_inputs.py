@@ -151,7 +151,10 @@ elif outputType == '1':
     else:
         splitpath.append('collapsed')
         # get output filename
-        xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.xml'
+        if shpfile.endswith('MX.shp'):
+            xmlfile = path.split(shpfile)[-1].strip('shp')[:-14] + 'collapsed_mx.xml'
+        else:
+            xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.xml'
     
     modPath = sep.join(splitpath)
     
