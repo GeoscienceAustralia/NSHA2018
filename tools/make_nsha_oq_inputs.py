@@ -658,23 +658,23 @@ def make_logic_tree(srcxmls, branch_wts, meta):
 ###############################################################################
 # set code prefix to ensure unique ids and optimise jobs
 def get_code_prefix(modelshp):
-    if modelshp.endswith('ARUP_NSHA18_MFD.shp'):
+    if modelshp.endswith('ARUP_NSHA18_MFD.shp') or modelshp.endswith('ARUP_NSHA18_MFD_MX.shp'):
         code_prefix = 'ARUP'
-    elif modelshp.endswith('ARUP_Background_NSHA18_MFD.shp'):
+    elif modelshp.endswith('ARUP_Background_NSHA18_MFD.shp') or modelshp.endswith('ARUP_Background_NSHA18_MFD_MX.shp'):
         code_prefix = 'ARUPB'
-    elif modelshp.endswith('AUS6_NSHA18_MFD.shp'):
+    elif modelshp.endswith('AUS6_NSHA18_MFD.shp') or modelshp.endswith('AUS6_NSHA18_MFD_MX.shp'):
         code_prefix = 'AUS6'
-    elif modelshp.endswith('DIMAUS_NSHA18_MFD.shp'):
+    elif modelshp.endswith('DIMAUS_NSHA18_MFD.shp') or modelshp.endswith('DIMAUS_NSHA18_MFD_MX.shp'):
         code_prefix = 'DIM'
-    elif modelshp.endswith('Domains_NSHA18_MFD.shp'):
+    elif modelshp.endswith('Domains_NSHA18_MFD.shp') or modelshp.endswith('Domains_NSHA18_MFD_MX.shp'):
         code_prefix = 'DOM'
-    elif modelshp.endswith('Leonard2008_NSHA18_MFD.shp'):
+    elif modelshp.endswith('Leonard2008_NSHA18_MFD.shp') or modelshp.endswith('Leonard2008_NSHA18_MFD_MX.shp'):
         code_prefix = 'L08'
-    elif modelshp.endswith('NSHA13_NSHA18_MFD.shp'):
+    elif modelshp.endswith('NSHA13_NSHA18_MFD.shp') or modelshp.endswith('NSHA13_NSHA18_MFD_MX.shp'):
         code_prefix = 'NSHM'
-    elif modelshp.endswith('NSHA13_BACKGROUND_NSHA18_MFD.shp'):
+    elif modelshp.endswith('NSHA13_BACKGROUND_NSHA18_MFD.shp') or modelshp.endswith('NSHA13_BACKGROUND_NSHA18_MFD_MX.shp'):
         code_prefix = 'NSHMB'
-    elif modelshp.endswith('SIN_MCC_NSHA18_MFD.shp'):
+    elif modelshp.endswith('SIN_MCC_NSHA18_MFD.shp') or modelshp.endswith('SIN_MCC_NSHA18_MFD_MX.shp'):
         code_prefix = 'SM'
     else:
         code_prefix = ''

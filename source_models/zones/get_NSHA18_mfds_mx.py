@@ -143,10 +143,8 @@ for i in range(0, len(src_mcomp)):
     if float(src_class[i]) <= 8.:
         tmpmcomp = [float(x) for x in src_mcomp[i].strip().split(';')]
         for j in range(0, len(tmpmcomp)):
-            print tmpmcomp[j], '1'
             tmpmcomp[j] = nsha18_bilin_mw2ml(tmpmcomp[j])
-            print tmpmcomp[j], '2'
-        tmpmcompstr = (str(x) for x in tmpmcomp)
+        tmpmcompstr = [str('%0.2f' % x) for x in tmpmcomp]
         
         src_mcomp[i] = ';'.join(tmpmcompstr)
 
@@ -198,6 +196,10 @@ else:
 hmtk_csv = path.join('..','..','catalogue','data','NSHA18CAT_V0.1_hmtk_mx_orig_declustered.csv')
 nshaCat, full_neq = parse_hmtk_cat(hmtk_csv)
 nshaMaxYear = toYearFraction(nshaCat[-1]['datetime'])
+
+# reassert MX to prefmag
+for i in range(0, len(nshaCat)):
+    nshaCat[i]['prefmag'] = nshaCat[i]['mx_origML']
 
 # parse ISC-GEM catalogue
 hmtk_csv = path.join('..','..','catalogue','data','ISC-GEM_V5_hmtk_GK74_declustered_clip.csv')

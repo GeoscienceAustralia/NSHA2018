@@ -113,7 +113,7 @@ def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
     
     
 # get neotectonic domain number and Mmax from zone centroid
-def get_neotectonic_domain_params(target_sf, target_trt):
+def get_neotectonic_domain_params(target_sf, target_trt, refShpFile):
     import shapefile
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
@@ -122,7 +122,7 @@ def get_neotectonic_domain_params(target_sf, target_trt):
     polygons = target_sf.shapes()
     
     # load domains shp
-    domshp = open('..//reference_shp.txt').read()
+    domshp = open(refShpFile).read()
     dsf = shapefile.Reader(domshp)
     
     # get domains

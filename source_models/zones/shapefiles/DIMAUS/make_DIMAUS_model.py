@@ -88,7 +88,9 @@ for i in range(0,len(trt)):
 ###############################################################################
 
 # set domestic domain numbers based on neotectonic domains
-neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new)
+refshpfile = '..//reference_shp.txt'
+#refshpfile = '..//reference_shp_mx.txt' # for testing only!
+neo_domains, neo_min_rmag, neo_mmax, neo_trt, neo_bval_fix, neo_bval_sig_fix = get_neotectonic_domain_params(sf, trt_new, refshpfile)
 
 # set b-values and sigmas
 bval_fix = neo_bval_fix
@@ -298,6 +300,7 @@ rte_adj_fact = get_rate_adjust_factor(domshp, newField, origshp, origField)
 ###############################################################################
 
 outshp = 'DIMAUS_NSHA18.shp'
+#outshp = 'DIMAUS_NSHA18_MX.shp'
 
 build_source_shape(outshp, shapes, src_names, src_codes, zone_class, \
                    rte_adj_fact, dep_b, dep_u, dep_l, usd, lsd, \

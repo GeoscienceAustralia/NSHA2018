@@ -70,7 +70,7 @@ def return_annualised_haz_curves(hazcurvefile):
             dat = line.split(',')
             tmpdict = {'lon': float(dat[0]), 'lat': float(dat[1]), 'depth': float(dat[2])}
             
-            dat = dat[2:]
+            dat = dat[3:]
             # loop through imts
             for ut in uimts:
                 idx = where(imts == ut)[0]
@@ -83,6 +83,7 @@ def return_annualised_haz_curves(hazcurvefile):
                 annual_probs = n / investigation_time
                 
                 tmpdict[ut+'_probs'] = annual_probs
+                tmpdict[ut+'_probs_invtime'] = hazcurve
                 
             siteDict.append(tmpdict)
         
