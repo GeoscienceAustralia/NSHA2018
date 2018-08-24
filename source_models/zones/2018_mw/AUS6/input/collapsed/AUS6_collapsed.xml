@@ -11040,7 +11040,7 @@
                 </gml:posList>
               </gml:LineString>
             </intermediateEdge>
-    
+
             <faultBottomEdge>
               <gml:LineString>
                 <gml:posList>
