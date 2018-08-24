@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+
+    <logicTree logicTreeID="lt1">
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+            <logicTreeBranchSet uncertaintyType="sourceModel"
+                                branchSetID="bs1">
+
+                <logicTreeBranch branchID="b9">
+                    <uncertaintyModel>AUS6_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.204</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b10">
+                    <uncertaintyModel>NSHA13_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.283</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b11">
+                    <uncertaintyModel>DIMAUS_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.21</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b15">
+                    <uncertaintyModel>Leonard2008_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.053</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b16">
+                    <uncertaintyModel>Domains_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.092</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b17">
+                    <uncertaintyModel>SIN_MCC_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.019</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b18">
+                    <uncertaintyModel>ARUP_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.052</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b19">
+                    <uncertaintyModel>ARUP_Background_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.051</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b20">
+                    <uncertaintyModel>NSHA13_BACKGROUND_collapsed_mx.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.036</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+    </logicTree>
+</nrml>
