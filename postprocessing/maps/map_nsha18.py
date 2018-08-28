@@ -152,7 +152,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     maxlon = float(bbox[1])
     minlat = float(bbox[2])
     maxlat = float(bbox[3])
-    mbuff = 1.
+    mbuff_l = 1.
+    mbuff_r = 3.5
     
     '''
     # get shpfile for masking hazard values
@@ -250,7 +251,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     # first make regular cartesian grid
     print 'Resampling data...'
     N = 500j
-    extent = (minlon-mbuff, maxlon+mbuff, minlat-mbuff, maxlat+mbuff)
+    extent = (minlon-mbuff_l, maxlon+mbuff_r, minlat-mbuff_r, maxlat+0)
     xs,ys = mgrid[extent[0]:extent[1]:N, extent[2]:extent[3]:N]
     	
     #resampled = griddata(lonlist, latlist, log10(hazvals), xs, ys, interp='linear')
@@ -637,22 +638,18 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     ##########################################################################################
     # make shapefile of contour lines
     ##########################################################################################
-    """
+    
     # check to see if shapefile contours exists
     if path.isdir('contours') == False:
         mkdir('contours')
         
-    # make list of levels
-    allLevels = [array([0.005, 0.01, 0.02, 0.04, 0.06, 0.08, 0.12, 0.18, 0.24]),
+    # make list of levels - old levels array([0.005, 0.01, 0.02, 0.04, 0.06, 0.08, 0.12, 0.18, 0.24])
+    allLevels = [bounds,
                  array([0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.25, 0.30]),
                  array([0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10]),
                  array([0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.15]),
                  array([0.003, 0.004, 0.006, 0.008, 0.01, 0.012, 0.015, 0.02])]
-    '''
-                 arange(0.01, 0.2, 0.01),
-                 arange(0.02, 0.3, 0.02), 
-                 arange(0.05, 0.6, 0.05)]
-    '''
+ 
     levelNames = ['lev_nat', 'lev_swsz','lev_ntsa', 'lev_nswtas', 'lev_qld'] #, 'lev_0_01', 'lev_0_02', 'lev_0_05']                 
     
     # loop thru levels
@@ -667,12 +664,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         w.field('LEVELS','F', 5, 2)
             
         # have to re-contour using un-transformed lat/lons
-        # differences in the way different machines deal with grids - weird!
-        if cwd.startswith('/nas'):
-            cs = plt.contour(xs, ys, 10**resampled.T, levels, colors='k')
-        else:
-            cs = plt.contour(xs, ys, 10**resampled, levels, colors='k')
-    
+        cs = plt.contour(xs, ys, resampled, levels, colors='k')
+        
         plt.close(figure)
         
         # loop through contour levels
@@ -681,8 +674,6 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             
             # now loop through multiple paths within level
             for cnt in contours:
-                #lons = cnt.vertices[:,0]
-                #lats = cnt.vertices[:,0]
                 
                 # add polyline to shapefile
                 w.line(parts=[cnt.vertices], shapeType=shapefile.POLYLINE)
@@ -698,7 +689,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         f = open(prjfile, 'wb')
         f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
         f.close()
-        """
+        
 
     
 

@@ -1,8 +1,9 @@
 import matplotlib.pyplot as plt
-from numpy import arange, array, interp
+from numpy import arange, array, interp, argsort
 from os import path, getcwd, sep
 from sys import argv
 import matplotlib as mpl
+from misc_tools import dictlist2array
 mpl.style.use('classic')
 
 fracFolder = argv[1] # folder where fractile files sit
@@ -70,7 +71,9 @@ for j in range(0, len(fracDict)):
 cwd = getcwd()
 if cwd.startswith('/Users'): #mac
     citycsv = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/shared/nsha_cities.csv'
-    lines = open(citycsv).readlines()
+else:
+    citycsv = '../../shared/nsha_cities.csv'
+lines = open(citycsv).readlines()
     
 # make city dict
 cityDict = []
@@ -89,12 +92,47 @@ for j in range(0, len(fracDict)):
            fracDict[j]['place'] = city['city']
            
 ###################################################################################
+# export csvs
+###################################################################################
+fracPath = path.join('final', 'fractile_tables')
+
+# get alphabetical order
+placesOrd = dictlist2array(fracDict,'place')
+sortidx = argsort(placesOrd)
+header = 'PLACE,LONGITUDE,LATITUDE,MEAN,16TH PERCENTILE,50TH PERCENTILE,84TH PERCENTILE,MEAN PERCENTILE\n'
+
+for key in keys:
+    csvfile = 'fractile_table_' + key + '.csv'
+    fracFilePath = path.join(fracPath, csvfile)
+    
+    pctltxt = header
+    
+    for idx in sortidx:
+        # get fractile at mean
+        if not fracDict[idx]['place'].endswith('max'):
+            meanfrac = interp(fracDict[idx]['mean_'+key], fracDict[idx]['quant_'+key], fractiles)
+            
+            pctltxt = pctltxt+','.join((fracDict[idx]['place'], \
+                                str('%0.2f' % fracDict[idx]['lon']), \
+                                str('%0.2f' % fracDict[idx]['lat']), \
+                                str('%0.3f' % fracDict[idx]['mean_'+key]), \
+                                str('%0.3f' % fracDict[idx]['quant_'+key][16]), \
+                                str('%0.3f' % fracDict[idx]['quant_'+key][50]), \
+                                str('%0.3f' % fracDict[idx]['quant_'+key][84]), \
+                                str(int(round(100*meanfrac))))) + '\n'
+        
+    # write to file
+    f = open(fracFilePath, 'wb')
+    f.write(pctltxt)
+    f.close()
+
+###################################################################################
 # let's make the plots
 ###################################################################################
 if altPlaces == False:
     places = ['Perth', 'Darwin', 'Adelaide', 'Melbourne', 'Hobart', 'Canberra', 'Sydney', 'Brisbane']
 else:
-    places = ['Wongan Hills', 'Kalgoorlie', 'Port Pirie', 'Yulara', 'Tennant Creek', 'Cooma', 'Leongatha', 'Morwell']
+    places = ['Wongan Hills', 'Kalgoorlie', 'Port Pirie', 'Yulara', 'Tennant Creek', 'Cooma', 'Albury', 'Morwell']
 
 
 # loop through keys
@@ -140,7 +178,10 @@ for k, key in enumerate(keys[:3]):
                 plt.semilogx([frac['quant_'+key][95],frac['quant_'+key][95]], [0,1], '--', c='r', lw=1.5, label='95th Percentile')
                 
                 if i == 0:
-                    plt.legend(loc=2, fontsize=11)
+                    if altPlaces == False:
+                        plt.legend(loc=4, fontsize=13)
+                    else:
+                        plt.legend(loc=2, fontsize=13)
                 
     #plt.suptitle(fracFolder.split(sep)[1] + ' ' + key, fontsize=20)
     
