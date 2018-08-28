@@ -2,6 +2,11 @@ import matplotlib.pyplot as plt
 from numpy import arange, array, interp
 from os import path, getcwd, sep
 from sys import argv
+import matplotlib as mpl
+
+mpl.style.use('classic')
+mpl.rcParams['pdf.fonttype'] = 42
+
 
 fracFolder = argv[1] # folder where fractile files sit
 
@@ -25,7 +30,10 @@ meanLines = open(meanFile).readlines()[2:]
 # loop thru fractiles and fill city Dict
 fracDict = []
 for i, fractile in enumerate(fractiles):
-    fracFile = path.join(fracFolder, 'quantile_map-'+str(fractile)+'_1.csv' )
+    fracStr = str('%0.2f' % fractile)
+    if fracStr.endswith('0'):
+        fracStr = fracStr[0:-1]
+    fracFile = path.join(fracFolder, 'quantile_map-'+fracStr+'_1.csv' )
     
     # parse file
     lines = open(fracFile).readlines()[2:]

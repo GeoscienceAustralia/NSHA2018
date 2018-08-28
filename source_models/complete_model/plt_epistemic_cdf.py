@@ -22,6 +22,9 @@ lines = open(fracFile).readlines()
 # get keys from medianfile
 keys = lines[1].strip().split(',')[2:]
 	
+pltlett = ['(a)', '(b)', '(c)', '(d)', '(e)', '(f)', '(g)', '(h)']
+
+	
 # load mean lines to add
 meanFile = path.join(fracFolder, 'hazard_map-mean_1.csv' )
 meanLines = open(meanFile).readlines()[2:]
@@ -134,9 +137,9 @@ if altPlaces == False:
 else:
     places = ['Wongan Hills', 'Kalgoorlie', 'Port Pirie', 'Yulara', 'Tennant Creek', 'Cooma', 'Albury', 'Morwell']
 
-
 # loop through keys
-
+xtxt = 0.28
+ytxt = 0.97
 # just do PGA
 for k, key in enumerate(keys[:3]):
     # set up figure
@@ -154,7 +157,7 @@ for k, key in enumerate(keys[:3]):
                 
                 
                 # make pretty
-                plt.title(place)
+                plt.title(place, fontsize=18)
                 if i == 0 or i == 2 or i == 4 or i == 6:
                     plt.ylabel('Fractile', fontsize=16)
                 
@@ -178,10 +181,9 @@ for k, key in enumerate(keys[:3]):
                 plt.semilogx([frac['quant_'+key][95],frac['quant_'+key][95]], [0,1], '--', c='r', lw=1.5, label='95th Percentile')
                 
                 if i == 0:
-                    if altPlaces == False:
-                        plt.legend(loc=4, fontsize=13)
-                    else:
-                        plt.legend(loc=2, fontsize=13)
+                    plt.legend(loc=2, fontsize=13)
+                    
+                plt.text(xtxt, ytxt, pltlett[i], fontsize=18, va='top', ha='right')
                 
     #plt.suptitle(fracFolder.split(sep)[1] + ' ' + key, fontsize=20)
     
