@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+
+    <logicTree logicTreeID="lt1">
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+            <logicTreeBranchSet uncertaintyType="sourceModel"
+                                branchSetID="bs1">
+
+                <logicTreeBranch branchID="b5">
+                    <uncertaintyModel>GA_NFSM_fixed_smoothing_50_3_collapsed_single_corner_completeness_banda_nfsm.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.155</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b6">
+                    <uncertaintyModel>GA_NFSM_adaptive_smoothing_collapsed_K3_single_corner_completeness_banda_nfsm.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.427</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b7">
+                    <uncertaintyModel>Hall2007_2018_banda_nfsm.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.224</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b8">
+                    <uncertaintyModel>cuthbertson2018_source_model_banda_nfsm.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.194</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+    </logicTree>
+</nrml>

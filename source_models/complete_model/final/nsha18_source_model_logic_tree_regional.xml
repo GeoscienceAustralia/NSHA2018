@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+
+    <logicTree logicTreeID="lt1">
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+            <logicTreeBranchSet uncertaintyType="sourceModel"
+                                branchSetID="bs1">
+
+                <logicTreeBranch branchID="b9">
+                    <uncertaintyModel>AUS6_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.293</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b10">
+                    <uncertaintyModel>NSHA13_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.406</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="b11">
+                    <uncertaintyModel>DIMAUS_collapsed.xml</uncertaintyModel>
+                    <uncertaintyWeight>0.301</uncertaintyWeight>
+                </logicTreeBranch>
+
+            </logicTreeBranchSet>
+        </logicTreeBranchingLevel>
+    </logicTree>
+</nrml>
