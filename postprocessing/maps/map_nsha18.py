@@ -281,54 +281,19 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     
     #cmap = cm.rainbow
     #print period
-    if period == 'PGA':
+    # get T from period
+    if period.startswith('SA0'):
+        T = 'Sa(0.'+period[3:]+')'
+    else:
+        T = 'Sa('+period[2]+'.'+period[3:]+')' 
         
-        if probability == '10%' or probability == '9.5%': # kluge to get on same scale
-            ncolours = 13
-            #vmin = -2.
-            #vmax = -0.25 - 0.125 # so there is an odd number for which to split the cpt
-            
-        elif probability == '2%':
-            ncolours = 13
-            #vmin = -1.5
-            #vmax = vmin + 0.25 * ncolours/2.
-        T = 'PGA'
+    print period, T
     
-    elif period == 'SA005':
+    if probability == '10%' or probability == '9.5%': # kluge to get on same scale
+        ncolours = 13
         
-        if probability == '10%' or probability == '9.5%': # kluge to get on same scale
-            ncolours = 13
-            
-        elif probability == '2%':
-            ncolours = 10
-        T = 'Sa(0.05)'
-        
-    elif period == 'SA01':
-        
-        if probability == '10%' or probability == '9.5%': # kluge to get on same scale
-            ncolours = 12
-            
-        elif probability == '2%':
-            ncolours = 10
-        T = 'Sa(0.1)'
-        
-    elif period == 'SA02':
-        if probability == '10%' or probability == '9.5%':
-            ncolours = 13
-            
-        elif probability == '2%':
-            ncolours = 12
-            
-        T = 'Sa(0.2)'
-        
-    elif period == 'SA10':
-        if probability == '10%' or probability == '9.5%':
-            ncolours = 13
-        
-        elif probability == '2%':
-            ncolours = 14
-            
-        T = 'Sa(1.0)'
+    elif probability == '2%':
+        ncolours = 13       
     
     ncolours = 13
     try:
@@ -370,10 +335,13 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             #ncolours = 9
             #norm = colors.Normalize(vmin=0,vmax=10)
         else:
-            if period == 'PGA' or period == 'SA01' or period == 'SA02' or period == 'SA05':
+            if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+               or period == 'SA03' or period == 'SA05':
                 bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
-            else:
+            elif  period == 'SA07'  or period == 'SA10':
                 bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
+            else:
+                bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
             ncolours = 12
             norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     else:

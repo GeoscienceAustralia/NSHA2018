@@ -4,62 +4,96 @@ Created on Tue May 12 15:07:46 2015
 
 @author: tallen
 """
-'''
-ncols=174
-nrows=115
-xllcorner=14.97
-yllcorner=-34.54
-cellsize=0.11
-'''
+# https://gis.stackexchange.com/questions/130199/changing-color-of-raster-images-based-on-their-data-values-gdal
+#from pyrate.shared import Ifg, DEM
+#import subprocess
+import sys
+import os
+import tempfile
+import numpy as np
 
+def gen_color_file(input_file):
+    fp, temp_file = tempfile.mkstemp(suffix='.txt')
+
+    dem = DEM(input_file)
+    dem.open()
+    phase_data = dem.height_band.ReadAsArray()
+
+    max_ph = np.nanmax(phase_data)
+    min_ph = np.nanmin(phase_data)
+    range_ph = max_ph-min_ph
+    colors = ['black', 'blue', 'yellow', 'orange', 'red', 'white']
+    with open(temp_file, 'w') as f:
+        for i, c in enumerate(colors[:-1]):
+            f.write(str(int(min_ph + (i + 1)*range_ph/len(colors))) +
+                    ' ' + c + '\n')
+        f.write(str(int(max_ph - range_ph/len(colors))) +
+                ' ' + colors[-1] + '\n')
+    os.close(fp)
+    return temp_file
+'''
+cmd = "gdaldem color-relief " + input_file \
+      + ' ' + color_file + ' ' + output_file
+      subprocess.check_call(cmd, shell=True)
+'''    
 '''
 # read sol file
 '''
 from sys import argv
-from os import sep
-from numpy import array, mgrid, nan, shape
+from os import sep, path, mkdir, system
+from numpy import array, mgrid, nan, shape, hstack, isinf, log, exp, interp
 from scipy.interpolate import griddata
 #from matplotlib.mlab import griddata
 from osgeo import osr, gdal
 import shapefile	
 from shapely.geometry import Point, Polygon
-
-period = argv[1]  # fmt: e.g. Sa1.0 or PGA
-
-#solfile = ''.join(('solfiles', sep, 'NBCC2015_Canada_', period, 'all_000thperc.sol'))
-solfile = ''.join(('solfiles', sep, 'GSC2015_seismichazardgrid_', period, '.txt'))
-
-# parse sol file 
-lines = open(solfile).readlines()[2:]
-
-# make grid dictionary
-grddict = []
-alon = []
-alat = []
-
+from tools.oq_tools import return_annualised_haz_curves
+#from misc_tools import dictlist2array
 
 maxlat = -90
 minlat = 90
 maxlon = -180
 minlon = 180
 
-print '\nReading sol file...'
-for line in lines:
-    tmpdict = {}
-    dat = line.strip().split()
-    tmpdict['lat'] = float(dat[0])
-    tmpdict['lon'] = float(dat[1])
-    tmpdict['P0.0200'] = float(dat[2])
-    tmpdict['P0.01375'] = float(dat[3])
-    tmpdict['P0.0100'] = float(dat[4])
-    tmpdict['P0.00445'] = float(dat[5])
-    tmpdict['P0.0021'] = float(dat[6])
-    tmpdict['P0.0010'] = float(dat[7])
-    tmpdict['P0.0005'] = float(dat[8])
-    tmpdict['P0.000404'] = float(dat[9])
-    #tmpdict['P0.0002'] = float(dat[10])
-    #tmpdict['P0.0001'] = float(dat[11])
-    tmpdict['ref'] = int(dat[11])
+##############################################################################
+# parse hazard grid
+##############################################################################
+
+hazCurveGridFile = argv[1]
+
+# check to see if geotiff folder exists
+if path.isdir('geotiff') == False:
+    mkdir('geotiff')
+    
+# make out geoTIFF    
+period = hazCurveGridFile.split(sep)[-2].split('_')[-1]
+
+# parse grid file
+gridDict, imls, investigation_time = return_annualised_haz_curves(hazCurveGridFile)
+
+
+##############################################################################
+# interpolate hazard curve and fill dictionary
+##############################################################################
+
+# set grid return periods for hazard curve
+probs = array([0.02,0.01375,0.01,0.00445,0.002,0.0021,0.001,0.0005,0.000404,0.0002,0.0001])
+
+grddict = []
+alon = []
+alat = []
+
+for site in gridDict:
+    interpHaz = exp(interp(log(probs[::-1]), log(site['poe_probs_annual'][::-1]), log(imls[::-1])))[::-1]
+    
+    # fill a temp dictionary
+    tmpdict = {'lon':site['lon'], 'lat':site['lat']}
+    
+    for p, ih in zip(probs, interpHaz):
+        if ih < 1E-20:
+            tmpdict['P'+str(p)] = 1E-20
+        else:
+            tmpdict['P'+str(p)] = ih
     
     grddict.append(tmpdict)
     alon.append(tmpdict['lon'])
@@ -76,13 +110,15 @@ for line in lines:
     if tmpdict['lat'] < minlat:
         minlat = tmpdict['lat']
 
-'''
-make mesh
-'''
+##############################################################################
+# make mesh
+##############################################################################
+
 resolution = 0.05 # degrees
-invres = int(1/resolution)
-keys = ['P0.0021', 'P0.0010', 'P0.000404'] # probabilities
-for key in keys:
+invres = int(1./resolution)
+keys = ['P0.0021', 'P0.000404'] # probabilities
+pc50 = ['0.1', '0.02']
+for key, p50 in zip(keys, pc50):
     print 'Making', key, 'grid mesh...'
     
     # first make z data array
@@ -100,6 +136,7 @@ for key in keys:
                       method='cubic', fill_value=nan) # scipy.interpolate (linear, nearest, cubic)
     #grid_z = griddata(array(alon), array(alat), array(ahaz), grid_x, grid_y, interp='linear') # matplotlib
     
+    '''
     # mask grid points outside defined grid to avoid extrapolation
     print 'Masking', key, 'grid...'
     #inshape = '2015NBCC_grid_mask.shp'
@@ -108,15 +145,17 @@ for key in keys:
     sf = shapefile.Reader(inshape)
     sf = sf.shapes()
     poly = Polygon(sf[0].points)
+    '''
     flat_x = grid_x.flatten()
     flat_y = grid_y.flatten()
     flat_z = grid_z.flatten()
     
-    
+    '''
     for i in range(0, len(flat_x)):
         point = Point(flat_x[i], flat_y[i])
         if point.within(poly) == False:
             flat_z[i] = nan
+    '''
     
     # reshape xyz
     #grid_x = flat_x.reshape(shape(grid_x))
@@ -131,7 +170,7 @@ for key in keys:
     write mesh
     '''
     print 'Writing', key, 'geoTIFF...'
-    output_file = ''.join(('geoTIFF', sep, 'GSC2015_hazgrd_', period, '_', key, '.tiff'))
+    output_file = path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff')))
     
     # Create gtif
     nbands = 1
@@ -148,15 +187,49 @@ for key in keys:
     #srs.SetLCC() # to set Lambert Conformal Conic
     dst_ds.SetProjection(srs.ExportToWkt())
     
+    # set color
+    ct = gdal.ColorTable()
+    # Some examples
+    ct.SetColorEntry( 0, (0, 0, 0, 255) )
+    ct.SetColorEntry( 1, (0, 255, 0, 255) )
+    ct.SetColorEntry( 2, (255, 0, 0, 255) )
+    ct.SetColorEntry( 3, (255, 0, 255, 255) )
+    # Set the color table for your band
+    dst_ds.GetRasterBand( 1 ).SetRasterColorTable( ct )
+    
     # write the band
     dst_ds.GetRasterBand(1).WriteArray(grid_z.T)
     dst_ds = None # to close file
 
 # testing
+
+src_ds = gdal.Open(path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff'))))
 '''
-src_ds = gdal.Open('NBCC2015_Canada_PGVall_P0.000404.tiff')
 src_ds.GetGeoTransform()
 srcband = src_ds.GetRasterBand(1)
-srcband.GetMetadata()
+src_ds.GetMetadata()
+'''
+band = src_ds.GetRasterBand(1)
+ct   = band.GetRasterColorTable()
+f    = open("rgb_color.txt", 'w+')    
+for i in range(ct.GetCount()):
+    sEntry = ct.GetColorEntry(i)
+    f.write( "  %3d: %d,%d,%d\n" % ( \
+      i, \
+      sEntry[0],\
+      sEntry[1],\
+      sEntry[2]))
+
+'''
+format of relief file from: http://blog.mastermaps.com/2012/06/creating-color-relief-and-slope-shading.html
+
+0 110 220 110
+900 240 250 160 
+1300 230 220 170 
+1900 220 220 220
+2500 250 250 250 
+
+gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
 '''
 
+system('gdaldem color-relief -of VRT input.tif rgb_color.txt rgb_output.vrt')
