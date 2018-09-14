@@ -40,7 +40,7 @@ cmd = "gdaldem color-relief " + input_file \
 # read sol file
 '''
 from sys import argv
-from os import sep, path, mkdir, system
+from os import sep, path, mkdir, system, getcwd
 from numpy import array, mgrid, nan, shape, hstack, isinf, log, exp, interp
 from scipy.interpolate import griddata
 #from matplotlib.mlab import griddata
@@ -70,7 +70,6 @@ period = hazCurveGridFile.split(sep)[-2].split('_')[-1]
 
 # parse grid file
 gridDict, imls, investigation_time = return_annualised_haz_curves(hazCurveGridFile)
-
 
 ##############################################################################
 # interpolate hazard curve and fill dictionary
@@ -114,7 +113,7 @@ for site in gridDict:
 # make mesh
 ##############################################################################
 
-resolution = 0.05 # degrees
+resolution = 0.025 # degrees
 invres = int(1./resolution)
 keys = ['P0.0021', 'P0.000404'] # probabilities
 pc50 = ['0.1', '0.02']
@@ -136,34 +135,29 @@ for key, p50 in zip(keys, pc50):
                       method='cubic', fill_value=nan) # scipy.interpolate (linear, nearest, cubic)
     #grid_z = griddata(array(alon), array(alat), array(ahaz), grid_x, grid_y, interp='linear') # matplotlib
     
-    '''
+    
     # mask grid points outside defined grid to avoid extrapolation
     print 'Masking', key, 'grid...'
-    #inshape = '2015NBCC_grid_mask.shp'
-    inshape = '..\\2005_grid\\canada_2005grid_released.shp'
+    if getcwd().startswith('/nas'):
+        inshape = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/shapefiles//au_maritime_boundary_digitised.shp'
     
     sf = shapefile.Reader(inshape)
     sf = sf.shapes()
     poly = Polygon(sf[0].points)
-    '''
+    
     flat_x = grid_x.flatten()
     flat_y = grid_y.flatten()
     flat_z = grid_z.flatten()
     
-    '''
+    # now loop through points
+    print 'Cropping points...'
     for i in range(0, len(flat_x)):
         point = Point(flat_x[i], flat_y[i])
         if point.within(poly) == False:
             flat_z[i] = nan
-    '''
     
     # reshape xyz
-    #grid_x = flat_x.reshape(shape(grid_x))
-    #grid_y = flat_y.reshape(shape(grid_y))
     grid_z = flat_z.reshape(shape(grid_z))
-    
-    #grid_x = grid_x[:,::-1]
-    #grid_y = grid_y[:,::-1]
     grid_z = grid_z[:,::-1]
     
     '''
@@ -187,6 +181,7 @@ for key, p50 in zip(keys, pc50):
     #srs.SetLCC() # to set Lambert Conformal Conic
     dst_ds.SetProjection(srs.ExportToWkt())
     
+    '''
     # set color
     ct = gdal.ColorTable()
     # Some examples
@@ -196,7 +191,7 @@ for key, p50 in zip(keys, pc50):
     ct.SetColorEntry( 3, (255, 0, 255, 255) )
     # Set the color table for your band
     dst_ds.GetRasterBand( 1 ).SetRasterColorTable( ct )
-    
+    '''
     # write the band
     dst_ds.GetRasterBand(1).WriteArray(grid_z.T)
     dst_ds = None # to close file
@@ -209,6 +204,8 @@ src_ds.GetGeoTransform()
 srcband = src_ds.GetRasterBand(1)
 src_ds.GetMetadata()
 '''
+
+'''
 band = src_ds.GetRasterBand(1)
 ct   = band.GetRasterColorTable()
 f    = open("rgb_color.txt", 'w+')    
@@ -219,6 +216,7 @@ for i in range(ct.GetCount()):
       sEntry[0],\
       sEntry[1],\
       sEntry[2]))
+'''
 
 '''
 format of relief file from: http://blog.mastermaps.com/2012/06/creating-color-relief-and-slope-shading.html
@@ -232,4 +230,4 @@ format of relief file from: http://blog.mastermaps.com/2012/06/creating-color-re
 gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
 '''
 
-system('gdaldem color-relief -of VRT input.tif rgb_color.txt rgb_output.vrt')
+#system('gdaldem color-relief -of VRT input.tif rgb_color.txt rgb_output.vrt')
