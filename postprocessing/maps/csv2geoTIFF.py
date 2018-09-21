@@ -48,6 +48,9 @@ from osgeo import osr, gdal
 import shapefile	
 from shapely.geometry import Point, Polygon
 from tools.oq_tools import return_annualised_haz_curves
+from misc_tools import cmap2rgb, remove_last_cmap_colour
+from gmt_tools import cpt2colormap
+
 #from misc_tools import dictlist2array
 
 maxlat = -90
@@ -199,11 +202,28 @@ for key, p50 in zip(keys, pc50):
 # testing
 
 src_ds = gdal.Open(path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff'))))
-'''
-src_ds.GetGeoTransform()
-srcband = src_ds.GetRasterBand(1)
-src_ds.GetMetadata()
-'''
+
+# set bounds for colours
+if p50 == '0.1' or p50 == '0.0952':
+        if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+           or period == 'SA03' or period == 'SA05':
+            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
+        elif  period == 'SA07'  or period == 'SA10':
+            bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
+        else:
+            bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
+else:
+    bounds = array([0, 0.02, 0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7])
+ncolours = 12
+
+if getcwd().startswith('/nas'):
+    cptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
+else:
+    cptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/cw1-013_mod.cpt
+cmap, zvals = cpt2colormap(cptfile, ncolours+1, rev=True)
+rgbTable = cmap2rgb(cmap, ncolours)
+
+
 
 '''
 band = src_ds.GetRasterBand(1)
