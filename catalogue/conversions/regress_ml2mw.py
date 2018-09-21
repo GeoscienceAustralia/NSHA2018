@@ -187,6 +187,21 @@ yrng_poly = out.beta[0]*xrng**2+out.beta[1]*xrng+out.beta[2]
 
 out_poly = out
 
+############## 
+# get stats from simulated data
+##############
+a = 0.042
+b = 0.481
+c = 1.395
+
+sim_mw = a*ml**2 + b*ml + c
+
+# get simulated residual
+sim_mw_res = mw - sim_mw
+
+# get simulated std
+print '\nSimulated Regression Sigma =', np.std(sim_mw_res),'\n'
+
 # ############## polynomial + linear
 # def mix_reg_fix(c, x):
 #     from numpy import zeros_like
