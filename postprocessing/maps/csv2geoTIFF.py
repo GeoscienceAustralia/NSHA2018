@@ -86,7 +86,7 @@ alon = []
 alat = []
 
 for site in gridDict:
-    interpHaz = exp(interp(log(probs[::-1]), log(site['poe_probs_annual'][::-1]), log(imls[::-1])))[::-1]
+    interpHaz = exp(interp(log(probs[::-1]), log(site[period+'_probs_annual'][::-1]), log(imls[::-1])))[::-1]
     
     # fill a temp dictionary
     tmpdict = {'lon':site['lon'], 'lat':site['lat']}
@@ -143,6 +143,8 @@ for key, p50 in zip(keys, pc50):
     print 'Masking', key, 'grid...'
     if getcwd().startswith('/nas'):
         inshape = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/shapefiles//au_maritime_boundary_digitised.shp'
+    else:
+        inshape = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/shapefiles/au_maritime_boundary_digitised.shp'
     
     sf = shapefile.Reader(inshape)
     sf = sf.shapes()
@@ -184,24 +186,16 @@ for key, p50 in zip(keys, pc50):
     #srs.SetLCC() # to set Lambert Conformal Conic
     dst_ds.SetProjection(srs.ExportToWkt())
     
-    '''
-    # set color
-    ct = gdal.ColorTable()
-    # Some examples
-    ct.SetColorEntry( 0, (0, 0, 0, 255) )
-    ct.SetColorEntry( 1, (0, 255, 0, 255) )
-    ct.SetColorEntry( 2, (255, 0, 0, 255) )
-    ct.SetColorEntry( 3, (255, 0, 255, 255) )
-    # Set the color table for your band
-    dst_ds.GetRasterBand( 1 ).SetRasterColorTable( ct )
-    '''
     # write the band
     dst_ds.GetRasterBand(1).WriteArray(grid_z.T)
     dst_ds = None # to close file
 
 # testing
+#src_ds = gdal.Open(path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff'))))
 
-src_ds = gdal.Open(path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff'))))
+##############################################################################
+# make gdal cpt file and recolour
+##############################################################################
 
 # set bounds for colours
 if p50 == '0.1' or p50 == '0.0952':
@@ -214,17 +208,44 @@ if p50 == '0.1' or p50 == '0.0952':
             bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
 else:
     bounds = array([0, 0.02, 0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7])
-ncolours = 12
+ncolours = 13
 
 if getcwd().startswith('/nas'):
     cptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
 else:
-    cptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/cw1-013_mod.cpt
-cmap, zvals = cpt2colormap(cptfile, ncolours+1, rev=True)
-rgbTable = cmap2rgb(cmap, ncolours)
+    cptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
+cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+rgbTable = cmap2rgb(cmap, ncolours)[0] * 255
+
+# make gdal cpt file
+cpttxt = ''
+for bound, rgb in zip(bounds, rgbTable):
+    cpttxt += '\t'.join((str(bound), str(rgb[0]), str(rgb[1]), str(rgb[2]))) + '\n'
+    
+f = open('gdal_cpt.dat', 'wb')
+f.write(cpttxt)
+f.close()
+
+# recolour geoTiff
+intiff = path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff')))
+outtiff = intiff[0:-4]+'_colour.tiff'
+
+gdaldem_cmd = ' '.join(('gdaldem color-relief', intiff, 'gdal_cpt.dat', outtiff))
+#gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
+system(gdaldem_cmd)
 
 
+'''
+format of relief file from: http://blog.mastermaps.com/2012/06/creating-color-relief-and-slope-shading.html
 
+0 110 220 110
+900 240 250 160 
+1300 230 220 170 
+1900 220 220 220
+2500 250 250 250 
+
+gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
+'''
 '''
 band = src_ds.GetRasterBand(1)
 ct   = band.GetRasterColorTable()
@@ -238,16 +259,3 @@ for i in range(ct.GetCount()):
       sEntry[2]))
 '''
 
-'''
-format of relief file from: http://blog.mastermaps.com/2012/06/creating-color-relief-and-slope-shading.html
-
-0 110 220 110
-900 240 250 160 
-1300 230 220 170 
-1900 220 220 220
-2500 250 250 250 
-
-gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
-'''
-
-#system('gdaldem color-relief -of VRT input.tif rgb_color.txt rgb_output.vrt')

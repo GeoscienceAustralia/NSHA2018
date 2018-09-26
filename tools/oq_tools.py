@@ -36,10 +36,13 @@ def return_annualised_haz_curves(hazcurvefile):
         csvlines = open(hazcurvefile).readlines()
         
         # get investigation time
-        investigation_time = float(csvlines[0].split(',')[1].split('=')[-1])
+        for header in csvlines[0].split(','):
+            if header.strip().startswith('investigation_time'):
+                investigation_time = float(header.split('=')[-1])
         
         # get intesity measures
         header = csvlines[1].strip().split(',')[3:] # changed to 3 for oq version 3.1
+        #print header
         try:
             imls = array([float(x.split(':')[0]) for x in header])
         
@@ -63,7 +66,7 @@ def return_annualised_haz_curves(hazcurvefile):
         #metadata = {'imls': imls, 'imts':imts}
         
         uimts = unique(imts) # get unique periods
-        print 'needs fixing here to deal with multiple periods', uimts
+        #print 'needs fixing here to deal with multiple periods', uimts
         # get site data
         siteDict = []
         for line in csvlines[2:]:
