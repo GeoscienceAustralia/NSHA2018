@@ -89,7 +89,7 @@ for minmag in minmags:
     fx1 = 1986 - width
     fx2 = 1992 + width
     plt.fill([fx1, fx2, fx2, fx1, fx1], [0, 0, fy, fy, 0], '0.8', edgecolor='0.8')
-    plt.text(1989, 8.1, '  Australian ML\n'+'equations developed', rotation=90., ha='center', va='bottom', fontsize=13)
+    plt.text(1989, 8.1, '  Australian $\mathregular{M_L}$\n'+'equations developed', rotation=90., ha='center', va='bottom', fontsize=13)
         
     
     for pm in pltmean:
@@ -118,10 +118,10 @@ for minmag in minmags:
         
         plt.xticks(rotation=65) #, ha='right')
         #ax.set_yticks([0, 4, 8, 12, 16, 20])   
-        plt.ylabel('Number of Earthquakes ML '+r'$\geq$'+' '+str(minmag), fontsize=17)   
+        plt.ylabel('Number of Earthquakes $\mathregular{M_X}$ '+r'$\geq$'+' '+str(minmag), fontsize=17)   
         plt.xlabel('Year', fontsize=17)
         
-        leg1 = ax.legend((bar1[0], bar2[0]), ('Original ML', 'Revised ML'))
+        leg1 = ax.legend((bar1[0], bar2[0]), ('Original $\mathregular{M_L}$', 'Revised $\mathregular{M_L}$'))
         leg1.get_frame().set_alpha(1.)
         plt.xlim([1958, 2018]) 
         ax.yaxis.grid(ls=':')
@@ -142,7 +142,7 @@ for minmag in minmags:
             av_n_1960_1988 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs <= 1988))[0]) / 29. # years
             av_n_1989_2017 = len(where((mx_orig >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
             
-            plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c='darkblue', lw=2.5, label='Original ML Average Annual Number')
+            plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c='darkblue', lw=2.5, label='Original $\mathregular{M_L}$ Average Annual Number')
             plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='darkblue', lw=2.5)
             #plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c=cs[-1], lw=2.5, label='Original ML Average Annual Number')
             #plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c=cs[-1], lw=2.5)
@@ -150,7 +150,7 @@ for minmag in minmags:
             av_n_1960_1988 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1960) & (decimal_yrs <= 1988))[0]) / 29. # years
             av_n_1989_2017 = len(where((mx_rev_ml >= minmag) & (decimal_yrs >= 1989) & (decimal_yrs < 2018))[0]) / 28. # years
             
-            plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c='orangered', lw=2.5, label='Revised ML Average Annual Number')
+            plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c='orangered', lw=2.5, label='Revised $\mathregular{M_L}$ Average Annual Number')
             plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c='orangered', lw=2.5)
             #plt.plot([1959.65, 1988.35], [av_n_1960_1988, av_n_1960_1988], '--', c=cs[5], lw=2.5, label='Revised ML Average Annual Number')
             #plt.plot([1988.65, 2017.35], [av_n_1989_2017, av_n_1989_2017], '--', c=cs[5], lw=2.5)
