@@ -23,6 +23,9 @@ from tools.mapping_tools import get_map_polygons, mask_outside_polygons, cpt2col
 import shapefile
 from scipy.constants import g
 from misc_tools import remove_last_cmap_colour
+from shapely.geometry import Point, Polygon
+import warnings
+warnings.filterwarnings("ignore")
 #from gmt_tools import cpt2colormap
 #from shapely.geometry import Point, Polygon
 
@@ -263,8 +266,8 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     lats = ogrid[extent[2]:extent[3]:N]
     
     # transform to map projection
-    nx = int((m.xmax-m.xmin)/2000.)+1
-    ny = int((m.ymax-m.ymin)/2000.)+1
+    nx = int((m.xmax-m.xmin)/3000.)+1
+    ny = int((m.ymax-m.ymin)/3000.)+1
     
     # differences in the way different machines deal with grids - weird!
     if cwd.startswith('/nas'):
@@ -273,19 +276,18 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
         transhaz = m.transform_scalar(resampled.T,lons,lats,nx,ny)
     
     masked_array = ma.array(transhaz, mask=isnan(transhaz))
-    #masked_array = masked_array.set_fill_value(0)
     
     # get colormap from cpt file
     cptfile = 'cw1-013_mod.cpt'
     #ncols = 9
     
-    #cmap = cm.rainbow
-    #print period
     # get T from period
     if period.startswith('SA0'):
         T = 'Sa(0.'+period[3:]+')'
-    else:
+    elif period.startswith('SA'):
         T = 'Sa('+period[2]+'.'+period[3:]+')' 
+    else:
+        T = period
         
     print period, T
     
@@ -345,7 +347,15 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             ncolours = 12
             norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     else:
-        bounds = array([0, 0.02, 0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7])
+        if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+           or period == 'SA03' or period == 'SA05':
+            bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7, 1.0])
+        elif period == 'SA07':
+            bounds = array([0, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24, 0.36])
+        elif period == 'SA15' or period == 'SA10':
+            bounds = array([0, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.2, 0.3])
+        else:
+            bounds = array([0, 0.001, 0.002, 0.003, 0.004, 0.005, 0.007, 0.015, 0.03, 0.04, 0.05, 0.06, 0.1, 0.16])
         #ncolours = 12
     norm = colors.BoundaryNorm(boundaries=bounds, ncolors=ncolours)
     
@@ -436,6 +446,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     annotate cities
     ###########################################################################################
     '''
+    capfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/shared/capitals_names.csv'
     
     import matplotlib.patheffects as PathEffects
     pe = [PathEffects.withStroke(linewidth=2.5, foreground="w")]
@@ -550,7 +561,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     
     # set colourbar
     plt.gcf().subplots_adjust(bottom=0.1)
-    cax = figure.add_axes([0.34,0.05,0.33,0.02]) # setup colorbar axes.
+    cax = figure.add_axes([0.31,0.05,0.38,0.02]) # setup colorbar axes.
     #norm = colors.Normalize(vmin=vmin, vmax=vmax)
     cb = colorbar.ColorbarBase(cax, cmap=cmap, norm=norm, orientation='horizontal')
     
@@ -573,19 +584,13 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     
     # set title
     if pltGSHAP == 'True':
-        titlestr = 'PGA 10% in 50-Year Mean Hazard (m/s^2)'
+        titlestr = 'PGA 10% in 50-Year Mean Hazard ($\mathregular{m/s_2}$)'
     else:
         if probability == '9.5%':
             titlestr = ' '.join(('1 in 500-Year AEP Mean', T, 'Hazard (g)'))
         else:
             titlestr = ' '.join((T, probability, 'in 50-Year Mean Hazard (g)'))
     cb.set_label(titlestr, fontsize=12)
-    
-    '''
-    # check to see if exists
-    if path.isdir(key) == False:
-        mkdir(key)
-    '''
     
     # check to see if maps exists
     if path.isdir('maps') == False:
@@ -607,18 +612,31 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     # make shapefile of contour lines
     ##########################################################################################
     
+    print 'Masking maritime boundaries...'
+    if getcwd().startswith('/nas'):
+        inshape = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/shapefiles//au_maritime_boundary_digitised.shp'
+    else:
+        inshape = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/shapefiles/au_maritime_boundary_digitised.shp'
+    
+    sf = shapefile.Reader(inshape)
+    sf = sf.shapes()
+    poly = Polygon(sf[0].points)
+    
+    
     # check to see if shapefile contours exists
     if path.isdir('contours') == False:
         mkdir('contours')
         
     # make list of levels - old levels array([0.005, 0.01, 0.02, 0.04, 0.06, 0.08, 0.12, 0.18, 0.24])
-    allLevels = [bounds,
+    allLevels = [bounds] #,
+    '''
                  array([0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.25, 0.30]),
                  array([0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.10]),
                  array([0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.15]),
                  array([0.003, 0.004, 0.006, 0.008, 0.01, 0.012, 0.015, 0.02])]
- 
-    levelNames = ['lev_nat', 'lev_swsz','lev_ntsa', 'lev_nswtas', 'lev_qld'] #, 'lev_0_01', 'lev_0_02', 'lev_0_05']                 
+    '''
+    levelNames = ['lev_nat', 'lev_swsz','lev_ntsa', 'lev_nswtas', 'lev_qld'] #, 'lev_0_01', 'lev_0_02', 'lev_0_05']  
+    levelNames = ['lev_nat']
     
     # loop thru levels
     for levels, levelName in zip(allLevels, levelNames):
@@ -629,7 +647,7 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
     
         # set shapefile to write to
         w = shapefile.Writer(shapefile.POLYLINE)
-        w.field('LEVELS','F', 5, 2)
+        w.field('LEVELS','F', 5, 3)
             
         # have to re-contour using un-transformed lat/lons
         cs = plt.contour(xs, ys, resampled, levels, colors='k')
@@ -642,13 +660,28 @@ for i, key in enumerate([keys[mapidx]]): # just plot 1 for now!
             
             # now loop through multiple paths within level
             for cnt in contours:
+                # check if verticies within maritime boundaries
+                newcnt = []
+                for vert in cnt.vertices:
+                    point = Point(vert)
+                    if point.within(poly) == True:
+                        newcnt.append(vert)
+                    
+                    # add polyline to shapefile
+                    elif point.within(poly) == False and len(newcnt) > 0:
+                        #w.line(parts=[newcnt.vertices], shapeType=shapefile.POLYLINE)
+                        w.line(parts=array([newcnt]), shapeType=shapefile.POLYLINE)                        
+                        # add level attribute
+                        w.record(lev)
+                        
+                        newcnt = []
+                        
+                # do final addition of contours
+                if len(newcnt) > 0:
+                    w.line(parts=array([newcnt]), shapeType=shapefile.POLYLINE)
+                    # add level attribute
+                    w.record(lev)
                 
-                # add polyline to shapefile
-                w.line(parts=[cnt.vertices], shapeType=shapefile.POLYLINE)
-                
-                # add level attribute
-                w.record(lev)
-    
         # now save area shapefile
         w.save(outshp)
         

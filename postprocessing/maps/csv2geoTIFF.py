@@ -50,6 +50,8 @@ from shapely.geometry import Point, Polygon
 from tools.oq_tools import return_annualised_haz_curves
 from misc_tools import cmap2rgb, remove_last_cmap_colour
 from gmt_tools import cpt2colormap
+import warnings
+warnings.filterwarnings("ignore")
 
 #from misc_tools import dictlist2array
 
@@ -86,7 +88,9 @@ alon = []
 alat = []
 
 for site in gridDict:
-    interpHaz = exp(interp(log(probs[::-1]), log(site[period+'_probs_annual'][::-1]), log(imls[::-1])))[::-1]
+    poe ='poe' # short term fix
+    #interpHaz = exp(interp(log(probs[::-1]), log(site[period+'_probs_annual'][::-1]), log(imls[::-1])))[::-1]
+    interpHaz = exp(interp(log(probs[::-1]), log(site[poe+'_probs_annual'][::-1]), log(imls[::-1])))[::-1]
     
     # fill a temp dictionary
     tmpdict = {'lon':site['lon'], 'lat':site['lat']}
@@ -116,7 +120,7 @@ for site in gridDict:
 # make mesh
 ##############################################################################
 
-resolution = 0.025 # degrees
+resolution = 0.05 # degrees
 invres = int(1./resolution)
 keys = ['P0.0021', 'P0.000404'] # probabilities
 pc50 = ['0.1', '0.02']
@@ -199,15 +203,23 @@ for key, p50 in zip(keys, pc50):
 
 # set bounds for colours
 if p50 == '0.1' or p50 == '0.0952':
-        if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
-           or period == 'SA03' or period == 'SA05':
-            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
-        elif  period == 'SA07'  or period == 'SA10':
-            bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
-        else:
-            bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
+    if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+       or period == 'SA03' or period == 'SA05':
+        bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
+    elif  period == 'SA07'  or period == 'SA10':
+        bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
+    else:
+        bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
 else:
-    bounds = array([0, 0.02, 0.03, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7])
+    if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+       or period == 'SA03' or period == 'SA05':
+        bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7, 1.0])
+    elif period == 'SA07':
+        bounds = array([0, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24, 0.36])
+    elif period == 'SA15' or period == 'SA10':
+        bounds = array([0, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.2, 0.3])
+    else:
+        bounds = array([0, 0.001, 0.002, 0.003, 0.004, 0.005, 0.007, 0.015, 0.03, 0.04, 0.05, 0.06, 0.1, 0.16])
 ncolours = 13
 
 if getcwd().startswith('/nas'):
