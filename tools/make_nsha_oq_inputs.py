@@ -47,7 +47,6 @@ def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
             mx_wts = zeros_like(mx_wts)
             mx_wts[meta['mx_idx']] = 1.0
         
-    
     wtd_list  = []
     maglen = 0
     

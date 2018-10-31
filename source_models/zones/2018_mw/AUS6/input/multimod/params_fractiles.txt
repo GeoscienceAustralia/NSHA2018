@@ -1,6 +1,6 @@
-ncpus = 512 
+ncpus = 992 
 mem = 2000GB
-walltime = 6:00:00
+walltime = 10:00:00
 jobfs = 100GB
 sandpit_path = /short/w84/NSHA18/sandpit/
 model_rel_path = NSHA2018/source_models/zones/2018_mw/AUS6/input/multimod
