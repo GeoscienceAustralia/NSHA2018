@@ -60,6 +60,11 @@ minlat = 90
 maxlon = -180
 minlon = 180
 
+'''
+# THIS IS HOW TO RUN ME IN IPYTHON
+
+run csv2geoTIFF.py ../../source_models/complete_model/final/results_maps_SA10/hazard_curve-mean-SA(1.0)_1.csv
+'''
 ##############################################################################
 # parse hazard grid
 ##############################################################################
@@ -116,6 +121,7 @@ for site in gridDict:
     if tmpdict['lat'] < minlat:
         minlat = tmpdict['lat']
 
+print 'BBOX', '/'.join((str(minlon), str(maxlon), str(minlat), str(maxlat)))
 ##############################################################################
 # make mesh
 ##############################################################################
@@ -194,80 +200,56 @@ for key, p50 in zip(keys, pc50):
     dst_ds.GetRasterBand(1).WriteArray(grid_z.T)
     dst_ds = None # to close file
 
-# testing
-#src_ds = gdal.Open(path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff'))))
-
-##############################################################################
-# make gdal cpt file and recolour
-##############################################################################
-
-# set bounds for colours
-if p50 == '0.1' or p50 == '0.0952':
-    if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
-       or period == 'SA03' or period == 'SA05':
-        bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
-    elif  period == 'SA07'  or period == 'SA10':
-        bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
-    else:
-        bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
-else:
-    if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
-       or period == 'SA03' or period == 'SA05':
-        bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7, 1.0])
-    elif period == 'SA07':
-        bounds = array([0, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24, 0.36])
-    elif period == 'SA15' or period == 'SA10':
-        bounds = array([0, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.2, 0.3])
-    else:
-        bounds = array([0, 0.001, 0.002, 0.003, 0.004, 0.005, 0.007, 0.015, 0.03, 0.04, 0.05, 0.06, 0.1, 0.16])
-ncolours = 13
-
-if getcwd().startswith('/nas'):
-    cptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
-else:
-    cptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
-cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
-rgbTable = cmap2rgb(cmap, ncolours)[0] * 255
-
-# make gdal cpt file
-cpttxt = ''
-for bound, rgb in zip(bounds, rgbTable):
-    cpttxt += '\t'.join((str(bound), str(rgb[0]), str(rgb[1]), str(rgb[2]))) + '\n'
+    # testing
+    #src_ds = gdal.Open(path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff'))))
     
-f = open('gdal_cpt.dat', 'wb')
-f.write(cpttxt)
-f.close()
+    ##############################################################################
+    # make gdal cpt file and recolour
+    ##############################################################################
+    
+    # set bounds for colours
+    if p50 == '0.1' or p50 == '0.0952':
+        if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+           or period == 'SA03' or period == 'SA05':
+            bounds = array([0, 0.005, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24])
+        elif  period == 'SA07'  or period == 'SA10':
+            bounds = array([0, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08])
+        else:
+            bounds = array([0, 0.001, 0.002, 0.004, 0.007, 0.01, 0.015, 0.02, 0.025, 0.03, 0.035, 0.045, 0.06])
+    else:
+        if period == 'PGA' or period == 'SA005' or period == 'SA01' or period == 'SA02' \
+           or period == 'SA03' or period == 'SA05':
+            bounds = array([0, 0.02, 0.04, 0.06, 0.08, 0.10, 0.12, 0.16, 0.20, 0.3, 0.5, 0.7, 1.0])
+        elif period == 'SA07':
+            bounds = array([0, 0.01, 0.015, 0.02, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.24, 0.36])
+        elif period == 'SA15' or period == 'SA10':
+            bounds = array([0, 0.01, 0.015, 0.02, 0.025, 0.03, 0.04, 0.05, 0.06, 0.08, 0.12, 0.16, 0.2, 0.3])
+        else:
+            bounds = array([0, 0.001, 0.002, 0.003, 0.004, 0.005, 0.007, 0.015, 0.03, 0.04, 0.05, 0.06, 0.1, 0.16])
+    ncolours = 13
+    
+    if getcwd().startswith('/nas'):
+        cptfile = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
+    else:
+        cptfile = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/postprocessing/maps/cw1-013_mod.cpt'
+    cmap, zvals = cpt2colormap(cptfile, ncolours, rev=True)
+    rgbTable = cmap2rgb(cmap, ncolours)[0] * 255
+    
+    # make gdal cpt file
+    cpttxt = ''
+    for bound, rgb in zip(bounds, rgbTable):
+        cpttxt += '\t'.join((str(bound), str(rgb[0]), str(rgb[1]), str(rgb[2]))) + '\n'
+        
+    f = open('gdal_cpt.dat', 'wb')
+    f.write(cpttxt)
+    f.close()
+    
+    # recolour geoTiff
+    intiff = path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff')))
+    outtiff = intiff[0:-4]+'_colour.tiff'
+    
+    gdaldem_cmd = ' '.join(('gdaldem color-relief', intiff, 'gdal_cpt.dat', outtiff))
+    #gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
+    system(gdaldem_cmd)
 
-# recolour geoTiff
-intiff = path.join('geotiff', '_'.join(('nsha18',period, p50+'.tiff')))
-outtiff = intiff[0:-4]+'_colour.tiff'
-
-gdaldem_cmd = ' '.join(('gdaldem color-relief', intiff, 'gdal_cpt.dat', outtiff))
-#gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
-system(gdaldem_cmd)
-
-
-'''
-format of relief file from: http://blog.mastermaps.com/2012/06/creating-color-relief-and-slope-shading.html
-
-0 110 220 110
-900 240 250 160 
-1300 230 220 170 
-1900 220 220 220
-2500 250 250 250 
-
-gdaldem color-relief jotunheimen.tif color_relief.txt jotunheimen_colour_relief.tif
-'''
-'''
-band = src_ds.GetRasterBand(1)
-ct   = band.GetRasterColorTable()
-f    = open("rgb_color.txt", 'w+')    
-for i in range(ct.GetCount()):
-    sEntry = ct.GetColorEntry(i)
-    f.write( "  %3d: %d,%d,%d\n" % ( \
-      i, \
-      sEntry[0],\
-      sEntry[1],\
-      sEntry[2]))
-'''
 

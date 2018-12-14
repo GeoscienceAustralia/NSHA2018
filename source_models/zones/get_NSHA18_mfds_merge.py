@@ -1332,75 +1332,75 @@ for i in srcidx:
                 plt.clf()
                 plt.close()
             
-        ###############################################################################
-        # export rates file
-        ###############################################################################
-        
-        # check (again) to see if folder exists
-        srcfolder = path.join(outfolder, src_code[i])
+            ###############################################################################
+            # export rates file
+            ###############################################################################
             
-        if path.isdir(srcfolder) == False:
-            mkdir(srcfolder)
-            
-        # get beta curve again at consistent mags
-        mpltmin_best = 2.0 + bin_width/2.
-        plt_width = 0.1
-        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
-        
-        header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT,MFD_FIT_AREA_NORM'
-        
-        rate_txt = header + '\n'
-        for mr in range(0,len(mrng)):
-            for bm in range(0, len(mfd_mrng)):
-                if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
-                    beta_curve_val = betacurve[bm]
-            
-            # normalise rates by 10,000 km2
-            area_norm_beta_curve_val = 10000. * beta_curve_val / src_area[i]
-            line = ','.join((str(mrng[mr]), str(n_obs[mr]), str(cum_num[mr]), \
-                             str('%0.4e' % bin_rates[mr]), str('%0.4e' % cum_rates[mr]), \
-                             str('%0.4e' % beta_curve_val), str('%0.4e' % area_norm_beta_curve_val))) + '\n'
-            rate_txt += line
+            # check (again) to see if folder exists
+            srcfolder = path.join(outfolder, src_code[i])
                 
-        # export to file
-        ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
-        f = open(ratefile, 'wb')
-        f.write(rate_txt)
-        f.close()
-                                 
-        ###############################################################################
-        # export sourcecat for source zone
-        ###############################################################################
-        catfile = path.join(srcfolder, '_'.join((src_code[i], 'passed.dat')))
-        ggcat2ascii(ev_dict, catfile)
-        
-        # reorder out dict 
-        ordidx = argsort(argsort(out_idx))
-        new_dict = []
-        for o in range(0, len(ordidx)):
-            idx = where(ordidx == o)[0][0]
-            new_dict.append(ev_out[idx])
-        
-        catfile = path.join(srcfolder, '_'.join((src_code[i], 'failed.dat')))
-        ggcat2ascii(new_dict, catfile)
-        
-        ###############################################################################
-        # export ggcat files to shp
-        ###############################################################################
-        
-        # write "in" shapefile
-        incat = '_'.join((src_code[i], 'passed'))+'.dat'
-        inshp = '_'.join((src_code[i], 'passed'))+'.shp'
-        catfile = path.join(srcfolder, incat)
-        shppath = path.join(srcfolder, inshp)
-        #cat2shp(catfile, shppath)
-        
-        # write "out" shapefile
-        outcat = '_'.join((src_code[i], 'failed'))+'.dat'
-        outshp = '_'.join((src_code[i], 'failed'))+'.shp'
-        catfile = path.join(srcfolder, outcat)
-        shppath = path.join(srcfolder, outshp)
-        #cat2shp(catfile, shppath)
+            if path.isdir(srcfolder) == False:
+                mkdir(srcfolder)
+                
+            # get beta curve again at consistent mags
+            mpltmin_best = 2.0 + bin_width/2.
+            plt_width = 0.1
+            betacurve, mfd_mrng = get_oq_incrementalMFD(beta, fn0, mpltmin_best, mrng[-1], plt_width)
+            
+            header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT,MFD_FIT_AREA_NORM'
+            
+            rate_txt = header + '\n'
+            for mr in range(0,len(mrng)):
+                for bm in range(0, len(mfd_mrng)):
+                    if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
+                        beta_curve_val = betacurve[bm]
+                
+                # normalise rates by 10,000 km2
+                area_norm_beta_curve_val = 10000. * beta_curve_val / src_area[i]
+                line = ','.join((str(mrng[mr]), str(n_obs[mr]), str(cum_num[mr]), \
+                                 str('%0.4e' % bin_rates[mr]), str('%0.4e' % cum_rates[mr]), \
+                                 str('%0.4e' % beta_curve_val), str('%0.4e' % area_norm_beta_curve_val))) + '\n'
+                rate_txt += line
+                    
+            # export to file
+            ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
+            f = open(ratefile, 'wb')
+            f.write(rate_txt)
+            f.close()
+                                     
+            ###############################################################################
+            # export sourcecat for source zone
+            ###############################################################################
+            catfile = path.join(srcfolder, '_'.join((src_code[i], 'passed.dat')))
+            ggcat2ascii(ev_dict, catfile)
+            
+            # reorder out dict 
+            ordidx = argsort(argsort(out_idx))
+            new_dict = []
+            for o in range(0, len(ordidx)):
+                idx = where(ordidx == o)[0][0]
+                new_dict.append(ev_out[idx])
+            
+            catfile = path.join(srcfolder, '_'.join((src_code[i], 'failed.dat')))
+            ggcat2ascii(new_dict, catfile)
+            
+            ###############################################################################
+            # export ggcat files to shp
+            ###############################################################################
+            
+            # write "in" shapefile
+            incat = '_'.join((src_code[i], 'passed'))+'.dat'
+            inshp = '_'.join((src_code[i], 'passed'))+'.shp'
+            catfile = path.join(srcfolder, incat)
+            shppath = path.join(srcfolder, inshp)
+            #cat2shp(catfile, shppath)
+            
+            # write "out" shapefile
+            outcat = '_'.join((src_code[i], 'failed'))+'.dat'
+            outshp = '_'.join((src_code[i], 'failed'))+'.shp'
+            catfile = path.join(srcfolder, outcat)
+            shppath = path.join(srcfolder, outshp)
+            #cat2shp(catfile, shppath)
         
             
 ###############################################################################
@@ -1629,6 +1629,11 @@ src_area= array(src_area)
     
 # normalise M5 rates by area
 lognorm_m5_rates = log10(100**2 * m5_rates / src_area[idx])
+
+# print rates
+print '\nM5 rates'
+for rate, code in zip(lognorm_m5_rates, src_code):
+    print code, 10**rate     
     
 # get colour index
 ncolours=20
@@ -1711,6 +1716,13 @@ m6_rates = array(new_n0_b[idx]) * exp(-new_beta[idx] * 6.0) * (1 - exp(-new_beta
 
 # normalise M6 rates by area
 lognorm_m6_rates = log10(100**2 * m6_rates / src_area[idx])
+
+# print rates
+print '\nM6 rates'
+for rate, code in zip(lognorm_m6_rates, src_code):
+    print code, 10**rate 
+
+print '\n'
     
 # get colour index
 ncolours=20

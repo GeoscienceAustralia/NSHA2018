@@ -63,10 +63,8 @@ def return_annualised_haz_curves(hazcurvefile):
             imts = array(imts)
             #imls = array([float(x.split('-')[-1]) for x in header])
         
-        #metadata = {'imls': imls, 'imts':imts}
-        
         uimts = unique(imts) # get unique periods
-        #print 'needs fixing here to deal with multiple periods', uimts
+
         # get site data
         siteDict = []
         for line in csvlines[2:]:
@@ -78,26 +76,18 @@ def return_annualised_haz_curves(hazcurvefile):
             for ut in uimts:
                 idx = where(imts == ut)[0]
                 #tmpdict[ut+'_imls'] = imls[idx]
-                hazcurve = array([float(x) for x in array(dat)[idx]])
+                poe50 = array([float(x) for x in array(dat)[idx]])
                 
                 # now get annualised curves
-                P0 = 1 - array(hazcurve)
+                P0 = 1 - array(poe50)
                 n = -1*log(P0)
                 annual_probs = n / investigation_time
                 
                 tmpdict[ut+'_probs_annual'] = annual_probs
-                tmpdict[ut+'_probs_invtime'] = hazcurve
+                tmpdict[ut+'_probs_invtime'] = poe50
                 
             siteDict.append(tmpdict)
         
-    '''
-    annual_hazcurves = []
-    for i, hazcurve in enumerate(hazcurves):
-        # for curves, plot annual probablility
-        P0 = 1 - array(hazcurve)
-        n = -1*log(P0)
-        annual_hazcurves.append(n / investigation_time)
-    '''    
     #return annual_hazcurves, curvelon, curvelat, metadata
     return siteDict, imls, investigation_time
     
