@@ -732,44 +732,50 @@ for i in srcidx:
         ###############################################################################
         # export rates file - too hard basket for now
         ###############################################################################
-        '''
+        
         # check (again) to see if folder exists
         srcfolder = path.join(outfolder, src_code[i])
             
         if path.isdir(srcfolder) == False:
             mkdir(srcfolder)
-            
+        
         # get beta curve again at consistent mags
-        mpltmin_best = 2.0 + bin_width/2.
+        mpltmin_best = mcompminmw + bin_width/2.
         plt_width = 0.1
         beta = bval2beta(bval)
         betacurve, mfd_mrng = get_oq_incrementalMFD(beta, N0areanorm, mpltmin_best, mrng[-1], plt_width)
         
-        header = 'MAG,N_OBS,N_CUM,BIN_RTE,CUM_RTE,MFD_FIT,MFD_FIT_AREA_NORM'
+        # calculate rate of M5 events
+        print N0areanorm
+        rates = N0areanorm * exp(-beta  * mfd_mrng) * (1 - exp(-beta * (src_mmax[i] - mfd_mrng))) \
+                / (1 - exp(-beta * src_mmax[i]))
+        
+        # normalise M5 rates by area
+        lognorm_rates = log10(100**2 * rates / src_area[i])
+        
+        header = 'MAG,MFD_FIT,MFD_FIT_AREA_NORM'
         
         rate_txt = header + '\n'
-        for mr in range(0,len(mrng)):
-            for bm in range(0, len(mfd_mrng)):
-                if around(mfd_mrng[bm], decimals=2) == around(mrng[mr], decimals=2):
-                    beta_curve_val = betacurve[bm]
-            
+        for bcv, mfdm in zip(rates, mfd_mrng):
+            beta_curve_val = bcv
+        
             # normalise rates by 10,000 km2
-            area_norm_beta_curve_val = 10000. * beta_curve_val / src_area[i]
-            line = ','.join((str(mrng[mr]), str(n_obs[mr]), str(cum_num[mr]), \
-                             str('%0.4e' % bin_rates[mr]), str('%0.4e' % cum_rates[mr]), \
-                             str('%0.4e' % beta_curve_val), str('%0.4e' % area_norm_beta_curve_val))) + '\n'
+            area_norm_beta_curve_val = 10000. * bcv / src_area[i]
+            line = ','.join((str(mfdm), str('%0.4e' % bcv), \
+                             str('%0.4e' % area_norm_beta_curve_val))) + '\n'
             rate_txt += line
                 
         # export to file
-        ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
+        ratefile = path.join(srcfolder, '_'.join((src_code[i], 'norm_rates.csv')))
         f = open(ratefile, 'wb')
         f.write(rate_txt)
         f.close()
-        '''
+                
     ###############################################################################
     # start making outputs
     ###############################################################################
         
+    #if len(mvect) > 0:
     else:
         
         # get annualised rates based on preferred MW (mvect)

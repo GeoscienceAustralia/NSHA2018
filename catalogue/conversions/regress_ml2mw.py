@@ -64,6 +64,23 @@ def bilinear_reg_fix(c, x):
 
 def f(B, x):
     return B[0]*x**2+B[1]*x+B[2]
+    
+def nsha18_ml2mw(ml):
+    '''
+    use ODR polynomial of simulated data from Ghasemi & Allen (2017)
+    
+    See Appendix C in Allen et al, (2018) for discussion on model development
+    
+    Allen, T. I., Leonard, M., Ghasemi, H., and Gibson, G., 2018. The 2018 National Seismic 
+    Hazard Assessment for Australia: earthquake epicentre catalogue, Geoscience Australia 
+    Record 2018/30, Canberra, doi: 10.11636/Record.2018.030.
+    '''
+    a = 0.04160769
+    b = 0.48058286
+    c = 1.39485216
+    
+    # get Mw
+    return a*ml**2 + b*ml + c
 
 ####################################################################
 # parse file
@@ -256,7 +273,7 @@ yrng_swiss = np.concatenate((0.594 * xrng[xrng<=2]+0.985,
 yrng_ross = 0.754*xrng[xrng<=4.0] + 0.88
 
 ##### Ghasemi & Allen, 2017
-from mag_tools import nsha18_ml2mw
+#from mag_tools import nsha18_ml2mw
 yrng_ga17 = nsha18_ml2mw(xrng)
 
 # get residuals
