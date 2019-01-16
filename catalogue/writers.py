@@ -32,9 +32,16 @@ def ggcat2ascii(ggcat_dict, outfile):
         # set string constant width
         datestr = '{0.year:4d} {0.month:02d} {0.day:02d} {0.hour:02d}{0.minute:02d}'.format(ev['datetime'])
         
-        # make line        
+        # get dep format
+        depStr = str("%0.1f" % ev['dep'])
+        if len(depStr) == 3:
+            depStr = '  ' + depStr
+        elif len(depStr) == 4:
+            depStr = ' ' + depStr
+        
+        # make line
         line = ' '.join((datestr, str("%0.3f" % ev['lon']), str("%0.3f" % ev['lat']), \
-                         str("%0.1f" % ev['dep']), str("%0.2f" % ev['prefmag']), \
+                         depStr, str("%0.2f" % ev['prefmag']), \
                          ev['prefmagtype'], ev['auth']))
                        
         cattxt = cattxt + line + '\n'

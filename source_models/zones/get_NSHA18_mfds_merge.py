@@ -732,44 +732,45 @@ for i in srcidx:
         ###############################################################################
         # export rates file - too hard basket for now
         ###############################################################################
-        
-        # check (again) to see if folder exists
-        srcfolder = path.join(outfolder, src_code[i])
+        if skipPlotting == True and float(src_class[i]) <= 8.0:
             
-        if path.isdir(srcfolder) == False:
-            mkdir(srcfolder)
-        
-        # get beta curve again at consistent mags
-        mpltmin_best = mcompminmw + bin_width/2.
-        plt_width = 0.1
-        beta = bval2beta(bval)
-        betacurve, mfd_mrng = get_oq_incrementalMFD(beta, N0areanorm, mpltmin_best, mrng[-1], plt_width)
-        
-        # calculate rate of M5 events
-        print N0areanorm
-        rates = N0areanorm * exp(-beta  * mfd_mrng) * (1 - exp(-beta * (src_mmax[i] - mfd_mrng))) \
-                / (1 - exp(-beta * src_mmax[i]))
-        
-        # normalise M5 rates by area
-        lognorm_rates = log10(100**2 * rates / src_area[i])
-        
-        header = 'MAG,MFD_FIT,MFD_FIT_AREA_NORM'
-        
-        rate_txt = header + '\n'
-        for bcv, mfdm in zip(rates, mfd_mrng):
-            beta_curve_val = bcv
-        
-            # normalise rates by 10,000 km2
-            area_norm_beta_curve_val = 10000. * bcv / src_area[i]
-            line = ','.join((str(mfdm), str('%0.4e' % bcv), \
-                             str('%0.4e' % area_norm_beta_curve_val))) + '\n'
-            rate_txt += line
+            # check (again) to see if folder exists
+            srcfolder = path.join(outfolder, src_code[i])
                 
-        # export to file
-        ratefile = path.join(srcfolder, '_'.join((src_code[i], 'norm_rates.csv')))
-        f = open(ratefile, 'wb')
-        f.write(rate_txt)
-        f.close()
+            if path.isdir(srcfolder) == False:
+                mkdir(srcfolder)
+            
+            # get beta curve again at consistent mags
+            mpltmin_best = mcompminmw + bin_width/2.
+            plt_width = 0.1
+            beta = bval2beta(bval)
+            betacurve, mfd_mrng = get_oq_incrementalMFD(beta, N0areanorm, mpltmin_best, mrng[-1], plt_width)
+            
+            # calculate rate of M5 events
+            print N0areanorm
+            rates = N0areanorm * exp(-beta  * mfd_mrng) * (1 - exp(-beta * (src_mmax[i] - mfd_mrng))) \
+                    / (1 - exp(-beta * src_mmax[i]))
+            
+            # normalise M5 rates by area
+            lognorm_rates = log10(100**2 * rates / src_area[i])
+            
+            header = 'MAG,MFD_FIT,MFD_FIT_AREA_NORM'
+            
+            rate_txt = header + '\n'
+            for bcv, mfdm in zip(rates, mfd_mrng):
+                beta_curve_val = bcv
+            
+                # normalise rates by 10,000 km2
+                area_norm_beta_curve_val = 10000. * bcv / src_area[i]
+                line = ','.join((str(mfdm), str('%0.4e' % bcv), \
+                                 str('%0.4e' % area_norm_beta_curve_val))) + '\n'
+                rate_txt += line
+                    
+            # export to file
+            ratefile = path.join(srcfolder, '_'.join((src_code[i], 'norm_rates.csv')))
+            f = open(ratefile, 'wb')
+            f.write(rate_txt)
+            f.close()
                 
     ###############################################################################
     # start making outputs
@@ -1246,7 +1247,7 @@ for i in srcidx:
             #plt.hist(array(all_dep), bins=deprng, facecolor='w', label='Fixed Depths')
             
             # plt data with free depths
-            plt.hist(array(free_dep), bins=deprng, facecolor='seagreen', label='Free Depths')
+            #plt.hist(array(free_dep), bins=deprng, facecolor='seagreen', label='Free Depths')
             
             # make pretty
             plt.xlabel('Hypocentral Depth (km)')
