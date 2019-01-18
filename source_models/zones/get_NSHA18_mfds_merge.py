@@ -1244,7 +1244,7 @@ for i in srcidx:
                         free_dep.append(ev['dep'])
             
             # first plt all data
-            #plt.hist(array(all_dep), bins=deprng, facecolor='w', label='Fixed Depths')
+            plt.hist(array(all_dep), bins=deprng, facecolor='seagreen')
             
             # plt data with free depths
             #plt.hist(array(free_dep), bins=deprng, facecolor='seagreen', label='Free Depths')
