@@ -8,5 +8,5 @@ model_rel_path = NSHA2018/source_models/complete_model/final/
 shared_rel_path = NSHA2018/shared
 gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_July18.xml
 model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_June18/deaggregations/york/SA02/
-job_file = job_deag_mde_york_SA02.ini
-job_type = deag_mde
+job_file = job_deag_york_SA02.ini
+job_type = deag
