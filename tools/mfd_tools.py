@@ -267,7 +267,7 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
     n_yrs = array(n_yrs)
     bin_rates = n_obs / n_yrs
     
-    #print mrng, n_obs, n_yrs, bin_rates
+    #print len(mvect), n_obs
     
     # get cumulative rates per mag bin (/yr)
     cum_rates = []

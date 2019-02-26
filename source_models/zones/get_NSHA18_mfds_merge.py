@@ -987,8 +987,10 @@ for i in srcidx:
             # add grids
             plt.grid(which='major')    
             
-            Npass = str(len(mvect))
+            #Npass = str(len(mvect))
+            Npass = str(sum(n_obs))
             Nfail = str(len(orig_mvect) - len(mvect))
+            #Nfail = str(len(orig_mvect) - n_obs)
             plt.legend([h1[0], h2[0]], [Nfail+' Failed', Npass+' Passed'], loc=3, numpoints=1)
                     
             tlim = ax.get_xlim()

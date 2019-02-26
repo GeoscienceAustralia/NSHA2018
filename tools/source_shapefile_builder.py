@@ -192,7 +192,8 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
     
     print 'Reading SHmax shapefile...'
     try:
-        shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
+        #shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
+        shmaxshp = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
         sf = shapefile.Reader(shmaxshp)
     except:
         shmaxshp = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
