@@ -5,7 +5,8 @@ The code accessible through the NSHA18 Geoscience Australia github repository wa
  
 **This repository is not intentioned as the authoritative model files for the NSHA18 product.**
 
-The model files that underpinned the final version of the NSHA are available in [Geoscience Australia Record 2018/32](http://pid.geoscience.gov.au/dataset/ga/123049). The NSHA18 model files contain third party models (referenced in [GA Record 2018/32](http://pid.geoscience.gov.au/dataset/ga/123049)) and authors of these models have agreed and acknowledged that their models form part of the NSHA18 product and therefore subject to the copyright and licencing conditions of the NSHA18 product suite. 
+The model files that underpinned the final version of the NSHA are available in [Geoscience Australia Record 2018/32](http://pid.geoscience.gov.au/dataset/ga/123049). The NSHA18 model files contain third party models (referenced in [GA Record 2018/32](http://pid.geoscience.gov.au/dataset/ga/123049)) and authors of these models have agreed and acknowledged that their models form part of the NSHA18 product and therefore subject to the copyright and licencing conditions of the NSHA18 product suite.
+ 
 The copyright and licencing conditions of the NSHA18 product suite are detailed below. For users of the NSHA18 product suite, including the model files, users are free to share, copy, and redistribute it in any medium or format and users must always provide credit to the original author. The process for providing attribution is detailed [here](https://creativecommons.org.au/learn/howto/).
  
 Copyright and licencing conditions:
