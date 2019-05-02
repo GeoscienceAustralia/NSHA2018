@@ -18,12 +18,12 @@ import matplotlib.pyplot as plt
 num_ssc_experts = 15
 num_gmm_experts = 10
 
-cw = '0p4' # just change this to get different calibration powers
+cw = '1p0' # just change this to get different calibration powers
 fig_cw = 'p' + cw[0] + '.' + cw[-1]
 
 #########################################################
 # Seismic source model
-calib_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/'
+calib_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHA_18/Expert_Elicitation/Excalibur/data/'
 if cw == '0p0':
     # Equal weights
     ssc_weights = np.ones(num_ssc_experts)/num_ssc_experts
@@ -35,7 +35,7 @@ else:
 #print ssc_weights
 
 # Load in target responses for seismic source mode,l
-target_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
+target_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHA_18/Expert_Elicitation/Target_questions'
 fig_path =join(target_path, 'seismic_source_results', 'Figures_%s') % fig_cw
 if not os.path.exists(fig_path):
     os.makedirs(fig_path)
@@ -482,7 +482,7 @@ f_out.close()
 ######################################################
 # Calculate and plot ground motion logic tree weights
 # Load data
-calib_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Excalibur/data/GMPE/'
+calib_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHA_18/Expert_Elicitation/Excalibur/data/GMPE/'
 if cw == '0p0':
     # Equal weights
     gmm_weights = np.ones(num_gmm_experts)/num_gmm_experts
@@ -496,7 +496,7 @@ else:
 
 # Load in target responses for ground motion model
 print 'Loading ground motion model weight data'
-target_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHM_18/Expert_Elicitation/Target_questions'
+target_path = '/nas/active/ops/community_safety/ehp/georisk_earthquake/hazard/NSHA_18/Expert_Elicitation/Target_questions'
 #fig_path =join(target_path, 'ground_motion_results', 'Figures_p0.3')
 #gmm_weights
 gmm_responses = {}
