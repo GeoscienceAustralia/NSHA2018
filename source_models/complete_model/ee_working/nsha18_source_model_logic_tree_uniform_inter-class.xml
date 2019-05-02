@@ -104,7 +104,7 @@
 
                 <logicTreeBranch branchID="b20">
                     <uncertaintyModel>NSHA13_BACKGROUND_collapsed.xml</uncertaintyModel>
-                    <uncertaintyWeight>0.039</uncertaintyWeight>
+                    <uncertaintyWeight>0.040</uncertaintyWeight>
                 </logicTreeBranch>
 
             </logicTreeBranchSet>
