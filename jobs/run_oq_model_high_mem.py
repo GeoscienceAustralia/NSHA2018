@@ -110,8 +110,8 @@ outlines += '#PBS -l other=hyperthread\n\n'
 
 #outlines += 'module load openquake/2.1.1\n'
 #outlines += 'module load openquake/2.4\n'
-#outlines += 'module load openquake/3.1\n' # used in the NSHA18
-outlines += 'module load openquake/3.3.1\n'
+outlines += 'module load openquake/3.1\n' # used in the NSHA18
+#outlines += 'module load openquake/3.3.1\n'
 outlines += 'oq-ini.all.sh\n'
 # zip inputs - oq zip /path/to/your/job.ini job.zip
 #outlines += 'oq zip %s job.zip\n' % full_job_dir
