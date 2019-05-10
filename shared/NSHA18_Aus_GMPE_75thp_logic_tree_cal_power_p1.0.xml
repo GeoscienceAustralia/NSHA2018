@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nrml xmlns:gml="http://www.opengis.net/gml"
+      xmlns="http://openquake.org/xmlns/nrml/0.4">
+    <logicTree logicTreeID="lt1">
+
+<!-- GMM selection and weights defined through expert elicitation process, using calibration
+power of 0.4 and a 75th percentile cut-off to remove lowly weighted branches -->
+
+        <logicTreeBranchingLevel branchingLevelID="bl1">
+
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs1"
+                    applyToTectonicRegionType="Non_cratonic">
+
+                <logicTreeBranch branchID="Allen2012">
+                    <uncertaintyModel>Allen2012</uncertaintyModel>
+                    <uncertaintyWeight>0.229</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="SomervilleEtAl2009NonCratonic">
+                    <uncertaintyModel>SomervilleEtAl2009NonCratonic</uncertaintyModel>
+                    <uncertaintyWeight>0.179</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="AtkinsonBoore2006">
+                    <uncertaintyModel>AtkinsonBoore2006</uncertaintyModel>
+                    <uncertaintyWeight>0.107</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="BooreEtAl2014">
+                    <uncertaintyModel>BooreEtAl2014</uncertaintyModel>
+                    <uncertaintyWeight>0.147</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="ChiouYoungs2014">
+                    <uncertaintyModel>ChiouYoungs2014</uncertaintyModel>
+                    <uncertaintyWeight>0.110</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="ChiouYoungs2008SWISS01">
+                    <uncertaintyModel>ChiouYoungs2008SWISS01</uncertaintyModel>
+                    <uncertaintyWeight>0.228</uncertaintyWeight>
+                </logicTreeBranch>
+
+           </logicTreeBranchSet>
+
+        </logicTreeBranchingLevel>
+
+        <logicTreeBranchingLevel branchingLevelID="bl2">
+
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs2"
+                    applyToTectonicRegionType="Cratonic">
+
+                <logicTreeBranch branchID="Allen2012">
+                    <uncertaintyModel>Allen2012</uncertaintyModel>
+                    <uncertaintyWeight>0.227</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="SomervilleEtAl2009YilgarnCraton">
+                    <uncertaintyModel>SomervilleEtAl2009YilgarnCraton</uncertaintyModel>
+                    <uncertaintyWeight>0.182</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="AtkinsonBoore2006Modified2011">
+                    <uncertaintyModel>AtkinsonBoore2006Modified2011</uncertaintyModel>
+                    <uncertaintyWeight>0.120</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="BooreEtAl2014">
+                    <uncertaintyModel>BooreEtAl2014</uncertaintyModel>
+                    <uncertaintyWeight>0.136</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="ChiouYoungs2014">
+                    <uncertaintyModel>ChiouYoungs2014</uncertaintyModel>
+                    <uncertaintyWeight>0.107</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="RietbrockEtAl2013SelfSimilar">
+                    <uncertaintyModel>RietbrockEtAl2013SelfSimilar</uncertaintyModel>
+                    <uncertaintyWeight>0.228</uncertaintyWeight>
+                </logicTreeBranch>
+
+           </logicTreeBranchSet>
+
+        </logicTreeBranchingLevel>
+
+        <logicTreeBranchingLevel branchingLevelID="bl3">
+
+            <logicTreeBranchSet uncertaintyType="gmpeModel" branchSetID="bs3"
+                    applyToTectonicRegionType="Subduction">
+
+                <logicTreeBranch branchID="Allen2012">
+                    <uncertaintyModel>Allen2012</uncertaintyModel>
+                    <uncertaintyWeight>0.111</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="AtkinsonBoore2006Modified2011">
+                    <uncertaintyModel>AtkinsonBoore2006Modified2011</uncertaintyModel>
+                    <uncertaintyWeight>0.125</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="BooreEtAl2014">
+                    <uncertaintyModel>BooreEtAl2014</uncertaintyModel>
+                    <uncertaintyWeight>0.089</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="ChiouYoungs2008SWISS01">
+                    <uncertaintyModel>ChiouYoungs2008SWISS01</uncertaintyModel>
+                    <uncertaintyWeight>0.088</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="AbrahamsonEtAl2015SSlab">
+                    <uncertaintyModel>AbrahamsonEtAl2015SSlab</uncertaintyModel>
+                    <uncertaintyWeight>0.230</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="AtkinsonBoore2003SSlab">
+                    <uncertaintyModel>AtkinsonBoore2003SSlab</uncertaintyModel>
+                    <uncertaintyWeight>0.147</uncertaintyWeight>
+                </logicTreeBranch>
+
+                <logicTreeBranch branchID="GarciaEtAl2005SSlab">
+                    <uncertaintyModel>GarciaEtAl2005SSlab</uncertaintyModel>
+                    <uncertaintyWeight>0.210</uncertaintyWeight>
+                </logicTreeBranch>
+
+           </logicTreeBranchSet>
+
+        </logicTreeBranchingLevel>
+
+    </logicTree>
+</nrml>
