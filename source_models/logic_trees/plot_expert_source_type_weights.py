@@ -56,8 +56,36 @@ for i in range(num_ssc_experts):
     Seismo_weights.append(data[38])
     SS_flt_weights.append(data[39])
 
+SS_weights = np.array(SS_weights)
+BG_weights = np.array(BG_weights)
+Reg_weights = np.array(Reg_weights)
+Seismo_weights = np.array(Seismo_weights)
+SS_flt_weights = np.array(SS_flt_weights)
 print SS_weights
 print BG_weights
 print Reg_weights
 print Seismo_weights
-print np.array(SS_flt_weights)
+print SS_flt_weights
+weight_list = [SS_weights, BG_weights, Reg_weights, Seismo_weights,
+               SS_flt_weights]
+fig = plt.figure(figsize = (3,10))
+title_list = ['Smoothed Seismicity', 'Background', 'Regional',
+              'Seismotectonic', 'Smoothed Seismicity with Faults']
+label_list = ['a)', 'b)', 'c)', 'd)', 'e)']
+for i,mod_type_w in enumerate(weight_list):
+    plt.subplot(5,1,i+1)
+    for j in range(num_ssc_experts):
+        plt.scatter(mod_type_w[j,1], [j+1], marker='x', c='k')
+        plt.plot([mod_type_w[j,0], mod_type_w[j,2]], [j+1, j+1], c='k')
+    plt.yticks(np.arange(1, num_ssc_experts+1, 1), fontsize=7.5)
+    plt.xticks(np.arange(0.0, 1.2, 0.2), fontsize=7.5)
+    plt.xlim([-0.05,1.0])
+    plt.ylim([0, 17])
+    plt.xlabel('Weight', fontsize=10)
+    plt.ylabel('Expert ID', fontsize=10)
+    plt.text(0, 15.5, label_list[i], fontsize=10)
+#    plt.title(title_list[i], fontsize=10)
+
+plt.tight_layout()
+plt.savefig('Model_type_expert_weights.png', dpi=300)
+plt.savefig('Model_type_expert_weights.eps', dpi=300)
