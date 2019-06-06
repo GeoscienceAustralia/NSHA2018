@@ -1,0 +1,11 @@
+ncpus = 1008 
+mem = 7000GB
+walltime = 4:30:00
+jobfs = 500GB
+sandpit_path = /short/w84/NSHA18/sandpit/
+model_rel_path = NSHA2018/source_models/complete_model/final_mx/
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_July18.xml
+model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_Production_June18/expert_elicitation_paper/catalogue_test_mx
+job_file = job_fractiles_cat_test_mx.ini
+job_type = fractiles
