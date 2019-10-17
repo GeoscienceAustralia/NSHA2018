@@ -1,4 +1,4 @@
-import os
+import os, sys
 import platform
 import numpy as np
 import pandas as pd
@@ -7,9 +7,14 @@ from glob import glob
 import shapefile
 from shapely.geometry import Point, Polygon
 
+if sys.version_info[0] < 3:
+    raise Exception("Must be using Python 3")
+
 # for IPython use in VS code
 #import IPython
 #IPython.embed()
+
+# script in development
 
 # TODO Check script is being run with Python 3 or there will be confusing error messages!
 # TODO Check for compatibility with unix.  
@@ -51,8 +56,8 @@ weights = []
 x_vals = []
 
 for key in source_model_dict.keys():
-    #print(key)
-    NSHA_SM_path = Path("T:/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/jstephenson/NSHA2018/source_models/zones/2018_mw/")
+    # relative path for source model 
+    NSHA_SM_path = Path("../../source_models/zones/2018_mw/")
     full_path = NSHA_SM_path / str(key) / "shapefiles"
 
     for file in os.listdir(str(full_path)):
