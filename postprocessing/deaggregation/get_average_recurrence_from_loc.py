@@ -54,7 +54,6 @@ def look_up_recurrance(lon, lat, mag, source_model_dict):
     x_vals = []
 
     for key in source_model_dict.keys():
-        print(key)
         # relative path for source model 
         NSHA_SM_path = Path("../../source_models/zones/2018_mw/")
         full_path = NSHA_SM_path / str(key) / "shapefiles"
