@@ -2,6 +2,9 @@
 """Wrapper script for running model and capturing provenance
 """
 
+'''Edited by js1626 to remove copying of source logic trees per run
+'''
+
 import os, sys
 from os.path import join
 from subprocess import call
@@ -71,8 +74,8 @@ f_in.close()
 
 # Copy files to output directory
 copy2(job_file, output_dir)
-copy2(src_lt_file, output_dir)
-copy2(gsim_lt_file, output_dir)
+#copy2(src_lt_file, output_dir)
+#copy2(gsim_lt_file, output_dir)
 try:
     copy2(sites_file, output_dir)
 except IOError:
@@ -83,13 +86,13 @@ except NameError:
 
 # Find source models from logic tree file
 # and copy to output dir
-f_in = open(src_lt_file)
-for line in f_in.readlines():
-    if '.xml' in line:
-        source_model_name = line.replace('>','<').split('<')[2]
-        source_model_file = join(model_path, source_model_name)        
-        copy2(source_model_file, output_dir)
-f_in.close()    
+#f_in = open(src_lt_file)
+#for line in f_in.readlines():
+#    if '.xml' in line:
+#        source_model_name = line.replace('>','<').split('<')[2]
+#        source_model_file = join(model_path, source_model_name)        
+#        copy2(source_model_file, output_dir)
+#f_in.close()    
 
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
