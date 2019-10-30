@@ -139,6 +139,12 @@ for i,param_file in enumerate(param_file_list):
     f_out = open(run_script, 'w')
     f_out.write(outlines)
     f_out.close()
+run_oq_deag_high_mem_mde_batch.py
+
+    # clean working directory after copying job files.  
+    
+
+
 
 # Change to output directory and submit job
 # batch jobs need to go into ALL the folders and run the coresponding scripts
@@ -154,3 +160,18 @@ for i,directory in enumerate(output_dirs):
     os.system(cmd)
     
 # add section to clean up job files putting them in the right directories
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
