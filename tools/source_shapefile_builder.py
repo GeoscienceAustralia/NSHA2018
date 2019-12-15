@@ -43,7 +43,7 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
         # get centroid of completeness sources
         clon, clat = get_shp_centroid(poly.points)
         point = Point(clon, clat)
-        print clon, clat
+        print(clon, clat)
         
         # loop through target and find point in poly    
         mccompFound = False
@@ -78,8 +78,76 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
         min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
         
     return ycomp, mcomp, min_rmag
-    
 
+def get_completeness_model_point(clat, clon, singleCorner):
+    '''
+    singleCorner
+        1 = do singleCorner (True)
+        0 = do not do singleCorner (False)
+        
+        assume AU, dom = 0
+    '''
+    dom = 0
+    from os import path
+    import shapefile
+    from shapely.geometry import Point, Polygon
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+    
+    # load completeness shp
+    if singleCorner == 1:
+        compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
+    else:
+        compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
+    
+    mcsf = shapefile.Reader(compshp)
+    
+    # get completeness data
+    mc_ycomp = get_field_data(mcsf, 'YCOMP', 'str')
+    mc_mcomp = get_field_data(mcsf, 'MCOMP', 'str')
+    
+    # get completeness polygons
+    mc_shapes = mcsf.shapes()
+    
+    # set empty completeness values
+    ycomp = []
+    mcomp = []
+    min_rmag = []
+    point = Point(clon, clat)
+        
+    # loop through target and find point in poly
+    mccompFound = False
+    for i in range(0, len(mc_shapes)):
+        mc_poly = Polygon(mc_shapes[i].points)
+        
+        # check if target centroid in completeness poly
+        if point.within(mc_poly): 
+            ycomp = mc_ycomp[i]
+            mcomp = mc_mcomp[i]
+            mccompFound = True
+    
+    # if no Mcomp model assigned, use conservative model
+    if mccompFound == False:
+        if dom <= 8:
+            # for single-corner
+            if singleCorner == 1:
+                ycomp = '1980;1980'
+                mcomp = '3.5;3.5'
+        
+            # for mult-corner
+            else:
+                ycomp = '1980;1964;1900'
+                mcomp = '3.5;5.0;6.0'
+                            
+        # use approx ISC-GEM completeness
+        else:
+            ycomp = '1975;1964;1904'
+            mcomp = '5.75;6.25;7.5'
+        
+    # set rmin range
+    min_rmag.append(max([3.0, float(mcomp.split(';')[0])]))
+        
+    return ycomp, mcomp, min_rmag
+    
 # need to ensure upper/lower seismo depths consistent with Domains edits
 def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
     from os import path
@@ -89,7 +157,7 @@ def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
     
     shmaxshp = path.join('..','Domains','Domains_NSHA18_single_Mc.shp')
 
-    print 'Reading SHmax shapefile...'
+    print('Reading SHmax shapefile...')
     sf = shapefile.Reader(shmaxshp)
         
     # get shmax attributes
@@ -107,7 +175,7 @@ def get_ul_seismo_depths(target_codes, target_usd, target_lsd):
         
         # no match
         if matchCodes == False:
-           print '  Cannot match seis depths:', tc
+           print('  Cannot match seis depths:', tc)
            
     return target_usd, target_lsd
     
@@ -190,7 +258,7 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data
     
-    print 'Reading SHmax shapefile...'
+    print('Reading SHmax shapefile...')
     try:
         #shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
         shmaxshp = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
@@ -228,11 +296,11 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
             # check sigma and make sure it is at least +/- 15 degrees
             shmax_sig.append(max([std(array(shm_in)), 15.]))        
             
-            print 'Getting SHmax for', code
+            print('Getting SHmax for', code)
         
         # if no points in polygons, get nearest neighbour
         else:
-            print 'Getting nearest neighbour...'
+            print('Getting nearest neighbour...')
             min_dist = 9999.
             for shmlo, shmla, shm in zip(shmax_lon, shmax_lat, shmax):
                 pt = Point(shmlo, shmla)
@@ -254,7 +322,7 @@ def get_rate_adjust_factor(newshp, newField, origshp, origField):
     from shapely.geometry import Polygon
     from tools.nsha_tools import get_field_data
     
-    print '\nChecking shape geometrties...'
+    print('\nChecking shape geometrties...')
     
     newsf = shapefile.Reader(newshp)
     new_shapes = newsf.shapes()
@@ -277,7 +345,7 @@ def get_rate_adjust_factor(newshp, newField, origshp, origField):
                 if round(newPolyArea, 4) != round(origPolyArea, 4):
                     rte_adj_fact[i] = round(newPolyArea / origPolyArea, 4)
                     
-                    print '    ',newCode,'rate adjustment factor:',rte_adj_fact[i]
+                    print('    ',newCode,'rate adjustment factor:',rte_adj_fact[i])
                     
         i += 1
         
@@ -445,7 +513,7 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     w.save(outshp)
     
     # write projection file
-    print outshp
+    print(outshp)
     prjfile = outshp.strip().split('.shp')[0]+'.prj'
     f = open(prjfile, 'wb')
     f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')

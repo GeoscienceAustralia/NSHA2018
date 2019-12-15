@@ -22,7 +22,7 @@ from os import path
 def parse_hmtk_cat(hmtk_csv):
     from numpy import nan
     
-    print 'parsing HMTK catalogue...'
+    print('parsing HMTK catalogue...')
 
     # parse HMTK csv using modified version of HMTK parser
     parser = CsvCatalogueParser(hmtk_csv)
@@ -108,7 +108,7 @@ def get_events_in_poly(idx, cat, poly, polygons, src_usd, src_lsd, src_overwrite
         2 = do not add - will be double-counted
         
     '''
-    #print src_usd[idx], src_lsd[idx], src_overwrite_lsd[idx]
+    #print(src_usd[idx], src_lsd[idx], src_overwrite_lsd[idx]
     from numpy import isnan
     
     # set arrays
@@ -164,7 +164,7 @@ def get_events_in_poly(idx, cat, poly, polygons, src_usd, src_lsd, src_overwrite
                 dec_tvect.append(toYearFraction(ev['datetime']))
                 ev_dict.append(ev)
     
-    #print 'len mvect:', len(mvect)
+    #print('len mvect:', len(mvect)
     return array(mvect), array(mxvect), array(tvect), array(dec_tvect), ev_dict
     
 def get_events_in_poly_simple(cat, poly):
@@ -189,7 +189,7 @@ def get_events_in_poly_simple(cat, poly):
             dec_tvect.append(toYearFraction(ev['datetime']))
             ev_dict.append(ev)
     
-    #print 'len mvect:', len(mvect)
+    #print('len mvect:', len(mvect)
     return array(mvect), array(mxvect), array(tvect), array(dec_tvect), ev_dict
 
 ###############################################################################
@@ -235,8 +235,8 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
     bin_width: mfd nin width
     ymax:   max year of catalogue + 1
     '''
-    #print 'mcomps', mcomps
-    #print 'mrng', mrng
+    #print('mcomps', mcomps
+    #print('mrng', mrng
     
     # get cumulative rates for mags >= m
     cum_num = []
@@ -267,7 +267,7 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
     n_yrs = array(n_yrs)
     bin_rates = n_obs / n_yrs
     
-    #print len(mvect), n_obs
+    #print(len(mvect), n_obs
     
     # get cumulative rates per mag bin (/yr)
     cum_rates = []
@@ -275,7 +275,7 @@ def get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax):
         midx = where( array(mrng) >= m )[0]
         cum_rates.append(sum(bin_rates[midx]))
     
-    #print cum_rates
+    #print(cum_rates
     return array(cum_rates), array(cum_num), bin_rates, n_obs, n_yrs
 
 ###############################################################################
@@ -349,8 +349,8 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
     cum_rates, cum_num, bin_rates, n_obs, n_yrs = \
         get_annualised_rates(mcomps, ycomps, mvect, mrng, bin_width, ymax)
         
-    print '    Number of events:', len(mvect)
-    #print cum_rates
+    print('    Number of events:', len(mvect))
+    #print(cum_rates
             
     ###############################################################################
     # calculate MFDs if at least 50 events
@@ -372,13 +372,13 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
             # if num observations greater than zero, add to midx
             if n_obs[idxstart] > 0:
                 midx = hstack((idxstart, midx))
-                print '    get lower mag T', midx
+                print('    get lower mag T', midx)
                 
             idxstart -= 1
         
     # first, check if using fixed bval and fit curve using to solve for N0
     if src_bval_fix > 0:
-        print '    Using fixed b-value =', src_bval_fix, src_bval_fix_sd        
+        print('    Using fixed b-value =', src_bval_fix, src_bval_fix_sd)
         
         # set source beta
         bval = src_bval_fix
@@ -419,7 +419,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         # solve for N0
         fn0 = 10**(log10(Nminmag[0]) + bval*bc_mrng[fidx])
         
-        print '    Aki ML b-value =', bval, sigb
+        print('    Aki ML b-value =', bval, sigb)
                         
     # do Weichert for zones with more events
     elif len(mvect) >= 80:
@@ -432,14 +432,14 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         beta = bval2beta(bval)
         sigbeta = bval2beta(sigb)
     
-        print '    Weichert b-value =', str('%0.3f' % bval), str('%0.3f' % sigb)
+        print('    Weichert b-value =', str('%0.3f' % bval), str('%0.3f' % sigb))
                     
     ###############################################################################
     # calculate MFDs using NSHA13_Background if fewer than 50 events
     ###############################################################################
     
     else:
-        print 'Setting b-value to 1.0...'   
+        print('Setting b-value to 1.0...')
         
         bval = 1.0            
         
@@ -450,7 +450,7 @@ def get_mfds(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, ymax, mrn
         # solve for N0
         fn0 = fit_a_value(bval, mrng, cum_rates, src_mmax, bin_width, midx)
         
-        print '    Automatic b-value =', bval, sigb
+        print('    Automatic b-value =', bval, sigb)
         
     ###############################################################################
     # get confidence intervals
