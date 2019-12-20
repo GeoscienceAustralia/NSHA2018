@@ -88,16 +88,23 @@ def get_completeness_model_point(clat, clon, singleCorner):
         assume AU, dom = 0
     '''
     dom = 0
-    from os import path
+    from os import path, getcwd
     import shapefile
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
     
     # load completeness shp
-    if singleCorner == 1:
-        compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
+    if getcwd().startswith('/Users'):
+        if singleCorner == 1:
+            compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
+        else:
+            compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
     else:
-        compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
+        if singleCorner == 1:
+            compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
+        else:
+            #compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
+            compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi_20191217.shp') # multi corner 
     
     mcsf = shapefile.Reader(compshp)
     
@@ -248,7 +255,79 @@ def get_neotectonic_domain_params(target_sf, target_trt, refShpFile):
             bval_sig_fix.append(bval_sig[matchidx])
         
     return domain, min_rmag, mmax, trt, bval_fix, bval_sig_fix
+
+# get neotectonic domain number and Mmax from zone centroid
+def get_simple_neotectonic_domain_params(target_sf, refShpFile):
+    import shapefile
+    from shapely.geometry import Point, Polygon
+    from tools.nsha_tools import get_field_data, get_shp_centroid
     
+    # load target shapefile
+    polygons = target_sf.shapes()
+    
+    # load domains shp
+    domshp = open(refShpFile).read()
+    dsf = shapefile.Reader(domshp)
+    
+    # get domains
+    neo_doms = get_field_data(dsf, 'DOMAIN', 'float')
+    neo_min_reg = get_field_data(dsf, 'MIN_RMAG', 'float')
+    neo_mmax = get_field_data(dsf, 'MMAX_BEST', 'float')
+    neo_bval = get_field_data(dsf, 'BVAL_BEST', 'float')
+    neo_bval_l = get_field_data(dsf, 'BVAL_LOWER', 'float')
+    neo_trt  = get_field_data(dsf, 'TRT', 'str')
+    neo_usd  = get_field_data(dsf, 'USD', 'float')
+    neo_lsd  = get_field_data(dsf, 'LSD', 'float')
+    neo_dep_b  = get_field_data(dsf, 'DEP_BEST', 'float')
+    neo_dep_u  = get_field_data(dsf, 'DEP_UPPER', 'float')
+    neo_dep_l  = get_field_data(dsf, 'DEP_LOWER', 'float')
+    
+    # get bval sigma
+    bval_sig = neo_bval_l - neo_bval
+    
+    # get domain polygons
+    dom_shapes = dsf.shapes()
+    domain = []
+    min_rmag = []
+    mmax = []
+    trt = []
+    bval_fix = []
+    bval_sig_fix = []
+    
+    # loop through target zones
+    for poly in polygons:
+        # get centroid of target sources
+        clon, clat = get_shp_centroid(poly.points)
+        point = Point(clon, clat)
+        
+        # loop through domains and find point in poly
+        matchidx = -99
+        for i in range(0, len(dom_shapes)):
+            # make sure trts match
+            dom_poly = Polygon(dom_shapes[i].points)
+                
+            # check if target centroid in domains poly
+            if point.within(dom_poly):
+                matchidx = i
+                
+        # set dummy values
+        if matchidx == -99:
+            domain.append(-99)
+            min_rmag.append(3.5)
+            mmax.append(-99)
+            trt.append('')
+            bval_fix.append(-99)
+            bval_sig_fix.append(-99)
+        # fill real values
+        else:
+            domain.append(neo_doms[matchidx])
+            min_rmag.append(neo_min_reg[matchidx])
+            mmax.append(neo_mmax[matchidx])
+            trt.append(neo_trt[matchidx])
+            bval_fix.append(neo_bval[matchidx])
+            bval_sig_fix.append(bval_sig[matchidx])
+        
+    return domain, min_rmag, mmax, trt, bval_fix, bval_sig_fix, neo_usd, neo_lsd, neo_dep_b, neo_dep_u, neo_dep_l
 
 # use Rajabi_2016 shmax vectors - gets median & std within a source zone    
 def get_aus_shmax_vectors(src_codes, src_shapes):
