@@ -79,6 +79,86 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
         
     return ycomp, mcomp, min_rmag
 
+def get_completeness_model_vertex(src_codes, src_shapes, domains, singleCorner):
+    '''
+    singleCorner
+        1 = do singleCorner (True)
+        0 = do not do singleCorner (False)
+    '''
+    
+    from os import path
+    import shapefile
+    from shapely.geometry import Point, Polygon
+    from tools.nsha_tools import get_field_data, get_shp_centroid
+    
+    # load completeness shp
+    if singleCorner == 1:
+        compshp = path.join('..','Other','Mcomp_NSHA18_single.shp') # single corner 
+    else:
+        compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
+    
+    mcsf = shapefile.Reader(compshp)
+    
+    # get completeness data
+    mc_ycomp = get_field_data(mcsf, 'YCOMP', 'str')
+    mc_mcomp = get_field_data(mcsf, 'MCOMP', 'str')
+    
+    # get completeness polygons
+    mc_shapes = mcsf.shapes()
+    
+    # set empty completeness values
+    ycomp = []
+    mcomp = []
+    min_rmag = []
+    
+    # loop through Mcomp zones
+    for code, poly, dom in zip(src_codes, src_shapes, domains):
+        tmp_mcomp = '-99;-99' # dummy value
+        mccompFound = False
+                
+        # get centroid of completeness sources
+        for clon, clat in poly.points:
+            point = Point(clon, clat)
+            
+            # loop through target and find point in poly    
+            for i in range(0, len(mc_shapes)):
+                mc_poly = Polygon(mc_shapes[i].points)
+                
+                # check if target vertex in completeness poly
+                if point.within(mc_poly): 
+                    # select most conservative option
+                    if float(mc_mcomp[i].strip().split(';')[0]) > float(tmp_mcomp.strip().split(';')[0]):
+                        tmp_ycomp = mc_ycomp[i]
+                        tmp_mcomp = mc_mcomp[i]
+                        mccompFound = True
+            
+        # if no Mcomp model assigned, use conservative model
+        if mccompFound == False:
+            if dom <= 8:
+                # for single-corner
+                if singleCorner == 1:
+                    tmp_ycomp = '1980;1980'
+                    tmp_mcomp = '3.5;3.5'
+            
+                # for mult-corner
+                else:
+                    tmp_ycomp = '1980;1964;1900'
+                    tmp_mcomp = '3.5;5.0;6.0'
+                                
+            # use approx ISC-GEM completeness
+            else:
+                tmp_ycomp = '1975;1964;1904'
+                tmp_mcomp = '5.75;6.25;7.5'
+                
+            
+        ycomp.append(tmp_ycomp)
+        mcomp.append(tmp_mcomp)
+        
+        # set rmin range
+        min_rmag.append(max([3.0, float(mcomp[-1].split(';')[0])]))
+        
+    return ycomp, mcomp, min_rmag
+
 def get_completeness_model_point(clat, clon, singleCorner):
     '''
     singleCorner
@@ -101,10 +181,10 @@ def get_completeness_model_point(clat, clon, singleCorner):
             compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
     else:
         if singleCorner == 1:
-            compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
+            compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/trev/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
         else:
-            #compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
-            compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi_20191217.shp') # multi corner 
+            #compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/trev/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
+            compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/trev/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi_20191217.shp') # multi corner 
     
     mcsf = shapefile.Reader(compshp)
     
@@ -293,6 +373,11 @@ def get_simple_neotectonic_domain_params(target_sf, refShpFile):
     trt = []
     bval_fix = []
     bval_sig_fix = []
+    usd = []
+    lsd = []
+    dep_b = []
+    dep_u = []
+    dep_l = []
     
     # loop through target zones
     for poly in polygons:
@@ -314,10 +399,15 @@ def get_simple_neotectonic_domain_params(target_sf, refShpFile):
         if matchidx == -99:
             domain.append(-99)
             min_rmag.append(3.5)
-            mmax.append(-99)
+            mmax.append(8.5)
             trt.append('')
             bval_fix.append(-99)
             bval_sig_fix.append(-99)
+            usd.append(-99)
+            lsd.append(-99)
+            dep_b.append(-99)
+            dep_u.append(-99)
+            dep_l.append(-99)
         # fill real values
         else:
             domain.append(neo_doms[matchidx])
@@ -326,8 +416,13 @@ def get_simple_neotectonic_domain_params(target_sf, refShpFile):
             trt.append(neo_trt[matchidx])
             bval_fix.append(neo_bval[matchidx])
             bval_sig_fix.append(bval_sig[matchidx])
-        
-    return domain, min_rmag, mmax, trt, bval_fix, bval_sig_fix, neo_usd, neo_lsd, neo_dep_b, neo_dep_u, neo_dep_l
+            usd.append(neo_usd[matchidx])
+            lsd.append(neo_lsd[matchidx])
+            dep_b.append(neo_dep_b[matchidx])
+            dep_u.append(neo_dep_u[matchidx])
+            dep_l.append(neo_dep_l[matchidx])
+    
+    return domain, min_rmag, mmax, trt, bval_fix, bval_sig_fix, usd, lsd, dep_b, dep_u, dep_l
 
 # use Rajabi_2016 shmax vectors - gets median & std within a source zone    
 def get_aus_shmax_vectors(src_codes, src_shapes):
@@ -340,10 +435,10 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
     print('Reading SHmax shapefile...')
     try:
         #shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
-        shmaxshp = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/tallen/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
+        shmaxshp = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/trev/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
         sf = shapefile.Reader(shmaxshp)
     except:
-        shmaxshp = '/Users/tallen/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
+        shmaxshp = '/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
         sf = shapefile.Reader(shmaxshp)
 
     # get shmax attributes
@@ -522,6 +617,8 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
             gmm_trt.append('Non_cratonic')
         elif t == 'Intraslab' or t == 'Interface':
             gmm_trt.append('Subduction')
+        else:
+            gmm_trt.append('Non_cratonic')
     
     # set shapefile to write to
     w = shapefile.Writer(shapefile.POLYGON)
@@ -584,6 +681,9 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
             
         # write new records
         if i >= 0:
+            #print(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i])
+            #print(overwrite_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i])
+            #print(
             w.record(src_names[i], src_codes[i], src_ty, zone_class[i], src_wt, rte_adj_fact[i], dep_b[i], dep_u[i], dep_l[i], usd[i], lsd[i], \
                      overwrite_lsd[i], min_mag, min_rmag[i], mmax[i], mmax[i]-0.2, mmax[i]+0.2, n0, n0_l, n0_u, bval, bval_l, bval_u, bval_fix[i], bval_sig_fix[i], \
                      ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], gmm_trt[i], dom[i], prefCat[i])
@@ -594,6 +694,6 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     # write projection file
     print(outshp)
     prjfile = outshp.strip().split('.shp')[0]+'.prj'
-    f = open(prjfile, 'wb')
+    f = open(prjfile, 'w')
     f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
     f.close()

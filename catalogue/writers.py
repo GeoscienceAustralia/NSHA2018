@@ -47,7 +47,7 @@ def ggcat2ascii(ggcat_dict, outfile):
         cattxt = cattxt + line + '\n'
                 
     #f = open(path.join(outfolder, outfile), 'wb')
-    f = open(outfile, 'wb')
+    f = open(outfile, 'w')
     f.write(cattxt)
     f.close()
     
@@ -148,8 +148,8 @@ def ggcat2hmtk_csv(ggcat_dict, hmtkfile, prefmag):
         oq_dat += line + '\n'
         
     #write to OQ out
-    print 'Writing HMTK csv...'
-    f = open(hmtkfile, 'wb')
+    print('Writing HMTK csv...')
+    f = open(hmtkfile, 'w')
     f.write(oq_dat)
     f.close()
     
@@ -176,8 +176,8 @@ def iscgem2hmtk_csv(iscgem_dict, hmtkfile):
         oq_dat += line + '\n'
         
     #write to OQ out
-    print 'Writing HMTK csv...'
-    f = open(hmtkfile, 'wb')
+    print('Writing HMTK csv...')
+    f = open(hmtkfile, 'w')
     f.write(oq_dat)
     f.close()   
 
@@ -190,7 +190,7 @@ def htmk2shp(cat, outshp):
     import shapefile
     from numpy import isnan
     
-    print 'Making shapefile...'
+    print('Making shapefile...')
     w = shapefile.Writer(shapefile.POINT)
     w.field('EVID','C','15')
     w.field('AGENCY','C','15')
@@ -226,12 +226,12 @@ def htmk2shp(cat, outshp):
                  cat.data['depth'][i],round(cat.data['pref_mw'][i],2),\
                  cat.data['mx_origML'][i],cat.data['mx_origType'][i])
     
-    print 'Writing shapefile...'
+    print('Writing shapefile...')
     w.save(outshp)
     
     # write projection file
     prjfile = outshp.strip().split('.shp')[0]+'.prj'
-    f = open(prjfile, 'wb')
+    f = open(prjfile, 'w')
     f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
     f.close()
     
@@ -244,7 +244,7 @@ def htmk2shp_isc(cat, outshp):
     import shapefile
     from numpy import isnan
     
-    print 'Making shapefile...'
+    print('Making shapefile...')
     w = shapefile.Writer(shapefile.POINT)
     w.field('EVID','C','15')
     w.field('AGENCY','C','15')
@@ -277,12 +277,12 @@ def htmk2shp_isc(cat, outshp):
                  round(cat.data['latitude'][i],4), \
                  cat.data['depth'][i], cat.data['magnitude'][i])
     
-    print 'Writing shapefile...'
+    print('Writing shapefile...')
     w.save(outshp)
     
     # write projection file
     prjfile = outshp.strip().split('.shp')[0]+'.prj'
-    f = open(prjfile, 'wb')
+    f = open(prjfile, 'w')
     f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
     f.close()
 

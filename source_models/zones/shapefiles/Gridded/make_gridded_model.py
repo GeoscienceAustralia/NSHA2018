@@ -1,16 +1,19 @@
 import shapefile
 from shapely.geometry import Polygon, Point
 from numpy import array, ones_like, nan, linspace, arange
-try:
-    from tools.nsha_tools import get_field_data
-    from tools.source_shapefile_builder import get_preferred_catalogue, \
-                                               get_completeness_model, get_aus_shmax_vectors, \
-                                               get_rate_adjust_factor, build_source_shape, \
-                                               get_ul_seismo_depths, get_simple_neotectonic_domain_params, \
-                                               aggregate_intraslab_sources
-except:
-    print 'Add PYTHONPATH to NSHA18 root directory'
+from sys import argv
 
+from tools.nsha_tools import get_field_data
+from tools.source_shapefile_builder import get_preferred_catalogue, \
+                                           get_completeness_model, get_aus_shmax_vectors, \
+                                           get_rate_adjust_factor, build_source_shape, \
+                                           get_ul_seismo_depths, get_simple_neotectonic_domain_params, \
+                                           aggregate_intraslab_sources
+
+'''
+except:
+    print('Add PYTHONPATH to NSHA18 root directory')
+'''
 ###############################################################################
 
 ''' START MAIN CODE HERE '''
@@ -18,21 +21,21 @@ except:
 ###############################################################################
 # make gridded polygons
 ###############################################################################
+res = int(argv[1]) # degrees
+r2 = res / 2.
+outshp = 'gridded_polygons_'+str(res)+'deg.shp'
 
-outshp = 'gridded_polygons.shp'
+print('Making grids shapefile...')
 
-print 'Making grids shapefile...'
-
-bbox = '111.0/156.0/-45.0/-7.0' # map boundary - lon1/lon2/lat1/lat2
+bbox = '110.0/156.0/-46.0/-9.0' # map boundary - lon1/lon2/lat1/lat2
 bbox = bbox.split('/')
 minlon = float(bbox[0])
 maxlon = float(bbox[1])
 minlat = float(bbox[2])
 maxlat = float(bbox[3])
 
-res = 3. # degrees
-xrng = arange(minlon, maxlon+1, res)
-yrng = arange(minlat, maxlat+1, res)
+xrng = arange(minlon+r2, maxlon+r2, res)
+yrng = arange(minlat+r2, maxlat+r2, res)
 
 polygons = []
 zcode = []
@@ -73,7 +76,7 @@ w.save(outshp)
 # read new shapefile
 ###############################################################################
 
-print 'Reading source shapefile...'
+print('Reading source shapefile...')
 sf = shapefile.Reader(outshp)
 shapes = sf.shapes()
 polygons = []
@@ -123,7 +126,7 @@ domains[11] = 2.
 ###############################################################################
 #  set intraslab aggregation class
 ###############################################################################
-print '\n!!! REMEMBER TO RESET SRM_200_300 SOURCE CODE !!!!\n'
+print('\n!!! REMEMBER TO RESET SRM_200_300 SOURCE CODE !!!!\n'
 new_src_codes = []
 for i, src_code in enumerate(src_codes):
     
@@ -272,7 +275,7 @@ pref_dip = -99 * ones_like(array(min_rmag))
 pref_rke = -99 * ones_like(array(min_rmag))
 
 build_source_shape(outshp, shapes, src_names, src_codes, zone_class, \
-                   rte_adj_fact, neo_dep_b, neo_dep_u, neo_dep_l, neo_usd, neo_lsd, \
+                   rte_adj_fact, neo_dep_b, neo_dep_u, neo_dep_l, neo_usd, array(neo_lsd), \
                    min_rmag, neo_mmax, bval_fix, bval_sig_fix, \
                    ycomp, mcomp, pref_stk, pref_dip, pref_rke, \
                    shmax_pref, shmax_sig, neo_trt, neo_domains, prefCat)
@@ -281,6 +284,6 @@ build_source_shape(outshp, shapes, src_names, src_codes, zone_class, \
 # write projection file
 print(outshp)
 prjfile = outshp.strip().split('.shp')[0]+'.prj'
-f = open(prjfile, 'wb')
+f = open(prjfile, 'w')
 f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
 f.close()

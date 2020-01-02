@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mw//Gridded_6D
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//Gridded//gridded_polygons_6deg.shp
+ORIGINAL SHAPES  = shapefiles//Gridded//gridded_polygons_6deg.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = Gridded_6D_NSHA18.shp
+MFD BIN WIDTH    = 0.1
