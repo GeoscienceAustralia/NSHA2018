@@ -27,15 +27,16 @@ outshp = 'gridded_polygons_'+str(res)+'deg.shp'
 
 print('Making grids shapefile...')
 
-bbox = '110.0/156.0/-46.0/-9.0' # map boundary - lon1/lon2/lat1/lat2
+bbox = '110.0/156.0/-45.0/-9.0' # map boundary - lon1/lon2/lat1/lat2
 bbox = bbox.split('/')
 minlon = float(bbox[0])
 maxlon = float(bbox[1])
 minlat = float(bbox[2])
 maxlat = float(bbox[3])
 
-xrng = arange(minlon+r2, maxlon+r2, res)
-yrng = arange(minlat+r2, maxlat+r2, res)
+# make first grid
+xrng = arange(minlon-r2, maxlon+r2, res)
+yrng = arange(minlat-r2, maxlat+r2, res) # check 1st + shouldn't be a -
 
 polygons = []
 zcode = []
@@ -55,22 +56,45 @@ for x in xrng:
         polygons.append(pointList)
         
         zcode.append(str(x)+'E_'+str(abs(y))+'S')
+
+# make offset grid
+xrng = arange(minlon, maxlon+r2, res)
+yrng = arange(minlat, maxlat+r2, res)
+
+for x in xrng:
+    for y in yrng:
+        #print('\n'+str(x)+' '+str(y))
         
-w = shapefile.Writer(shapefile.POLYGON)
+        # make points
+        p1 = [x-r2, y-r2]
+        p2 = [x+r2, y-r2]
+        p3 = [x+r2, y+r2]
+        p4 = [x-r2, y+r2]
+        
+        pointList = [p1, p2, p3, p4, p1]
+        #polygons.append(Polygon(pointList))
+        polygons.append(pointList)
+        
+        zcode.append(str(x)+'E_'+str(abs(y))+'S')
+        
+#w = shapefile.Writer(shapefile.POLYGON)
+w = shapefile.Writer(outshp[:-4], shapeType=5)
 w.field('SRC_NAME','C','12')
 w.field('CODE','C','12')
 
 for i, poly in enumerate(polygons):
     
         # set shape polygon
-        w.line(parts=[poly], shapeType=shapefile.POLYGON)
+        #w.line(parts=[poly], shapeType=shapefile.POLYGON)
+        w.poly([poly])
             
         # write new records
         if i >= 0:
             w.record(zcode[i], zcode[i])
 
 # now save area shapefile
-w.save(outshp)
+#w.save(outshp)
+w.close()
 
 ###############################################################################
 # read new shapefile
@@ -202,6 +226,7 @@ prefCat[2] = 'NSHA18CAT_V0.1_hmtk_declustered.csv'
 ###############################################################################
 single_mc = 0
 ycomp, mcomp, min_rmag_ignore = get_completeness_model(src_codes, shapes, neo_domains, single_mc)
+#ycomp, mcomp, min_rmag_ignore = get_completeness_model_point(src_codes, shapes, single_mc)
 
 # use values from Domains model instead
 min_rmag = neo_min_rmag

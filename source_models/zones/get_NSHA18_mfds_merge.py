@@ -1912,13 +1912,27 @@ for root, dirnames, filenames in walk(rootfolder):
                                 print('Adding', filename)
                                 pdffiles.append(path.join(root, filename))
 
+def merger(output_path, input_paths):
+    from PyPDF2 import PdfFileWriter, PdfFileReader
+    pdf_writer = PdfFileWriter()
+ 
+    for path in input_paths:
+        pdf_reader = PdfFileReader(path)
+        for page in range(pdf_reader.getNumPages()):
+            pdf_writer.addPage(pdf_reader.getPage(page))
+ 
+    with open(output_path, 'wb') as fh:
+        pdf_writer.write(fh)
+
+merger(combined_pdf, pdffiles)
+'''        
 # now merge files
 merger = PdfFileMerger()                              
 for pdffile in pdffiles:                            
-    merger.append(PdfFileReader(file(pdffile, 'rb')))
+    merger.append(PdfFileReader(file(pdffile, 'r')))
 
 merger.write(combined_pdf)
-
+'''
 ###############################################################################
 # write summary csv
 ###############################################################################

@@ -17,12 +17,14 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
     import shapefile
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
+    from mapping_tools import distance
     
     # load completeness shp
     if singleCorner == 1:
         compshp = path.join('..','Other','Mcomp_NSHA18_single.shp') # single corner 
     else:
-        compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
+        #compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
+        compshp = path.join('..','Other','gridded_polygons_3d_completeness.shp') # gridded model for updated Mc - Jan 2020
     
     mcsf = shapefile.Reader(compshp)
     
@@ -47,18 +49,28 @@ def get_completeness_model(src_codes, src_shapes, domains, singleCorner):
         
         # loop through target and find point in poly    
         mccompFound = False
-        for i in range(0, len(mc_shapes)):
-            mc_poly = Polygon(mc_shapes[i].points)
+        dist_to_comp_cent = 9999.
+        for i, mc_shape in enumerate(mc_shapes):
+            mc_poly = Polygon(mc_shape.points)
+            mclon, mclat = get_shp_centroid(mc_shape.points)
             
             # check if target centroid in completeness poly
-            if point.within(mc_poly): 
-                ycomp.append(mc_ycomp[i])
-                mcomp.append(mc_mcomp[i])
-                mccompFound = True
+            if point.within(mc_poly) or point.touches(mc_poly):
+                # get dist to centroids
+                rngkm = distance(clat, clon, mclat, mclon)[0]
+                if rngkm < dist_to_comp_cent:
+                    tmp_ycmp = mc_ycomp[i]
+                    tmp_mcmp = mc_mcomp[i]
+                    mccompFound = True
+                    
+        # now fill completeness if True
+        if mccompFound == True:
+            ycomp.append(tmp_ycmp)
+            mcomp.append(tmp_mcmp)
         
         # if no Mcomp model assigned, use conservative model
-        if mccompFound == False:
-            if dom <= 8:
+        elif mccompFound == False:
+            if dom >= 1 and dom <= 8:
                 # for single-corner
                 if singleCorner == 1:
                     ycomp.append('1980;1980')
@@ -95,7 +107,8 @@ def get_completeness_model_vertex(src_codes, src_shapes, domains, singleCorner):
     if singleCorner == 1:
         compshp = path.join('..','Other','Mcomp_NSHA18_single.shp') # single corner 
     else:
-        compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
+        #compshp = path.join('..','Other','Mcomp_NSHA18_multi.shp') # multi corner 
+        compshp = path.join('..','Other','gridded_polygons_3d_completeness.shp') # gridded model for updated Mc - Jan 2020
     
     mcsf = shapefile.Reader(compshp)
     
@@ -172,13 +185,14 @@ def get_completeness_model_point(clat, clon, singleCorner):
     import shapefile
     from shapely.geometry import Point, Polygon
     from tools.nsha_tools import get_field_data, get_shp_centroid
+    from mapping_tools import distance
     
     # load completeness shp
     if getcwd().startswith('/Users'):
         if singleCorner == 1:
             compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
         else:
-            compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_multi.shp') # multi corner 
+            compshp = path.join('/Users/trev/Documents/Geoscience_Australia/NSHA2018/source_models/zones/shapefiles/Other/gridded_polygons_3d_completeness.shp') # multi corner 
     else:
         if singleCorner == 1:
             compshp = path.join('/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/trev/NSHA2018/source_models/zones/shapefiles/Other/Mcomp_NSHA18_single.shp') # single corner 
@@ -200,18 +214,26 @@ def get_completeness_model_point(clat, clon, singleCorner):
     mcomp = []
     min_rmag = []
     point = Point(clon, clat)
+    print(clon, clat)
         
-    # loop through target and find point in poly
+    # loop through target and find point in poly    
     mccompFound = False
-    for i in range(0, len(mc_shapes)):
-        mc_poly = Polygon(mc_shapes[i].points)
+    dist_to_comp_cent = 9999.
+    for i, mc_shape in enumerate(mc_shapes):
+        mc_poly = Polygon(mc_shape.points)
+        mclon, mclat = get_shp_centroid(mc_shape.points)
         
         # check if target centroid in completeness poly
-        if point.within(mc_poly): 
-            ycomp = mc_ycomp[i]
-            mcomp = mc_mcomp[i]
-            mccompFound = True
-    
+        if point.within(mc_poly) or point.touches(mc_poly):
+            # get dist to centroids
+            rngkm = distance(clat, clon, mclat, mclon)[0]
+            print(rngkm)
+            if rngkm < dist_to_comp_cent:
+                ycomp.append(mc_ycomp[i])
+                mcomp.append(mc_mcomp[i])
+                mccompFound = True
+                print(mc_poly)
+        
     # if no Mcomp model assigned, use conservative model
     if mccompFound == False:
         if dom <= 8:
@@ -621,7 +643,10 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
             gmm_trt.append('Non_cratonic')
     
     # set shapefile to write to
-    w = shapefile.Writer(shapefile.POLYGON)
+    try:
+        w = shapefile.Writer(shapefile.POLYGON)
+    except:
+        w = shapefile.Writer(outshp[:-4], shapeType=5)
     w.field('SRC_NAME','C','100')
     w.field('CODE','C','12')
     w.field('SRC_TYPE','C','10')
@@ -677,7 +702,10 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
     for i, shape in enumerate(src_shapes):
     
         # set shape polygon
-        w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        try:
+            w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        except:
+            w.poly([shape.points])
             
         # write new records
         if i >= 0:
@@ -689,7 +717,10 @@ def build_source_shape(outshp, src_shapes, src_names, src_codes, zone_class, \
                      ycomp[i], mcomp[i], cat_ymax, pref_stk[i], pref_dip[i], pref_rke[i], shmax_pref[i], shmax_sig[i], trt[i], gmm_trt[i], dom[i], prefCat[i])
             
     # now save area shapefile
-    w.save(outshp)
+    try:
+        w.save(outshp)
+    except:
+        w.close()
     
     # write projection file
     print(outshp)
