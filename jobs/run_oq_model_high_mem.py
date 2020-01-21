@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 """Wrapper script for running model and capturing provenance
 """
 
@@ -100,6 +100,7 @@ f_in.close()
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
 outlines += '#PBS -q normalbw\n' # for high-memory jobs
+outlines += '#PBS -l storage=scratch/w84\n'
 outlines += '#PBS -l walltime=%s\n' % params['walltime']
 outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
 outlines += '#PBS -l mem=%s\n' % params['mem']

@@ -1,4 +1,3 @@
-#!/usr/bin/env python
 """Wrapper script for running model and capturing provenance
 """
 
@@ -109,7 +108,8 @@ except NameError:
 
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
-outlines += '#PBS -q normalbw\n' # for high-memory jobs
+outlines += '#PBS -q normal\n' # for high-memory jobs
+outlines += '#PBS -l storage=scratch/w84\n'
 outlines += '#PBS -l walltime=%s\n' % params['walltime']
 outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
 outlines += '#PBS -l mem=%s\n' % params['mem']
@@ -122,7 +122,8 @@ outlines += '#PBS -l other=hyperthread\n\n'
 #outlines += 'module load openquake/2.4\n'
 #outlines += 'module load openquake/3.1\n' # used for NSHA18
 #outlines += 'module load openquake/3.3.1\n'
-outlines += 'module load openquake/3.6\n'
+#outlines += 'module load openquake/3.6\n'
+outlines += 'module load openquake/3.7.1\n'
 outlines += 'oq-ini.all.sh\n'
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
 outlines += 'oq-end.sh'
