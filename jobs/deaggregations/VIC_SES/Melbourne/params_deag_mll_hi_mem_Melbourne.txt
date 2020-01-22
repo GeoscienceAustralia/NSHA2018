@@ -1,0 +1,12 @@
+ncpus = 560
+mem = 1000GB
+walltime = 1:00:00
+jobfs = 1000GB
+sandpit_path = /short/w84/NSHA18/sandpit/
+deag_rel_path = NSHA2018/jobs/deaggregations/
+model_rel_path = NSHA2018/source_models/complete_model/final/
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_July18.xml
+model_output_base = /short/w84/NSHA18/PSHA_modelling/NSHA_deaggregation_testing/Melbourne/SA02/
+job_file = job_deag_mll_Melbourne_SA02.ini
+job_type = deag_mll
