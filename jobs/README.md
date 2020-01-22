@@ -25,15 +25,15 @@ The user should edit `params.txt` to defined the NCI resources required and the 
     mem = 256GB
     walltime = 02:00:00
     jobfs = 300GB
-    sandpit_path = /short/w84/NSHA18/sandpit/
+    sandpit_path = /scratch/w84/NSHA18/sandpit/
     model_rel_path = NSHA2018/source_models/faults/Adelaide/Adelaide_faults
     shared_rel_path = NSHA2018/shared
     gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4.xml
-    model_output_base = /short/w84/NSHA18/PSHA_modelling/
+    model_output_base = /scratch/w84/NSHA18/PSHA_modelling/
     job_file = job.ini
     
 You should not need to change anything in run_oq_model.py, however additional NCI job parameters are defined towards the end of the file. All your source mode input data and the job file (i.e. `source model.xml`, `source_model_logic_tree.xml` and `job.ini`) should be under the directory specified by `/<sandpit_path>/<username>/<model_rel_path>`. Ground motion model files (`gsim_logic_tree`) and sites files (if required; `sites.csv`) are generally shared between many models and therefore these are stored in the path defined by `/<sandpit_path>/<username>/<shared_rel_path>`. These are all standard OpenQuake input files.
 
-Standard output is written to `parjob.log` in the output directory. The output directory will be  a timestamped diretory, in this case under `/short/w84/NSHA18/PSHA_modelling/Adelaide_faults`.
+Standard output is written to `parjob.log` in the output directory. The output directory will be  a timestamped diretory, in this case under `/scratch/w84/NSHA18/PSHA_modelling/Adelaide_faults`.  ***Note that as of Q2 2020, scratch will be purged on the NCI - a more permanent solution is requied. 
 
 After running the model the NCI will report on the resources actually used in a file in the outut directory with a name like `oq512c512ht.o<job_number>`. This can be used to adjust the resources erquested for future runs to ensure efficient use of the NCI. The default parameters given above are reasonable for a high resolution national scale model with a reasonable complex logic tree. Other models (e.g. a simple smoothed seismicity model) will use much less memory and wall time.
