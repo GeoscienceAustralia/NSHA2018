@@ -139,7 +139,6 @@ for i,param_file in enumerate(param_file_list):
     f_out = open(run_script, 'w')
     f_out.write(outlines)
     f_out.close()
-run_oq_deag_high_mem_mde_batch.py
 
     # clean working directory after copying job files.  
     
