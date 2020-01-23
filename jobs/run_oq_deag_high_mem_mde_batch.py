@@ -33,7 +33,7 @@ def find_replace(rep, infile_s, outfile_s):
 
 SA = "0.2"
 SA_s = "SA02"
-poe = "0.02"
+poe = "0.02" # check this is needed - more than one peo may be needed
 
 
 with open("cities_021019.csv") as csvfile:
@@ -146,8 +146,8 @@ for i,param_file in enumerate(param_file_list):
 
 
 # Change to output directory and submit job
-# batch jobs need to go into ALL the folders and run the coresponding scripts
-# there must be a way to loop through akl folder smartly.  
+# batch jobs needs to go into ALL the folders and run the coresponding scripts
+# there must be a way to loop through all folders smartly?  
     output_dirs.append(output_dir)
 
 for i,directory in enumerate(output_dirs):
@@ -158,7 +158,7 @@ for i,directory in enumerate(output_dirs):
     print cmd
     os.system(cmd)
     
-# add section to clean up job files putting them in the right directories
+# TODO: add section to clean up job files putting them in the right directories
 
 
 
