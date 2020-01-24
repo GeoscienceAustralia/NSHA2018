@@ -4,6 +4,10 @@
 
 '''Edited by js1626 08/08/2019 to remove copying of source lt files'''
 
+# Run this script from the folder:
+# /scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations
+# It uses relative paths.  
+
 
 import os, sys
 from os.path import join
@@ -12,10 +16,16 @@ import getpass
 import datetime
 import argparse
 import re
+import shutil
 import csv
 import subprocess
 
+# Don't run if the wd is incorrect
+if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations':
+    sys.exit("Please run script from within /scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations")
+
 def find_replace(rep, infile_s, outfile_s):
+    import re
     '''function to enter correct details in to job and parameter file '''
     
     infile = open(infile_s, "r")
@@ -33,33 +43,56 @@ def find_replace(rep, infile_s, outfile_s):
 
 SA = "0.2"
 SA_s = "SA02"
-poe = "0.02"
+poe = "0.1, 0.02, 0.005"
 
-
-with open("cities_021019.csv") as csvfile:
+with open("../../shared/nsha_cities.csv") as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=',')
     job_file_list = []
     param_file_list = []
     
-    for row in csv_reader:
-        city = row[0]
+    for i, row in enumerate(csv_reader):
+        lon = row[0]
         lat = row[1]
-        lon = row[2]
-        
+        city = row[2]
+
+        # Skip over max hazard locations of cites
+        if city.endswith("max"):
+            continue
+        if i > 10:
+            break
+
+        city = city.replace(" ", "_")
+        print(city)
+
+        # Dictonary to select strings to be be replaced"
         rep = {"<CITY>": city, "<SA>": SA, 
                 "<LON>": lon, "<LAT>": lat, 
                 "<POE>": poe, "<SA_s>": SA_s}
 
-        ini_file = "job_deag_mde_TEMPLATE.ini"
-        txt_file = "params_deag_mde_hi_mem_TEMPLATE.txt"
+        ini_file = "Templates/job_deag_mde_TEMPLATE.ini"
+        txt_file = "Templates/params_deag_mde_hi_mem_TEMPLATE.txt"
         ini_out = "job_deag_mde_" + str(city) + "_" + str(SA_s) + ".ini"
         txt_out = "params_deag_mde_hi_mem_" + str(city) +".txt"
-        
+    
         find_replace(rep, ini_file, ini_out)
         find_replace(rep, txt_file, txt_out)
+
+        deagg_folder = os.getcwd()
+        ini_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", ini_out)
+        txt_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", txt_out)
         
-        job_file_list.append(ini_out)
-        param_file_list.append(txt_out)
+        if os.path.exists(ini_path):
+            os.remove(ini_path)
+        if os.path.exists(txt_path):
+            os.remove(txt_path)
+
+        # Move to scenario folder to tidy
+        shutil.move(ini_out, "Scenario_Selector_Jobs")
+        shutil.move(txt_out, "Scenario_Selector_Jobs")
+
+        # Create lists of ini and param.txt files 
+        job_file_list.append(ini_path)
+        param_file_list.append(txt_path)
         
 
 # loop through the params file to set up directories and stuff?
