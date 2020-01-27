@@ -78,17 +78,21 @@ with open("../../shared/nsha_cities.csv") as csvfile:
         find_replace(rep, txt_file, txt_out)
 
         deagg_folder = os.getcwd()
-        ini_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", ini_out)
-        txt_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", txt_out)
-        
+        ini_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, ini_out)
+        txt_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, txt_out)
+        city_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city)
+
+        if not os.path.exists(city_path):
+            os.mkdir(city_path)
+
         if os.path.exists(ini_path):
             os.remove(ini_path)
         if os.path.exists(txt_path):
             os.remove(txt_path)
-
+        
         # Move to scenario folder to tidy
-        shutil.move(ini_out, "Scenario_Selector_Jobs")
-        shutil.move(txt_out, "Scenario_Selector_Jobs")
+        shutil.move(ini_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
+        shutil.move(txt_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
 
         # Create lists of ini and param.txt files 
         job_file_list.append(ini_path)
@@ -112,8 +116,8 @@ for i,param_file in enumerate(param_file_list):
 
     run_start_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     
-    model_name = params['model_rel_path'].split('/')[-2]
-    deag_name = params['deag_rel_path'].split('/')[-2]
+    model_name = params['model_rel_path'].split('/')[-1]
+    deag_name = params['deag_rel_path'].split('/')[-1]
     model_path = join(params['sandpit_path'], user, params['model_rel_path'])
     deag_path = join(params['sandpit_path'], user, params['deag_rel_path'])
     
@@ -148,7 +152,8 @@ for i,param_file in enumerate(param_file_list):
 
     # Build run_<model>.sh
     outlines = '#PBS -P w84\n'
-    outlines += '#PBS -q normalbw\n' # for high-memory jobs
+    outlines += '#PBS -q normal\n' # for high-memory jobs
+    outlines += '#PBS -l storage=scratch/w84\n'
     outlines += '#PBS -l walltime=%s\n' % params['walltime']
     outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
     outlines += '#PBS -l mem=%s\n' % params['mem']
@@ -156,15 +161,16 @@ for i,param_file in enumerate(param_file_list):
     outlines += '#PBS -N oq512c512ht\n'
     outlines += '#PBS -l jobfs=%s\n' % params['jobfs']
     outlines += '#PBS -l other=hyperthread\n\n'
-    
+
     #outlines += 'module load openquake/2.1.1\n'
     #outlines += 'module load openquake/2.4\n'
     #outlines += 'module load openquake/3.1\n' # used for NSHA18
     #outlines += 'module load openquake/3.3.1\n'
-    outlines += 'module load openquake/3.6\n'
+    #outlines += 'module load openquake/3.6\n'
+    outlines += 'module load openquake/3.7.1\n'
     outlines += 'oq-ini.all.sh\n'
     outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
-    outlines += 'oq-end.sh\n'
+    outlines += 'oq-end.sh'
 
     run_script_name = 'run_%s.sh' % model_name
     run_script = join(output_dir, run_script_name)
@@ -172,16 +178,14 @@ for i,param_file in enumerate(param_file_list):
     f_out = open(run_script, 'w')
     f_out.write(outlines)
     f_out.close()
-run_oq_deag_high_mem_mde_batch.py
-
-    # clean working directory after copying job files.  
+    # clean working directory after copying job files...
     
 
 
 
 # Change to output directory and submit job
 # batch jobs need to go into ALL the folders and run the coresponding scripts
-# there must be a way to loop through akl folder smartly.  
+# there must be a way to loop through all folders smartly.  
     output_dirs.append(output_dir)
 
 for i,directory in enumerate(output_dirs):

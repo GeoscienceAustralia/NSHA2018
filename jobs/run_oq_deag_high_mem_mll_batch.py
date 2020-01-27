@@ -4,6 +4,10 @@
 
 '''Edited by js1626 08/08/2019 to remove copying of source lt files'''
 
+# Run this script from the folder:
+# /scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations
+# It uses relative paths.  
+
 
 import os, sys
 from os.path import join
@@ -12,10 +16,16 @@ import getpass
 import datetime
 import argparse
 import re
+import shutil
 import csv
 import subprocess
 
+# Don't run if the wd is incorrect
+if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations':
+    sys.exit("Please run script from within /scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations")
+
 def find_replace(rep, infile_s, outfile_s):
+    import re
     '''function to enter correct details in to job and parameter file '''
     
     infile = open(infile_s, "r")
@@ -33,32 +43,60 @@ def find_replace(rep, infile_s, outfile_s):
 
 SA = "0.2"
 SA_s = "SA02"
-poe = "0.02"
+poe = "0.1, 0.02, 0.005"
 
-with open("cities_021019.csv") as csvfile:
+with open("../../shared/nsha_cities.csv") as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=',')
     job_file_list = []
     param_file_list = []
     
-    for row in csv_reader:
-        city = row[0]
+    for i, row in enumerate(csv_reader):
+        lon = row[0]
         lat = row[1]
-        lon = row[2]
-        
+        city = row[2]
+
+        # Skip over max hazard locations of cites
+        if city.endswith("max"):
+            continue
+        if i > 10:
+            break
+
+        city = city.replace(" ", "_")
+        print(city)
+
+        # Dictonary to select strings to be be replaced"
         rep = {"<CITY>": city, "<SA>": SA, 
                 "<LON>": lon, "<LAT>": lat, 
                 "<POE>": poe, "<SA_s>": SA_s}
 
-        ini_file = "job_deag_mll_TEMPLATE.ini"
-        txt_file = "params_deag_mll_hi_mem_TEMPLATE.txt"
+        ini_file = "Templates/job_deag_mll_TEMPLATE.ini"
+        txt_file = "Templates/params_deag_mll_hi_mem_TEMPLATE.txt"
         ini_out = "job_deag_mll_" + str(city) + "_" + str(SA_s) + ".ini"
         txt_out = "params_deag_mll_hi_mem_" + str(city) +".txt"
-        
+    
         find_replace(rep, ini_file, ini_out)
         find_replace(rep, txt_file, txt_out)
+
+        deagg_folder = os.getcwd()
+        ini_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, ini_out)
+        txt_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, txt_out)
+        city_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city)
+
+        if not os.path.exists(city_path):
+            os.mkdir(city_path)
+
+        if os.path.exists(ini_path):
+            os.remove(ini_path)
+        if os.path.exists(txt_path):
+            os.remove(txt_path)
         
-        job_file_list.append(ini_out)
-        param_file_list.append(txt_out)
+        # Move to scenario folder to tidy
+        shutil.move(ini_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
+        shutil.move(txt_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
+
+        # Create lists of ini and param.txt files 
+        job_file_list.append(ini_path)
+        param_file_list.append(txt_path)
         
 
 # loop through the params file to set up directories and stuff?
@@ -78,8 +116,8 @@ for i,param_file in enumerate(param_file_list):
 
     run_start_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
     
-    model_name = params['model_rel_path'].split('/')[-2]
-    deag_name = params['deag_rel_path'].split('/')[-2]
+    model_name = params['model_rel_path'].split('/')[-1]
+    deag_name = params['deag_rel_path'].split('/')[-1]
     model_path = join(params['sandpit_path'], user, params['model_rel_path'])
     deag_path = join(params['sandpit_path'], user, params['deag_rel_path'])
     
@@ -103,7 +141,7 @@ for i,param_file in enumerate(param_file_list):
     
     # Copy files to output directory
     copy2(job_file, output_dir) #copy job file still required
-
+  
     try:
         copy2(sites_file, output_dir)
     except IOError:
@@ -114,7 +152,8 @@ for i,param_file in enumerate(param_file_list):
 
     # Build run_<model>.sh
     outlines = '#PBS -P w84\n'
-    outlines += '#PBS -q normalbw\n' # for high-memory jobs
+    outlines += '#PBS -q normal\n' # for high-memory jobs
+    outlines += '#PBS -l storage=scratch/w84\n'
     outlines += '#PBS -l walltime=%s\n' % params['walltime']
     outlines += '#PBS -l ncpus=%s\n' % params['ncpus']
     outlines += '#PBS -l mem=%s\n' % params['mem']
@@ -122,15 +161,16 @@ for i,param_file in enumerate(param_file_list):
     outlines += '#PBS -N oq512c512ht\n'
     outlines += '#PBS -l jobfs=%s\n' % params['jobfs']
     outlines += '#PBS -l other=hyperthread\n\n'
-    
+
     #outlines += 'module load openquake/2.1.1\n'
     #outlines += 'module load openquake/2.4\n'
     #outlines += 'module load openquake/3.1\n' # used for NSHA18
     #outlines += 'module load openquake/3.3.1\n'
-    outlines += 'module load openquake/3.6\n'
+    #outlines += 'module load openquake/3.6\n'
+    outlines += 'module load openquake/3.7.1\n'
     outlines += 'oq-ini.all.sh\n'
     outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
-    outlines += 'oq-end.sh\n'
+    outlines += 'oq-end.sh'
 
     run_script_name = 'run_%s.sh' % model_name
     run_script = join(output_dir, run_script_name)
@@ -138,10 +178,14 @@ for i,param_file in enumerate(param_file_list):
     f_out = open(run_script, 'w')
     f_out.write(outlines)
     f_out.close()
+    # clean working directory after copying job files...
+    
+
+
 
 # Change to output directory and submit job
 # batch jobs need to go into ALL the folders and run the coresponding scripts
-# there must be a way to loop through akl folder smartly.  
+# there must be a way to loop through all folders smartly.  
     output_dirs.append(output_dir)
 
 for i,directory in enumerate(output_dirs):
@@ -153,3 +197,18 @@ for i,directory in enumerate(output_dirs):
     os.system(cmd)
     
 # add section to clean up job files putting them in the right directories
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
