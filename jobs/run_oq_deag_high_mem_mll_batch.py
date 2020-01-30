@@ -186,12 +186,10 @@ for i,param_file in enumerate(param_file_list):
     f_out.write(outlines)
     f_out.close()
     # clean working directory after copying job files...
-
-
-# Change to output directory and submit job
-# batch jobs need to go into ALL the folders and run the coresponding scripts
-# there must be a way to loop through all folders smartly.  
     output_dirs.append(output_dir)
+
+loop_end_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+np.savetxt("Job_list_%s.txt" % loop_end_time, output_dirs)
 
 for i,directory in enumerate(output_dirs):
     print directory
@@ -200,6 +198,6 @@ for i,directory in enumerate(output_dirs):
     cmd = 'qsub -v PBS_ARRAY_INDEX=%s %s' % (i+1,run_script_name)
     print cmd
     os.system(cmd)
-    
-# add section to clean up job files putting them in the right directories
-# delete folders that contain no results 
+
+
+

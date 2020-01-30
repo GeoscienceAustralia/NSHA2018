@@ -128,7 +128,6 @@ outlines += 'oq-ini.all.sh\n'
 outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
 outlines += 'oq engine --lhc\n'
 outlines += 'oq engine --export-outputs 1 ./results\n'
-outlines += 'oq export hcurves-rlzs --exports hdf5\n'
 outlines += 'oq-end.sh'
 
 run_script_name = 'run_%s.sh' % model_name
