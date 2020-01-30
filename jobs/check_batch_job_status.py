@@ -1,6 +1,17 @@
 #!/usr/bin/env python
+"""
+Script used for batch deaggregation jobs to check results were created
+in each deagg procudction folder.  
+Run script after the batch jobs script has been submitted and jobs have been
+completed.  
+
+To save information to disk use " python check_batch_job_status.py > tmp"
+to save a temporary file to disk.  Then use "more tmp | grep 'FAIL'" to 
+list failed jobs.  
+"""
 
 import os, sys
+import re
 from os.path import join
 from glob import glob
 
