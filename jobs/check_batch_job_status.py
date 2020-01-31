@@ -6,7 +6,7 @@ Run script after the batch jobs script has been submitted and jobs have been
 completed.  
 
 To save information to disk use " python check_batch_job_status.py > tmp"
-to save a temporary file to disk.  Then use "more tmp | grep 'FAIL'" to 
+to save a temporary file to disk.  Then use "cat tmp | grep 'FAIL'" to 
 list failed jobs.  
 """
 

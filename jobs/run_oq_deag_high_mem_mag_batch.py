@@ -19,6 +19,7 @@ import re
 import shutil
 import csv
 import subprocess
+import numpy as np
 
 # Don't run if the wd is incorrect
 if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations':
@@ -39,65 +40,78 @@ def find_replace(rep, infile_s, outfile_s):
     infile.close()
     outfile.close()
 
-# Set up input files from sites csv.
 
+def make_city_list(infile):
+    import csv
+    with open(infile) as csvfile:
+        cities = []
+        lats = []
+        lons = []
+        csv_reader = csv.reader(csvfile, delimiter=',')
+        
+        for i, row in enumerate(csv_reader):
+            lon = row[0]
+            lat = row[1]
+            city = row[2]
+
+            # Skip over max hazard locations of cites "max"
+            if city.endswith("max"):
+                continue
+            # test first 10 cities - remove for batch production
+            if i > 10:
+                break
+            city = city.replace(" ", "_")
+            print(city)
+            cities.append(city)
+            lats.append(lat)
+            lons.append(lon)
+        return cities, lats, lons
+
+
+# Set up input files from sites csv.
 SA = "0.2"
 SA_s = "SA02"
 poe = "0.1, 0.02, 0.005"
+cities, lats, lons = make_city_list("../../shared/nsha_cities.csv")
 
-with open("../../shared/nsha_cities.csv") as csvfile:
-    csv_reader = csv.reader(csvfile, delimiter=',')
-    job_file_list = []
-    param_file_list = []
+
+job_file_list = []
+param_file_list = []
+for i, city in enumerate(cities):
+    # Dictonary to select strings to be be replaced"
+    rep = {"<CITY>": city, "<SA>": SA, 
+            "<LON>": lons[i], "<LAT>": lats[i], 
+            "<POE>": poe, "<SA_s>": SA_s}
+
+    ini_file = "Templates/job_deag_mag_TEMPLATE.ini"
+    txt_file = "Templates/params_deag_mag_hi_mem_TEMPLATE.txt"
+    ini_out = "job_deag_mag_" + str(city) + "_" + str(SA_s) + ".ini"
+    txt_out = "params_deag_mag_hi_mem_" + str(city) +".txt"
+
+    find_replace(rep, ini_file, ini_out)
+    find_replace(rep, txt_file, txt_out)
+
+    deagg_folder = os.getcwd()
+    ini_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, ini_out)
+    txt_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, txt_out)
+    city_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city)
+
+    if not os.path.exists(city_path):
+        os.mkdir(city_path)
+
+    if os.path.exists(ini_path):
+        os.remove(ini_path)
+    if os.path.exists(txt_path):
+        os.remove(txt_path)
     
-    for i, row in enumerate(csv_reader):
-        lon = row[0]
-        lat = row[1]
-        city = row[2]
+    # Move to scenario folder to tidy
+    shutil.move(ini_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
+    shutil.move(txt_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
 
-        # Skip over max hazard locations of cites
-        if city.endswith("max"):
-            continue
-        if i > 10:
-            break
+    # Create lists of ini and param.txt files 
+    job_file_list.append(ini_path)
+    param_file_list.append(txt_path)
 
-        city = city.replace(" ", "_")
-        print(city)
-
-        # Dictonary to select strings to be be replaced"
-        rep = {"<CITY>": city, "<SA>": SA, 
-                "<LON>": lon, "<LAT>": lat, 
-                "<POE>": poe, "<SA_s>": SA_s}
-
-        ini_file = "Templates/job_deag_mde_TEMPLATE.ini"
-        txt_file = "Templates/params_deag_mde_hi_mem_TEMPLATE.txt"
-        ini_out = "job_deag_mde_" + str(city) + "_" + str(SA_s) + ".ini"
-        txt_out = "params_deag_mde_hi_mem_" + str(city) +".txt"
-    
-        find_replace(rep, ini_file, ini_out)
-        find_replace(rep, txt_file, txt_out)
-
-        deagg_folder = os.getcwd()
-        ini_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, ini_out)
-        txt_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city, txt_out)
-        city_path = os.path.join(deagg_folder, "Scenario_Selector_Jobs", city)
-
-        if not os.path.exists(city_path):
-            os.mkdir(city_path)
-
-        if os.path.exists(ini_path):
-            os.remove(ini_path)
-        if os.path.exists(txt_path):
-            os.remove(txt_path)
-        
-        # Move to scenario folder to tidy
-        shutil.move(ini_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
-        shutil.move(txt_out, os.path.join(deagg_folder, "Scenario_Selector_Jobs", city))
-
-        # Create lists of ini and param.txt files 
-        job_file_list.append(ini_path)
-        param_file_list.append(txt_path)
-        
 
 # loop through the params file to set up directories and stuff?
 output_dirs = []
@@ -174,19 +188,15 @@ for i,param_file in enumerate(param_file_list):
 
     run_script_name = 'run_%s.sh' % model_name
     run_script = join(output_dir, run_script_name)
-    
+
     f_out = open(run_script, 'w')
     f_out.write(outlines)
     f_out.close()
     # clean working directory after copying job files...
-    
-
-
-
-# Change to output directory and submit job
-# batch jobs need to go into ALL the folders and run the coresponding scripts
-# there must be a way to loop through all folders smartly.  
     output_dirs.append(output_dir)
+
+loop_end_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+np.savetxt("Job_list_%s.txt" % loop_end_time, output_dirs, fmt='%s')
 
 for i,directory in enumerate(output_dirs):
     print directory
@@ -195,20 +205,6 @@ for i,directory in enumerate(output_dirs):
     cmd = 'qsub -v PBS_ARRAY_INDEX=%s %s' % (i+1,run_script_name)
     print cmd
     os.system(cmd)
-    
-# add section to clean up job files putting them in the right directories
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
