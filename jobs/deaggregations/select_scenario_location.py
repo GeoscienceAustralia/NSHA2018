@@ -11,6 +11,7 @@ import glob
 import sys, os
 import re
 from pathlib import Path
+from os.path import join
 
 import numpy as np
 import pandas as pd
@@ -26,7 +27,19 @@ def main():
 #TODO output a file of scenarios:
 #     :name, location, mag max, loc max, poe
 #TODO make sure paths work on both unix and windows - may be easier to run on NCI when finalised?
-    
+
+    # open pre canned paths of run deaggregations (test file set currently)
+    f = open("Job_list_20200131_162724.txt", 'r')
+    for line in f:
+    #print(line)
+        print("**********")
+        line = re.sub('\n', '', line).strip() # remove \n characters
+        city = line.split("/")[6]
+        full_line = join(line, "results")
+        print(full_line)
+
+
+
     place_name = "Newcastle" # TODO - possibility for being a list of places in file
     poe = 0.005
     df_mag = open_rlz_file(place_name, poe, "mag")
