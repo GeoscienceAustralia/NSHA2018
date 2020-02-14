@@ -1,0 +1,12 @@
+ncpus = 1008 
+mem = 4032GB
+walltime = 1:00:00
+jobfs = 750GB
+sandpit_path = /scratch/w84/NSHA18/sandpit/
+deag_rel_path = NSHA2018/jobs/deaggregations_gridded_b
+model_rel_path = NSHA2018/source_models/gridded_bval/
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_July18.xml
+model_output_base = /scratch/w84/NSHA18/PSHA_modelling/NSHA_deaggregation_testing/Gladstone/gridded_bval
+job_file = job_deag_mll_gladstone_SA02_gridded_b.ini
+job_type = deag
