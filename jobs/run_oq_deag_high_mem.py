@@ -109,6 +109,7 @@ except NameError:
 # Build run_<model>.sh
 outlines = '#PBS -P w84\n'
 outlines += '#PBS -q normal\n' # for high-memory jobs
+#outlines += '#PBS -q hugemem\n' # for high-memory jobs
 outlines += '#PBS -l storage=scratch/w84\n'
 outlines += '#PBS -l walltime=%s\n' % params['walltime']
 outlines += '#PBS -l ncpus=%s\n' % params['ncpus']

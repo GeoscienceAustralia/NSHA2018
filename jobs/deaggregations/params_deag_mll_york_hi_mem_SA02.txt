@@ -1,6 +1,6 @@
 ncpus = 576
 mem = 1500GB
-walltime = 8:00:00
+walltime = 1:00:00
 jobfs = 1000GB
 sandpit_path = /scratch/w84/NSHA18/sandpit/
 deag_rel_path = NSHA2018/jobs/deaggregations/
