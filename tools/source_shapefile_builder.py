@@ -509,7 +509,80 @@ def get_aus_shmax_vectors(src_codes, src_shapes):
             shmax_sig.append(15.) # set std manually
             
     return shmax_pref, shmax_sig
-
+    
+# use gridded b-value to get fixed b
+def get_gridded_bvalue(src_codes, src_shapes):
+    from os import path
+    from numpy import array, nanmedian, std, loadtxt, isnan
+    from shapely.geometry import Point, Polygon
+    from tools.nsha_tools import get_field_data
+    
+    print('Reading b-value grid...')
+    try:
+        #shmaxshp = path.join('..','Other','SHMax_Rajabi_2016.shp')
+        bgrid_csv = '/nas/active/ops/community_safety/ehp/georisk_earthquake/modelling/sandpits/trev/NSHA2018/source_models/zones/shapefiles/Other/SHMax_Rajabi_2016.shp'
+        # get shmax attributes
+        blons, blats, bvals, bsigs = loadtxt(bgrid_csv, delimiter=',', skiprows=1)
+    
+    except:
+        bgrid_csv = '/Users/trev/Documents/Manuscripts/manuscripts/conferences/2020_wcee/gridded_bval.csv'
+        # get shmax attributes
+        data = loadtxt(bgrid_csv, delimiter=',', skiprows=1)
+    
+    blons = data[:, 0]
+    blats = data[:, 1]
+    bvals = data[:, 2]
+    bsigs = data[:, 3]
+    
+    ###############################################################################
+    # get preferred strike
+    ###############################################################################
+    bval_fix = []
+    bval_sig_fix  = []
+    
+    for code, poly in zip(src_codes, src_shapes):
+        # get shmax points in polygon
+        bval_in = []
+        bval_sig_in = []
+        
+        # now loop through earthquakes in cat
+        for blo, bla, bv, bs in zip(blons, blats, bvals, bsigs):
+            
+            # check if pt in poly and compile mag and years
+            pt = Point(blo, bla)
+            if pt.within(Polygon(poly.points)):
+                bval_in.append(bv)
+                bval_sig_in.append(bs)
+        
+        if len(bval_in) > 0: 
+            bval_fix.append(nanmedian(array(bval_in)))
+            
+            # check sigma and make sure it is at least +/- 15 degrees
+            bval_sig_fix.append(nanmedian(array(bval_sig_in)))
+            
+            print('Getting b-value for', code)
+        
+        # if no points in polygons, get nearest neighbour
+        else:
+            print('Getting nearest neighbour...')
+            min_dist = 9999.
+            for blo, bla, bv, bs in zip(blons, blats, bvals, bsigs):
+                pt = Point(blo, bla)
+                pt_dist = pt.distance(Polygon(poly.points))
+                if pt_dist < min_dist:
+                    min_dist = pt_dist
+                    bv_near = bv
+                    bs_near = bs
+            
+            if isnan(bv_near) or bv_near < 0:
+                bv_near = 1.0
+                bs_near = 0.15
+                
+            bval_fix.append(bv_near) # set nearest neighbour
+            bval_sig_fix.append(bs_near) # set std manually
+            
+    return bval_fix, bval_sig_fix 
+    
 
 def get_rate_adjust_factor(newshp, newField, origshp, origField):
     import shapefile

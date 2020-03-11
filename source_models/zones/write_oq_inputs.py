@@ -92,7 +92,7 @@ for ut in unq_trt:
     idx = where(trt == ut)[0]
     td = {'trt':ut, 'mx_vals':mxv[idx], 'mx_wts':mxw[idx]}    
     mx_dict[ut] = td
-    #print td
+    #print(td
 
 ##############################################################################
 # use best beta & Mmax
@@ -146,13 +146,20 @@ elif outputType == '1':
     if doSeismotectonic == True:
         splitpath.append('seismo_collapsed')
         # get output filename
-        xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed_NFSM.xml'
+        if shpfile.endswith('b_MFD.shp'):
+            xmlfile = path.split(shpfile)[-1].strip('shp')[:-6] + 'collapsed_NFSM.xml'
+        else:
+            xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed_NFSM.xml'
     
     else:
         splitpath.append('collapsed')
         # get output filename
         if shpfile.endswith('MX.shp'):
             xmlfile = path.split(shpfile)[-1].strip('shp')[:-14] + 'collapsed_mx.xml'
+        elif shpfile.endswith('Gridded_b_MFD.shp'):
+            xmlfile = path.split(shpfile)[-1].strip('shp')[:-6] + 'collapsed_gridded_b.xml'
+        elif shpfile.endswith('b_MFD.shp'):
+            xmlfile = path.split(shpfile)[-1].strip('shp')[:-6] + 'collapsed_NFSM.xml'
         else:
             xmlfile = path.split(shpfile)[-1].strip('shp')[:-11] + 'collapsed.xml'
     
@@ -301,7 +308,7 @@ elif outputType == '4':
 ##############################################################################
 # make logic tree file
 ##############################################################################
-print branch_wts
+print(branch_wts)
 make_logic_tree(srcxmls, branch_wts, meta)
 
 ##############################################################################

@@ -12,10 +12,13 @@ from matplotlib import colors, colorbar, style
 from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
-#from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
-from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
+from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
+#from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
 import matplotlib as mpl
 style.use('classic')
+
+import warnings
+warnings.filterwarnings("ignore")
 
 # import non-standard functions
 #try:
@@ -770,7 +773,7 @@ for i in srcidx:
                     
             # export to file
             ratefile = path.join(srcfolder, '_'.join((src_code[i], 'norm_rates.csv')))
-            f = open(ratefile, 'wb')
+            f = open(ratefile, 'w')
             f.write(rate_txt)
             f.close()
                 
@@ -1375,7 +1378,7 @@ for i in srcidx:
                     
             # export to file
             ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
-            f = open(ratefile, 'wb')
+            f = open(ratefile, 'w')
             f.write(rate_txt)
             f.close()
                                      
@@ -1426,7 +1429,12 @@ src_n0 = get_field_data(sf, 'N0_BEST', 'float')
 records = sf.records()
 
 # set shapefile to write to
-w = shapefile.Writer(shapefile.POLYGON)
+newshp = path.join(rootfolder,'shapefiles',outsrcshp)
+try:
+    w = shapefile.Writer(shapefile.POLYGON)
+except:
+    w = shapefile.Writer(newshp[:-4], shapeType=5) # 5=polygon
+    	
 w.field('SRC_NAME','C','100')
 w.field('CODE','C','12')
 w.field('SRC_TYPE','C','10')
@@ -1474,7 +1482,10 @@ for record, shape in zip(records, shapes):
     
     if new_n0_b[i] > 0.0:
         # set shape polygon
-        w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        try:
+            w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        except:
+            w.poly([shape.points])
         
         # loop thru fields and match with original shapefile
         for j, field in enumerate(fields):
@@ -1508,12 +1519,14 @@ for record, shape in zip(records, shapes):
     i += 1  
         
 # now save area shapefile
-newshp = path.join(rootfolder,'shapefiles',outsrcshp)
-w.save(newshp)
+try:
+    w.save(newshp)
+except:
+    w.close()
 
 # write projection file in WGS84
 prjfile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'.prj')
-f = open(prjfile, 'wb')
+f = open(prjfile, 'w')
 f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
 f.close()
 
@@ -1955,7 +1968,7 @@ for rec in records:
 csvbase = path.split(newshp)[-1].strip('shp')+'csv'
 combined_csv = path.join(rootfolder, csvbase)
    
-f = open(combined_csv, 'wb')
+f = open(combined_csv, 'w')
 f.write(csvtxt)
 f.close()
 """
