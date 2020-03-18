@@ -73,7 +73,7 @@ def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
         for r, rate in enumerate(rates):
             wtd_rates[r] += rate
     
-    #print wtd_rates[0]    
+    #print(wtd_rates[0]    
        
     # convert cummulative rates to annual occurrence rates
     occ_rates = []
@@ -85,7 +85,7 @@ def make_collapse_occurrence_text(m, min_mag, binwid, meta, mx_dict):
     octxt = str('%0.5e' % occ_rates[0])
     for bc in occ_rates[1:]:
         octxt += ' ' + str('%0.5e' % bc)
-    #print octxt.split()[0]
+    #print(octxt.split()[0]
     return octxt
 
 # makes sure strike angle is within acceptable range
@@ -231,7 +231,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
         # write area sources
         #######################################################################
         if m['src_type'] == 'area':
-            #print m['src_type']
+            #print(m['src_type']
             
             # rename source code if "." exists
             m['src_code'].replace('.', '')
@@ -271,7 +271,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
             newxml += '                </gml:Polygon>\n'
             
             ###################################################################
-            # print model bbox of model
+            # print(model bbox of model
             
             # this is not required for the nrml files, but useful for setting up job.ini files
             
@@ -287,12 +287,12 @@ def write_oq_sourcefile(model, meta, mx_dict):
             if maxlat > bbmaxlat: bbmaxlat = maxlat
             if minlat < bbminlat: bbminlat = minlat
     
-            #print m['src_code'], minlon, minlat, ',', minlon, maxlat, ',', maxlon, maxlat, ',', maxlon, minlat
+            #print(m['src_code'], minlon, minlat, ',', minlon, maxlat, ',', maxlon, maxlat, ',', maxlon, minlat
             ###################################################################
     
             # set depth distribution
             if m['src_dep'][0] <= m['src_usd'] or m['src_dep'][0] >= m['src_lsd']:
-                print m['src_code'], 'FIX DEPTHS'
+                print(m['src_code'], 'FIX DEPTHS')
                 
             newxml += '                <upperSeismoDepth>'+str(m['src_usd'])+'</upperSeismoDepth>\n'
             newxml += '                <lowerSeismoDepth>'+str(m['src_lsd'])+'</lowerSeismoDepth>\n'
@@ -576,7 +576,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
     for line in lines:
         newxml += line
     
-    #print '\nSkipping Banda Faults\n'
+    #print('\nSkipping Banda Faults\n'
        
     ######################################################################
     # finish nrml
@@ -584,7 +584,7 @@ def write_oq_sourcefile(model, meta, mx_dict):
     newxml += '</nrml>'
     
     # write Big BBOX
-    #print '\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
+    #print('\nBBOX:', bbminlon, bbminlat, ',', bbminlon, bbmaxlat, ',', bbmaxlon, bbmaxlat, ',', bbmaxlon, bbminlat
     
     # write new data to file
     outxml = path.join(meta['modelPath'], meta['modelFile'])
@@ -603,13 +603,13 @@ def write_oq_sourcefile(model, meta, mx_dict):
 def make_logic_tree(srcxmls, branch_wts, meta):    
     from os import path
     
-    #print branch_wts
+    #print(branch_wts
     # if multimodel - adjust weights
     '''
     if meta['multiMods'] == 'True':
         branch_wts = array(branch_wts)
         branch_wt *= m['src_reg_wt']
-        print 'Branch Weights: ', m['src_reg_wt']
+        print('Branch Weights: ', m['src_reg_wt']
         #else:
         #    full_wt = concatenate((branch_wt, branch_wt, branch_wt))
     '''
@@ -624,13 +624,13 @@ def make_logic_tree(srcxmls, branch_wts, meta):
     
     # make branches
     for i, srcxml in enumerate(srcxmls):
-        #print i, srcxml
+        #print(i, srcxml
         #logictreepath = logicpath + sep + path.split(branch)[-1]
         if meta['splitXMLPath'] == True:
             logictreepath = path.split(srcxml)[-1]
         else:
             logictreepath = srcxml
-        #print i, logictreepath
+        #print(i, logictreepath
             
         newxml += '                <logicTreeBranch branchID="b' + str(i+1) + '">\n'
         newxml += '                    <uncertaintyModel>'+logictreepath+'</uncertaintyModel>\n'
@@ -657,6 +657,7 @@ def make_logic_tree(srcxmls, branch_wts, meta):
 ###############################################################################
 # set code prefix to ensure unique ids and optimise jobs
 def get_code_prefix(modelshp):
+    print(modelshp)
     if modelshp.endswith('ARUP_NSHA18_MFD.shp') or modelshp.endswith('ARUP_NSHA18_MFD_MX.shp'):
         code_prefix = 'ARUP'
     elif modelshp.endswith('ARUP_Background_NSHA18_MFD.shp') or modelshp.endswith('ARUP_Background_NSHA18_MFD_MX.shp'):
@@ -675,6 +676,12 @@ def get_code_prefix(modelshp):
         code_prefix = 'NSHMB'
     elif modelshp.endswith('SIN_MCC_NSHA18_MFD.shp') or modelshp.endswith('SIN_MCC_NSHA18_MFD_MX.shp'):
         code_prefix = 'SM'
+    elif modelshp.endswith('AUS6_Gridded_b_MFD.shp'):
+        code_prefix = 'AUS6G'
+    elif modelshp.endswith('DIMAUS_Gridded_b_MFD.shp'):
+        code_prefix = 'DIMG'
+    elif modelshp.endswith('NSHA13_Gridded_b_MFD.shp'):
+        code_prefix = 'NSHMG'
     else:
         code_prefix = ''
         

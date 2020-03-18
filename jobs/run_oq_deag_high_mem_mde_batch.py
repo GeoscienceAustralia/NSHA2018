@@ -178,14 +178,15 @@ for i,param_file in enumerate(param_file_list):
     f_out = open(run_script, 'w')
     f_out.write(outlines)
     f_out.close()
-    # clean working directory after copying job files...
+
+    # clean working directory after copying job files.  
     
 
 
 
 # Change to output directory and submit job
-# batch jobs need to go into ALL the folders and run the coresponding scripts
-# there must be a way to loop through all folders smartly.  
+# batch jobs needs to go into ALL the folders and run the coresponding scripts
+# there must be a way to loop through all folders smartly?  
     output_dirs.append(output_dir)
 
 for i,directory in enumerate(output_dirs):
@@ -196,7 +197,7 @@ for i,directory in enumerate(output_dirs):
     print cmd
     os.system(cmd)
     
-# add section to clean up job files putting them in the right directories
+# TODO: add section to clean up job files putting them in the right directories
 
 
 

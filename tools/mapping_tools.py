@@ -8,7 +8,7 @@ def print_functions():
     txt = open('U:/Code/pycode/mapping_tools.py').readlines()
     for line in txt:
         if line.find('def') >= 0:
-            print line.strip('def ').strip('\n')
+            print(line.strip('def ').strip('\n'))
             
 def get_field_index(sf, field):
     fields = sf.fields[1:]
@@ -102,7 +102,7 @@ def getshapecolour(sf, field, colmap, ncolours, **kwargs):
     # get colour index
     ci = []
     for f in fvect:
-        print f
+        print(f)
         ci.append(round((ncolours-1.) / zrng * (f-zmin)))
         
     return cs, ci, cmap, zmin, zmax
@@ -240,10 +240,10 @@ def drawoneshapepoly(m, plt, sf, field, value, **kwargs):
     
     # get field index
     findex = get_field_index(sf, field)
-    #print 'findex', findex
+    #print('findex', findex
 
     for i, shape in enumerate(shapes):
-        #print 'i', i
+        #print('i', i
         if recs[i][findex] == value:
             # get colour
             try:
@@ -657,9 +657,9 @@ def mask_outside_polygon(poly_verts, facecolor, plt):
     # A series of codes (1 and 2) to tell matplotlib whether to draw a line or 
     # move the "pen" (So that there's no connecting line)
     bound_codes = [mpath.Path.MOVETO] + (len(bound_verts) - 1) * [mpath.Path.LINETO]
-    print bound_codes
+    print(bound_codes)
     poly_codes = [mpath.Path.MOVETO] + (len(poly_verts) - 1) * [mpath.Path.LINETO]
-    print poly_codes
+    print(poly_codes)
     
     # Plot the masking patch
     path = mpath.Path(bound_verts + poly_verts, bound_codes + poly_codes)
@@ -730,22 +730,34 @@ def get_WGS84_area(geom):
     import shapely.ops as ops
     #from shapely.geometry.polygon import Polygon
     from functools import partial
-        
-    geom_area = ops.transform(
-        partial(
-            pyproj.transform,
-            pyproj.Proj(init='EPSG:4326'),
-            pyproj.Proj(
-                proj='aea',
-                lat1=geom.bounds[1],
-                lat2=geom.bounds[3])),
-        geom)
     
-    # Print the area in km^2
-    #print geom_area.area / 1000000.
+    try:
+        geom_area = ops.transform(
+            partial(
+                pyproj.transform,
+                pyproj.Proj(init='EPSG:4326'),
+                pyproj.Proj(
+                    proj='aea',
+                    lat_1=geom.bounds[1],
+                    lat_2=geom.bounds[3])),
+            geom)
+    # different keys for old lat/lon
+    except:
+        geom_area = ops.transform(
+            partial(
+                pyproj.transform,
+                pyproj.Proj(init='EPSG:4326'),
+                pyproj.Proj(
+                    proj='aea',
+                    lat1=geom.bounds[1],
+                    lat2=geom.bounds[3])),
+            geom)
+    
+    # print(the area in km^2)
+    #print(geom_area.area / 1000000.
     
     return geom_area.area / 1000000.
-    
+        
 '''
 code below stolen from:
 http://wiki.scipy.org/Cookbook/Matplotlib/Loading_a_colormap_dynamically
@@ -768,7 +780,7 @@ def cpt2colormap(fileName, ncolours, **kwargs):
     try:
         f = open(fileName)
     except:
-        print "file ",fileName, "not found"
+        print("file ",fileName, "not found")
         return None
 
     lines = f.readlines()
@@ -869,11 +881,11 @@ wgs84=pyproj.Proj("+init=EPSG:4326") # LatLon with WGS84 datum used by GPS units
 #NAD83=pyproj.Proj("+init=EPSG:3347") # NAD83 / Statistics Canada Lambert
 
 # get lat/lon for each point:
-print 'Converting to lon/lat...'
+print('Converting to lon/lat...'
 xx, yy = meshgrid(eastings, northings)
 lons, lats = pyproj.transform(nad1983, wgs84, xx.flatten(), yy.flatten())
 
-print 'Looping thru pop data...'
+print('Looping thru pop data...'
 # write population file for grdtrack
 pop = []
 plo = []

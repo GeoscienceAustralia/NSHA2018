@@ -13,26 +13,31 @@ from mpl_toolkits.basemap import Basemap
 from hmtk.parsers.catalogue.csv_catalogue_parser import CsvCatalogueParser
 from tools.nsha_tools import toYearFraction, get_shapely_centroid
 from tools.mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
+#from mfd_tools import * # get_mfds, get_annualised_rates, fit_a_value, parse_hmtk_cat, parse_hmtk_cat
 import matplotlib as mpl
 style.use('classic')
 
+import warnings
+warnings.filterwarnings("ignore")
+
 # import non-standard functions
-try:
-    from catalogue_tools import weichert_algorithm, aki_maximum_likelihood, bval2beta
-    from oq_tools import get_oq_incrementalMFD, beta2bval #, bval2beta
-    from mapping_tools import get_field_data, get_field_index, drawoneshapepoly, \
-                              drawshapepoly, labelpolygon, get_WGS84_area
-    #from catalogue.parsers import parse_ggcat
-    from catalogue.writers import ggcat2ascii
+#try:
+from catalogue_tools import weichert_algorithm, aki_maximum_likelihood, bval2beta
+from oq_tools import get_oq_incrementalMFD, beta2bval #, bval2beta
+from mapping_tools import get_field_data, get_field_index, drawoneshapepoly, \
+                          drawshapepoly, labelpolygon, get_WGS84_area
+#from catalogue.parsers import parse_ggcat
+from catalogue.writers import ggcat2ascii
     
     
     #from misc_tools import listdir_extension
     #from make_nsha_oq_inputs import write_oq_sourcefile
+'''
 except:
     cwd = getcwd().split(sep)
     pythonpath = sep.join(pt[0:-3])+sep+'tools'
-    print '\nSet environmental variables, e.g.:\n\nexport PYTHONPATH='+pythonpath+':$PYTHONPATH\n'
-
+    print('\nSet environmental variables, e.g.:\n\nexport PYTHONPATH='+pythonpath+':$PYTHONPATH\n')
+'''
 def timedelta2days_hours_minutes(td):
     return td.days, td.seconds//3600, (td.seconds//60)%60
         
@@ -59,7 +64,7 @@ except:
     single_src = False
 '''
 
-#print '!!!Temporary test - setting weights of upper and lower curves to zero!!!'
+#print('!!!Temporary test - setting weights of upper and lower curves to zero!!!'
 #bestcurve = True
 ###############################################################################
 # get parameter values
@@ -97,7 +102,7 @@ shpfolder = path.split(shpfile)
 # parse shapefile and make shapely objects
 ###############################################################################
 
-print 'Reading source shapefile...'
+print('Reading source shapefile...')
 sf = shapefile.Reader(shpfile)
 shapes = sf.shapes()
 polygons = []
@@ -158,7 +163,7 @@ new_n0_l = src_n0_l
 new_n0_u = src_n0_u
 
 # reset Mmin to 4.8
-#print '!!!Setting Mmin = 4.5!!!'
+#print('!!!Setting Mmin = 4.5!!!'
 #src_mmin = 4.5 * ones_like(src_mmin)
 #src_mmin_reg = 4. * ones_like(src_mmin_reg)
 
@@ -228,7 +233,7 @@ for uclass in unique_sup_classes:
     class_mmin_reg = 0.0
     class_mmax = nan
     
-    print '\nCalculating b-value for class:', uclass
+    print('\nCalculating b-value for class:', uclass)
                 
     ###############################################################################
     # loop thru zones 
@@ -240,13 +245,13 @@ for uclass in unique_sup_classes:
         
             # first check rate adjustment factor
             if not src_rte_adj[i] == 1.0:
-                print '    Getting alternative source boundary for', src_code[i]
+                print('    Getting alternative source boundary for', src_code[i])
                 
                 # loop through original shapes
                 for oPoly, oCode in zip(origPolygons, origCodes):
                     # assign original polygon                    
                     if oCode == src_code[i]:
-                        print '        Matched', oCode
+                        print('        Matched', oCode)
                         poly = oPoly
                         
             # if rate adjust == 1., use default shapes
@@ -256,7 +261,7 @@ for uclass in unique_sup_classes:
             # get cumulative class area
             cum_area += get_WGS84_area(poly)
             
-            print '    Compiling data from:', src_code[i]
+            print('    Compiling data from:', src_code[i])
             
             # definitions of arrays extracted from catalogue
             '''
@@ -281,7 +286,7 @@ for uclass in unique_sup_classes:
             src_ymax[i] = year_max
             
             # get earthquakes within source zones
-            #print src_code[i], src_usd, src_lsd
+            #print(src_code[i], src_usd, src_lsd
             mvect, mxvect, tvect, dec_tvect, ev_dict \
                 = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
             
@@ -381,7 +386,7 @@ for uclass in unique_sub_classes:
     class_mmin_reg = 0.0
     class_mmax = nan
     
-    print '\nCalculating b-value for class:', uclass
+    print('\nCalculating b-value for class:', uclass)
                 
     ###############################################################################
     # loop thru zones 
@@ -396,13 +401,13 @@ for uclass in unique_sub_classes:
         
             # first check rate adjustment factor
             if not src_rte_adj[i] == 1.0:
-                print '    Getting alternative source boundary for', src_code[i]
+                print('    Getting alternative source boundary for', src_code[i])
                 
                 # loop through original shapes
                 for oPoly, oCode in zip(origPolygons, origCodes):
                     # assign original polygon                    
                     if oCode == src_code[i]:
-                        print '        Matched', oCode
+                        print('        Matched', oCode)
                         poly = oPoly
                         
             # if rate adjust == 1., use default shapes
@@ -412,7 +417,7 @@ for uclass in unique_sub_classes:
             # get cumulative class area
             cum_area += get_WGS84_area(poly)
             
-            print '    Compiling data from:', src_code[i]
+            print('    Compiling data from:', src_code[i])
             
             # definitions of arrays extracted from catalogue
             '''
@@ -437,7 +442,7 @@ for uclass in unique_sub_classes:
             src_ymax[i] = year_max
             
             # get earthquakes within source zones
-            #print src_code[i], src_usd, src_lsd
+            #print(src_code[i], src_usd, src_lsd
             mvect, mxvect, tvect, dec_tvect, ev_dict \
                 = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
             
@@ -532,7 +537,7 @@ for uclass in unique_sub_classes:
                 # if num observations greater than zero, add to midx
                 if n_obs[idxstart] > 0:
                     midx = hstack((idxstart, midx))
-                    print '    get lower mag M', midx
+                    print('    get lower mag M', midx)
                     
                 idxstart -= 1
         
@@ -610,7 +615,7 @@ for uclass in unique_sub_classes:
 src_area = [] 
 
 for i in srcidx:
-    print '\nFitting MFD for', src_code[i]
+    print('\nFitting MFD for', src_code[i])
     
     # get completeness periods for zone
     ycomps = array([int(x) for x in src_ycomp[i].split(';')])
@@ -655,13 +660,13 @@ for i in srcidx:
     ###############################################################################
     # first check rate adjustment factor
     if not src_rte_adj[i] == 1.0:
-        print '    Getting original source boundary for', src_code[i]
+        print('    Getting original source boundary for', src_code[i])
         
         # loop through original shapes
         for oPoly, oCode in zip(origPolygons, origCodes):
             # assign original polygon                    
             if oCode == src_code[i]:
-                print '        Matched', oCode
+                print('        Matched', oCode)
                 poly = oPoly
     
     # if rate adjust == 1., use default shapes
@@ -690,7 +695,7 @@ for i in srcidx:
         = get_events_in_poly(i, sourcecat, poly, polygons, src_usd, src_lsd, src_overwrite_lsd)
         
     # skip zone if no events pass completeness
-    print 'NEQ Before =', len(mvect)
+    print('NEQ Before =', len(mvect))
     if len(mvect) > 1 :
         
         # preserve original arrays for plotting
@@ -704,7 +709,7 @@ for i in srcidx:
              remove_incomplete_events(mvect, mxvect, tvect, dec_tvect, ev_dict, mcomps, ycomps, bin_width)
         
     # check to see if mvect still non-zero length after removing incomplete events
-    print 'NEQ After =', len(mvect)
+    print('NEQ After =', len(mvect))
     
     ###############################################################################
     # pad N0 for sources without any events based on nornalised class area
@@ -727,7 +732,7 @@ for i in srcidx:
         new_bval_l[i] = bval+bval_sig # lower curve, so higher b
         new_bval_u[i] = bval-bval_sig # upper curve, so lower b
         
-        print 'Setting N0 based on area-normalised class rates:', src_code[i], src_cat[i]
+        print('Setting N0 based on area-normalised class rates:', src_code[i], src_cat[i])
         
         ###############################################################################
         # export rates file - too hard basket for now
@@ -747,7 +752,7 @@ for i in srcidx:
             betacurve, mfd_mrng = get_oq_incrementalMFD(beta, N0areanorm, mpltmin_best, mrng[-1], plt_width)
             
             # calculate rate of M5 events
-            print N0areanorm
+            print(N0areanorm)
             rates = N0areanorm * exp(-beta  * mfd_mrng) * (1 - exp(-beta * (src_mmax[i] - mfd_mrng))) \
                     / (1 - exp(-beta * src_mmax[i]))
             
@@ -768,7 +773,7 @@ for i in srcidx:
                     
             # export to file
             ratefile = path.join(srcfolder, '_'.join((src_code[i], 'norm_rates.csv')))
-            f = open(ratefile, 'wb')
+            f = open(ratefile, 'w')
             f.write(rate_txt)
             f.close()
                 
@@ -799,13 +804,13 @@ for i in srcidx:
                 # if num observations greater than zero, add to midx
                 if n_obs[idxstart] > 0:
                     midx = hstack((idxstart, midx))
-                    print '    get lower mag M2', midx
+                    print('    get lower mag M2', midx)
                     
                 idxstart -= 1
         
         # get a-value for intraslab events based on nornalised class area
         if floor(src_class_num[i]) == 11.:
-            print '\nIntraslab Source\n', src_class_num[i]
+            print('\nIntraslab Source\n', src_class_num[i])
             fn0 = class_fn0[class_idx] * src_area[-1] / class_area[class_idx]
             
             # make alternate rates based on new fn0
@@ -840,7 +845,7 @@ for i in srcidx:
             
             # use area-normalised rates
             if floor(src_class_num[i]) == 11.:
-                print 'Using area-normalised rates...'
+                print('Using area-normalised rates...')
                 # get lower + 1 std
                 bc_tmp, bc_mrng_lo = get_oq_incrementalMFD(beta+sigbeta, dummyN0, mpltmin, src_mmax_l[i], bin_width)
                 # fit to err_lo
@@ -903,7 +908,7 @@ for i in srcidx:
         # fill new values
         ###############################################################################
     
-        print 'Filling new values for', src_code[i]
+        print('Filling new values for', src_code[i])
         new_bval_b[i] = bval
         #new_bval_l[i] = bval-sigb173
         #new_bval_u[i] = bval+sigb173
@@ -1123,7 +1128,7 @@ for i in srcidx:
             ###############################################################################
             # make map
             ###############################################################################
-            print 'Making map for:', src_code[i]
+            print('Making map for:', src_code[i])
             ax = plt.subplot(236)
             res = 'l'
             
@@ -1331,7 +1336,7 @@ for i in srcidx:
             
             pdffile = '.'.join((src_code[i], 'mfd', 'pdf'))
             pdfpath = path.join(srcfolder, pdffile)
-            print 'Saving file:', pdfpath
+            print('Saving file:', pdfpath)
             plt.savefig(pdfpath, format='pdf', bbox_inches='tight')  # causing program to crash (sometimes) on rhe-compute for unknown reason
             
             if single_src == True:
@@ -1373,7 +1378,7 @@ for i in srcidx:
                     
             # export to file
             ratefile = path.join(srcfolder, '_'.join((src_code[i], 'rates.csv')))
-            f = open(ratefile, 'wb')
+            f = open(ratefile, 'w')
             f.write(rate_txt)
             f.close()
                                      
@@ -1424,7 +1429,12 @@ src_n0 = get_field_data(sf, 'N0_BEST', 'float')
 records = sf.records()
 
 # set shapefile to write to
-w = shapefile.Writer(shapefile.POLYGON)
+newshp = path.join(rootfolder,'shapefiles',outsrcshp)
+try:
+    w = shapefile.Writer(shapefile.POLYGON)
+except:
+    w = shapefile.Writer(newshp[:-4], shapeType=5) # 5=polygon
+    	
 w.field('SRC_NAME','C','100')
 w.field('CODE','C','12')
 w.field('SRC_TYPE','C','10')
@@ -1472,7 +1482,10 @@ for record, shape in zip(records, shapes):
     
     if new_n0_b[i] > 0.0:
         # set shape polygon
-        w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        try:
+            w.line(parts=[shape.points], shapeType=shapefile.POLYGON)
+        except:
+            w.poly([shape.points])
         
         # loop thru fields and match with original shapefile
         for j, field in enumerate(fields):
@@ -1506,12 +1519,14 @@ for record, shape in zip(records, shapes):
     i += 1  
         
 # now save area shapefile
-newshp = path.join(rootfolder,'shapefiles',outsrcshp)
-w.save(newshp)
+try:
+    w.save(newshp)
+except:
+    w.close()
 
 # write projection file in WGS84
 prjfile = path.join(rootfolder,'shapefiles',outsrcshp.strip().split('.shp')[0]+'.prj')
-f = open(prjfile, 'wb')
+f = open(prjfile, 'w')
 f.write('GEOGCS["GCS_WGS_1984",DATUM["D_WGS_1984",SPHEROID["WGS_1984",6378137.0,298.257223563]],PRIMEM["Greenwich",0.0],UNIT["Degree",0.0174532925199433]]')
 f.close()
 
@@ -1639,10 +1654,10 @@ src_area= array(src_area)
 # normalise M5 rates by area
 lognorm_m5_rates = log10(100**2 * m5_rates / src_area[idx])
 
-# print rates
-print '\nM5 rates'
+# print(rates
+print('\nM5 rates')
 for rate, code in zip(lognorm_m5_rates, src_code):
-    print code, 10**rate     
+    print(code, 10**rate)
     
 # get colour index
 ncolours=20
@@ -1726,12 +1741,12 @@ m6_rates = array(new_n0_b[idx]) * exp(-new_beta[idx] * 6.0) * (1 - exp(-new_beta
 # normalise M6 rates by area
 lognorm_m6_rates = log10(100**2 * m6_rates / src_area[idx])
 
-# print rates
-print '\nM6 rates'
+# print(rates
+print('\nM6 rates')
 for rate, code in zip(lognorm_m6_rates, src_code):
-    print code, 10**rate 
+    print(code, 10**rate)
 
-print '\n'
+print('\n')
     
 # get colour index
 ncolours=20
@@ -1846,7 +1861,7 @@ cindex = []
 # loop thru rates and get c-index
 for r in lognorm_m7_rates:
     idx = interp(r, [r_min, r_max], [0, ncolours-1])
-    #print r, idx
+    #print(r, idx
     cindex.append(int(round(idx)))
     if isnan(idx) or isinf(idx):
         idx = 0
@@ -1907,16 +1922,30 @@ for root, dirnames, filenames in walk(rootfolder):
                     if not filename.endswith('_NSHA18_MFD.MERGE.pdf'):
                         if not filename.endswith('_NSHA18_MFD_M4.MERGE.pdf'):
                             if not filename.endswith('_NSHA18_MFD_M4_GK.MERGE.pdf'):
-                                print 'Adding', filename
+                                print('Adding', filename)
                                 pdffiles.append(path.join(root, filename))
 
+def merger(output_path, input_paths):
+    from PyPDF2 import PdfFileWriter, PdfFileReader
+    pdf_writer = PdfFileWriter()
+ 
+    for path in input_paths:
+        pdf_reader = PdfFileReader(path)
+        for page in range(pdf_reader.getNumPages()):
+            pdf_writer.addPage(pdf_reader.getPage(page))
+ 
+    with open(output_path, 'wb') as fh:
+        pdf_writer.write(fh)
+
+merger(combined_pdf, pdffiles)
+'''        
 # now merge files
 merger = PdfFileMerger()                              
 for pdffile in pdffiles:                            
-    merger.append(PdfFileReader(file(pdffile, 'rb')))
+    merger.append(PdfFileReader(file(pdffile, 'r')))
 
 merger.write(combined_pdf)
-
+'''
 ###############################################################################
 # write summary csv
 ###############################################################################
@@ -1939,7 +1968,7 @@ for rec in records:
 csvbase = path.split(newshp)[-1].strip('shp')+'csv'
 combined_csv = path.join(rootfolder, csvbase)
    
-f = open(combined_csv, 'wb')
+f = open(combined_csv, 'w')
 f.write(csvtxt)
 f.close()
 """

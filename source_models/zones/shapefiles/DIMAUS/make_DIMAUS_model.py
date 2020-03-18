@@ -9,7 +9,7 @@ try:
                                                get_ul_seismo_depths, get_neotectonic_domain_params, \
                                                aggregate_intraslab_sources
 except:
-    print 'Add PYTHONPATH to NSHA18 root directory'
+    print('Add PYTHONPATH to NSHA18 root directory')
 
 ###############################################################################
 
@@ -21,7 +21,7 @@ except:
 
 domshp = 'DIMAUS_NSHA18_Merged.shp'
 
-print 'Reading source shapefile...'
+print('Reading source shapefile...')
 sf = shapefile.Reader(domshp)
 shapes = sf.shapes()
 polygons = []

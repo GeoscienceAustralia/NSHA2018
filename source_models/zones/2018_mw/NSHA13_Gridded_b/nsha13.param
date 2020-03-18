@@ -1,0 +1,8 @@
+ROOT FOLDER      = 2018_mw//NSHA13_Gridded_b
+CATALOGUE        = ..//..//catalogue//data//NSHA18CAT_V0.1_hmtk_declustered.csv
+DECLUSTERED      = True
+SHAPEFILE INPUT  = shapefiles//NSHA13//NSHA13_Gridded_b.shp
+ORIGINAL SHAPES  = shapefiles//NSHA13//NSHA13_NSHA18_May2017.shp
+OUTPUT FOLDER    = mfd
+SHAPEFILE OUTPUT = NSHA13_Gridded_b_MFD.shp
+MFD BIN WIDTH    = 0.1

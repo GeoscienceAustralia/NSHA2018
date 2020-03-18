@@ -1,0 +1,11 @@
+ncpus = 1008 
+mem = 4032GB
+walltime = 10:00:00
+jobfs = 750GB
+sandpit_path = /scratch/w84/NSHA18/sandpit/
+model_rel_path = NSHA2018/source_models/gridded_bval/
+shared_rel_path = NSHA2018/shared
+gsim_lt_filename = NSHA18_Aus_GMPE_75thp_logic_tree_cal_power_p0.4_simplified_July18.xml
+model_output_base = /scratch/w84/NSHA18/PSHA_modelling/NSHA_gridded_bval_Jan20/PGA
+job_file = job_maps_PGA_nsha_bval.ini
+job_type = maps
