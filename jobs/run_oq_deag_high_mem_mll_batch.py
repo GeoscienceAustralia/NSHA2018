@@ -174,7 +174,8 @@ for i,param_file in enumerate(param_file_list):
     #outlines += 'module load openquake/3.1\n' # used for NSHA18
     #outlines += 'module load openquake/3.3.1\n'
     #outlines += 'module load openquake/3.6\n'
-    outlines += 'module load openquake/3.7.1\n'
+    #outlines += 'module load openquake/3.7.1\n'
+    outlines += 'module load openquake/3.8.0\n'
     outlines += 'oq-ini.all.sh\n'
     outlines += 'oq engine --run %s --exports csv >&  parjob.log\n' % params['job_file']
     outlines += 'oq-end.sh'

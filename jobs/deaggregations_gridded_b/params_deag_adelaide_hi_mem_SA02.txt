@@ -1,7 +1,7 @@
-ncpus = 1008 
-mem = 4032GB
-walltime = 1:00:00
-jobfs = 750GB
+ncpus = 576
+mem = 1500GB
+walltime = 4:00:00
+jobfs = 1000GB
 sandpit_path = /scratch/w84/NSHA18/sandpit/
 deag_rel_path = NSHA2018/jobs/deaggregations_gridded_b
 model_rel_path = NSHA2018/source_models/gridded_bval/
