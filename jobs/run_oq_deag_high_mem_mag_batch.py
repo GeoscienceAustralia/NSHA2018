@@ -74,7 +74,6 @@ SA_s = "SA02"
 poe = "0.1, 0.02, 0.005"
 cities, lats, lons = make_city_list("../../shared/nsha_cities.csv")
 
-
 job_file_list = []
 param_file_list = []
 for i, city in enumerate(cities):

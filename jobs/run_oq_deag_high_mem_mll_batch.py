@@ -19,6 +19,7 @@ import re
 import shutil
 import csv
 import subprocess
+import numpy as np
 
 # Don't run if the wd is incorrect
 if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations':
@@ -44,9 +45,9 @@ def make_city_list(infile):
     import csv
     with open(infile) as csvfile:
         cities = []
+        lats = []
+        lons = []
         csv_reader = csv.reader(csvfile, delimiter=',')
-        job_file_list = []
-        param_file_list = []
         
         for i, row in enumerate(csv_reader):
             lon = row[0]
@@ -57,23 +58,27 @@ def make_city_list(infile):
             if city.endswith("max"):
                 continue
             # test first 10 cities - remove for batch production
-            if i > 10:
-                break
+            # if i > 10:
+            #    break
             city = city.replace(" ", "_")
             print(city)
             cities.append(city)
-        return cities
+            lats.append(lat)
+            lons.append(lon)
+        return cities, lats, lons
     
 # Set up input files from sites csv.
 SA = "0.2"
 SA_s = "SA02"
 poe = "0.1, 0.02, 0.005"
-cities = make_city_list("../../shared/nsha_cities.csv")
-    
-for city in cities:
+cities, lats, lons = make_city_list("../../shared/nsha_cities.csv")
+
+job_file_list = []
+param_file_list = []
+for i, city in enumerate(cities):
     # Dictonary to select strings to be be replaced"
     rep = {"<CITY>": city, "<SA>": SA, 
-            "<LON>": lon, "<LAT>": lat, 
+            "<LON>": lons[i], "<LAT>": lats[i], 
             "<POE>": poe, "<SA_s>": SA_s}
 
     ini_file = "Templates/job_deag_mll_TEMPLATE.ini"
@@ -190,13 +195,13 @@ for i,param_file in enumerate(param_file_list):
     output_dirs.append(output_dir)
 
 loop_end_time = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
-np.savetxt("Job_list_%s.txt" % loop_end_time, output_dirs)
+np.savetxt("Job_list_%s.txt" % loop_end_time, output_dirs, fmt='%s')
 
 for i,directory in enumerate(output_dirs):
     print directory
     os.chdir(directory)
     print(os.getcwd())
-    cmd = 'qsub -v PBS_ARRAY_INDEX=%s %s' % (i+1,run_script_name)
+    cmd = 'qsub -v PBS_ARRAY_INDEX=%s %s' % (i+1, run_script_name)
     print cmd
     os.system(cmd)
 
