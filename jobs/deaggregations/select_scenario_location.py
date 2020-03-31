@@ -23,6 +23,7 @@ def main():
 
     # open pre canned paths of run deaggregations (set is final run paths)
     f = open("Job_list_20200324_145200.txt", 'r')
+    #scenario_list = ["city", "mag", "lat", "lon", "poe", "poe_mag"]
     scenario_list = []
     for line in f:
     #print(line)
@@ -40,10 +41,12 @@ def main():
         print("looking up modal location...")
         df_loc = open_rlz_file(city, poe, full_line)
         max_loc = select_top_loc(df_loc, top_mag)
-        details = append_to_scenrio_list(max_loc, city)
+        sum_mag = sum_locs(df_mag, top_mag)
+
+        details = append_to_scenrio_list(max_loc, city, sum_mag)
         scenario_list.append(details)
         scenario_array = np.array(scenario_list)
-        np.savetxt(u"Earthquake_Scenarios.csv", scenario_array, fmt=u'%10s', delimiter=u",")
+        np.savetxt(u"Earthquake_Scenarios1.csv", scenario_array, fmt=u'%10.10s', delimiter=u",")
 
 
 def open_rlz_file(place_name, poe, file_path):
@@ -85,6 +88,7 @@ def make_dataframes(infile):
 
 def select_top_mags(df):
     max_poe = df.nlargest(1, ['poe'])
+    #max_poe = df.nlargest(2, ['poe']).iloc[[1]]
     mag_max = np.float(max_poe.mag)
     return mag_max
 
@@ -98,9 +102,17 @@ def select_top_loc(df, max_mag, plot=False):
     return max_loc
 
 
-def append_to_scenrio_list(df, place_name):
-    file_line = [place_name, df['mag'], df['lat'], df['lon'], df['poe']]
+def append_to_scenrio_list(df, place_name, sum_mag):
+    file_line = [place_name, df['mag'], df['lat'], df['lon'], df['poe'], sum_mag]
     return file_line
+
+
+def sum_locs(df, mag):
+    locs = df.loc[df['mag'] == mag]
+    sum_mag = locs['poe'].sum()
+    return sum_mag
+
+
 
 
 if __name__ == "__main__":
