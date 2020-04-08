@@ -17,14 +17,16 @@ import pandas as pd
 
 def main():
 
-#TODO output a file of scenarios:
-#     :name, location, mag max, loc max, poe
-#TODO make sure paths work on both unix and windows - may be easier to run on NCI when finalised?
+#TODO Add unction to calculate the distance of the scenario location to the population centre
+#TODO Fix index being printed into scenario file - pandas issue on lat lon fields.  
+#TODO Decide if normalsed mag needed.  
 
     # open pre canned paths of run deaggregations (set is final run paths)
     f = open("Job_list_20200324_145200.txt", 'r')
     #scenario_list = ["city", "mag", "lat", "lon", "poe", "poe_mag"]
-    scenario_list = []
+    scenario_list1 = []
+    scenario_list2 = []
+
     for line in f:
     #print(line)
         print("**********")
@@ -33,20 +35,43 @@ def main():
         city = line.split("/")[6]
         full_line = join(line, "results")
         poe = float(0.005)
-        df_mag = open_rlz_file(city, poe, full_line)
-        print(df_mag)
-        top_mag = select_top_mags(df_mag)
-        print("The highest probability magnitude for poe in %s: %s, is %s: " 
-                                                % (city, poe, top_mag))
-        print("looking up modal location...")
-        df_loc = open_rlz_file(city, poe, full_line)
-        max_loc = select_top_loc(df_loc, top_mag)
-        sum_mag = sum_locs(df_mag, top_mag)
 
-        details = append_to_scenrio_list(max_loc, city, sum_mag)
-        scenario_list.append(details)
-        scenario_array = np.array(scenario_list)
-        np.savetxt(u"Earthquake_Scenarios1.csv", scenario_array, fmt=u'%10.10s', delimiter=u",")
+        df = open_rlz_file(city, poe, full_line)
+
+        # stack poes in each lon/lat bin
+        mags, lonlats_df = stack_mags_lonlat(df)
+
+        # select highest poe from lonlat df
+        lon, lat = select_top_loc(lonlats_df)
+        print(lat, lon)
+
+        # make datafram for only selected lon and lats 
+        max_loc_df = df.loc[(df['lon'] == float(lon)) & (df['lat'] == float(lat))]
+
+        # look up highest poe mags for this location
+        print(max_loc_df)
+        top_mag1 = select_top_mags(max_loc_df, number=1, mag_prev="NaN")
+        top_mag2 = select_top_mags(max_loc_df, number=2, mag_prev="NaN")
+
+        sum_mag1 = sum_locs(df, top_mag1)
+        sum_mag2 = sum_locs(df, top_mag2)
+
+        #details1 = append_to_scenrio_list(lon, lat, city, sum_mag1)        
+        #details2 = append_to_scenrio_list(lon lat, city, sum_mag2)
+
+
+        details1 = [city, top_mag1, lat, lon, sum_mag1]
+        details2 = [city, top_mag2, lat, lon, sum_mag2]
+
+
+        scenario_list1.append(details1)
+        scenario_array1 = np.array(scenario_list1)
+
+        scenario_list2.append(details2)
+        scenario_array2 = np.array(scenario_list2)
+
+        np.savetxt(u"Earthquake_Scenarios1.csv", scenario_array1, fmt=u'%10.10s', delimiter=u",")
+        np.savetxt(u"Earthquake_Scenarios2.csv", scenario_array2, fmt=u'%10.10s', delimiter=u",")
 
 
 def open_rlz_file(place_name, poe, file_path):
@@ -60,6 +85,7 @@ def open_rlz_file(place_name, poe, file_path):
                 headers = first_line.split(', ')
                 poe_file = headers[9].split('=')[1]
                 poe_file = np.float(re.sub("'", '', poe_file))
+
                 if poe_file == poe:
                     infile = str(path_to_file)
                     df = make_dataframes(infile)
@@ -86,20 +112,46 @@ def make_dataframes(infile):
     return df
 
 
-def select_top_mags(df):
-    max_poe = df.nlargest(1, ['poe'])
-    #max_poe = df.nlargest(2, ['poe']).iloc[[1]]
-    mag_max = np.float(max_poe.mag)
-    return mag_max
+def select_top_mags(df, number=1, mag_prev="NaN"):
+    if number == 1:
+        max_poe = df.nlargest(1, ['poe'])
+        mag_max = np.float(max_poe.mag)
+        print(mag_max)
+        return mag_max
+    if number >= 2:
+        i = number
+        print("number is currently %s" % i)
+        max_poe = df.nlargest(i, ['poe']).iloc[[i-1]]
+        mag_max = np.float(max_poe.mag)
+        mag_prev = df.nlargest(1, ['poe']).mag
+        if abs(float(mag_max) - float(mag_prev)) < 0.5:
+            number = i + 1
+            return select_top_mags(df, number, mag_max)
+        else:
+            if mag_max:
+                return mag_max
 
 
-def select_top_loc(df, max_mag, plot=False):
-    locs = df.loc[df['mag'] == max_mag]
-    if plot == True:
-        locs.plot.line(y='poe')
-        plt.show()
-    max_loc = locs.loc[locs['poe'].idxmax()]
-    return max_loc
+def stack_mags_lonlat(df):
+    #get unique magnitudes
+    mags = np.unique(df.mag)
+    p_norm = df.poe / sum(df.poe)
+
+    #get stacked sum of z's for a given lat/lon
+    poe_sum = []
+    for i in range(0, len(p_norm), len(mags)):
+        poe_sum.append(sum(p_norm[i:i+len(mags)]))
+        
+    lonlats_df = df[['lon', 'lat']].drop_duplicates().reset_index()
+    lonlats_df['poe_sum'] = poe_sum
+
+    return mags, lonlats_df
+
+
+def select_top_loc(df):
+    max_lonlat = df.nlargest(1, ['poe_sum']) 
+    #max_loc = locs.loc[locs['poe'].idxmax()]
+    return max_lonlat.lon, max_lonlat.lat
 
 
 def append_to_scenrio_list(df, place_name, sum_mag):
