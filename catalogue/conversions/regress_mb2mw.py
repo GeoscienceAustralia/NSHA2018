@@ -89,7 +89,7 @@ def linear_reg(c, x):
 
 
 # parse file
-nsha_file = path.join('..','..','data','NSHA18CAT.MB-MW.csv')
+nsha_file = path.join('..','data','NSHA18CAT.mb-MW.csv')
 
 cat_nsha = np.genfromtxt(nsha_file,delimiter=',',skip_header=1,dtype=None)
 
@@ -166,7 +166,7 @@ y1 = C1[0]*xrng + C1[1]
 coeftxt = 'mw = c1 * mb + c2\n'
 coeftxt += str(C1[0]) + '\n'
 coeftxt += str(C1[1]) + '\n'
-f = open('mb2mw_coefs.txt', 'wb')
+f = open('mb2mw_coefs.txt', 'w')
 f.write(coeftxt)
 f.close()
 
