@@ -17,8 +17,7 @@ import pandas as pd
 
 def main():
 
-#TODO Add unction to calculate the distance of the scenario location to the population centre
-#TODO Fix index being printed into scenario file - pandas issue on lat lon fields.  
+#TODO Add function to calculate the distance of the scenario location to the population centre
 #TODO Decide if normalsed mag needed.  
 
     # open pre canned paths of run deaggregations (set is final run paths)
@@ -43,13 +42,11 @@ def main():
 
         # select highest poe from lonlat df
         lon, lat = select_top_loc(lonlats_df)
-        print(lat, lon)
 
-        # make datafram for only selected lon and lats 
+        # make dataframe for only selected lon and lats 
         max_loc_df = df.loc[(df['lon'] == float(lon)) & (df['lat'] == float(lat))]
 
         # look up highest poe mags for this location
-        print(max_loc_df)
         top_mag1 = select_top_mags(max_loc_df, number=1, mag_prev="NaN")
         top_mag2 = select_top_mags(max_loc_df, number=2, mag_prev="NaN")
 
@@ -59,10 +56,8 @@ def main():
         #details1 = append_to_scenrio_list(lon, lat, city, sum_mag1)        
         #details2 = append_to_scenrio_list(lon lat, city, sum_mag2)
 
-
-        details1 = [city, top_mag1, lat, lon, sum_mag1]
-        details2 = [city, top_mag2, lat, lon, sum_mag2]
-
+        details1 = [city, top_mag1, float(lat), float(lon), sum_mag1]
+        details2 = [city, top_mag2, float(lat), float(lon), sum_mag2]
 
         scenario_list1.append(details1)
         scenario_array1 = np.array(scenario_list1)
@@ -70,8 +65,8 @@ def main():
         scenario_list2.append(details2)
         scenario_array2 = np.array(scenario_list2)
 
-        np.savetxt(u"Earthquake_Scenarios1.csv", scenario_array1, fmt=u'%10.10s', delimiter=u",")
-        np.savetxt(u"Earthquake_Scenarios2.csv", scenario_array2, fmt=u'%10.10s', delimiter=u",")
+        np.savetxt(u"Earthquake_Scenarios1.csv", scenario_array1, fmt=u'%10.20s', delimiter=u",")
+        np.savetxt(u"Earthquake_Scenarios2.csv", scenario_array2, fmt=u'%10.20s', delimiter=u",")
 
 
 def open_rlz_file(place_name, poe, file_path):
@@ -120,7 +115,7 @@ def select_top_mags(df, number=1, mag_prev="NaN"):
         return mag_max
     if number >= 2:
         i = number
-        print("number is currently %s" % i)
+        #print("number is currently %s" % i)
         max_poe = df.nlargest(i, ['poe']).iloc[[i-1]]
         mag_max = np.float(max_poe.mag)
         mag_prev = df.nlargest(1, ['poe']).mag
