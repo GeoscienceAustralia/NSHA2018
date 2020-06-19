@@ -25,6 +25,16 @@ import numpy as np
 if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations':
     sys.exit("Please run script from within /scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations")
 
+
+######################################################################################
+# User inputs:
+SA = "0.2"
+SA_s = "SA02"
+poe = "0.1, 0.02, 0.005"
+location_file = "../../shared/additional_deagg_locations.csv"
+######################################################################################
+
+
 def find_replace(rep, infile_s, outfile_s):
     import re
     '''function to enter correct details in to job and parameter file '''
@@ -52,7 +62,7 @@ def make_city_list(infile):
         for i, row in enumerate(csv_reader):
             lon = row[0]
             lat = row[1]
-            city = row[2]
+            city = row[2].strip()
 
             # Skip over max hazard locations of cites "max"
             if city.endswith("max"):
@@ -66,12 +76,8 @@ def make_city_list(infile):
             lats.append(lat)
             lons.append(lon)
         return cities, lats, lons
-    
-# Set up input files from sites csv.
-SA = "0.2"
-SA_s = "SA02"
-poe = "0.1, 0.02, 0.005"
-cities, lats, lons = make_city_list("../../shared/nsha_cities.csv")
+
+cities, lats, lons = make_city_list(location_file)    
 
 job_file_list = []
 param_file_list = []

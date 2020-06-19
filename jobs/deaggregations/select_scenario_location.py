@@ -21,7 +21,7 @@ def main():
 #TODO Decide if normalsed mag needed.  
 
     # open pre canned paths of run deaggregations (set is final run paths)
-    f = open("Job_list_20200324_145200.txt", 'r')
+    f = open("Job_list_20200619_140100.txt", 'r')
     #scenario_list = ["city", "mag", "lat", "lon", "poe", "poe_mag"]
     scenario_list1 = []
     scenario_list2 = []
@@ -65,8 +65,8 @@ def main():
         scenario_list2.append(details2)
         scenario_array2 = np.array(scenario_list2)
 
-        np.savetxt(u"Earthquake_Scenarios1.csv", scenario_array1, fmt=u'%10.20s', delimiter=u",")
-        np.savetxt(u"Earthquake_Scenarios2.csv", scenario_array2, fmt=u'%10.20s', delimiter=u",")
+        np.savetxt(u"Earthquake_Scenarios1_new_locs.csv", scenario_array1, fmt=u'%10.20s', delimiter=u",")
+        np.savetxt(u"Earthquake_Scenarios2_new_locs.csv", scenario_array2, fmt=u'%10.20s', delimiter=u",")
 
 
 def open_rlz_file(place_name, poe, file_path):
