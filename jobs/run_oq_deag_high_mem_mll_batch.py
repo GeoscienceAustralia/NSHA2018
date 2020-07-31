@@ -29,7 +29,7 @@ if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggreg
 ######################################################################################
 # User inputs:
 SA = "0.2"
-SA_s = "SA02"
+SA_s = "SA02" #for the file name
 poe = "0.1, 0.02, 0.005"
 location_file = "../../shared/additional_deagg_locations.csv"
 ######################################################################################
@@ -52,6 +52,9 @@ def find_replace(rep, infile_s, outfile_s):
 
 
 def make_city_list(infile):
+    """ Fuction reads in input file.  This may need editing
+    for the format of your input file.  
+    """
     import csv
     with open(infile) as csvfile:
         cities = []
@@ -81,6 +84,7 @@ cities, lats, lons = make_city_list(location_file)
 
 job_file_list = []
 param_file_list = []
+
 for i, city in enumerate(cities):
     # Dictonary to select strings to be be replaced"
     rep = {"<CITY>": city, "<SA>": SA, 

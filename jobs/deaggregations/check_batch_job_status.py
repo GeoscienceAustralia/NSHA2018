@@ -14,7 +14,7 @@ import re
 from os.path import join
 from glob import glob
 
-f = open("Job_list_20200619_140100.txt", 'r')
+f = open("Job_list_20200324_145200.txt", 'r')
 for line in f:
     #print(line)
     print("**********")

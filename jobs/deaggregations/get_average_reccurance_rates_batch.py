@@ -12,33 +12,41 @@ from shapely.geometry import Point, Polygon
 Script used to calcualte recurrance intervals and their corresponding 
 uncertainty ranges.  Used specifically for creation of the Altas of
 Earthquake Scenarios.
+
+In this script the file inputs/outputs are hard coded so you may want
+to fix this to be more standardised (command line input?).  
+
 """
 
 if sys.version_info[0] < 3:
     raise Exception("Must be using Python 3")
 
-# TODO calculate mean/stdev from mfds in log space.  
 
 def main():
 
-    # Make sure keys are EXACTLY the same as the NSHA folder names
+    # Make sure keys are EXACTLY the same as the NSHA folder names.  If there are
+    # error this is likely an issue.  Check NSHA folder names and rename these
+    # dictonary entires occordingly.  If a source model region doesn't exist or can't
+    # be found (FileNotFoundError) - ask Trevor...
+
     source_model_dict = {
-                        "AUS6": 0.204,
-                        "DIMAUS": 0.210,
-                        "NSHA13": 0.283,
-                        "ARUP": 0.052,
-                        "ARUP_Background": 0.052,
-                        "Leonard2008": 0.053,
-                        "Domains_multi_mc": 0.092,
-                        "NSHA13_Background": 0.036,
-                        "SinMcC2016": 0.019
+                        "AUS6_Gridded_b": 0.044,
+                        "DIMAUS_Gridded_b": 0.045,
+                        "NSHA13_Gridded_b": 0.061,
+                        "ARUP": 0.034,
+                        "ARUP_Background": 0.034,
+                        "Leonard2008": 0.035,
+                        "Domains_multi_mc": 0.061,
+                        "NSHA13_Background": 0.024,
+                        "SinMcC2016": 0.013
     }
 
-    # from file or hard coded
     # TODO put as a choice between a looping file or single input arguments
+    # TODO stop file inputs/outputs being hard coded.  Add standardised naming.  
+
     reccurance_list = []
 
-    with open("Earthquake_Scenarios2.csv") as csvfile:
+    with open("Scenario_csvs/Earthquake_Scenarios2_new_locs.csv") as csvfile:
         csvreader = csv.reader(csvfile, delimiter=',')
         for row in csvreader:
             name = row[0]
@@ -48,8 +56,6 @@ def main():
             x_vals, weights = look_up_recurrance(lon, lat, mag, source_model_dict)            
             mean, stdev = weighted_avg_and_std(x_vals, weights)
 
-            #print(mean)
-            #print(stdev)
             ub = mean - (2*stdev)
             lb = mean + (2*stdev)
 
@@ -63,14 +69,13 @@ def main():
             mean_yrs = np.round(1 / mean_exp)
             
             print("For Scenario %s: " % name)
-            print("mean recurrance = %s in the range %s to %s" % (mean_yrs, np.round(lb_yrs), np.round(ub_yrs)))
+            print("Mean recurrance = %s in the range %s to %s" % (mean_yrs, np.round(lb_yrs), np.round(ub_yrs)))
             
             reccurance_list.append([name, mean_yrs, np.round(lb_yrs), np.round(ub_yrs)])
 
 
-    np.savetxt(u"Earthquake_Scenarios2_rates.csv", np.array(reccurance_list), fmt=u'%10.20s', delimiter=u",")
-    #print(reccurance_list)    
-
+    np.savetxt(u"Scenario_csvs/Earthquake_Scenarios2_newlocs_rates.csv", np.array(reccurance_list), fmt=u'%10.20s', delimiter=u",")
+ 
 
 def weighted_avg_and_std(values, weights):
     """

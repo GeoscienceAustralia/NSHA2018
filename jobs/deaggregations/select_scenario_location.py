@@ -21,7 +21,7 @@ def main():
 #TODO Decide if normalsed mag needed.  
 
     # open pre canned paths of run deaggregations (set is final run paths)
-    f = open("Job_list_20200619_140100.txt", 'r')
+    f = open("Job_list_20200324_145200.txt", 'r')
     #scenario_list = ["city", "mag", "lat", "lon", "poe", "poe_mag"]
     scenario_list1 = []
     scenario_list2 = []
@@ -53,11 +53,19 @@ def main():
         sum_mag1 = sum_locs(df, top_mag1)
         sum_mag2 = sum_locs(df, top_mag2)
 
+        if top_mag1 >= 6.0:
+            r1 = round(mag2len_L14(top_mag1), 0)
+        else:
+            r1 = "N/A"
+        if top_mag2 >= 6.0:
+            r2 = round(mag2len_L14(top_mag2), 0)
+        else: r2 = "N/A"
+
         #details1 = append_to_scenrio_list(lon, lat, city, sum_mag1)        
         #details2 = append_to_scenrio_list(lon lat, city, sum_mag2)
 
-        details1 = [city, top_mag1, float(lat), float(lon), sum_mag1]
-        details2 = [city, top_mag2, float(lat), float(lon), sum_mag2]
+        details1 = [city, top_mag1, float(lat), float(lon), sum_mag1, r1]
+        details2 = [city, top_mag2, float(lat), float(lon), sum_mag2, r2]
 
         scenario_list1.append(details1)
         scenario_array1 = np.array(scenario_list1)
@@ -160,6 +168,26 @@ def sum_locs(df, mag):
     return sum_mag
 
 
+def mw2m0(mw):
+    return 10**(3. * mw / 2.  + 9.05)
+
+def mag2len_L14(mw, ftype='scrrs'): # in MW - not sure if correct
+    # assume mw is a list
+    logM0 = np.log10(mw2m0(mw))
+    #logM0 = np.array([logM0])
+
+    if ftype == 'scrrs':
+        b = 3.0
+        a = 6.382
+        rl = 10**((logM0 - a) / b) / 1000.
+
+        
+        idx = rl > 2.5
+        b = 2.5
+        a = 8.08
+        rl = 10**((logM0 - a) / b) / 1000.
+
+    return rl # in km
 
 
 if __name__ == "__main__":
