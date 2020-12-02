@@ -21,7 +21,7 @@ import csv
 import subprocess
 
 # Don't run if the wd is incorrect
-if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations':
+if not os.getcwd() == '/scratch/w84/NSHA18/sandpit/tia547/NSHA2018/jobs/deaggregations':
     sys.exit("Please run script from within /scratch/w84/NSHA18/sandpit/js1626/NSHA2018/jobs/deaggregations")
 
 def find_replace(rep, infile_s, outfile_s):

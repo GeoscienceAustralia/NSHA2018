@@ -12,7 +12,7 @@ end
 ind = [];
 for i = 1:length(mdat)
     if ~isnan(mdat(i).MDAT_MLrevdist(1)) ...
-       & mdat(i).MDAT_dateNum > datenum(1986,1,1) ...
+       & mdat(i).MDAT_dateNum < datenum(1986,1,1) ...
        & mdat(i).MDAT_lat < -10
         ind = [ind i];
     end
@@ -39,4 +39,4 @@ stdrev(delnan) = [];
 hold on;
 errorbar((mrange),(medrev),(stdrev),'rs');
 mcorr = polyfit(mrange,medrev,1);
-dlmwrite('mcorr.dat',mcorr);
+dlmwrite('mcorr_2020.dat',mcorr);
