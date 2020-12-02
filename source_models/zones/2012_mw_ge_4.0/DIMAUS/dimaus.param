@@ -1,7 +1,0 @@
-ROOT FOLDER      = 2012_mw_ge_4.0//DIMAUS
-CATALOGUE        = ..//..//catalogue//data//AUSTCAT_V0.12_hmtk_declustered.csv
-DECLUSTERED      = True
-SHAPEFILE INPUT  = shapefiles//DIMAUS//DIMAUS_NSHA18.shp
-OUTPUT FOLDER    = mfd
-SHAPEFILE OUTPUT = DIMAUS_NSHA18_MFD.shp
-MFD BIN WIDTH    = 0.1
