@@ -14,9 +14,10 @@
 % Author: T. Allen (2011-01-11) - updated February 2018
 % 
 % 2018-05-07: V0.2 - Adding column for fixed hunge ML2MW conversion
+% 2021-01-20: Slight update to ML adjustment criteria
 %
 % *************************************************************************
-outfile = fullfile('..','data','NSHA18CAT.MW.V0.2.csv');
+outfile = fullfile('..','data','NSHA18CAT.MW.V0.3.csv');
 
 % load data
 if exist('mdat','var') ~= 1
@@ -288,6 +289,19 @@ disp('Saving mdat');
 save mdat_mw_pref mdat;
 
 % *************************************************************************
+%% Make GMT mag diff file for pre-1990 events
+clear txt;
+ind = find([mdat.zone] ~= 4 & ~isnan([mdat.MDAT_prefML]) ...
+      & ~isnan([mdat.MDAT_MLrev]));
+mdiff = [mdat(ind).MDAT_MLrev] - [mdat(ind).MDAT_prefML];
+dat = [[mdat(ind).MDAT_lon]' [mdat(ind).MDAT_lat]'  ...
+      [mdat(ind).MDAT_prefML]' [mdat(ind).MDAT_MLrev]' mdiff'];
+
+% comment out when yet to derive mcorr params
+disp('comment out if NOT deriving mcorr')
+% dlmwrite('rev_mag_diff.csv',dat,'delimiter',',','precision','%0.3f');
+
+% *************************************************************************
 %% write to file
 
 header = 'DATESTR,DATENUM,TYPE,DEPENDENCE,LON,LAT,DEP,LOCSRC,PREFMW,PREFMWSRC,PREFMS,PREFMSSRC,PREFmb,PREFmbSRC,PREFML,PREFMLSRC,MLREGION,REVML,MX_ORIGML,MX_TYPE,MX_REVML,MX_REVMLTYPE,MX_REVMLSRC,MS2MW,mb2MW,ML2MW,ML2MW_BLE,ML2MW_QDE,PREFMW,PREFMWSRC,COMM';
@@ -339,16 +353,6 @@ end
 txt = txt(1:end-1);
 dlmwrite(outfile,txt,'delimiter','','-append');
 
-% *************************************************************************
-%% Make GMT mag diff file for pre-1990 events
-clear txt;
-ind = find([mdat.zone] ~= 4 & ~isnan([mdat.MDAT_prefML]) ...
-      & ~isnan([mdat.MDAT_MLrev]));
-mdiff = [mdat(ind).MDAT_MLrev] - [mdat(ind).MDAT_prefML];
-dat = [[mdat(ind).MDAT_lon]' [mdat(ind).MDAT_lat]' mdiff' ...
-      [mdat(ind).MDAT_MLrev]'/15];
-
-dlmwrite('ML_diff.dat',dat,'delimiter','\t','precision','%0.3f');
 
 % *************************************************************************
 %% plot histograms of ML difference

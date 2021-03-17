@@ -288,16 +288,16 @@ was based on these magnitudes
 prefmag1 = 'orig' # declusters based on original catalogue magnitude
 
 # Use 2018 NSHA catalogue
-print 'Declustering NSHA18CAT.MW.V0.2.csv'
-nsha2018csv = path.join('data', 'NSHA18CAT.MW.V0.2.csv')
+print 'Declustering NSHA18CAT.MW.V0.3.csv'
+nsha2018csv = path.join('data', 'NSHA18CAT.MW.V0.3.csv')
 nsha_dict = parse_NSHA2018_catalogue(nsha2018csv)
 
 # set HMTK file name
 if prefmag1 == 'orig':
-    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.2_hmtk_mx_orig.csv'
+    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.3_hmtk_mx_orig.csv'
     #hmtk_csv = nsha2018csv.split('.')[0] + '_V0.12_hmtk_mp_orig.csv'
 elif prefmag1 == 'mw':
-    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.2_hmtk.csv'
+    hmtk_csv = nsha2018csv.split('.')[0] + '_V0.3_hmtk.csv'
 
 # write HMTK csv
 ggcat2hmtk_csv(nsha_dict, hmtk_csv, prefmag1)
@@ -412,7 +412,7 @@ for line in lines[1:]:
 # re-write declustered catalogue
 if deblastOnly == False:
     if prefmag2 == 'mw':
-        declustered_csv = nsha2018csv.split('.')[0] + '_V0.2_hmtk_declustered_test.csv'   
+        declustered_csv = nsha2018csv.split('.')[0] + '_V0.3_hmtk_declustered_test.csv'   
     else:
         declustered_csv = declustered_catalog_filename
 else:

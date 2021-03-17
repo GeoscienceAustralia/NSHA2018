@@ -54,8 +54,9 @@ end
 % mdat(delind) = [];
 
 %%
-% load mcorr coefs for converting old events based on average correction
-mcorr = textread('mcorr.dat','%f','delimiter',',');
+% load mcorr coefs for converting old events based on average correction -
+% coeffs from py code in ml_adjustment paper
+mcorr = textread('mcorr_2020.dat','%f','delimiter',',');
 
 %% read station info
 % disp('Reading station info...');
@@ -236,8 +237,8 @@ disp('Looping thru events...')
         repi = [];
     end
     
-%% get ML corrections assuming Western Australia Zone - 2020-12-02 added time criteria to prevent pre-1940 events from correction
-    if zone == 1 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum < datenum(1940,1,1)
+%% get ML corrections assuming Western Australia Zone - 2020-12-02 added time criteria to prevent pre-1950 events from correction
+    if zone == 1 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum >= datenum(1950,1,1)
         
 %         % keep AUST solutions for post-1990 events
 %         if strcmp(mdat(i).MDAT_prefMLSrc,'AUST') & mdat(i).MDAT_dateNum >= datenum(1990,1,1)
@@ -252,9 +253,9 @@ disp('Looping thru events...')
             % get station A
             R35_A = mdat(i).MDAT_prefML - R35_A0;
             % get revised mag
-            gt50lt180 = find(rhyp >= 50 & rhyp < 180);
+            gt50lt180 = find(rhyp >= 50 & rhyp <= 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
                                           + 0.000657 * rhyp(ge180(dminind)) + 0.66;
@@ -276,7 +277,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
                                           + 0.000657 * rhyp(ge180(dminind)) + 0.66;
@@ -291,14 +292,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 ADE events to Gaull & Gregson assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2007,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.137 * log10(rhyp(ge180(dminind))) ...
                                           + 0.000657 * rhyp(ge180(dminind)) + 0.66;
@@ -313,7 +314,7 @@ disp('Looping thru events...')
         end
                 
 %% get ML corrections assuming Eastern Australia Zone
-    elseif zone == 2 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML)
+    elseif zone == 2 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum >= datenum(1950,1,1)
         
 %         % keep Allen solutions as is
 %         if strcmp(mdat(i).MDAT_prefMLSrc,'Allen (unpublished)')
@@ -337,7 +338,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -359,7 +360,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -381,7 +382,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -403,7 +404,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -418,14 +419,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 MEL events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2005,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -440,14 +441,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 ADE events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2007,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -462,14 +463,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 MEL events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2005,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -484,14 +485,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 SRC events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2005,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'SRC') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -506,14 +507,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 GG events to Michael-Leiba & Manafant assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2005,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'GG') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -538,7 +539,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -576,13 +577,13 @@ disp('Looping thru events...')
         
         % correct 1994-2002 MEL events to Michael-Leiba & Manafant assuming Wilkie et al 96  - use restricted range
         if ~isnan(mdat(i).MDAT_prefML) && mdat(i).MDAT_dateNum > datenum(1994,1,1) ...
-           & mdat(i).MDAT_dateNum < datenum(2002,1,1) & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 1
+           & mdat(i).MDAT_dateNum < datenum(2005,1,1) & strcmp(mdat(i).MDAT_prefMLSrc,'MEL') == 1
             % get station A
             WGW96_A = mdat(i).MDAT_prefML - WGW96_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 110);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = WGW96_A(ge180(dminind)) + 1.34*log10(rhyp(ge180(dminind))/100) ...
                                           + 0.00055*(rhyp(ge180(dminind))-100)+ 3.0; % changed from 3.13 as assumed used maxh                                      
@@ -597,7 +598,7 @@ disp('Looping thru events...')
         end
 
 %% get ML corrections assuming South Australia Zone
-    elseif zone == 3 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML)
+    elseif zone == 3 & ~isempty(stns) & ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum >= datenum(1950,1,1)
         
 %         % keep AUST solutions for post-2000 events
 %         if strcmp(mdat(i).MDAT_prefMLSrc,'AUST') & mdat(i).MDAT_dateNum >= datenum(1990,1,1)
@@ -614,7 +615,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
                                           + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;
@@ -636,7 +637,7 @@ disp('Looping thru events...')
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = R35_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
                                           + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;
@@ -651,14 +652,14 @@ disp('Looping thru events...')
         end
         
         % correct post-2002 ADE events to Greenhalgh 1986 assuming Bakun & Joyner (1984)
-        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2002,1,1) ...
+        if ~isnan(mdat(i).MDAT_prefML) & mdat(i).MDAT_dateNum > datenum(2007,1,1) ...
            & strcmp(mdat(i).MDAT_prefMLSrc,'ADE') == 1
             % get station A
             BJ84_A = mdat(i).MDAT_prefML - BJ84_A0;
             % get revised mag
             gt50lt180 = find(rhyp >= 50 & rhyp < 180);
             if isempty(gt50lt180) % get minimum distance GE 180 km (try and avoid near-source data where possible)
-                ge180 = find(rhyp >= 180);
+                ge180 = find(rhyp >= 180 & rhyp <= 700);
                 [dmindist, dminind] = min(rhyp(ge180));
                 mdat(i).MDAT_MLrev = BJ84_A(ge180(dminind)) + 1.10 * log10(repi(ge180(dminind))/100) ...
                                           + 0.0013 * (repi(ge180(dminind)) - 100) + 3.03;                                      
@@ -761,18 +762,36 @@ disp('Looping thru events...')
         mdat(i).MDAT_MLrevdist = NaN;
         mdat(i).MDAT_MLminstn = [];
     end
-    mdat(i).zone = zone;
     
-%% Use magnitude correction for those events that have no sites
-    if isempty(stns) & zone ~= 4
-        if isnan(mdat(i).MDAT_MLrevdist) & ~isnan(mdat(i).MDAT_prefML)
-            mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML + mcorr(2);
-            cnt = cnt + 1;
-        end
+    %% reset MP magnitudes to orginal values - new at 2021-01-20
+    if strcmp(mdat(i).MDAT_origMLType,'MP') | mdat(i).MDAT_dateNum < datenum(1950,1,1)
+        mdat(i).MDAT_MLrev = NaN;
         mdat(i).MDAT_MLrevdist = NaN;
         mdat(i).MDAT_MLminstn = [];
-        
     end
+    
+%% Use magnitude correction for those events that have no sites using results from py code
+    %if isempty(stns) & zone ~= 4
+    if isnan(mdat(i).MDAT_MLrevdist) & ~isnan(mdat(i).MDAT_prefML) & zone ~= 4 ...
+       & mdat(i).MDAT_dateNum < datenum(1950,1,1)
+
+        mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML + mcorr(2);
+        % use quadratic 2021-01-20
+        %mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML.^2 + mcorr(2) * mdat(i).MDAT_prefML + mcorr(3);
+        cnt = cnt + 1;
+    end
+    mdat(i).MDAT_MLrevdist = NaN;
+    mdat(i).MDAT_MLminstn = [];
+        
+    %end
+    
+    if strcmp(mdat(i).MDAT_origMLType,'ML') & mdat(i).MDAT_dateNum >= datenum(1950,1,1) ...
+       & isempty(stns)
+        mdat(i).MDAT_MLrev = mcorr(1) * mdat(i).MDAT_prefML + mcorr(2);
+    end
+     
+    mdat(i).zone = zone;
+        
 end
 
 % to fix empty structs

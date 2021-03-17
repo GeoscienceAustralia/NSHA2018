@@ -38,5 +38,9 @@ stdrev(delnan) = [];
 
 hold on;
 errorbar((mrange),(medrev),(stdrev),'rs');
-mcorr = polyfit(mrange,medrev,1);
-dlmwrite('mcorr_2020.dat',mcorr);
+mcorr = polyfit(mrange,medrev,2);
+xfit = [1:0.1:6];
+yfit = mcorr(1)*xfit.^2 + mcorr(2)*xfit + mcorr(3);
+hold on;
+plot(xfit, yfit, 'r-')
+dlmwrite('mcorr_quad_2020.dat',mcorr);
