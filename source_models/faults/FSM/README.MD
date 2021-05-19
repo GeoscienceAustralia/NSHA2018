@@ -1,3 +1,5 @@
+**The files in this repository are legacy versions as used in the NSHA18. Updated verisons of FSD_simple_faults_plus_vert2.shp can be found [here](https://github.com/GeoscienceAustralia/GA-neotectonics/tree/master/Neotectonic_features_lines).**
+
 Simplified Fault Source Model Attributes as derived from the [Australian Neotectonic Feature Database](http://www.ga.gov.au/earthquakes/staticPageController.do?page=neotectonics):
 
 *	Name: 	 	fault name
